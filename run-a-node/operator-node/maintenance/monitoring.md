@@ -16,16 +16,9 @@ For Grafana, specifically, [Grafana Cloud](https://grafana.com/docs/grafana-clou
 
 ### Prometheus
 
-In a sample configuration, where only one SSV node Docker container is running, named `ssv-node`:
+In a typical setup, where only one SSV node Docker container is running, Prometheus should be configured with a file like this:
 
-```bash
-ssv@ssv-node:~|⇒ docker ps
-CONTAINER ID   IMAGE                                  COMMAND                  CREATED       STATUS          PORTS                                                                                                        NAMES
-b91c93801c40   bloxstaking/ssv-node-unstable:latest   "make BUILD_PATH=/go…"   2 weeks ago   Up 51 minutes   5000/tcp, 0.0.0.0:13001->13001/tcp, 4000/udp, 5678/tcp, 0.0.0.0:12001->12001/udp, 0.0.0.0:15000->15000/tcp   ssv_node
-```
-
-Then the config file template above should become:
-
+{% code title="prometheus.yml" lineNumbers="true" %}
 ```yaml
 global:
   scrape_interval:     10s
@@ -37,14 +30,22 @@ scrape_configs:
     static_configs:
       - targets:
         # change the targets according to your setup
-        # - <container_name>:<metrics_port>
-        - ssv-node:15000
+        # if running prometheus from source, or as executable:
+        # - <container_name>:15000 (i.e.: ssv_node:15000, check with docker ps command)
+        # if running prometheus as docker container:
+        - host.docker.internal:15000
   - job_name: ssv_health
     metrics_path: /health
     static_configs:
       - targets:
-        - ssv-node:15000
+        # change the targets according to your setup
+        # if running prometheus from source, or as executable:
+        # - <container_name>:15000 (i.e.: ssv_node:15000, check with docker ps command)
+        # if running prometheus as docker container:
+        - host.docker.internal:15000
+
 ```
+{% endcode %}
 
 And to launch the Prometheus service as a Docker container as well ([using the official Docker image, as shown here](https://hub.docker.com/r/prom/prometheus)), use this command, where `/path/to/prometheus.yml` is the path and filename of the configuration file itself:
 
@@ -54,6 +55,17 @@ docker run \
     -v /path/to/prometheus.yml:/etc/prometheus/prometheus.yml \
     prom/prometheus
 ```
+
+{% hint style="info" %}
+If you are not running Prometheus as a Docker container, but as an executable, change the \`targets\` in the config file to reflect the correct networking connections. In the case where the SSV Node container is called `ssv_node` the targets should look like this:
+
+```yaml
+      - targets:
+        - ssv_node:15000
+```
+
+Use the `docker ps` command to verify the name of the SSV Node container.
+{% endhint %}
 
 ### Grafana monitoring
 
