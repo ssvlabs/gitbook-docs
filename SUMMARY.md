@@ -3,10 +3,10 @@
 ## Learn
 
 * [Introduction](README.md)
-  * [Tech Overview](learn/readme/tech-overview.md)
-  * [Network Overview](learn/readme/network-overview.md)
-  * [SSV Token](learn/readme/ssv-token.md)
-  * [Governance](learn/readme/governance.md)
+  * [Tech Overview](learn/introduction/tech-overview.md)
+  * [Network Overview](learn/introduction/network-overview.md)
+  * [SSV Token](learn/introduction/ssv-token.md)
+  * [Governance](learn/introduction/governance.md)
 * [Protocol Overview](learn/protocol-overview/README.md)
   * [Tokenomics](learn/protocol-overview/tokenomics/README.md)
     * [Fees](learn/protocol-overview/tokenomics/fees.md)
@@ -35,8 +35,8 @@
 
 * [Get Started](developers/get-started.md)
 * [Tools](developers/tools/README.md)
-  * [SSV Keys SDK](developers/tools/ssv-key-distributor.md)
-  * [SSV Scanner SDK](developers/tools/ssv-scanner.md)
+  * [SSV Keys SDK](developers/tools/ssv-key-distributor/README.md)
+  * [SSV Scanner SDK](developers/tools/cluster-scanner/README.md)
   * [SSV API v4](https://api.ssv.network/documentation/#/v4)
 * [Smart Contracts](developers/smart-contracts/README.md)
   * [SSVNetwork](developers/smart-contracts/ssvnetwork.md)
@@ -48,6 +48,7 @@
     * [Operation Stage](developers/integration-guides/staking-pools/operation-stage.md)
     * [Maintenance Stage](developers/integration-guides/staking-pools/maintenance-stage.md)
   * [Staking Services](developers/integration-guides/staking-services.md)
+* [Security](developers/security.md)
 
 ## Run a Node
 
