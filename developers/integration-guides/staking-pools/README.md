@@ -18,7 +18,7 @@ Developing an SSV-based staking pool is outlined through these 3 stages:
 2. **Operation** - aggregation of pools, each containing 32 ETH, into validators by depositing their stake and registering them for operation through the ssv.network.
 3. **Maintenance** - rebasing the pool’s LSD for accrued rewards and enabling validator management capabilities.
 
-![](<../../../.gitbook/assets/image (15).png>)
+![](<../../../.gitbook/assets/image (14).png>)
 
 #### Key Terms
 
