@@ -6,6 +6,35 @@ To run a validator through the SSV network, a user must distribute their validat
 
 This can be done via the [web app ](https://app.ssv.network/)interface or through the smart contracts and developer tools (see [get started](../../../developers/get-started.md) guide).
 
+#### Operators Selection <a href="#_jm9n7m464k0" id="_jm9n7m464k0"></a>
+
+To form your cluster, you must select your preferred group of operators to manage it.
+
+The complete operator registry can be accessed through the ssv.network’s [webapp](http://app.ssv.network), [explorer](http://explorer.ssv.network) and [SSV API](https://api.ssv.network/documentation/).
+
+The number of operators you select must be 3f+1 compatible, whereas f is the number of faulty operators that your cluster could endure (more operators, greater fault tolerance).
+
+Supported cluster sizes:
+
+| **Cluster Size (# of operators)** | **Fault Tolerance** |
+| --------------------------------- | ------------------- |
+| 4                                 | 1                   |
+| 7                                 | 2                   |
+| 10                                | 3                   |
+| 13                                | 4                   |
+
+Stakers have the freedom to select and customize the group of operators that will manage their validator cluster according to their own preferences:
+
+Factors to consider in cluster formation:
+
+* **Reputation** - ssv.network is permissionless network that is open to anyone to join as an operator. Operators can range from professional companies with proven experience in node operations all the way to home operators who are running their own infrastructure. The DAO maintains a curated-list of operators called “Verified Operators” to help stakers distinguish between them.
+* **Performance** -  current and historical [performance](../../performance/) of operators is a great indicator of operators reliability. Stakers can track operators performance through the ssv.network’s [explorer](http://explorer.ssv.network) to evaluate operators track record and to consistently monitor their validators.
+* **Diversification** - diversity of the cluster's tech stack enhances resilience to individual hardware and software failures, allowing distributed validators to remain operational even if a component fails. To mitigate single point of failures, a staker should strive to have operator diversification across various aspects such as execution and consensus clients, cloud providers, and geolocation.
+* **MEV** - every time a validator is tasked with a block proposal, one operator from its cluster is chosen to assemble the block. Given that MEV-enabled blocks are broadcasted via relays, only those operators who support the selected relay can broadcast it to the network. This implies that the more overlap there is in the relays supported by the operators in a cluster, the more operators can broadcast the block proposal, thereby enhancing the liveness of the proposal duty throughout the Ethereum network.
+  * In situations where there's no overlap, only the operator proposing the block would broadcast the duty (the standard liveness of non-DVT validators).
+  * In instances where some operators of the cluster don't enable MEV at all (when MEV-enabled operators count is below quorum), consensus may not be reached for the duty, potentially leading to the block proposal not being executed at all.
+  * In cases where the block is assembled by a non-MEV operator, the proposal would be executed, but without any MEV rewards.
+
 #### Operational Costs <a href="#_jm9n7m464k0" id="_jm9n7m464k0"></a>
 
 The associated costs for running validators on the ssv network are determined by **operator fees** and **network fees**.
@@ -18,7 +47,7 @@ In addition to fees, there’s a minimum balance requirement, known as [liquidat
 
 To carry validators operational costs, the validator's cluster must be funded with an appropriate amount of SSV (see [Cluster Balance](../clusters/cluster-balance.md)).
 
-Funding can be made at any time to the cluster’s balance (see [Deposits](https://docs.google.com/document/d/10fQYx4jh-UDduGA89EBP1DdTEhYeb\_-mga05y9rLdVA/edit#heading=h.2a5wkxdov2fm)), but in case the first validator is onboarded to a cluster, the initial funding must be carried with its registration.
+Funding can be made at any time to the cluster’s balance (see [Deposits](../clusters/cluster-balance.md#\_2a5wkxdov2fm)), but in case the first validator is onboarded to a cluster, the initial funding must be carried with its registration.
 
 To calculate how much funding is needed to run a validator within its cluster according to a certain **operation period** and the required **liquidation collateral**:
 

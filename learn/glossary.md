@@ -6,6 +6,10 @@ The Beacon Chain is the core of the new Ethereum Proof-of-Stake (PoS) consensus 
 
 The Beacon Chain is a brand-new, proof-of-stake blockchain that stores and manages the registry of validators in order to support the new Ethereum PoS system. It is constantly scanning, validating, collecting votes and rewarding validators that correctly attest to blocks. On the other hand, it deducts rewards for those validators not online and slashes the ETH rewards from malicious actors.
 
+### Cluster
+
+The group (usually 4, in compliance with [the fault tolerance rule is accepted](stakers/validators/validator-onboarding.md#\_jm9n7m464k0)) of non-trusting operators that manage a set (one, or multiple) validator(s). Each operator in the cluster holds a share of the complete validator key, for more information, see [Shamir Secret Sharing](glossary.md#shamir-secret-sharing).&#x20;
+
 ### Consensus Client
 
 Formerly known as an Eth2 client. Runs the Ethereum PoS (Proof-of-Stake) consensus layer, aka the Beacon Chain, checking the validity of transactions and new blocks. Examples of consensus clients include Prysm, Teku, Lighthouse, Nimbus, and Lodestar.
@@ -108,12 +112,13 @@ If an Ethereum validator behaves maliciously, they would lose a significant amou
 
 ### SSV Node
 
-The four non-trusting operators that manage a validator. The four validator KeyShares are distributed to the operators managing the node. An SSV node is responsible for the following:
+This is software containing the SSV protocol implementation and integration to the network’s smart contracts. It is run by Operators and includes a validator client.
+
+The SSV Node software maintain peer-to-peer connections with other Nodes to handle communication with the rest of the ssv.network. An SSV Node is responsible for the following:
 
 * Management of validator KeyShares
 * Shamir Secret Sharing
 * Multi-Party Computation
-* Running the Consensus layer
 * Validator signing duties to the Beacon Chain
 
 ### SSV Token

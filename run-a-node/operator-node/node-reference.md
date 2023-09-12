@@ -1,0 +1,73 @@
+# Node Reference
+
+The table below represents the reference for every Node configuration option available.
+
+{% hint style="danger" %}
+**Caution:** The following configuration options are intended for advanced users with a deep understanding of their impact.
+
+Please exercise extreme care and discretion when modifying these settings, as any incorrect changes may result in unintended consequences or system instability.
+
+The parameters used in the [Installation guide](installation.md) should serve the vast majority of users.
+{% endhint %}
+
+| YAML                                            | ENV                            | Default          | Description                                                                                         |
+| ----------------------------------------------- | ------------------------------ | ---------------- | --------------------------------------------------------------------------------------------------- |
+| global                                          |                                |                  |                                                                                                     |
+| global.LogLevel                                 | LOG\_LEVEL                     | info             | Defines logger's log level'                                                                         |
+| global.LogFormat                                | LOG\_FORMAT                    | console          | Defines logger's encoding, valid values are 'json' (default) and 'console''                         |
+| global.LogLevelFormat                           | LOG\_LEVEL\_FORMAT             | capitalColor     | Defines logger's level format, valid values are 'capitalColor' (default), 'capital' or 'lowercase'' |
+| global.LogFilePath                              | LOG\_FILE\_PATH                | ./data/debug.log | Defines a file path to write logs into                                                              |
+| db                                              |                                |                  |                                                                                                     |
+| db.Path                                         | DB\_PATH                       | ./data/db        | Path for storage                                                                                    |
+| db.Reporting                                    | DB\_REPORTING                  | FALSE            | Flag to run on-off db size reporting                                                                |
+| db.GCInterval                                   | DB\_GC\_INTERVAL               | 6m               | Interval between garbage collection cycles. Set to 0 to disable.                                    |
+| ssv                                             |                                |                  |                                                                                                     |
+| ssv.Network                                     | NETWORK                        | mainnet          | Network is the network of this node                                                                 |
+| ssv.ValidatorOptions                            |                                |                  |                                                                                                     |
+| ssv.ValidatorOptions.SignatureCollectionTimeout | SIGNATURE\_COLLECTION\_TIMEOUT | 5s               | Timeout for signature collection after consensus                                                    |
+| ssv.ValidatorOptions.MetadataUpdateInterval     | METADATA\_UPDATE\_INTERVAL     | 12m              | Interval for updating metadata                                                                      |
+| ssv.ValidatorOptions.HistorySyncBatchSize       | HISTORY\_SYNC\_BATCH\_SIZE     | 25               | Maximum number of messages to sync in a single batch                                                |
+| ssv.ValidatorOptions.MinimumPeers               | MINIMUM\_PEERS                 | 2                | The required minimum peers for sync                                                                 |
+| ssv.ValidatorOptions.FullNode                   | FULLNODE                       | FALSE            | Save decided history rather than just highest messages                                              |
+| ssv.ValidatorOptions.Exporter                   | EXPORTER                       | FALSE            |                                                                                                     |
+| ssv.ValidatorOptions.BuilderProposals           | BUILDER\_PROPOSALS             | FALSE            | Use external builders to produce blocks                                                             |
+| ssv.ValidatorOptions.MsgWorkersCount            | MSG\_WORKERS\_COUNT            | 256              | Number of goroutines to use for message workers                                                     |
+| ssv.ValidatorOptions.MsgWorkerBufferSize        | MSG\_WORKER\_BUFFER\_SIZE      | 1024             | Buffer size for message workers                                                                     |
+| eth1                                            |                                |                  |                                                                                                     |
+| eth1.ETH1Addr                                   | ETH\_1\_ADDR                   |                  | Execution client WebSocket address                                                                  |
+| eth1.ETH1ConnectionTimeout                      | ETH\_1\_CONNECTION\_TIMEOUT    | 10s              | Execution client connection timeout                                                                 |
+| eth2                                            |                                |                  |                                                                                                     |
+| eth2.BeaconNodeAddr                             | BEACON\_NODE\_ADDR             |                  |                                                                                                     |
+| p2p                                             |                                |                  |                                                                                                     |
+| p2p.Bootnodes                                   | BOOTNODES                      |                  | Bootnodes to use to start discovery, seperated with '                                               |
+| p2p.Discovery                                   | P2P\_DISCOVERY                 | discv5           | Discovery system to use                                                                             |
+| p2p.TcpPort                                     | TCP\_PORT                      | 13001            | TCP port for p2p transport                                                                          |
+| p2p.UdpPort                                     | UDP\_PORT                      | 12001            | UDP port for discovery                                                                              |
+| p2p.HostAddress                                 | HOST\_ADDRESS                  |                  | External ip node is exposed for discovery                                                           |
+| p2p.HostDNS                                     | HOST\_DNS                      |                  | External DNS node is exposed for discovery                                                          |
+| p2p.RequestTimeout                              | P2P\_REQUEST\_TIMEOUT          | 10s              |                                                                                                     |
+| p2p.MaxBatchResponse                            | P2P\_MAX\_BATCH\_RESPONSE      | 25               | Maximum number of returned objects in a batch                                                       |
+| p2p.MaxPeers                                    | P2P\_MAX\_PEERS                | 60               | Connected peers limit for connections                                                               |
+| p2p.TopicMaxPeers                               | P2P\_TOPIC\_MAX\_PEERS         | 10               | Connected peers limit per pubsub topic                                                              |
+| p2p.Subnets                                     | SUBNETS                        |                  | Hex string that represents the subnets that this node will join upon start                          |
+| p2p.PubSubScoring                               | PUBSUB\_SCORING                | TRUE             | Flag to turn on/off pubsub scoring                                                                  |
+| p2p.PubSubTrace                                 | PUBSUB\_TRACE                  |                  | Flag to turn on/off pubsub tracing in logs                                                          |
+| p2p.DiscoveryTrace                              | DISCOVERY\_TRACE               |                  | Flag to turn on/off discovery tracing in logs                                                       |
+| p2p.PubsubMsgCacheTTL                           | PUBSUB\_MSG\_CACHE\_TTL        |                  | How long a message ID will be remembered as seen                                                    |
+| p2p.PubsubOutQueueSize                          | PUBSUB\_OUT\_Q\_SIZE           |                  | The size that we assign to the outbound pubsub message queue                                        |
+| p2p.PubsubValidationQueueSize                   | PUBSUB\_VAL\_Q\_SIZE           |                  | he size that we assign to the pubsub validation queue                                               |
+| p2p.PubsubPubsubValidateThrottle                | PUBSUB\_VAL\_THROTTLE          |                  | The amount of goroutines used for pubsub msg validation                                             |
+| p2p.PermissionedActivateEpoch                   | PERMISSIONED\_ACTIVE\_EPOCH    | 0                | On which epoch to start only accepting peers that are operators registered in the contract          |
+| p2p.PermissionedDeactivateEpoch                 | PERMISSIONED\_DEACTIVE\_EPOCH  | 99999999999999   | On which epoch to start accepting operators all peers                                               |
+| p2p.WhitelistedOperatorKeys                     | WHITELISTED\_KEYS              |                  | Operators' keys not registered in the contract with which the node will accept connections          |
+| KeyStore                                        |                                |                  |                                                                                                     |
+| KeyStore.PrivateKeyFile                         | PRIVATE\_KEY\_FILE             |                  | Operator private key file                                                                           |
+| KeyStore.PasswordFile                           | PASSWORD\_FILE                 |                  | Password for operator private key file decryption                                                   |
+| OperatorPrivateKey                              | OPERATOR\_KEY                  |                  | Operator private key, used to decrypt contract events                                               |
+| MetricsAPIPort                                  | METRICS\_API\_PORT             |                  | Port to listen on for the metrics API.                                                              |
+| EnableProfile                                   | ENABLE\_PROFILE                |                  | flag that indicates whether go profiling tools are enabled                                          |
+| NetworkPrivateKey                               | NETWORK\_PRIVATE\_KEY          |                  | private key for network identity                                                                    |
+| WebSocketAPIPort                                | WS\_API\_PORT                  |                  | Port to listen on for the websocket API.                                                            |
+| WithPing                                        | WITH\_PING                     |                  | Whether to send websocket ping messages'                                                            |
+| SSVAPIPort                                      | SSV\_API\_PORT                 |                  | Port to listen on for the SSV API.                                                                  |
+| LocalEventsPath                                 | EVENTS\_PATH                   |                  | path to local events                                                                                |

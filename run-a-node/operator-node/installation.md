@@ -6,17 +6,21 @@ description: So you want to install an SSV node? You've come to the right place!
 
 Once you have your node running you'll be able to participate in multiple validator clusters and earn rewards 🥳
 
+{% hint style="success" %}
+SSV node setup is also available using [eth-docker](https://eth-docker.net/Support/BloxSSV/) and [Stereum Launcher](https://stereum.net/), so you can use those if you prefer.
+{% endhint %}
+
 ### System Requirements
 
 The SSV node that you are installing with these instructions is only the SSV node, not an Ethereum Execution Client or Beacon Client (e.g. not Get/Lighthouse or Besu/Teku, etc.). You will need those clients to already be running and synced, either on a different machine or the same machine.
 
 All cloud services are supported for your node setup (see a reference example on AWS [here](https://github.com/bloxapp/ssv/blob/main/docs/OPERATOR\_GETTING\_STARTED.md#setting-aws-server-for-operator)).
 
-The minimum system requirements shown below are for a machine that is only running an SSV node. If you plan to run the SSV node on the same machine as your Execution Client and/or Beacon Client, these minimum requirements will be needed in addition to your existing requirements.
+The minimum system requirements shown below are for a machine that is only running an SSV node. If you plan to run the SSV node on the same machine as your Execution Client and/or Beacon Client, these minimum requirements will be needed **in addition** to your existing requirements.
 
 💻 Machine running Ubuntu
 
-🎛️ 4 cores (2 minimum)
+🎛️ 4 cores (3 minimum)
 
 ⚡️ 4GB RAM
 
@@ -26,7 +30,7 @@ The minimum system requirements shown below are for a machine that is only runni
 
 ### Ethereum Node Requirements
 
-The Ethereum clients used by your SSV node can be running on the same machine or a different machine. Ideally, to improve [client diversity](https://clientdiversity.org/#distribution), you will be running minority clients 👀
+The Ethereum clients used by your SSV node can be running on the same machine or a different machine. Ideally, to improve [client diversity](https://clientdiversity.org/#distribution) (Erigon client is still not supported), you will be running minority clients 👀 .
 
 #### Execution Client
 
@@ -42,9 +46,11 @@ The specific configuration will be different for each Execution Client. For exam
 
 This can be any Ethereum Beacon Node client (e.g. Prysm, Lighthouse, Tekou, Nimbus, or any client utilizing standard REST HTTP). You will see this node referenced as ETH2 in the SSV configuration.
 
-### Installing the SSV Node
+### Pre-requisites
 
-Connect to your server:
+#### Enable SSH
+
+You will need to be able to connect to your server:
 
 <details>
 
@@ -58,7 +64,7 @@ Connect to your server:
 
 <summary>SSH into a Cloud server (e.g. AWS)</summary>
 
-If you have generated an SSH key for your server or downloaded one from your Cloud hosting provider (e.g. AWS)&#x20;
+If you have generated an SSH key for your server or downloaded one from your Cloud hosting provider (e.g. AWS)
 
 **MacOS**
 
@@ -81,38 +87,22 @@ ssh -i {key pair file name} ubuntu@{instance public IP you took from AWS}
 
 </details>
 
-Once you're connected and on the command line, the next step is to install the SSV node software.
+#### Install Docker
 
-{% hint style="success" %}
-SSV node setup is also available using [eth-docker](https://eth-docker.net/Support/BloxSSV/) and [Stereum Launcher](https://stereum.net/), so you can use those if you prefer.
+Another fundamental pre-requisite is to have Docker installed on the machine hosting the SSV Node. In order to do so, please refer to [the official Docker documentation](https://docs.docker.com/engine/install/), and find the option that better fits your server configuration.
+
+{% hint style="info" %}
+In order to run the SSV Node, in a server, only Docker engine is necessary, you can still go ahead and install Docker Desktop, but it will not be necessary unless you plan to use the Graphical Interface.
 {% endhint %}
 
-### Installation Script
-
-Type (or copy and paste) these commands into your terminal on your SSV node machine that you should now be connected to:
-
-```bash
-# Change to the root (admin) user on your machine 
-sudo su
-
-# Download the installation script
-wget https://raw.githubusercontent.com/bloxapp/ssv/main/install.sh
-
-# Change the permissions of the downloaded script so that it can be run
-chmod +x install.sh
-
-# Run the downloaded installation script
-./install.sh
-```
+Once you're connected and on the command line, the next steps are to configure and run the SSV Node docker image to create keys and start your SSV Node. If you are not familiar with Docker, and run into some issues while running the node, [try and take a look at the FAQ](installation.md#docker-faq) at the bottom of this page.
 
 ### Generate Operator Keys
 
 Your Operator <mark style="color:green;">**Public Key (PK)**</mark> and <mark style="color:green;">**Secret Key (SK)**</mark> are generated with this command:
 
 ```bash
-docker run -d --name=ssv_node_op_key -it 'bloxstaking/ssv-node:latest' \
-/go/bin/ssvnode generate-operator-keys && docker logs ssv_node_op_key --follow \
-&& docker stop ssv_node_op_key && docker rm ssv_node_op_key
+docker run -it --rm bloxstaking/ssv-node:latest /go/bin/ssvnode generate-operator-keys
 ```
 
 {% hint style="info" %}
@@ -138,71 +128,63 @@ Be careful when you select and copy the entire **Secret Key (SK)** and make sure
 {% hint style="danger" %}
 Make sure to store and back up your operator's **Secret Key (SK)** in a safe place.
 
-
 **Do not share** this key with anyone.
 {% endhint %}
 
 ### Create Configuration File
 
-Fill all the placeholders (DB\_FOLDER, ETH2\_NODE, etc.) with actual values, and run the commands below to create a `config.yaml` file.
+Copy the following `config.yaml` file, just be sure to replace all the placeholders (`ETH2_NODE`, `ETH1_WEBSOCKET_ADDRESS`, `OPERATOR_SECRET_KEY`, etc.) with actual values.
 
-Replace `<DB_FOLDER>` with the location you want the database to be stored e.g. `./data/db`
+In particular, substitute`OPERATOR_SECRET_KEY` with the operator secret key [generated above](ssv-node-installation.md#generate-operator-keys) (e.g. `LS0tLS1CRUdJTiBSU0EgUFJJVkF...`)
 
-```bash
-yq n db.Path "<DB_FOLDER>" | tee config.yaml
 ```
+global:
+  # Console output log level 
+  LogLevel: info
+  
+  # Debug logs file path
+  LogFilePath: ./data/debug.log
 
-Set the network to `prater`
+db:
+  # Path to a persistent directory to store the node's database.
+  Path: ./data/db
 
-```bash
-yq w -i config.yaml eth2.Network "prater"
-```
+ssv:
+  # The SSV network to join to
+  # Mainnet = Network: mainnet (default)
+  # Testnet = Network: jato-v2
+  Network: mainnet
+  
+  ValidatorOptions:
+    # Whether to enable MEV block production. Requires the connected Beacon node to be MEV-enabled.
+    BuilderProposals: false
 
-Replace `<ETH2_NODE>` with the location of your Beacon Client e.g `http://localhost:5052`
+eth2:
+  # HTTP URL of the Beacon node to connect to.
+  BeaconNodeAddr: <ETH2_NODE> # e.g. http://example.url:5052
 
-```bash
-yq w -i config.yaml eth2.BeaconNodeAddr "<ETH2_NODE>"
-```
+eth1:
+  # WebSocket URL of the Eth1 node to connect to.
+  ETH1Addr: <ETH1_WEBSOCKET_ADDRESS> # e.g. ws://example.url:8546/ws
 
-Replace `<ETH1_WEBSOCKET_ADDRESS>` with the location of your Execution Client e.g. `ws://localhost:8546`
+p2p:
+  # Optionally provide the external IP address of the node, if it cannot be automatically determined.
+  # HostAddress: 192.168.1.1
 
-```bash
-yq w -i config.yaml eth1.ETH1Addr "<ETH1_WEBSOCKET_ADDRESS>"
+  # Optionally override the default TCP & UDP ports of the node.
+  # TcpPort: 13001
+  # UdpPort: 12001
+
+# Note: Operator private key can be generated with the `generate-operator-keys` command.
+OperatorPrivateKey: <OPERATOR_SECRET_KEY>
+
+# This enables monitoring at the specified port, see https://docs.ssv.network/run-a-node/operator-node/maintenance/monitoring
+MetricsAPIPort: 15000
 ```
 
 {% hint style="warning" %}
 Make sure your `ETH1Addr` endpoint is communicating **over WebSocket** and **not over HTTP** in order to support subscriptions and notifications.
 {% endhint %}
-
-Replace `<OPERATOR_SECRET_KEY>` with your operator secret key [generated above](ssv-node-installation.md#generate-operator-keys) e.g. `LS0tLS1CRUdJTiBSU0EgUFJJVkF...`
-
-```bash
-yq w -i config.yaml OperatorPrivateKey "<OPERATOR_SECRET_KEY>"
-```
-
-<details>
-
-<summary><strong>Debug Configuration (Optional)</strong></summary>
-
-In order to see `debug` level logs, add the corresponding section to the `config.yaml` by running:
-
-```bash
-yq w -i config.yaml global.LogLevel "debug"
-```
-
-</details>
-
-<details>
-
-<summary><strong>Metrics Configuration (Optional)</strong></summary>
-
-In order to enable metrics, add the corresponding section to the `config.yaml` by running:
-
-```bash
-yq w -i config.yaml MetricsAPIPort "15000"
-```
-
-</details>
 
 ### Create and Start the Node using Docker
 
@@ -211,12 +193,27 @@ Now, for the part you've been waiting for... actually starting your SSV node!
 To start your node, run the following Docker command in the same folder you created the `config.yaml` file in the previous step:
 
 ```bash
-docker run -d --restart unless-stopped --name=ssv_node -e \
-CONFIG_PATH=./config.yaml -p 13001:13001 -p 12001:12001/udp -v \
-$(pwd)/config.yaml:/config.yaml -v $(pwd):/data -it \
-'bloxstaking/ssv-node:latest' make BUILD_PATH=/go/bin/ssvnode start-node \ 
-&& docker logs ssv_node --follow
+docker run -d --restart unless-stopped --name ssv_node -e \
+CONFIG_PATH=/config.yaml -p 13001:13001 -p 12001:12001/udp -p 15000:15000 \
+-v "$(pwd)/config.yaml":/config.yaml -v "$(pwd)":/data -it \
+"bloxstaking/ssv-node:latest" make BUILD_PATH="/go/bin/ssvnode" start-node && \ 
+docker logs ssv_node --follow
 ```
+
+### Other Configuration
+
+If you don't want to use those default ports, it's best to change them in your `config.yaml` file **as well as changing the ports on the container creation command** (simply changing the host port mappings on the Docker command isn't enough!).
+
+You can also add your `HostAddress` to the config, which is the public static IP address of the machine.
+
+```yaml
+p2p:
+  HostAddress: 206.22.63.189
+  UdpPort: 12001
+  TcpPort: 13001
+```
+
+When you set up your firewall on your SSV node machine, make sure to expose the ports that you set in the [container creation command](installation.md#create-and-start-the-node-using-docker). The defaults are <mark style="color:green;">**12001 UDP**</mark> and <mark style="color:green;">**13001 TCP**</mark>.
 
 ### Docker FAQ
 
@@ -329,16 +326,3 @@ docker pull bloxstaking/ssv-node:latest
 And finally... run the [creation command again from the top of this section](installation.md#create-and-start-the-node-using-docker) to create a new Docker container with the latest SSV image.
 
 </details>
-
-### Other Configuration
-
-When you set up your firewall on your SSV node machine, make sure to expose the ports that you set in the [container creation command](installation.md#create-and-start-the-node-using-docker). The defaults are <mark style="color:green;">**12001 UDP**</mark> and <mark style="color:green;">**13001 TCP**</mark>.
-
-If you don't want to use those default ports, it's best to change them in your `config.yaml` file as well as changing the ports on the container creation command. Simply changing the host port mappings on the Docker command isn't enough! You can also add your `HostAddress` to the config, which is the public static IP address of the machine.
-
-```yaml
-p2p:
-  HostAddress: 206.22.63.189
-  UdpPort: 12001
-  TcpPort: 13001
-```

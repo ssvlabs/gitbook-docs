@@ -8,7 +8,7 @@ The SSVNetworkViews contract is for reading information about the network and it
 
 ### General Methods <a href="#_b2oq6y1s4ym" id="_b2oq6y1s4ym"></a>
 
-#### **public getNetworkFee ()**
+#### **getNetworkFee ()**
 
 Description: Returns current network fee.
 
@@ -24,7 +24,7 @@ Return values
 
 
 
-#### **public getNetworkEarnings ()**
+#### **getNetworkEarnings ()**
 
 Description: Returns accumulated network fees not yet withdrawn.
 
@@ -40,7 +40,7 @@ Return values
 
 
 
-#### **public getLiquidationThresholdPeriod ()**
+#### **getLiquidationThresholdPeriod ()**
 
 Description: Returns the minimum duration (in blocks) which a cluster has to have sufficient balance (liquidation collateral) to not be liquidated.
 
@@ -56,7 +56,23 @@ Return values
 
 
 
-#### **public getOperatorFeeIncreaseLimit ()**
+#### **getMinimumLiquidationCollateral()**
+
+Description: Returns the minimum amount which a cluster has to have sufficient balance (liquidation collateral) to not be liquidated.
+
+| **Parameter** | **Type**    | **Description** |
+| ------------- | ----------- | --------------- |
+| <p><br></p>   | <p><br></p> | <p><br></p>     |
+
+Return values
+
+| **Parameter** | **Type** | **Description**                                                                                      |
+| ------------- | -------- | ---------------------------------------------------------------------------------------------------- |
+| amount        | uint256  | The minimum amount of SSV which a cluster has to have (liquidation collateral) to not be liquidated. |
+
+
+
+#### **getOperatorFeeIncreaseLimit ()**
 
 Description: Returns the max amount by which operators can increase fees in each fee update cycle. This does refer to the max operator fee limitation, but to the rate (%) by which it can be increased.
 
@@ -72,9 +88,9 @@ Return values
 
 
 
-#### **public getDeclaredOperatorFeePeriod ()**
+#### **getOperatorFeePeriods ()**
 
-Description: Returns the time window (in seconds) between the declaration and activation of a new operator fee.
+Description: returns the time windows (in seconds) of operators declaration and execution fee periods.
 
 | **Parameter** | **Type** | **Description** |
 | ------------- | -------- | --------------- |
@@ -85,28 +101,29 @@ Return values
 | **Parameter** | **Type** | **Description**                                                                |
 | ------------- | -------- | ------------------------------------------------------------------------------ |
 | seconds       | uint64   | The duration (seconds) until an operator can execute a fee after declaring it. |
+| seconds       | uint64   | The duration (seconds) until an operator can execute a fee after declaring it. |
 
 
 
-#### **public getExecuteOperatorFeePeriod ()**
+#### getValidatorsPerOperatorLimit()
 
-Description: Returns the time window (in seconds) in which an operator can activate a new fee. It starts after the fee declaration window ends.
+Description: Returns the maximum amount of validators an operator may manage.
 
-| **Parameter** | **Type** | **Description** |
-| ------------- | -------- | --------------- |
-|               |          |                 |
+| **Parameter** | **Type**    | **Description** |
+| ------------- | ----------- | --------------- |
+| <p><br></p>   | <p><br></p> | <p><br></p>     |
 
 Return values
 
-| **Parameter** | **Type** | **Description**                                                                         |
-| ------------- | -------- | --------------------------------------------------------------------------------------- |
-| seconds       | uint64   | The duration (seconds) in which an operator can execute a declared fee until it expires |
+| **Parameter**   | **Type** | **Description**                              |
+| --------------- | -------- | -------------------------------------------- |
+| Validator limit | uint32   | amount of validators an operator may manage. |
 
 
 
 ### Operator Methods <a href="#_ha5jkuo5opxs" id="_ha5jkuo5opxs"></a>
 
-#### **public getOperatorById (operatorId)**
+#### **getOperatorById (operatorId)**
 
 Description: Returns operator’s data.
 
@@ -116,16 +133,18 @@ Description: Returns operator’s data.
 
 Return values
 
-| **Parameter** | **Type**  | **Description**                                                        |
-| ------------- | --------- | ---------------------------------------------------------------------- |
-| owner         | address   | The operator’s admin address (for management purposes).                |
-| fee           | uint64256 | The fee charged by the operator (denominated as $SSV tokens per block) |
-| validators    | uint32    | The amount of managed validators                                       |
-| active        | boolean   | Operator network status                                                |
+| **Parameter**  | **Type**  | **Description**                                                             |
+| -------------- | --------- | --------------------------------------------------------------------------- |
+| owner          | address   | The operator’s admin address (for management purposes).                     |
+| fee            | uint64256 | The fee charged by the operator (denominated as $SSV tokens per block)      |
+| validatorCount | uint32    | The amount of managed validators                                            |
+| whitelisted    | address   | The whitelisted address that can select operator to manage their validators |
+| isPrivate      | boolean   | Indication if operator is permissioned                                      |
+| active         | boolean   | Operator network status                                                     |
 
 
 
-#### **public getOperatorFee (operatorId)**
+#### **getOperatorFee (operatorId)**
 
 Description: returns current operator’s fee (not declared).
 
@@ -141,7 +160,7 @@ Return values
 
 
 
-#### **public getOperatorDeclaredFee (operatorId)**
+#### **getOperatorDeclaredFee (operatorId)**
 
 Description: Returns the declared fee (not actual fee) together with the execution time window.
 
@@ -149,17 +168,7 @@ Description: Returns the declared fee (not actual fee) together with the executi
 | ------------- | -------- | --------------- |
 | operatorId    | uint64   | The operator id |
 
-Return values
-
-| **Parameter**           | **Type** | **Description**                                                                       |
-| ----------------------- | -------- | ------------------------------------------------------------------------------------- |
-| declaredFee             | uint256  | The declared fee to be charged by the operator (denominated as $SSV tokens per block) |
-| executionBeginTime      | uint256  | The timestamp of when the operator can execute the declared fee                       |
-| executionExpirationTime | uint256  | The timestamp of when the declared fee is expired                                     |
-
-
-
-#### **public getOperatorEarnings (operatorId)**
+Return value**getOperatorEarnings (operatorId)**
 
 Description: Returns the outstanding earnings of an operator.
 
@@ -177,16 +186,16 @@ Return values
 
 ### Cluster Methods <a href="#_s1a6da24gvwp" id="_s1a6da24gvwp"></a>
 
-#### **public getBalance (owner, operatorIds, cluster)**
+#### **getBalance (owner, operatorIds, cluster)**
 
 Description: Returns the outstanding SSV balance of a cluster.\
 
 
-| **Parameter** | **Type**  | **Description**                                                                                                            |
-| ------------- | --------- | -------------------------------------------------------------------------------------------------------------------------- |
-| owner         | address   | The cluster owner address                                                                                                  |
-| operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                             |
-| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [Cluster-Scanne](../tools/cluster-scanner/)r tool. |
+| **Parameter** | **Type**  | **Description**                                                                                               |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------------- |
+| owner         | address   | The cluster owner address                                                                                     |
+| operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                |
+| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](broken-reference) tool. |
 
 Return values
 
@@ -196,16 +205,16 @@ Return values
 
 
 
-#### **public getClusterBurnRate (owner, operatorIds, cluster)**
+#### **getBurnRate (owner, operatorIds, cluster)**
 
 Description: Returns current ongoing expenses of SSV tokens for a particular SSV cluster balance on per block basis (aggregates all expenses for all the validators in this cluster).\
 
 
-| **Parameter** | **Type**  | **Description**                                                                                                            |
-| ------------- | --------- | -------------------------------------------------------------------------------------------------------------------------- |
-| owner         | address   | The user address                                                                                                           |
-| operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                             |
-| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [Cluster-Scanne](../tools/cluster-scanner/)r tool. |
+| **Parameter** | **Type**  | **Description**                                                                                               |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------------- |
+| owner         | address   | The user address                                                                                              |
+| operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                |
+| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](broken-reference) tool. |
 
 Return values
 
@@ -217,34 +226,16 @@ Return values
 
 ### Liquidator Methods <a href="#_39qo7wl8s1he" id="_39qo7wl8s1he"></a>
 
-#### **public getClusterBurnRate (owner, operatorIds, cluster)**
-
-Description: Returns rate of expenses in SSV tokens (per block) for a specified cluster.
-
-| **Parameter** | **Type**  | **Description**                                                                                                            |
-| ------------- | --------- | -------------------------------------------------------------------------------------------------------------------------- |
-| owner         | address   | The user address                                                                                                           |
-| operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                             |
-| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [Cluster-Scanne](../tools/cluster-scanner/)r tool. |
-
-Return values
-
-| **Parameter** | **Type** | **Description**                                     |
-| ------------- | -------- | --------------------------------------------------- |
-| burnRate      | uint256  | The rate per block in which the cluster spends SSV. |
-
-
-
-#### **public isLiquidatable (owner, operatorIds, cluster)**
+#### **isLiquidatable (owner, operatorIds, cluster)**
 
 Description: Returns true if the specified cluster is under the liquidation threshold and can be liquidated.\
 
 
-| **Parameter** | **Type**  | **Description**                                                                                                            |
-| ------------- | --------- | -------------------------------------------------------------------------------------------------------------------------- |
-| owner         | address   | The user address                                                                                                           |
-| operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                             |
-| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [Cluster-Scanne](../tools/cluster-scanner/)r tool. |
+| **Parameter** | **Type**  | **Description**                                                                                               |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------------- |
+| owner         | address   | The user address                                                                                              |
+| operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                |
+| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](broken-reference) tool. |
 
 Return values
 
@@ -254,15 +245,15 @@ Return values
 
 
 
-#### **public isLiquidated (owner, operatorIds, cluster)**
+#### **isLiquidated (owner, operatorIds, cluster)**
 
 Description: Returns true if the provided cluster is liquidated.
 
-| **Parameter** | **Type**  | **Description**                                                                                                            |
-| ------------- | --------- | -------------------------------------------------------------------------------------------------------------------------- |
-| owner         | address   | The user address                                                                                                           |
-| operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                             |
-| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [Cluster-Scanne](../tools/cluster-scanner/)r tool. |
+| **Parameter** | **Type**  | **Description**                                                                                               |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------------- |
+| owner         | address   | The user address                                                                                              |
+| operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                |
+| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](broken-reference) tool. |
 
 Return values
 

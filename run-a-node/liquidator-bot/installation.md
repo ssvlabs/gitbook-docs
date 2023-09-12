@@ -21,14 +21,7 @@ This installation requires NodeJS on your machine.
 
 ### Arguments
 
-| Parameter               | Description                                                                                                                                                            |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--node-url`            | The Ethereum execution node end-point                                                                                                                                  |
-| `--private-key`         | Private key of the liquidator's wallet                                                                                                                                 |
-| `--ssv-token-address`   | SSV token [contract](../../developers/testnet.md) address                                                                                                              |
-| `--ssv-network-address` | The ssv.network [contract](../../developers/smart-contracts/ssvnetwork.md) address                                                                                     |
-| `--ssv-network-views`   | The ssv.network views [contract](../../developers/smart-contracts/ssvnetworkviews.md) address                                                                          |
-| `--gas-price`           | <p>Gas price heuristic according to the median gas price suggested by web3 gas price oracle: </p><ul><li>Low (*0.1) </li><li>Med (*0.2) </li><li>High (*0.3)</li></ul> |
+<table><thead><tr><th width="230.29247910863506">Parameter</th><th width="466.2">Description</th></tr></thead><tbody><tr><td><code>--node-url</code></td><td>The Ethereum execution node end-point</td></tr><tr><td><code>--private-key</code></td><td>Private key of the liquidator's wallet</td></tr><tr><td><code>--ssv-token-address</code></td><td>SSV token <a href="../../developers/testnet.md">contract</a> address</td></tr><tr><td><code>--ssv-network-address</code></td><td>The ssv.network <a href="../../developers/smart-contracts/ssvnetwork.md">contract</a> address</td></tr><tr><td><code>--ssv-network-views</code></td><td>The ssv.network views <a href="../../developers/smart-contracts/ssvnetworkviews.md">contract</a> address</td></tr><tr><td><code>--gas-price</code></td><td><p>Gas price heuristic according to the median gas price suggested by web3 gas price oracle: </p><ul><li>Low (*0.1) </li><li>Med (*0.2) </li><li>High (*0.3)</li></ul></td></tr></tbody></table>
 
 ### Run
 
