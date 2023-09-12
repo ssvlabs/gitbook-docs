@@ -6,7 +6,7 @@ This section and the documents under it have not been updated to V3 testnet
 
 The second stage outlines how to manage the pool users’  ETH deposits and how the pool should activate validators according to demand (accumulated pooled ETH).
 
-![](<../../../.gitbook/assets/image (11).png>)
+![](<../../../.gitbook/assets/image (12).png>)
 
 ### Deposits Management
 

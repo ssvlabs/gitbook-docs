@@ -6,7 +6,7 @@ This section and the documents under it have not been updated to V3 testnet
 
 The third stage outlines how to rebase the pool’s liquid staking derivative (LSD) and which administrative functions must be utilized in the pool manager contract. This must be done in advance, to enable the management capabilities of the pool and its validators.
 
-![](<../../../.gitbook/assets/image (20).png>)
+![](<../../../.gitbook/assets/image (22).png>)
 
 ### Liquid Staking Derivative Rebasing
 

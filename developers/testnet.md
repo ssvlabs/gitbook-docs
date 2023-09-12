@@ -8,11 +8,11 @@ The ssv.network testnet is live on the Goerli network with the goal of serving a
 
 ### Smart Contracts
 
-| **Contract**      | **Address**                                |
-| ----------------- | ------------------------------------------ |
-| SSV Token         | 0x3a9f01091C446bdE031E39ea8354647AFef091E7 |
-| SSV Network       | 0xAfdb141Dd99b5a101065f40e3D7636262dce65b3 |
-| SSV Network Views | 0x8dB45282d7C4559fd093C26f677B3837a5598914 |
+| **Contract**      | **Address**                                                                                                                               |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| SSV Token         | [0x3a9f01091C446bdE031E39ea8354647AFef091E7](https://goerli.etherscan.io/address/0x3a9f01091C446bdE031E39ea8354647AFef091E7)              |
+| SSV Network       | [0xC3CD9A0aE89Fff83b71b58b6512D43F8a41f363D](https://goerli.etherscan.io/address/0xc3cd9a0ae89fff83b71b58b6512d43f8a41f363d)              |
+| SSV Network Views | [0xAE2C84c48272F5a1746150ef333D5E5B51F68763](https://goerli.etherscan.io/address/0xAE2C84c48272F5a1746150ef333D5E5B51F68763#readContract) |
 
 ### tSSV Faucet <a href="#_652a6sxy0wse" id="_652a6sxy0wse"></a>
 
