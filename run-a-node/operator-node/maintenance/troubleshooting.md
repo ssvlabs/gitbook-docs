@@ -53,7 +53,7 @@ FATAL	could not setup network	{"error": "network not supported: jatov2"}
 ```
 {% endcode %}
 
-In the example above, the N`etwork` in [`config.yaml` configuration file](../installation.md#create-configuration-file) was wrongly set to `jatov2` instead of `jato-v2`, so be sure to look for thinks like spelling mistakes.
+In the example above, the `Network` in [`config.yaml` configuration file](../installation.md#create-configuration-file) was wrongly set to `jatov2` instead of `jato-v2`, so be sure to look for thinks like spelling mistakes.
 
 ***
 
