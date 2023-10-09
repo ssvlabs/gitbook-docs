@@ -6,6 +6,8 @@ The SSV network enables the distribution of validator operations between non-tru
 
 {% hint style="warning" %}
 In order to distribute your validator, you must have an activated (deposited) validator on the Beacon Chain.
+
+Please [follow this guide](../validator-user-guides/validator-management/creating-a-new-validator.md) for instructions on this topic.
 {% endhint %}
 
 ## How to Run a Distributed Validator <a href="#_qbxicu1vhvv3" id="_qbxicu1vhvv3"></a>
