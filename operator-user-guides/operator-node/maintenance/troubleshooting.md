@@ -41,7 +41,9 @@ FATAL	could not setup operator private key	{"error": "Operator private key is no
 ```
 {% endcode %}
 
-Verify that the Operator Private Key is correctly set in [`config.yaml` configuration file](../installation.md#create-configuration-file). In particular, if using unencrypted (raw) keys, that the **private (secret) key** was copied in the configuration file.
+Verify that the Operator Private Key is correctly set in [`config.yaml` configuration file](../installation.md#create-configuration-file). In particular, if using unencrypted (raw) keys, that the **private (secret) key** was copied in the configuration file and that it contains all characters (sometimes it contains a  `=`  character that can easily be left out).
+
+If the node has been stopped and restart, verify that the same configuration has been applied, that the private key has not been changed, and that the `db.Path` configuration points to the same directory as before.
 
 ***
 
