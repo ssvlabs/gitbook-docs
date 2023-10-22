@@ -1,5 +1,11 @@
 # Removing an Operator
 
+{% hint style="danger" %}
+Please be aware: this process is irreversible and removed Operators would not be able to reactivate or register this operator back in the future.
+
+Trying to register an Operator with the same private key will result in an error, they would have to register a new one with a new key.
+{% endhint %}
+
 ### Connect your Web3 wallet to WebApp.
 
 Make sure to connect your Web3 wallet with the WebApp, and that the address corresponds with the one you want to manage your Operators with.
