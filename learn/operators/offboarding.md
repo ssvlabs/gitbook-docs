@@ -9,5 +9,5 @@ An operator can choose to leave the network at any time. Choosing to remove an o
 {% hint style="warning" %}
 Please be aware: this process is irreversible and removed Operators would not be able to reactivate or register this operator back in the future.
 
-Trying to register an Operator with the same private key will result in an error, they would have to register a new one with a new key.
+Attempting to register an Operator using the same private key will result in an error. In such a case, Operator registration must be done with with a new key.
 {% endhint %}
