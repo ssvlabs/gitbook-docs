@@ -18,6 +18,7 @@
   * [Operator Onboarding](learn/operators/operator-onboarding.md)
   * [Update Fee](learn/operators/update-fee.md)
   * [Offboarding](learn/operators/offboarding.md)
+  * [Verified Operators](learn/operators/verified-operators.md)
 * [Stakers](learn/stakers/README.md)
   * [Validators](learn/stakers/validators/README.md)
     * [Validator Onboarding](learn/stakers/validators/validator-onboarding.md)
