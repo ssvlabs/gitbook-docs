@@ -79,7 +79,7 @@
   * [Registering an Operator](operator-user-guides/operator-management/registration.md)
   * [Updating Operator fees](operator-user-guides/operator-management/updating-operator-fees.md)
   * [Withdrawing earnings](operator-user-guides/operator-management/withdrawing-earnings.md)
-  * [Configuring a private Operator](operator-user-guides/operator-management/configuring-a-private-operator.md)
+  * [Configuring a permissioned Operator](operator-user-guides/operator-management/configuring-a-permissioned-operator.md)
   * [Setting Operator metadata](operator-user-guides/operator-management/setting-operator-metadata.md)
   * [Removing an Operator](operator-user-guides/operator-management/removing-an-operator.md)
 * [Liquidator Bot](operator-user-guides/liquidator-bot/README.md)
