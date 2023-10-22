@@ -28,8 +28,8 @@ To join the network as an operator a user must [install](installation.md) the SS
 [withdrawing-earnings.md](../operator-management/withdrawing-earnings.md)
 {% endcontent-ref %}
 
-{% content-ref url="../operator-management/configuring-a-private-operator.md" %}
-[configuring-a-private-operator.md](../operator-management/configuring-a-private-operator.md)
+{% content-ref url="../operator-management/configuring-a-permissioned-operator.md" %}
+[configuring-a-permissioned-operator.md](../operator-management/configuring-a-permissioned-operator.md)
 {% endcontent-ref %}
 
 {% content-ref url="../operator-management/setting-operator-metadata.md" %}
