@@ -103,7 +103,7 @@ The most secure way to run your Operator node, is to generate an Encrypted key p
 
 #### Password file
 
-You will need to create a file (named `password.pass` in this example) containing the password you chose for your Secret Key:
+You will need to create a file (named `password` in this example) containing the password you chose for your Secret Key:
 
 ```bash
 echo "<MY_OPERATOR_PASSWORD>" >> password
@@ -441,7 +441,7 @@ At this point the node configuration needs to be changed, please edit the `confi
 ```yaml
 KeyStore:
   PrivateKeyFile: <ENCRYPTED_PRIVATE_KEY_JSON> # e.g. ./encrypted_private_key.json
-  PasswordFile: <PASSWORD_FILE> # e.g. ./password.pass
+  PasswordFile: <PASSWORD_FILE> # e.g. ./password
 ```
 
 And make sure to replace `ENCRYPTED_PRIVATE_KEY_JSON` with the operator encrypted private key file just generated (e.g. `encrypted_private_key.json`) and `PASSWORD_FILE` with the file containing the password used to generate the encrypted key itself (e.g. `password`).
