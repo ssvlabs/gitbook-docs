@@ -1,4 +1,16 @@
-# MEV Configuration
+# Configuring MEV
+
+{% hint style="danger" %}
+**VERY IMPORTANT**
+
+
+
+Until further notice, we advise everyone to **refrain from using a Prysm endpoint for Mainnet operators** as its not MEV compatible.
+
+
+
+A [bug in Prysm Beacon node](https://github.com/prysmaticlabs/prysm/issues/12103) is causing operators using such endpoint in their SSV Node to miss MEV rewards.
+{% endhint %}
 
 This guide outlines the necessary steps required to configure MEV within your SSV node to enable operators to participate in proposing MEV blocks for the validators they manage.
 
