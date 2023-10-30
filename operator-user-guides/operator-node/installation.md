@@ -44,6 +44,18 @@ The specific configuration will be different for each Execution Client. For exam
 
 #### Beacon Client
 
+{% hint style="danger" %}
+**VERY IMPORTANT**
+
+
+
+Until further notice, we advise everyone to **refrain from using a Prysm endpoint for Mainnet operators** as its not MEV compatible.
+
+
+
+A [bug in Prysm Beacon node](https://github.com/prysmaticlabs/prysm/issues/12103) is causing operators using such endpoint in their SSV Node to miss MEV rewards.
+{% endhint %}
+
 This can be any Ethereum Beacon Node client (e.g. Prysm, Lighthouse, Tekou, Nimbus, or any client utilizing standard REST HTTP). You will see this node referenced as ETH2 in the SSV configuration.
 
 ### Pre-requisites
@@ -260,18 +272,23 @@ Make sure your `ETH1Addr` endpoint is communicating **over WebSocket** and **not
 
 ### Start the Node using Docker
 
+{% hint style="warning" %}
+**Do not** run multiple instances of SSV Node with the same set Operator keys.
+
+This does not increase validator resiliency and **could lead to validator slashing**.
+{% endhint %}
+
 Now, for the part you've been waiting for... actually starting your SSV node!
 
 To start your node, run the following Docker command in the same folder you created the `config.yaml` file in the previous step:
 
-<pre class="language-bash"><code class="lang-bash"><strong>docker run -d --restart unless-stopped --name ssv_node -e \
+<pre class="language-bash"><code class="lang-bash"><strong>docker run --restart unless-stopped --name ssv_node -e \
 </strong>CONFIG_PATH=/config.yaml -p 13001:13001 -p 12001:12001/udp -p 15000:15000 \
 -v "$(pwd)/config.yaml":/config.yaml \
 -v "$(pwd)":/data \
 -v "$(pwd)/password":/password \
 -v "$(pwd)/encrypted_private_key.json":/encrypted_private_key.json \
--it "bloxstaking/ssv-node:latest" make BUILD_PATH="/go/bin/ssvnode" start-node &#x26;&#x26; \ 
-docker logs ssv_node --follow
+-it "bloxstaking/ssv-node:latest" make BUILD_PATH="/go/bin/ssvnode" start-node
 </code></pre>
 
 ### Other Configuration
@@ -288,8 +305,6 @@ p2p:
 ```
 
 When you set up your firewall on your SSV node machine, make sure to expose the ports that you set in the [container creation command](installation.md#create-and-start-the-node-using-docker). The defaults are <mark style="color:green;">**12001 UDP**</mark> and <mark style="color:green;">**13001 TCP**</mark>.
-
-
 
 ### FAQ
 
