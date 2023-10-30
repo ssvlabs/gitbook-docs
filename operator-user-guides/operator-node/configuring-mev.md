@@ -1,17 +1,5 @@
 # Configuring MEV
 
-{% hint style="danger" %}
-**VERY IMPORTANT**
-
-
-
-Until further notice, we advise everyone to **refrain from using a Prysm endpoint for Mainnet operators** as its not MEV compatible.
-
-
-
-A [bug in Prysm Beacon node](https://github.com/prysmaticlabs/prysm/issues/12103) is causing operators using such endpoint in their SSV Node to miss MEV rewards.
-{% endhint %}
-
 This guide outlines the necessary steps required to configure MEV within your SSV node to enable operators to participate in proposing MEV blocks for the validators they manage.
 
 ## Prerequisite: Enable MEV in Beacon Client <a href="#prerequisite-enable-mev-in-beacon-client" id="prerequisite-enable-mev-in-beacon-client"></a>
@@ -26,6 +14,10 @@ Follow the setup guidelines for configuring MEV on your preferred client:
 * ​[Teku](https://docs.teku.consensys.net/how-to/configure/use-proposer-config-file)​
 * ​[Lighthouse](https://lighthouse-book.sigmaprime.io/builders.html?highlight=mev#maximal-extractable-value-mev)​
 * ​[Nimbus](https://nimbus.guide/external-block-builder.html)​
+
+{% hint style="danger" %}
+**Critical Notice** - until further notice, we strongly recommend against using Prysm client for Mainnet operators due to its lack of MEV compatibility. Refer to the [bug report ](https://github.com/prysmaticlabs/prysm/issues/12103)for more details.
+{% endhint %}
 
 {% hint style="info" %}
 For reference, the [ETHStaker](https://github.com/eth-educators/ethstaker-guides/blob/main/MEV-relay-list.md) community provides a list of MEV relays and their corresponding endpoints.
