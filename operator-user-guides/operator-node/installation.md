@@ -44,19 +44,11 @@ The specific configuration will be different for each Execution Client. For exam
 
 #### Beacon Client
 
-{% hint style="danger" %}
-**VERY IMPORTANT**
-
-
-
-Until further notice, we advise everyone to **refrain from using a Prysm endpoint for Mainnet operators** as its not MEV compatible.
-
-
-
-A [bug in Prysm Beacon node](https://github.com/prysmaticlabs/prysm/issues/12103) is causing operators using such endpoint in their SSV Node to miss MEV rewards.
-{% endhint %}
-
 This can be any Ethereum Beacon Node client (e.g. Prysm, Lighthouse, Tekou, Nimbus, or any client utilizing standard REST HTTP). You will see this node referenced as ETH2 in the SSV configuration.
+
+{% hint style="danger" %}
+**Critical Notice** - until further notice, we strongly recommend against using Prysm client for Mainnet operators due to its lack of MEV compatibility. Refer to the [bug report ](https://github.com/prysmaticlabs/prysm/issues/12103)for more details.
+{% endhint %}
 
 ### Pre-requisites
 
