@@ -6,8 +6,6 @@ The SSV network enables the distribution of validator operations between non-tru
 
 {% hint style="warning" %}
 In order to distribute your validator, you must have an activated (deposited) validator on the Beacon Chain.
-
-Please [follow this guide](../validator-user-guides/validator-management/creating-a-new-validator.md) for instructions on this topic.
 {% endhint %}
 
 ## How to Run a Distributed Validator <a href="#_qbxicu1vhvv3" id="_qbxicu1vhvv3"></a>
@@ -16,7 +14,7 @@ This guide outlines the steps required to run a distributed validator via the ss
 
 ### Prerequisites <a href="#_v2zo33nxl8mr" id="_v2zo33nxl8mr"></a>
 
-* **An Ethereum validator** - generation of validator keys and their activation (deposit) to the Beacon Chain could be done using Ethereum’s official [Staking Deposit CLI](https://github.com/ethereum/staking-deposit-cli) and their [Launchpad](https://goerli.launchpad.ethereum.org/).
+* **An Ethereum validator** - to generate validator keys and activate them using Ethereum’s official [Staking Deposit CLI](https://github.com/ethereum/staking-deposit-cli) and [Launchpad](https://goerli.launchpad.ethereum.org/), please [follow this guide](../validator-user-guides/validator-management/creating-a-new-validator.md). You can also run a Distributed Key Generation ceremony using [SSV DKG Client](tools/ssv-dkg-client/generate-key-shares.md)
 * **Goerli ETH** (<0.1) to cover transaction gas costs on the Goerli testnet (Community members on our [discord](https://discord.gg/D5kUdV93) could assist in obtaining the required amount).
 * **Testnet SSV** ([faucet](https://faucet.ssv.network/))
 
