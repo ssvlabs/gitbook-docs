@@ -1,5 +1,9 @@
 # Creating a new validator
 
+{% hint style="info" %}
+Note: Instead of creating a validator key pair and then distribute that into Key Shares, you can run a Distributed Key Generation ceremony, thanks to the [SSV DKG Client](creating-a-new-validator.md#generate-validator-keys).
+{% endhint %}
+
 This guide shows how to create a new set of validator keys for the Goerli testnet. For Ethereum mainnet, simply change Launchpad configuration from the page's dropdown menu, and refer to this [Deposit Contract](https://etherscan.io/address/0x00000000219ab540356cBB839Cbe05303d7705Fa) on mainnet, instead.
 
 The official [Staking Launchpad](https://goerli.launchpad.ethereum.org/en/) allows developers to create a new validator via the web interface, but the procedure on the Web UI can be hardly integrated in an automated process.
