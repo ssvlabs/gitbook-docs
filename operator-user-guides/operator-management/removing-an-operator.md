@@ -14,11 +14,11 @@ Make sure to connect your Web3 wallet with the WebApp, and that the address corr
 **Note:** Your account is associated with your Web3 wallet.
 {% endhint %}
 
-Once connected, browse to the _My Account_ page and click on the _Validators_ drop down menu, and select _Operators_.
+Once connected, browse to the _My Account_ page and select the Operator you want to update from the _Operator Dashboard_.
 
-<figure><img src="../../.gitbook/assets/removing_validator_1.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/withdrawing_earnings_1.png" alt=""><figcaption></figcaption></figure>
 
-In the Operator Details screen, click on the three vertical dots on the top-right corner. From the dropdown, choose the _Remove Operator_ option.
+Then, on the _Operator Details_ screen, click on the three vertical dots on the top-right corner. From the dropdown, choose the _Remove Operator_ option.
 
 <figure><img src="../../.gitbook/assets/removing_validator_2.png" alt=""><figcaption></figcaption></figure>
 
