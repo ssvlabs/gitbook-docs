@@ -42,6 +42,7 @@
 * [Smart Contracts](developers/smart-contracts/README.md)
   * [SSVNetwork](developers/smart-contracts/ssvnetwork.md)
   * [SSVNetworkViews](developers/smart-contracts/ssvnetworkviews.md)
+  * [Troubleshooting](developers/smart-contracts/troubleshooting.md)
 * [Testnet](developers/testnet.md)
 * [Integration Guides](developers/integration-guides/README.md)
   * [Staking Pools](developers/integration-guides/staking-pools/README.md)
