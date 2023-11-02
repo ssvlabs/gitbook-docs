@@ -7,7 +7,7 @@ description: So you want to install an SSV node? You've come to the right place!
 Once you have your node running you'll be able to participate in multiple validator clusters and earn rewards 🥳
 
 {% hint style="success" %}
-SSV node setup is also available using [eth-docker](https://eth-docker.net/Support/BloxSSV/) and [Stereum Launcher](https://stereum.net/), so you can use those if you prefer.
+SSV node setup is also available using [eth-docker](https://eth-docker.net/Support/SSV/) and [Stereum Launcher](https://stereum.net/), so you can use those if you prefer.
 {% endhint %}
 
 ### System Requirements
