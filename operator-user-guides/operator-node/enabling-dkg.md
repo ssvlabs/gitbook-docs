@@ -72,7 +72,7 @@ Under the assumption that all the necessary files (`encrypted_private_key.json`,
 ```bash
 docker run --restart unless-stopped --name ssv_dkg -p 3030:3030 \
 -v "<PATH_TO_FOLDER_WITH_CONFIG_FILES>":/data -it \
-"bloxstaking/ssv-dkg:latest" /app \ start-operator \
+"bloxstaking/ssv-dkg:latest" /app start-operator \
 --configPath /data/operator.yaml
 ```
 
