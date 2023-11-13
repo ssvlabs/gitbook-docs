@@ -41,16 +41,15 @@ It is very important to ensure that Beacon client have been set up with MEV befo
 
 ## Considerations for MEV Relays Selection
 
-In ssv.network, every time a validator is assigned a block proposal, one operator within its cluster is selected to propose the block. Given that MEV-enabled blocks are broadcasted through relays, only operators supporting the chosen relay can broadcast it to the network.
+In ssv.network, every time a validator is assigned a block proposal, one operator within its cluster is selected to lead the proposal of the block. Given that MEV-enabled blocks are broadcasted through relays, only operators supporting the relay chosen by the leader can broadcast it to the network.
 
 Consequently, a greater correlation between the relays supported by operators in a cluster enhances the number of operators capable of broadcasting the block proposal, ultimately enhancing the liveness of the proposal duty.
 
-* **Full Relay Correlation**: When all operator nodes support the same relays, each node can both sign and broadcast the block, enhancing liveness beyond the industry standard.
-* **Partial Relay Correlation**: In cases where overlap is lacking, only the operator responsible for proposing the block will broadcast the task. This aligns with the standard liveness of non-DVT validators.
-* **Minimal or No MEV Support**: If certain cluster operators do not enable MEV (when the count of MEV-enabled operators falls below quorum), consensus might not be reached for the task. This could lead to the block proposal not being executed at all.
-* **No MEV Support**: In instances where a non-MEV operator proposes the block, the proposal would proceed but without any MEV rewards.
+* **Full Relay Correlation**: When all operator nodes support the same relays, every node would broadcast the block, enhancing liveness beyond the industry standard.
+* **Partial Relay Correlation**: In cases where overlap is lacking, only operator nodes supporting the relay chosen by the operator leading the proposal will broadcast the proposal.
+* **No MEV Support**: In instances where a non-MEV operator leads the proposal of the block, the proposal would proceed but without any MEV rewards (vanilla block).
 
-Therefore, it is recommended to support as many relays as possible in your operator setup. The more correlation among supported relays, the higher the liveness for block proposal duties and the greater favorability among stakers during operator selection. This approach minimizes the chances of missed proposals or non-MEV blocks in edge cases, ensuring optimal network performance and alignment with staker expectations.
+Therefore, it is recommended to support as many relays as possible in your operator setup. The more correlation among supported relays, the higher the liveness for block proposal duties and the greater favorability among stakers during operator selection. This approach promotes optimal network performance and alignment with staker expectations.
 
 ## Showcase Supported Relays
 
