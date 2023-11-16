@@ -29,7 +29,7 @@ The best resource to learn more about the inner workings of the SSV DAO is the [
 
 ### How to Become a part of the DAO <a href="#_4amyzbfyyfuc" id="_4amyzbfyyfuc"></a>
 
-There are multiple ways to get involved and start building. The best way is to get familiar with our [discord](https://discord.com/invite/ssvnetwork) and [forum](https://forum.ssv.network/) and start interacting with the community there. If you are a developer, you can [check our GitHub](https://github.com/bloxapp/ssv), [work on open issues](https://github.com/bloxapp/ssv-network/issues) and push some code! If you love the project and want to contribute in a larger capacity, discord would be the best way to reach out and make your case.
+There are multiple ways to get involved and start building. The best way is to get familiar with our [discord](https://discord.gg/ssvnetworkofficial) and [forum](https://forum.ssv.network/) and start interacting with the community there. If you are a developer, you can [check our GitHub](https://github.com/bloxapp/ssv), [work on open issues](https://github.com/bloxapp/ssv-network/issues) and push some code! If you love the project and want to contribute in a larger capacity, discord would be the best way to reach out and make your case.
 
 \
 We are looking forward to hearing from you and expanding the DAO!\

@@ -15,7 +15,7 @@ This guide outlines the steps required to run a distributed validator via the ss
 ### Prerequisites <a href="#_v2zo33nxl8mr" id="_v2zo33nxl8mr"></a>
 
 * **An Ethereum validator** - to generate validator keys and activate them using Ethereum’s official [Staking Deposit CLI](https://github.com/ethereum/staking-deposit-cli) and [Launchpad](https://goerli.launchpad.ethereum.org/), please [follow this guide](../validator-user-guides/validator-management/creating-a-new-validator.md). You can also run a Distributed Key Generation ceremony using [SSV DKG Client](tools/ssv-dkg-client/generate-key-shares.md)
-* **Goerli ETH** (<0.1) to cover transaction gas costs on the Goerli testnet (Community members on our [discord](https://discord.gg/D5kUdV93) could assist in obtaining the required amount).
+* **Goerli ETH** (<0.1) to cover transaction gas costs on the Goerli testnet (Community members on our [discord](https://discord.gg/ssvnetworkofficial) could assist in obtaining the required amount).
 * **Testnet SSV** ([faucet](https://faucet.ssv.network/))
 
 ### Process Overview <a href="#_7f2y4pcm8bfl" id="_7f2y4pcm8bfl"></a>

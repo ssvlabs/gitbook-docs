@@ -133,7 +133,7 @@ Steps to confirm you use the same key:
 ***
 
 {% hint style="info" %}
-Didn't find the answer you are looking for? Reach out to other network operators on our [Discord channel](https://discord.gg/kqWmdU8dQ2)
+Didn't find the answer you are looking for? Reach out to other network operators on our [Discord channel](https://discord.gg/ssvnetworkofficial)
 {% endhint %}
 
 [^1]: 

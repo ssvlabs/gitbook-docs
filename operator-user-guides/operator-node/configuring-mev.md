@@ -15,10 +15,6 @@ Follow the setup guidelines for configuring MEV on your preferred client:
 * ​[Lighthouse](https://lighthouse-book.sigmaprime.io/builders.html?highlight=mev#maximal-extractable-value-mev)​
 * ​[Nimbus](https://nimbus.guide/external-block-builder.html)​
 
-{% hint style="danger" %}
-**Critical Notice** - until further notice, we strongly recommend against using Prysm client for Mainnet operators due to its lack of MEV compatibility. Refer to the [bug report ](https://github.com/prysmaticlabs/prysm/issues/12103)for more details.
-{% endhint %}
-
 {% hint style="info" %}
 For reference, the [ETHStaker](https://github.com/eth-educators/ethstaker-guides/blob/main/MEV-relay-list.md) community provides a list of MEV relays and their corresponding endpoints.
 {% endhint %}
