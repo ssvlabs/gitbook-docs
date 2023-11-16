@@ -46,10 +46,6 @@ The specific configuration will be different for each Execution Client. For exam
 
 This can be any Ethereum Beacon Node client (e.g. Prysm, Lighthouse, Tekou, Nimbus, or any client utilizing standard REST HTTP). You will see this node referenced as ETH2 in the SSV configuration.
 
-{% hint style="danger" %}
-**Critical Notice** - until further notice, we strongly recommend against using Prysm client for Mainnet operators due to its lack of MEV compatibility. Refer to the [bug report ](https://github.com/prysmaticlabs/prysm/issues/12103)for more details.
-{% endhint %}
-
 ### Pre-requisites
 
 #### Enable SSH
@@ -161,7 +157,7 @@ Pay close attention to the `publicKey` field, as the name says, it contains the 
 
 <summary>Raw Operator Keys generation (deprecated)</summary>
 
-#### Note
+**Note**
 
 While it is still possible to generate raw (unencrypted) keys, it is advised not to do so. The procedure described in the collapsed section constitutes a legacy and deprecated alternative to the default option, which is generating password-encrypted keys.
 
@@ -282,6 +278,14 @@ To start your node, run the following Docker command in the same folder you crea
 -v "$(pwd)/encrypted_private_key.json":/encrypted_private_key.json \
 -it "bloxstaking/ssv-node:latest" make BUILD_PATH="/go/bin/ssvnode" start-node
 </code></pre>
+
+{% hint style="info" %}
+This command will keep the terminal busy, showing the container's logs. It is useful to make sure that the node start up sequence runs correctly.
+
+You can detach the terminal at any time by hitting `Ctrl-c` key combination, or closing the terminal itself. The node will be stopped, but it will restart automatically, thanks to the `--restart unless-stopped` startup parameter.
+
+If you are sure that the node works, and don't care about the logs, you can add the `-d` parameter right after `docker run`.
+{% endhint %}
 
 ### Other Configuration
 
@@ -412,11 +416,11 @@ And finally... run the [creation command again from the top of this section](ins
 
 <details>
 
-<summary>How do I migrate raw (deprecated) Operator Keys </summary>
+<summary>How do I migrate raw (deprecated) Operator Keys</summary>
 
 If you are already in possession of raw (unencrypted) Operator Keys, please copy the private key into a text file and make sure the file only contains the key in a single line. For this mini-guide, we are going to call this file: `private-key`.
 
-#### Password file
+**Password file**
 
 You will need to create a file (named `password` in this example) containing the password you chose for your Secret Key:
 
@@ -424,7 +428,7 @@ You will need to create a file (named `password` in this example) containing the
 echo "<MY_OPERATOR_PASSWORD>" >> password
 ```
 
-#### Secret Key encryption
+**Secret Key encryption**
 
 Then, you can generate a KeyStore using this command:
 
@@ -441,7 +445,7 @@ docker rm ssv-node-key-generation
 ```
 {% endcode %}
 
-#### Configuration update
+**Configuration update**
 
 At this point the node configuration needs to be changed, please edit the `config.yaml` file for your node, find the line with `OperatorPrivateKey` and delete it entirely. Replace it with this section:
 
@@ -453,7 +457,7 @@ KeyStore:
 
 And make sure to replace `ENCRYPTED_PRIVATE_KEY_JSON` with the operator encrypted private key file just generated (e.g. `encrypted_private_key.json`) and `PASSWORD_FILE` with the file containing the password used to generate the encrypted key itself (e.g. `password`).
 
-#### Restart node and apply new configuration
+**Restart node and apply new configuration**
 
 The node needs to be restarted, in order for the new configuration to be applied. Please connect to the machine running the node via terminal and execute the command:
 

@@ -79,6 +79,14 @@ docker run --restart unless-stopped --name ssv_dkg -p 3030:3030 \
 Just make sure to substitute `<PATH_TO_FOLDER_WITH_CONFIG_FILES>` with the actual folder containing all the files.
 
 You can, of course, change the configuration above to one that suits you better, just be mindful about changing the path references in the docker command **and** in the `operator.yaml` file as well.
+
+{% hint style="info" %}
+This command will keep the terminal busy, showing the container's logs. It is useful to make sure that the tool start up sequence runs correctly.
+
+You can detach the terminal at any time by hitting `Ctrl-c` key combination, or closing the terminal itself. The tool will be stopped, but it will restart automatically, thanks to the `--restart unless-stopped` startup parameter.
+
+If you are sure that the tool works, and don't care about the logs, you can add the `-d` parameter right after `docker run`.
+{% endhint %}
 {% endtab %}
 
 {% tab title="Build from Source" %}
