@@ -1,4 +1,20 @@
-# Distributing a validator
+# Run a Distributed Key Generation ceremony
+
+{% hint style="danger" %}
+The SSV-DKG tool is yet to be audited. **Please refrain from using it on mainnet.**
+{% endhint %}
+
+### Overview
+
+The process described below allows users to generate a set of KeyShares by directly communicating with the SSV Operators they have chosen. With this operation, the actual validator key is never created and no one will be able to have the full validator key in its entirety, just its parts, assigned to each chosen Operator.
+
+Please note that it is possible to switch Operators and Exit the validator at a later time, but you will need the cooperation of the Operators in the cluster, and the threashold to reach consensus is needed, for this to be successful.
+
+Please continue only if you accept these constraints.
+
+### Pre-requisites
+
+In order to generate KeyShares with DKG, the only fundamental pre-requisite is to have Docker installed on the computer running the ceremony. In order to do so, please refer to [the official Docker documentation](https://docs.docker.com/engine/install/), and find the option that better fits your computer.
 
 ### Connect your Web3 wallet to WebApp
 
@@ -32,13 +48,9 @@ You'll simply be asked how do you want to handle operational costs, in regards t
 
 #### Ethereum validator disclaimer
 
-In order to run a validator, you'll need to be in possession of its keys, have made the deposit to the Deposit Contract to activate it, and own the necessary amount of SSV tokens to cover operational costs.
+This screen lists the pre-requisites to distribute an existing set of validator keys, but as stated at the top of this guide, the goal of the procedure described in this page is to directly generate a KeyShares file through a Distributed Key Generation ceremony
 
-{% hint style="info" %}
-To learn how to create a new set of validator keys and activate them, please refer to [this guide](broken-reference).
-{% endhint %}
-
-Accept the disclaimer by clicking Next if you have all the pre-requisites.
+So for this reason, simply disregard the disclaimer and click _Next_.
 
 <figure><img src="../../.gitbook/assets/distribute_validator_3.png" alt=""><figcaption></figcaption></figure>
 
@@ -46,17 +58,21 @@ Accept the disclaimer by clicking Next if you have all the pre-requisites.
 
 Now, select four operators to manage your validator. Please note the **Yearly Fee** for the setup you created before hitting the Next button.
 
+Please make sure to use the _Filter_ button to select Operators that have enabled their node to run DKG ceremonies, like in the screenshot below:
+
+<figure><img src="../../.gitbook/assets/distributed_key_generation_1.png" alt=""><figcaption></figcaption></figure>
+
+![](../../.gitbook/assets/distributed\_key\_generation\_2.png)
+
 {% hint style="info" %}
 **Important:** Verified Operators (VOs) are operators that have been granted the **Verified** status by the DAO for completing KYC and providing consistent high-quality service. You can sort the operator list by their daily performance, yearly fee, and # of validators they manage. You can also filter to view only Verified Operators.
 {% endhint %}
-
-![](../../.gitbook/assets/distribute\_validator\_4.png)
 
 ### Validator operational runway
 
 You can select the operational runway period of your validator, in accordance with the **Yearly Fee** of previously selected operators. This will dictate the initial amount of SSV to be deposited in the cluster, but it can always be managed later.
 
-<figure><img src="../../.gitbook/assets/distribute_validator_5.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/distributed_key_generation_4.png" alt=""><figcaption></figcaption></figure>
 
 **Please read carefully and understand how fees are managed and the risks of account** [**liquidation**](https://ssv.network/glossary/#liquidation) **if your account balance falls below the** [**Threshold Balance**](https://ssv.network/glossary/##threshold-balance)**.**
 
@@ -64,37 +80,33 @@ You can select the operational runway period of your validator, in accordance wi
 
 ### Key splitting
 
-The next screen will allow you to generate KeyShares for your validator key. On testnet, this can be done Online, directly on the WebApp, or Offline, on your computer.
+The next screen usually allows you to generate KeyShares for your validator key, but as stated at the top of this guide, the goal of this procedure is to directly generate a KeyShares file through a Distributed Key Generation ceremony.
 
-On mainnet, only the Offline option is available.
+This can only be done on your personal computer, as you will have to run a command on a terminal, so the only way forward is to choose the _Offline_ option.
 
 <figure><img src="../../.gitbook/assets/distribute_validator_7.png" alt=""><figcaption></figcaption></figure>
 
-#### Online Key Splitting
+From the options presented in the next screen, please select DKG,&#x20;
 
-Online key splitting presents a convenient option, especially for those not familiar with the console,  or command line clients.
+<figure><img src="../../.gitbook/assets/distributed_key_generation_7.png" alt=""><figcaption></figcaption></figure>
 
-This is not considered safe and is only available on testnet for testing purposes.
+Then, enter the withdrawal address for your validator in the _Withdrawal Address_ field, and click _Confirm_ to reveal the command in the area below. Please copy the command and run it on a terminal on your machine.
 
-{% hint style="warning" %}
-Please never perform a Online key splitting on testnet, with a private key that you intend to use on mainnet.
-{% endhint %}
+<figure><img src="../../.gitbook/assets/distributed_key_generation_8.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/distribute_validator_8.png" alt=""><figcaption></figcaption></figure>
+After launching the `ssv-dkg` tool as shown above, it will commence a DKG ceremony with the selected operators.
 
-If the Online option is chosen, the next screen allows you to upload the Validator key (file named keystore) and enter the password to decrypt it.
+Following the successful completion of the DKG ceremony, several files have been generated and placed in the directory where the command was launched from:
 
-<figure><img src="../../.gitbook/assets/distribute_validator_9.png" alt=""><figcaption></figcaption></figure>
+* `deposit-[validator_pubkey].json` -  this file contains the deposit data necessary activate the validator
+* `keyshares-[validator_pubkey].json` - this file contains the keyshares necessary to [register the validator on the ssv.network](distributing-a-validator.md)
+* `encrypted_private_key-[validator_pubkey].json` and `password-[validator_pubkey]` (not present if the `generateInitiatorKey` option is not used) - these files contain the keys used to sign messages during the ceremony (sometimes called ceremony identifiers), which are **crucial for resharing** your validator to a different set of operators in the future.
 
-#### Offline Key Splitting
+Before proceeding, please make sure to perform the transaction on the Deposit Contract for the network you have chosen (e.g. Ethereum mainnet, Goerli, Holesky, ...) and [activate the validator on the Beacon layer by following this guide.](creating-a-new-validator.md#activate-validator-keys)
 
-Offline key splitting is the most secure option, although less convenient, as it requires running a command line tool. For more information, refer to the specific [User Guide on how to use the ssv-keys CLI tool](../tools/ssv-keys-cli.md).
+At this point, click the _Next_ button and upload the generated `keyshares-[validator_pubkey].json` file in the following screen.
 
-<figure><img src="../../.gitbook/assets/distribute_validator_10.png" alt=""><figcaption></figcaption></figure>
-
-If the Offline option was selected, please follow the indications (image above) and upload the generated `keyshares-[DATE]-[TIME].json` file in the following screen.
-
-<figure><img src="../../.gitbook/assets/distribute_validator_11.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/distributed_key_generation_3.png" alt=""><figcaption></figcaption></figure>
 
 Once uploaded, if successfully validated, advance to the next screen clicking Next.
 
