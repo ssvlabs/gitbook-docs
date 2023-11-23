@@ -223,7 +223,8 @@ db:
 ssv:
   # The SSV network to join to
   # Mainnet = Network: mainnet (default)
-  # Testnet = Network: jato-v2
+  # Testnet (Goerli)  = Network: jato-v2
+  # Testnet (Holesky) = Network: holesky
   Network: mainnet
   
   ValidatorOptions:
