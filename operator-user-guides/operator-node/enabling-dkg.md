@@ -53,7 +53,7 @@ With this configuration, a typical configuration file would look like this:
 {% code title="operator.yaml" %}
 ```yaml
 privKey: /data/encrypted_private_key.json
-password: /data/password
+privKeyPassword: /data/password
 port: 3030
 storeShare: true
 logLevel: info
