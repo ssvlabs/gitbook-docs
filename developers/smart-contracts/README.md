@@ -14,7 +14,7 @@
 
 
 
-<table><thead><tr><th width="283">Contract</th><th>Address</th></tr></thead><tbody><tr><td>SSV Token</td><td><a href="https://holesky.etherscan.io/address/0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA">0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA</a></td></tr><tr><td>SSVNetwork</td><td><a href="https://holesky.etherscan.io/address/0x352A18AEe90cdcd825d1E37d9939dCA86C00e281">0x352A18AEe90cdcd825d1E37d9939dCA86C00e281</a></td></tr><tr><td>SSVNetworkViews</td><td><a href="https://holesky.etherscan.io/address/0xad45A78180961079BFaeEe349704F411dfF947C6">0xad45A78180961079BFaeEe349704F411dfF947C6</a></td></tr></tbody></table>
+<table><thead><tr><th width="283">Contract</th><th>Address</th></tr></thead><tbody><tr><td>SSV Token</td><td><a href="https://holesky.etherscan.io/address/0xad45A78180961079BFaeEe349704F411dfF947C6">0xad45A78180961079BFaeEe349704F411dfF947C6</a></td></tr><tr><td>SSVNetwork</td><td><a href="https://holesky.etherscan.io/address/0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA">0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA</a></td></tr><tr><td>SSVNetworkViews</td><td><a href="https://holesky.etherscan.io/address/0x352A18AEe90cdcd825d1E37d9939dCA86C00e281">0x352A18AEe90cdcd825d1E37d9939dCA86C00e281</a></td></tr></tbody></table>
 
 #### Goerli Testnet v4 (Jato-v2)
 
