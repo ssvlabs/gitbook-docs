@@ -79,13 +79,13 @@ operatorIDs: [143, 219, 33, 34]    # array of Operator IDs which will be used fo
 withdrawAddress: "0xa1a66cc5d309f19fb2fda2b7601b223053d0f7f4"    # Address where reward payments for the validator are sent
 owner: "0xb64923DA2c1A9907AdC63617d882D824033a091c"    # Address of owner of the Cluster that will manage the validator on ssv.network
 nonce: 0    # Owner nonce for the SSV contract
-network: "prater"    # Network name (default: mainnet)
+network: "holesky"    # Network name (default: mainnet, other options: prater)
 operatorsInfoPath: /data/operators_info.json    # Path to the file containing operators information
 # alternatively:
 # operatorsInfo: '[{"id": 1,"public_key": "LS0tLS1CRUdJTiBSU0....","ip": "http://localhost:3030"}, {"id": 2,"public_key": "LS0tLS1CRUdJTiBSU0....","ip": "http://localhost:3030"},...]'    # Raw content of the JSON file with operators information
 outputPath: /data/    # Path to store the output files
-initiatorPrivKey: /data/encrypted_private_key.json    # Path to private key of ssv initiator
-initiatorPrivKeyPassword: /data/password    # Path to password file to decrypt the key
+privKey: /data/encrypted_private_key.json    # Path to private key of ssv initiator
+privKeyPassword: /data/password    # Path to password file to decrypt the key
 generateInitiatorKey: false # If set true - generates a new RSA key pair + random secure password. Result stored at `outputPath`
 logLevel: info    # Logger's log level (default: debug)
 logFormat: json    # Logger's encoding (default: json)
@@ -164,11 +164,11 @@ ssv-dkg init \
           --owner 0x81592c3de184a3e2c0dcb5a261bc107bfa91f494 \
           --nonce 4 \
           --withdrawAddress 0xa1a66cc5d309f19fb2fda2b7601b223053d0f7f4  \
-          --fork "mainnet" \
+          --network "holesky" \
           --depositResultsPath deposit.json \
           --ssvPayloadResultsPath payload.json \
-          --initiatorPrivKey ./encrypted_private_key.json \
-          --initiatorPrivKeyPassword ./password \
+          --privKey ./encrypted_private_key.json \
+          --privKeyPassword ./password \
           # Alternatively:
           # --generateInitiatorKey
           --logLevel info \
@@ -179,7 +179,7 @@ ssv-dkg init \
 
 Here's an explanation of each parameter:
 
-<table><thead><tr><th width="307">Argument</th><th width="144.33333333333331">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>--operatorIDs</code></td><td>int[]</td><td>Operator IDs which will be used for a DKG ceremony</td></tr><tr><td><code>--operatorsInfoPath</code></td><td>string</td><td>Path to the file containing operators information</td></tr><tr><td><code>--operatorsInfo</code></td><td>string</td><td>Raw content of the JSON file with operators information</td></tr><tr><td><code>--owner</code></td><td>address</td><td>Address of owner of the Cluster that will manage the validator on ssv.network</td></tr><tr><td><code>--nonce</code></td><td>int</td><td>Owner nonce for the SSV contract</td></tr><tr><td><code>--withdrawAddress</code></td><td>address</td><td>Address where reward payments for the validator are sent</td></tr><tr><td><code>--network</code></td><td>mainnet | prater | now_test_network</td><td>Network name (default: <code>mainnet</code>)</td></tr><tr><td><code>--outputPath</code></td><td>string</td><td>Path to store the staking deposit file</td></tr><tr><td><code>--initiatorPrivKey</code></td><td>string</td><td>Path to private key of ssv initiator</td></tr><tr><td><code>--initiatorPrivKeyPassword</code></td><td>string</td><td>Path to password file to decrypt the key</td></tr><tr><td><code>--generateInitiatorKey</code></td><td>boolean</td><td>If set true - generates a new RSA key pair + random secure password. Result stored at <code>outputPath</code></td></tr><tr><td><code>--logLevel</code></td><td>debug | info | warning | error | critical</td><td>Logger's log level (default: <code>debug</code>)</td></tr><tr><td><code>--logFormat</code></td><td>json | console</td><td>Logger's encoding (default: <code>json</code>)</td></tr><tr><td><code>--logLevelFormat</code></td><td>capitalColor | capital | lowercase</td><td>Logger's level format (default: <code>capitalColor</code>)</td></tr><tr><td><code>--logFilePath</code></td><td>string</td><td>Path to file where logs should be written (default: <code>./data/debug.log</code>)</td></tr></tbody></table>
+<table><thead><tr><th width="307">Argument</th><th width="144.33333333333331">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>--operatorIDs</code></td><td>int[]</td><td>Operator IDs which will be used for a DKG ceremony</td></tr><tr><td><code>--operatorsInfoPath</code></td><td>string</td><td>Path to the file containing operators information</td></tr><tr><td><code>--operatorsInfo</code></td><td>string</td><td>Raw content of the JSON file with operators information</td></tr><tr><td><code>--owner</code></td><td>address</td><td>Address of owner of the Cluster that will manage the validator on ssv.network</td></tr><tr><td><code>--nonce</code></td><td>int</td><td>Owner nonce for the SSV contract</td></tr><tr><td><code>--withdrawAddress</code></td><td>address</td><td>Address where reward payments for the validator are sent</td></tr><tr><td><code>--network</code></td><td>mainnet | prater | holesky</td><td>Network name (default: <code>mainnet</code>)</td></tr><tr><td><code>--outputPath</code></td><td>string</td><td>Path to store the staking deposit file</td></tr><tr><td><code>--privKey</code></td><td>string</td><td>Path to private key of ssv initiator</td></tr><tr><td><code>--privKeyPassword</code></td><td>string</td><td>Path to password file to decrypt the key</td></tr><tr><td><code>--generateInitiatorKey</code></td><td>boolean</td><td>If set true - generates a new RSA key pair + random secure password. Result stored at <code>outputPath</code></td></tr><tr><td><code>--logLevel</code></td><td>debug | info | warning | error | critical</td><td>Logger's log level (default: <code>debug</code>)</td></tr><tr><td><code>--logFormat</code></td><td>json | console</td><td>Logger's encoding (default: <code>json</code>)</td></tr><tr><td><code>--logLevelFormat</code></td><td>capitalColor | capital | lowercase</td><td>Logger's level format (default: <code>capitalColor</code>)</td></tr><tr><td><code>--logFilePath</code></td><td>string</td><td>Path to file where logs should be written (default: <code>./data/debug.log</code>)</td></tr></tbody></table>
 
 A special note goes to the `nonce` field, which represents how many validators the address identified in the `owner` parameter has already registered to the ssv.network.
 
@@ -214,13 +214,13 @@ operatorIDs: [143, 219, 33, 34]    # array of Operator IDs which will be used fo
 withdrawAddress: "0xa1a66cc5d309f19fb2fda2b7601b223053d0f7f4"    # Address where reward payments for the validator are sent
 owner: "0xb64923DA2c1A9907AdC63617d882D824033a091c"    # Address of owner of the Cluster that will manage the validator on ssv.network
 nonce: 0    # Owner nonce for the SSV contract
-network: "prater"    # Network name (default: mainnet)
+network: "holesky"    # Network name (default: mainnet)
 operatorsInfoPath: /data/operators_info.json    # Path to the file containing operators information
 # alternatively:
 # operatorsInfo: '[{"id": 1,"public_key": "LS0tLS1CRUdJTiBSU0....","ip": "http://localhost:3030"}, {"id": 2,"public_key": "LS0tLS1CRUdJTiBSU0....","ip": "http://localhost:3030"},...]'    # Raw content of the JSON file with operators information
 outputPath: /data/    # Path to store the output files
-initiatorPrivKey: /data/encrypted_private_key.json    # Path to private key of ssv initiator
-initiatorPrivKeyPassword: /data/password    # Path to password file to decrypt the key
+privKey: /data/encrypted_private_key.json    # Path to private key of ssv initiator
+privKeyPassword: /data/password    # Path to password file to decrypt the key
 generateInitiatorKey: false # If set true - generates a new RSA key pair + random secure password. Result stored at `outputPath`
 logLevel: info    # Logger's log level (default: debug)
 logFormat: json    # Logger's encoding (default: json)

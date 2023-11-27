@@ -53,7 +53,7 @@ With this configuration, a typical configuration file would look like this:
 {% code title="operator.yaml" %}
 ```yaml
 privKey: /data/encrypted_private_key.json
-password: /data/password
+privKeyPassword: /data/password
 port: 3030
 storeShare: true
 logLevel: info
@@ -126,7 +126,7 @@ To run the DKG tool as an operator, you can launch the following command with th
 ssv-dkg start-operator \
             --privKey ./operator-config/encrypted_private_key.json  \
             --port 3030 \
-            --password ./operator-config/password \
+            --privKeyPassword ./operator-config/password \
             --storeShare true \
             --logLevel info \
             --logFormat json \
@@ -136,7 +136,7 @@ ssv-dkg start-operator \
 
 Here's an explanation of each parameter:
 
-<table><thead><tr><th width="307">Argument</th><th width="144.33333333333331">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>--privKey</code></td><td>string</td><td>Path to private key of ssv operator</td></tr><tr><td><code>--port</code></td><td>int</td><td>Port for listening messages (default: <code>3030</code>)</td></tr><tr><td><code>--password</code></td><td>string</td><td>Path to password file to decrypt the key</td></tr><tr><td><code>--storeShare</code></td><td>bool</td><td>Whether to store the created bls key share to a file for later reuse if needed (default: <code>false</code>)</td></tr><tr><td><code>--logLevel</code></td><td>debug | info | warning | error | critical</td><td>Logger's log level (default: <code>debug</code>)</td></tr><tr><td><code>--logFormat</code></td><td>json | console</td><td>Logger's encoding (default: <code>json</code>)</td></tr><tr><td><code>--logLevelFormat</code></td><td>capitalColor | capital | lowercase</td><td>Logger's level format (default: <code>capitalColor</code>)</td></tr><tr><td><code>--logFilePath</code></td><td>string</td><td>Path to file where logs should be written (default: <code>./data/debug.log</code>)</td></tr></tbody></table>
+<table><thead><tr><th width="307">Argument</th><th width="144.33333333333331">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>--privKey</code></td><td>string</td><td>Path to private key of ssv operator</td></tr><tr><td><code>--port</code></td><td>int</td><td>Port for listening messages (default: <code>3030</code>)</td></tr><tr><td><code>--privKeyPassword</code></td><td>string</td><td>Path to password file to decrypt the key</td></tr><tr><td><code>--storeShare</code></td><td>bool</td><td>Whether to store the created bls key share to a file for later reuse if needed (default: <code>false</code>)</td></tr><tr><td><code>--logLevel</code></td><td>debug | info | warning | error | critical</td><td>Logger's log level (default: <code>debug</code>)</td></tr><tr><td><code>--logFormat</code></td><td>json | console</td><td>Logger's encoding (default: <code>json</code>)</td></tr><tr><td><code>--logLevelFormat</code></td><td>capitalColor | capital | lowercase</td><td>Logger's level format (default: <code>capitalColor</code>)</td></tr><tr><td><code>--logFilePath</code></td><td>string</td><td>Path to file where logs should be written (default: <code>./data/debug.log</code>)</td></tr></tbody></table>
 
 #### Launch with YAML config file
 
@@ -159,7 +159,7 @@ Then the content of the YAML file should be changed to this:
 {% code title="operator.yaml" %}
 ```yaml
 privKey: ./operator-config/encrypted_private_key.json
-password: ./operator-config/password
+privKeyPassword: ./operator-config/password
 port: 3030
 storeShare: true
 logLevel: info
