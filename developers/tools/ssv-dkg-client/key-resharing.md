@@ -38,13 +38,13 @@ oldID: "dbd12b3155454666a6710a2262695bb82cda41948d612d98" # HEX of previous DKG 
 withdrawAddress: "0xa1a66cc5d309f19fb2fda2b7601b223053d0f7f4"    # Address where reward payments for the validator are sent
 owner: "0xb64923DA2c1A9907AdC63617d882D824033a091c"    # Address of owner of the Cluster that will manage the validator on ssv.network
 nonce: 0    # Owner nonce for the SSV contract
-network: "prater"    # Network name (default: mainnet)
+network: "prater"    # Network name (default: mainnet, other options: prater)
 operatorsInfoPath: /data/operators_info.json    # Path to the file containing operators information
 # Alternatively:
 # operatorsInfo: '[{"id": 1,"public_key": "LS0tLS1CRUdJTiBSU0....","ip": "http://localhost:3030"}, {"id": 2,"public_key": "LS0tLS1CRUdJTiBSU0....","ip": "http://localhost:3030"},...]'    # Raw content of the JSON file with operators information
 outputPath: /data/output   #  Path to store the resulting staking deposit and ssv contract payload files
-initiatorPrivKey: /data/encrypted_private_key.json    # Path to private key of ssv initiator
-initiatorPrivKeyPassword: /data/password    # Path to password file to decrypt the key
+privKey: /data/encrypted_private_key.json    # Path to private key of ssv initiator
+privKeyPassword: /data/password    # Path to password file to decrypt the key
 # Alternatively:
 # generateInitiatorKey: false # If set true - generates a new RSA key pair + random secure password. The result is stored at `outputPath`
 logLevel: info    # Logger's log level (default: debug)
@@ -125,8 +125,8 @@ ssv-dkg reshare \
           --owner 0x81592c3de184a3e2c0dcb5a261bc107bfa91f494 \
           --nonce 4 \
           --outputPath /output \
-          --initiatorPrivKey ./encrypted_private_key.json \
-          --initiatorPrivKeyPassword ./password \
+          --privKey ./encrypted_private_key.json \
+          --privKeyPassword ./password \
           --logLevel info \
           --logFormat json \
           --logLevelFormat capitalColor \
@@ -182,8 +182,8 @@ operatorsInfoPath: /data/operators_info.json    # Path to the file containing op
 # Alternatively:
 # operatorsInfo: '[{"id": 1,"public_key": "LS0tLS1CRUdJTiBSU0....","ip": "http://localhost:3030"}, {"id": 2,"public_key": "LS0tLS1CRUdJTiBSU0....","ip": "http://localhost:3030"},...]'    # Raw content of the JSON file with operators information
 outputPath: /data/output   #  Path to store the resulting staking deposit and ssv contract payload files
-initiatorPrivKey: /data/encrypted_private_key.json    # Path to private key of ssv initiator
-initiatorPrivKeyPassword: /data/password    # Path to password file to decrypt the key
+privKey: /data/encrypted_private_key.json    # Path to private key of ssv initiator
+privKeyPassword: /data/password    # Path to password file to decrypt the key
 # Alternatively:
 # generateInitiatorKey: false # If set true - generates a new RSA key pair + random secure password. The result is stored at `outputPath`
 logLevel: info    # Logger's log level (default: debug)
