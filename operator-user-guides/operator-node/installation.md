@@ -16,17 +16,19 @@ The SSV node that you are installing with these instructions is only the SSV nod
 
 All cloud services are supported for your node setup (see a reference example on AWS [here](https://github.com/bloxapp/ssv/blob/main/docs/OPERATOR\_GETTING\_STARTED.md#setting-aws-server-for-operator)).
 
-The minimum system requirements shown below are for a machine that is only running an SSV node. If you plan to run the SSV node on the same machine as your Execution Client and/or Beacon Client, these minimum requirements will be needed **in addition** to your existing requirements.
-
 💻 Machine running Ubuntu
 
-🎛️ 4 cores (3 minimum)
+🎛️ 4 cores&#x20;
 
 ⚡️ 4GB RAM
 
 📀 20GB storage (5GB minimum)
 
 🧮 IOPS > 10K
+
+{% hint style="warning" %}
+The minimum system requirements shown below are for a machine that is only running an SSV node. If you plan to run the SSV node on the same machine as your Execution Client and/or Beacon Client, these minimum requirements will be needed **in addition** to your existing requirements.
+{% endhint %}
 
 ### Ethereum Node Requirements
 
