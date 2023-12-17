@@ -290,9 +290,11 @@ You can detach the terminal at any time by hitting `Ctrl-c` key combination, or 
 If you are sure that the node works, and don't care about the logs, you can add the `-d` parameter right after `docker run`.
 {% endhint %}
 
-### Other Configuration
+### Peer-to-peer ports configuration and firewall
 
-If you don't want to use those default ports, it's best to change them in your `config.yaml` file **as well as changing the ports on the container creation command** (simply changing the host port mappings on the Docker command isn't enough!).
+When you set up your firewall on your SSV node machine, make sure to expose the ports that you set in the [container creation command](installation.md#create-and-start-the-node-using-docker). The defaults are <mark style="color:green;">**12001 UDP**</mark> and <mark style="color:green;">**13001 TCP**</mark>.
+
+If you don't want to use the default ports, they can be changed in your `config.yaml` file. Be aware, the **must be changed on the container creation command as well** (simply changing the host port mappings on the Docker command isn't enough!).
 
 You can also add your `HostAddress` to the config, which is the public static IP address of the machine.
 
@@ -303,9 +305,18 @@ p2p:
   TcpPort: 13001
 ```
 
-When you set up your firewall on your SSV node machine, make sure to expose the ports that you set in the [container creation command](installation.md#create-and-start-the-node-using-docker). The defaults are <mark style="color:green;">**12001 UDP**</mark> and <mark style="color:green;">**13001 TCP**</mark>.
-
 ### FAQ
+
+<details>
+
+<summary>My node is not participating in cluster consensus</summary>
+
+* If your node is not participating in cluster consensus, please verify that the `Network` has the correct value for the blockchain you are trying to operate on.
+* Next, verify in the SSV node logs that the connection to execution and beacon node has been established.
+* If the SSV node logs don't report any errors, please verify the clients logs themselves. If the disk they are running on does not support fast IOPS, they might struggle to stay in sync with the blockchain
+* It is finally possible that the clients don't report any errors, but the issue persists. In this cases, try and re-sync execution and/or beacon client(s), to fix potential initialization issues.
+
+</details>
 
 <details>
 

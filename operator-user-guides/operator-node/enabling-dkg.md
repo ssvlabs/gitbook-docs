@@ -21,11 +21,11 @@ In order to successfully participate in DKG ceremonies initiated by stakers, you
 * **Operator ID** - the ID of your operator within the SSV network.
 * **Operator Key Pair**
   * **Public Key** - the public key of the operator&#x20;
-  * **Private Key** - the private key of the operator as an password-encrypted file (follow [this guide to generate an encrypted private key file](installation.md#generate-operator-keys-encrypted) or [this migration guide to encrypt existing keys](installation.md#how-do-i-migrate-raw-deprecated-operator-keys))
+  * **Private Key** - the private key of the operator as an password-encrypted file (if you are in possession of raw text private key, follow [this migration guide to encrypt your existing operator keys](installation.md#how-do-i-migrate-raw-deprecated-operator-keys))
 * **Machine Endpoint** - the endpoint (`protocol:ip:port`) of the machine intended to run the `ssv-dkg` client (if you have a domain name, instead of an `ip` that works as well)
 
 {% hint style="warning" %}
-You must use the keys of your SSV operator as the `ssv-dkg` key pairs. Failure to do so will result in the inability to decrypt the keyshare and fulfill validator duties.
+You **must** **use the same key** of your SSV operator when running `ssv-dkg`node. Using a different key will result in the inability to successfully complete the DKG ceremony.
 {% endhint %}
 
 ## **Start SSV-DKG**
@@ -78,9 +78,9 @@ docker run --restart unless-stopped --name ssv_dkg -p 3030:3030 \
 --configPath /data/operator.yaml
 ```
 
-Just make sure to substitute `<PATH_TO_FOLDER_WITH_CONFIG_FILES>` with the actual folder containing all the files.
+Just **make sure to substitute** `<PATH_TO_FOLDER_WITH_CONFIG_FILES>` with the actual folder containing all the files (e.g. `/home/my-user/ssv-dkg/`).
 
-You can, of course, change the configuration above to one that suits you better, just be mindful about changing the path references in the docker command **and** in the `operator.yaml` file as well.
+You can, of course, change the configuration above to one that suits you better, just be mindful about changing the path references in the docker command **and** in the `operator.yaml` file as well. The two need to be consistent with each other.
 
 {% hint style="info" %}
 This command will keep the terminal busy, showing the container's logs. It is useful to make sure that the tool start up sequence runs correctly.
@@ -180,6 +180,8 @@ ssv-dkg start-operator --configPath "./operator-config/operator.yaml"
 If the `--configPath` parameter is not provided, `ssv-dkg` will be looking for a file named `config.yaml` in `./config/` folder at the same root as the binary (i.e. `./config/config.yaml`)
 {% endtab %}
 {% endtabs %}
+
+When you set up your firewall on your DKG node machine, make sure to expose the port that you set in the configuration (and Docker container creation command ,if running on Docker). The default is <mark style="color:green;">**3030**</mark>.
 
 ## Update Operator Metadata
 
