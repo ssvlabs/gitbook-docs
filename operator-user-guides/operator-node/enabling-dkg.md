@@ -36,7 +36,11 @@ It is advised launching the tool as a Docker image as it is the most convenient 
 
 {% tabs %}
 {% tab title="Launch with Docker and YAML file" %}
-All of the necessary configuration information can be provided in a YAML file (referenced as `operator.yaml` from now on).
+All of the necessary configuration information can be provided in a YAML file.
+
+{% hint style="danger" %}
+The configuration file has to be named `config.yaml`
+{% endhint %}
 
 A good way to manage all the necessary files (`encrypted_private_key.json`, `password`) is to store them in a single folder (in this case `operator-config`), together with the `operator.yaml` configuration file, like so:
 
@@ -44,7 +48,7 @@ A good way to manage all the necessary files (`encrypted_private_key.json`, `pas
 ssv@localhost:~/ssv-dkg# tree operator-config
 operator-config
 ├── encrypted_private_key.json
-├── operator.yaml
+├── config.yaml
 └── password
 
 1 directory, 3 files
@@ -57,6 +61,7 @@ With this configuration, a typical configuration file would look like this:
 privKey: /data/encrypted_private_key.json
 privKeyPassword: /data/password
 port: 3030
+operatorID: <YOUR_OPERATOR_ID>
 storeShare: true
 logLevel: info
 logFormat: json
@@ -72,15 +77,16 @@ In the config file above, `/data/` represents the container's shared volume crea
 Under the assumption that all the necessary files (`encrypted_private_key.json`, `operator.yaml`, `password`) are under the same folder (represented below with `<PATH_TO_FOLDER_WITH_CONFIG_FILES>`) you can run the tool using the command below:
 
 ```bash
-docker run --restart unless-stopped --name ssv_dkg -p 3030:3030 \
--v "<PATH_TO_FOLDER_WITH_CONFIG_FILES>":/data -it \
-"bloxstaking/ssv-dkg:latest" /app start-operator \
---configPath /data/operator.yaml
+docker run --restart unless-stopped --name ssv_dkg -p 3030:3030 -it \
+-v "<PATH_TO_FOLDER_WITH_CONFIG_FILES>":/data \
+-v "<PATH_TO_OUTPUT_FOLDER>":/output \
+"bloxstaking/ssv-dkg:latest" start-operator \
+--configPath /data --outputPath /output
 ```
 
-Just **make sure to substitute** `<PATH_TO_FOLDER_WITH_CONFIG_FILES>` with the actual folder containing all the files (e.g. `/home/my-user/ssv-dkg/`).
+Just **make sure to substitute** `<PATH_TO_FOLDER_WITH_CONFIG_FILES>` with the actual folder containing all the files (e.g. `/home/my-user/operator-config/`).
 
-You can, of course, change the configuration above to one that suits you better, just be mindful about changing the path references in the docker command **and** in the `operator.yaml` file as well. The two need to be consistent with each other.
+You can, of course, change the configuration above to one that suits you better, just be mindful about changing the path references in the docker command **and** in the `config.yaml` file as well. The two need to be consistent with each other.
 
 {% hint style="info" %}
 This command will keep the terminal busy, showing the container's logs. It is useful to make sure that the tool start up sequence runs correctly.
@@ -150,7 +156,7 @@ Just pay attention to the path of the necessary files, which needs to be changed
 ssv@localhost:~/ssv-dkg# tree operator-config
 operator-config
 ├── encrypted_private_key.json
-├── operator.yaml
+├── config.yaml
 └── password
 
 1 directory, 3 files
@@ -160,8 +166,8 @@ Then the content of the YAML file should be changed to this:
 
 {% code title="operator.yaml" %}
 ```yaml
-privKey: ./operator-config/encrypted_private_key.json
-privKeyPassword: ./operator-config/password
+privKey: ./encrypted_private_key.json
+privKeyPassword: ./password
 port: 3030
 storeShare: true
 logLevel: info
@@ -174,7 +180,7 @@ logFilePath: ./operator-config/debug.log
 Then the tool can be launched from the root folder, by running this command:
 
 ```sh
-ssv-dkg start-operator --configPath "./operator-config/operator.yaml"
+ssv-dkg start-operator --configPath "./operator-config/
 ```
 
 If the `--configPath` parameter is not provided, `ssv-dkg` will be looking for a file named `config.yaml` in `./config/` folder at the same root as the binary (i.e. `./config/config.yaml`)
@@ -192,3 +198,12 @@ To participate in DKG ceremonies without coordination and to enable others to in
 Once the DKG tool is up and running, please make sure to update your operator metadata, and provide your DKG Operator endpoint, in the form of `protocol:ip:port` (if you have a domain name, instead of an `ip` that works as well).
 
 Please head over to [the Operator User guide on how to update metadata](../operator-management/setting-operator-metadata.md) and follow the instructions
+
+## Test the setup
+
+You can test out if your DKG node is correctly setup, with these simple steps:
+
+* fetch operator metadata from ssv-api (substitute `OPERATOR_ID` with your operator ID `https://api.ssv.network/api/v4/holesky/operators/OPERATOR_ID` and get `dkg_address` from the output
+* run the command:`docker run "bloxstaking/ssv-dkg:latest" ping --ip ${dkg_address}` where `dkg_address` comes from previous step
+
+It should tell you if the operator is online and is updated to the latest version.
