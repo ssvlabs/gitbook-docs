@@ -2,13 +2,13 @@
 
 The SSVNetworkViews contract is for reading information about the network and its participants.
 
-### Repository <a href="#_xkgqmoxdldho" id="_xkgqmoxdldho"></a>
+### Repository <a href="#xkgqmoxdldho" id="xkgqmoxdldho"></a>
 
 {% embed url="https://github.com/bloxapp/ssv-network/tree/contract-v3/contracts" %}
 
-### General Methods <a href="#_b2oq6y1s4ym" id="_b2oq6y1s4ym"></a>
+### General Methods <a href="#b2oq6y1s4ym" id="b2oq6y1s4ym"></a>
 
-#### **getNetworkFee ()**
+#### **`getNetworkFee ()`**
 
 Description: Returns current network fee.
 
@@ -22,9 +22,7 @@ Return values
 | ------------- | -------- | --------------------------------------------------------------------- |
 | fee           | uint256  | The fee charged by the network (denominated as $SSV tokens per block) |
 
-
-
-#### **getNetworkEarnings ()**
+#### **`getNetworkEarnings ()`**
 
 Description: Returns accumulated network fees not yet withdrawn.
 
@@ -38,9 +36,7 @@ Return values
 | ------------- | -------- | -------------------------------------------------- |
 | amount        | uint256  | Amount of fees accumulated in the network treasury |
 
-
-
-#### **getLiquidationThresholdPeriod ()**
+#### **`getLiquidationThresholdPeriod ()`**
 
 Description: Returns the minimum duration (in blocks) which a cluster has to have sufficient balance (liquidation collateral) to not be liquidated.
 
@@ -54,9 +50,7 @@ Return values
 | ------------- | -------- | --------------------------------------------------------------------------------------------------------------------------- |
 | blocks        | uint64   | The minimum duration (blocks) which a cluster has to have sufficient balance (liquidation collateral) to not be liquidated. |
 
-
-
-#### **getMinimumLiquidationCollateral()**
+#### **`getMinimumLiquidationCollateral()`**
 
 Description: Returns the minimum amount which a cluster has to have sufficient balance (liquidation collateral) to not be liquidated.
 
@@ -70,9 +64,7 @@ Return values
 | ------------- | -------- | ---------------------------------------------------------------------------------------------------- |
 | amount        | uint256  | The minimum amount of SSV which a cluster has to have (liquidation collateral) to not be liquidated. |
 
-
-
-#### **getOperatorFeeIncreaseLimit ()**
+#### **`getOperatorFeeIncreaseLimit ()`**
 
 Description: Returns the max amount by which operators can increase fees in each fee update cycle. This does refer to the max operator fee limitation, but to the rate (%) by which it can be increased.
 
@@ -86,15 +78,11 @@ Return values
 | ------------- | -------- | ---------------------------------------------------------------------- |
 | amount        | uint64   | The maximum increase in percentage the operator can update his fee to. |
 
-
-
-#### **getOperatorFeePeriods ()**
+#### **`getOperatorFeePeriods()`**
 
 Description: returns the time windows (in seconds) of operators declaration and execution fee periods.
 
-| **Parameter** | **Type** | **Description** |
-| ------------- | -------- | --------------- |
-|               |          |                 |
+<table data-header-hidden><thead><tr><th width="253"></th><th></th><th></th></tr></thead><tbody><tr><td><strong>Parameter</strong></td><td><strong>Type</strong></td><td><strong>Description</strong></td></tr><tr><td></td><td></td><td></td></tr></tbody></table>
 
 Return values
 
@@ -103,9 +91,19 @@ Return values
 | seconds       | uint64   | The duration (seconds) until an operator can execute a fee after declaring it. |
 | seconds       | uint64   | The duration (seconds) until an operator can execute a fee after declaring it. |
 
+#### **`getMaximumOperatorFee()`**
 
+Description: **Gets the operator maximum fee for operators that use SSV token**
 
-#### getValidatorsPerOperatorLimit()
+<table><thead><tr><th width="253">Paramet</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td></td><td></td><td></td></tr></tbody></table>
+
+Return values
+
+| Parameter | Type   | Description                      |
+| --------- | ------ | -------------------------------- |
+| maxFee    | uint64 | The maximum fee value (SSV/year) |
+
+#### `getValidatorsPerOperatorLimit()`
 
 Description: Returns the maximum amount of validators an operator may manage.
 
@@ -119,11 +117,9 @@ Return values
 | --------------- | -------- | -------------------------------------------- |
 | Validator limit | uint32   | amount of validators an operator may manage. |
 
+### Operator Methods <a href="#ha5jkuo5opxs" id="ha5jkuo5opxs"></a>
 
-
-### Operator Methods <a href="#_ha5jkuo5opxs" id="_ha5jkuo5opxs"></a>
-
-#### **getOperatorById (operatorId)**
+#### **`getOperatorById (operatorId)`**
 
 Description: Returns operator’s data.
 
@@ -144,7 +140,7 @@ Return values
 
 
 
-#### **getOperatorFee (operatorId)**
+#### **`getOperatorFee (operatorId)`**
 
 Description: returns current operator’s fee (not declared).
 
@@ -160,7 +156,7 @@ Return values
 
 
 
-#### **getOperatorDeclaredFee (operatorId)**
+#### **`getOperatorDeclaredFee (operatorId)`**
 
 Description: Returns the declared fee (not actual fee) together with the execution time window.
 
@@ -184,9 +180,9 @@ Return values
 
 
 
-### Cluster Methods <a href="#_s1a6da24gvwp" id="_s1a6da24gvwp"></a>
+### Cluster Methods <a href="#s1a6da24gvwp" id="s1a6da24gvwp"></a>
 
-#### **getBalance (owner, operatorIds, cluster)**
+#### **`getBalance (owner, operatorIds, cluster)`**
 
 Description: Returns the outstanding SSV balance of a cluster.\
 
@@ -205,7 +201,7 @@ Return values
 
 
 
-#### **getBurnRate (owner, operatorIds, cluster)**
+#### **`getBurnRate (owner, operatorIds, cluster)`**
 
 Description: Returns current ongoing expenses of SSV tokens for a particular SSV cluster balance on per block basis (aggregates all expenses for all the validators in this cluster).\
 
@@ -224,9 +220,9 @@ Return values
 
 
 
-### Liquidator Methods <a href="#_39qo7wl8s1he" id="_39qo7wl8s1he"></a>
+### Liquidator Methods <a href="#id-39qo7wl8s1he" id="id-39qo7wl8s1he"></a>
 
-#### **isLiquidatable (owner, operatorIds, cluster)**
+#### **`isLiquidatable (owner, operatorIds, cluster)`**
 
 Description: Returns true if the specified cluster is under the liquidation threshold and can be liquidated.\
 
@@ -245,7 +241,7 @@ Return values
 
 
 
-#### **isLiquidated (owner, operatorIds, cluster)**
+#### **`isLiquidated (owner, operatorIds, cluster)`**
 
 Description: Returns true if the provided cluster is liquidated.
 
@@ -261,4 +257,4 @@ Return values
 | ------------- | -------- | ------------------------------------- |
 |               | boolean  | Indication if a cluster is liquidated |
 
-### &#x20;<a href="#_usq3rk5h0wb6" id="_usq3rk5h0wb6"></a>
+### &#x20;<a href="#usq3rk5h0wb6" id="usq3rk5h0wb6"></a>

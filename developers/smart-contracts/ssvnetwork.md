@@ -2,11 +2,11 @@
 
 The SSVNetwork contract is the main contract for operations and management.
 
-### Repository <a href="#_xkgqmoxdldho" id="_xkgqmoxdldho"></a>
+### Repository <a href="#xkgqmoxdldho" id="xkgqmoxdldho"></a>
 
 {% embed url="https://github.com/bloxapp/ssv-network/tree/main/contracts" %}
 
-### Operator Methods <a href="#_cxoku5ytbvgq" id="_cxoku5ytbvgq"></a>
+### Operator Methods <a href="#cxoku5ytbvgq" id="cxoku5ytbvgq"></a>
 
 #### **`registerOperator(publicKey, operatorFee)`**
 
@@ -58,7 +58,7 @@ Events:
 
 * `OperatorWithdrawn(address indexed owner, uint64 indexed operatorId, uint256 value)`
 
-#### **setOperatorWhitelist (operatorId, whitelisted)**
+#### **`setOperatorWhitelist (operatorId, whitelisted)`**
 
 Description: Sets a whitelisted address that can select him as their operator (setting a whitelist address transitions the operator from public to permissioned).
 
@@ -121,7 +121,7 @@ Events:
 
 * `OperatorFeeExecuted(address indexed owner, uint64 indexed operatorId, uint256 blockNumber, uint256 fee)`
 
-### Account Methods <a href="#_af9cg9vns61i" id="_af9cg9vns61i"></a>
+### Account Methods <a href="#af9cg9vns61i" id="af9cg9vns61i"></a>
 
 #### **`setFeeRecipientAddress(feeRecipientAddress)`**
 
@@ -135,7 +135,7 @@ Events:
 
 * `FeeRecipientAddressUpdated(address indexed owner, address recipientAddress)`
 
-### Cluster Methods <a href="#_hqxi798q7b6v" id="_hqxi798q7b6v"></a>
+### Cluster Methods <a href="#hqxi798q7b6v" id="hqxi798q7b6v"></a>
 
 #### **`registerValidator(publicKey, operatorIds, shares, amount, cluster)`**
 
@@ -166,6 +166,19 @@ Description: Removes validator from the SSV network.
 Events:
 
 * `ValidatorRemoved(address indexed owner, uint64[] operatorIds, bytes publicKey, Cluster cluster)`
+
+#### **`exitValidator(publicKey, operatorIds)`**
+
+Description: Prompts SSV nodes to sign a voluntary exit of the validator.
+
+| **Parameter** | **Type**  | **Description**                |
+| ------------- | --------- | ------------------------------ |
+| publicKey     | bytes     | The validator’s public key.    |
+| operatorIds   | unit64\[] | List of cluster operators Ids. |
+
+Events:
+
+* `ValidatorExited(address indexed owner, uint64[] operatorIds, bytes publicKey)`
 
 #### **`deposit(owner, operatorIds, amount, cluster)`**
 
@@ -210,7 +223,7 @@ Events:
 
 * `ClusterReactivated(address indexed owner, uint64[] operatorIds, Cluster cluster)`
 
-### Liquidator Methods <a href="#_sli6i8fh6q5y" id="_sli6i8fh6q5y"></a>
+### Liquidator Methods <a href="#sli6i8fh6q5y" id="sli6i8fh6q5y"></a>
 
 Write methods for liquidators
 
@@ -228,7 +241,7 @@ Events:
 
 * `ClusterLiquidated(address indexed owner, uint64[] operatorIds, Cluster cluster)`
 
-### Governance Methods <a href="#_31cymrhcphoi" id="_31cymrhcphoi"></a>
+### Governance Methods <a href="#id-31cymrhcphoi" id="id-31cymrhcphoi"></a>
 
 #### **`updateNetworkFee(networkFee)`**
 
@@ -265,6 +278,18 @@ Description: Sets the minimum period (in blocks) after which a cluster can be li
 Events:
 
 * `LiquidationThresholdPeriodUpdated(uint64 value)`
+
+#### `updateMaxiumumOperatorFee`**`(maxFee)`**
+
+Description: Updates the maximum fee an operator that uses SSV token can set
+
+| **Parameter** | **Type** | **Description**                                          |
+| ------------- | -------- | -------------------------------------------------------- |
+| maxFee        | uint64   | Maximum fee (in SSV tokens per year) an operator can set |
+
+Events:
+
+* `OperatorMaximumFeeUpdated(uint64 maxFee)`
 
 #### `updateMinimumLiquidationCollateral(amount)`
 
