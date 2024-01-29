@@ -4,9 +4,9 @@
 Note: Instead of creating a validator key pair and then distribute that into Key Shares, you can run a Distributed Key Generation ceremony, thanks to the [SSV DKG Client](creating-a-new-validator.md#generate-validator-keys).
 {% endhint %}
 
-This guide shows how to create a new set of validator keys for the Goerli testnet. For Ethereum mainnet, simply change Launchpad configuration from the page's dropdown menu, and refer to this [Deposit Contract](https://etherscan.io/address/0x00000000219ab540356cBB839Cbe05303d7705Fa) on mainnet, instead.
+This guide shows how to create a new set of validator keys for the Holesky testnet. For Ethereum mainnet, simply change Launchpad configuration from the page's dropdown menu, and refer to this [Deposit Contract](https://etherscan.io/address/0x00000000219ab540356cBB839Cbe05303d7705Fa) on mainnet, instead.
 
-The official [Staking Launchpad](https://goerli.launchpad.ethereum.org/en/) allows developers to create a new validator via the web interface, but the procedure on the Web UI can be hardly integrated in an automated process.
+The official [Staking Launchpad](https://holesky.launchpad.ethereum.org/) (follow [this link for mainnet](https://launchpad.ethereum.org/)) allows developers to create a new validator via the web interface, but the procedure on the Web UI can be hardly integrated in an automated process.
 
 What's more important, the Launchpad procedure includes steps related to the Execution client and Consensus client. These are not unnecessary and the steps should be skipped.
 
@@ -19,12 +19,12 @@ The essential steps to create a new validator are only these two:
 1. Generate validator keys
 2. Activate previously generated keys
 
-For this reason, an alternative and shorter route to the Launchpad is to use the [Staking Deposit CLI](https://github.com/ethereum/staking-deposit-cli) and the [Staking Deposit Contract](https://goerli.etherscan.io/address/0xff50ed3d0ec03ac01d4c79aad74928bff48a7b2b).
+For this reason, an alternative and shorter route to the Launchpad is to use the [Staking Deposit CLI](https://github.com/ethereum/staking-deposit-cli) and the [Staking Deposit Contract](https://holesky.etherscan.io/address/0x4242424242424242424242424242424242424242).
 
 ### Prerequisites
 
 * Confidence using the command line, and command line interfaces
-* Goerli ETH: 32 + \~0.1 for gas fees to activate the validator keys
+* Holesky ETH: 32 + \~0.1 for gas fees to activate the validator keys
 
 ### Generate validator keys
 
@@ -37,11 +37,11 @@ Head over to the official [Staking Deposit CLI](https://github.com/ethereum/stak
 
 There are additional arguments to be provided to change language, reference chain, create multiple validator keys at once, or provide an address for withdrawing staking rewards.
 
-Here’s the command used to create one set of validator keys for the goerli testnet, providing the address to withdraw staking rewards (you must have ownership of such address):
+Here’s the command used to create one set of validator keys for the holesky testnet, providing the address to withdraw staking rewards (you must have ownership of such address):
 
 {% code overflow="wrap" %}
 ```bash
-./deposit new-mnemonic --num_validators 1  --chain goerli  --execution_address [YOUR_ETHEREUM_WALLET_ADDRESS]
+./deposit new-mnemonic --num_validators 1  --chain holesky  --eth1_withdrawal_address [YOUR_ETHEREUM_WALLET_ADDRESS]
 ```
 {% endcode %}
 
@@ -61,12 +61,12 @@ Take note of the keys location, you’ll need the file named `deposit_data-[TIME
 
 To activate the validator keys you must deposit the 32 ETH (or testETH) to the Deposit Contract on chain. There are two options to do so:
 
-1. Directly interacting with the [Staking Deposit Contract](https://goerli.etherscan.io/address/0xff50ed3d0ec03ac01d4c79aad74928bff48a7b2b#writeContract)
-2. Using the official [Staking Launchpad](https://goerli.launchpad.ethereum.org/en/), and GUI
+1. Directly interacting with the [Staking Deposit Contract](https://holesky.etherscan.io/address/0x4242424242424242424242424242424242424242)
+2. Using the official [Staking Launchpad](https://holesky.launchpad.ethereum.org/en/), and GUI
 
 #### Activate via Staking Deposit Smart Contract
 
-A quick way to send transactions to the Staking Deposit Contract is to visit the [Staking Deposit Contract](https://goerli.etherscan.io/address/0xff50ed3d0ec03ac01d4c79aad74928bff48a7b2b) page on Etherscan, and browse the _Contract_ tab, then select the _Write Contract_ option.
+A quick way to send transactions to the Staking Deposit Contract is to visit the [Staking Deposit Contract](https://holesky.etherscan.io/address/0x4242424242424242424242424242424242424242) page on Etherscan, and browse the _Contract_ tab, then select the _Write Contract_ option.
 
 <figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption><p>Göerli Staking Deposit Contract page on Etherscan</p></figcaption></figure>
 
@@ -87,15 +87,15 @@ Here's an example:
 ```json
 [
   {
-    "pubkey": "a3aa18ed18253ea97873edfa09022d445d954a3704b2250a8f4f119e73f5b91186d72ac65f38737731cf260fdf6692c8",
-    "withdrawal_credentials": "010000000000000000000000a1a66cc5d309f19fb2fda2b7601b223053d0f7f3",
+    "pubkey": "b0210e4333812d669b178443b77e1674329e2eeeae17e6b9d7ef6cb8723c8b269de7e152b42445d5ea8d5f582ca45cd7",
+    "withdrawal_credentials": "010000000000000000000000f0179dec45a37423ead4fad5fcb136197872ead9",
     "amount": 32000000000,
-    "signature": "a45a4062e8f0dc270302b50f7837ef033ada3ad33f9c992cd7c5d5b88dd157c4d060b475ab4a8cf1a54e43deb72788a20793eb29fd431d21cad9904dcff3fce4d4aef37005f8ff9cfdb8aeedcae10548e600b0ba82f4d257f86fa433fad270f2",
-    "deposit_message_root": "ad4fa095269b01c07a9b3c094a4e3a6dd9d4e3f41fb4d487a153d70173f63da9",
-    "deposit_data_root": "25ed6d60350928f2f9529d7dbbac2bc52e7c8eadd50bf7f52d21867314fcb8a4",
-    "fork_version": "00001020",
-    "network_name": "goerli",
-    "deposit_cli_version": "2.5.0"
+    "signature": "96b504aec4ced4d680a01a2cde40632809744f967657f4aa31d4bc77701dbeb68e86441999b3559c505e5644eed9c350091af39e3e319befe4a76e796856095912938046ce567ed39a56df13b8f31e9e83b93ca774a9f983b9c0eb673c7f7a4a",
+    "deposit_message_root": "d09880f5dab2c46c7d4e6d7148c54eebd4b33db44b2cd194dff3a8aaff6ad9eb",
+    "deposit_data_root": "aa9bb085dc0410d2013cff51e98ae2a41a81512a0676fbe0397c3cd997f1fb87",
+    "fork_version": "01017000",
+    "network_name": "holesky",
+    "deposit_cli_version": "2.7.0"
   }
 ]
 ```
@@ -108,7 +108,7 @@ Alternatively, the smart contract transaction can be generated via SDKs such as 
 
 #### Activate via official Staking Launchpad
 
-If you don’t trust performing the transaction via Etherscan's Beta functionality, or simply prefer a more official route, you can visit the [Staking Launchpad](https://goerli.launchpad.ethereum.org/en/) and access the full procedure to create a new validator, by clicking _Become a Validator_.
+If you don’t trust performing the transaction via Etherscan's Beta functionality, or simply prefer a more official route, you can visit the [Staking Launchpad](https://holesky.launchpad.ethereum.org/en/) and access the full procedure to create a new validator, by clicking _Become a Validator_.
 
 <figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption><p>Staking Launchpad Advisories</p></figcaption></figure>
 
