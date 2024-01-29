@@ -22,8 +22,8 @@
 
 #### ABI
 
-* [Mainnet](https://github.com/bloxapp/ssv-network/tree/contract-abi/docs/mainnet/v1.0.0)
-* [Testnet](https://github.com/bloxapp/ssv-network/tree/contract-abi/docs/testnet/v1.0.0.rc4/abi)
+* [Mainnet](https://github.com/bloxapp/ssv-network/tree/contract-abi/docs/mainnet/v1.0.2/abi)
+* [Testnet](https://github.com/bloxapp/ssv-network/tree/contract-abi/docs/testnet/v1.1.0/abi)
 
 ### Ethereum Deposit Contract Addresses
 
