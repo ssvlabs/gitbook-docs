@@ -22,24 +22,26 @@ A tutorial on using SSV Keys tool was recorded by a member of SSV community. Tak
 
 {% tab title="yarn" %}
 ```sh
-1 git clone https://github.com/bloxapp/ssv-keys.git --branch=v1.0.1
+1 git clone https://github.com/bloxapp/ssv-keys.git --branch=v1.1.0
 2 cd ssv-keys
 3 yarn
 ```
 {% endtab %}
 {% endtabs %}
 
-{% hint style="info" %}
-Please note that If your operating system prevents you from running the executable you can open it from the file manager (Finder in case of macOS), right-click on it, and click the Open menu. Once opened, click the **open** or **allow** button when you are asked to do so. After this go back to the console and try to run it again.a
+{% hint style="warning" %}
+Please note that If your operating system prevents you from running the executable you can open it from the file manager (Finder in case of macOS), right-click on it, and click the Open menu. Once opened, click the **open** or **allow** button when you are asked to do so. After this go back to the console and try to run it again.
 {% endhint %}
 
-### Command arguments
+## Command arguments
 
 You can use **`shares --help`** to see all arguments. Note that if there are missing arguments that the CLI needs, it will ask you for them.
 
-<table><thead><tr><th width="277">Argument</th><th width="122.33333333333331">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>--keystore (-ks)</code></td><td>string</td><td>The validator keystore file path</td></tr><tr><td><code>--password (-ps)</code></td><td>string</td><td>The keystore file encryption password</td></tr><tr><td><code>--operators-ids (-oids)</code></td><td>int</td><td>Comma-separated list of operator IDs. The amount must be 3f+1 compatible.</td></tr><tr><td><code>--operators-keys (-oks)</code></td><td>string</td><td><p>Comma-separated list of operator keys (same sequence as operator ids). </p><p>The amount must be 3f+1 compatible.</p></td></tr><tr><td><code>--owner-address (-oa)</code></td><td>string</td><td>The cluster owner address (in the SSV contract)</td></tr><tr><td><code>--owner-nonce (-on)</code></td><td>int</td><td>The validator registration nonce of the account (owner address) within the SSV contract (increments after each validator registration), obtained using the ssv-scanner tool.</td></tr><tr><td><code>--output-folder (-of)</code></td><td>string</td><td>Target folder path to output the key shares file</td></tr></tbody></table>
+<table><thead><tr><th width="277">Argument</th><th width="122.33333333333331">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>--keystore (-ks)</code></td><td>string</td><td><p>The path to either a validator keystore file or a folder that contains multiple validator keystore files.</p><p>If a folder is provided, it will split in bulk all the keystore files within it, according to the additional arguments provided.</p></td></tr><tr><td><code>--password (-ps)</code></td><td>string</td><td>The keystore file encryption password</td></tr><tr><td><code>--operators-ids (-oids)</code></td><td>int</td><td>Comma-separated list of operator IDs. The amount must be 3f+1 compatible.</td></tr><tr><td><code>--operators-keys (-oks)</code></td><td>string</td><td><p>Comma-separated list of operator keys (same sequence as operator ids). </p><p>The amount must be 3f+1 compatible.</p></td></tr><tr><td><code>--owner-address (-oa)</code></td><td>string</td><td>The cluster owner address (in the SSV contract)</td></tr><tr><td><code>--owner-nonce (-on)</code></td><td>int</td><td>The validator registration nonce of the account (owner address) within the SSV contract (increments after each validator registration), obtained using the ssv-scanner tool.</td></tr><tr><td><code>--output-folder (-of)</code></td><td>string</td><td>Target folder path to output the key shares file</td></tr></tbody></table>
 
-**Run**
+## **Examples**
+
+### Split single keystore file
 
 {% tabs %}
 {% tab title="Executable" %}
@@ -52,68 +54,243 @@ You can use **`shares --help`** to see all arguments. Note that if there are mis
 
 ```bash
 ./ssv-keys-mac \
---operator-keys=<OPERATOR1_KEY,OPERATOR2_KEY,OPERATOR3_KEY,OPERATOR4_KEY> \
+--keystore=<KEYSTORE_FILE_FILE> \
+--password=<FILE_PASSWORD> \
 --operator-ids=<OPERATOR1_ID, OPERATOR2_ID, OPERATOR3_ID, OPERATOR4_ID> \
---owner-address=<CLUSTER_OWNER_ADDRESS> --owner-nonce=<OWNER_NONCE>
+--operator-keys=<OPERATOR1_KEY,OPERATOR2_KEY,OPERATOR3_KEY,OPERATOR4_KEY> \
+--owner-address=<CLUSTER_OWNER_ADDRESS> \
+--owner-nonce=<OWNER_REGISTRATION_NONCE> \
+--output-folder=<TARGET_FILE_PATH> 
 ```
 {% endtab %}
 
 {% tab title="yarn" %}
 ```bash
-yarn cli shares --keystore=<KEYSTORE_FILE_FILE> \
+yarn cli shares \
+--keystore=<KEYSTORE_FILE_FILE> \
 --password=<FILE_PASSWORD> \
 --operator-ids=<OPERATOR1_ID,OPERATOR2_ID, OPERATOR3_ID, OPERATOR4_ID> \
 --operator-keys=<OPERATOR1_KEY, OPERATOR2_KEY, OPERATOR3_KEY, OPERATOR4_KEY> \
---owner-address=<OWNER_ADDRESS> --owner-nonce=<OWNER_REGISTRATION_NONCE) \
+--owner-address=<OWNER_ADDRESS> \
+--owner-nonce=<OWNER_REGISTRATION_NONCE> \
 --output-folder=<TARGET_FILE_PATH> 
 ```
 {% endtab %}
 {% endtabs %}
 
-**Output**
+#### **Output**
 
 A json file will be generated with the shares and the transaction payload required for validator registration ([registerValidator()](broken-reference)).
 
-**Example:**
+{% hint style="warning" %}
+It is important to notice that this format is a breaking change with respect to previous versions of `ssv-keys` as it contains an array (`"shares"`) of shares data, where each single item represents one validator key, its related keyshares, and the payload necessary for the on-chain transaction.
 
-{% code title="keyshares-20230305_044622.json" %}
+This is true also in the case of a single validator key, where the array will only contain one item. It was done so, to maintain consistency across various use cases.
+{% endhint %}
+
+{% code title="keyshares-1705575046.json" %}
 ```json
 {
-  "version": "v4",
-  "createdAt": "2023-05-30T14:44:08.498Z",
-  "data": {
-    "publicKey": "0x8ad8857ca00986ec2619961fb159bea47463f19d77c60e37fb6f9277420c8bdfe9bde37e51cbe90a7c127a4ead9f86cb",
-    "operators": [
-      {
-        "id": 29,
-        "operatorKey": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBNDNQbkNpTzN4cEhLa3ZuQkJJbWYKWCtRb09BS0xvSmNOR2lNL2cwcHJFV01lVFhkdEVkUHRYRzlXNXBZYTBkOGszUnE3aHM2QjN5Slh2VXVKRktxRgpIUWROZUFib0xveE9Pd1hlaGo4Sm5iR2Rtb3czeEVaSm5JczlzODhGMnBEV3F1OTNTdUYvaDhKMFEvbjF1cHdVCnU4YTNnSW9HMDFXVzdtc25aVmJ1bEEvQXBNaEZ6SjdFUTA4TnFHYW1DcU1MMzl4SHNmS2t5Z1lYY21ORGdZZHAKT0RvZGNSeTZTTjY0U29Gd3JQT3hvKzBKeGJCL1FlNjNNMDc1Y3B6TzhhMkdKTzVNd1ZZakNaZ0tiTW9DNDZCcwpKbkkvU3c5aWgwVkRNUW1LRFRiZ3hVTE5ZY1JRdE8ybHBsUm5rRlVmaGtFT2lYOXV1SHpJOEhsVnVxOE9IZUI5CldRSURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K"
+  "version": "v1.1.0",
+  "createdAt": "2024-01-30T16:39:04.028Z",
+  "shares": [
+    {
+      "data": {
+        "ownerNonce": 22,
+        "ownerAddress": "0xaA184b86B4cdb747F4A3BF6e6FCd5e27c1d92c5c",
+        "publicKey": "0xa6f245cab776aa282e268fc1e8c2896f149985bb1851846a37c7d0d001374905551c2871d4504fe88b5b0adc68db6a8f",
+        "operators": [
+          {
+            "id": 1,
+            "operatorKey": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBMVg2MUFXY001QUNLaGN5MTlUaEIKby9HMWlhN1ByOVUralJ5aWY5ZjAyRG9sd091V2ZLLzdSVUlhOEhEbHBvQlVERDkwRTVQUGdJSy9sTXB4RytXbwpwQ2N5bTBpWk9UT0JzNDE5bEh3TzA4bXFja1JsZEg5WExmbmY2UThqWFR5Ym1yYzdWNmwyNVprcTl4U0owbHR1CndmTnVTSzNCZnFtNkQxOUY0aTVCbmVaSWhjRVJTYlFLWDFxbWNqYnZFL2cyQko4TzhaZUgrd0RzTHJiNnZXQVIKY3BYWG1uelE3Vlp6ZklHTGVLVU1CTTh6SW0rcXI4RGZ4SEhSeVU1QTE3cFU4cy9MNUp5RXE1RGJjc2Q2dHlnbQp5UE9BYUNzWldVREI3UGhLOHpUWU9WYi9MM1lnSTU4bjFXek5IM0s5cmFreUppTmUxTE9GVVZzQTFDUnhtQ2YzCmlRSURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K"
+          },
+          {
+            "id": 2,
+            "operatorKey": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBeUtVWTVEUmZZREljengzcjhVY0UKTlpFMFdIQXFuV2FIRjZYRlUydVdObjVOVE94Zkt4ZmZaLzkyeVE1citQVkJPRmQrcHhILzI2QXJVT3dNL1lBRQpRbDZ0VzBtc1FqdUtIU1Q4aUtvTDRTNUt0aDNoeTBqeFRHR1ZZaWdjWG1vRURjd2YxaG8wdWRxRmlEN3dFWXN1CmZHa2E2U1ZQNnBab1NMaU9HZFRKUWVzVDI5WEVCdDZnblhMaFB1MER2K0xsQUJJQ1pqWEFTZWtpSFVKUHRjYlgKRjZFL0lScGpkWHVNSmUyOXZDcmZudXhWWk93a1ptdzJXdGljYlNDOVJpSFRYWUQ1dnVGakZXRHNZMERHUDhzOAoyc1haVHdsNWl4dEhlUWM2N1lLRFN6YU1MNnY1VUVZblhUTzZzNHFVSWVnTXJwZjd3S0xGVWxqRTMwbnNIaVBUCjBRSURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K"
+          },
+          {
+            "id": 3,
+            "operatorKey": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBNWVUNUwwV0h6ZTdyTWZPb2xtVHMKdWtIQ2E4K3dtbUw2OTFJQ1RpREE1UkJ1TkxqSVQ2WkE0YzMxcVRIY3FBVHl5eVkwLzk3R3lKZ2doYnlFR2RoZQovalh6aWVTOXJ2RytJVGF1QjhMVlhkekxGYVQxWEZWeFlnN2x2TlB4OURPL1ZoRkhkWWxnT3I2d0RtV3FjRGo3ClhWUWFOWEFtRng3NjVQNTlXNXZzVGRXVWFHRWxXSm93SkZKdnc2UlRISkZ1TVhjSzZVaWJ0cUZMSmJwOW5kdUgKQjlLSzNWcmYrZmtJOWRBZ2txRDFHOElxQ0tKMVl3bjUyeGxxbTRCNitOOGZUZE1MS1JucWpFZmRzV1dwMFVzMQpLTW9vSXcyc3BoaXAzUFpNYnJaaU0wNjJ2ZUo0U3ovYjBObWdPTnhTd0JJTnNxcG54QjhFUVQxSTNjNklqNXhhCm5RSURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K"
+          },
+          {
+            "id": 4,
+            "operatorKey": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBdXZleUpUMURwM21mQ3FRTUora2YKZHdhV0d1bkRURUFaWmNTOHdtUTJBcjU1bE5venl5cHRwb1lGSTgxaW1RSmpwdVV0akR2am15RDRQSmt1SzFXRQovZG9TSzFraWlTSEYvZFBaeE5ZT2swMlRiTGIvTXBjMG12VE1nZmRsVDBoTlVOWDZIMnJzZzNlc2NEOStENEdDCmxtZGpCdmdxUDQydXdDbFlQUVhuN3Z6OWlOOEpXdEFtd1JkQ25USkZ6M2tYSEFPVGMyMjJGYXp4ZGJVNEVPYkIKVmJNejd2UXRmMWtNSGtacEh5UXNpL3F0WmhQaThtTlNQTWpMTDBtcmc4Ly9xVjIyeEVPNENmSHFKZkZOWEhKVwpEbU85M2h2QXE2dDFZOGN5UVZkSGZ2WEp5VzRxR29MY25HZzV1S2ZSYWVCSSt1aXFSeExOL2dtTnA2RzdpZVNkCkl3SURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K"
+          }
+        ]
       },
-      {
-        "id": 30,
-        "operatorKey": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBMC9zbTE3cUpFRGNDNG13OHhvNDQKZ1NuaUVXeGQ4L0hHSXllU2hZNWpDajJNajA5em1Dd3F1UU1CalVlalBJb1p2VG0wM1dtVlVPaWRBZ2tzY3V0cAp5UXVRL3JaZ3FzVXhjZDBUamQwN2FhRzVwNGQ2ZjF0ajhNcXkrMjFENjcvcmxKaGZaZVcyNFIzY2dNSTJFWWNKCitud0gzZVFISXgzcGNlWjNlZGVhOU5SRlNYd245MWplaWVmbkgxMEtCc3hxTE1EaVk1MGQxRitpNjVJMUY0aEQKRHpVVHpTMHJLQXNzdU1VR1Z5QlczMVdxK0V6MVBKR0Rka2NXZVBDVy8rd1RlTmovV2xWU2M1SXY0TzJSR2xyeApLRndpRmw1dUdBbVRvRHJRa1ltcVFxeGlldzkrUUovdUN3ZlRQeExvWS9BWlowMjU3eFB1b2F5N1JhOC9qMytaCmF3SURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K"
-      },
-      {
-        "id": 31,
-        "operatorKey": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBMFBXV0RBbE11L2JYMXFPN0lpREcKdHI0QjRkZkJpb2RiWWJnbXA5Wld5ZFJXYnRpbjR2elUyTFlnaGdoTnAvdkE0Qmg5WDFjbWhacjNQaEFiT3BSSApqZld4RVJiRGJxcVZtUGZSaU5Wa3FhUk9XLzg5R3VZZytQdjBwTTBrbTdJb3dIS1k3WVpHMkRiK3FpV25rTnplClJJTloyUi80RXg2L2xBUGpZMFhHeWJ5NVFhb0tLMWRsY1JFQ3JYU2RrRFBRWFkwam1DWjhYZ3ROOHJhQ1RvSmUKRTgwWUk5NVFPdkFhWG5SYldqekg3SjNYTnFGb3pNbXdya2VBUUh3YUNkaWl3WEFHdlVWWjkyTk9NbmQwOThlZQorVll5b0R3THBrbWIrTFFJa2drOFRTeTJKc2d0THk1N2o4aU9QNitCV0RDN25XVVUrMzUwL3VWOFVXL2FGK3NDCkh3SURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K"
-      },
-      {
-        "id": 32,
-        "operatorKey": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBdFAyMW42Z0IxYmdUMWFkb3RzY2oKdGVRZXNPZEZRZDdKUDh6VVdWY0ZwOHdReS8rZ1lVVXNOVHhZZDFDK1d1WXRncHcxTmdHZDYyYVNFVWtBZ0Y0Uwp4VjdsVkU0WmhzYU5Ic3QzVGorOWltOFFPU3hqUnlHVzZzRzJUMkRaOTc2ekRoMjdUWmJCN1l4c2ovNUpTdVBDCkhQSTIzTlJEYVM0Wkd1TW5IVjVxdHN5a25GRERyQytZK2w5OG9XRGYvbnBUVkYvQ3NkQUw3bEpTR3Q2WlQya2gKMkFEV2VTNmkwcXIwaEZJblJYMld3dmx3aHZpUlhJYVZ6cHJXTkxpZEYyWWFvWkJwbWs3dm9ReVp6dUNHekRqdQpPQzBSakdsZzIya1g0UzMwZUVXRTV0dVZEZXdNcjNvZ0NmR0owQTJGM0w3QjlsRUU4WnlzbVlmVG9KQlM1VU9OCkJ3SURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K"
+      "payload": {
+        "publicKey": "0xa6f245cab776aa282e268fc1e8c2896f149985bb1851846a37c7d0d001374905551c2871d4504fe88b5b0adc68db6a8f",
+        "operatorIds": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "sharesData": "0xb944a6e76addfc72c583b0e316393f5079b1269396a72060d22f20a4400aaedbfaa1da6e0fdd5539d03e64cd68d28c430ec51ae54b8de26e6540dbee26b01eafb2697850d96f2399412c089bcb1f24a45aafb113c33ebfdbb32fcd9126851bee9386547c45be98927e9155d1fdb6f254118c332b1e7839b30c35dddb4c77c9433ca72a6a1ad09694a83ed5844b25d00c97005af7d8b2b8afb3c11e14f338e5e4f94112e85eda0c25f933371a830862103bd7a3e51d300e0937420499cea5727f873d3d52f91600535d41e34c01fae731151a6ddf67b5d1c3d2844a5a0a98bbebd76203270246bb043502dc0888bf7b3aa8e8c484df59ea72d8784b9d51e457c9c6547b02709b9dbb81bfeb04c5d2258973c34d013aa4c6aa24f4d6e8c2f6cf0a6224badb008cd0947787a5c2bdd139dcf47776724a63ca7be02e0d2dd0c9ade1ebeb3e8760ecb3afb054880438c66f201b85d3902d1c2fc02e3a455aae29d84cc219985716a312723b1cebfa6b358050af6061d19f94e4f33fbf269bd1a2920e3aed0c52886eb3c3dd8571116d5eddc2361e3f99e52eb8a3314027c8831e39064c41fb2aa470485242626daefc4746286d514092bcc0662418cb3914727e2d47b51884bde882523b0018c0d32f621dcf5659912bdda154f7f73d346538a40350b9e83e010043ac2c60f9c6a6adfc2e0c38cb74e0cd9b074d3633ab55f79e8e2291267101c4a1f3cfccae66138aa4798460dc8e25b792baed869d857b95fb741542c26d5a6b3cd803746b5e9169cd3ec75ab591c5da34251f09d429489371946922b3d3a8123f4c161204ab127d78d53cb939fc2542c0b22d530989f7daba7304e3aa65ffcd547df38091b0d63314476995eb4cdc351db4ac2aff9b75199f45e2827a1fad43a0db73e2a5abf2b147c01e063449e6b17d3c0bc9e704b5ad5ddb66f8c0ac56785c0cf9494e28bed1abe3ccd07af4adbf62ac8473437449a133f618945607f1afbfc4eed50974e47106c89001aa66a51a4cca0cacac3bd789e9304cd65204d2e8d5ff4b75fd606fbfb2aac37244f2f76fd8296220731c6ca743285492559ed45630578d6d07ae584b1a066e46ed4b42b1a83dd6fc6c697ccb545d8726665f19343b8b3a220711e8a2ebd7e2eb8c48ab5d8a1f20ea2296864738e9504506ada904f5c4cb4f92acb9ae0296e3a5391570e277d994662099699f0c34db7cee740f5b552b47e27121db36bf2d3362f4df49d41285522285aab5704623a1165f71c9a5bfc6f4d0275c174784d6c557301749bc06388b29c0e705e585eab5f30d0d28c9da0d8f1ad1ee0ddf27c11c86f5292c9fe417a52802aba8a36bd54f017452d65ca0046b53aa50f7406b462d90b74b37381dd349a0296d96615fd29c63e107637da48233de3437b0927137855ecb4a99e882de4482f8dea233c3dd5382a877dcfb14be890c785fa1161e273910215c4c8c16ea907367418995bd141d23ab2949fffe2bfaed2b1bb056b14532ac83ba6a095f6aa915c430b7321177eac75459e6d0e1cbf34b337fbf8b2ca29033d248837769d984dcba9497a8477f0fc886695f0ec76d0f2350db9aa8751a7db2b0e86bd02ff2aaf5d5d39a9e1c0a3963694db4b6a711a5a006bb3ece185eca921234f2e0a0bf9745fa3e67fdcce8ca6e04489397897405802be15a6c76d76e3648b298220b46e1aaef610f9818dc0f5911a8b21741d9e2c95d451449c87218b4392654ff8a300c699222b1ec31ba1b44ae1a07157f13dffc0a6f875786ac1df8e2ff6ad2c0a25002bf5ae3ceb52229e2fa9bba95c06d7a88ae35f0bd8963d9bd543fb37da6dd18c6d9bc27d0837c09"
       }
-    ]
-  },
-  "payload": {
-    "publicKey": "0x8ad8857ca00986ec2619961fb159bea47463f19d77c60e37fb6f9277420c8bdfe9bde37e51cbe90a7c127a4ead9f86cb",
-    "operatorIds": [
-      29,
-      30,
-      31,
-      32
-    ],
-    "sharesData": "0x8e1f1761e7ab0224af98d3a58d417c43deb996edb81d46dfeedfa04ad36c3c9c104424d6bcfc9a12862c9e00c9c623cb17c7be89a1f75c85c25f16749ea3a0a0c79bb3ed30857dfeefbeba80225d6a1d1dc86ca47b1d20f8eaf4f24b866696b782b7eec212d9388bd55868dc50729e5a22ebf7343a7cc4c5191ef9bf381eb7f9b805e92a359f7c71598e0ed12f730390acf9be7b22af4bec63a36604255f456bfc559f04ba8421092a2d45b199d7ecc3820ebf9e94f961ff52ff1bcb7b00e6bda785bfad38c720cee5c057b26d870d918ec46fd65e551e4faa400d8b81c7cd22f4cfbd1fe5cf27b4e6d864dd5375e7da97e4208bcbede92f8002cb1008ed8c046314d9d3189c30d6458d2dc29d097699c8dc17f72401bfd99abb588091d2439d7cd077f067b994cb9d8687de4ac7c99bb450aca1e6f6d23500f84eaeb49864363740fd107db808f91b6a0dce597c6224b7632a0952d57783e95c95990af462faa0eb530e4b20aaaf74e7e50a1e603fb23e1989afacfedd95c8a9bb228f96004b33cf047d6f837dbd833b7eadd7bee34cf3c1956b7fdc06c571b44635c0c098954254e9f3a2602c09df5b626ede2829ffa951e36f46cf33e6c93073d8bee420cb817fb94474e5b670c46cad60e6b50cfb6d0bcadee462dde68c3a77646b3af9ec8d411603b4fe458efbcf875a457f04427a0cc1e3397894cd4e4dc9bdbe0e88076a9d6624d9d18a7c01a893e371347fc4d855a1a4011c9d4923ce721287d2fa370c3fafac24060b1e9ebdeb7b1d2d22ff09c73350211ea57404521b577007f3ddf9050846f07dd1f751c8703794e69c091383deb433fdef61570b85eb8a3ca012d7d96a9f2d91456a8ae37664cedea7d9ec2c4b90449d4cdae135a5dbc74e1ded9f4ed1adf7bf3320ff5289ac3497dbf68d86c3cf98c16b0963796abefc1bd01ba74f4cd5a4b1c4092c83d0a4e1a151c7e40591548964b85833eccbaab8917f3ad55bef9d87074f8aff29c21ea2b9e8251c8fb9eda5fc1c6ec813bd2f0060cdb29eee836b260946805ae4ce0bf7186302054b9f463328a643315bebb306d5eb933d5187ac25bab80a41862221f56c2d4914cbbc5041766d1c64374d00042b333fa4be3c92d0cff27316f8700fa488313af41b3865fbff86c11904b49fc486ff075da45ffd4f7eb1c472ac8cff2815eab3af2274d378efa4d8340e7a74570510f05b6cfabb03b5fbe0ac9dabaf9c4c28f8a36fe4ea6811b24b27fdfdbc5d5a65b50496fe5265f36624477a69bf5349607a7b364509b6eb656983e9f45bfbc0c1621dd91661c863047078c34f6c41947811ae927e3d77317b775882749b3ed44601471c1c6a459b6a625d2b097eed7aec5b2ea8db37e8f3705b5a3c1d9f9bbd87f47af96ba70f68465aea53911e29b87f53a9dcb79c3ba837a42db3e2b0cab002d4418d012bc0956530cce54ea1e5d3a818e3ba19d282c5c2f95bc8a7832273d0f02e7a61ff739f2829b013d2b4973745d20a30bb01a96def88e5ea2e91fffd3040309074e7d2688faba670df28c256790ae17213261d70b841ecf9b7ddffefb10a2f08cc696b4813d98d7128242c8c136ce2ba545506329dc071bcb1393fed40c012049b6137d1189ba70e935ed5a8a35302efa6f0e82a7419591be9bbc61da551d9ca79e88e30472db86722ae799fd2c37eb8ba9023e6d0762701dde11cab97ad199418160aff7ee062c3ceed05ded621395b2e29dd0a54f0c0dc31f097360b11fc6b0c1362616d6450a3881ea34149c5be7ceaafce18cb62a1f1be3b984c9a937d31b7ba8714493239afa017e6145dc160d30ba6fd846b6f19f51d9f79c4fa9f",
-    "ownerAddress": "0xb64923DA2c1A9907AdC63617d882D824033a091c",
-    "ownerNonce": 1
-  }
+    }
+  ]
 }
 ```
 {% endcode %}
+
+### Spit multiple keystore files in a folder
+
+{% tabs %}
+{% tab title="Executable" %}
+1. Run the Executable file through terminal `./ssv-keys`
+   1. `./ssv-keys-mac` (Mac)
+   2. `ssv-keys.exe` (Windows)
+2. Follow the instructions
+
+#### Executable example
+
+```bash
+./ssv-keys-mac \
+--keystore=<PATH_TO_MULTIPLE_KEYSTORE_FILES> \
+--password=<FILE_PASSWORD> \
+--operator-ids=<OPERATOR1_ID,OPERATOR2_ID, OPERATOR3_ID, OPERATOR4_ID> \
+--operator-keys=<OPERATOR1_KEY, OPERATOR2_KEY, OPERATOR3_KEY, OPERATOR4_KEY> \
+--owner-address=<OWNER_ADDRESS> \
+--owner-nonce=<OWNER_REGISTRATION_NONCE> \
+--output-folder=<TARGET_FILE_PATH> 
+```
+{% endtab %}
+
+{% tab title="yarn" %}
+```bash
+yarn cli shares \
+--keystore=<PATH_TO_MULTIPLE_KEYSTORE_FILES> \
+--password=<FILE_PASSWORD> \
+--operator-ids=<OPERATOR1_ID,OPERATOR2_ID, OPERATOR3_ID, OPERATOR4_ID> \
+--operator-keys=<OPERATOR1_KEY, OPERATOR2_KEY, OPERATOR3_KEY, OPERATOR4_KEY> \
+--owner-address=<OWNER_ADDRESS> \
+--owner-nonce=<OWNER_REGISTRATION_NONCE> \
+--output-folder=<TARGET_FILE_PATH> 
+```
+{% endtab %}
+{% endtabs %}
+
+#### **Output**
+
+A json file will be generated with the shares and the transaction payload required for validator registration ([registerValidator()](broken-reference)).
+
+In the case of the file below, a total of 3 validator keystore files were supplied, so 3 keyshares data items are present in the output file.
+
+{% hint style="info" %}
+It is important to notice that this format is a breaking change with respect to previous versions of `ssv-keys` as it contains an array (`"shares"`) of shares data, where each single item represents one validator key, its related keyshares, and the payload necessary for the on-chain transaction.
+{% endhint %}
+
+```json
+{
+  "version": "v1.1.0",
+  "createdAt": "2024-01-30T16:39:04.028Z",
+  "shares": [
+    {
+      "data": {
+        "ownerNonce": 20,
+        "ownerAddress": "0xaA184b86B4cdb747F4A3BF6e6FCd5e27c1d92c5c",
+        "publicKey": "0xaaebab76f205c191080ad7642916c5e1b063d761346f0b5db35ceb50bcbab0c7937d5365e690e9c2dd841be462e6e318",
+        "operators": [
+          {
+            "id": 1,
+            "operatorKey": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBMVg2MUFXY001QUNLaGN5MTlUaEIKby9HMWlhN1ByOVUralJ5aWY5ZjAyRG9sd091V2ZLLzdSVUlhOEhEbHBvQlVERDkwRTVQUGdJSy9sTXB4RytXbwpwQ2N5bTBpWk9UT0JzNDE5bEh3TzA4bXFja1JsZEg5WExmbmY2UThqWFR5Ym1yYzdWNmwyNVprcTl4U0owbHR1CndmTnVTSzNCZnFtNkQxOUY0aTVCbmVaSWhjRVJTYlFLWDFxbWNqYnZFL2cyQko4TzhaZUgrd0RzTHJiNnZXQVIKY3BYWG1uelE3Vlp6ZklHTGVLVU1CTTh6SW0rcXI4RGZ4SEhSeVU1QTE3cFU4cy9MNUp5RXE1RGJjc2Q2dHlnbQp5UE9BYUNzWldVREI3UGhLOHpUWU9WYi9MM1lnSTU4bjFXek5IM0s5cmFreUppTmUxTE9GVVZzQTFDUnhtQ2YzCmlRSURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K"
+          },
+          {
+            "id": 2,
+            "operatorKey": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBeUtVWTVEUmZZREljengzcjhVY0UKTlpFMFdIQXFuV2FIRjZYRlUydVdObjVOVE94Zkt4ZmZaLzkyeVE1citQVkJPRmQrcHhILzI2QXJVT3dNL1lBRQpRbDZ0VzBtc1FqdUtIU1Q4aUtvTDRTNUt0aDNoeTBqeFRHR1ZZaWdjWG1vRURjd2YxaG8wdWRxRmlEN3dFWXN1CmZHa2E2U1ZQNnBab1NMaU9HZFRKUWVzVDI5WEVCdDZnblhMaFB1MER2K0xsQUJJQ1pqWEFTZWtpSFVKUHRjYlgKRjZFL0lScGpkWHVNSmUyOXZDcmZudXhWWk93a1ptdzJXdGljYlNDOVJpSFRYWUQ1dnVGakZXRHNZMERHUDhzOAoyc1haVHdsNWl4dEhlUWM2N1lLRFN6YU1MNnY1VUVZblhUTzZzNHFVSWVnTXJwZjd3S0xGVWxqRTMwbnNIaVBUCjBRSURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K"
+          },
+          {
+            "id": 3,
+            "operatorKey": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBNWVUNUwwV0h6ZTdyTWZPb2xtVHMKdWtIQ2E4K3dtbUw2OTFJQ1RpREE1UkJ1TkxqSVQ2WkE0YzMxcVRIY3FBVHl5eVkwLzk3R3lKZ2doYnlFR2RoZQovalh6aWVTOXJ2RytJVGF1QjhMVlhkekxGYVQxWEZWeFlnN2x2TlB4OURPL1ZoRkhkWWxnT3I2d0RtV3FjRGo3ClhWUWFOWEFtRng3NjVQNTlXNXZzVGRXVWFHRWxXSm93SkZKdnc2UlRISkZ1TVhjSzZVaWJ0cUZMSmJwOW5kdUgKQjlLSzNWcmYrZmtJOWRBZ2txRDFHOElxQ0tKMVl3bjUyeGxxbTRCNitOOGZUZE1MS1JucWpFZmRzV1dwMFVzMQpLTW9vSXcyc3BoaXAzUFpNYnJaaU0wNjJ2ZUo0U3ovYjBObWdPTnhTd0JJTnNxcG54QjhFUVQxSTNjNklqNXhhCm5RSURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K"
+          },
+          {
+            "id": 4,
+            "operatorKey": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBdXZleUpUMURwM21mQ3FRTUora2YKZHdhV0d1bkRURUFaWmNTOHdtUTJBcjU1bE5venl5cHRwb1lGSTgxaW1RSmpwdVV0akR2am15RDRQSmt1SzFXRQovZG9TSzFraWlTSEYvZFBaeE5ZT2swMlRiTGIvTXBjMG12VE1nZmRsVDBoTlVOWDZIMnJzZzNlc2NEOStENEdDCmxtZGpCdmdxUDQydXdDbFlQUVhuN3Z6OWlOOEpXdEFtd1JkQ25USkZ6M2tYSEFPVGMyMjJGYXp4ZGJVNEVPYkIKVmJNejd2UXRmMWtNSGtacEh5UXNpL3F0WmhQaThtTlNQTWpMTDBtcmc4Ly9xVjIyeEVPNENmSHFKZkZOWEhKVwpEbU85M2h2QXE2dDFZOGN5UVZkSGZ2WEp5VzRxR29MY25HZzV1S2ZSYWVCSSt1aXFSeExOL2dtTnA2RzdpZVNkCkl3SURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K"
+          }
+        ]
+      },
+      "payload": {
+        "publicKey": "0xaaebab76f205c191080ad7642916c5e1b063d761346f0b5db35ceb50bcbab0c7937d5365e690e9c2dd841be462e6e318",
+        "operatorIds": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "sharesData": "0xa98abba3ff7e4ffc3ece1719068be091255e186fc0aa7857d3f1c20fee859e327f7348fd5471a9759f1e36547f12668006d277b3fdc88ac0b84bffc7dc0cb237a1441ecfa2cba9e0d64d8a0a976516c7fe18f84cbb2821b1db56b6115bc0580c89fac3d627afa4b07abee191eb3704d7588c68eafb515ce1905b97084a6e6c11a9ee3af271a5235f2ffd12cc229ba515a74486ef34b09737a7fd8d3b6637e5d25045269ffcbe2609a301164c3d7510bf226f492fbd50b3bc485a7a3f6fcee1638b9742f83d2d416ff5a0d985a41bccd5cefb40a2b799b64e7a0935583f35e0279c31690e8b4106eb2327143b37389ba299d0709a9253ed07cdd6114c2c4cc935774a46036949d9039fff39355682cac61356ea88aaf649823f8d02a552c404e952dcafb84231de606c8019eccd074469bd5635e152d78f3c8ca517310649da7369b7eab20a537b9ee0c35ceba19947d859ef2d932ca922f5794c3a7a693ec6511c7f1e39fc446ff20d745fbe54a8ab5d1703f1967d9242f57f1ba913a9d7ee08a3875c7cfe8f6dfd0281f1e5dae76548c116c4642876534cf054ffd68a22a66aa32557c2a8b538db8eaf14fcddf16ef68dcb8d18c2ce993ec34c54ee60a931a484e812e4e97356dbce9ed7581d5fba99a13dac61282764a89d26a1159312ba1f74dec78e08508f955628ded8914bf9d7c5c5983a825419c1d58456325ebdee36a69970970d6544ecce461ff05764bba87ec99167914becb162e259ef29807ab9097d072628fa65f1a5c21de5f0cb2715e633e57a050303c08f1573d08db6e4ef250b60c63cfa5921dfe2308718e0590ff0cc30ad1ea16b451ed54a477e812fde612318de0c6521961c3c630d781b03abcb3b50e704c99d76f0ba494693a2e8f72b2b32e25fb80593ada5f42dccfe97a7706f5aaa945b6123cec3e2e230083a0be819bdc12ada32e1e56d5fdb6550c029a97ce01f0a8443c60fc7385071c2ea64e5394340416822a821a0d7e090431170d1ebe057e7e02841eba53c3ce40b7ae3aba039e65acb3a8e82794d7a5a9b75b56a8b782e027e4f490184e83789922445226784fd849318b4aa8efcaf5fb43369a487ed20e981bf888559005c79b86545d25d08225398576664b7b82413d246c9262c1566e6cf25e15c563ca58d98e394a25675f551050e62e7bd99911e30c4a5e4ad0100112ede54713f9503563cebb4d7e1d5bbb37da8e688bedac774163474b146ce010e02106b7a62d1105de6e63e17da48ed29f9f13b68bc18ec2d32177bfc0e8c7d57633d9e05a0777d9c8c5c4f8759c3a81add3ecd335ddee93b046a18c85f15b3574541795379fa4248b8c9136d3a71618eb39bf3f37a163ae086fb32aebf89b3f60bc3533dbe6def19b29317b84db2e81dae47509a150365840d33078af6d9e209f11a8f5a40a36780de2cd0815b73d154874068f6add018e33aaf599e8e8245866c193d1c895e7d672068544a1ea4da2f3ae2a879104edb8ac85c1832366d0af5dd59a42744f5171a52dc49a88e7e64be2bb0783cfdfeb924efc2bf8ca6bd5c339c54b6bbbc905835f07bb4949d1dec55423604b126ee45f5ee93cd10b58d3e758845d63285d29b0d423edf0080542ac10810da1ff6a8c023fbce630eb489e0c1e33d50fd21ea9ef170310ac7d35be54014b01790949216f2bd51f0116bedc35917279097878c0eab2f7c747b8db2a7a221cdc14c25cc18f263c796e5a5decec7da9ba4329177b24e658d60527695da7ff1f4181796abe34f131f46d7e8a9c91c9b5853ef7a1f16749845c083ea91d3fe53d93c5eaac8e9ac6484390c9e8025d57c5b6da25525deef41b12c"
+      }
+    },
+    {
+      "data": {
+        "ownerNonce": 21,
+        "ownerAddress": "0xaA184b86B4cdb747F4A3BF6e6FCd5e27c1d92c5c",
+        "publicKey": "0xa6f245cab776aa282e268fc1e8c2896f149985bb1851846a37c7d0d001374905551c2871d4504fe88b5b0adc68db6a8f",
+        "operators": [
+          {
+            "id": 1,
+            "operatorKey": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBMVg2MUFXY001QUNLaGN5MTlUaEIKby9HMWlhN1ByOVUralJ5aWY5ZjAyRG9sd091V2ZLLzdSVUlhOEhEbHBvQlVERDkwRTVQUGdJSy9sTXB4RytXbwpwQ2N5bTBpWk9UT0JzNDE5bEh3TzA4bXFja1JsZEg5WExmbmY2UThqWFR5Ym1yYzdWNmwyNVprcTl4U0owbHR1CndmTnVTSzNCZnFtNkQxOUY0aTVCbmVaSWhjRVJTYlFLWDFxbWNqYnZFL2cyQko4TzhaZUgrd0RzTHJiNnZXQVIKY3BYWG1uelE3Vlp6ZklHTGVLVU1CTTh6SW0rcXI4RGZ4SEhSeVU1QTE3cFU4cy9MNUp5RXE1RGJjc2Q2dHlnbQp5UE9BYUNzWldVREI3UGhLOHpUWU9WYi9MM1lnSTU4bjFXek5IM0s5cmFreUppTmUxTE9GVVZzQTFDUnhtQ2YzCmlRSURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K"
+          },
+          {
+            "id": 2,
+            "operatorKey": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBeUtVWTVEUmZZREljengzcjhVY0UKTlpFMFdIQXFuV2FIRjZYRlUydVdObjVOVE94Zkt4ZmZaLzkyeVE1citQVkJPRmQrcHhILzI2QXJVT3dNL1lBRQpRbDZ0VzBtc1FqdUtIU1Q4aUtvTDRTNUt0aDNoeTBqeFRHR1ZZaWdjWG1vRURjd2YxaG8wdWRxRmlEN3dFWXN1CmZHa2E2U1ZQNnBab1NMaU9HZFRKUWVzVDI5WEVCdDZnblhMaFB1MER2K0xsQUJJQ1pqWEFTZWtpSFVKUHRjYlgKRjZFL0lScGpkWHVNSmUyOXZDcmZudXhWWk93a1ptdzJXdGljYlNDOVJpSFRYWUQ1dnVGakZXRHNZMERHUDhzOAoyc1haVHdsNWl4dEhlUWM2N1lLRFN6YU1MNnY1VUVZblhUTzZzNHFVSWVnTXJwZjd3S0xGVWxqRTMwbnNIaVBUCjBRSURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K"
+          },
+          {
+            "id": 3,
+            "operatorKey": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBNWVUNUwwV0h6ZTdyTWZPb2xtVHMKdWtIQ2E4K3dtbUw2OTFJQ1RpREE1UkJ1TkxqSVQ2WkE0YzMxcVRIY3FBVHl5eVkwLzk3R3lKZ2doYnlFR2RoZQovalh6aWVTOXJ2RytJVGF1QjhMVlhkekxGYVQxWEZWeFlnN2x2TlB4OURPL1ZoRkhkWWxnT3I2d0RtV3FjRGo3ClhWUWFOWEFtRng3NjVQNTlXNXZzVGRXVWFHRWxXSm93SkZKdnc2UlRISkZ1TVhjSzZVaWJ0cUZMSmJwOW5kdUgKQjlLSzNWcmYrZmtJOWRBZ2txRDFHOElxQ0tKMVl3bjUyeGxxbTRCNitOOGZUZE1MS1JucWpFZmRzV1dwMFVzMQpLTW9vSXcyc3BoaXAzUFpNYnJaaU0wNjJ2ZUo0U3ovYjBObWdPTnhTd0JJTnNxcG54QjhFUVQxSTNjNklqNXhhCm5RSURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K"
+          },
+          {
+            "id": 4,
+            "operatorKey": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBdXZleUpUMURwM21mQ3FRTUora2YKZHdhV0d1bkRURUFaWmNTOHdtUTJBcjU1bE5venl5cHRwb1lGSTgxaW1RSmpwdVV0akR2am15RDRQSmt1SzFXRQovZG9TSzFraWlTSEYvZFBaeE5ZT2swMlRiTGIvTXBjMG12VE1nZmRsVDBoTlVOWDZIMnJzZzNlc2NEOStENEdDCmxtZGpCdmdxUDQydXdDbFlQUVhuN3Z6OWlOOEpXdEFtd1JkQ25USkZ6M2tYSEFPVGMyMjJGYXp4ZGJVNEVPYkIKVmJNejd2UXRmMWtNSGtacEh5UXNpL3F0WmhQaThtTlNQTWpMTDBtcmc4Ly9xVjIyeEVPNENmSHFKZkZOWEhKVwpEbU85M2h2QXE2dDFZOGN5UVZkSGZ2WEp5VzRxR29MY25HZzV1S2ZSYWVCSSt1aXFSeExOL2dtTnA2RzdpZVNkCkl3SURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K"
+          }
+        ]
+      },
+      "payload": {
+        "publicKey": "0xa6f245cab776aa282e268fc1e8c2896f149985bb1851846a37c7d0d001374905551c2871d4504fe88b5b0adc68db6a8f",
+        "operatorIds": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "sharesData": "0xacd013d15558063c16f6d2ec21e6f41c99d8eadd45b8d763717a71e20103a2ff5282a8d344ae5ffaf5a95465cfa705e00993465a6803ed1c9a1b09c51f00c03f26b897d5f2357abb060c1e2b2351bd284aaacfc8095216a06345dafe9843b0a3851c51f5de127de416473091aa5655ce132d487bb37b09c016f9e6719db1caccb0f9f5e9776580108084ec9eab13cae8b9b71c9dc1c638c7870c586e35ed5320f890c1abb5fd4461ddf981f3c8d970a5efaeb22ab833dd2e1a226298c47579fdab06c1bc6d900236d95ce89dcdb7c7529cdcfcf417e05b90805e66b9e42ef89c1852d85e2f9760cc5a83eda6daa4225d8831f74f8269e27fb28ec89cfda8ec4911a90dec4b4f6a1319ea7354b4ed0d7e303829d64b76aa427fb02580c93df57586d5a17ff34a43f71f58e224fae3cb09af320537bcee97e6b421a98c9bc568438a14a69aa3c357b301c74c23e5d08586aff4e90d113e8de2bad9c5b96138a83153dcd8706fcc4f8dc5f9ae0e8ca994a35b76807293d54e03e420c427f7172a977ecbe87e0388e088344968e5f9394ab06cc984ced6381b4f7c6fe6435f25a667342e3a75f6c69136be06c3f5003fbcb52c286881bda2a050f3597791579426038778273285a45fc53f7d809b156cb5c7d111189df562f96739bdf8fed4f6a6f00289550686f178928d0798e84b7ceebd808aeb64364543f7843df65f910af4e3e7d850d59b8f23755f3631f0bf6545789abf0d802b9e5aaefbf50b10c404c0b796a6cf08addc81d67de063b4a8ba0cbbd5783e484461adb38bdc0f3ab7747ad9067f0efa3846c93ea0f69f73c669efd595478ee1d3aaceadb3954a6d8fa581d3b32c10097fb9b2a54818c2e99957a2e584357d78586b0f742d0958283d8d12d91c01acdaad84a60de959310ed66f145eaf6abaa7b8fa0d59769018e36a8c3158ab17fe9d248a137321cac08430692ae152be46c3a9601f91826cadbce355fd6defba0f36e2d3129c6ba007ea31a260cc9b384f37a383a9322082dceeee196d8acc146da5b54febaebf10b7ff90dd23d4e2c233228dd9cc1f2f75dcdbd13e3f4cdccc9eff55039e5d2e17f4ec8e10ba22d1658794e49f68bb726679509253082308b792b8551d2654091565736f955ffc4ab78c4b597d1ffba631df18a753add95e8f7b6c135c332b4159b8b03cf3190b7aa41a6347f7843f7f0e9e5ff7dfde540b603ebe92c62b10f4f932fe10eafeaf1386b73cb9dc0deaafcccb2831aa0aac365682cc4295a94c21af9ea02bfdb3aab6ff3a9d7930cc84dc6778d6da5c2ad9403381dd1274e3fba0e2911a871664d45b6d0067d43458367a7d4fe2ed60d38fde9c52387e579090632ae0daa1767e1eebea4c014712ecb4bb54e29cfb1684ce5075bdfdfc20aa4b560f7e268ac217c2eef2038111554fbc512072dfc2b48805d4ed690fa7b207a9bbb98bbf3178ecc1fc95517e31ef363ffa78c7dfd1ffe8a11680b9fc31397f625068ef76f68526748f9d64700e02efc900dcfee2311e0898c1be48b0483a9191079d96777352e02596a2951da3cecb1a45682bcc4f9b44594f46f1462de3dfea9c1621153a6a07d36e70cfcce027fb2e434a265e664c187af1b78816763f34e63368e35bd39c2c9500f01c3b675b393b190067655082123aa66c26f42e2817ce87a8816cb1cae8f546d9f6f111f1bd8fd0a4cb7882c1e10bdcd50ec3a9f24ef749161eb41ce8fcb9307d3aaefa0b5a30eebac6f65481eea80b89f1ae3acc993a9f6b002007a46b67eb05b76d8133c5f5e3d1dba831e6d8f2d28af59ee2280612a83c9603080bd52614dd8baef29f7ac8c3a09b86e8ea0c60"
+      }
+    },
+    {
+      "data": {
+        "ownerNonce": 22,
+        "ownerAddress": "0xaA184b86B4cdb747F4A3BF6e6FCd5e27c1d92c5c",
+        "publicKey": "0xa6f245cab776aa282e268fc1e8c2896f149985bb1851846a37c7d0d001374905551c2871d4504fe88b5b0adc68db6a8f",
+        "operators": [
+          {
+            "id": 1,
+            "operatorKey": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBMVg2MUFXY001QUNLaGN5MTlUaEIKby9HMWlhN1ByOVUralJ5aWY5ZjAyRG9sd091V2ZLLzdSVUlhOEhEbHBvQlVERDkwRTVQUGdJSy9sTXB4RytXbwpwQ2N5bTBpWk9UT0JzNDE5bEh3TzA4bXFja1JsZEg5WExmbmY2UThqWFR5Ym1yYzdWNmwyNVprcTl4U0owbHR1CndmTnVTSzNCZnFtNkQxOUY0aTVCbmVaSWhjRVJTYlFLWDFxbWNqYnZFL2cyQko4TzhaZUgrd0RzTHJiNnZXQVIKY3BYWG1uelE3Vlp6ZklHTGVLVU1CTTh6SW0rcXI4RGZ4SEhSeVU1QTE3cFU4cy9MNUp5RXE1RGJjc2Q2dHlnbQp5UE9BYUNzWldVREI3UGhLOHpUWU9WYi9MM1lnSTU4bjFXek5IM0s5cmFreUppTmUxTE9GVVZzQTFDUnhtQ2YzCmlRSURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K"
+          },
+          {
+            "id": 2,
+            "operatorKey": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBeUtVWTVEUmZZREljengzcjhVY0UKTlpFMFdIQXFuV2FIRjZYRlUydVdObjVOVE94Zkt4ZmZaLzkyeVE1citQVkJPRmQrcHhILzI2QXJVT3dNL1lBRQpRbDZ0VzBtc1FqdUtIU1Q4aUtvTDRTNUt0aDNoeTBqeFRHR1ZZaWdjWG1vRURjd2YxaG8wdWRxRmlEN3dFWXN1CmZHa2E2U1ZQNnBab1NMaU9HZFRKUWVzVDI5WEVCdDZnblhMaFB1MER2K0xsQUJJQ1pqWEFTZWtpSFVKUHRjYlgKRjZFL0lScGpkWHVNSmUyOXZDcmZudXhWWk93a1ptdzJXdGljYlNDOVJpSFRYWUQ1dnVGakZXRHNZMERHUDhzOAoyc1haVHdsNWl4dEhlUWM2N1lLRFN6YU1MNnY1VUVZblhUTzZzNHFVSWVnTXJwZjd3S0xGVWxqRTMwbnNIaVBUCjBRSURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K"
+          },
+          {
+            "id": 3,
+            "operatorKey": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBNWVUNUwwV0h6ZTdyTWZPb2xtVHMKdWtIQ2E4K3dtbUw2OTFJQ1RpREE1UkJ1TkxqSVQ2WkE0YzMxcVRIY3FBVHl5eVkwLzk3R3lKZ2doYnlFR2RoZQovalh6aWVTOXJ2RytJVGF1QjhMVlhkekxGYVQxWEZWeFlnN2x2TlB4OURPL1ZoRkhkWWxnT3I2d0RtV3FjRGo3ClhWUWFOWEFtRng3NjVQNTlXNXZzVGRXVWFHRWxXSm93SkZKdnc2UlRISkZ1TVhjSzZVaWJ0cUZMSmJwOW5kdUgKQjlLSzNWcmYrZmtJOWRBZ2txRDFHOElxQ0tKMVl3bjUyeGxxbTRCNitOOGZUZE1MS1JucWpFZmRzV1dwMFVzMQpLTW9vSXcyc3BoaXAzUFpNYnJaaU0wNjJ2ZUo0U3ovYjBObWdPTnhTd0JJTnNxcG54QjhFUVQxSTNjNklqNXhhCm5RSURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K"
+          },
+          {
+            "id": 4,
+            "operatorKey": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBdXZleUpUMURwM21mQ3FRTUora2YKZHdhV0d1bkRURUFaWmNTOHdtUTJBcjU1bE5venl5cHRwb1lGSTgxaW1RSmpwdVV0akR2am15RDRQSmt1SzFXRQovZG9TSzFraWlTSEYvZFBaeE5ZT2swMlRiTGIvTXBjMG12VE1nZmRsVDBoTlVOWDZIMnJzZzNlc2NEOStENEdDCmxtZGpCdmdxUDQydXdDbFlQUVhuN3Z6OWlOOEpXdEFtd1JkQ25USkZ6M2tYSEFPVGMyMjJGYXp4ZGJVNEVPYkIKVmJNejd2UXRmMWtNSGtacEh5UXNpL3F0WmhQaThtTlNQTWpMTDBtcmc4Ly9xVjIyeEVPNENmSHFKZkZOWEhKVwpEbU85M2h2QXE2dDFZOGN5UVZkSGZ2WEp5VzRxR29MY25HZzV1S2ZSYWVCSSt1aXFSeExOL2dtTnA2RzdpZVNkCkl3SURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K"
+          }
+        ]
+      },
+      "payload": {
+        "publicKey": "0xa6f245cab776aa282e268fc1e8c2896f149985bb1851846a37c7d0d001374905551c2871d4504fe88b5b0adc68db6a8f",
+        "operatorIds": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "sharesData": "0xb944a6e76addfc72c583b0e316393f5079b1269396a72060d22f20a4400aaedbfaa1da6e0fdd5539d03e64cd68d28c430ec51ae54b8de26e6540dbee26b01eafb2697850d96f2399412c089bcb1f24a45aafb113c33ebfdbb32fcd9126851bee9386547c45be98927e9155d1fdb6f254118c332b1e7839b30c35dddb4c77c9433ca72a6a1ad09694a83ed5844b25d00c97005af7d8b2b8afb3c11e14f338e5e4f94112e85eda0c25f933371a830862103bd7a3e51d300e0937420499cea5727f873d3d52f91600535d41e34c01fae731151a6ddf67b5d1c3d2844a5a0a98bbebd76203270246bb043502dc0888bf7b3aa8e8c484df59ea72d8784b9d51e457c9c6547b02709b9dbb81bfeb04c5d2258973c34d013aa4c6aa24f4d6e8c2f6cf0a6224badb008cd0947787a5c2bdd139dcf47776724a63ca7be02e0d2dd0c9ade1ebeb3e8760ecb3afb054880438c66f201b85d3902d1c2fc02e3a455aae29d84cc219985716a312723b1cebfa6b358050af6061d19f94e4f33fbf269bd1a2920e3aed0c52886eb3c3dd8571116d5eddc2361e3f99e52eb8a3314027c8831e39064c41fb2aa470485242626daefc4746286d514092bcc0662418cb3914727e2d47b51884bde882523b0018c0d32f621dcf5659912bdda154f7f73d346538a40350b9e83e010043ac2c60f9c6a6adfc2e0c38cb74e0cd9b074d3633ab55f79e8e2291267101c4a1f3cfccae66138aa4798460dc8e25b792baed869d857b95fb741542c26d5a6b3cd803746b5e9169cd3ec75ab591c5da34251f09d429489371946922b3d3a8123f4c161204ab127d78d53cb939fc2542c0b22d530989f7daba7304e3aa65ffcd547df38091b0d63314476995eb4cdc351db4ac2aff9b75199f45e2827a1fad43a0db73e2a5abf2b147c01e063449e6b17d3c0bc9e704b5ad5ddb66f8c0ac56785c0cf9494e28bed1abe3ccd07af4adbf62ac8473437449a133f618945607f1afbfc4eed50974e47106c89001aa66a51a4cca0cacac3bd789e9304cd65204d2e8d5ff4b75fd606fbfb2aac37244f2f76fd8296220731c6ca743285492559ed45630578d6d07ae584b1a066e46ed4b42b1a83dd6fc6c697ccb545d8726665f19343b8b3a220711e8a2ebd7e2eb8c48ab5d8a1f20ea2296864738e9504506ada904f5c4cb4f92acb9ae0296e3a5391570e277d994662099699f0c34db7cee740f5b552b47e27121db36bf2d3362f4df49d41285522285aab5704623a1165f71c9a5bfc6f4d0275c174784d6c557301749bc06388b29c0e705e585eab5f30d0d28c9da0d8f1ad1ee0ddf27c11c86f5292c9fe417a52802aba8a36bd54f017452d65ca0046b53aa50f7406b462d90b74b37381dd349a0296d96615fd29c63e107637da48233de3437b0927137855ecb4a99e882de4482f8dea233c3dd5382a877dcfb14be890c785fa1161e273910215c4c8c16ea907367418995bd141d23ab2949fffe2bfaed2b1bb056b14532ac83ba6a095f6aa915c430b7321177eac75459e6d0e1cbf34b337fbf8b2ca29033d248837769d984dcba9497a8477f0fc886695f0ec76d0f2350db9aa8751a7db2b0e86bd02ff2aaf5d5d39a9e1c0a3963694db4b6a711a5a006bb3ece185eca921234f2e0a0bf9745fa3e67fdcce8ca6e04489397897405802be15a6c76d76e3648b298220b46e1aaef610f9818dc0f5911a8b21741d9e2c95d451449c87218b4392654ff8a300c699222b1ec31ba1b44ae1a07157f13dffc0a6f875786ac1df8e2ff6ad2c0a25002bf5ae3ceb52229e2fa9bba95c06d7a88ae35f0bd8963d9bd543fb37da6dd18c6d9bc27d0837c09"
+      }
+    }
+  ]
+}
+```
