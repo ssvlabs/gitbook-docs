@@ -2,12 +2,6 @@
 
 The `SSV Keys CLI` tool is a command-line interface that splits a validator key to a predefined threshold of shares.
 
-## Video tutorial
-
-A tutorial on using SSV Keys tool was recorded by a member of SSV community. Take a look at it if you think a video would be useful:
-
-{% embed url="https://youtu.be/yZ7utgFGuno" %}
-
 ## Installation
 
 {% tabs %}
