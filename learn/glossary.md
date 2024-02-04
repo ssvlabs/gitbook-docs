@@ -20,7 +20,7 @@ Centralized service that manages the entire ETH staking process on behalf of the
 
 ### DAO
 
-an Decentralized Autonomous Organization is is an organization constructed by rules encoded as a computer program that is often transparent, controlled by the organization's members and not influenced by a central government, in other words they are member-owned communities without centralized leadership.
+a Decentralized Autonomous Organization is an organization constructed by rules encoded as a computer program that is often transparent, controlled by the organization's members and not influenced by a central government, in other words they are member-owned communities without centralized leadership.
 
 ### Distributed Key Generation
 
