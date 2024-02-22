@@ -8,17 +8,17 @@ The SSV network enables the distribution of validator operations between non-tru
 In order to distribute your validator, you must have an activated (deposited) validator on the Beacon Chain.
 {% endhint %}
 
-## How to Run a Distributed Validator <a href="#_qbxicu1vhvv3" id="_qbxicu1vhvv3"></a>
+## How to Run a Distributed Validator <a href="#qbxicu1vhvv3" id="qbxicu1vhvv3"></a>
 
 This guide outlines the steps required to run a distributed validator via the ssv.network, using the protocol’s smart contracts and developer tools.
 
-### Prerequisites <a href="#_v2zo33nxl8mr" id="_v2zo33nxl8mr"></a>
+### Prerequisites <a href="#v2zo33nxl8mr" id="v2zo33nxl8mr"></a>
 
 * **An Ethereum validator** - to generate validator keys and activate them using Ethereum’s official [Staking Deposit CLI](https://github.com/ethereum/staking-deposit-cli) and [Launchpad](https://goerli.launchpad.ethereum.org/), please [follow this guide](../validator-user-guides/validator-management/creating-a-new-validator.md). You can also run a Distributed Key Generation ceremony using [SSV DKG Client](tools/ssv-dkg-client/generate-key-shares.md)
 * **Goerli ETH** (<0.1) to cover transaction gas costs on the Goerli testnet (Community members on our [discord](https://discord.gg/ssvnetworkofficial) could assist in obtaining the required amount).
 * **Testnet SSV** ([faucet](https://faucet.ssv.network/))
 
-### Process Overview <a href="#_7f2y4pcm8bfl" id="_7f2y4pcm8bfl"></a>
+### Process Overview <a href="#id-7f2y4pcm8bfl" id="id-7f2y4pcm8bfl"></a>
 
 Validators are managed within Clusters - the group of operators that were selected to operate them.
 
@@ -31,7 +31,7 @@ Running a distributed validator is outlined by the following steps:
 
 <figure><img src="../.gitbook/assets/spaces_5j2wcf1k37MM5iWhtP7i_uploads_FFviU4kxmClr0SuQvzDk_1.png" alt=""><figcaption><p><em>Process Diagram</em></p></figcaption></figure>
 
-#### 1. Operator Selection <a href="#_tulnbjthau7t" id="_tulnbjthau7t"></a>
+#### 1. Operator Selection <a href="#tulnbjthau7t" id="tulnbjthau7t"></a>
 
 Select your preferred group of operators from the operator registry of the SSV network.
 
@@ -39,17 +39,17 @@ The number of cluster operators you select must be **3f+1** compatible, whereas 
 
 For each chosen operator, you must fetch its network assigned **id** and its corresponding **key**.
 
-The entire operator registry can be viewed via the ssv.network’s [explorer](https://explorer.ssv.network/operators) or through the SSV API to get access to the necessary operator **ids / keys**.
+
 
 <figure><img src="../.gitbook/assets/spaces_5j2wcf1k37MM5iWhtP7i_uploads_nx4QZvQF2uYWyH7IAjIg_2.png" alt=""><figcaption></figcaption></figure>
 
-#### 2. Split Validator Key to Shares <a href="#_x02jw9rs53s3" id="_x02jw9rs53s3"></a>
+#### 2. Split Validator Key to Shares <a href="#x02jw9rs53s3" id="x02jw9rs53s3"></a>
 
 To assign the validator operation to the cluster of your selected operators, you must split your validator key to shares.
 
 Use the [SSV Keys](tools/ssv-key-distributor/) tools to extract your validator key from your keystore file and split it to shares
 
-#### 3. Retrieve Cluster Snapshot Data <a href="#_vjco67d7q0gy" id="_vjco67d7q0gy"></a>
+#### 3. Retrieve Cluster Snapshot Data <a href="#vjco67d7q0gy" id="vjco67d7q0gy"></a>
 
 Cluster snapshots are required for SSV smart contract transactions with cluster related functions which require the **cluster object** as input.
 
@@ -61,7 +61,7 @@ Use the [Cluster Scanner](tools/cluster-scanner/) tools to retrieve the latest s
 If this is the first validator within a cluster, you can skip this step and use **{0,0,0,0,true}** for the **cluster object**.
 {% endhint %}
 
-#### 4. Network Registration <a href="#_j9fra6w5d8er" id="_j9fra6w5d8er"></a>
+#### 4. Network Registration <a href="#j9fra6w5d8er" id="j9fra6w5d8er"></a>
 
 To signal your cluster to start operating your validator, you must register your validator to the network by broadcasting the [registerValidator()](smart-contracts/ssvnetwork.md#public-registervalidator-publickey-operatorids-shares-amount-cluster) transaction to the ssv.network contract:
 
