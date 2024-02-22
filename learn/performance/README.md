@@ -16,7 +16,8 @@ e.g. **Alice** the operator missed 24 duties in the last 24 hours for **validato
 
 #### Network Explorer
 
-Operator's scores and performance could be viewed in corresponding operator pages and also per each validator via our explorer:
+Operator's scores and performance could be  in corresponding operator pages and also per each validator
 
 {% embed url="https://explorer.ssv.network" %}
 
+{% embed url="https://ssvscan.io/" %}
