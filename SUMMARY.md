@@ -54,6 +54,7 @@
     * [Operation Stage](developers/integration-guides/staking-pools/operation-stage.md)
     * [Maintenance Stage](developers/integration-guides/staking-pools/maintenance-stage.md)
   * [Staking Services](developers/integration-guides/staking-services.md)
+  * [Native Restaking](developers/integration-guides/native-restaking.md)
 * [Security](developers/security.md)
 
 ## Validator user guides

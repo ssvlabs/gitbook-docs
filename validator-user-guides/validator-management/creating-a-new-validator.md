@@ -24,7 +24,7 @@ For this reason, an alternative and shorter route to the Launchpad is to use the
 ### Prerequisites
 
 * Confidence using the command line, and command line interfaces
-* Holesky ETH: 32 + \~0.1 for gas fees to activate the validator keys
+* ETH (or Goerli/Holesky ETH): 32 + \~0.1 for gas fees to activate the validator keys
 
 ### Generate validator keys
 
