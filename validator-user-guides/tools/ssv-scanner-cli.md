@@ -18,7 +18,7 @@ Prerequisites _- this tool requires_ [_NodeJS_](https://nodejs.org/en/download/)
  3 yarn
 ```
 
-### Commands <a href="#_1rk5eeceo4ov" id="_1rk5eeceo4ov"></a>
+### Commands <a href="#id-1rk5eeceo4ov" id="id-1rk5eeceo4ov"></a>
 
 <table data-header-hidden><thead><tr><th width="151"></th><th></th></tr></thead><tbody><tr><td><strong>Command</strong></td><td><strong>Description</strong></td></tr><tr><td><code>cluster</code></td><td>This command is used to retrieve the latest snapshot of a provided cluster from the SSV network contract.</td></tr><tr><td><code>nonce</code></td><td>This command is used to retrieve the validator registration nonce of a provided account from the SSV network contract.</td></tr></tbody></table>
 
@@ -26,7 +26,7 @@ Prerequisites _- this tool requires_ [_NodeJS_](https://nodejs.org/en/download/)
 
 You can use **`yarn cli cluster --help`** to see all arguments and their descriptions.&#x20;
 
-<table><thead><tr><th width="323">Argument</th><th width="85.33333333333331">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>--node-url (-n)</code></td><td>string</td><td>ETH1 (execution client) node endpoint URL</td></tr><tr><td>--<code>ssv-contract-address (-ca)</code></td><td>string</td><td>The SSV network contract address (<a href="http://127.0.0.1:5000/o/-Mb7OC5dRdirWgUB-coa/s/5j2wcf1k37MM5iWhtP7i/">reference</a>)</td></tr><tr><td>--<code>owner-address (-oa)</code></td><td>int</td><td>The cluster owner address (in the SSV contract)</td></tr><tr><td>--<code>operator-ids (-oids)</code></td><td>string</td><td>Comma-separated list of operator IDs. The amount must be 3f+1 compatible.</td></tr></tbody></table>
+<table><thead><tr><th width="323">Argument</th><th width="85.33333333333331">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>--node-url (-n)</code></td><td>string</td><td>ETH1 (execution client) node endpoint URL</td></tr><tr><td>--<code>ssv-contract-address (-ca)</code></td><td>string</td><td>The SSV network contract address (<a href="https://app.gitbook.com/o/-Mb7OC5dRdirWgUB-coa/s/5j2wcf1k37MM5iWhtP7i/">reference</a>)</td></tr><tr><td>--<code>owner-address (-oa)</code></td><td>int</td><td>The cluster owner address (in the SSV contract)</td></tr><tr><td>--<code>operator-ids (-oids)</code></td><td>string</td><td>Comma-separated list of operator IDs. The amount must be 3f+1 compatible.</td></tr></tbody></table>
 
 **Run**
 
@@ -76,7 +76,7 @@ Cluster snapshot:
 
 You can use **`yarn cli nonce --help`** to see all arguments and their descriptions.&#x20;
 
-<table><thead><tr><th width="323">Argument</th><th width="85.33333333333331">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>--node-url (-n)</code></td><td>string</td><td>ETH1 (execution client) node endpoint URL</td></tr><tr><td>--<code>ssv-contract-address (-ca)</code></td><td>string</td><td>The SSV network contract address (<a href="http://127.0.0.1:5000/o/-Mb7OC5dRdirWgUB-coa/s/5j2wcf1k37MM5iWhtP7i/">reference</a>)</td></tr><tr><td>--<code>owner-address (-oa)</code></td><td>int</td><td>The account owner address (in the SSV contract)</td></tr></tbody></table>
+<table><thead><tr><th width="323">Argument</th><th width="85.33333333333331">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>--node-url (-n)</code></td><td>string</td><td>ETH1 (execution client) node endpoint URL</td></tr><tr><td>--<code>ssv-contract-address (-ca)</code></td><td>string</td><td>The SSV network contract address (<a href="https://app.gitbook.com/o/-Mb7OC5dRdirWgUB-coa/s/5j2wcf1k37MM5iWhtP7i/">reference</a>)</td></tr><tr><td>--<code>owner-address (-oa)</code></td><td>int</td><td>The account owner address (in the SSV contract)</td></tr></tbody></table>
 
 **Run**
 
