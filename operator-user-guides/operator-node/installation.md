@@ -22,17 +22,17 @@ All cloud services are supported for your node setup (see a reference example on
 
 ⚡️ 4GB RAM
 
-📀 20GB storage (5GB minimum)
+📀 20GB storage (10GB minimum)
 
 🧮 IOPS > 10K
 
 {% hint style="warning" %}
-The minimum system requirements shown below are for a machine that is only running an SSV node. If you plan to run the SSV node on the same machine as your Execution Client and/or Beacon Client, these minimum requirements will be needed **in addition** to your existing requirements.
+The minimum system requirements shown above are for a machine that is only running an SSV node. If you plan to run the SSV node on the same machine as your Execution Client and/or Beacon Client, these minimum requirements will be needed **in addition** to your existing requirements.
 {% endhint %}
 
 ### Ethereum Node Requirements
 
-The Ethereum clients used by your SSV node can be running on the same machine or a different machine. Ideally, to improve [client diversity](https://clientdiversity.org/#distribution) (Erigon client is still not supported), you will be running minority clients 👀 .
+The Ethereum clients used by your SSV node can be running on the same machine or a different machine. Ideally, to improve [client diversity](https://clientdiversity.org/#distribution), you will be running minority clients 👀 .
 
 #### Execution Client
 
@@ -217,6 +217,10 @@ global:
   
   # Debug logs file path
   LogFilePath: ./data/debug.log
+  
+  # Number of log files preserved (roughly equivalent to number of days)
+  # Increase if you want to preserve log files for longer. This would require more disk space
+  LogFileBackups: 10
 
 db:
   # Path to a persistent directory to store the node's database.
