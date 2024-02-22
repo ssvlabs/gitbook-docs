@@ -1,4 +1,4 @@
-# Node Reference
+# Node Configuration Reference
 
 The table below represents the reference for every Node configuration option available.
 
@@ -16,6 +16,7 @@ The parameters used in the [Installation guide](installation.md) should serve th
 | global.LogLevel                                 | LOG\_LEVEL                     | info             | Defines logger's log level'                                                                         |
 | global.LogFormat                                | LOG\_FORMAT                    | console          | Defines logger's encoding, valid values are 'json' (default) and 'console''                         |
 | global.LogLevelFormat                           | LOG\_LEVEL\_FORMAT             | capitalColor     | Defines logger's level format, valid values are 'capitalColor' (default), 'capital' or 'lowercase'' |
+| global.LogFileBackups                           | LOG\_FILE\_BACKUPS             | 3                | Defines number of log files preserved (roughly equivalent to number of days)                        |
 | global.LogFilePath                              | LOG\_FILE\_PATH                | ./data/debug.log | Defines a file path to write logs into                                                              |
 | db                                              |                                |                  |                                                                                                     |
 | db.Path                                         | DB\_PATH                       | ./data/db        | Path for storage                                                                                    |
