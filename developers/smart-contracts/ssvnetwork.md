@@ -153,6 +153,24 @@ Events:
 
 * `ValidatorAdded(address indexed owner, uint64[] operatorIds, bytes publicKey, bytes shares, Cluster cluster)`
 
+#### **`bulkRegisterValidator(publicKey, operatorIds, shares, amount, cluster)`**
+
+Description: Registers all the new validators provided as argument to a cluster of provided operators (ids + shares), **fails if** number of operatorIds is greater than 13..
+
+| **Parameter** | **Type**                   | **Description**                                                                                                                                                                                                                                                         |
+| ------------- | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| publicKeys    | bytes\[]                   | An array of validators’ public keys.                                                                                                                                                                                                                                    |
+| operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                                                                                          |
+| sharesData    | bytes\[]                   | <p>An array of strings of keyshares - obtained by splitting the validator key using the <a href="../tools/ssv-key-distributor/">SSV-Keys</a> tool.<br><br>Each element in this array must relate to a public key in the <code>publicKeys</code> array.</p>              |
+| amount        | uint256 (casted to uint64) | <p>Amount of SSV token to be deposited as payment</p><p>(not mandatory)</p>                                                                                                                                                                                             |
+| cluster       | tuple\[]                   | <p>Object containing the latest cluster snapshot data - obtained using the <a href="../tools/cluster-scanner/">SSV Scanner</a> tool.<br><br><strong>If this is the 1st validator within a specific cluster (unique set of operators), use - {0,0,0,true,0}</strong></p> |
+
+Events:
+
+* `ValidatorAdded(address indexed owner, uint64[] operatorIds, bytes publicKey, bytes shares, Cluster cluster)`
+
+The function emits as many `ValidatorAdded` events, as is the length of the provided `publicKeys` array.
+
 #### **`removeValidator(publicKey, operatorIds, cluster)`**
 
 Description: Removes validator from the SSV network.
@@ -167,6 +185,22 @@ Events:
 
 * `ValidatorRemoved(address indexed owner, uint64[] operatorIds, bytes publicKey, Cluster cluster)`
 
+#### **`bulkRemoveValidator(publicKey, operatorIds, cluster)`**
+
+Description: Removes all the validators provided as argument from the SSV network.
+
+| **Parameter** | **Type**  | **Description**                                                                                                        |
+| ------------- | --------- | ---------------------------------------------------------------------------------------------------------------------- |
+| publicKeys    | bytes\[]  | An array of validators’ public keys.                                                                                   |
+| operatorIds   | unit64\[] | List of cluster operators Ids.                                                                                         |
+| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](../tools/cluster-scanner/) tool. |
+
+Events:
+
+* `ValidatorRemoved(address indexed owner, uint64[] operatorIds, bytes publicKey, Cluster cluster)`
+
+The function emits as many `ValidatorRemoved` events, as is the length of the provided `publicKeys` array.
+
 #### **`exitValidator(publicKey, operatorIds)`**
 
 Description: Prompts SSV nodes to sign a voluntary exit of the validator.
@@ -179,6 +213,21 @@ Description: Prompts SSV nodes to sign a voluntary exit of the validator.
 Events:
 
 * `ValidatorExited(address indexed owner, uint64[] operatorIds, bytes publicKey)`
+
+#### **`bulkExitValidator(publicKey, operatorIds)`**
+
+Description: Prompts SSV nodes to sign a voluntary exit for all the validators provided as argument.
+
+| **Parameter** | **Type**  | **Description**                      |
+| ------------- | --------- | ------------------------------------ |
+| publicKeys    | bytes\[]  | An array of validators’ public keys. |
+| operatorIds   | unit64\[] | List of cluster operators Ids.       |
+
+Events:
+
+* `ValidatorExited(address indexed owner, uint64[] operatorIds, bytes publicKey)`
+
+The function emits as many `ValidatorExited` events, as is the length of the provided `publicKeys` array.
 
 #### **`deposit(owner, operatorIds, amount, cluster)`**
 
