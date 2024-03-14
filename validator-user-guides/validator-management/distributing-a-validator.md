@@ -50,17 +50,7 @@ Now, select four operators to manage your validator. Please note the **Yearly Fe
 **Important:** Verified Operators (VOs) are operators that have been granted the **Verified** status by the DAO for completing KYC and providing consistent high-quality service. You can sort the operator list by their daily performance, yearly fee, and # of validators they manage. You can also filter to view only Verified Operators.
 {% endhint %}
 
-![](../../.gitbook/assets/distribute\_validator\_4.png)
-
-### Validator operational runway
-
-You can select the operational runway period of your validator, in accordance with the **Yearly Fee** of previously selected operators. This will dictate the initial amount of SSV to be deposited in the cluster, but it can always be managed later.
-
-<figure><img src="../../.gitbook/assets/distribute_validator_5.png" alt=""><figcaption></figcaption></figure>
-
-**Please read carefully and understand how fees are managed and the risks of account** [**liquidation**](https://ssv.network/glossary/#liquidation) **if your account balance falls below the** [**Threshold Balance**](https://ssv.network/glossary/##threshold-balance)**.**
-
-<figure><img src="../../.gitbook/assets/distribute_validator_6.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Screenshot 2024-03-13 at 12.03.16.png" alt=""><figcaption></figcaption></figure>
 
 ### Key splitting
 
@@ -90,6 +80,10 @@ If the Online option is chosen, the next screen allows you to upload the Validat
 
 Offline key splitting is the most secure option, although less convenient, as it requires running a command line tool. For more information, refer to the specific [User Guide on how to use the ssv-keys CLI tool](../tools/ssv-keys-cli.md).
 
+{% hint style="success" %}
+The latest SSV Smart Contract updates added support for [_bulk operations_](../../developers/smart-contracts/ssvnetwork.md#bulkregistervalidator-publickey-operatorids-shares-amount-cluster), and the latest release of`ssv-keys` has been made compatible with bulk operations. With version 1.1.0 (and above), it is possible to generate keyshares for multiple keystores in a single operation.
+{% endhint %}
+
 <figure><img src="../../.gitbook/assets/distribute_validator_10.png" alt=""><figcaption></figcaption></figure>
 
 If the Offline option was selected, please follow the indications (image above) and upload the generated `keyshares-[DATE]-[TIME].json` file in the following screen.
@@ -98,7 +92,23 @@ If the Offline option was selected, please follow the indications (image above) 
 
 Once uploaded, if successfully validated, advance to the next screen clicking Next.
 
-<figure><img src="../../.gitbook/assets/distribute_validator_12.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Screenshot 2024-03-13 at 12.04.48 (1).png" alt=""><figcaption></figcaption></figure>
+
+{% hint style="success" %}
+The SSV WebApp has been upgraded to include the ability to process `keyshares` files that contain multiple validator KeyShares.
+
+This makes it possible to distribute multiple validators in a single transaction, thanks to the latest updates to the SSV Smart Contract.
+{% endhint %}
+
+### Validator operational runway
+
+You can select the operational runway period of your validator, in accordance with the **Yearly Fee** of previously selected operators. This will dictate the initial amount of SSV to be deposited in the cluster, but it can always be managed later.
+
+<figure><img src="../../.gitbook/assets/distribute_validator_5.png" alt=""><figcaption></figcaption></figure>
+
+**Please read carefully and understand how fees are managed and the risks of account** [**liquidation**](https://ssv.network/glossary/#liquidation) **if your account balance falls below the** [**Threshold Balance**](https://ssv.network/glossary/##threshold-balance)**.**
+
+<figure><img src="../../.gitbook/assets/distribute_validator_6.png" alt=""><figcaption></figcaption></figure>
 
 ### Slashing warning
 
@@ -112,15 +122,13 @@ Please make sure to stop any other running validator setup, if you have any.
 
 The next screen presents a summary of your validator setup.
 
-<figure><img src="../../.gitbook/assets/distribute_validator_14.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Screenshot 2024-03-13 at 12.05.28.png" alt=""><figcaption></figcaption></figure>
 
-By clicking on Register validator, you'll be proposed to sign transactions to confirm your choice and transfer the SSV balance necessary to cover for the operational costs.
+By clicking on Register validator(s), you'll be proposed to sign transactions to confirm your choice and transfer the SSV balance necessary to cover for the operational costs.
 
 {% hint style="info" %}
 **Note:** If this is the first time you are registering a validator to ssv.network, you will be required to make two transactions - one to approve the SSV smart contract and another one to register the validator.
 {% endhint %}
-
-<figure><img src="../../.gitbook/assets/distribute_validator_15.png" alt=""><figcaption></figcaption></figure>
 
 ### SSV Balance deposit
 
@@ -134,6 +142,6 @@ You will need to confirm the transaction in your web3 wallet.
 
 Once the transaction has been signed and confirmed by the network, you'll be presented with the summary screen.
 
-<figure><img src="../../.gitbook/assets/distribute_validator_18.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Screenshot 2024-03-13 at 12.06.11.png" alt=""><figcaption></figcaption></figure>
 
 **Congratulations! You’re all set!🥳**

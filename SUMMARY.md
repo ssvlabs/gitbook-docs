@@ -69,6 +69,7 @@
   * [Depositing SSV](validator-user-guides/cluster-management/depositing-ssv.md)
   * [Withdrawing SSV](validator-user-guides/cluster-management/withdrawing-ssv.md)
   * [Re-activating a cluster](validator-user-guides/cluster-management/re-activating-a-cluster.md)
+  * [Exiting a validator](validator-user-guides/cluster-management/exiting-a-validator.md)
   * [Removing a validator](validator-user-guides/cluster-management/removing-a-validator.md)
 * [Tools](validator-user-guides/tools/README.md)
   * [SSV-Keys CLI](validator-user-guides/tools/ssv-keys-cli.md)

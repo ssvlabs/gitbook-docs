@@ -86,13 +86,19 @@ This can only be done on your personal computer, as you will have to run a comma
 
 <figure><img src="../../.gitbook/assets/distribute_validator_7.png" alt=""><figcaption></figcaption></figure>
 
-From the options presented in the next screen, please select DKG,&#x20;
+From the options presented in the next screen, please select DKG
 
-<figure><img src="../../.gitbook/assets/distributed_key_generation_7.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Screenshot 2024-03-13 at 12.03.36.png" alt=""><figcaption></figcaption></figure>
+
+{% hint style="success" %}
+The latest SSV Smart Contract updates added support for [_bulk operations_](../../developers/smart-contracts/ssvnetwork.md#bulkregistervalidator-publickey-operatorids-shares-amount-cluster), and the latest release of`ssv-dkg` tool has been made compatible with bulk operations.
+
+With version 1.1.0 (and above), it is possible to generate keyshares for multiple validators in a single operation.
+{% endhint %}
 
 Then, enter the withdrawal address for your validator in the _Withdrawal Address_ field, and click _Confirm_ to reveal the command in the area below. Please copy the command and run it on a terminal on your machine.
 
-<figure><img src="../../.gitbook/assets/distributed_key_generation_8.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Screenshot 2024-03-13 at 12.03.56.png" alt=""><figcaption></figcaption></figure>
 
 After launching the `ssv-dkg` tool as shown above, it will commence a DKG ceremony with the selected operators.
 
@@ -110,7 +116,13 @@ At this point, click the _Next_ button and upload the generated `keyshares-[vali
 
 Once uploaded, if successfully validated, advance to the next screen clicking Next.
 
-<figure><img src="../../.gitbook/assets/distribute_validator_12.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Screenshot 2024-03-13 at 12.04.48 (2).png" alt=""><figcaption></figcaption></figure>
+
+{% hint style="success" %}
+The SSV WebApp has been upgraded to include the ability to process `keyshares` files that contain multiple validator KeyShares.
+
+This makes it possible to distribute multiple validators in a single transaction, thanks to the latest updates to the SSV Smart Contract.
+{% endhint %}
 
 ### Slashing warning
 
