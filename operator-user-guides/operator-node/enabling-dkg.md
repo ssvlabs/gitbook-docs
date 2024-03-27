@@ -60,13 +60,13 @@ With this configuration, a typical configuration file would look like this:
 ```yaml
 privKey: /data/encrypted_private_key.json
 privKeyPassword: /data/password
-port: 3030
 operatorID: <YOUR_OPERATOR_ID>
-storeShare: true
+port: 3030
 logLevel: info
 logFormat: json
 logLevelFormat: capitalColor
 logFilePath: /data/debug.log
+outputPath: /data/output
 ```
 {% endcode %}
 
@@ -76,13 +76,11 @@ In the config file above, `/data/` represents the container's shared volume crea
 
 Under the assumption that all the necessary files (`encrypted_private_key.json`, `operator.yaml`, `password`) are under the same folder (represented below with `<PATH_TO_FOLDER_WITH_CONFIG_FILES>`) you can run the tool using the command below:
 
+{% code overflow="wrap" %}
 ```bash
-docker run --restart unless-stopped --name ssv_dkg -p 3030:3030 -it \
--v "<PATH_TO_FOLDER_WITH_CONFIG_FILES>":/data \
--v "<PATH_TO_OUTPUT_FOLDER>":/output \
-"bloxstaking/ssv-dkg:latest" start-operator \
---configPath /data --outputPath /output
+docker run --restart unless-stopped --name ssv_dkg -p 3030:3030 -v "<PATH_TO_FOLDER_WITH_CONFIG_FILE>":/data -it "bloxstaking/ssv-dkg:latest" start-operator --configPath /data/config.yaml
 ```
+{% endcode %}
 
 Just **make sure to substitute** `<PATH_TO_FOLDER_WITH_CONFIG_FILES>` with the actual folder containing all the files (e.g. `/home/my-user/operator-config/`).
 
@@ -133,18 +131,19 @@ To run the DKG tool as an operator, you can launch the following command with th
 ```sh
 ssv-dkg start-operator \
             --privKey ./operator-config/encrypted_private_key.json  \
-            --port 3030 \
             --privKeyPassword ./operator-config/password \
-            --storeShare true \
+            --operatorID <YOUR_OPERATOR_ID> \
+            --port 3030 \
             --logLevel info \
             --logFormat json \
             --logLevelFormat capitalColor \
-            --logFilePath ./operator-config/debug.log
+            --logFilePath ./operator-config/debug.log \
+            --outputPath /data/output
 ```
 
 Here's an explanation of each parameter:
 
-<table><thead><tr><th width="307">Argument</th><th width="144.33333333333331">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>--privKey</code></td><td>string</td><td>Path to private key of ssv operator</td></tr><tr><td><code>--port</code></td><td>int</td><td>Port for listening messages (default: <code>3030</code>)</td></tr><tr><td><code>--privKeyPassword</code></td><td>string</td><td>Path to password file to decrypt the key</td></tr><tr><td><code>--storeShare</code></td><td>bool</td><td>Whether to store the created bls key share to a file for later reuse if needed (default: <code>false</code>)</td></tr><tr><td><code>--logLevel</code></td><td>debug | info | warning | error | critical</td><td>Logger's log level (default: <code>debug</code>)</td></tr><tr><td><code>--logFormat</code></td><td>json | console</td><td>Logger's encoding (default: <code>json</code>)</td></tr><tr><td><code>--logLevelFormat</code></td><td>capitalColor | capital | lowercase</td><td>Logger's level format (default: <code>capitalColor</code>)</td></tr><tr><td><code>--logFilePath</code></td><td>string</td><td>Path to file where logs should be written (default: <code>./data/debug.log</code>)</td></tr></tbody></table>
+<table><thead><tr><th width="307">Argument</th><th width="144.33333333333331">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>--privKey</code></td><td>string</td><td>Path to private key of ssv operator</td></tr><tr><td><code>--port</code></td><td>int</td><td>Port for listening messages (default: <code>3030</code>)</td></tr><tr><td><code>--privKeyPassword</code></td><td>string</td><td>Path to password file to decrypt the key</td></tr><tr><td><code>--operatorID</code></td><td>int</td><td>An integer, representing the ID of the operator, registered on the SSV network</td></tr><tr><td><code>--logLevel</code></td><td>debug | info | warning | error | critical</td><td>Logger's log level (default: <code>debug</code>)</td></tr><tr><td><code>--logFormat</code></td><td>json | console</td><td>Logger's encoding (default: <code>json</code>)</td></tr><tr><td><code>--logLevelFormat</code></td><td>capitalColor | capital | lowercase</td><td>Logger's level format (default: <code>capitalColor</code>)</td></tr><tr><td><code>--logFilePath</code></td><td>string</td><td>Path to file where logs should be written (default: <code>./data/debug.log</code>)</td></tr><tr><td><code>--outputPath</code></td><td>string</td><td>Path to store results (default <code>./output</code>)</td></tr></tbody></table>
 
 #### Launch with YAML config file
 
@@ -166,28 +165,31 @@ Then the content of the YAML file should be changed to this:
 
 {% code title="operator.yaml" %}
 ```yaml
-privKey: ./encrypted_private_key.json
-privKeyPassword: ./password
+privKey: /data/encrypted_private_key.json
+privKeyPassword: /data/password
+operatorID: <YOUR_OPERATOR_ID>
 port: 3030
-storeShare: true
 logLevel: info
 logFormat: json
 logLevelFormat: capitalColor
-logFilePath: ./operator-config/debug.log
+logFilePath: /data/debug.log
+outputPath: /data/output
 ```
 {% endcode %}
 
 Then the tool can be launched from the root folder, by running this command:
 
 ```sh
-ssv-dkg start-operator --configPath "./operator-config/
+ssv-dkg start-operator --configPath "./operator-config/operator.yaml
 ```
 
 If the `--configPath` parameter is not provided, `ssv-dkg` will be looking for a file named `config.yaml` in `./config/` folder at the same root as the binary (i.e. `./config/config.yaml`)
 {% endtab %}
 {% endtabs %}
 
-When you set up your firewall on your DKG node machine, make sure to expose the port that you set in the configuration (and Docker container creation command ,if running on Docker). The default is <mark style="color:green;">**3030**</mark>.
+{% hint style="danger" %}
+When you set up your firewall on your DKG node machine, **make sure to expose the port you set in the configuration** (and Docker container creation command ,if running on Docker). The default is <mark style="color:green;">**3030**</mark>.
+{% endhint %}
 
 ## Update Operator Metadata
 

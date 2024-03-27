@@ -41,7 +41,6 @@
   * [SSV Scanner SDK](developers/tools/cluster-scanner/README.md)
   * [SSV DKG Client](developers/tools/ssv-dkg-client/README.md)
     * [Generate Key Shares](developers/tools/ssv-dkg-client/generate-key-shares.md)
-    * [Key resharing](developers/tools/ssv-dkg-client/key-resharing.md)
   * [SSV API v4](https://api.ssv.network/documentation/#/v4)
 * [Smart Contracts](developers/smart-contracts/README.md)
   * [SSVNetwork](developers/smart-contracts/ssvnetwork.md)

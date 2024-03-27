@@ -53,8 +53,8 @@ Similarly, head over to [this other sub-page ](generate-key-shares.md)for instru
 7. Operators process `dkg` bundles and finish the DKG protocol of creating a shared key. After DKG process is finished each Operator has a share of the shared key which can be used for signing
 8. Each Operator signs a deposit root, using its share of the shared key, then encrypts the share with the initial RSA key and sends it to the Initiator
 9. Initiator receives all messages from Operators with signatures/encrypted shares and prepares the deposit data with a signature and save it as JSON file
-10. Initiator prepares a payload for SSV contract
-11. After the deposit is successful and SSV contract transaction is accepted, Operators can continue with their duties using their share of the distributes key
+10. Initiator prepares a `keyshares.json` and a `deposit_data.json` file to register to SSV contract, and activate the validator(s) on the beacon chain, respectively.
+11. After the deposit is successful and validator has registered to SSV contract, SSV Node Operators will accomplish validator duties using their share of the distributes key(s)
 
 ### Note on DKG instance management
 
