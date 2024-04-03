@@ -78,9 +78,17 @@ Under the assumption that all the necessary files (`encrypted_private_key.json`,
 
 {% code overflow="wrap" %}
 ```bash
-docker run --restart unless-stopped --name ssv_dkg -p 3030:3030 -v "<PATH_TO_FOLDER_WITH_CONFIG_FILE>":/data -it "bloxstaking/ssv-dkg:latest" start-operator --configPath /data/config.yaml
+docker run -u $(id -u):$(id -g) --restart unless-stopped --name ssv_dkg -p 3030:3030 -v "<PATH_TO_FOLDER_WITH_CONFIG_FILE>":/data -it "bloxstaking/ssv-dkg:latest" start-operator --configPath /data/config.yaml
 ```
 {% endcode %}
+
+{% hint style="info" %}
+A quick explanation of the command flags is due:
+
+* `-u` flag makes sure the container will write any output as the current user
+* `--restart unless-stopped` makes sure that, in case of a crash, the container will automatically restart. It will only stop when manually stopped
+* `--name` provisions the container with the specific name, so it's easier to find, with `docker ps`
+{% endhint %}
 
 Just **make sure to substitute** `<PATH_TO_FOLDER_WITH_CONFIG_FILES>` with the actual folder containing all the files (e.g. `/home/my-user/operator-config/`).
 
