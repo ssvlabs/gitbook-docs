@@ -14,7 +14,7 @@ SSV node setup is also available using [eth-docker](https://eth-docker.net/Suppo
 
 The SSV node that you are installing with these instructions is only the SSV node, not an Ethereum Execution Client or Beacon Client (e.g. not Get/Lighthouse or Besu/Teku, etc.). You will need those clients to already be running and synced, either on a different machine or the same machine.
 
-All cloud services are supported for your node setup (see a reference example on AWS [here](https://github.com/bloxapp/ssv/blob/main/docs/OPERATOR\_GETTING\_STARTED.md#setting-aws-server-for-operator)).
+All cloud services are supported for your node setup.
 
 💻 Machine running Ubuntu
 
@@ -89,15 +89,31 @@ ssh -i {key pair file name} ubuntu@{instance public IP you took from AWS}
 
 </details>
 
-#### Install Docker
+<details>
 
-Another fundamental pre-requisite is to have Docker installed on the machine hosting the SSV Node. In order to do so, please refer to [the official Docker documentation](https://docs.docker.com/engine/install/), and find the option that better fits your server configuration.
+<summary>Docker (Optional)</summary>
 
-{% hint style="info" %}
+**If you choose to use Docker** to launch the SSV Node, another fundamental pre-requisite is to have Docker installed on the machine hosting the SSV Node. In order to do so, please refer to [the official Docker documentation](https://docs.docker.com/engine/install/), and find the option that better fits your server configuration.
+
+***
+
+**NOTE:**
+
 In order to run the SSV Node, in a server, only Docker engine is necessary, you can still go ahead and install Docker Desktop, but it will not be necessary unless you plan to use the Graphical Interface.
-{% endhint %}
 
-Once you're connected and on the command line, the next steps are to configure and run the SSV Node docker image to create keys and start your SSV Node. If you are not familiar with Docker, and run into some issues while running the node, [try and take a look at the FAQ](installation.md#docker-faq) at the bottom of this page.
+</details>
+
+<details>
+
+<summary>Golang (optional)</summary>
+
+If you choose to build the project from source, you will need to have Go programming language binaries installed.
+
+For more information, you can refer to the [official Go installation instruction](https://go.dev/doc/install).
+
+</details>
+
+Once you're connected and have the command line opened, the next steps describe how to configure and run the SSV Node to create keys and start your SSV Node. If you run into some issues while running the node, [try and take a look at the FAQ](installation.md#docker-faq) at the bottom of this page.
 
 ### Generate Operator Keys (Encrypted)
 
@@ -113,13 +129,46 @@ echo "<MY_OPERATOR_PASSWORD>" >> password
 
 #### Key pair generation and encryption
 
+{% tabs %}
+{% tab title="Docker" %}
 The node Docker image will generate keys for you, then encrypt them with a password you provide, using the following command:
 
 {% code overflow="wrap" %}
 ```bash
-docker run --name ssv-node-key-generation -v "$(pwd)/password":/password -it "bloxstaking/ssv-node:latest" /go/bin/ssvnode generate-operator-keys --password-file=password && docker cp ssv-node-key-generation:/encrypted_private_key.json ./encrypted_private_key.json && docker rm ssv-node-key-generation
+docker run --name ssv-node-key-generation -v <PATH_TO_PASSWORD_FILE>:/password -it "bloxstaking/ssv-node:latest" /go/bin/ssvnode generate-operator-keys --password-file=password && docker cp ssv-node-key-generation:/encrypted_private_key.json ./encrypted_private_key.json && docker rm ssv-node-key-generation
 ```
 {% endcode %}
+{% endtab %}
+
+{% tab title="Build from Source" %}
+A prerequisite for this is to have `go` version 1.20 installed on the system, and an optional requirement is to have the `make` tool installed as well (alternatively you could run the corresponding command defined in the `Makefile`).
+
+#### Clone repository
+
+Clone the `ssv-dkg` repository in your local machine:
+
+```bash
+git clone git@github.com:bloxapp/ssv.git
+```
+
+#### Build
+
+From the project's root folder, run the following command:
+
+<pre class="language-bash"><code class="lang-bash"><strong>make build
+</strong></code></pre>
+
+#### Generate keys
+
+The node binary will generate keys for you, then encrypt them with a password you provide, using the following command:
+
+{% code overflow="wrap" %}
+```bash
+./bin/ssvnode generate-operator-keys --password-file=<PATH_TO_PASSWORD_FILE>
+```
+{% endcode %}
+{% endtab %}
+{% endtabs %}
 
 Here is an example of the generated file.
 
@@ -265,16 +314,18 @@ MetricsAPIPort: 15000
 Make sure your `ETH1Addr` endpoint is communicating **over WebSocket** and **not over HTTP** in order to support subscriptions and notifications.
 {% endhint %}
 
-### Start the Node using Docker
+### Start the Node
+
+Now, for the part you've been waiting for... actually starting your SSV node!
 
 {% hint style="warning" %}
 **Do not** run multiple instances of SSV Node with the same set Operator keys.
 
-This does not increase validator resiliency and **could lead to validator slashing**.
+This does not increase validator resiliency and **could lead to validator slashing**.Now, for the part you've been waiting for... actually starting your SSV node!
 {% endhint %}
 
-Now, for the part you've been waiting for... actually starting your SSV node!
-
+{% tabs %}
+{% tab title="Docker" %}
 To start your node, run the following Docker command in the same folder you created the `config.yaml` file in the previous step:
 
 <pre class="language-bash"><code class="lang-bash"><strong>docker run --restart unless-stopped --name ssv_node -e \
@@ -293,6 +344,73 @@ You can detach the terminal at any time by hitting `Ctrl-c` key combination, or 
 
 If you are sure that the node works, and don't care about the logs, you can add the `-d` parameter right after `docker run`.
 {% endhint %}
+{% endtab %}
+
+{% tab title="docker-compose" %}
+Here is an example of a `docker-compose.yml` file, where `<PATH_TO_CONFIG_YAML_FILE>`, `<PATH_TO_PASSWORD_FILE>`, `<PATH_DO_ENCRYPTED_KEY_FILE>` are the paths to the `config.yaml`, `password`, `encrypted_private_key.json` files you have created in the previous steps:
+
+```yaml
+ssv:
+  image: bloxstaking/ssv-node:latest
+  ports:
+    - 13001:13001
+    - 12001:12001/udp
+    - 15000:15000
+  command:
+      make BUILD_PATH="/go/bin/ssvnode" start-node
+  volumes:
+    - <PATH_TO_CONFIG_YAML_FILE>:/config/config.yaml
+    - <PATH_TO_OUTPUT_FOLDER>:/data
+    - <PATH_TO_PASSWORD_FILE>:/password
+    - <PATH_DO_ENCRYPTED_KEY_FILE>:/encrypted_private_key.json
+  environment:
+    - CONFIG_PATH=/config/config.yaml
+  container_name: ssv_node
+  restart: unless-stopped
+```
+
+{% hint style="info" %}
+This command will keep the terminal busy, showing the container's logs. It is useful to make sure that the tool start up sequence runs correctly.
+
+You can detach the terminal at any time by hitting `Ctrl-c` key combination, or closing the terminal itself. The tool will be stopped, but it will restart automatically, thanks to the `restart: "unless-stopped"` startup parameter.
+
+If you are sure that the tool works, and don't care about the logs, you can add the `-d` parameter right after `docker compose up`.
+{% endhint %}
+{% endtab %}
+
+{% tab title="Build from Source" %}
+If you have already created the operator keys using the compiled binary, then you can go ahead and launch the node. Otherwise, make sure to build from source first.
+
+A prerequisite for this is to have `go` version 1.20 installed on the system, and an optional requirement is to have the `make` tool installed as well (alternatively you could run the corresponding command defined in the `Makefile`).
+
+#### Clone repository
+
+Clone the `ssv-dkg` repository in your local machine:
+
+```bash
+git clone git@github.com:bloxapp/ssv.git
+```
+
+#### Build
+
+From the project's root folder, run the following command:
+
+<pre class="language-bash"><code class="lang-bash"><strong>make build
+</strong></code></pre>
+
+#### Launch the node
+
+To start your node, run the following command:
+
+```
+./bin/ssvnode start-node
+```
+
+By default, the node expects the config file you have created in the previous step to be at this path `./config/config.yaml`. If your setup is different, you can use the `CONFIG_PATH` environment variable to provide a custom path for the config file.
+
+As a small note, this compiled binary could be used to launch the binary [as a `systemd` service](https://manpages.ubuntu.com/manpages/focal/en/man5/systemd.service.5.html), for example.
+{% endtab %}
+{% endtabs %}
 
 ### Peer-to-peer ports configuration and firewall
 
