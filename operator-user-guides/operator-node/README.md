@@ -12,20 +12,12 @@ To join the network as an operator a user must [install](installation.md) the SS
 [configuring-mev.md](configuring-mev.md)
 {% endcontent-ref %}
 
-{% content-ref url="maintenance/" %}
-[maintenance](maintenance/)
+{% content-ref url="enabling-dkg.md" %}
+[enabling-dkg.md](enabling-dkg.md)
 {% endcontent-ref %}
 
 {% content-ref url="../operator-management/registration.md" %}
 [registration.md](../operator-management/registration.md)
-{% endcontent-ref %}
-
-{% content-ref url="../operator-management/updating-operator-fees.md" %}
-[updating-operator-fees.md](../operator-management/updating-operator-fees.md)
-{% endcontent-ref %}
-
-{% content-ref url="../operator-management/withdrawing-earnings.md" %}
-[withdrawing-earnings.md](../operator-management/withdrawing-earnings.md)
 {% endcontent-ref %}
 
 {% content-ref url="../operator-management/configuring-a-permissioned-operator.md" %}
@@ -34,6 +26,14 @@ To join the network as an operator a user must [install](installation.md) the SS
 
 {% content-ref url="../operator-management/setting-operator-metadata.md" %}
 [setting-operator-metadata.md](../operator-management/setting-operator-metadata.md)
+{% endcontent-ref %}
+
+{% content-ref url="../operator-management/updating-operator-fees.md" %}
+[updating-operator-fees.md](../operator-management/updating-operator-fees.md)
+{% endcontent-ref %}
+
+{% content-ref url="../operator-management/withdrawing-earnings.md" %}
+[withdrawing-earnings.md](../operator-management/withdrawing-earnings.md)
 {% endcontent-ref %}
 
 {% content-ref url="../operator-management/removing-an-operator.md" %}

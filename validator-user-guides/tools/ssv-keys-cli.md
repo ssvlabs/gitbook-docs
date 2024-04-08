@@ -128,7 +128,7 @@ This is true also in the case of a single validator key, where the array will on
 ```
 {% endcode %}
 
-### Spit multiple keystore files in a folder
+### Split multiple keystore files in a folder
 
 {% tabs %}
 {% tab title="Executable" %}

@@ -84,6 +84,8 @@
     * [Troubleshooting](operator-user-guides/operator-node/maintenance/troubleshooting.md)
   * [Enabling DKG](operator-user-guides/operator-node/enabling-dkg.md)
   * [Node Configuration Reference](operator-user-guides/operator-node/node-configuration-reference.md)
+  * [Node migration](operator-user-guides/operator-node/node-migration.md)
+  * [DKG operator migration](operator-user-guides/operator-node/dkg-operator-migration.md)
 * [Operator Management](operator-user-guides/operator-management/README.md)
   * [Registering an Operator](operator-user-guides/operator-management/registration.md)
   * [Updating Operator fees](operator-user-guides/operator-management/updating-operator-fees.md)
