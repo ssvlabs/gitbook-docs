@@ -1,9 +1,5 @@
 # SSV DKG Client
 
-{% hint style="danger" %}
-The SSV-DKG tool is yet to be audited. **Please refrain from using it on mainnet.**
-{% endhint %}
-
 ### What is Distributed Key Generation (DKG)
 
 Distributed Key Generation is a cryptographic process that aims to solve the problem of coordinating `N` parties to cryptographically sign and verify signatures without relying on Trusted Third Parties. The process is demonstrated to be successful in computing a key pair in the presence of a number `T` attackers in a decentralized network. To do so, this algorithm generates a public key, and a secret key of which no single party knows, but has some share of. The involvement of many parties requires Distributed key generation to ensure secrecy in the presence of malicious contributions to the key calculation.
