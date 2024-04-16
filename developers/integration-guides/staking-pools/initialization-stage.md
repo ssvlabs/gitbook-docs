@@ -19,7 +19,7 @@ For ssv.network Operators to operate your validator(s), you must supply them wit
 If you do not have validator keys, they can be generated using Ethereum’s official [Staking Deposit CLI](https://github.com/ethereum/staking-deposit-cli) tool via the [Ethereum launchpad](https://prater.launchpad.ethereum.org/en/).
 
 {% hint style="info" %}
-As an alternative, you can generate validator keys utilizing existing DKG protocols ([reference](https://github.com/ZenGo-X/awesome-tss)). An SSV tailored implementation is currently under [development](https://github.com/bloxapp/ssv-spec/tree/main/dkg) ([SIP](https://docs.google.com/document/d/1TRVUHjFyxINWW2H9FYLNL2pQoLy6gmvaI62KL\_4cREQ/edit))
+As an alternative, you can generate validator keys utilizing existing DKG protocols ([reference](https://github.com/ZenGo-X/awesome-tss)). An SSV tailored implementation is currently under [development](https://github.com/ssvlabs/ssv-spec/tree/main/dkg) ([SIP](https://docs.google.com/document/d/1TRVUHjFyxINWW2H9FYLNL2pQoLy6gmvaI62KL\_4cREQ/edit))
 {% endhint %}
 
 The tool will output a set of **keystore files** for each of the validators and a **deposit file** that aggregates the required deposit data for their activation on the beacon chain.

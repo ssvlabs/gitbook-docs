@@ -15,7 +15,7 @@ Please note that **shares** can be shared publicly since only assigned operators
 The SSV Keys library is distributed as a Javascript package, and it can be directly installed with the `npm` command (or `yarn`, if you prefer) using the repository's URL:
 
 ```bash
-npm i https://github.com/bloxapp/ssv-keys.git
+npm i https://github.com/ssvlabs/ssv-keys.git
 ```
 
 {% hint style="info" %}
