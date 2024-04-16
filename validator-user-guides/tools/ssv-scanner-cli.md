@@ -13,7 +13,7 @@ A tutorial on using SSV Scanner tool was recorded by a member of SSV community. 
 Prerequisites _- this tool requires_ [_NodeJS_](https://nodejs.org/en/download/) _installed on your machine._
 
 ```bash
- 1 git clone https://github.com/bloxapp/ssv-scanner.git
+ 1 git clone https://github.com/ssvlabs/ssv-scanner.git
  2 cd ssv-scanner
  3 yarn
 ```

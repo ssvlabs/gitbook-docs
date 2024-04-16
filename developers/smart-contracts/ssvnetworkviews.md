@@ -4,7 +4,7 @@ The SSVNetworkViews contract is for reading information about the network and it
 
 ### Repository <a href="#xkgqmoxdldho" id="xkgqmoxdldho"></a>
 
-{% embed url="https://github.com/bloxapp/ssv-network/tree/contract-v3/contracts" %}
+{% embed url="https://github.com/ssvlabs/ssv-network/tree/contract-v3/contracts" %}
 
 ### General Methods <a href="#b2oq6y1s4ym" id="b2oq6y1s4ym"></a>
 
