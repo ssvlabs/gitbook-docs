@@ -4,7 +4,7 @@ The SSVNetwork contract is the main contract for operations and management.
 
 ### Repository <a href="#xkgqmoxdldho" id="xkgqmoxdldho"></a>
 
-{% embed url="https://github.com/bloxapp/ssv-network/tree/main/contracts" %}
+{% embed url="https://github.com/ssvlabs/ssv-network/tree/main/contracts" %}
 
 ### Operator Methods <a href="#cxoku5ytbvgq" id="cxoku5ytbvgq"></a>
 

@@ -47,7 +47,7 @@ Please note that alternatively, instead of using this tool to retrieve the **reg
 The SSV Keys library is distributed as a Javascript package, and it can be directly installed with the `npm` command (or `yarn`, if you prefer) using the repository's URL:
 
 ```bash
-npm i https://github.com/bloxapp/ssv-scanner.git
+npm i https://github.com/ssvlabs/ssv-scanner.git
 ```
 
 {% hint style="info" %}
