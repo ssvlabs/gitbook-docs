@@ -13,7 +13,7 @@ The minimum hardware requirements are very low. A single board computer could ru
 ### Installation
 
 ```git
-git clone https://github.com/bloxapp/ssv-liquidator.git
+git clone https://github.com/ssvlabs/ssv-liquidator.git
 cd ssv-liquidator
 yarn install
 yarn cli --help

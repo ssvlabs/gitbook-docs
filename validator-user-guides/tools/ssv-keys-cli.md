@@ -6,7 +6,7 @@ The `SSV Keys CLI` tool is a command-line interface that splits a validator key 
 
 {% tabs %}
 {% tab title="Executable" %}
-1. Navigate to the [SSV GitHub](https://github.com/bloxapp/ssv-keys/releases/tag/v1.0.1) releases section
+1. Navigate to the [SSV GitHub](https://github.com/ssvlabs/ssv-keys/releases/tag/v1.0.1) releases section
 2. Download the native executable for your operating system:
    * `ssv-keys-lin` - for Ubuntu Linux
    * `ssv-keys-mac` - for macOS
@@ -16,7 +16,7 @@ The `SSV Keys CLI` tool is a command-line interface that splits a validator key 
 
 {% tab title="yarn" %}
 ```sh
-1 git clone https://github.com/bloxapp/ssv-keys.git --branch=v1.1.0
+1 git clone https://github.com/ssvlabs/ssv-keys.git --branch=v1.1.0
 2 cd ssv-keys
 3 yarn
 ```

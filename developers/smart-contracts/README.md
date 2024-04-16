@@ -2,7 +2,7 @@
 
 ### Repository <a href="#bhl3qnbkn7py" id="bhl3qnbkn7py"></a>
 
-{% embed url="https://github.com/bloxapp/ssv-network/tree/main/contracts" %}
+{% embed url="https://github.com/ssvlabs/ssv-network/tree/main/contracts" %}
 
 ### SSV Contract Addresses <a href="#bhl3qnbkn7py" id="bhl3qnbkn7py"></a>
 
@@ -22,8 +22,8 @@
 
 #### ABI
 
-* [Mainnet](https://github.com/bloxapp/ssv-network/tree/contract-abi/docs/mainnet/v1.1.0/abi)
-* [Testnet](https://github.com/bloxapp/ssv-network/tree/contract-abi/docs/testnet/v1.1.0/abi)
+* [Mainnet](https://github.com/ssvlabs/ssv-network/tree/contract-abi/docs/mainnet/v1.1.0/abi)
+* [Testnet](https://github.com/ssvlabs/ssv-network/tree/contract-abi/docs/testnet/v1.1.0/abi)
 
 ### Ethereum Deposit Contract Addresses
 

@@ -62,7 +62,7 @@ Anyone owning SSV tokens can participate in the ssv.network DAO from a governanc
 
 ### Istanbul Byzantine Fault Tolerance Consensus
 
-Tying it all together, the consensus layer of SSV is based on the Istanbul Byzantine Fault Tolerance (IBFT) algorithm. The algorithm randomly selects a validator node (KeyShare) responsible for proposing a block and shares the information with the other participants. Once the predefined threshold of KeyShares deems the block to be valid, it is added to the chain. As such, consensus can be reached even if some operators are faulty or not currently online ([Advanced IBFT reading](https://github.com/bloxapp/ssv/blob/main/ibft/IBFT.md)).
+Tying it all together, the consensus layer of SSV is based on the Istanbul Byzantine Fault Tolerance (IBFT) algorithm. The algorithm randomly selects a validator node (KeyShare) responsible for proposing a block and shares the information with the other participants. Once the predefined threshold of KeyShares deems the block to be valid, it is added to the chain. As such, consensus can be reached even if some operators are faulty or not currently online ([Advanced IBFT reading](https://github.com/ssvlabs/ssv/blob/main/ibft/IBFT.md)).
 
 ### KeyShare
 
