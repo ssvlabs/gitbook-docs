@@ -60,6 +60,10 @@ A `ssv-dkg` can handle multiple DKG instances, it saves up to `MaxInstances` (10
 
 ## Security Notes
 
+{% hint style="info" %}
+The `ssv-dkg` tool has recently been audited, you can find more details about it [on the Security page](../../security.md#audit-resources).
+{% endhint %}
+
 It is important to briefly explain how the communication between DKG ceremony Initiator and Operators is secured:
 
 1. Initiator is using RSA key (2048 bits) to sign `init` message sent to Operators. Upon receiving the signature, Operators verify it using public key included in the `init` message. If the signature is valid, Operators store this pub key for further verification of messages coming from the Initiator(s).
