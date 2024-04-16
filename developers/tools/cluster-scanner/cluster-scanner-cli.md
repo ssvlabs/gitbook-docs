@@ -9,7 +9,7 @@ Prerequisites _- this tool requires_ [_NodeJS_](https://nodejs.org/en/download/)
 1. Clone the cluster repo
 
 ```ini
- git clone https://github.com/ssvlabs/cluster-scanner.git
+ git clone https://github.com/ssvlabs/ssv-scanner.git
 ```
 
 2. Navigate to repo `cluster-scanner`
