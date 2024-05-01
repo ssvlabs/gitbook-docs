@@ -42,7 +42,7 @@
   * [SSV DKG Client](developers/tools/ssv-dkg-client/README.md)
     * [Generate Key Shares](developers/tools/ssv-dkg-client/generate-key-shares.md)
   * [SSV API v4](https://api.ssv.network/documentation/#/v4)
-  * [Subgraph](developers/tools/subgraph.md)
+  * [SSV Subgraph](developers/tools/ssv-subgraph.md)
 * [Smart Contracts](developers/smart-contracts/README.md)
   * [SSVNetwork](developers/smart-contracts/ssvnetwork.md)
   * [SSVNetworkViews](developers/smart-contracts/ssvnetworkviews.md)
