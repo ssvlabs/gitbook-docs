@@ -1,0 +1,111 @@
+# Subgraph
+
+The Graph is a decentralized indexing protocol for the Ethereum (and other EVM-compatible) blockchains. It allows to process data produced by smart contracts and apply logic to it, making it easier and faster to query.
+
+The Graph can be used for querying data related to the SSV protocol and develop applications on top of it.
+
+{% hint style="warning" %}
+### New to GraphQL?
+
+Before diving into subgraph queries, get familiar with GraphQL basics: [Learn GraphQL](https://graphql.org/learn/)
+{% endhint %}
+
+A Subgraph that implements the necessary logic to index all the events emitted by the SSV smart contract has been developed, and the code is open source, you can find it here:
+
+{% embed url="https://github.com/bloxapp/ssv-subgraph" %}
+
+### Querying SSV Protocol smart contract data
+
+Currently, there are two official Subgraphs deployed, one for [Ethereum Mainnet](https://thegraph.com/explorer/subgraphs/7V45fKPugp9psQjgrGsfif98gWzCyC6ChN7CW98VyQnr?view=Playground\&chain=arbitrum-one), and another one for [Holesky testnet](https://thegraph.com/explorer/subgraphs/2fc6xRiZ2PaPYE2fBRZ1fB1SFS3PojvCXB8fFguXQZk6?view=Overview\&chain=arbitrum-one).
+
+There are a few ways to access SSV smart contract data through The Graph.
+
+#### Subgraph Playground user interface
+
+First of all, you can access the Subgraph page on the Graph Explorer, and use it to experiment and prototype queries using the provided Playground.
+
+For example, head over to [this page to access the Playground of the Holesky Subgraph](https://thegraph.com/explorer/subgraphs/2fc6xRiZ2PaPYE2fBRZ1fB1SFS3PojvCXB8fFguXQZk6?view=Playground\&chain=arbitrum-one).
+
+<figure><img src="../../.gitbook/assets/Screenshot 2024-04-23 at 17.14.20.png" alt=""><figcaption></figcaption></figure>
+
+It's possible to access the underlying GraphQL schema, by clicking the _folder icon_ on the right of the playground. This is self-documenting, similarly (and more) to Swagger for a RESTful API, but it's also more powerful, since it will allow you to build queries through simple point-and-click interactions.
+
+Once you are satisfied with the query you built, click on the _Play_ button in the center to launch it and obtain the result.
+
+<figure><img src="../../.gitbook/assets/Screenshot 2024-04-23 at 17.17.33.png" alt=""><figcaption></figcaption></figure>
+
+Further documentation about the schema can be accessed by clicking on the _book icon_ on the right of the Playground window.
+
+#### Developer API
+
+{% hint style="warning" %}
+The developer API is rate limited and should only be used for infrequent queries that are not data heavy, like a single owner nonce, or the cluster snapshot information for a single cluster.
+{% endhint %}
+
+The developer API is typically not publicly accessed, but it is provided below, to foster development of applications built on the SSV protocol. Here are the Developer endpoints for the two deployed Subgraphs:
+
+* [Ethereum Mainnet SSV Subgraph](https://api.studio.thegraph.com/query/71118/ssv-network-ethereum/version/latest)
+* [Holesky testnet SSV Subgraph](https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest)
+
+Despite being rate limited, this endpoint should be sufficient for every development use case.
+
+In order to use it, you would need to know exactly the query you want to perform, and then perform a `POST` request to the provided endpoint. For example, in order to perform the following query (which requests the `nonce` of a specific owner address):
+
+```graphql
+query MyQuery {
+  account(id: "0xaA184b86B4cdb747F4A3BF6e6FCd5e27c1d92c5c") {
+    nonce
+  }
+}
+```
+
+You could simply use the `curl` tool, to perform the `POST` request:
+
+{% code overflow="wrap" %}
+```bash
+curl -X POST <ENDPOINT> -H "Content-Type: application/json"  -d '{
+    "query": "query MyQuery {  account(id: \"0xaA184b86B4cdb747F4A3BF6e6FCd5e27c1d92c5c\") {    nonce  }}"
+}'
+```
+{% endcode %}
+
+As with any other kind of web request, this can be done programmatically. Below, a simple snippet showcasing how to perform the same request with Node.js:
+
+```javascript
+const url = <ENDPOINT>;
+const query = `
+query MyQuery {
+  account(id: "0xaA184b86B4cdb747F4A3BF6e6FCd5e27c1d92c5c") {
+    nonce
+  }
+}`;
+
+const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ query })
+});
+
+const responseData = await response.json();
+console.log(responseData);
+```
+
+Finally, a simple project aimed at providing an example of how to use the subgraph to substitute the [`ssv-scanner`](../../validator-user-guides/tools/ssv-scanner-cli.md) tool can be found in this repository:
+
+{% embed url="https://github.com/raekwonIII/ssv-scanner-demo" %}
+
+#### Production API
+
+As previously mentioned, the Developer API is accessible to anyone for free, but it's rate limited. As such, it should be used for sporadic, light requests.
+
+For demanding and very frequent requests, you should be using the Production API, for which the data is provided by decentralized indexers, who get rewarded by the protocol tokenomics for providing the service.
+
+In order to use this endpoint, head over to the Subgraph's page and click on the _Query_ button
+
+<figure><img src="../../.gitbook/assets/Screenshot 2024-04-24 at 11.06.24.png" alt=""><figcaption></figcaption></figure>
+
+As you can see, the provided URL requires an API key, follow the documentation in the page, to find out how to create one.
+
+Once you have obtained your API key, you can essentially follow the instructions in the previous section, only substituting the URL in the examples with your new endpoint.

@@ -31,7 +31,7 @@ Please note that If your operating system prevents you from running the executab
 
 You can use **`shares --help`** to see all arguments. Note that if there are missing arguments that the CLI needs, it will ask you for them.
 
-<table><thead><tr><th width="277">Argument</th><th width="122.33333333333331">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>--keystore (-ks)</code></td><td>string</td><td><p>The path to either a validator keystore file or a folder that contains multiple validator keystore files.</p><p>If a folder is provided, it will split in bulk all the keystore files within it, according to the additional arguments provided.</p></td></tr><tr><td><code>--password (-ps)</code></td><td>string</td><td>The keystore file encryption password</td></tr><tr><td><code>--operators-ids (-oids)</code></td><td>int</td><td>Comma-separated list of operator IDs. The amount must be 3f+1 compatible.</td></tr><tr><td><code>--operators-keys (-oks)</code></td><td>string</td><td><p>Comma-separated list of operator keys (same sequence as operator ids). </p><p>The amount must be 3f+1 compatible.</p></td></tr><tr><td><code>--owner-address (-oa)</code></td><td>string</td><td>The cluster owner address (in the SSV contract)</td></tr><tr><td><code>--owner-nonce (-on)</code></td><td>int</td><td>The validator registration nonce of the account (owner address) within the SSV contract (increments after each validator registration), obtained using the ssv-scanner tool.</td></tr><tr><td><code>--output-folder (-of)</code></td><td>string</td><td>Target folder path to output the key shares file</td></tr></tbody></table>
+<table><thead><tr><th width="277">Argument</th><th width="122.33333333333331">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>--keystore (-ks)</code></td><td>string</td><td><p>The path to either a validator keystore file or a folder that contains multiple validator keystore files.</p><p>If a folder is provided, it will split in bulk all the keystore files within it, according to the additional arguments provided.</p></td></tr><tr><td><code>--password (-ps)</code></td><td>string</td><td>The keystore file encryption password</td></tr><tr><td><code>--operators-ids (-oids)</code></td><td>int</td><td>Comma-separated list of operator IDs. The amount must be 3f+1 compatible.</td></tr><tr><td><code>--operators-keys (-oks)</code></td><td>string</td><td><p>Comma-separated list of operator keys (same sequence as operator ids).</p><p>The amount must be 3f+1 compatible.</p></td></tr><tr><td><code>--owner-address (-oa)</code></td><td>string</td><td>The cluster owner address (in the SSV contract)</td></tr><tr><td><code>--owner-nonce (-on)</code></td><td>int</td><td>The validator registration nonce of the account (owner address) within the SSV contract (increments after each validator registration), obtained using the ssv-scanner tool.</td></tr><tr><td><code>--output-folder (-of)</code></td><td>string</td><td>Target folder path to output the key shares file</td></tr></tbody></table>
 
 ## **Examples**
 
@@ -44,7 +44,7 @@ You can use **`shares --help`** to see all arguments. Note that if there are mis
    2. `ssv-keys.exe` (Windows)
 2. Follow the instructions
 
-#### Executable example
+**Executable example**
 
 ```bash
 ./ssv-keys-mac \
@@ -74,7 +74,7 @@ yarn cli shares \
 
 #### **Output**
 
-A json file will be generated with the shares and the transaction payload required for validator registration ([registerValidator()](broken-reference)).
+A json file will be generated with the shares and the transaction payload required for validator registration ([registerValidator()](https://github.com/bloxapp/gitbook-docs/blob/main/validator-user-guides/tools/broken-reference/README.md)).
 
 {% hint style="warning" %}
 It is important to notice that this format is a breaking change with respect to previous versions of `ssv-keys` as it contains an array (`"shares"`) of shares data, where each single item represents one validator key, its related keyshares, and the payload necessary for the on-chain transaction.
@@ -137,7 +137,7 @@ This is true also in the case of a single validator key, where the array will on
    2. `ssv-keys.exe` (Windows)
 2. Follow the instructions
 
-#### Executable example
+**Executable example**
 
 ```bash
 ./ssv-keys-mac \
@@ -167,7 +167,7 @@ yarn cli shares \
 
 #### **Output**
 
-A json file will be generated with the shares and the transaction payload required for validator registration ([registerValidator()](broken-reference)).
+A json file will be generated with the shares and the transaction payload required for validator registration ([registerValidator()](https://github.com/bloxapp/gitbook-docs/blob/main/validator-user-guides/tools/broken-reference/README.md)).
 
 In the case of the file below, a total of 3 validator keystore files were supplied, so 3 keyshares data items are present in the output file.
 
