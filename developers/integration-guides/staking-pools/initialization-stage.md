@@ -10,7 +10,7 @@ The ceremony is initially performed in advance, but could also be iterated upon 
 
 The ceremony is performed in 5 steps:
 
-![](<../../../.gitbook/assets/image (21).png>)
+![](<../../../.gitbook/assets/image (28).png>)
 
 ### 1. Validator Key Generation
 
@@ -28,7 +28,7 @@ The tool will output a set of **keystore files** for each of the validators and 
 * From the **deposit file** you must extract and store the following data in your pool’s validator registry for each of your validators during the 4th step - “validator registry setup”:
   * pubkey
   * signature
-  * deposit\_data_\__root
+  * deposit\_data\_\_\_root
 
 **Deposit File Output Example**
 
@@ -65,7 +65,7 @@ The complete operator registry of the network and their corresponding **ids/keys
 
 To assign validator operation to the selected operators, the pool’s validator(s) keys must be distributed into corresponding KeyShares.
 
-To do this, gather the **keystore files** you generated during the 1st step - “validator key generation” and the **operator ids & keys** fetched during the 2nd step - “pool operators selection”. Then use the [SSV Key Distributor](../../tools/ssv-key-distributor/) tools to extract your validator’s key and distribute them to KeyShares.
+To do this, gather the **keystore files** you generated during the 1st step - “validator key generation” and the **operator ids & keys** fetched during the 2nd step - “pool operators selection”. Then use the [SSV Key Distributor](../../tools/ssv-key-distributor.md) tools to extract your validator’s key and distribute them to KeyShares.
 
 The tools will output the following set of variables which are required to store in your pool’s validators registry for each of your validators during the 4th step - “validator registry setup”:
 
@@ -79,7 +79,7 @@ In order to maintain and add validators to your pool according to user demand, a
 
 For each of your future pool validators, you must store the following data:
 
-* **Validator public key** - provided in the validator **keystore and deposit files** generated during the 1st step - “validator key generation” and also by the “SSV Key Distributor” tool during the 3rd step - “validator key distribution”.&#x20;
+* **Validator public key** - provided in the validator **keystore and deposit files** generated during the 1st step - “validator key generation” and also by the “SSV Key Distributor” tool during the 3rd step - “validator key distribution”.
 * **Signature** - provided in the **deposit file** generated during the 1st step - “validator key generation”.
 * **Deposit data root** - provided in the **deposit file** generated during the 1st step - “validator key generation”.
 * **Operator ids** - fetched during the 2nd step - “pool operators selection”.

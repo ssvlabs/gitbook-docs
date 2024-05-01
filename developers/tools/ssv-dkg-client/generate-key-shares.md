@@ -87,7 +87,7 @@ In the config file above, `/data/` represents the container's shared volume crea
 
 A special note goes to the `nonce` field, which represents how many validators the address identified in the `owner` parameter has already registered to the ssv.network.
 
-You can keep track of this counter yourself, or you can use the `ssv-scanner` tool made available by the SSV team to source it. For more information, please refer to the related user guide or to [its SDK documentation page](../cluster-scanner/).
+You can keep track of this counter yourself, or you can use the `ssv-scanner` tool made available by the SSV team to source it. For more information, please refer to the related user guide or to [its SDK documentation page](../cluster-scanner.md).
 
 {% hint style="info" %}
 **Note**: For more details on `operatorsInfoPath` parameter, head over to the [Operators data section](generate-key-shares.md#obtaining-operators-data) above
@@ -155,7 +155,7 @@ Here's an explanation of each parameter:
 
 A special note goes to the `nonce` field, which represents how many validators the address identified in the `owner` parameter has already registered to the ssv.network.
 
-You can keep track of this counter yourself, or you can use the `ssv-scanner` tool made available by the SSV team to source it. For more information, please refer to the related user guide or to [its SDK documentation page](../cluster-scanner/).
+You can keep track of this counter yourself, or you can use the `ssv-scanner` tool made available by the SSV team to source it. For more information, please refer to the related user guide or to [its SDK documentation page](../cluster-scanner.md).
 
 {% hint style="info" %}
 **Note**: For more details on `operatorsInfoPath` parameter, head over to the [Operators data section](generate-key-shares.md#obtaining-operators-data).
@@ -199,7 +199,7 @@ logFilePath: /data/debug.log # path to file where logs should be written (defaul
 
 A special note goes to the `nonce` field, which represents how many validators the address identified in the `owner` parameter has already registered to the ssv.network.
 
-You can keep track of this counter yourself, or you can use the `ssv-scanner` tool made available by the SSV team to source it. For more information, please refer to the related user guide or to [its SDK documentation page](../cluster-scanner/).
+You can keep track of this counter yourself, or you can use the `ssv-scanner` tool made available by the SSV team to source it. For more information, please refer to the related user guide or to [its SDK documentation page](../cluster-scanner.md).
 
 {% hint style="info" %}
 **Note**: For more details on `operatorsInfoPath` parameter, head over to the [Operators data section](generate-key-shares.md#obtaining-operators-data).

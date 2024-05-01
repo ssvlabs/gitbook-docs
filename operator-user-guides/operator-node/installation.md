@@ -257,7 +257,7 @@ If you previously generated unencrypted Operator <mark style="color:green;">**Pu
 
 Copy the following `config.yaml` file, just be sure to replace all the placeholders (`ETH2_NODE`, `ETH1_WEBSOCKET_ADDRESS`, `OPERATOR_SECRET_KEY`, etc.) with actual values.
 
-In particular, substitute `ENCRYPTED_PRIVATE_KEY_JSON` with the operator encrypted private key file [generated above](../../run-a-node/operator-node/ssv-node-installation.md#generate-operator-keys) (e.g. `encrypted_private_key.json`) and `PASSWORD_FILE` with the file containing the password used to generate the encrypted key itself.
+In particular, substitute `ENCRYPTED_PRIVATE_KEY_JSON` with the operator encrypted private key file [generated above](https://github.com/bloxapp/gitbook-docs/blob/main/run-a-node/operator-node/ssv-node-installation.md#generate-operator-keys) (e.g. `encrypted_private_key.json`) and `PASSWORD_FILE` with the file containing the password used to generate the encrypted key itself.
 
 ```yaml
 global:
