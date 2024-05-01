@@ -1,4 +1,4 @@
-# Subgraph
+# SSV Subgraph
 
 The Graph is a decentralized indexing protocol for the Ethereum (and other EVM-compatible) blockchains. It allows to process data produced by smart contracts and apply logic to it, making it easier and faster to query.
 
