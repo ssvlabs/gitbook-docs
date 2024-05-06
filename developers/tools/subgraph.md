@@ -12,7 +12,7 @@ Before diving into subgraph queries, get familiar with GraphQL basics: [Learn Gr
 
 A Subgraph that implements the necessary logic to index all the events emitted by the SSV smart contract has been developed, and the code is open source, you can find it here:
 
-{% embed url="https://github.com/bloxapp/ssv-subgraph" %}
+{% embed url="https://github.com/ssvlabs/ssv-subgraph" %}
 
 ### Querying SSV Protocol smart contract data
 

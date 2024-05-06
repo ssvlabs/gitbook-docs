@@ -26,22 +26,20 @@ To enable the pool operator to perform these functions, they must be contained w
 
 To manage the account balances, the pool operator could deposit or withdraw funds.
 
-* [`deposit()`](broken-reference)
-* [`withdraw()`](broken-reference)
+* `deposit()`
+* `withdraw()`
 
 **Account Reactivation** - accounts with insufficient balance for validator operations are susceptible to liquidation. In the unfortunate case the pool’s account becomes insolvent, the pool operator must reactivate the account along with additional funds in order to resume its validator(s) operation.
 
-* [`reactivateAccount()`](broken-reference)
+* `reactivateAccount()`
 
 #### Validator Management
 
 **Update Operators** - validators in the ssv.network are customizable and the pool operator can always update the operators managing the validator(s) according to their own preferences (i.e. operator cost and performance optimization).
 
-To update a validator’s operators, the pool operator should repeat the 2nd step - “pools operator selection” and 3rd step - “validator key distribution” of the [initialization stage](broken-reference) to redistribute the validator key and call the update function with the new operators and KeyShares.
-
-* [`updateValidator()`](broken-reference)
+To update a validator’s operators, the pool operator should repeat the 2nd step - “pools operator selection” and 3rd step - “validator key distribution” of the initialization stage to redistribute the validator key remove the validator from current cluster, and register it again, with the new operators and KeyShares.
 
 **Remove Validator** - validators in the ssv.network can always off-board the network. The pool can remove its validators from the network in order to support user poolETH redemptions in the future or to migrate to a different service.
 
-* [`removeValidator()`](broken-reference)
+* `removeValidator()`
 

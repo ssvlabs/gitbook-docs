@@ -42,7 +42,7 @@ If the Online option is choosen, the next screen allows you to upload the Valida
 
 #### Offline Key Splitting
 
-Offline key splitting is the most secure option, although less convenient, as it requires running a command line tool. For more information, refer to the specific [User Guide on how to use the ssv-keys CLI tool](broken-reference).
+Offline key splitting is the most secure option, although less convenient, as it requires running a command line tool. For more information, refer to the specific [User Guide on how to use the ssv-keys CLI tool](../tools/ssv-keys-cli.md).
 
 <figure><img src="../../.gitbook/assets/add_validator_6.png" alt=""><figcaption></figcaption></figure>
 

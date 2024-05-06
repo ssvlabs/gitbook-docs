@@ -148,7 +148,7 @@ A prerequisite for this is to have `go` version 1.20 installed on the system, an
 Clone the `ssv-dkg` repository in your local machine:
 
 ```bash
-git clone git@github.com:bloxapp/ssv.git
+git clone git@github.com:ssvlabs/ssv.git
 ```
 
 #### Build
