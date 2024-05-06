@@ -74,7 +74,7 @@ yarn cli shares \
 
 #### **Output**
 
-A json file will be generated with the shares and the transaction payload required for validator registration ([registerValidator()](https://github.com/bloxapp/gitbook-docs/blob/main/validator-user-guides/tools/broken-reference/README.md)).
+A json file will be generated with the shares and the transaction payload required for validator registration ([registerValidator()](../../developers/smart-contracts/ssvnetwork.md#registervalidator-publickey-operatorids-shares-amount-cluster)).
 
 {% hint style="warning" %}
 It is important to notice that this format is a breaking change with respect to previous versions of `ssv-keys` as it contains an array (`"shares"`) of shares data, where each single item represents one validator key, its related keyshares, and the payload necessary for the on-chain transaction.
@@ -167,7 +167,7 @@ yarn cli shares \
 
 #### **Output**
 
-A json file will be generated with the shares and the transaction payload required for validator registration ([registerValidator()](https://github.com/bloxapp/gitbook-docs/blob/main/validator-user-guides/tools/broken-reference/README.md)).
+A json file will be generated with the shares and the transaction payload required for validator registration ([bulkRegisterValidator()](../../developers/smart-contracts/ssvnetwork.md#bulkregistervalidator-publickey-operatorids-shares-amount-cluster)).
 
 In the case of the file below, a total of 3 validator keystore files were supplied, so 3 keyshares data items are present in the output file.
 

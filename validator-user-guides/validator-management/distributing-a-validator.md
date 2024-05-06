@@ -22,7 +22,7 @@ In the My Account page, click on Add Cluster to create a new one.
 
 <figure><img src="../../.gitbook/assets/distribute_validator_2.png" alt=""><figcaption></figcaption></figure>
 
-Alternatively, you can [onboard additional validators to an existing cluster](broken-reference).
+Alternatively, you can [onboard additional validators to an existing cluster](../cluster-management/adding-validator-to-existing-cluster.md).
 
 {% hint style="info" %}
 In this case, you will not need to select operators, so you can skip the next step.
@@ -35,7 +35,7 @@ You'll simply be asked how do you want to handle operational costs, in regards t
 In order to run a validator, you'll need to be in possession of its keys, have made the deposit to the Deposit Contract to activate it, and own the necessary amount of SSV tokens to cover operational costs.
 
 {% hint style="info" %}
-To learn how to create a new set of validator keys and activate them, please refer to [this guide](broken-reference).
+To learn how to create a new set of validator keys and activate them, [please refer to this guide](creating-a-new-validator.md).
 {% endhint %}
 
 Accept the disclaimer by clicking Next if you have all the pre-requisites.
