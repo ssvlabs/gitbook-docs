@@ -267,7 +267,8 @@ global:
   # Debug logs file path
   LogFilePath: ./data/debug.log
   
-  # Number of log files preserved (roughly equivalent to number of days)
+  # Number of log files preserved, 500MB each (time duration depends on number of validators and other factors).
+  # Roughly equates to half a day.
   # Increase if you want to preserve log files for longer. This would require more disk space
   LogFileBackups: 10
 
