@@ -6,7 +6,7 @@ The `SSV Keys CLI` tool is a command-line interface that splits a validator key 
 
 {% tabs %}
 {% tab title="Executable" %}
-1. Navigate to the [SSV GitHub](https://github.com/ssvlabs/ssv-keys/releases/tag/v1.0.1) releases section
+1. Navigate to the [SSV GitHub](https://github.com/ssvlabs/ssv-keys/releases/tag/v1.1.0) releases section
 2. Download the native executable for your operating system:
    * `ssv-keys-lin` - for Ubuntu Linux
    * `ssv-keys-mac` - for macOS
@@ -15,11 +15,10 @@ The `SSV Keys CLI` tool is a command-line interface that splits a validator key 
 {% endtab %}
 
 {% tab title="yarn" %}
-```sh
-1 git clone https://github.com/ssvlabs/ssv-keys.git --branch=v1.1.0
-2 cd ssv-keys
-3 yarn
-```
+<pre class="language-sh" data-line-numbers><code class="lang-sh"><strong>git clone https://github.com/ssvlabs/ssv-keys.git --branch=v1.1.0
+</strong>cd ssv-keys
+<strong>yarn
+</strong></code></pre>
 {% endtab %}
 {% endtabs %}
 
@@ -31,7 +30,7 @@ Please note that If your operating system prevents you from running the executab
 
 You can use **`shares --help`** to see all arguments. Note that if there are missing arguments that the CLI needs, it will ask you for them.
 
-<table><thead><tr><th width="277">Argument</th><th width="122.33333333333331">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>--keystore (-ks)</code></td><td>string</td><td><p>The path to either a validator keystore file or a folder that contains multiple validator keystore files.</p><p>If a folder is provided, it will split in bulk all the keystore files within it, according to the additional arguments provided.</p></td></tr><tr><td><code>--password (-ps)</code></td><td>string</td><td>The keystore file encryption password</td></tr><tr><td><code>--operators-ids (-oids)</code></td><td>int</td><td>Comma-separated list of operator IDs. The amount must be 3f+1 compatible.</td></tr><tr><td><code>--operators-keys (-oks)</code></td><td>string</td><td><p>Comma-separated list of operator keys (same sequence as operator ids).</p><p>The amount must be 3f+1 compatible.</p></td></tr><tr><td><code>--owner-address (-oa)</code></td><td>string</td><td>The cluster owner address (in the SSV contract)</td></tr><tr><td><code>--owner-nonce (-on)</code></td><td>int</td><td>The validator registration nonce of the account (owner address) within the SSV contract (increments after each validator registration), obtained using the ssv-scanner tool.</td></tr><tr><td><code>--output-folder (-of)</code></td><td>string</td><td>Target folder path to output the key shares file</td></tr></tbody></table>
+<table><thead><tr><th width="277">Argument</th><th width="122.33333333333331">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>--keystore (-ks)</code></td><td>string</td><td><p>The path to either a validator keystore file or a folder that contains multiple validator keystore files.</p><p>If a folder is provided, it will split in bulk all the keystore files within it, according to the additional arguments provided.</p></td></tr><tr><td><code>--password (-ps)</code></td><td>string</td><td>The keystore file encryption password</td></tr><tr><td><code>--operator-ids (-oids)</code></td><td>int</td><td>Comma-separated list of operator IDs. The amount must be 3f+1 compatible.</td></tr><tr><td><code>--operator-keys (-oks)</code></td><td>string</td><td><p>Comma-separated list of operator keys (same sequence as operator ids).</p><p>The amount must be 3f+1 compatible.</p></td></tr><tr><td><code>--owner-address (-oa)</code></td><td>string</td><td>The cluster owner address (in the SSV contract)</td></tr><tr><td><code>--owner-nonce (-on)</code></td><td>int</td><td>The validator registration nonce of the account (owner address) within the SSV contract (increments after each validator registration), obtained using the ssv-scanner tool.</td></tr><tr><td><code>--output-folder (-of)</code></td><td>string</td><td>Target folder path to output the key shares file</td></tr></tbody></table>
 
 ## **Examples**
 
