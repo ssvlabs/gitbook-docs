@@ -192,6 +192,16 @@ From the project's root folder, run the following command:
 <pre class="language-bash"><code class="lang-bash"><strong>make install
 </strong></code></pre>
 
+#### SSL certificate
+
+Launching the DKG tool as a Docker container has the advantage of automatically creating and managing SSL certificate. If you decide to build it from source, you will have to do this yourself.
+
+But don't worry, the [`entry-point.sh`](https://github.com/ssvlabs/ssv-dkg/blob/main/entry-point.sh) script in the repository is what is used by the Docker container, you could use that as an example for how to create an SSL certificate for your DKG node. For example:
+
+<pre data-line-numbers><code><strong>mkdir -p "/ssl"
+</strong>openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes -keyout "/ssl/tls.key" -out "/ssl/tls.crt" -subj "/C=CN/ST=GD/L=SZ/O=localhost, Inc./CN=localhost"
+</code></pre>
+
 #### Launch with command line parameters
 
 It is advised to store all the necessary files (`encrypted_private_key.json`, `password`) in a single folder (in this case `operator-config`), as shown below:
@@ -259,7 +269,7 @@ outputPath: /data/output
 Then the tool can be launched from the root folder, by running this command:
 
 ```sh
-ssv-dkg start-operator --configPath "./operator-config/operator.yaml
+ssv-dkg start-operator --configPath ./operator-config/operator.yaml
 ```
 
 If the `--configPath` parameter is not provided, `ssv-dkg` will be looking for a file named `config.yaml` in `./config/` folder at the same root as the binary (i.e. `./config/config.yaml`)
