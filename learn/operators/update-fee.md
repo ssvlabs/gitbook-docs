@@ -4,11 +4,11 @@ Fees are initially set when registering an operator but can be changed at any po
 
 Fee changes are generally initiated to stay competitive with other operators or to align with SSV market price fluctuations.
 
-### Fee Increase Process <a href="#_9qsadenkrwqm" id="_9qsadenkrwqm"></a>
+### Fee Increase Process <a href="#id-9qsadenkrwqm" id="id-9qsadenkrwqm"></a>
 
 To ensure fee updates are transparent and stakers have enough time to adjust accordingly (by depositing more balance or replacing that operator) the network utilizes a 2 step cycle for increasing operator fees:
 
-![Operator fee update cycle](../../.gitbook/assets/0.png)
+![Operator fee update cycle](<../../.gitbook/assets/feeIncreaseProcess (1).png>)
 
 1. **Declaring a new fee** - a broadcast to the network that the operator is increasing their fee.
 2. **Executing the declared fee** - finalizing the fee increase process (only after this does the fee change take effect).
@@ -21,7 +21,7 @@ For example, if an operator declares a new fee, they have to wait X days (declar
 
 Operators can always cancel their declared fee (during the declaration period or execution period) and stay with the existing fee.
 
-#### Fee Increase Limitations <a href="#_nn1qsdauoghf" id="_nn1qsdauoghf"></a>
+#### Fee Increase Limitations <a href="#nn1qsdauoghf" id="nn1qsdauoghf"></a>
 
 A restriction has been set in place by the network which limits the percentage of change that operators can increase their fee in each cycle (i.e. <10%).
 
@@ -31,12 +31,12 @@ This limitation is decided by the DAO and is implemented to protect stakers agai
 Please note that due to this restriction, Operators that have **set a fee of 0** would not be able to increase their fee in the future.
 {% endhint %}
 
-### Fee Decrease Process <a href="#_di2sf5r716nr" id="_di2sf5r716nr"></a>
+### Fee Decrease Process <a href="#di2sf5r716nr" id="di2sf5r716nr"></a>
 
 Operator fees can be decreased immediately at any time by operators.
 
 The 2 step cycle (consisting of the declaration and execution periods) utilized in the fee increase process, **does not apply** to decreasing operator fees.
 
-#### Fee Decrease Limitations <a href="#_21i98nc77ran" id="_21i98nc77ran"></a>
+#### Fee Decrease Limitations <a href="#id-21i98nc77ran" id="id-21i98nc77ran"></a>
 
 There are no restrictions to decreasing operator fees, however, please note that operators who decrease their fee to 0, would not be able to increase it in the future.
