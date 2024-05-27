@@ -16,15 +16,15 @@ The SSV node that you are installing with these instructions is only the SSV nod
 
 All cloud services are supported for your node setup.
 
-💻 Machine running Ubuntu
+💻  Machine running Ubuntu (preferably)
 
-🎛️ 4 cores&#x20;
+🎛️  8 cores&#x20;
 
-⚡️ 4GB RAM
+⚡️  4GB RAM
 
-📀 20GB storage (10GB minimum)
+📀  20GB storage (10GB minimum)
 
-🧮 IOPS > 10K
+🧮  IOPS > 10K
 
 {% hint style="warning" %}
 The minimum system requirements shown above are for a machine that is only running an SSV node. If you plan to run the SSV node on the same machine as your Execution Client and/or Beacon Client, these minimum requirements will be needed **in addition** to your existing requirements.
