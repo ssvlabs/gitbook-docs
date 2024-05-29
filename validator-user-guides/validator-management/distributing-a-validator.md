@@ -106,7 +106,7 @@ You can select the operational runway period of your validator, in accordance wi
 
 <figure><img src="../../.gitbook/assets/distribute_validator_5.png" alt=""><figcaption></figcaption></figure>
 
-**Please read carefully and understand how fees are managed and the risks of account** [**liquidation**](https://ssv.network/glossary/#liquidation) **if your account balance falls below the** [**Threshold Balance**](https://ssv.network/glossary/##threshold-balance)**.**
+**Please read carefully and understand how fees are managed and the risks of account** [**liquidation**](../../learn/glossary.md#liquidation) **if your account balance falls below the** [**Threshold Balance**](../../learn/glossary.md#liquidation-collateral)**.**
 
 <figure><img src="../../.gitbook/assets/distribute_validator_6.png" alt=""><figcaption></figcaption></figure>
 
