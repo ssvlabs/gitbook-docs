@@ -1,9 +1,5 @@
 # Run a Distributed Key Generation ceremony
 
-{% hint style="danger" %}
-The SSV-DKG tool is yet to be audited. **Please refrain from using it on mainnet.**
-{% endhint %}
-
 ### Overview
 
 The process described below allows users to generate a set of KeyShares by directly communicating with the SSV Operators they have chosen. With this operation, the actual validator key is never created and no one will be able to have the full validator key in its entirety, just its parts, assigned to each chosen Operator.
