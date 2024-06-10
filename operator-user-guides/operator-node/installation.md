@@ -195,13 +195,13 @@ Here is an example of the generated file.
       "salt": "bc71d3213fe17f15879e6bc468b30eeeb2d0969176491d87f9b00a37bf314a4c"
     }
   },
-  "publicKey": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJak..."
+  "pubKey": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJak..."
 }
 ```
 {% endcode %}
 
 {% hint style="info" %}
-Pay close attention to the `publicKey` field, as the name says, it contains the public key, which is needed to [register the Operator on the ssv.network](../operator-management/registration.md).
+Pay close attention to the `pubKey` field, as the name says, it contains the public key, which is needed to [register the Operator on the ssv.network](../operator-management/registration.md).
 {% endhint %}
 
 <details>
