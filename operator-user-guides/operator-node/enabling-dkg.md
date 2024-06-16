@@ -294,7 +294,7 @@ Please head over to [the Operator User guide on how to update metadata](../opera
 
 You can test out if your DKG node is correctly setup, with these simple steps:
 
-* fetch operator metadata from ssv-api (substitute `OPERATOR_ID` with your operator ID `https://api.ssv.network/api/v4/holesky/operators/OPERATOR_ID` and get `dkg_address` from the output
+* fetch operator metadata from [SSV-API](https://api.ssv.network/documentation/#/v4) (e.g. `https://api.ssv.network/api/v4/<holesky | mainnet>/operators/<OPERATOR_ID>` choosing the right network and substituting your operator ID) and get `dkg_address` from the output
 * run the command:`docker run "bloxstaking/ssv-dkg:latest" ping --ip ${dkg_address}` where `dkg_address` comes from previous step
 
 It should tell you if the operator is online and is updated to the latest version.
