@@ -8,18 +8,20 @@ The SSVNetwork contract is the main contract for operations and management.
 
 ### Operator Methods <a href="#cxoku5ytbvgq" id="cxoku5ytbvgq"></a>
 
-#### **`registerOperator(publicKey, operatorFee)`**
+#### **`registerOperator(publicKey, operatorFee, setPrivate)`**
 
 Description: Registers a new operator (key) with a set fee, **fails if** fee is less than the minimal fee.
 
-| **Parameter** | **Type**                             | **Description**                                                        |
-| ------------- | ------------------------------------ | ---------------------------------------------------------------------- |
-| publicKey     | bytes                                | The operator public key (generated as part of the node setup).         |
-| operatorFee   | <p>uint256<br>(casted to uint64)</p> | The fee charged by the operator (denominated as $SSV tokens per block) |
+| **Parameter** | **Type**                             | **Description**                                                                                                                                                                                     |
+| ------------- | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| publicKey     | bytes                                | The operator public key (generated as part of the node setup).                                                                                                                                      |
+| operatorFee   | <p>uint256<br>(casted to uint64)</p> | The fee charged by the operator (denominated as $SSV tokens per block)                                                                                                                              |
+| setPrivate    | bool                                 | A flag to set the operator to private or public during registration. Calls the [**`setOperatorsPrivateUnchecked`**](ssvnetwork.md#setoperatorsprivateunchecked-operatorids)function if set to true. |
 
 Events:
 
 * `OperatorAdded(uint64 indexed operatorId, address indexed owner, bytes publicKey, uint256 fee)`
+* `OperatorPrivacyStatusUpdated(uint64[] operatorIds, bool toPrivate)`
 
 #### **`removeOperator(operatorId)`**
 
@@ -58,18 +60,80 @@ Events:
 
 * `OperatorWithdrawn(address indexed owner, uint64 indexed operatorId, uint256 value)`
 
-#### **`setOperatorWhitelist (operatorId, whitelisted)`**
+#### **`setOperatorWhitelists (operatorIds, whitelisted)`**
 
-Description: Sets a whitelisted address that can select him as their operator (setting a whitelist address transitions the operator from public to permissioned).
+Description: For a list of operators provided, set a list of whitelisted addresses which can register validators to these operators.
 
-| **Parameter** | **Type** | **Description**                                                                                                                       |
-| ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| operatorId    | uint64   | The operator id                                                                                                                       |
-| whitelisted   | address  | <p>The ETH1 address that is whitelisted.</p><p><br>Use 0x0000000000000000000000000000000000000000 to set operator back to public.</p> |
+| **Parameter** | **Type**   | **Description**                                           |
+| ------------- | ---------- | --------------------------------------------------------- |
+| operatorId    | uint64\[]  | Operator ID list                                          |
+| whitelisted   | address\[] | <p>A list of ETH1 addresses to be whitelisted.</p><p></p> |
 
 Events:
 
-* `OperatorWhitelistUpdated(uint64 indexed operatorId, address whitelisted)`
+* `OperatorMultipleWhitelistUpdated(uint64[] operatorIds, address[] whitelistAddresses)`
+
+#### **`removeOperatorWhitelists (operatorIds, whitelisted)`**
+
+Description: For a list of operators provided, remove a list of whitelisted addresses.
+
+| **Parameter** | **Type**   | **Description**                                                          |
+| ------------- | ---------- | ------------------------------------------------------------------------ |
+| operatorId    | uint64\[]  | Operator ID list                                                         |
+| whitelisted   | address\[] | <p>A list of ETH1 addresses to be removed from the whitelist.</p><p></p> |
+
+Events:
+
+* `OperatorMultipleWhitelistRemoved(uint64[] operatorIds, address[] whitelistAddresses)`
+
+#### **`setOperatorsPrivateUnchecked(operatorIds)`**
+
+Description: For a list of operators provided, set their status to private.
+
+| **Parameter** | **Type**  | **Description**  |
+| ------------- | --------- | ---------------- |
+| operatorId    | uint64\[] | Operator ID list |
+
+Events:
+
+* `OperatorPrivacyStatusUpdated(uint64[] operatorIds, bool toPrivate)`
+
+#### **`setOperatorsPublicUnchecked(operatorIds)`**
+
+Description: For a list of operators provided, set their status to public.
+
+| **Parameter** | **Type**  | **Description**  |
+| ------------- | --------- | ---------------- |
+| operatorId    | uint64\[] | Operator ID list |
+
+Events:
+
+* `OperatorPrivacyStatusUpdated(uint64[] operatorIds, bool toPrivate)`
+
+#### **`setOperatorWhitelistingContract(operatorIds, whitelistingContract)`**
+
+Description: For a list of operators provided, set an external whitelisting contract to manage the whitelist for these operators. [Must be a valid whitelisting contract.](external-whitelist-contract-example.md)
+
+| **Parameter**        | **Type**                 | **Description**                                      |
+| -------------------- | ------------------------ | ---------------------------------------------------- |
+| operatorId           | uint64\[]                | Operator ID list                                     |
+| whitelistingContract | ISSVWhitelistingContract | <p>A valid whitelisting contract address.</p><p></p> |
+
+Events:
+
+* `OperatorWhitelistingContractUpdated(uint64[] operatorIds, address whitelistingContract)`
+
+#### `removeOperatorsWhitelistingContract(operatorIds)`
+
+Description: For a list of operators provided, remove the whitelisting contract stored.
+
+| **Parameter** | **Type**  | **Description**  |
+| ------------- | --------- | ---------------- |
+| operatorId    | uint64\[] | Operator ID list |
+
+Events:
+
+* `OperatorWhitelistingContractUpdated(uint64[] operatorIds, address whitelistingContract)`
 
 #### **`declareOperatorFee(operatorId, operatorFee)`**
 

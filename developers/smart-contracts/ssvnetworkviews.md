@@ -242,4 +242,47 @@ Return values
 | ------------- | -------- | ------------------------------------- |
 |               | boolean  | Indication if a cluster is liquidated |
 
-### &#x20;<a href="#usq3rk5h0wb6" id="usq3rk5h0wb6"></a>
+#### **`getWhitelistedOperators(operatorIds, whitelistedAddress)`**
+
+Description: Returns a list of operators that have this address whitelisted for them.
+
+| **Parameter**      | **Type**  | **Description**        |
+| ------------------ | --------- | ---------------------- |
+| operatorIds        | uint64\[] | List of operators Ids. |
+| whitelistedAddress | address   | ETH1 address           |
+
+Return values
+
+| **Parameter**          | **Type**  | **Description**                                            |
+| ---------------------- | --------- | ---------------------------------------------------------- |
+| whitelistedOperatorIds | uint64\[] | List of operator IDs that this address is whitelisted for. |
+
+#### **`isWhitelistingContract(contractAddress)`**
+
+Description: Returns if a contract address is a valid whitelisting contract or not.
+
+| **Parameter**      | **Type** | **Description**                |
+| ------------------ | -------- | ------------------------------ |
+| whitelistedAddress | address  | Whitelisting contract address. |
+
+Return values
+
+| **Parameter** | **Type** | **Description**                          |
+| ------------- | -------- | ---------------------------------------- |
+|               | bool     | True if contract is valid, false if not. |
+
+#### **`isAddressWhitelistedInWhitelistingContract(addressToCheck, operatorId, whitelistingContract)`**
+
+Description: Checks the whitelisted contract for an operator to see if the address provided is whitelisted for the given operator.
+
+| **Parameter**      | **Type** | **Description**                          |
+| ------------------ | -------- | ---------------------------------------- |
+| addressToCheck     | address  | Address we want to check is whitelisted. |
+| operatorId         | uint256  | Operator ID.                             |
+| whitelistedAddress | address  | Whitelisting contract address.           |
+
+Return values
+
+| **Parameter** | **Type** | **Description**                               |
+| ------------- | -------- | --------------------------------------------- |
+| isWhitelisted | bool     | True if address is whitelisted, false if not. |
