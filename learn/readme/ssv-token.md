@@ -11,7 +11,7 @@ $SSV is playing a pivotal role in the network’s ability to harness a community
 
 ### **Tokenomics**
 
-Stakers using ssv.network will pay operators using $SSV. Each participating operator can determine its own price point and compete with other network operators. A percentage of fees collected by operators will be allocated to the DAO treasury in return the DAO will determine the payment in an open vote.&#x20;
+Stakers using ssv.network will pay operators and network fees using $SSV. Each participating operator can determine its own price point and compete with other network operators.
 
 Fundamentally, the more ETH is staked in the network, the more fees will be paid to operators and the DAO’s treasury. The DAO will be able to use its treasury for promoting the network’s growth and development efforts thus creating a positive cycle of ETH inflows and $SSV revenue.
 
