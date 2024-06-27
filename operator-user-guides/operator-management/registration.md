@@ -37,13 +37,15 @@ In the following screen, select _Register Operator_ (just make sure [that you fo
 
 The next screen will ask you to input the Operator's public key (refer to [the Node setup guide](../operator-node/installation.md#key-pair-generation-and-encryption) for key generation) and provide a confirmation of the Operator owner address.
 
+Here you will also have to choose whether your Operator status is either [public or private](../../learn/operators/permissioned-operators.md).
+
 {% hint style="warning" %}
 Please verify once more that the owner address correspond to the wallet address you want to manage your operators with.
 {% endhint %}
 
 Click _Next_ when ready.
 
-<figure><img src="../../.gitbook/assets/registering_operator_3.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (42).png" alt=""><figcaption></figcaption></figure>
 
 In the following screen, shown below, you are being asked to set the Operator Fee.
 
