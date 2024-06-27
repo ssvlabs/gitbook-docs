@@ -22,7 +22,7 @@ Similarly, the [SSV Explorer](https://explorer.ssv.network/operators/1) also sho
 
 #### SSV Subgraph&#x20;
 
-SSV also provide a subgraph to easily look up information on permissioned Operators, this tracks all the events surrounding whitelisting and means we can check which operators are private, and which addresses are whitelisted per operator. You can find out more details on how to use the subgraph **HERE.**
+SSV also provide a subgraph to easily look up information on permissioned Operators, this tracks all the events surrounding whitelisting and means we can check which operators are private, and which addresses are whitelisted per operator. You can find out more details on how to use the subgraph [**here**](../../developers/tools/subgraph.md)**.**
 
 One last way to verify this is to use the [SSV Network Views smart contract](../../developers/smart-contracts/), which provides this information in the `isPrivate` and `whitelistedContract` fields returned by the [`getOperatorById` function](../../developers/smart-contracts/ssvnetworkviews.md#getoperatorbyid-operatorid).
 
@@ -50,7 +50,7 @@ The **`setOperatorMultipleWhitelists`** smart contract function allows to whitel
 Conveniently, [the ssv.network WebApp](https://app.ssv.network/) offers a way to interact with the smart contract through a UI, and you can get guidance on the process [on this page in this documentation](../../operator-user-guides/operator-management/configuring-a-permissioned-operator.md).
 
 {% hint style="info" %}
-It's important to note that configuring Permissioned Operator osnly affects **future validator registrations**.
+It's important to note that configuring Permissioned Operator only affects **future validator registrations**.
 
 If any number of validators have already been registered to various clusters that include a certain Operator, configuring this Operator to become a Permissioned Operator **will not** cause these validators to stop working.
 {% endhint %}
