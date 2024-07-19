@@ -36,7 +36,7 @@ The registration nonce is a sequence number that represents the number of valida
 
 The registration nonce increments after each validator registration and does not decrease when a validator is removed.
 
-The registration nonce is required as input for the [SSV Keys](ssv-key-distributor.md) tool, which outputs the **sharesData** payload required for the [validator registration](https://docs.ssv.network/developers/smart-contracts/ssvnetwork#public-registervalidator-publickey-operatorids-shares-amount-cluster) transaction in the SSV contract..
+The registration nonce is required as input for the [SSV Keys](ssv-keys-distributor.md) tool, which outputs the **sharesData** payload required for the [validator registration](https://docs.ssv.network/developers/smart-contracts/ssvnetwork#public-registervalidator-publickey-operatorids-shares-amount-cluster) transaction in the SSV contract..
 
 {% hint style="info" %}
 Please note that alternatively, instead of using this tool to retrieve the **registration nonce**, you could just keep track of the number of validator registrations you have made and use it as the input for the succeeding validator registrations.
@@ -56,7 +56,7 @@ The library is not yet maintained in a stable manner on npmjs.com so for the tim
 
 ## Import library
 
-The two main components of the `ssv-keys` library are the `SSVKeys` and `KeyShares` objects. Onche the library has been intstalled, they can be imported like so:
+The two main components of the `ssv-scanner` library are the `ClusterScanner` and `NonceScanner` objects. Once the library has been installed, they can be imported like so:
 
 ```javascript
 import { ClusterScanner, NonceScanner } from 'ssv-scanner';
@@ -70,9 +70,9 @@ The usage of SSV scanner SDK is rather simple. Given a set of parameters, some g
 
 `NonceScanner` can be used to verify how many times a certain address (the cluster owner) has registered a validator on SSV network, by invoking the `registerValidator()` function of the SSV smart contract (see [the smart contracts](../smart-contracts/) page for the correct address). This counter is called "nonce".
 
-This information is not only useful, but necessary for the validator key splitting ceremony. As such, this is used
+This information is not only useful, but necessary for the validator key splitting ceremony.
 
-## Example
+## Cluster Example
 
 ```javascript
 import { ClusterScanner, NonceScanner } from 'ssv-scanner';

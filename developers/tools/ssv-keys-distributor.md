@@ -24,7 +24,7 @@ The library is not yet maintained in a stable manner on npmjs.com so for the tim
 
 ## Import library
 
-The two main components of the `ssv-keys` library are the `SSVKeys` and `KeyShares` objects. Onche the library has been intstalled, they can be imported like so:
+The two main components of the `ssv-keys` library are the `SSVKeys` and `KeyShares` objects. Once the library has been installed, they can be imported like so:
 
 ```javascript
 const { SSVKeys, KeyShares, KeySharesItem, SSVKeysException } = require('ssv-keys');
@@ -34,15 +34,27 @@ const { SSVKeys, KeyShares, KeySharesItem, SSVKeysException } = require('ssv-key
 
 Using the `ssv-keys` SDK can be simply summarized in 3 steps:
 
-1. Reading the keystore file (validator set of keys), to extract public and private keys
-2. Build the keyshares configuration, given the chosen operators to which the validator will be distributed
+1. Reading the keystore file (validator set of keys), to extract public and private keys.
+2. Build the keyshares configuration, given the chosen operators to which the validator will be distributed.
 3. Build the payload for the web3 transaction, and add it to the newly created keyshare file.
 
 {% hint style="info" %}
-A requirement for splitting the keys of a validator, is to know the validator key owner's nonce (how many times this address has callded the registerValidator() function of the SSV contract) and their address.
+A requirement for splitting the keys of a validator, is to know the validator key owner's nonce (how many times this address has called the registerValidator() function of the SSV contract) and their address.
 
-These can be obtained via the [SSV Scanner tool](cluster-scanner.md).
+These can be obtained via the [SSV Subgraph](ssv-subgraph/subgraph-examples.md), or the [SSV Scanner tool](cluster-scanner.md)
 {% endhint %}
+
+## Required Inputs
+
+To generate keyshares using this tool we need a number of inputs as prerequisites.
+
+<table><thead><tr><th width="190">Input parameter</th><th>Description</th><th>Example</th></tr></thead><tbody><tr><td>Operator Keys</td><td>List of operator public keys to register the validator to.</td><td><pre><code>["LS0tLS1CRUdJTi...", "LS0tLS1CRUdJTi...", "LS0tLS1CRUdJTi...", "LS0tLS1CRUdJTi..."]
+</code></pre></td></tr><tr><td>Operator IDs</td><td>List of operator IDs to register the validator to.</td><td><pre><code>[12, 34, 56, 78]
+</code></pre></td></tr><tr><td>Keystore file</td><td>Validator keystore filed create when generating the validator. You must provide the path to this.</td><td><pre><code>./path-to-keystore.json'
+</code></pre></td></tr><tr><td>Keystore Password</td><td>Password for the attached keystore file.</td><td><pre><code>'XYZ'
+</code></pre></td></tr><tr><td>Owner Address</td><td>Address of the validator Owner. (Wallet you used to login on the webapp).</td><td><pre><code>'0x81592c3de184a3e2c0dcb5a261bc107bfa91f494'
+</code></pre></td></tr><tr><td>Owner Nonce</td><td>Nonce of the validator Owner. (Wallet you used to login on the webapp). This can be obtained by using the <a href="cluster-scanner.md">SSV Scanner SDK</a> or <a href="../../validator-user-guides/tools/ssv-scanner-cli.md">SSV Scanner CLI</a>.</td><td><pre><code>1
+</code></pre></td></tr></tbody></table>
 
 ## Example
 
@@ -117,7 +129,7 @@ void main();
 Here's an example of the printed output:
 
 {% hint style="info" %}
-It is important to notice that this format is a breaking change with respect to previous versions of `ssv-keys` as it contains an array (`"shares"`) of shares data, where each single item represents one validator key, its related keyshares, and the payload necessary for the on-chain transaction.
+It is important to notice that this format is a breaking change with respect to previous versions of `ssv-keys`as it contains an array (`"shares"`) of shares data, where each single item represents one validator key, it's related keyshares, and the payload necessary for the on-chain transaction.
 
 This is true also in the case of a single validator key, where the array will only contain one item. It was done so, to maintain consistency across various use cases.
 {% endhint %}

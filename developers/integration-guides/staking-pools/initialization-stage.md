@@ -65,7 +65,7 @@ The complete operator registry of the network and their corresponding **ids/keys
 
 To assign validator operation to the selected operators, the pool’s validator(s) keys must be distributed into corresponding KeyShares.
 
-To do this, gather the **keystore files** you generated during the 1st step - “validator key generation” and the **operator ids & keys** fetched during the 2nd step - “pool operators selection”. Then use the [SSV Key Distributor](../../tools/ssv-key-distributor.md) tools to extract your validator’s key and distribute them to KeyShares.
+To do this, gather the **keystore files** you generated during the 1st step - “validator key generation” and the **operator ids & keys** fetched during the 2nd step - “pool operators selection”. Then use the [SSV Key Distributor](../../tools/ssv-keys-distributor.md) tools to extract your validator’s key and distribute them to KeyShares.
 
 The tools will output the following set of variables which are required to store in your pool’s validators registry for each of your validators during the 4th step - “validator registry setup”:
 
