@@ -37,7 +37,7 @@
 
 * [Get Started](developers/get-started.md)
 * [Tools](developers/tools/README.md)
-  * [SSV Keys SDK](developers/tools/ssv-key-distributor.md)
+  * [SSV Keys SDK](developers/tools/ssv-keys-distributor.md)
   * [SSV Scanner SDK](developers/tools/cluster-scanner.md)
   * [SSV DKG Client](developers/tools/ssv-dkg-client/README.md)
     * [Generate Key Shares](developers/tools/ssv-dkg-client/generate-key-shares.md)
