@@ -39,10 +39,10 @@ Events:
 
 Description: Withdraws a specified amount of SSV tokens from provided operator balance to msg.sender, **will fail if** msg.sender is not the operator owner.
 
-| **Parameter** | **Type**                   | **Description**        |
-| ------------- | -------------------------- | ---------------------- |
-| operatorId    | uint64                     | The operator id        |
-| amount        | uint256 (casted to uint64) | Amount to be withdrawn |
+| **Parameter** | **Type**                   | **Description**                                                                                                  |
+| ------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| operatorId    | uint64                     | The operator id                                                                                                  |
+| amount        | uint256 (casted to uint64) | <p>Amount to be withdrawn<br><br><em><strong>Amount must be shrinkable (divisible by 10000000)</strong></em></p> |
 
 Events:
 
@@ -210,7 +210,7 @@ Description: Registers new validator to a cluster of provided operators (ids + s
 | publicKey     | bytes                      | The validator’s public key.                                                                                                                                                                                                                                               |
 | operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                                                                                            |
 | sharesData    | bytes                      | String of keyshares - obtained by splitting the validator key using the [SSV-Keys](../tools/ssv-key-distributor.md) tool.                                                                                                                                                 |
-| amount        | uint256 (casted to uint64) | <p>Amount of SSV token to be deposited as payment</p><p>(not mandatory)</p>                                                                                                                                                                                               |
+| amount        | uint256 (casted to uint64) | <p>Amount of SSV token to be deposited as payment</p><p>(not mandatory).<br><br><em><strong>Amount must be shrinkable (divisible by 10000000)</strong></em></p>                                                                                                           |
 | cluster       | tuple\[]                   | <p>Object containing the latest cluster snapshot data - obtained using the <a href="../tools/cluster-scanner.md">SSV Scanner</a> tool.<br><br><strong>If this is the 1st validator within a specific cluster (unique set of operators), use - {0,0,0,true,0}</strong></p> |
 
 Events:
@@ -226,7 +226,7 @@ Description: Registers all the new validators provided as argument to a cluster 
 | publicKeys    | bytes\[]                   | An array of validators’ public keys.                                                                                                                                                                                                                                      |
 | operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                                                                                            |
 | sharesData    | bytes\[]                   | <p>An array of strings of keyshares - obtained by splitting the validator key using the <a href="../tools/ssv-key-distributor.md">SSV-Keys</a> tool.<br><br>Each element in this array must relate to a public key in the <code>publicKeys</code> array.</p>              |
-| amount        | uint256 (casted to uint64) | <p>Amount of SSV token to be deposited as payment</p><p>(not mandatory)</p>                                                                                                                                                                                               |
+| amount        | uint256 (casted to uint64) | <p>Amount of SSV token to be deposited as payment</p><p>(not mandatory).<br><br><em><strong>Amount must be shrinkable (divisible by 10000000)</strong></em></p>                                                                                                           |
 | cluster       | tuple\[]                   | <p>Object containing the latest cluster snapshot data - obtained using the <a href="../tools/cluster-scanner.md">SSV Scanner</a> tool.<br><br><strong>If this is the 1st validator within a specific cluster (unique set of operators), use - {0,0,0,true,0}</strong></p> |
 
 Events:
@@ -301,7 +301,7 @@ Description: Deposits SSV token into a cluster, **will fail if** not enough toke
 | ------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | owner         | address                    | The cluster owner address                                                                                                |
 | operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                           |
-| amount        | uint256 (casted to uint64) | $SSV amount to be deposited                                                                                              |
+| amount        | uint256 (casted to uint64) | <p>$SSV amount to be deposited.<br><br><em><strong>Amount must be shrinkable (divisible by 10000000)</strong></em></p>   |
 | cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](../tools/cluster-scanner.md) tool. |
 
 Events:
@@ -315,7 +315,7 @@ Description: Withdraws a specified amount of SSV tokens from cluster of msg.send
 | **Parameter** | **Type**                   | **Description**                                                                                                          |
 | ------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                           |
-| amount        | uint256 (casted to uint64) | Amount to be withdrawn                                                                                                   |
+| amount        | uint256 (casted to uint64) | <p>Amount to be withdrawn.<br><br><em><strong>Amount must be shrinkable (divisible by 10000000)</strong></em></p>        |
 | cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](../tools/cluster-scanner.md) tool. |
 
 Events:
@@ -329,7 +329,7 @@ Description: Reactivates a liquidated cluster, **will fail** if insufficient SSV
 | **Parameter** | **Type**                   | **Description**                                                                                                          |
 | ------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                           |
-| amount        | uint256 (casted to uint64) | $SSV amount to be deposited                                                                                              |
+| amount        | uint256 (casted to uint64) | <p>$SSV amount to be deposited.<br><br><em><strong>Amount must be shrinkable (divisible by 10000000)</strong></em></p>   |
 | cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](../tools/cluster-scanner.md) tool. |
 
 Events:
@@ -372,9 +372,9 @@ Events:
 
 Description: Withdraws accumulated network fees in SSV token to DAO treasury.
 
-| **Parameter** | **Type**                   | **Description**        |
-| ------------- | -------------------------- | ---------------------- |
-| amount        | uint256 (casted to uint64) | Amount to be withdrawn |
+| **Parameter** | **Type**                   | **Description**                                                                                                   |
+| ------------- | -------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| amount        | uint256 (casted to uint64) | <p>Amount to be withdrawn.<br><br><em><strong>Amount must be shrinkable (divisible by 10000000)</strong></em></p> |
 
 Events:
 
@@ -408,9 +408,9 @@ Events:
 
 Description: Sets the minimum collateral (in $SSV) each cluster must keep in his balance.
 
-| **Parameter** | **Type**                   | **Description**          |
-| ------------- | -------------------------- | ------------------------ |
-| amount        | uint256 (casted to uint64) | Amount of SSV collateral |
+| **Parameter** | **Type**                   | **Description**                                                                                                     |
+| ------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| amount        | uint256 (casted to uint64) | <p>Amount of SSV collateral.<br><br><em><strong>Amount must be shrinkable (divisible by 10000000)</strong></em></p> |
 
 Events:
 
