@@ -16,9 +16,13 @@ The ssv network rewards liquidators for the costs and risks associated with liqu
 
 Accounts that drop below the liquidation collateral threshold are at risk of being liquidated. Liquidated accounts will no longer be managed by operators and will become inactive to perform their duties; this could lead to severe penalties on the Beacon Chain.
 
+### Minimum Liquidation Collateral
+
+This is a constant, set by the SSV DAO. If the balance of a cluster ever falls below this threshold, the cluster becomes _Liquidatable_, which means it's at risk of being liquidated.
+
 ### Liquidation Risk
 
-Accounts are liquidatable if their balance is insufficient for a certain period of time, called the “liquidation threshold period”. This duration is denominated in blocks and is aimed at maintaining a sufficient balance to cover operator cost for the period, which is configured for the network and governed by the DAO.
+Accounts are _Liquidatable_ if their balance is insufficient for a certain period of time, called the “liquidation threshold period”. This duration is denominated in blocks and is aimed at maintaining a sufficient balance to cover operator cost for the period, which is configured for the network and governed by the DAO.
 
 #### Burn Rate
 
@@ -35,6 +39,10 @@ $$
   * $$revenue_b$$ - all account's operator earnings per block
 
 ### Liquidation
+
+{% hint style="warning" %}
+Regardless of the calculated Liquidation Threshold, the cluster balance can **never drop below** the `Minimum Liquidation Collateral`, which is a fixed constant, set by the SSV DAO and accessible through the [SSV Network Views smart contract](../../../developers/smart-contracts/ssvnetworkviews.md#getminimumliquidationcollateral).
+{% endhint %}
 
 In order to determine whether an account is liquidatable, a user must check if it has a sufficient balance according to its burn rate to cover its operating costs for a duration longer than the “liquidation threshold period”.
 
