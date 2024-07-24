@@ -49,7 +49,7 @@ At this point you should open the terminal of your Operating System, type the co
 
 The procedure is interactive and it will ask you to store the mnemonic phrase, as well as to provide a password for the validator keys. At the end of it, the CLI will tell you where the keys have been stored (usually under a `validator_keys` subfolder of the current folder).
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption><p>When the keys are finally created, you should be  with a similar screen</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>When the keys are finally created, you should be  with a similar screen</p></figcaption></figure>
 
 {% hint style="danger" %}
 **Make sure to store and preserve the mnemonic phrase and the key passphrase in a secure environment, as they contain sensitive data that cannot be recovered otherwise.**
@@ -68,7 +68,7 @@ To activate the validator keys you must deposit the 32 ETH (or testETH) to the D
 
 A quick way to send transactions to the Staking Deposit Contract is to visit the [Staking Deposit Contract](https://holesky.etherscan.io/address/0x4242424242424242424242424242424242424242) page on Etherscan, and browse the _Contract_ tab, then select the _Write Contract_ option.
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption><p>Göerli Staking Deposit Contract page on Etherscan</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption><p>Göerli Staking Deposit Contract page on Etherscan</p></figcaption></figure>
 
 This page lists all the smart contract’s functions, and offers a form, where each field represents one of the arguments of the contract’s method in question.
 
@@ -110,7 +110,7 @@ Alternatively, the smart contract transaction can be generated via SDKs such as 
 
 If you don’t trust performing the transaction via Etherscan's Beta functionality, or simply prefer a more official route, you can visit the [Staking Launchpad](https://holesky.launchpad.ethereum.org/en/) and access the full procedure to create a new validator, by clicking _Become a Validator_.
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption><p>Staking Launchpad Advisories</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption><p>Staking Launchpad Advisories</p></figcaption></figure>
 
 This is a summary of the procedure itself:
 
@@ -133,6 +133,6 @@ For this reason, you’ll have to choose something to advance, but the choices m
 
 Once you get to this screen:
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption><p>On this page on Staking Launchpad, it is possible to upload deposit data and generate the deposit transaction</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption><p>On this page on Staking Launchpad, it is possible to upload deposit data and generate the deposit transaction</p></figcaption></figure>
 
 Upload the `deposit_data-[TIMESTAMP].json` file, select _Continue_ on this page and on the next one and accept the transaction on your wallet when requested.
