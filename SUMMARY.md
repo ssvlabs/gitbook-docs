@@ -57,6 +57,7 @@
     * [Maintenance Stage](developers/integration-guides/staking-pools/maintenance-stage.md)
   * [Staking Services](developers/integration-guides/staking-services.md)
   * [Native Restaking](developers/integration-guides/native-restaking.md)
+  * [Lido CSM](developers/integration-guides/lido-csm.md)
 * [Security](developers/security.md)
 
 ## Validator user guides
