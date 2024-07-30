@@ -51,13 +51,13 @@ The developer API is typically not publicly accessed, but it is provided below, 
 #### Developer API for Ethereum Mainnet SSV Subgraph
 
 ```
-https://api.studio.thegraph.com/proxy/71118/ssv-network-ethereum/version/latest/graphql?query=%23%0A%23+Welcome+to+The+GraphiQL%0A%23%0A%23+The+GraphiQL+is+an+in-browser+tool+for+writing,+validating,+and%0A%23+testing+GraphQL+queries.%0A%23%0A%23+Type+queries+into+this+side+of+the+screen,+and+you+will+see+intelligent%0A%23+typeaheads+aware+of+the+current+GraphQL+type+schema+and+live+syntax+and%0A%23+validation+errors+highlighted+within+the+text.%0A%23%0A%23+GraphQL+queries+typically+start+with+a+%22%7B%22+character.+Lines+that+start%0A%23+with+a+%23+are+ignored.%0A%23%0A%23+An+example+GraphQL+query+might+look+like:%0A%23%0A%23+++++%7B%0A%23+++++++field(arg:+%22value%22)+%7B%0A%23+++++++++subField%0A%23+++++++%7D%0A%23+++++%7D%0A%23%0A%23+Keyboard+shortcuts:%0A%23%0A%23++Prettify+Query:++Shift-Ctrl-P+(or+press+the+prettify+button+above)%0A%23%0A%23+++++Merge+Query:++Shift-Ctrl-M+(or+press+the+merge+button+above)%0A%23%0A%23+++++++Run+Query:++Ctrl-Enter+(or+press+the+play+button+above)%0A%23%0A%23+++Auto+Complete:++Ctrl-Space+(or+just+start+typing)%0A%23%0A
+https://api.studio.thegraph.com/proxy/71118/ssv-network-ethereum/version/latest/graphql
 ```
 
 #### Developer API for Holesky testnet SSV Subgraph
 
 ```
-https://api.studio.thegraph.com/proxy/71118/ssv-network-holesky/version/latest/graphql?query=%23%0A%23+Welcome+to+The+GraphiQL%0A%23%0A%23+The+GraphiQL+is+an+in-browser+tool+for+writing,+validating,+and%0A%23+testing+GraphQL+queries.%0A%23%0A%23+Type+queries+into+this+side+of+the+screen,+and+you+will+see+intelligent%0A%23+typeaheads+aware+of+the+current+GraphQL+type+schema+and+live+syntax+and%0A%23+validation+errors+highlighted+within+the+text.%0A%23%0A%23+GraphQL+queries+typically+start+with+a+%22%7B%22+character.+Lines+that+start%0A%23+with+a+%23+are+ignored.%0A%23%0A%23+An+example+GraphQL+query+might+look+like:%0A%23%0A%23+++++%7B%0A%23+++++++field(arg:+%22value%22)+%7B%0A%23+++++++++subField%0A%23+++++++%7D%0A%23+++++%7D%0A%23%0A%23+Keyboard+shortcuts:%0A%23%0A%23++Prettify+Query:++Shift-Ctrl-P+(or+press+the+prettify+button+above)%0A%23%0A%23+++++Merge+Query:++Shift-Ctrl-M+(or+press+the+merge+button+above)%0A%23%0A%23+++++++Run+Query:++Ctrl-Enter+(or+press+the+play+button+above)%0A%23%0A%23+++Auto+Complete:++Ctrl-Space+(or+just+start+typing)%0A%23%0A
+https://api.studio.thegraph.com/proxy/71118/ssv-network-holesky/version/latest/graphql
 ```
 
 Despite being rate limited, this endpoint should be sufficient for every development use case.
