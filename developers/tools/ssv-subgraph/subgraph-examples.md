@@ -437,7 +437,6 @@ query ValidatorCountPerOperator {
     active
     totalWithdrawn
     isPrivate
-    validatorCount
     whitelisted {
       id
     }
@@ -457,7 +456,6 @@ query ValidatorCountPerOperator {
     active
     totalWithdrawn
     isPrivate
-    validatorCount
     whitelisted {
       id
     }
@@ -480,7 +478,7 @@ console.log(responseData);
 {% tab title="Curl" %}
 ```bash
 curl -X POST "https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest" -H "Content-Type: application/json"  -d '{
-    "query": "query ValidatorCountPerOperator {  operator(id: "10") {    fee    active    totalWithdrawn    isPrivate    validatorCount    whitelisted {      id    }  }}"
+    "query": "query ValidatorCountPerOperator {  operator(id: "10") {    fee    active    totalWithdrawn    isPrivate    whitelisted {      id    }  }}"
 }'
 ```
 {% endtab %}
@@ -496,7 +494,6 @@ Output
       "active": true,
       "fee": "1913210000000",
       "isPrivate": false,
-      "validatorCount": "551",
       "totalWithdrawn": "0",
       "whitelisted": []
     }
