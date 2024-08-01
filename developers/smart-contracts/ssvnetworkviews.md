@@ -129,14 +129,7 @@ Description: Returns operator’s data.
 
 Return values
 
-| **Parameter**  | **Type**  | **Description**                                                             |
-| -------------- | --------- | --------------------------------------------------------------------------- |
-| owner          | address   | The operator’s admin address (for management purposes).                     |
-| fee            | uint64256 | The fee charged by the operator (denominated as $SSV tokens per block)      |
-| validatorCount | uint32    | The amount of managed validators                                            |
-| whitelisted    | address   | The whitelisted address that can select operator to manage their validators |
-| isPrivate      | boolean   | Indication if operator is permissioned                                      |
-| active         | boolean   | Operator network status                                                     |
+<table data-header-hidden><thead><tr><th width="256"></th><th width="177"></th><th></th></tr></thead><tbody><tr><td><strong>Parameter</strong></td><td><strong>Type</strong></td><td><strong>Description</strong></td></tr><tr><td>owner</td><td>address</td><td>The operator’s admin address (for management purposes).</td></tr><tr><td>fee</td><td>uint64256</td><td>The fee charged by the operator (denominated as $SSV tokens per block)</td></tr><tr><td>validatorCount</td><td>uint32</td><td>The amount of managed validators</td></tr><tr><td>whitelistedContract</td><td>address</td><td>The external contract set to manage this operator's whitelisted addresses</td></tr><tr><td>isPrivate</td><td>boolean</td><td>Indication if operator is permissioned</td></tr><tr><td>active</td><td>boolean</td><td>Operator network status</td></tr></tbody></table>
 
 #### **`getOperatorFee (operatorId)`**
 
