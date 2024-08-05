@@ -62,7 +62,7 @@ All of the necessary configuration information can be provided in a YAML file (r
 
 With this configuration, a typical configuration file would look like this:
 
-{% code title="initiator.yaml" %}
+{% code title="init.yaml" %}
 ```yaml
 validators: 10 # amount of validators to generate (nonce incrementing by 1) (default: 1)
 operatorIDs: [143, 219, 33, 34] # array of Operator IDs which will be used for a DKG ceremony
