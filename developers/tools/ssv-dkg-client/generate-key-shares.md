@@ -8,7 +8,7 @@ Select your preferred group of operators from the operator registry of the SSV n
 
 For each chosen operator, you must obtain its network assigned **id**, operator **key** and DKG **endpoint** (which are not provided by the `ssv-dkg` tool)
 
-The required Operators data can be collected via the [SSV API](https://api.ssv.network/documentation/#/v4) and [SSV Explorer](broken-reference).
+The required Operators data can be collected via the [SSV API](https://api.ssv.network/documentation/#/v4) and [SSV Explorer](https://explorer.ssv.network/).
 
 Operators data can be supplied to the `ssv-dkg` tool as an argument or through a `json` file, as shown in the example below:
 
