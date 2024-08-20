@@ -68,11 +68,9 @@ The usage of SSV scanner SDK is rather simple. Given a set of parameters, some g
 
 `ClusterScanner` is able to extract the snapshot of the cluster, including the number of validators in it, information about the network fee, the operator's fees, its balance and if it's active or not.
 
-`NonceScanner` can be used to verify how many times a certain address (the cluster owner) has registered a validator on SSV network, by invoking the `registerValidator()` function of the SSV smart contract (see [the smart contracts](../smart-contracts/) page for the correct address). This counter is called "nonce".
+`NonceScanner` can be used to verify how many times a certain address (the cluster owner) has registered a validator on SSV network, by invoking the `registerValidator()` and `bulkRegisterValidators()` functions of the SSV [smart contract](../smart-contracts/)  This counter is called "nonce".
 
-This information is not only useful, but necessary for the validator key splitting ceremony.
-
-## Cluster Example
+## Example
 
 ```javascript
 import { ClusterScanner, NonceScanner } from 'ssv-scanner';
@@ -88,7 +86,7 @@ async function main() {
 
   // ClusterScanner is initialized with the given parameters
   const clusterScanner = new ClusterScanner(params);
-  // and when run, it returns the Cluster Snapshot
+  // Return the Cluster Snapshot
   const result = await clusterScanner.run(params.operatorIds);
   console.log(JSON.stringify({
     'block': result.payload.Block,
@@ -96,7 +94,9 @@ async function main() {
     'cluster': Object.values(result.cluster)
   }, null, '  '));
 
+  // NonceScanner is initialized with the given parameters
   const nonceScanner = new NonceScanner(params);
+  // Return the owner nonce
   const nextNonce = await nonceScanner.run();
   console.log('Next Nonce:', nextNonce);
 }
