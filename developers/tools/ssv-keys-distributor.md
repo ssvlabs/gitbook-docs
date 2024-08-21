@@ -39,7 +39,7 @@ Using the `ssv-keys` SDK can be simply summarized in 3 steps:
 3. Build the payload for the web3 transaction, and add it to the newly created keyshare file.
 
 {% hint style="info" %}
-A requirement for splitting the keys of a validator, is to know the validator key owner's nonce (how many times this address has called the registerValidator() function of the SSV contract) and their address.
+A requirement for splitting the keys of a validator, is to know the validator key owner's `nonce` (how many times this address has called the `registerValidator()` function of the SSV contract) and their address.
 
 These can be obtained via the [SSV Subgraph](ssv-subgraph/subgraph-examples.md), or the [SSV Scanner tool](cluster-scanner.md)
 {% endhint %}
@@ -53,7 +53,7 @@ To generate keyshares using this tool we need a number of inputs as prerequisite
 </code></pre></td></tr><tr><td>Keystore file</td><td>Validator keystore filed create when generating the validator. You must provide the path to this.</td><td><pre><code>./path-to-keystore.json'
 </code></pre></td></tr><tr><td>Keystore Password</td><td>Password for the attached keystore file.</td><td><pre><code>'XYZ'
 </code></pre></td></tr><tr><td>Owner Address</td><td>Address of the validator Owner. (Wallet you used to login on the webapp).</td><td><pre><code>'0x81592c3de184a3e2c0dcb5a261bc107bfa91f494'
-</code></pre></td></tr><tr><td>Owner Nonce</td><td>Nonce of the validator Owner. (Wallet you used to login on the webapp). This can be obtained by using the <a href="cluster-scanner.md">SSV Scanner SDK</a> or <a href="../../validator-user-guides/tools/ssv-scanner-cli.md">SSV Scanner CLI</a>.</td><td><pre><code>1
+</code></pre></td></tr><tr><td>Owner Nonce</td><td>Nonce of the validator Owner. (Wallet you used to login on the webapp). This can be obtained by using the <a href="ssv-subgraph/subgraph-examples.md">SSV Subgraph</a>, or the <a href="cluster-scanner.md">SSV Scanner SDK</a>.</td><td><pre><code>1
 </code></pre></td></tr></tbody></table>
 
 ## Example
@@ -128,12 +128,6 @@ void main();
 
 Here's an example of the printed output:
 
-{% hint style="info" %}
-It is important to notice that this format is a breaking change with respect to previous versions of `ssv-keys`as it contains an array (`"shares"`) of shares data, where each single item represents one validator key, it's related keyshares, and the payload necessary for the on-chain transaction.
-
-This is true also in the case of a single validator key, where the array will only contain one item. It was done so, to maintain consistency across various use cases.
-{% endhint %}
-
 ```json
 {
   "version": "v1.0.10",
@@ -183,3 +177,7 @@ This is true also in the case of a single validator key, where the array will on
 Thanks to the `ssv-keys`, it's possible to programmatically split a set of validator keys into key-shares, which can be then given to the operators assigned to run the distributed validator.
 
 This is the foundation for building complex products like Staking Services or Staking Pools on top of SSV.
+
+{% hint style="info" %}
+It's important to note, that to generate multiple keyshares, developers should simply use the example above as a reference, and instead of processing one single `keystore` file at a time, write a simple loop that will iterate over multiple files, generate keyshares, and finally write all the generated keyshares into a single file with the format described above.
+{% endhint %}
