@@ -1,11 +1,260 @@
----
-description: >-
-  This page is a collection of common warnings, error messages, statuses and
-  other unexpected behaviours you might encounter and the possible related known
-  causes.
----
-
 # Troubleshooting
+
+## SSV Node health endpoint
+
+In order to troubleshoot any issues with the SSV Node, it's a good start to use the `/health` endpoint.
+
+First and foremost, the `SSV_API` port environment variable, or configuration parameter must be set. For that, refer to the [Node Configuration Reference page](../node-configuration-reference.md).
+
+Assuming that the SSV node is running on the local machine, and that the `SSV_API` port is set to `16000`, the health check endpoint can be reached using the `curl` command, for example, just as shown below:
+
+```bash
+curl http://localhost:16000/v1/node/health
+```
+
+This request will provide a JSON response, here is an example of a response from a node in good state:
+
+```json
+{
+  "p2p": "good",
+  "beacon_node": "good",
+  "execution_node": "good",
+  "event_syncer": "good",
+  "advanced": {
+    "peers": 89,
+    "inbound_conns": 67,
+    "outbound_conns": 22,
+    "p2p_listen_addresses": [
+      "tcp://<X.Y.W.Z>:13001",
+      "udp://<X.Y.W.Z>:12001"
+    ]
+  }
+}
+```
+
+This "self-diagnose" report of the node can be useful to make sure that some essential indicators have the correct values:
+
+* `p2p_listen_addresses` should show the correct public IP & port and the TCP port should be open when checking this IP with a port checker (they have been rendered anonymous for the purpose of this page)
+* `peers` should be at least 60 for operators with more than 100 validators
+* `inbound_conns` should be at least 20% of the peers (though not an exact number, this is a good indication of healthy connections from the node)
+
+Below, an example of the same report, from a node in bad state:
+
+```json
+{
+  "p2p": "bad: not enough connected peers",
+  "beacon_node": "good",
+  "execution_node": "good",
+  "event_syncer": "good",
+  "advanced": {
+    "peers": 5,
+    "inbound_conns": 1,
+    "outbound_conns": 4,
+    "p2p_listen_addresses": [
+      "tcp://<X.Y.W.Z>:13004",
+      "udp://<X.Y.W.Z>:12004"
+    ]
+  }
+}
+```
+
+## FAQ
+
+<details>
+
+<summary>My node is not participating in cluster consensus</summary>
+
+* If your node is not participating in cluster consensus, please verify that the `Network` has the correct value for the blockchain you are trying to operate on.
+
+<!---->
+
+* Next, verify in the SSV node logs that the connection to execution and beacon node has been established.
+
+<!---->
+
+* If the SSV node logs don't report any errors, please verify the clients logs themselves. If the disk they are running on does not support fast IOPS, they might struggle to stay in sync with the blockchain
+
+<!---->
+
+* It is finally possible that the clients don't report any errors, but the issue persists. In this cases, try and re-sync execution and/or beacon client(s), to fix potential initialization issues.
+
+</details>
+
+<details>
+
+<summary><strong>What happens if my machine restarts?</strong></summary>
+
+If you look at the Docker command you ran to start the node you'll see the part that says:
+
+```bash
+--restart unless-stopped
+```
+
+This means that the Docker container running your node will always try to restart if it crashes, or if the whole machine turns off and then restarts.
+
+</details>
+
+<details>
+
+<summary><strong>How do I stop the node?</strong></summary>
+
+In the command above, you named your node:
+
+```bash
+--name=ssv_node
+```
+
+This is how you will reference your node with other docker commands.
+
+To stop the node run:
+
+```bash
+docker stop ssv_node
+```
+
+</details>
+
+<details>
+
+<summary>How do I start the node?</summary>
+
+If for some reason your node has stopped (maybe you manually stopped it 🤔) you don't need to run the full creation command again, as that will actually throw an error saying that the Docker container already exists.
+
+In the command above, you named your node:
+
+```bash
+--name=ssv_node
+```
+
+This is how you will reference your node with other docker commands.
+
+To start a container, run the command:
+
+```bash
+docker start ssv_node
+```
+
+</details>
+
+<details>
+
+<summary>How do I view the logs again?</summary>
+
+In the command above, you named your node:
+
+```bash
+--name=ssv_node
+```
+
+This is how you will reference your node with other docker commands.
+
+To view the logs when your node is running, use the command:
+
+```bash
+docker logs ssv_node
+```
+
+</details>
+
+<details>
+
+<summary>How do I update my node?</summary>
+
+In the command above, you named your node:
+
+```bash
+--name=ssv_node
+```
+
+This is how you will reference your node with other docker commands.
+
+To update your SSV node, you will need to stop your current node:
+
+```bash
+docker stop ssv_node
+```
+
+Then remove it (this only removes the old Docker image, not all of your data!):
+
+```bash
+docker rm -f ssv_node
+```
+
+Then pull the latest image from SSV:
+
+```bash
+docker pull bloxstaking/ssv-node:latest
+```
+
+And finally... run the [creation command again from the top of this section](troubleshooting.md#create-and-start-the-node-using-docker) to create a new Docker container with the latest SSV image.
+
+</details>
+
+<details>
+
+<summary>How do I migrate raw (deprecated) Operator Keys</summary>
+
+If you are already in possession of raw (unencrypted) Operator Keys, please copy the private key into a text file and make sure the file only contains the key in a single line. For this mini-guide, we are going to call this file: `private-key`.
+
+**Password file**
+
+You will need to create a file (named `password` in this example) containing the password you chose for your Secret Key:
+
+```bash
+echo "<MY_OPERATOR_PASSWORD>" >> password
+```
+
+**Secret Key encryption**
+
+Then, you can generate a KeyStore using this command:
+
+{% code overflow="wrap" %}
+```bash
+docker run --name ssv-node-key-generation \
+-v "$(pwd)/password":/password \
+-v "$(pwd)/private-key":/private-key \
+-it bloxstaking/ssv-node:latest /go/bin/ssvnode generate-operator-keys \
+--password-file=/password  --operator-key-file=/private-key && \
+docker cp ssv-node-key-generation:/encrypted_private_key.json \
+./encrypted_private_key.json && \
+docker rm ssv-node-key-generation
+```
+{% endcode %}
+
+**Configuration update**
+
+At this point the node configuration needs to be changed, please edit the `config.yaml` file for your node, find the line with `OperatorPrivateKey` and delete it entirely. Replace it with this section:
+
+```yaml
+KeyStore:
+  PrivateKeyFile: <ENCRYPTED_PRIVATE_KEY_JSON> # e.g. ./encrypted_private_key.json
+  PasswordFile: <PASSWORD_FILE> # e.g. ./password
+```
+
+And make sure to replace `ENCRYPTED_PRIVATE_KEY_JSON` with the operator encrypted private key file just generated (e.g. `encrypted_private_key.json`) and `PASSWORD_FILE` with the file containing the password used to generate the encrypted key itself (e.g. `password`).
+
+**Restart node and apply new configuration**
+
+The node needs to be restarted, in order for the new configuration to be applied. Please connect to the machine running the node via terminal and execute the command:
+
+```bash
+docker stop ssv_node && docker rm ssv_node && docker run -d --restart unless-stopped --name ssv_node -e \
+CONFIG_PATH=/config.yaml -p 13001:13001 -p 12001:12001/udp -p 15000:15000 \
+-v "$(pwd)/config.yaml":/config.yaml \
+-v "$(pwd)":/data \
+-v "$(pwd)/password":/password \
+-v "$(pwd)/encrypted_private_key.json":/encrypted_private_key.json \
+-it "bloxstaking/ssv-node:latest" make BUILD_PATH="/go/bin/ssvnode" start-node && \ 
+docker logs ssv_node --follow
+```
+
+</details>
+
+
+
+## Common error/warning messages
+
+This section is a collection of common warnings, error messages, statuses and other unexpected behaviours you might encounter and the possible related known causes.
 
 ### `failed to create beacon go-client`
 
