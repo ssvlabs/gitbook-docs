@@ -143,7 +143,7 @@ ssv-dkg:
   user: "${UID}:${GID}"
   ports:
     - 3030:3030/tcp
-  command: start-operator --configPath /data/config.yaml
+  command: start-operator --configPath /data/operator.yaml
 ```
 {% endcode %}
 
