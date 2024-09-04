@@ -256,7 +256,7 @@ OperatorPrivateKey: <OPERATOR_SECRET_KEY> you have just created.
 </details>
 
 {% hint style="warning" %}
-If you previously generated unencrypted Operator <mark style="color:green;">**Public Key (PK)**</mark> and <mark style="color:green;">**Secret Key (SK)**</mark>, for example if you were running an Operator node in previous testnet versions (Jato-v1), and want to encrypt them, please follow the instructions detailed in [the Migration section below](installation.md#how-do-i-migrate-raw-deprecated-operator-keys).
+If you previously generated unencrypted Operator <mark style="color:green;">**Public Key (PK)**</mark> and <mark style="color:green;">**Secret Key (SK)**</mark>, for example if you were running an Operator node in previous testnet versions (Jato-v1), and want to encrypt them, please follow the instructions detailed [here](maintenance/troubleshooting.md#how-do-i-migrate-raw-deprecated-operator-keys).
 {% endhint %}
 
 ### Create Configuration File
@@ -323,12 +323,10 @@ Make sure your `ETH1Addr` endpoint is communicating **over WebSocket** and **not
 
 ### Start the Node
 
-Now, for the part you've been waiting for... actually starting your SSV node!
-
 {% hint style="warning" %}
 **Do not** run multiple instances of SSV Node with the same set Operator keys.
 
-This does not increase validator resiliency and **could lead to validator slashing**.Now, for the part you've been waiting for... actually starting your SSV node!
+This does not increase validator resiliency and **could lead to validator slashing**.
 {% endhint %}
 
 {% tabs %}
