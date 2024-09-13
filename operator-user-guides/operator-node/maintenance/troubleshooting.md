@@ -310,14 +310,21 @@ In the example above, the `Network` in [`config.yaml` configuration file](../ins
 
 ### `could not create loggerlogging.SetGlobalLogger`
 
-{% code overflow="wrap" %}
-```bash
-could not create loggerlogging.SetGlobalLogger: unrecognized level: "infor"
-make: *** [Makefile:97: start-node] Error 1
-```
-{% endcode %}
+<pre class="language-bash" data-overflow="wrap"><code class="lang-bash"><strong>could not create loggerlogging.SetGlobalLogger: unrecognized level: "infor"
+</strong>make: *** [Makefile:97: start-node] Error 1
+</code></pre>
 
 In the example above, the `LogLevel` variable in [`config.yaml` configuration file](../installation.md#create-configuration-file) was wrongly set to `infor` instead of `info`, so be sure to look for thinks like spelling mistakes.
+
+***
+
+### `failed to get attestation data`
+
+```bash
+"error":"could not start committee duty: failed to get attestation data: failed to get attestation data: failed to call GET endpoint\nGet 
+```
+
+This error could be caused by using multiple SSV nodes within one Nimbus setup. It is advised to only run one SSV node per Nimbus instance.
 
 ***
 
