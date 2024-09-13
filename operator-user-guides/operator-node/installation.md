@@ -50,6 +50,12 @@ Please be advised: the [Reth Execution Client](https://reth.rs/) has recently be
 As a result, you should not be using it on mainnet for the time being. Its usage is also discouraged on Holesky, as the problem persists on testnet too, although it is (obviously) less impactful.
 {% endhint %}
 
+{% hint style="danger" %}
+Please be advised: [the Nimbus client](https://nimbus.team/) is a single thread program and it has shown to generate errors when a single client instance is connected to multiple SSV nodes.
+
+As such, **it is not advised to run more than one SSV node per Nimbus instance** due to performance constraints.
+{% endhint %}
+
 #### Beacon Client
 
 This can be any Ethereum Beacon Node client (e.g. Prysm, Lighthouse, Tekou, Nimbus, or any client utilizing standard REST HTTP). You will see this node referenced as ETH2 in the SSV configuration.
