@@ -51,14 +51,13 @@ The developer API is typically not publicly accessed, but it is provided below, 
 #### Developer API for Ethereum Mainnet SSV Subgraph
 
 ```
-https://api.studio.thegraph.com/proxy/71118/ssv-network-ethereum/version/latest
+https://api.studio.thegraph.com/query/71118/ssv-network-ethereum/version/latest
 ```
 
 #### Developer API for Holesky testnet SSV Subgraph
 
-```
-https://api.studio.thegraph.com/proxy/71118/ssv-network-holesky/version/latest
-```
+<pre><code><strong>https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest
+</strong></code></pre>
 
 Despite being rate limited, this endpoint should be sufficient for every development use case.
 

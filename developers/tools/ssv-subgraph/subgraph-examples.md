@@ -54,7 +54,7 @@ console.log(responseData);
 
 {% tab title="Curl" %}
 ```bash
-curl -X POST "https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest" -H "Content-Type: application/json"  -d '{
+curl -X POST "https://api.studio.thegraph.com/proxy/71118/ssv-network-holesky/version/latest" -H "Content-Type: application/json"  -d '{
     "query": "query AccountNonceQuery {  account(id: \"0x004f13516f00ccc4aca6560c115bee5aaf5f758b\") {    nonce  }}"
 }'
 ```
@@ -131,7 +131,7 @@ console.log(responseData);
 
 {% tab title="Curl" %}
 ```bash
-curl -X POST "https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest" -H "Content-Type: application/json"  -d '{
+curl -X POST "https://api.studio.thegraph.com/proxy/71118/ssv-network-holesky/version/latest" -H "Content-Type: application/json"  -d '{
     "query": "query ClusterSnapshot { cluster(id: \"0x000b4369b71b6634f27f5de9cbaaabb0d21b8be5-399-429-694-699\") {    active    balance    index    lastUpdateBlockNumber    networkFeeIndex    validatorCount}}"
 }'
 ```
@@ -215,7 +215,7 @@ console.log(responseData);
 
 {% tab title="Curl" %}
 ```bash
-curl -X POST "https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest" -H "Content-Type: application/json"  -d '{
+curl -X POST "https://api.studio.thegraph.com/proxy/71118/ssv-network-holesky/version/latest" -H "Content-Type: application/json"  -d '{
     "query": "query ListOfValidatorsPerOwner { validators(where: {owner: \"0xcdb35fe42e19860b061ba6d1d85ce12c8f491ddf\"}) { id    owner { id }}}"
 }'
 ```
@@ -298,7 +298,7 @@ console.log(responseData);
 
 {% tab title="Curl" %}
 ```bash
-curl -X POST "https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest" -H "Content-Type: application/json"  -d '{
+curl -X POST "https://api.studio.thegraph.com/proxy/71118/ssv-network-holesky/version/latest" -H "Content-Type: application/json"  -d '{
     "query": "query ValidatorData { validator(id: \"0x80006ff500fc36a6ae4ce7b643be3856ffe052ef36e5a6223dc9f7021b1dae02539c919751bba870f7ac9fccb86e06cf\") {    active    operators(first: 10) { operatorId }}}"
 }'
 ```
@@ -393,7 +393,7 @@ console.log(responseData);
 
 {% tab title="Curl" %}
 ```bash
-curl -X POST "https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest" -H "Content-Type: application/json"  -d '{
+curl -X POST "https://api.studio.thegraph.com/proxy/71118/ssv-network-holesky/version/latest" -H "Content-Type: application/json"  -d '{
     "query": "query ClusterData { cluster(id: \"0x000b4369b71b6634f27f5de9cbaaabb0d21b8be5-399-429-694-699\") {        active    validators {      id      owner {        id      }    }    validatorCount}}"
 }'
 ```
@@ -477,7 +477,7 @@ console.log(responseData);
 
 {% tab title="Curl" %}
 ```bash
-curl -X POST "https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest" -H "Content-Type: application/json"  -d '{
+curl -X POST "https://api.studio.thegraph.com/proxy/71118/ssv-network-holesky/version/latest" -H "Content-Type: application/json"  -d '{
     "query": "query ValidatorCountPerOperator {  operator(id: "10") {    fee    active    totalWithdrawn    isPrivate    whitelisted {      id    }  }}"
 }'
 ```
@@ -558,7 +558,7 @@ console.log(responseData);
 
 {% tab title="Curl" %}
 ```bash
-curl -X POST "https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest" -H "Content-Type: application/json"  -d '{
+curl -X POST "https://api.studio.thegraph.com/proxy/71118/ssv-network-holesky/version/latest" -H "Content-Type: application/json"  -d '{
     "query": "query ClusterQuery {    clusters( first: 10    where: {validatorCount: \"4\"}    orderBy: lastUpdateBlockNumber orderDirection: desc) { validatorCount    lastUpdateBlockNumber    id}}"
 }'
 ```
