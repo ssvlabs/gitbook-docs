@@ -1,10 +1,6 @@
 # Fees
 
-{% hint style="warning" %}
-This section and the documents under it have not been updated to V3 testnet
-{% endhint %}
-
-### Operator Fees <a href="#_ht1v5x3rp8hp" id="_ht1v5x3rp8hp"></a>
+### Operator Fees <a href="#ht1v5x3rp8hp" id="ht1v5x3rp8hp"></a>
 
 The ssv.network utilizes a free-market approach such that operators can set their desired fees. This approach drives competition between operators and helps ensure that operator services are provided to stakers at lower costs.
 
@@ -16,7 +12,7 @@ For example, assuming there are 100 blocks per day and an operator has a set fee
 
 365 ssv / 100 blocks per day / 365 days in a year = 0.01 SSV per block
 
-### Network Fees <a href="#_k4tw9to38r3v" id="_k4tw9to38r3v"></a>
+### Network Fees <a href="#k4tw9to38r3v" id="k4tw9to38r3v"></a>
 
 In addition to operator fees, stakers are also required to pay a ‘network fee’ for each validator they run through the network.
 
