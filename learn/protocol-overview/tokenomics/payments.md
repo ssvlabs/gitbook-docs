@@ -1,154 +1,75 @@
 # Payments
 
-{% hint style="warning" %}
-This section and the documents under it have not been updated to V3 testnet
+Payments are facilitated by maintaining a cluster balance in the SSV network smart contract, which keeps a balance sheet for all clusters. All balances are in the unit of the SSV token itself.
+
+Clusters are created when registering validators to the network are accessible and owned by the wallet address that transmitted the transaction. This means that the address is the cluster’s owner, enabling it to manage its balance and its chosen validators/operators.
+
+The most important concept behind cluster balance calculation is that it depends on essentially three factors:
+
+* Network fee
+* Operator fees
+* Number of validators
+
+And all of them can change at any point in time. So in order to maintain an up-to-date cluster balance, one would have to keep track of such factors, and the period for which they applied.&#x20;
+
+These are tracked using an essential component called an Index.
+
+{% hint style="info" %}
+Cluster balance and payments are in a tight relation with two other essential concepts: liquidation collateral threshold, and operational runway, both explained [here](../../stakers/clusters/cluster-balance.md#id-4d33wiukw2ss).
 {% endhint %}
 
-Payments are facilitated by maintaining an account balance in the ssv network smart contract, which keeps a balance sheet for all network participants.
+### I**ndexes**
 
-Accounts created when registering validators and operators to the network are accessible and owned by the wallet address that transmitted the transaction. This means that the address is the account’s owner, enabling it to manage its balance and its chosen validators/operators.
+Indexes can be defined as:
 
-All account balances are pooled in the SSV network smart contract to enable the calculation of payment flows between network participants. The flows are maintained by keeping track of each user’s accumulated deposits, withdrawals, revenue, and expenses which forms their account balance.
+> The aggregated sum of fees, valid until the last change that impacted fees calculation
 
-Balance components are calculated by a set of formulas (outlined below) every time an event occurs that influences that user’s account. Each time such an event occurs the components of the balance are calculated retroactively up to the current state and a new snapshot is taken to be used for future calculations.
+These indexes are retroactively calculated every time there is an event that influences them. When a on-chain action occurs later on, the previous index and the amount of blocks since the last change can be used to calculate the new index. Indexes are a generic concept used for fee calculation.
 
-![Contract payment flow](<../../../.gitbook/assets/pasted\_image\_0111 (1).jpg>)
+It is important to note that indexes are calculated for both the [Network Fee](fees.md#k4tw9to38r3v) and the [Operator Fees](fees.md#ht1v5x3rp8hp), and these two indexes are calculated for each cluster, as well as "protocol-wide".
 
-The account balance consists of 4 variables and is calculated by:
+This means, whenever the Network Fee is changed by the SSV DAO, a new _**"protocol-wide" Network Fee Index**_ is calculated and stored in the smart contract. The same applies to the _**"protocol-wide" Operator Fee Index**_, when an operator changes their fee.
 
-$$
-balance = d +  r - e - w
-$$
+Similarly, whenever an event changes fee calculations for a cluster (e.g. adding or removing validators), the Network Fee Index and the sum of all Operator Fee Indexes, referred to as Cluster Index are calculated. These indexes are stored in a [Cluster Snapshot](../../../developers/tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot), which includes the [Cluster Balance](../../stakers/clusters/cluster-balance.md), updated to the block where the cluster-changing event happened.&#x20;
 
-* Legend
-  * d - deposits&#x20;
-  * r - revenue&#x20;
-  * e - expenses&#x20;
-  * w - withdrawals
-
-### Deposits & Withdrawals
-
-The net transfers of deposits and withdrawals made to the user account balance.
-
-### **Revenue**
-
-Earnings received by operators as payment from stakers for operating their validators.
-
-* Revenue is calculated by the sum of earnings from all the operators of the account:
+**Indexes are calculated using this generalized formula:**
 
 $$
-revenue = \sum(e_{operators})
+index_n =index_{n-1} + (b - b_{n-1}) * f
 $$
 
-* Earnings for each operator are calculated by:
 
-$$
-e_{operator}= e_p + (b-b_p) * f * v
-$$
-
-* Legend
-  * $$e_p$$​ - previously accumulated earnings
-  * $$b$$  - current block
-  * $$b_p$$​ - previous block
-  * $$f$$ - fee​ ($SSV per block)
-  * $$v$$​ - # of validators that the operator manages
-
-Earnings are calculated for each operator by keeping track of their accumulated earnings ($$e_p$$) every time an operator fee changes ($$f$$) or when gaining or losing a validator ($$v$$).
-
-### Expenses
-
-Expenses come in the form of payments made to operators for managing their validators and network fees paid to the network.
-
-* Expenses are calculated by the sum of payments to operators in addition to accrued network fees:
-
-$$
-expenses =  \sum(p_{operators}) + p_{network}
-$$
-
-**Indexes: Operator and Network Fees**
-
-Indexes help keep track of payments in relation to ongoing fee updates from the network and its operators.
-
-Indexes are stored separately for both operator and network fee changes and represent a curve of accumulated fee changes over time.
-
-![Operator Index from block 100 (registration) to block 200, presenting 4 fee updates](https://lh6.googleusercontent.com/PLTYTJiTeIM791Gw0\_xeTMAVzu8aaTxV05FlFYaEMAVnkKCgrEyrjTVuuxL\_GynmyDINcTeQJUlP01M\_IPunBSLufYGgO1OD2M\_dQ3VeNOB2VNuX3RJR9pu5ug5EcYRW-HPh7HALlxlHuehPSQ)
-
-* Indexes are calculated by:
-
-$$
-index =index_p + (b - b_p) * f
-$$
 
 * Legend
   * $$index_p$$​ - previous index
   * $$b$$​ - current block
-  * $$b_p$$​ - previous block
-  * $$f$$ - fee ($SSV per block)
-    * Operator index - operator fee
-    * Network fee index - protocol fee
+  * $$b_p$$​ - block number of previous index
+  * $$f$$ - fee ($SSV per block) applicable to the block interval ("previous fee")
 
-Indexes are calculated by keeping track of the accumulation of fees over time ($$index_p$$) every time the network or an operator changes their fee ($$f$$).
+### **Index Calculation Example**
 
-**Indexes in Payments**
+![Cluster Index calculation example](<../../../.gitbook/assets/image (45).png>)
 
-Each account on the network stores an operator and network index from the time an operator (and the network) starts managing their validators. Referencing the current $$index$$ of the operator in relation to the previous index ($$index_p$$) - during the payment calculations - enables the contract to determine account expenses in isolation. This is done to exclude it from the other network participants' activity (e.g. frequent fee changes), allowing the calculation to be accomplished in an isolated manner which optimizes contract execution performance and cost.
+In this example the cluster index is updated each time a new validator is registered.
 
-#### Payments
-
-* Payment per each operator is calculated by:
+When the first validator is registered, the index is 0, the previous block is 100, and the current block is 170. Let's say the fee is 5 for this example. This means we can put it into our formula:
 
 $$
-p_{operator}=p_p + (i-i_p) * v
+index =0 + (170 - 100) * 5
 $$
 
-* Legend
-  * $$p_p$$ - previously accumulated payments
-  * $$i$$ - current operator index
-  * $$i_p$$ - previous operator index
-  * ​$$v$$ - # of validators operators for the user (specific operator)
-
-Payments are calculated for each operator by keeping track of it’s accumulated payments ($$p_p$$) every time an account changes its validators count ($$v$$) with the operator.
-
-* Network payment per each account is calculated by:
+Which gets us **350.** This process can be repeated for the next action, when a validator is removed.
 
 $$
-p_{network} =p_p + (i - i_p) * v
+index =350 + (220 - 170) * 5
 $$
 
-* Legend
-  * $$p_p$$ - previous accumulated network fees
-  * $$i$$ - current network fee index
-  * $$i_p$$ - previous network fee index
-  * $$v$$ - # of validators operator for the user (across all operators)
-
-Network fees are calculated for each account by keeping track of it’s accumulated network fees($$p_p$$) every time an account onboards a new validator to the network, or leaves it ($$v$$).
-
-#### **Indexes Scenario Example**
-
-![](https://lh6.googleusercontent.com/ScxeO0Cq4zyXCr3XCf3Lxb0qa5JlTj8mQrNKQP8l8D0MmbW5jaq0UuSjhmT01-UZqNd4h\_qQHwvOB1PVK4P22rRlAFh6sVRFCBSRwLOuOoQxMOwY07D9D1Nmc47uGc6h6AumlQXvdL5g2jUfWQ)
-
-* Bob has registered a validator to the network to be managed by Alice the operator at block 120:
-  * $$p _{alice} = 0$$ , $$p_p$$ --> 0 , $$i_p$$ --> 200 , $$v$$ --> 1
-* At block 140, Bob has registered an additional validator to be managed by Alice:
-  * $$p _{alice} = 0 + (800 - 200) * 1 = 600$$ , $$p_p$$ --> 600 , $$i_p$$ --> 800 , $$v$$ --> 2
-* At block 180, Bob chose to replace Alice with Eve to manage his validators - the total payments Bob has made to Alice thus far is 3000:
-  * $$p_{alice} = 600 + (2000 - 800) * 2 = 3000$$ , $$p_p$$ --> 3000 , $$i_p$$ --> 2000 , $$v$$ --> 0
-
-#### Network Fees
-
-Fees accrued to the protocol treasury from validators for using the network.
-
-* Network fees are calculated by:
+Which gets us the second index, **600.** We can repeat the process once more to get the last index on the chart.
 
 $$
-Network \; Fees= NF_p + (b-b_p) * f * v
+index =600 + (300 - 220) * 5
 $$
 
-* Legend
-  * $$NF_p$$ - previous accumulated fees
-  * $$b$$ - current block
-  * $$b_b$$ - previous block
-  * $$f$$ - fee ($SSV per block)
-  * $$v$$ - # of validators in the network
+Which gets us our third index, 1100.
 
-Fees are maintained for the whole network by keeping track of it’s accumulated fees ($$NF_p$$) every time the network fee changes ($$f$$) or when the network gains or loses a validator ($$v$$).
+This process is repeated for any indexes that need calculated.

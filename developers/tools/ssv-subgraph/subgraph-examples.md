@@ -157,6 +157,258 @@ Output
 ```
 {% endcode %}
 
+### DAO constants and protocol network fee index
+
+Returns the value of important values set by the DAO (such as Minimum Liquidation Collatera, and Liquidation Threshold Period), as well as the protocol-wide Network Fee Index, needed to calculate the balance of clusters and verify their risk of liquidation.
+
+{% hint style="warning" %}
+Note: the `id` of `daovalues` is the address of the SSVNetwork smart contract deployed on the current chain. So in the case of Holesky it's `0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA`
+{% endhint %}
+
+{% tabs %}
+{% tab title="GraphQL" %}
+{% code fullWidth="true" %}
+```graphql
+query daoValues {
+  daovalues(id: "0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA") {
+    declareOperatorFeePeriod
+    executeOperatorFeePeriod
+    liquidationThreshold
+    minimumLiquidationCollateral
+    networkFee
+    networkFeeIndex
+    networkFeeIndexBlockNumber
+    operatorFeeIncreaseLimit
+    operatorMaximumFee
+  }
+}
+```
+{% endcode %}
+{% endtab %}
+
+{% tab title="Javascript" %}
+```javascript
+const url = "https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest";
+const query = `
+query daoValues {
+  daovalues(id: "0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA") {
+    declareOperatorFeePeriod
+    executeOperatorFeePeriod
+    liquidationThreshold
+    minimumLiquidationCollateral
+    networkFee
+    networkFeeIndex
+    networkFeeIndexBlockNumber
+    operatorFeeIncreaseLimit
+    operatorMaximumFee
+  }
+}`;
+
+const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ query })
+});
+
+const responseData = await response.json();
+console.log(responseData);
+```
+{% endtab %}
+
+{% tab title="Curl" %}
+```bash
+curl -X POST "https://api.studio.thegraph.com/proxy/71118/ssv-network-holesky/version/latest" -H "Content-Type: application/json"  -d '{
+    "query": "query daoValues {  daovalues(id: \"0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA\") {    declareOperatorFeePeriod    executeOperatorFeePeriod    liquidationThreshold    minimumLiquidationCollateral    networkFee    networkFeeIndex    networkFeeIndexBlockNumber    operatorFeeIncreaseLimit    operatorMaximumFee  }}"
+}'
+```
+{% endtab %}
+{% endtabs %}
+
+Output
+
+{% code fullWidth="false" %}
+```json
+{
+  "data": {
+    "daovalues": {
+      "declareOperatorFeePeriod": "604800",
+      "executeOperatorFeePeriod": "604800",
+      "liquidationThreshold": "0",
+      "minimumLiquidationCollateral": "0",
+      "networkFee": "382640000000",
+      "networkFeeIndex": "0",
+      "networkFeeIndexBlockNumber": "208788",
+      "operatorFeeIncreaseLimit": "0",
+      "operatorMaximumFee": "76528650000000"
+    }
+  }
+}
+```
+{% endcode %}
+
+### Cluster Balance Values
+
+Returns all necessary data needed to compute the [Cluster Balance](../../../learn/stakers/clusters/cluster-balance.md).
+
+{% tabs %}
+{% tab title="GraphQL" %}
+{% code fullWidth="true" %}
+```graphql
+query clusterBalanceValues {
+  _meta {
+    block {
+      number
+    }
+  }
+  daovalues(id: "0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA") {
+    declareOperatorFeePeriod
+    executeOperatorFeePeriod
+    liquidationThreshold
+    minimumLiquidationCollateral
+    networkFee
+    networkFeeIndex
+    networkFeeIndexBlockNumber
+    operatorFeeIncreaseLimit
+    operatorMaximumFee
+  }
+  operators(where: {id_in: ["11", "13", "24", "29"]}) {
+    fee
+    feeIndex
+    feeIndexBlockNumber
+  }
+  cluster(id: "0xaa184b86b4cdb747f4a3bf6e6fcd5e27c1d92c5c-11-13-24-29") {
+    validatorCount
+    operatorIds
+    networkFeeIndex
+    index
+    balance
+  }
+}
+```
+{% endcode %}
+{% endtab %}
+
+{% tab title="Javascript" %}
+```javascript
+const url = "https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest";
+const query = `
+query clusterBalanceValues {
+  _meta {
+    block {
+      number
+    }
+  }
+  daovalues(id: "0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA") {
+    declareOperatorFeePeriod
+    executeOperatorFeePeriod
+    liquidationThreshold
+    minimumLiquidationCollateral
+    networkFee
+    networkFeeIndex
+    networkFeeIndexBlockNumber
+    operatorFeeIncreaseLimit
+    operatorMaximumFee
+  }
+  operators(where: {id_in: ["11", "13", "24", "29"]}) {
+    fee
+    feeIndex
+    feeIndexBlockNumber
+  }
+  cluster(id: "0xaa184b86b4cdb747f4a3bf6e6fcd5e27c1d92c5c-11-13-24-29") {
+    validatorCount
+    operatorIds
+    networkFeeIndex
+    index
+    balance
+  }
+}`;
+
+const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ query })
+});
+
+const responseData = await response.json();
+console.log(responseData);
+```
+{% endtab %}
+
+{% tab title="Curl" %}
+```bash
+curl -X POST "https://api.studio.thegraph.com/proxy/71118/ssv-network-holesky/version/latest" -H "Content-Type: application/json"  -d '{
+    "query": "query clusterBalanceValues {    _meta {     block {     number }}   daovalues(id: \"0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA\") {     declareOperatorFeePeriod        executeOperatorFeePeriod        liquidationThreshold       minimumLiquidationCollateral     networkFee      networkFeeIndex     networkFeeIndexBlockNumber      operatorFeeIncreaseLimit        operatorMaximumFee      }   operators(where: {id_in: [\"11\", \"13\", \"24\", \"29\"]}) {       fee     feeIndex        feeIndexBlockNumber }   cluster(id: \"0xaa184b86b4cdb747f4a3bf6e6fcd5e27c1d92c5c-11-13-24-29\") {       validatorCount      operatorIds     networkFeeIndex     index   balance }}"
+}'
+```
+{% endtab %}
+{% endtabs %}
+
+Output
+
+{% code fullWidth="false" %}
+```json
+{
+  "data": {
+    "daovalues": {
+      "declareOperatorFeePeriod": "604800",
+      "executeOperatorFeePeriod": "604800",
+      "liquidationThreshold": "0",
+      "minimumLiquidationCollateral": "0",
+      "networkFee": "382640000000",
+      "networkFeeIndex": "0",
+      "networkFeeIndexBlockNumber": "208788",
+      "operatorFeeIncreaseLimit": "0",
+      "operatorMaximumFee": "76528650000000"
+    },
+    "operators": [
+      {
+        "fee": "0",
+        "feeIndex": "0",
+        "feeIndexBlockNumber": "377585"
+      },
+      {
+        "fee": "382640000000",
+        "feeIndex": "0",
+        "feeIndexBlockNumber": "412415"
+      },
+      {
+        "fee": "0",
+        "feeIndex": "0",
+        "feeIndexBlockNumber": "424818"
+      },
+      {
+        "fee": "0",
+        "feeIndex": "0",
+        "feeIndexBlockNumber": "426254"
+      }
+    ],
+    "cluster": {
+      "validatorCount": "1",
+      "operatorIds": [
+        "11",
+        "13",
+        "24",
+        "29"
+      ],
+      "networkFeeIndex": "54511123984",
+      "index": "46719540456",
+      "active": true,
+      "balance": "10000000000000000000"
+    },
+    "_meta": {
+      "block": {
+        "number": 2373410
+      }
+    }
+  }
+}
+```
+{% endcode %}
+
 ### List of Validators for an owner&#x20;
 
 Returns a list of validators for an owner and displays whether they are active or not. Queries the `first` 5 validators owned by this address.
