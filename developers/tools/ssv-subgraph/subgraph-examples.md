@@ -263,15 +263,9 @@ query clusterBalanceValues {
     }
   }
   daovalues(id: "0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA") {
-    declareOperatorFeePeriod
-    executeOperatorFeePeriod
-    liquidationThreshold
-    minimumLiquidationCollateral
     networkFee
     networkFeeIndex
     networkFeeIndexBlockNumber
-    operatorFeeIncreaseLimit
-    operatorMaximumFee
   }
   operators(where: {id_in: ["11", "13", "24", "29"]}) {
     fee
@@ -280,7 +274,6 @@ query clusterBalanceValues {
   }
   cluster(id: "0xaa184b86b4cdb747f4a3bf6e6fcd5e27c1d92c5c-11-13-24-29") {
     validatorCount
-    operatorIds
     networkFeeIndex
     index
     balance
@@ -301,15 +294,9 @@ query clusterBalanceValues {
     }
   }
   daovalues(id: "0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA") {
-    declareOperatorFeePeriod
-    executeOperatorFeePeriod
-    liquidationThreshold
-    minimumLiquidationCollateral
     networkFee
     networkFeeIndex
     networkFeeIndexBlockNumber
-    operatorFeeIncreaseLimit
-    operatorMaximumFee
   }
   operators(where: {id_in: ["11", "13", "24", "29"]}) {
     fee
@@ -318,7 +305,6 @@ query clusterBalanceValues {
   }
   cluster(id: "0xaa184b86b4cdb747f4a3bf6e6fcd5e27c1d92c5c-11-13-24-29") {
     validatorCount
-    operatorIds
     networkFeeIndex
     index
     balance
@@ -341,7 +327,7 @@ console.log(responseData);
 {% tab title="Curl" %}
 ```bash
 curl -X POST "https://api.studio.thegraph.com/proxy/71118/ssv-network-holesky/version/latest" -H "Content-Type: application/json"  -d '{
-    "query": "query clusterBalanceValues {    _meta {     block {     number }}   daovalues(id: \"0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA\") {     declareOperatorFeePeriod        executeOperatorFeePeriod        liquidationThreshold       minimumLiquidationCollateral     networkFee      networkFeeIndex     networkFeeIndexBlockNumber      operatorFeeIncreaseLimit        operatorMaximumFee      }   operators(where: {id_in: [\"11\", \"13\", \"24\", \"29\"]}) {       fee     feeIndex        feeIndexBlockNumber }   cluster(id: \"0xaa184b86b4cdb747f4a3bf6e6fcd5e27c1d92c5c-11-13-24-29\") {       validatorCount      operatorIds     networkFeeIndex     index   balance }}"
+    "query": "query clusterBalanceValues {    _meta {     block {     number }}   daovalues(id: \"0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA\") {     networkFee      networkFeeIndex     networkFeeIndexBlockNumber      }   operators(where: {id_in: [\"11\", \"13\", \"24\", \"29\"]}) {       fee     feeIndex        feeIndexBlockNumber }   cluster(id: \"0xaa184b86b4cdb747f4a3bf6e6fcd5e27c1d92c5c-11-13-24-29\") {       validatorCount      networkFeeIndex     index   balance }}"
 }'
 ```
 {% endtab %}
@@ -354,15 +340,9 @@ Output
 {
   "data": {
     "daovalues": {
-      "declareOperatorFeePeriod": "604800",
-      "executeOperatorFeePeriod": "604800",
-      "liquidationThreshold": "0",
-      "minimumLiquidationCollateral": "0",
       "networkFee": "382640000000",
       "networkFeeIndex": "0",
-      "networkFeeIndexBlockNumber": "208788",
-      "operatorFeeIncreaseLimit": "0",
-      "operatorMaximumFee": "76528650000000"
+      "networkFeeIndexBlockNumber": "208788"
     },
     "operators": [
       {
@@ -388,12 +368,6 @@ Output
     ],
     "cluster": {
       "validatorCount": "1",
-      "operatorIds": [
-        "11",
-        "13",
-        "24",
-        "29"
-      ],
       "networkFeeIndex": "54511123984",
       "index": "46719540456",
       "active": true,
