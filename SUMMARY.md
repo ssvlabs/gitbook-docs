@@ -50,6 +50,8 @@
   * [Troubleshooting](developers/smart-contracts/troubleshooting.md)
   * [External Whitelist Contract example](developers/smart-contracts/external-whitelist-contract-example.md)
 * [Testnet](developers/testnet.md)
+* [Code examples and snippets](developers/code-examples-and-snippets/README.md)
+  * [Cluster Balance Script](developers/code-examples-and-snippets/cluster-balance-script.md)
 * [Integration Guides](developers/integration-guides/README.md)
   * [Staking Pools](developers/integration-guides/staking-pools/README.md)
     * [Initialization Stage](developers/integration-guides/staking-pools/initialization-stage.md)
