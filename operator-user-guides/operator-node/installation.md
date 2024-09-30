@@ -153,7 +153,7 @@ docker run --name ssv-node-key-generation -v <PATH_TO_PASSWORD_FILE>:/password -
 {% endtab %}
 
 {% tab title="Build from Source" %}
-A prerequisite for this is to have `go` version 1.20 installed on the system, and an optional requirement is to have the `make` tool installed as well (alternatively you could run the corresponding command defined in the `Makefile`).
+A prerequisite for this is to have `go` version 1.22 installed on the system, and an optional requirement is to have the `make` tool installed as well (alternatively you could run the corresponding command defined in the `Makefile`).
 
 #### Clone repository
 
@@ -392,7 +392,7 @@ If you are sure that the tool works, and don't care about the logs, you can add 
 {% tab title="Build from Source" %}
 If you have already created the operator keys using the compiled binary, then you can go ahead and launch the node. Otherwise, make sure to build from source first.
 
-A prerequisite for this is to have `go` version 1.20 installed on the system, and an optional requirement is to have the `make` tool installed as well (alternatively you could run the corresponding command defined in the `Makefile`).
+A prerequisite for this is to have `go` version 1.22 installed on the system, and an optional requirement is to have the `make` tool installed as well (alternatively you could run the corresponding command defined in the `Makefile`).
 
 #### Clone repository
 
