@@ -110,7 +110,7 @@ Make sure to have the most recent image tagged with `latest`. You can make sure 
 {% endtab %}
 
 {% tab title="Build from source" %}
-A prerequisite for this is to have `go` version 1.20 installed on the system, and an optional requirement is to have the `make` tool installed as well (alternatively you could run the corresponding command defined in the `Makefile`).
+A prerequisite for this is to have `go` version 1.22 installed on the system, and an optional requirement is to have the `make` tool installed as well (alternatively you could run the corresponding command defined in the `Makefile`).
 
 #### Clone repository
 
