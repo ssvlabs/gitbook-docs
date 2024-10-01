@@ -16,12 +16,12 @@ The ssv network rewards liquidators for the costs and risks associated with liqu
 
 ### Liquidation Collateral
 
-The required collateral amount is the highest value between a fixed amount called[_**Minimum Liquidation Collateral**_](liquidations.md#minimum-liquidation-collateral), and a dynamic amount (derived from the fees paid by each cluster) which must be sufficient for a predefined period of time called the [_**Liquidation Threshold Period**_](liquidations.md#liquidation-threshold-period) . Because fees can very between different cluster formations this amount is dynamically calculated for each cluster.
+The required collateral amount is the highest value between a fixed amount called [_**Minimum Liquidation Collateral**_](liquidations.md#minimum-liquidation-collateral), and a dynamic amount (derived from the fees paid by each cluster) which must be sufficient for a predefined period of time called the [_**Liquidation Threshold Period**_](liquidations.md#liquidation-threshold-period) . Because fees can very between different cluster formations this amount is dynamically calculated for each cluster.
 
 Another way to explain it is to reverse the logic: _Clusters that drop below the liquidation collateral threshold are deemed **Liquidatable** and are at risk of being liquidated._
 
 $$
-liquidatable = balance<min(MLC, burn\;rate * LTP)
+liquidatable = balance<max(MLC, burn\;rate * LTP)
 $$
 
 Legend
