@@ -15,7 +15,7 @@ Description: Registers a new operator (key) with a set fee, **fails if** fee is 
 | **Parameter** | **Type**                             | **Description**                                                                                                                                                                                     |
 | ------------- | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | publicKey     | bytes                                | The operator public key (generated as part of the node setup).                                                                                                                                      |
-| operatorFee   | <p>uint256<br>(casted to uint64)</p> | The fee charged by the operator (denominated as $SSV tokens per block)                                                                                                                              |
+| operatorFee   | <p>uint256<br>(casted to uint64)</p> | <p>The fee charged by the operator (denominated as $SSV tokens per block)<br><br><em><strong>Amount must be shrinkable (divisible by 10000000)</strong></em></p>                                    |
 | setPrivate    | bool                                 | A flag to set the operator to private or public during registration. Calls the [**`setOperatorsPrivateUnchecked`**](ssvnetwork.md#setoperatorsprivateunchecked-operatorids)function if set to true. |
 
 Events:
@@ -139,10 +139,10 @@ Events:
 
 Description: Initiates the first step of the operator fee update cycle - declaration of a new fee. [After specified](ssvnetworkviews.md#getoperatorfeeperiods) time window operator will be able to change to the new fee with executeOperatorFee().
 
-| **Parameter** | **Type**                   | **Description**                                 |
-| ------------- | -------------------------- | ----------------------------------------------- |
-| operatorId    | uint64                     | The operator id                                 |
-| operatorFee   | uint256 (casted to uint64) | New fee (denominated as $SSV tokens per block). |
+| **Parameter** | **Type**                   | **Description**                                                                                                                           |
+| ------------- | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| operatorId    | uint64                     | The operator id                                                                                                                           |
+| operatorFee   | uint256 (casted to uint64) | <p>New fee (denominated as $SSV tokens per block).<br><br><em><strong>Amount must be shrinkable (divisible by 10000000)</strong></em></p> |
 
 Events:
 
@@ -176,10 +176,10 @@ Events:
 
 Description: Reduce the operator fee, does not abide by the restrictions of fee increase
 
-| Parameter  | Type                       | Description                                     |
-| ---------- | -------------------------- | ----------------------------------------------- |
-| operatorId | uint64                     | The operator id                                 |
-| fee        | uint256 (casted to uint64) | New fee (denominated as $SSV tokens per block). |
+| Parameter  | Type                       | Description                                                                                                                               |
+| ---------- | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| operatorId | uint64                     | The operator id                                                                                                                           |
+| fee        | uint256 (casted to uint64) | <p>New fee (denominated as $SSV tokens per block).<br><br><em><strong>Amount must be shrinkable (divisible by 10000000)</strong></em></p> |
 
 Events:
 
@@ -205,13 +205,13 @@ Events:
 
 Description: Registers new validator to a cluster of provided operators (ids + shares), **fails if** number of operatorIds is greater than 13..
 
-| **Parameter** | **Type**                   | **Description**                                                                                                                                                                                                                                                                                                                                                      |
-| ------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| publicKey     | bytes                      | The validator’s public key.                                                                                                                                                                                                                                                                                                                                          |
-| operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                                                                                                                                                                                       |
-| sharesData    | bytes                      | String of keyshares - obtained by splitting the validator key using the [SSV-Keys](../tools/ssv-keys-distributor.md) tool.                                                                                                                                                                                                                                           |
-| amount        | uint256 (casted to uint64) | <p>Amount of SSV token to be deposited as payment</p><p>(not mandatory).<br><br><em><strong>Amount must be shrinkable (divisible by 10000000)</strong></em></p>                                                                                                                                                                                                      |
-| cluster       | tuple\[]                   | <p>Object containing the latest cluster snapshot data - obtained using the <a href="../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot">SSV Subgraph</a>, or <a href="../tools/cluster-scanner.md">SSV Scanner</a> tools<br><br><strong>If this is the 1st validator within a specific cluster (unique set of operators), use - {0,0,0,true,0}</strong></p> |
+| **Parameter** | **Type**  | **Description**                                                                                                                                                                                                                                                                                                                                                      |
+| ------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| publicKey     | bytes     | The validator’s public key.                                                                                                                                                                                                                                                                                                                                          |
+| operatorIds   | unit64\[] | List of cluster operators Ids.                                                                                                                                                                                                                                                                                                                                       |
+| sharesData    | bytes     | String of keyshares - obtained by splitting the validator key using the [SSV-Keys](../tools/ssv-keys-distributor.md) tool.                                                                                                                                                                                                                                           |
+| amount        | uint256   | <p>Amount of SSV token to be deposited as payment</p><p>(not mandatory).</p>                                                                                                                                                                                                                                                                                         |
+| cluster       | tuple\[]  | <p>Object containing the latest cluster snapshot data - obtained using the <a href="../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot">SSV Subgraph</a>, or <a href="../tools/cluster-scanner.md">SSV Scanner</a> tools<br><br><strong>If this is the 1st validator within a specific cluster (unique set of operators), use - {0,0,0,true,0}</strong></p> |
 
 Events:
 
@@ -221,13 +221,13 @@ Events:
 
 Description: Registers all the new validators provided as argument to a cluster of provided operators (ids + shares), **fails if** number of operatorIds is greater than 13..
 
-| **Parameter** | **Type**                   | **Description**                                                                                                                                                                                                                                                                                                                                                      |
-| ------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| publicKeys    | bytes\[]                   | An array of validators’ public keys.                                                                                                                                                                                                                                                                                                                                 |
-| operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                                                                                                                                                                                       |
-| sharesData    | bytes\[]                   | <p>An array of strings of keyshares - obtained by splitting the validator key using the <a href="../tools/ssv-keys-distributor.md">SSV-Keys</a> tool.<br><br>Each element in this array must relate to a public key in the <code>publicKeys</code> array.</p>                                                                                                        |
-| amount        | uint256 (casted to uint64) | <p>Amount of SSV token to be deposited as payment</p><p>(not mandatory).<br><br><em><strong>Amount must be shrinkable (divisible by 10000000)</strong></em></p>                                                                                                                                                                                                      |
-| cluster       | tuple\[]                   | <p>Object containing the latest cluster snapshot data - obtained using the <a href="../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot">SSV Subgraph</a>, or <a href="../tools/cluster-scanner.md">SSV Scanner</a> tools<br><br><strong>If this is the 1st validator within a specific cluster (unique set of operators), use - {0,0,0,true,0}</strong></p> |
+| **Parameter** | **Type**  | **Description**                                                                                                                                                                                                                                                                                                                                                      |
+| ------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| publicKeys    | bytes\[]  | An array of validators’ public keys.                                                                                                                                                                                                                                                                                                                                 |
+| operatorIds   | unit64\[] | List of cluster operators Ids.                                                                                                                                                                                                                                                                                                                                       |
+| sharesData    | bytes\[]  | <p>An array of strings of keyshares - obtained by splitting the validator key using the <a href="../tools/ssv-keys-distributor.md">SSV-Keys</a> tool.<br><br>Each element in this array must relate to a public key in the <code>publicKeys</code> array.</p>                                                                                                        |
+| amount        | uint256   | <p>Amount of SSV token to be deposited as payment</p><p>(not mandatory).</p>                                                                                                                                                                                                                                                                                         |
+| cluster       | tuple\[]  | <p>Object containing the latest cluster snapshot data - obtained using the <a href="../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot">SSV Subgraph</a>, or <a href="../tools/cluster-scanner.md">SSV Scanner</a> tools<br><br><strong>If this is the 1st validator within a specific cluster (unique set of operators), use - {0,0,0,true,0}</strong></p> |
 
 Events:
 
@@ -314,12 +314,12 @@ Please note: the number of validators that can be requested to exit from the bea
 
 Description: Deposits SSV token into a cluster, **will fail if** not enough tokens are approved.
 
-| **Parameter** | **Type**                   | **Description**                                                                                                                                                                                           |
-| ------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| owner         | address                    | The cluster owner address                                                                                                                                                                                 |
-| operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                            |
-| amount        | uint256 (casted to uint64) | <p>$SSV amount to be deposited.<br><br><em><strong>Amount must be shrinkable (divisible by 10000000)</strong></em></p>                                                                                    |
-| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot), or [SSV Scanner](../tools/cluster-scanner.md) tools. |
+| **Parameter** | **Type**  | **Description**                                                                                                                                                                                           |
+| ------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| owner         | address   | The cluster owner address                                                                                                                                                                                 |
+| operatorIds   | unit64\[] | List of cluster operators Ids.                                                                                                                                                                            |
+| amount        | uint256   | $SSV amount to be deposited.                                                                                                                                                                              |
+| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot), or [SSV Scanner](../tools/cluster-scanner.md) tools. |
 
 Events:
 
@@ -329,11 +329,11 @@ Events:
 
 Description: Withdraws a specified amount of SSV tokens from cluster of msg.sender, **will fail if** msg.sender tries to withdraw more than the cluster’s liquidation collateral. To withdraw the entire cluster balance and stop its operation use liquidate().
 
-| **Parameter** | **Type**                   | **Description**                                                                                                                                                                                           |
-| ------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                            |
-| amount        | uint256 (casted to uint64) | <p>Amount to be withdrawn.<br><br><em><strong>Amount must be shrinkable (divisible by 10000000)</strong></em></p>                                                                                         |
-| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot), or [SSV Scanner](../tools/cluster-scanner.md) tools. |
+| **Parameter** | **Type**  | **Description**                                                                                                                                                                                           |
+| ------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| operatorIds   | unit64\[] | List of cluster operators Ids.                                                                                                                                                                            |
+| amount        | uint256   | Amount to be withdrawn.                                                                                                                                                                                   |
+| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot), or [SSV Scanner](../tools/cluster-scanner.md) tools. |
 
 Events:
 
@@ -343,11 +343,11 @@ Events:
 
 Description: Reactivates a liquidated cluster, **will fail** if insufficient SSV tokens to cover the cluster’s liquidation collateral have been deposited.
 
-| **Parameter** | **Type**                   | **Description**                                                                                                                                                                                           |
-| ------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                            |
-| amount        | uint256 (casted to uint64) | <p>$SSV amount to be deposited.<br><br><em><strong>Amount must be shrinkable (divisible by 10000000)</strong></em></p>                                                                                    |
-| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot), or [SSV Scanner](../tools/cluster-scanner.md) tools. |
+| **Parameter** | **Type**  | **Description**                                                                                                                                                                                           |
+| ------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| operatorIds   | unit64\[] | List of cluster operators Ids.                                                                                                                                                                            |
+| amount        | uint256   | $SSV amount to be deposited.                                                                                                                                                                              |
+| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot), or [SSV Scanner](../tools/cluster-scanner.md) tools. |
 
 Events:
 
@@ -377,9 +377,9 @@ Events:
 
 Description: Updates network fee.
 
-| **Parameter** | **Type**                   | **Description**                                                                      |
-| ------------- | -------------------------- | ------------------------------------------------------------------------------------ |
-| networkFee    | uint256 (casted to uint64) | The fee charged by the network per validator (denominated as $SSV tokens per block). |
+| **Parameter** | **Type**                   | **Description**                                                                                                                                                                |
+| ------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| networkFee    | uint256 (casted to uint64) | <p>The fee charged by the network per validator (denominated as $SSV tokens per block).<br><br><em><strong>Amount must be shrinkable (divisible by 10000000)</strong></em></p> |
 
 Events:
 
