@@ -77,16 +77,3 @@ Below, an example of two dashboards, respectively monitoring the SSV Node and th
 
 {% file src="../../../.gitbook/assets/operator-performance.json" %}
 
-{% hint style="warning" %}
-It is very important **NOT** to use each JSON template "as is". They should be used as templates, and apply a few important changes to before importing them in Grafana:
-
-* search for the `templating` section and edit the value options for the `instance` variable to reflect the Prometheus service configuration (the `targets` variables in the configuration file, which relate to, the node container names, for example)
-* identify all of the `datasource` object instances in the file as shown below, and change the uuid to the one related to the Prometheus datasource added to Grafana.
-
-```json
-"datasource": {
-  "type": "prometheus",
-  "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
-},
-```
-{% endhint %}
