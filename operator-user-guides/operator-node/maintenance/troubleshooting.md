@@ -183,7 +183,7 @@ docker rm -f ssv_node
 Then pull the latest image from SSV:
 
 ```bash
-docker pull bloxstaking/ssv-node:latest
+docker pull ssvlabs/ssv-node:latest
 ```
 
 And finally... run the [creation command again from the top of this section](troubleshooting.md#create-and-start-the-node-using-docker) to create a new Docker container with the latest SSV image.
@@ -213,7 +213,7 @@ Then, you can generate a KeyStore using this command:
 docker run --name ssv-node-key-generation \
 -v "$(pwd)/password":/password \
 -v "$(pwd)/private-key":/private-key \
--it bloxstaking/ssv-node:latest /go/bin/ssvnode generate-operator-keys \
+-it ssvlabs/ssv-node:latest /go/bin/ssvnode generate-operator-keys \
 --password-file=/password  --operator-key-file=/private-key && \
 docker cp ssv-node-key-generation:/encrypted_private_key.json \
 ./encrypted_private_key.json && \
@@ -244,7 +244,7 @@ CONFIG_PATH=/config.yaml -p 13001:13001 -p 12001:12001/udp -p 15000:15000 \
 -v "$(pwd)":/data \
 -v "$(pwd)/password":/password \
 -v "$(pwd)/encrypted_private_key.json":/encrypted_private_key.json \
--it "bloxstaking/ssv-node:latest" make BUILD_PATH="/go/bin/ssvnode" start-node && \ 
+-it "ssvlabs/ssv-node:latest" make BUILD_PATH="/go/bin/ssvnode" start-node && \ 
 docker logs ssv_node --follow
 ```
 

@@ -147,7 +147,7 @@ The node Docker image will generate keys for you, then encrypt them with a passw
 
 {% code overflow="wrap" %}
 ```bash
-docker run --name ssv-node-key-generation -v <PATH_TO_PASSWORD_FILE>:/password -it "bloxstaking/ssv-node:latest" /go/bin/ssvnode generate-operator-keys --password-file=password && docker cp ssv-node-key-generation:/encrypted_private_key.json ./encrypted_private_key.json && docker rm ssv-node-key-generation
+docker run --name ssv-node-key-generation -v <PATH_TO_PASSWORD_FILE>:/password -it "ssvlabs/ssv-node:latest" /go/bin/ssvnode generate-operator-keys --password-file=password && docker cp ssv-node-key-generation:/encrypted_private_key.json ./encrypted_private_key.json && docker rm ssv-node-key-generation
 ```
 {% endcode %}
 {% endtab %}
@@ -234,7 +234,7 @@ The following command can generated unencrypted Operator <mark style="color:gree
 
 {% code overflow="wrap" %}
 ```bash
-docker run -it --rm bloxstaking/ssv-node:latest /go/bin/ssvnode generate-operator-keys
+docker run -it --rm ssvlabs/ssv-node:latest /go/bin/ssvnode generate-operator-keys
 ```
 {% endcode %}
 
@@ -345,7 +345,7 @@ To start your node, run the following Docker command in the same folder you crea
 -v "$(pwd)":/data \
 -v "$(pwd)/password":/password \
 -v "$(pwd)/encrypted_private_key.json":/encrypted_private_key.json \
--it "bloxstaking/ssv-node:latest" make BUILD_PATH="/go/bin/ssvnode" start-node
+-it "ssvlabs/ssv-node:latest" make BUILD_PATH="/go/bin/ssvnode" start-node
 </code></pre>
 
 {% hint style="info" %}
@@ -362,7 +362,7 @@ Here is an example of a `docker-compose.yml` file, where `<PATH_TO_CONFIG_YAML_F
 
 ```yaml
 ssv:
-  image: bloxstaking/ssv-node:latest
+  image: ssvlabs/ssv-node:latest
   ports:
     - 13001:13001
     - 12001:12001/udp
