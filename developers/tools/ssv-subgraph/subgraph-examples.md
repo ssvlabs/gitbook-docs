@@ -484,7 +484,7 @@ query ValidatorData {
   validator(
     id: "0x80006ff500fc36a6ae4ce7b643be3856ffe052ef36e5a6223dc9f7021b1dae02539c919751bba870f7ac9fccb86e06cf"
   ) {
-    active
+    removed
     operators(first: 10) {
       operatorId
     }
@@ -502,7 +502,7 @@ query ValidatorData {
   validator(
     id: "0x80006ff500fc36a6ae4ce7b643be3856ffe052ef36e5a6223dc9f7021b1dae02539c919751bba870f7ac9fccb86e06cf"
   ) {
-    active
+    removed
     operators(first: 10) {
       operatorId
     }
@@ -525,7 +525,7 @@ console.log(responseData);
 {% tab title="Curl" %}
 ```bash
 curl -X POST "https://api.studio.thegraph.com/proxy/71118/ssv-network-holesky/version/latest" -H "Content-Type: application/json"  -d '{
-    "query": "query ValidatorData { validator(id: \"0x80006ff500fc36a6ae4ce7b643be3856ffe052ef36e5a6223dc9f7021b1dae02539c919751bba870f7ac9fccb86e06cf\") {    active    operators(first: 10) { operatorId }}}"
+    "query": "query ValidatorData { validator(id: \"0x80006ff500fc36a6ae4ce7b643be3856ffe052ef36e5a6223dc9f7021b1dae02539c919751bba870f7ac9fccb86e06cf\") {    removed    operators(first: 10) { operatorId }}}"
 }'
 ```
 {% endtab %}
@@ -538,7 +538,7 @@ Output
 {
   "data": {
     "validator": {
-      "active": false,
+      "removed": true,
       "operators": [
         {
           "operatorId": "10"
@@ -660,9 +660,10 @@ Returns validator count, fee, and active status.
 query ValidatorCountPerOperator {
   operator(id: "10") {
     fee
-    active
+    removed
     totalWithdrawn
     isPrivate
+    validatorCount
     whitelisted {
       id
     }
@@ -673,15 +674,15 @@ query ValidatorCountPerOperator {
 {% endtab %}
 
 {% tab title="Javascript" %}
-```javascript
-const url = "https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest";
+<pre class="language-javascript"><code class="lang-javascript">const url = "https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest";
 const query = `
-query ValidatorCountPerOperator {
-  operator(id: "10") {
+<strong>query ValidatorCountPerOperator {
+</strong>  operator(id: "10") {
     fee
-    active
+    removed
     totalWithdrawn
     isPrivate
+    validatorCount
     whitelisted {
       id
     }
@@ -698,13 +699,13 @@ const response = await fetch(url, {
 
 const responseData = await response.json();
 console.log(responseData);
-```
+</code></pre>
 {% endtab %}
 
 {% tab title="Curl" %}
 ```bash
 curl -X POST "https://api.studio.thegraph.com/proxy/71118/ssv-network-holesky/version/latest" -H "Content-Type: application/json"  -d '{
-    "query": "query ValidatorCountPerOperator {  operator(id: "10") {    fee    active    totalWithdrawn    isPrivate    whitelisted {      id    }  }}"
+    "query": "query ValidatorCountPerOperator {  operator(id: "10") {    fee    removed    totalWithdrawn    validatorCount    isPrivate    whitelisted {      id    }  }}"
 }'
 ```
 {% endtab %}
@@ -717,10 +718,11 @@ Output
 {
   "data": {
     "operator": {
-      "active": true,
       "fee": "1913210000000",
-      "isPrivate": false,
+      "removed": false,
       "totalWithdrawn": "0",
+      "isPrivate": false,
+      "validatorCount": "197",
       "whitelisted": []
     }
   }
