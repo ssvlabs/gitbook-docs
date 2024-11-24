@@ -45,7 +45,7 @@ $$
 Legend:
 
 * $$\Delta_{network\;fee}$$ - Change in network fees paid since the last snapshot
-* $$nfi_p$$ - Protocol Network Fee Index, the latest protocol-wide network fee index (see here)
+* $$nfi_p$$ - Protocol Network Fee Index, the latest protocol-wide network fee index ([see here](../../../learn/protocol-overview/tokenomics/payments.md#indexes))
 * $$b$$ - Block number of the latest blockchain block, for which the cluster balance needs to be calculated
 * $$nf$$ - The current network fee
 * $$nfb_{p}$$ - The block number at which the Protocol Network Fee Index $$nfi_p$$ was taken
@@ -61,8 +61,8 @@ $$
 
 Legend (the $$_n$$ nomenclature designates the $$nth$$ operator in this cluster):
 
-* $$\Delta_{operator\;fee}$$ - Change in network fees paid since the last snapshot
-* $$ofi_n$$ - OperatorNetwork Fee Index, the latest protocol-wide network fee index (see here)
+* $$\Delta_{operator\;fee}$$ - Change in operator fees paid since the last snapshot
+* $$ofi_n$$ - Operator Network Fee Index, the latest protocol-wide operator fee index ([see here](../../../learn/protocol-overview/tokenomics/payments.md#indexes))
 * $$b$$ - Block number of the latest blockchain block, for which the cluster balance needs to be calculated
 * $$ofb_n$$ - The block number at which the Operator Network Fee Index $$ofi_n$$ was taken
 * $$of_{n}$$ - The current operator fee, for the $$nth$$ operator in this cluster
@@ -84,7 +84,7 @@ $$
 
 * Legend
   * $$Residual\;Balance$$ - Amount of $SSV in the cluster balance, exceeding the [Liquidation Collateral](../../protocol-overview/tokenomics/liquidations.md#liquidation-collateral)
-  * $$Burn\;Rate_{cluster}$$ - the rate at which a cluster spends ( denominated in _SSV tokens per block,_ [see here](../../protocol-overview/tokenomics/liquidations.md#burn-rate)).
+  * $$Burn\;Rate_{cluster}$$ - the rate at which a cluster spends (denominated in _SSV tokens per block,_ [see here](../../protocol-overview/tokenomics/liquidations.md#burn-rate)).
 
 ### Deposits <a href="#id-2a5wkxdov2fm" id="id-2a5wkxdov2fm"></a>
 
