@@ -30,24 +30,53 @@ scrape_configs:
     static_configs:
       - targets:
         # change the targets according to your setup
+        # if running prometheus as docker container on Linux
+          - ["ssv_node:15000"]
         # if running prometheus from source, or as executable:
         # - <container_name>:15000 (i.e.: ssv_node:15000, check with docker ps command)
-        # if running prometheus as docker container:
-        - host.docker.internal:15000
+        # if running prometheus as docker on MacOS
+        # - host.docker.internal:15000
+
   - job_name: ssv_health
     metrics_path: /health
     static_configs:
       - targets:
         # change the targets according to your setup
+        # if running prometheus as docker container on Linux
+          - ["ssv_node:15000"]
         # if running prometheus from source, or as executable:
         # - <container_name>:15000 (i.e.: ssv_node:15000, check with docker ps command)
-        # if running prometheus as docker container:
-        - host.docker.internal:15000
-
+        # if running prometheus as docker on MacOS
+        # - host.docker.internal:15000
 ```
 {% endcode %}
 
-And to launch the Prometheus service as a Docker container as well ([using the official Docker image, as shown here](https://hub.docker.com/r/prom/prometheus)), use this command, where `/path/to/prometheus.yml` is the path and filename of the configuration file itself:
+And to launch the Prometheus service as a Docker container as well ([using the official Docker image, as shown here](https://hub.docker.com/r/prom/prometheus)):
+
+{% tabs %}
+{% tab title="docker compose" %}
+If you used docker compose to run your SSV node — add the following part after the `services:` to your `docker-compose.yml` file:
+
+{% code overflow="wrap" %}
+```yaml
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - /path/to/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+    restart: always
+    container_name: prometheus
+    networks:
+      - ssv
+```
+{% endcode %}
+
+Then run `docker compose up prometheus`
+{% endtab %}
+
+{% tab title="docker run" %}
+Use this command, where `/path/to/prometheus.yml` is the path and filename of the configuration file itself:
 
 ```bash
 docker run \
@@ -55,6 +84,10 @@ docker run \
     -v /path/to/prometheus.yml:/etc/prometheus/prometheus.yml \
     prom/prometheus
 ```
+
+We recommend using `docker compose` as it makes the setup easier. If you choose to use this command, note that you also have to add both Prometheus and SSV to the same custom Docker Network in order for them to communicate between each other. This is explained in [Docker Networking documentation](https://docs.docker.com/engine/network/).&#x20;
+{% endtab %}
+{% endtabs %}
 
 {% hint style="info" %}
 If you are not running Prometheus as a Docker container, but as an executable, change the \`targets\` in the config file to reflect the correct networking connections. In the case where the SSV Node container is called `ssv_node` the targets should look like this:
@@ -69,7 +102,49 @@ Use the `docker ps` command to verify the name of the SSV Node container.
 
 ### Grafana monitoring
 
-After successfully configuring a Prometheus service, and [adding it as a data source to Grafana](https://grafana.com/docs/grafana/latest/datasources/prometheus/configure-prometheus-data-source/) (read [here for Grafana Cloud](https://grafana.com/docs/grafana-cloud/connect-externally-hosted/data-sources/prometheus/configure-prometheus-data-source/)), a Grafana dashboard can be created.
+After successfully configuring a Prometheus service, and [adding it as a data source to Grafana](https://grafana.com/docs/grafana/latest/datasources/prometheus/configure-prometheus-data-source/) (read [here for Grafana Cloud](https://grafana.com/docs/grafana-cloud/connect-externally-hosted/data-sources/prometheus/configure-prometheus-data-source/)), a Grafana dashboard can be created.&#x20;
+
+You will also need to expose the <mark style="color:green;">**9090 TCP**</mark> port on your firewall, otherwise Grafana won't be able to reach Prometheus.
+
+Alternatively, you can run your Grafana locally, which requires exposing the <mark style="color:green;">**3000 TCP**</mark> port on your firewall
+
+{% tabs %}
+{% tab title="docker compose" %}
+If you used docker compose to run your SSV node — add the following part after the `services:` to your `docker-compose.yml` file:
+
+{% code overflow="wrap" %}
+```yaml
+   grafana:
+      image: grafana/grafana-enterprise
+      container_name: grafana
+      environment:
+         - GF_INSTALL_PLUGINS=grafana-clock-panel
+      restart: unless-stopped
+      ports:
+         - 3000:3000
+      networks:
+         - ssv
+      volumes:
+         - /path/to/grafana:/var/lib/grafana #Change to an actual path to grafana directory
+```
+{% endcode %}
+
+Then run `docker compose up grafana`
+{% endtab %}
+
+{% tab title="docker run" %}
+Change `/path/to/grafana` to an actual path on the machine and run this command:
+
+```bash
+docker run -d -p 3000:3000 --name=grafana \
+  --volume /path/to/grafana:/var/lib/grafana \
+  -e "GF_INSTALL_PLUGINS=grafana-clock-panel" \
+  grafana/grafana-enterprise
+```
+
+We recommend using `docker compose` as it makes the setup easier. If you choose to use this command, note that you also have to add Prometheus, Grafana, and SSV to the same custom Docker Network in order for them to communicate between each other. This is explained in [Docker Networking documentation](https://docs.docker.com/engine/network/).&#x20;
+{% endtab %}
+{% endtabs %}
 
 Below, an example of two dashboards, respectively monitoring the SSV Node and the performance of an Operator:
 

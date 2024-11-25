@@ -31,70 +31,6 @@ It is advised launching the tool as a Docker image as it is the most convenient 
 {% endhint %}
 
 {% tabs %}
-{% tab title="Docker and YAML file" %}
-All of the necessary configuration information can be provided in a YAML file.
-
-A good way to manage all the necessary files (`encrypted_private_key.json`, `password`) is to store them in a single folder (in this case `operator-config`), together with the `operator.yaml` configuration file, like so:
-
-```bash
-ssv@localhost:~/ssv-dkg# tree operator-config
-operator-config
-├── encrypted_private_key.json
-├── operator.yaml
-└── password
-
-1 directory, 3 files
-```
-
-With this configuration, a typical configuration file would look like this:
-
-{% code title="operator.yaml" %}
-```yaml
-privKey: /data/encrypted_private_key.json
-privKeyPassword: /data/password
-operatorID: <YOUR_OPERATOR_ID>
-port: 3030
-logLevel: info
-logFormat: json
-logLevelFormat: capitalColor
-logFilePath: /data/debug.log
-outputPath: /data/output
-```
-{% endcode %}
-
-{% hint style="info" %}
-In the config file above, `/data/` represents the container's shared volume created by the `docker` command itself with the `-v` option.
-{% endhint %}
-
-Under the assumption that all the necessary files (`encrypted_private_key.json`, `operator.yaml`, `password`) are under the same folder (represented below with `<PATH_TO_FOLDER_WITH_CONFIG_FILES>`) you can run the tool using the command below:
-
-{% code overflow="wrap" %}
-```bash
-docker run -u $(id -u):$(id -g) --restart unless-stopped --name ssv_dkg -p 3030:3030 -v "<PATH_TO_FOLDER_WITH_CONFIG_FILE>":/data -it "bloxstaking/ssv-dkg:latest" start-operator --configPath /data/operator.yaml
-```
-{% endcode %}
-
-{% hint style="info" %}
-A quick explanation of the command flags is due:
-
-* `-u` flag makes sure the container will write any output as the current user
-* `--restart unless-stopped` makes sure that, in case of a crash, the container will automatically restart. It will only stop when manually stopped
-* `--name` provisions the container with the specific name, so it's easier to find, with `docker ps`
-{% endhint %}
-
-Just **make sure to substitute** `<PATH_TO_FOLDER_WITH_CONFIG_FILES>` with the actual folder containing all the files (e.g. `/home/my-user/operator-config/`).
-
-You can, of course, change the configuration above to one that suits you better, just be mindful about changing the path references in the docker command **and** in the `operator.yaml` file as well. The two need to be consistent with each other.
-
-{% hint style="info" %}
-This command will keep the terminal busy, showing the container's logs. It is useful to make sure that the tool start up sequence runs correctly.
-
-You can detach the terminal at any time by hitting `Ctrl-c` key combination, or closing the terminal itself. The tool will be stopped, but it will restart automatically, thanks to the `--restart unless-stopped` startup parameter.
-
-If you are sure that the tool works, and don't care about the logs, you can add the `-d` parameter right after `docker run`.
-{% endhint %}
-{% endtab %}
-
 {% tab title="docker-compose and YAML file" %}
 All of the necessary configuration information can be provided in a YAML file.
 
@@ -162,7 +98,7 @@ You can, of course, change the configuration above to one that suits you better,
 In order to launch the container, you would need to run this command:
 
 ```bash
-docker compose up
+sudo docker compose up
 ```
 
 {% hint style="info" %}
@@ -170,7 +106,72 @@ This command will keep the terminal busy, showing the container's logs. It is us
 
 You can detach the terminal at any time by hitting `Ctrl-c` key combination, or closing the terminal itself. The tool will be stopped, but it will restart automatically, thanks to the `restart: "unless-stopped"` startup parameter.
 
-If you are sure that the tool works, and don't care about the logs, you can add the `-d` parameter right after `docker compose up`.
+If you are sure that the tool works, and don't care about the logs, you can add the `-d` parameter right after `sudo docker compose up`.
+{% endhint %}
+{% endtab %}
+
+{% tab title="Docker and YAML file" %}
+All of the necessary configuration information can be provided in a YAML file.
+
+A good way to manage all the necessary files (`encrypted_private_key.json`, `password`) is to store them in a single folder (in this case `operator-config`), together with the `operator.yaml` configuration file, like so:
+
+```bash
+ssv@localhost:~/ssv-dkg# tree operator-config
+operator-config
+├── encrypted_private_key.json
+├── operator.yaml
+└── password
+
+1 directory, 3 files
+```
+
+With this configuration, a typical configuration file would look like this:
+
+{% code title="operator.yaml" %}
+```yaml
+privKey: /data/encrypted_private_key.json
+privKeyPassword: /data/password
+operatorID: <YOUR_OPERATOR_ID>
+port: 3030
+logLevel: info
+logFormat: json
+logLevelFormat: capitalColor
+logFilePath: /data/debug.log
+outputPath: /data/output
+```
+{% endcode %}
+
+{% hint style="info" %}
+In the config file above, `/data/` represents the container's shared volume created by the `docker` command itself with the `-v` option.
+{% endhint %}
+
+Under the assumption that all the necessary files (`encrypted_private_key.json`, `operator.yaml`, `password`) are under the same folder (represented below with `<PATH_TO_FOLDER_WITH_CONFIG_FILES>`) you can run the tool using the command below:
+
+{% code overflow="wrap" %}
+```bash
+sudo docker run -u $(id -u):$(id -g) --restart unless-stopped --name ssv_dkg -p 3030:3030 -v "<PATH_TO_FOLDER_WITH_CONFIG_FILE>":/data -it "bloxstaking/ssv-dkg:latest" start-operator --configPath /data/operator.yaml
+```
+{% endcode %}
+
+{% hint style="info" %}
+A quick explanation of the command flags is due:
+
+* `-u` flag makes sure the container will write any output as the current user
+* `--restart unless-stopped` makes sure that, in case of a crash, the container will automatically restart. It will only stop when manually stopped
+* `--name` provisions the container with the specific name, so it's easier to find, with `docker ps`
+* `sudo` is required for the dkg node to create the necessary directory and files under `/tls`.
+{% endhint %}
+
+Just **make sure to substitute** `<PATH_TO_FOLDER_WITH_CONFIG_FILES>` with the actual folder containing all the files (e.g. `/home/my-user/operator-config/`).
+
+You can, of course, change the configuration above to one that suits you better, just be mindful about changing the path references in the docker command **and** in the `operator.yaml` file as well. The two need to be consistent with each other.
+
+{% hint style="info" %}
+This command will keep the terminal busy, showing the container's logs. It is useful to make sure that the tool start up sequence runs correctly.
+
+You can detach the terminal at any time by hitting `Ctrl-c` key combination, or closing the terminal itself. The tool will be stopped, but it will restart automatically, thanks to the `--restart unless-stopped` startup parameter.
+
+If you are sure that the tool works, and don't care about the logs, you can add the `-d` parameter right after `docker run`.
 {% endhint %}
 {% endtab %}
 

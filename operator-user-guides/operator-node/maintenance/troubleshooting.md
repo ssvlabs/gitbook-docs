@@ -66,17 +66,11 @@ Below, an example of the same report, from a node in bad state:
 
 * If your node is not participating in cluster consensus, please verify that the `Network` has the correct value for the blockchain you are trying to operate on.
 
-<!---->
-
-* Next, verify in the SSV node logs that the connection to execution and beacon node has been established.
-
-<!---->
+- Next, verify in the SSV node logs that the connection to execution and beacon node has been established.
 
 * If the SSV node logs don't report any errors, please verify the clients logs themselves. If the disk they are running on does not support fast IOPS, they might struggle to stay in sync with the blockchain
 
-<!---->
-
-* It is finally possible that the clients don't report any errors, but the issue persists. In this cases, try and re-sync execution and/or beacon client(s), to fix potential initialization issues.
+- It is finally possible that the clients don't report any errors, but the issue persists. In this cases, try and re-sync execution and/or beacon client(s), to fix potential initialization issues.
 
 </details>
 
@@ -325,6 +319,16 @@ In the example above, the `LogLevel` variable in [`config.yaml` configuration fi
 ```
 
 This error could be caused by using multiple SSV nodes within one Nimbus setup. It is advised to only run one SSV node per Nimbus instance.
+
+***
+
+### `ERROR P2PNetwork`
+
+```bash
+ERROR P2PNetwork unable to create external multiaddress {"error": "invalid ip address provided: ...
+```
+
+This error signalizes the node could not figure the public IP address of your node on a startup. You need to provide your SSV Node's address in `p2p: HostAddress:` variable in [your `config.yaml` file.](https://docs.ssv.network/operator-user-guides/operator-node/installation#peer-to-peer-ports-configuration-and-firewall)
 
 ***
 

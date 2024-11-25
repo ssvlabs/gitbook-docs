@@ -147,9 +147,11 @@ The node Docker image will generate keys for you, then encrypt them with a passw
 
 {% code overflow="wrap" %}
 ```bash
-docker run --name ssv-node-key-generation -v <PATH_TO_PASSWORD_FILE>:/password -it "ssvlabs/ssv-node:latest" /go/bin/ssvnode generate-operator-keys --password-file=password && docker cp ssv-node-key-generation:/encrypted_private_key.json ./encrypted_private_key.json && docker rm ssv-node-key-generation
+docker run --name ssv-node-key-generation -v <PATH_TO_PASSWORD>:/password -it "ssvlabs/ssv-node:latest" /go/bin/ssvnode generate-operator-keys --password-file=password && docker cp ssv-node-key-generation:/encrypted_private_key.json ./encrypted_private_key.json && docker rm ssv-node-key-generation
 ```
 {% endcode %}
+
+`<PATH_TO_PASSWORD>` should be changed to a path to file, e.g. `/path/to/password`
 {% endtab %}
 
 {% tab title="Build from Source" %}
@@ -214,6 +216,10 @@ Here is an example of the generated file.
 
 {% hint style="info" %}
 Pay close attention to the `pubKey` field, as the name says, it contains the public key, which is needed to [register the Operator on the ssv.network](../operator-management/registration.md).
+{% endhint %}
+
+{% hint style="danger" %}
+Create backups of your `encrypted_private_key.json` and `password` files on a separate device. If any of these files are lost, you will not be able to access your operator ever again.
 {% endhint %}
 
 <details>
@@ -297,6 +303,7 @@ ssv:
   
   ValidatorOptions:
     # Whether to enable MEV block production. Requires the connected Beacon node to be MEV-enabled.
+    # Please see https://docs.ssv.network/operator-user-guides/operator-node/configuring-mev
     BuilderProposals: false
 
 eth2:
@@ -321,6 +328,8 @@ KeyStore:
 
 # This enables monitoring at the specified port, see https://docs.ssv.network/run-a-node/operator-node/maintenance/monitoring
 MetricsAPIPort: 15000
+# This enables node health endpoint for troubleshooting, see https://docs.ssv.network/operator-user-guides/operator-node/maintenance/troubleshooting
+SSVAPIPort: 16000
 ```
 
 {% hint style="warning" %}
@@ -336,11 +345,55 @@ This does not increase validator resiliency and **could lead to validator slashi
 {% endhint %}
 
 {% tabs %}
+{% tab title="docker compose" %}
+Here is an example of a `docker-compose.yml` file, where `<PATH_TO_CONFIG_YAML_FILE>`, `<PATH_TO_PASSWORD_FILE>`, `<PATH_TO_ENCRYPTED_KEY_FILE>` are the paths to the `config.yaml`, `password`, `encrypted_private_key.json` files you have created in the previous steps:
+
+```yaml
+services:
+  ssv:
+    image: ssvlabs/ssv-node:latest
+    ports:
+      - 13001:13001
+      - 12001:12001/udp
+      - 15000:15000
+      - 16000:16000
+    command:
+        make BUILD_PATH="/go/bin/ssvnode" start-node
+    volumes:
+      - <PATH_TO_CONFIG_YAML_FILE>:/config/config.yaml
+      - <PATH_TO_OUTPUT_FOLDER>:/data
+      - <PATH_TO_PASSWORD_FILE>:/password
+      - <PATH_TO_ENCRYPTED_KEY_FILE>:/encrypted_private_key.json
+    environment:
+      - CONFIG_PATH=/config/config.yaml
+    container_name: ssv_node
+    restart: unless-stopped
+    networks:
+      - ssv
+
+networks:
+  ssv:
+    name: ssv
+    driver: bridge
+```
+
+Then run `docker compose up` command from the same directory as your `docker-compose.yml`.
+
+{% hint style="info" %}
+This command will keep the terminal busy, showing the container's logs. It is useful to make sure that the tool start up sequence runs correctly.
+
+You can detach the terminal at any time by hitting `Ctrl-c` key combination, or closing the terminal itself. The tool will be stopped, but it will restart automatically, thanks to the `restart: "unless-stopped"` startup parameter.
+
+If you are sure that the tool works, and don't care about the logs, you can add the `-d` parameter right after `docker compose up`.
+{% endhint %}
+{% endtab %}
+
 {% tab title="Docker" %}
 To start your node, run the following Docker command in the same folder you created the `config.yaml` file in the previous step:
 
 <pre class="language-bash"><code class="lang-bash"><strong>docker run --restart unless-stopped --name ssv_node -e \
-</strong>CONFIG_PATH=/config.yaml -p 13001:13001 -p 12001:12001/udp -p 15000:15000 \
+</strong>CONFIG_PATH=/config.yaml \
+ -p 13001:13001 -p 12001:12001/udp -p 15000:15000 -p 16000:16000 \
 -v "$(pwd)/config.yaml":/config.yaml \
 -v "$(pwd)":/data \
 -v "$(pwd)/password":/password \
@@ -354,38 +407,6 @@ This command will keep the terminal busy, showing the container's logs. It is us
 You can detach the terminal at any time by hitting `Ctrl-c` key combination, or closing the terminal itself. The node will be stopped, but it will restart automatically, thanks to the `--restart unless-stopped` startup parameter.
 
 If you are sure that the node works, and don't care about the logs, you can add the `-d` parameter right after `docker run`.
-{% endhint %}
-{% endtab %}
-
-{% tab title="docker-compose" %}
-Here is an example of a `docker-compose.yml` file, where `<PATH_TO_CONFIG_YAML_FILE>`, `<PATH_TO_PASSWORD_FILE>`, `<PATH_DO_ENCRYPTED_KEY_FILE>` are the paths to the `config.yaml`, `password`, `encrypted_private_key.json` files you have created in the previous steps:
-
-```yaml
-ssv:
-  image: ssvlabs/ssv-node:latest
-  ports:
-    - 13001:13001
-    - 12001:12001/udp
-    - 15000:15000
-  command:
-      make BUILD_PATH="/go/bin/ssvnode" start-node
-  volumes:
-    - <PATH_TO_CONFIG_YAML_FILE>:/config/config.yaml
-    - <PATH_TO_OUTPUT_FOLDER>:/data
-    - <PATH_TO_PASSWORD_FILE>:/password
-    - <PATH_DO_ENCRYPTED_KEY_FILE>:/encrypted_private_key.json
-  environment:
-    - CONFIG_PATH=/config/config.yaml
-  container_name: ssv_node
-  restart: unless-stopped
-```
-
-{% hint style="info" %}
-This command will keep the terminal busy, showing the container's logs. It is useful to make sure that the tool start up sequence runs correctly.
-
-You can detach the terminal at any time by hitting `Ctrl-c` key combination, or closing the terminal itself. The tool will be stopped, but it will restart automatically, thanks to the `restart: "unless-stopped"` startup parameter.
-
-If you are sure that the tool works, and don't care about the logs, you can add the `-d` parameter right after `docker compose up`.
 {% endhint %}
 {% endtab %}
 
@@ -423,9 +444,9 @@ As a small note, this compiled binary could be used to launch the binary [as a `
 {% endtab %}
 {% endtabs %}
 
-### Peer-to-peer ports configuration and firewall
+### Peer-to-peer ports configuration and firewall <a href="#peer-to-peer-ports-configuration-and-firewall" id="peer-to-peer-ports-configuration-and-firewall"></a>
 
-When you set up your firewall on your SSV node machine, make sure to expose the ports that you set in the [container creation command](installation.md#create-and-start-the-node-using-docker). The defaults are <mark style="color:green;">**12001 UDP**</mark> and <mark style="color:green;">**13001 TCP**</mark>.
+When you set up your firewall on your SSV node machine, make sure to expose the ports that you set in the [container creation command](installation.md#create-and-start-the-node-using-docker). The defaults are <mark style="color:green;">**12001 UDP**</mark> and <mark style="color:green;">**13001 TCP**</mark>; additional ones are <mark style="color:green;">**15000 TCP**</mark> for Metrics and <mark style="color:green;">**16000 TCP**</mark> for Health endpoint.
 
 If you don't want to use the default ports, they can be changed in your `config.yaml` file. Be aware, the **must be changed on the container creation command as well** (simply changing the host port mappings on the Docker command isn't enough!).
 
