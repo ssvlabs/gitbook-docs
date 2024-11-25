@@ -58,6 +58,93 @@ Below, an example of the same report, from a node in bad state:
 }
 ```
 
+## SSV-Pulse benchmarking tool
+
+Our team developed a tool to ease your troubleshooting process, as it analyses SSV Node, Consensus Node, and Execution Node at the same time. You can find more details on [ssv-pulse GitHub page](https://github.com/ssvlabs/ssv-pulse).
+
+To use this tool you can use docker compose or a docker command below:
+
+{% tabs %}
+{% tab title="docker compose" %}
+If you used docker compose to run your SSV node — add the following part after the `services:` to your `docker-compose.yml` file:
+
+{% code overflow="wrap" %}
+```yaml
+  ssv-pulse:
+    container_name: ssv-pulse
+    image: ghcr.io/ssvlabs/ssv-pulse:latest
+    command: 
+      - 'benchmark'
+      - '--consensus-addr=<YOUR_ADDRESS_HERE>' # Change to your Consensus Node's address, e.g. http://lighthouse:5052
+      - '--execution-addr=<YOUR_ADDRESS_HERE>' # Change to your Execution Node's address, e.g. http://geth:8545
+      - '--ssv-addr=http://ssv_node:16000' #Or Change to your SSV Node's address with SSVAPIPort
+      - '--duration=60m'
+      # - '--network=holesky' # Add this if you run a Holesky Node
+      # - '--platform linux/arm64' # Add this if you run on an arm64 machine
+    networks:
+      - ssv
+    pull_policy: always
+```
+{% endcode %}
+
+Then run `docker compose up ssv-pulse` to run the benchmark tool.
+{% endtab %}
+
+{% tab title="docker run" %}
+Use the following command to run the benchmark tool:
+
+```bash
+docker run --rm --pull=always --name ssv-pulse \
+ghcr.io/ssvlabs/ssv-pulse:latest benchmark \
+--consensus-addr=REPLACE_WITH_ADDR \
+--execution-addr=REPLACE_WITH_ADDR \
+--ssv-addr=REPLACE_WITH_ADDR \
+--duration=60m
+```
+
+Replace the various addresses with the respective endpoints, e.g. [http://lighthouse:5052](http://lighthouse:5052/), [http://geth:8545](http://geth:8545/), and SSV [http://ssv\_node:16000](http://ssv:16000/) (or your other SSVAPIPort).
+
+If you run a Holesky Node you should add `--network=holesky` to the command.
+
+If you run this on a arm64 machine you should add `--platform linux/arm64` to the command.&#x20;
+{% endtab %}
+{% endtabs %}
+
+The tool will run for 1 hour and provide you with results as a table. An example of output is below:
+
+```log
+┌────────────────┬─────────────┬──────────────────────────────────────────────────────────────┬────────────┬───────────────────────────────────────────────────────────┐
+│   Group Name   │ Metric Name │                            Value                             │   Health   │                         Severity                          │
+├────────────────┼─────────────┼──────────────────────────────────────────────────────────────┼────────────┼───────────────────────────────────────────────────────────┤
+│ Infrastructure │     CPU     │     user_P50=13.54%, system_P50=1.80%, total=87903220930     │ Healthy✅  │                 System: None, User: None                  │
+├────────────────┼─────────────┼──────────────────────────────────────────────────────────────┼────────────┼───────────────────────────────────────────────────────────┤
+│ Infrastructure │   Memory    │         total_P50=128580.05MB, used_P50=54250.51MB,          │ Healthy✅  │     Cached: None, Used: None, Free: None, Total: None     │
+│                │             │          cached_P50=66262.48MB, free_P50=4250.07MB           │            │                                                           │
+├────────────────┼─────────────┼──────────────────────────────────────────────────────────────┼────────────┼───────────────────────────────────────────────────────────┤
+│   Consensus    │   Client    │ teku/v24.10.0/linux-x86_64/-eclipseadoptium-openjdk64bitser- │ Healthy✅  │                       Version: None                       │
+│                │             │                        vervm-java-21                         │            │                                                           │
+├────────────────┼─────────────┼──────────────────────────────────────────────────────────────┼────────────┼───────────────────────────────────────────────────────────┤
+│   Consensus    │   Latency   │        min=415.643µs, p10=720.518µs, p50=2.856258ms,         │ Healthy✅  │                      Duration: None                       │
+│                │             │               p90=3.519113ms, max=595.473628ms               │            │                                                           │
+├────────────────┼─────────────┼──────────────────────────────────────────────────────────────┼────────────┼───────────────────────────────────────────────────────────┤
+│   Consensus    │    Peers    │         min=276, p10=287, p50=299, p90=300, max=300          │ Healthy✅  │                        Count: None                        │
+├────────────────┼─────────────┼──────────────────────────────────────────────────────────────┼────────────┼───────────────────────────────────────────────────────────┤
+│   Consensus    │ Attestation │       missed_attestations=0, unready_blocks_200_ms=0,        │ Healthy✅  │ Correctness: None, ReceivedBlock: None, FreshAttestation: │
+│                │             │                       missed_blocks=1                        │            │                  None, MissedBlock: None                  │
+│                │             │         fresh_attestations=296 received_blocks=297,          │            │                                                           │
+│                │             │                     correctness=99.66 %                      │            │                                                           │
+├────────────────┼─────────────┼──────────────────────────────────────────────────────────────┼────────────┼───────────────────────────────────────────────────────────┤
+│   Execution    │    Peers    │         min=232, p10=238, p50=245, p90=250, max=253          │ Healthy✅  │                        Count: None                        │
+├────────────────┼─────────────┼──────────────────────────────────────────────────────────────┼────────────┼───────────────────────────────────────────────────────────┤
+│      SSV       │    Peers    │            min=0, p10=0, p50=0, p90=0, max=0                 │ Unhealthy⚠️ │                        Count: High                        │
+├────────────────┼─────────────┼──────────────────────────────────────────────────────────────┼────────────┼───────────────────────────────────────────────────────────┤
+│      SSV       │ Connections │        inbound_min=0, inbound_P50=0, outbound_min=0,         │ Unhealthy⚠️ │    OutboundConnections: High, InboundConnections: High    │
+│                │             │                       outbound_P50=60                        │            │                                                           │
+└────────────────┴─────────────┴──────────────────────────────────────────────────────────────┴────────────┴───────────────────────────────────────────────────────────┘
+```
+
+The results signalize low Peer connection on SSV Node, this most probably caused by closed ports.
+
 ## FAQ
 
 <details>
