@@ -24,7 +24,7 @@ For reference, the [ETHStaker](https://github.com/eth-educators/ethstaker-guides
 
 Update the `config.yaml` file in the SSV node to enable MEV for your operator:
 
-```
+```yaml
 ssv:
     ValidatorOptions:
         BuilderProposals: true
