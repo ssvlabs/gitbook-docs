@@ -58,7 +58,7 @@ Please make sure to use the _Filter_ button to select Operators that have enable
 
 <figure><img src="../../.gitbook/assets/distributed_key_generation_1.png" alt=""><figcaption></figcaption></figure>
 
-![](../../.gitbook/assets/distributed\_key\_generation\_2.png)
+![](../../.gitbook/assets/distributed_key_generation_2.png)
 
 {% hint style="info" %}
 **Important:** Verified Operators (VOs) are operators that have been granted the **Verified** status by the DAO for completing KYC and providing consistent high-quality service. You can sort the operator list by their daily performance, yearly fee, and # of validators they manage. You can also filter to view only Verified Operators.
@@ -104,7 +104,7 @@ Following the successful completion of the DKG ceremony, several files have been
 * `keyshares-[validator_pubkey].json` - this file contains the keyshares necessary to [register the validator on the ssv.network](distributing-a-validator.md)
 * `encrypted_private_key-[validator_pubkey].json` and `password-[validator_pubkey]` (not present if the `generateInitiatorKey` option is not used) - these files contain the keys used to sign messages during the ceremony (sometimes called ceremony identifiers), which are **crucial for resharing** your validator to a different set of operators in the future.
 
-Before proceeding, please make sure to perform the transaction on the Deposit Contract for the network you have chosen (e.g. Ethereum mainnet, Goerli, Holesky, ...) and [activate the validator on the Beacon layer by following this guide.](creating-a-new-validator.md#activate-validator-keys)
+Before proceeding, please make sure to perform the transaction on the Deposit Contract for the network you have chosen (Mainnet or Holesky) and [activate the validator on the Beacon layer by following this guide.](creating-a-new-validator.md#activate-validator-keys)
 
 At this point, click the _Next_ button and upload the generated `keyshares-[validator_pubkey].json` file in the following screen.
 

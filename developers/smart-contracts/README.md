@@ -12,13 +12,7 @@
 
 #### Holesky Testnet
 
-
-
 <table><thead><tr><th width="283">Contract</th><th>Address</th></tr></thead><tbody><tr><td>SSV Token</td><td><a href="https://holesky.etherscan.io/address/0xad45A78180961079BFaeEe349704F411dfF947C6">0xad45A78180961079BFaeEe349704F411dfF947C6</a></td></tr><tr><td>SSVNetwork</td><td><a href="https://holesky.etherscan.io/address/0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA">0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA</a></td></tr><tr><td>SSVNetworkViews</td><td><a href="https://holesky.etherscan.io/address/0x352A18AEe90cdcd825d1E37d9939dCA86C00e281">0x352A18AEe90cdcd825d1E37d9939dCA86C00e281</a></td></tr></tbody></table>
-
-#### Goerli Testnet v4 (Jato-v2)
-
-<table data-header-hidden><thead><tr><th width="281"></th><th></th></tr></thead><tbody><tr><td><strong>Contract</strong></td><td><strong>Address</strong></td></tr><tr><td>SSV Token</td><td><a href="https://goerli.etherscan.io/address/0x3a9f01091C446bdE031E39ea8354647AFef091E7">0x3a9f01091C446bdE031E39ea8354647AFef091E7</a></td></tr><tr><td>SSVNetwork</td><td><a href="https://goerli.etherscan.io/address/0xc3cd9a0ae89fff83b71b58b6512d43f8a41f363d">0xC3CD9A0aE89Fff83b71b58b6512D43F8a41f363D</a></td></tr><tr><td>SSVNetworkViews</td><td><a href="https://goerli.etherscan.io/address/0xAE2C84c48272F5a1746150ef333D5E5B51F68763#readContract">0xAE2C84c48272F5a1746150ef333D5E5B51F68763</a></td></tr></tbody></table>
 
 #### ABI
 
@@ -29,6 +23,6 @@
 
 You will need to send 32 ETH to the Deposit Contract in order to activate a validator.
 
-<table><thead><tr><th width="274">Ethereum network</th><th>Address</th></tr></thead><tbody><tr><td>Mainnet</td><td><a href="https://etherscan.io/address/0x00000000219ab540356cBB839Cbe05303d7705Fa">0x00000000219ab540356cBB839Cbe05303d7705Fa</a></td></tr><tr><td>Holesky Testnet</td><td><a href="https://holesky.etherscan.io/address/0x4242424242424242424242424242424242424242">0x4242424242424242424242424242424242424242</a></td></tr><tr><td>Goerli Testnet</td><td><a href="https://goerli.etherscan.io/address/0xff50ed3d0ec03ac01d4c79aad74928bff48a7b2b">0xff50ed3d0ec03ac01d4c79aad74928bff48a7b2b</a></td></tr></tbody></table>
+<table><thead><tr><th width="274">Ethereum network</th><th>Address</th></tr></thead><tbody><tr><td>Mainnet</td><td><a href="https://etherscan.io/address/0x00000000219ab540356cBB839Cbe05303d7705Fa">0x00000000219ab540356cBB839Cbe05303d7705Fa</a></td></tr><tr><td>Holesky Testnet</td><td><a href="https://holesky.etherscan.io/address/0x4242424242424242424242424242424242424242">0x4242424242424242424242424242424242424242</a></td></tr></tbody></table>
 
 Please refer to [Ethereum official documentation](https://ethereum.org/en/staking/deposit-contract/) and verify this information. The [official Launchpad also has great guidelines](https://holesky.launchpad.ethereum.org/) to protect from phishing attempts.
