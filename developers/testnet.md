@@ -16,7 +16,7 @@ The ssv.network testnet is live on the Holesky network with the goal of serving 
 
 ### tSSV Faucet <a href="#id-652a6sxy0wse" id="id-652a6sxy0wse"></a>
 
-The tSSV Faucet is a web interface that distributes small amounts of SSV tokens on the Goerli network for validators registration to the ssv.network and testing purposes.
+The tSSV Faucet is a web interface that distributes small amounts of SSV tokens on the Holesky network for validators registration to the ssv.network and testing purposes.
 
 {% embed url="https://faucet.ssv.network/" %}
 

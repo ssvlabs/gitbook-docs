@@ -24,7 +24,7 @@ For this reason, an alternative and shorter route to the Launchpad is to use the
 ### Prerequisites
 
 * Confidence using the command line, and command line interfaces
-* ETH (or Goerli/Holesky ETH): 32 + \~0.1 for gas fees to activate the validator keys
+* ETH (or Holesky ETH): 32 + \~0.1 for gas fees to activate the validator keys
 
 ### Generate validator keys
 
@@ -68,7 +68,7 @@ To activate the validator keys you must deposit the 32 ETH (or testETH) to the D
 
 A quick way to send transactions to the Staking Deposit Contract is to visit the [Staking Deposit Contract](https://holesky.etherscan.io/address/0x4242424242424242424242424242424242424242) page on Etherscan, and browse the _Contract_ tab, then select the _Write Contract_ option.
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption><p>Göerli Staking Deposit Contract page on Etherscan</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption><p> Staking Deposit Contract page on Etherscan</p></figcaption></figure>
 
 This page lists all the smart contract’s functions, and offers a form, where each field represents one of the arguments of the contract’s method in question.
 
