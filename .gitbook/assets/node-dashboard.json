@@ -1,9 +1,61 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "gauge",
+      "name": "Gauge",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "11.2.0"
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -21,12 +73,15 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 115,
-  "iteration": 1676023992743,
+  "id": null,
   "links": [],
   "liveNow": false,
   "panels": [
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -34,13 +89,22 @@
         "y": 0
       },
       "id": 20,
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Node Health",
       "type": "row"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Current status of the beacon, ETH1 and SSV operator node",
       "fieldConfig": {
@@ -149,6 +213,8 @@
       },
       "id": 42,
       "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -159,14 +225,15 @@
         },
         "showThresholdLabels": false,
         "showThresholdMarkers": true,
+        "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "8.3.4",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "ssv_beacon_status{instance=~\"$instance.*\"}",
@@ -178,7 +245,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "ssv_eth1_status{instance=~\"$instance.*\"}",
@@ -191,7 +258,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "(ssv_node_status{instance=~\"$instance.*\"} + 1) or (absent(ssv_node_status{instance=~\"$instance.*\"}) * 0)",
@@ -208,7 +275,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Health status of the beacon node",
       "fieldConfig": {
@@ -217,9 +284,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 8,
             "gradientMode": "none",
@@ -228,6 +299,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -298,11 +370,13 @@
       "options": {
         "legend": {
           "calcs": [],
-          "displayMode": "hidden",
-          "placement": "bottom"
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.0.4",
@@ -310,7 +384,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "ssv_beacon_status{instance=~\"$instance.*\"}",
@@ -325,7 +399,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Health status of the ETH1 node",
       "fieldConfig": {
@@ -334,9 +408,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 8,
             "gradientMode": "none",
@@ -345,6 +423,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -415,11 +494,13 @@
       "options": {
         "legend": {
           "calcs": [],
-          "displayMode": "hidden",
-          "placement": "bottom"
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.0.4",
@@ -427,7 +508,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "ssv_eth1_status{instance=~\"$instance.*\"}",
@@ -442,7 +523,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Health status of the SSV operator node",
       "fieldConfig": {
@@ -451,9 +532,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 8,
             "gradientMode": "none",
@@ -462,6 +547,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -525,11 +611,13 @@
       "options": {
         "legend": {
           "calcs": [],
-          "displayMode": "hidden",
-          "placement": "bottom"
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.0.4",
@@ -537,7 +625,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "ssv_node_status{instance=~\"$instance.*\"} + 1",
@@ -550,7 +638,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "absent(ssv_node_status{instance=~\"$instance.*\"}) * 0",
@@ -565,6 +653,10 @@
     },
     {
       "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -573,68 +665,110 @@
       },
       "id": 18,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Resource Usage",
       "type": "row"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+        "uid": "${DS_PROMETHEUS}"
       },
-      "decimals": 2,
       "description": "RAM memory usage of the SSV operator node",
-      "editable": true,
-      "error": false,
-      "fill": 0,
-      "fillGradient": 0,
-      "grid": {},
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "stepAfter",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 10,
         "w": 8,
         "x": 0,
         "y": 7
       },
-      "hiddenSeries": false,
       "id": 16,
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": true,
-        "hideEmpty": false,
-        "max": true,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "sideWidth": 200,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 2,
-      "links": [],
-      "nullPointMode": "connected",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "width": 200
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
       },
-      "paceLength": 10,
-      "percentage": false,
       "pluginVersion": "8.3.4",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": true,
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "sum (container_memory_working_set_bytes{image!=\"\", pod=~\"$instance.*\"}) by (pod)",
@@ -648,44 +782,13 @@
           "step": 10
         }
       ],
-      "thresholds": [],
-      "timeRegions": [],
       "title": "Memory Usage (RAM)",
-      "tooltip": {
-        "msResolution": false,
-        "shared": true,
-        "sort": 2,
-        "value_type": "cumulative"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:65",
-          "format": "bytes",
-          "logBase": 1,
-          "min": "0",
-          "show": true
-        },
-        {
-          "$$hashKey": "object:66",
-          "format": "short",
-          "logBase": 1,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
+      "type": "timeseries"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Go memory usage of the SSV operator node",
       "fieldConfig": {
@@ -694,9 +797,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -705,6 +812,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -751,14 +859,20 @@
             "lastNotNull"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "exemplar": true,
           "expr": "go_memstats_sys_bytes{instance=~\"$instance.*\"}",
           "interval": "",
@@ -766,6 +880,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "exemplar": true,
           "expr": "go_memstats_heap_idle_bytes{instance=~\"$instance.*\"}",
           "hide": false,
@@ -774,6 +892,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "exemplar": true,
           "expr": "go_memstats_heap_inuse_bytes{instance=~\"$instance.*\"}",
           "hide": false,
@@ -782,6 +904,10 @@
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "exemplar": true,
           "expr": "go_memstats_stack_inuse_bytes{instance=~\"$instance.*\"}",
           "hide": false,
@@ -794,17 +920,66 @@
       "type": "timeseries"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Number of go routines running on the SSV operator node",
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
         "overrides": [
           {
             "matcher": {
@@ -820,43 +995,36 @@
           }
         ]
       },
-      "fill": 1,
-      "fillGradient": 0,
       "gridPos": {
         "h": 10,
         "w": 8,
         "x": 16,
         "y": 7
       },
-      "hiddenSeries": false,
       "id": 22,
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": true,
-        "max": true,
-        "min": true,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "percentage": false,
       "pluginVersion": "8.3.4",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "exemplar": true,
           "expr": "go_goroutines{instance=~\"$instance.*\"}",
           "format": "table",
@@ -865,102 +1033,101 @@
           "refId": "A"
         }
       ],
-      "thresholds": [],
-      "timeRegions": [],
       "title": "Goroutines",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:66",
-          "format": "short",
-          "logBase": 1,
-          "min": "0",
-          "show": true
-        },
-        {
-          "$$hashKey": "object:67",
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
+      "type": "timeseries"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+        "uid": "${DS_PROMETHEUS}"
       },
-      "decimals": 3,
       "description": "CPU usage of the SSV operator node",
-      "editable": true,
-      "error": false,
       "fieldConfig": {
         "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "cores",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "stepAfter",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
           "unit": "none"
         },
         "overrides": []
       },
-      "fill": 0,
-      "fillGradient": 0,
-      "grid": {},
       "gridPos": {
         "h": 9,
         "w": 8,
         "x": 0,
         "y": 17
       },
-      "height": "",
-      "hiddenSeries": false,
       "id": 24,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": true,
-        "max": true,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "sort": "current",
-        "sortDesc": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 2,
-      "links": [],
-      "nullPointMode": "connected",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
       },
-      "paceLength": 10,
-      "percentage": false,
       "pluginVersion": "8.3.4",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": true,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "exemplar": true,
           "expr": "sum (rate (container_cpu_usage_seconds_total{image!=\"\", pod=~\"$instance.*\"}[1m])) by (pod)",
           "format": "time_series",
@@ -973,44 +1140,13 @@
           "step": 10
         }
       ],
-      "thresholds": [],
-      "timeRegions": [],
       "title": "CPU Usage",
-      "tooltip": {
-        "msResolution": true,
-        "shared": true,
-        "sort": 2,
-        "value_type": "cumulative"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:179",
-          "format": "none",
-          "label": "cores",
-          "logBase": 1,
-          "show": true
-        },
-        {
-          "$$hashKey": "object:180",
-          "format": "short",
-          "logBase": 1,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
+      "type": "timeseries"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Hard drive memory usage of the SSV operator node",
       "fieldConfig": {
@@ -1019,9 +1155,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 5,
             "gradientMode": "none",
@@ -1030,6 +1170,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -1076,14 +1217,20 @@
             "last"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "exemplar": true,
           "expr": "((kubelet_volume_stats_used_bytes{persistentvolumeclaim=\"$instance\"} / kubelet_volume_stats_capacity_bytes{persistentvolumeclaim=\"$instance\"}) * 100)",
           "hide": true,
@@ -1092,6 +1239,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "exemplar": true,
           "expr": "kubelet_volume_stats_used_bytes{persistentvolumeclaim=\"$instance\"}",
           "format": "time_series",
@@ -1104,13 +1255,12 @@
         }
       ],
       "title": "Disk Usage",
-      "transformations": [],
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Network input and output usage of the SSV operator node",
       "fieldConfig": {
@@ -1119,9 +1269,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "none",
@@ -1130,6 +1284,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 2,
             "pointSize": 5,
@@ -1171,7 +1326,6 @@
         "y": 17
       },
       "id": 28,
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -1180,10 +1334,12 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.3.4",
@@ -1191,7 +1347,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "sum (rate (container_network_receive_bytes_total{pod=~\"$instance.*\"}[1m])) by (pod)",
@@ -1207,7 +1363,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "sum (rate (container_network_transmit_bytes_total{pod=~\"$instance.*\"}[1m])) by (pod)",
@@ -1226,6 +1382,10 @@
     },
     {
       "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1234,13 +1394,22 @@
       },
       "id": 12,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Network Discovery",
       "type": "row"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Number of connected peers to the SSV operator node",
       "fieldConfig": {
@@ -1254,8 +1423,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
-                "value": null
+                "color": "red"
               },
               {
                 "color": "#EAB839",
@@ -1297,7 +1465,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "ssv_p2p_all_connected_peers{instance=~\"$instance.*\"}",
@@ -1312,7 +1480,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Subnet peer distribution based on topic",
       "fieldConfig": {
@@ -1355,8 +1523,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1379,7 +1546,8 @@
             "mean"
           ],
           "displayMode": "table",
-          "placement": "right"
+          "placement": "right",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single"
@@ -1389,7 +1557,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "ssv_p2p_connected_peers{instance=~\"$instance.*\"}",
@@ -1404,7 +1572,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Subnet peers breakdown table of the SSV operator node",
       "fieldConfig": {
@@ -1414,7 +1582,9 @@
           },
           "custom": {
             "align": "center",
-            "displayMode": "color-text",
+            "cellOptions": {
+              "type": "color-text"
+            },
             "width": 150
           },
           "mappings": [],
@@ -1424,8 +1594,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#ccccdc",
-                "value": null
+                "color": "#ccccdc"
               }
             ]
           }
@@ -1438,8 +1607,10 @@
             },
             "properties": [
               {
-                "id": "custom.displayMode",
-                "value": "auto"
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "auto"
+                }
               },
               {
                 "id": "unit",
@@ -1463,8 +1634,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#ccccdc",
-                      "value": null
+                      "color": "#ccccdc"
                     },
                     {
                       "color": "#ccccdc",
@@ -1518,7 +1688,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "ssv:network:subnets:known{instance=~\"$instance.*\"}",
@@ -1531,7 +1701,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "ssv:network:subnets:connected{instance=~\"$instance.*\"}",
@@ -1545,7 +1715,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "ssv:network:subnets:my{instance=~\"$instance.*\"}",
@@ -1617,7 +1787,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The discovery rate of the subnet peers.\nFound is rate per second of nodes that were found with discovery. Rejected is rate per second of nodes that were found with discovery but rejected because of limit or subnet",
       "fieldConfig": {
@@ -1658,8 +1828,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1681,7 +1850,8 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single"
@@ -1691,7 +1861,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "rate(ssv:network:discovery:found{instance=~\"$instance.*\"}[5m])",
@@ -1702,7 +1872,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "rate(ssv:network:discovery:rejected{instance=~\"$instance.*\"}[5m])",
@@ -1718,7 +1888,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Table breakdown of all the SSV operator nodes",
       "fieldConfig": {
@@ -1728,7 +1898,9 @@
           },
           "custom": {
             "align": "center",
-            "displayMode": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
             "filterable": true
           },
           "mappings": [],
@@ -1736,8 +1908,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1898,7 +2069,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "rate(ssv:network:peers_identity{instance=~\"$instance.*\"}[5m])",
@@ -2035,6 +2206,10 @@
     },
     {
       "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -2043,13 +2218,22 @@
       },
       "id": 2,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Network Messaging",
       "type": "row"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Rate per second of inbound / outbound topic messages over the last 5 minutes",
       "fieldConfig": {
@@ -2091,8 +2275,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "#EAB839",
@@ -2114,7 +2297,8 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single"
@@ -2125,7 +2309,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "sum (rate(ssv:p2p:pubsub:msg:in{instance=~\"$instance.*\"}[5m]))",
@@ -2138,7 +2322,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "sum (rate(ssv:p2p:pubsub:msg:in{instance=~\"$instance.*\", msg_type=\"0\"}[5m]))",
@@ -2152,7 +2336,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "sum (rate(ssv:p2p:pubsub:msg:in{instance=~\"$instance.*\", msg_type=\"1\"}[5m]))",
@@ -2166,7 +2350,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "sum (rate(ssv:p2p:pubsub:msg:in{instance=~\"$instance.*\", msg_type=\"2\"}[5m]))",
@@ -2180,7 +2364,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "sum (rate(ssv:p2p:pubsub:msg:out{instance=~\"$instance.*\"}[5m]))",
@@ -2198,7 +2382,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Rate per second of incoming topic messages for every topic over the last 5 minutes",
       "fieldConfig": {
@@ -2240,8 +2424,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2268,7 +2451,8 @@
             "mean"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single"
@@ -2278,7 +2462,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "rate (ssv:p2p:pubsub:msg:in{instance=~\"$instance.*\"}[5m])",
@@ -2293,7 +2477,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Rate per second of outgoing topic messages for every topic over the last 5 minutes.\nResponses are outgoing, for incoming requests.\nSuccessful Requests are outgoing.\nActive are outgoing requests.",
       "fieldConfig": {
@@ -2334,8 +2518,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2362,7 +2545,8 @@
             "mean"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single"
@@ -2372,7 +2556,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "rate (ssv:p2p:pubsub:msg:out{instance=~\"$instance.*\"}[5m])",
@@ -2387,7 +2571,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Table breakdown for each stream protocol.\nResponses are outgoing, for incoming requests.\nSuccessful Requests are outgoing.\nActive Requests are outgoing.",
       "fieldConfig": {
@@ -2397,15 +2581,16 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "auto"
+            "cellOptions": {
+              "type": "auto"
+            }
           },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           }
@@ -2460,7 +2645,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "ssv:p2p:streams:res{instance=~\"$instance.*\"}",
@@ -2473,7 +2658,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "ssv:p2p:streams:req:count{instance=~\"$instance.*\"}",
@@ -2487,7 +2672,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "ssv:p2p:streams:req:success{instance=~\"$instance.*\"}",
@@ -2501,7 +2686,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "ssv:p2p:streams:req:active{instance=~\"$instance.*\"}",
@@ -2558,7 +2743,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Rate per second of requests,  responses and active requests.\nResponses are outgoing, for incoming requests.\nSuccessful Requests are outgoing.\nActive are outgoing requests.",
       "fieldConfig": {
@@ -2599,8 +2784,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           }
@@ -2618,7 +2802,8 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single"
@@ -2629,7 +2814,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "rate(ssv:p2p:streams:res{instance=~\"$instance.*\"}[5m])",
@@ -2642,7 +2827,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "rate(ssv:p2p:streams:req:count{instance=~\"$instance.*\"}[5m])",
@@ -2656,7 +2841,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "rate(ssv:p2p:streams:req:success{instance=~\"$instance.*\"}[5m])",
@@ -2670,7 +2855,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bffb3e8b-7fb7-44ce-bf8e-e6bb0d93c445"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "rate(ssv:p2p:streams:req:active{instance=~\"$instance.*\"}[5m])",
@@ -2683,12 +2868,10 @@
         }
       ],
       "title": "Stream Protocols (time-series)",
-      "transformations": [],
       "type": "timeseries"
     }
   ],
-  "schemaVersion": 34,
-  "style": "dark",
+  "schemaVersion": 39,
   "tags": [],
   "templating": {
     "list": [
@@ -2705,7 +2888,7 @@
         "name": "instance",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "ssv-node:15000",
             "value": "ssv-node:15000"
           }
@@ -2724,7 +2907,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "Node Dashboard",
-  "uid": "QNiMrdoVz",
-  "version": 59,
+  "uid": "QNiMrdoVx",
+  "version": 3,
   "weekStart": ""
 }
