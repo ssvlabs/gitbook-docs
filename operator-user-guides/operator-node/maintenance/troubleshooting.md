@@ -241,13 +241,21 @@ docker logs ssv_node
 
 <summary>How do I update my node?</summary>
 
-In the command above, you named your node:
+**Docker compose:**
 
-```bash
---name=ssv_node
+Run the following commands to update your node to the latest version:
+
+```
+docker compose down
+docker pull ssvlabs/ssv-node:latest
+docker compose up -d
 ```
 
-This is how you will reference your node with other docker commands.
+_Alternatively_, you can set the exact version in your `docker-compose.yaml` configuration file with `image: ssvlabs/ssv-node:v1.2.3`. But in that case you will have to change the version in your file with each new update [posted on SSV Docker Hub](https://hub.docker.com/r/ssvlabs/ssv-node/tags).
+
+**Docker run:**
+
+If you followed our documentation, you named your node with the `--name=ssv_node`  docker flag. This is how you will reference your node with other docker commands.
 
 To update your SSV node, you will need to stop your current node:
 
@@ -267,7 +275,7 @@ Then pull the latest image from SSV:
 docker pull ssvlabs/ssv-node:latest
 ```
 
-And finally... run the [creation command again from the top of this section](troubleshooting.md#create-and-start-the-node-using-docker) to create a new Docker container with the latest SSV image.
+And finally... [run the creation command again](../installation.md#start-the-node) to create a new Docker container with the latest SSV image.
 
 </details>
 
