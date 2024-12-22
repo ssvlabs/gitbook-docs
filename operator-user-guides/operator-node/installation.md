@@ -8,6 +8,8 @@ Once you have your node running you'll be able to participate in multiple valida
 
 {% hint style="success" %}
 SSV node setup is also available using [eth-docker](https://eth-docker.net/Support/SSV/) and [Stereum Launcher](https://stereum.net/), so you can use those if you prefer.
+
+We also have an example repository - [ssv-stack](https://github.com/ssvlabs/ssv-stack) which is has `docker-compose` template to quickly run SSV node with observability stack.
 {% endhint %}
 
 ### System Requirements
@@ -346,46 +348,7 @@ This does not increase validator resiliency and **could lead to validator slashi
 
 {% tabs %}
 {% tab title="docker compose" %}
-Here is an example of a `docker-compose.yml` file, where `<PATH_TO_CONFIG_YAML_FILE>`, `<PATH_TO_PASSWORD_FILE>`, `<PATH_TO_ENCRYPTED_KEY_FILE>` are the paths to the `config.yaml`, `password`, `encrypted_private_key.json` files you have created in the previous steps:
-
-```yaml
-services:
-  ssv:
-    image: ssvlabs/ssv-node:latest
-    ports:
-      - 13001:13001
-      - 12001:12001/udp
-      - 15000:15000
-      - 16000:16000
-    command:
-        make BUILD_PATH="/go/bin/ssvnode" start-node
-    volumes:
-      - <PATH_TO_CONFIG_YAML_FILE>:/config/config.yaml
-      - <PATH_TO_OUTPUT_FOLDER>:/data
-      - <PATH_TO_PASSWORD_FILE>:/password
-      - <PATH_TO_ENCRYPTED_KEY_FILE>:/encrypted_private_key.json
-    environment:
-      - CONFIG_PATH=/config/config.yaml
-    container_name: ssv_node
-    restart: unless-stopped
-    networks:
-      - ssv
-
-networks:
-  ssv:
-    name: ssv
-    driver: bridge
-```
-
-Then run `docker compose up` command from the same directory as your `docker-compose.yml`.
-
-{% hint style="info" %}
-This command will keep the terminal busy, showing the container's logs. It is useful to make sure that the tool start up sequence runs correctly.
-
-You can detach the terminal at any time by hitting `Ctrl-c` key combination, or closing the terminal itself. The tool will be stopped, but it will restart automatically, thanks to the `restart: "unless-stopped"` startup parameter.
-
-If you are sure that the tool works, and don't care about the logs, you can add the `-d` parameter right after `docker compose up`.
-{% endhint %}
+The example repository with `docker-compose.yaml` can we found in [ssv-stack](https://github.com/ssvlabs/ssv-stack) repository which containts a quick template to automatically generate private key and to run SSV node with observability stack.
 {% endtab %}
 
 {% tab title="Docker" %}
