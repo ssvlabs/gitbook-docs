@@ -43,7 +43,7 @@ The configuration file (`config.yaml` in the code snippet above), is necessary f
 
 #### Operator keys
 
-Similarly to the SSV Node, Operator keys are a vital requirement to run the DKG operator server, as they the link that connects it to the SSV node itself.
+Similarly to the SSV Node, Operator keys are a vital requirement to run the DKG operator server, as they are the link that connects it to the SSV node itself.
 
 The files in question are `encrypted_private_key.json` and `password` in the snippet above and the filenames should be the same for you.
 
