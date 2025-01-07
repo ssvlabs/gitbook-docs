@@ -1,10 +1,14 @@
-# Monitoring
+---
+hidden: true
+---
 
-This page will outline how to monitor an SSV Node using Grafana and Prometheus.
+# Monitoring (deprecated)
+
+This page will outline how to setup the monitoring stack for SSV Node manually, with Grafana and Prometheus.
 
 ### Pre-requisites
 
-Make sure your node is exposing a `/metrics` and `/health` endpoints. This is done via node configuration, as explained in the [Installation guide](../installation.md#metrics-configuration-optional).
+Make sure your node is exposing a `/metrics` and `/health` endpoints. This is done via node configuration, as explained in the [Installation guide](../installation/#metrics-configuration-optional).
 
 This guide will not go into the details of setting up and running Prometheus or Grafana. For this, we recommend visiting their related documentations:
 

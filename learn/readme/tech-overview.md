@@ -1,6 +1,6 @@
 # Tech Overview
 
-SSV is a sophisticated multi**-**signature wallet with a consensus layer. It is a middle layer that comes between a beacon node and a validator client. From a user’s perspective, it is just a component to plug in and take care of everything on their behalf. The main components of an SSV configuration are as follows:\
+SSV is a sophisticated mult&#x69;**-**&#x73;ignature wallet with a consensus layer. It is a middle layer that comes between a beacon node and a validator client. From a user’s perspective, it is just a component to plug in and take care of everything on their behalf. The main components of an SSV configuration are as follows:\
 
 
 * **Distributed Key Generation**

@@ -125,7 +125,7 @@ For more information, you can refer to the [official Go installation instruction
 
 </details>
 
-Once you're connected and have the command line opened, the next steps describe how to configure and run the SSV Node to create keys and start your SSV Node. If you run into some issues while running the node, try and [take a look at the troubleshooting page](maintenance/troubleshooting.md).
+Once you're connected and have the command line opened, the next steps describe how to configure and run the SSV Node to create keys and start your SSV Node. If you run into some issues while running the node, try and [take a look at the troubleshooting page](../maintenance/troubleshooting.md).
 
 ### Generate Operator Keys (Encrypted)
 
@@ -215,7 +215,7 @@ Here is an example of the generated file.
 {% endcode %}
 
 {% hint style="info" %}
-Pay close attention to the `pubKey` field, as the name says, it contains the public key, which is needed to [register the Operator on the ssv.network](../operator-management/registration.md).
+Pay close attention to the `pubKey` field, as the name says, it contains the public key, which is needed to [register the Operator on the ssv.network](../../operator-management/registration.md).
 {% endhint %}
 
 {% hint style="danger" %}
@@ -234,7 +234,7 @@ As specified in the rest of this guide, **encrypted keys should be considered th
 
 ***
 
-Please refer to the [Migration section](installation.md#how-do-i-migrate-raw-deprecated-operator-keys) in this guide, if you have previously generated unencrypted keys using this procedure.
+Please refer to the [Migration section](./#how-do-i-migrate-raw-deprecated-operator-keys) in this guide, if you have previously generated unencrypted keys using this procedure.
 
 The following command can generated unencrypted Operator <mark style="color:green;">**Public Key (PK)**</mark> and <mark style="color:green;">**Secret Key (SK)**</mark> for your Operator node:
 
@@ -268,14 +268,14 @@ OperatorPrivateKey: <OPERATOR_SECRET_KEY> you have just created.
 </details>
 
 {% hint style="warning" %}
-If you previously generated unencrypted Operator <mark style="color:green;">**Public Key (PK)**</mark> and <mark style="color:green;">**Secret Key (SK)**</mark>, for example if you were running an Operator node in previous testnet versions (Jato-v1), and want to encrypt them, please follow the instructions detailed [here](maintenance/troubleshooting.md#how-do-i-migrate-raw-deprecated-operator-keys).
+If you previously generated unencrypted Operator <mark style="color:green;">**Public Key (PK)**</mark> and <mark style="color:green;">**Secret Key (SK)**</mark>, for example if you were running an Operator node in previous testnet versions (Jato-v1), and want to encrypt them, please follow the instructions detailed [here](../maintenance/troubleshooting.md#how-do-i-migrate-raw-deprecated-operator-keys).
 {% endhint %}
 
 ### Create Configuration File
 
 Copy the following `config.yaml` file, just be sure to replace all the placeholders (`ETH2_NODE`, `ETH1_WEBSOCKET_ADDRESS`, `OPERATOR_SECRET_KEY`, etc.) with actual values.
 
-In particular, substitute `ENCRYPTED_PRIVATE_KEY_JSON` with the operator encrypted private key file [generated above](installation.md#generate-operator-keys-encrypted) (e.g. `encrypted_private_key.json`) and `PASSWORD_FILE` with the file containing the password used to generate the encrypted key itself.
+In particular, substitute `ENCRYPTED_PRIVATE_KEY_JSON` with the operator encrypted private key file [generated above](./#generate-operator-keys-encrypted) (e.g. `encrypted_private_key.json`) and `PASSWORD_FILE` with the file containing the password used to generate the encrypted key itself.
 
 ```yaml
 global:
@@ -446,7 +446,7 @@ As a small note, this compiled binary could be used to launch the binary [as a `
 
 ### Peer-to-peer ports configuration and firewall <a href="#peer-to-peer-ports-configuration-and-firewall" id="peer-to-peer-ports-configuration-and-firewall"></a>
 
-When you set up your firewall on your SSV node machine, make sure to expose the ports that you set in the [container creation command](installation.md#create-and-start-the-node-using-docker). The defaults are <mark style="color:green;">**12001 UDP**</mark> and <mark style="color:green;">**13001 TCP**</mark>; additional ones are <mark style="color:green;">**15000 TCP**</mark> for Metrics and <mark style="color:green;">**16000 TCP**</mark> for Health endpoint.
+When you set up your firewall on your SSV node machine, make sure to expose the ports that you set in the [container creation command](./#create-and-start-the-node-using-docker). The defaults are <mark style="color:green;">**12001 UDP**</mark> and <mark style="color:green;">**13001 TCP**</mark>; additional ones are <mark style="color:green;">**15000 TCP**</mark> for Metrics and <mark style="color:green;">**16000 TCP**</mark> for Health endpoint.
 
 If you don't want to use the default ports, they can be changed in your `config.yaml` file. Be aware, the **must be changed on the container creation command as well** (simply changing the host port mappings on the Docker command isn't enough!).
 

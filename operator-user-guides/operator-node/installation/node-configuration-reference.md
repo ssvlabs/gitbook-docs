@@ -7,7 +7,7 @@ The table below represents the reference for every Node configuration option ava
 
 Please exercise extreme care and discretion when modifying these settings, as any incorrect changes may result in unintended consequences or system instability.
 
-The parameters used in the [Installation guide](installation.md) should serve the vast majority of users.
+The parameters used in the [Installation guide](./) should serve the vast majority of users.
 {% endhint %}
 
 | YAML                                            | ENV                            | Default          | Description                                                                                                                                          |

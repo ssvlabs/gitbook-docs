@@ -26,7 +26,7 @@ Please note: if you are also running a DKG operator node, you may have to [follo
 
 ### Node backup
 
-If you have followed [the dedicated Node setup guide](installation.md), you most likely have (at least) these files in the folder with your node configuration:
+If you have followed [the dedicated Node setup guide](../installation/), you most likely have (at least) these files in the folder with your node configuration:
 
 ```
 ⇒   tree
@@ -61,7 +61,7 @@ The configuration file (`config.yaml` in the code snippet above), is necessary f
 
 Operator keys are, essentially, the authentication method to identify an SSV node, and link it to an operator ID. As a consequence, whenever a node is moved to a different machine, they **absolutely must** be preserved and copied from the existing setup to the new one.
 
-The files in question are `encrypted_private_key.json` and `password` in the snippet above and if you have followed [the Node setup guide](installation.md), the filenames should be the same for you.
+The files in question are `encrypted_private_key.json` and `password` in the snippet above and if you have followed [the Node setup guide](../installation/), the filenames should be the same for you.
 
 #### Node database
 

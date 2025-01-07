@@ -32,9 +32,9 @@ Please note that you can always customize your validators’ operator group and 
 
 In order to set up your nodes and register your operators to the network, follow these steps for each operator:
 
-1. [Install operator node](../../operator-user-guides/operator-node/installation.md)
+1. [Install operator node](../../operator-user-guides/operator-node/installation/)
 2. [Register operator](../../operator-user-guides/operator-management/registration.md)
-3. [Monitor node via Grafana](../../operator-user-guides/operator-node/maintenance/monitoring.md) (OPTIONAL but recommended)
+3. [Monitor node via Grafana](../../operator-user-guides/operator-node/monitoring/monitoring.md) (OPTIONAL but recommended)
 
 ### Validator Onboarding
 
@@ -63,7 +63,7 @@ $$
 Legend:
 
 * $$O1...4_{fee}$$ - operator fee ($SSV per block)
-* $$N_{fee}$$ - [network fee](../../learn/protocol-overview/tokenomics/fees.md#\_k4tw9to38r3v) ($SSV per block)​
+* $$N_{fee}$$ - [network fee](../../learn/protocol-overview/tokenomics/fees.md#_k4tw9to38r3v) ($SSV per block)​
 * $$Period$$ - operation period (blocks)
 * $$LTP$$ - [liquidation threshold period](../../learn/protocol-overview/tokenomics/liquidations.md#liquidation-risk)
 
