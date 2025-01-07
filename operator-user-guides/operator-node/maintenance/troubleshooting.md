@@ -4,7 +4,7 @@
 
 In order to troubleshoot any issues with the SSV Node, it's a good start to use the `/health` endpoint.
 
-First and foremost, the `SSV_API` port environment variable, or configuration parameter must be set. For that, refer to the [Node Configuration Reference page](../node-configuration-reference.md).
+First and foremost, the `SSV_API` port environment variable, or configuration parameter must be set. For that, refer to the [Node Configuration Reference page](../installation/node-configuration-reference.md).
 
 Assuming that the SSV node is running on the local machine, and that the `SSV_API` port is set to `16000`, the health check endpoint can be reached using the `curl` command, for example, just as shown below:
 
@@ -275,7 +275,7 @@ Then pull the latest image from SSV:
 docker pull ssvlabs/ssv-node:latest
 ```
 
-And finally... [run the creation command again](../installation.md#start-the-node) to create a new Docker container with the latest SSV image.
+And finally... [run the creation command again](../installation/#start-the-node) to create a new Docker container with the latest SSV image.
 
 </details>
 
@@ -353,7 +353,7 @@ FATAL	failed to create beacon go-client	{"error": "failed to create http client:
 ```
 {% endcode %}
 
-This is likely due to issues with the Beacon layer Node. Verify that `BeaconNodeAddr` has the correct address and port in [`config.yaml` configuration file](../installation.md#create-configuration-file).
+This is likely due to issues with the Beacon layer Node. Verify that `BeaconNodeAddr` has the correct address and port in [`config.yaml` configuration file](../installation/#create-configuration-file).
 
 ***
 
@@ -365,7 +365,7 @@ FATAL	could not connect to execution client	{"error": "failed to connect to exec
 ```
 {% endcode %}
 
-This is likely due to issues with the Execution layer Node. Verify that `ETH1Addr` has the correct address and port in [`config.yaml` configuration file](../installation.md#create-configuration-file).
+This is likely due to issues with the Execution layer Node. Verify that `ETH1Addr` has the correct address and port in [`config.yaml` configuration file](../installation/#create-configuration-file).
 
 Finally, make sure that your ETH1 endpoint is running using Websocket. This is required in order to stream events from the network contracts.
 
@@ -379,7 +379,7 @@ FATAL	could not setup operator private key	{"error": "Operator private key is no
 ```
 {% endcode %}
 
-Verify that the Operator Private Key is correctly set in [`config.yaml` configuration file](../installation.md#create-configuration-file). In particular, if using unencrypted (raw) keys, that the **private (secret) key** was copied in the configuration file and that it contains all characters (sometimes it contains a  `=`  character that can easily be left out).
+Verify that the Operator Private Key is correctly set in [`config.yaml` configuration file](../installation/#create-configuration-file). In particular, if using unencrypted (raw) keys, that the **private (secret) key** was copied in the configuration file and that it contains all characters (sometimes it contains a  `=`  character that can easily be left out).
 
 If the node has been stopped and restart, verify that the same configuration has been applied, that the private key has not been changed, and that the `db.Path` configuration points to the same directory as before.
 
@@ -393,7 +393,7 @@ FATAL	could not setup network	{"error": "network not supported: jatov2"}
 ```
 {% endcode %}
 
-In the example above, the `Network` in [`config.yaml` configuration file](../installation.md#create-configuration-file) was wrongly set to `jatov2` instead of `jato-v2`, so be sure to look for thinks like spelling mistakes.
+In the example above, the `Network` in [`config.yaml` configuration file](../installation/#create-configuration-file) was wrongly set to `jatov2` instead of `jato-v2`, so be sure to look for thinks like spelling mistakes.
 
 ***
 
@@ -403,7 +403,7 @@ In the example above, the `Network` in [`config.yaml` configuration file](../ins
 </strong>make: *** [Makefile:97: start-node] Error 1
 </code></pre>
 
-In the example above, the `LogLevel` variable in [`config.yaml` configuration file](../installation.md#create-configuration-file) was wrongly set to `infor` instead of `info`, so be sure to look for thinks like spelling mistakes.
+In the example above, the `LogLevel` variable in [`config.yaml` configuration file](../installation/#create-configuration-file) was wrongly set to `infor` instead of `info`, so be sure to look for thinks like spelling mistakes.
 
 ***
 
@@ -429,21 +429,21 @@ This error signalizes the node could not figure the public IP address of your no
 
 ### Node Metrics not showing up in Prometheus/Grafana
 
-Please verify that the `MetricsAPIPort` variable is correctly set in [`config.yaml` configuration file](../installation.md#create-configuration-file).
+Please verify that the `MetricsAPIPort` variable is correctly set in [`config.yaml` configuration file](../installation/#create-configuration-file).
 
-For a more in-depth guide on how to set up Node monitoring, refer to [the dedicated page in this section](monitoring.md).
+For a more in-depth guide on how to set up Node monitoring, refer to [the dedicated page in this section](../monitoring/monitoring.md).
 
 ***
 
 ### Node does not generate a log file
 
-Please verify that the `LogFilePath` variable is correctly set in [`config.yaml` configuration file](../installation.md#create-configuration-file). Be sure to look for thinks like spelling mistakes.
+Please verify that the `LogFilePath` variable is correctly set in [`config.yaml` configuration file](../installation/#create-configuration-file). Be sure to look for thinks like spelling mistakes.
 
 ***
 
 ### Node takes a long time to become active
 
-Please verify that the `Path` under the `db` section is correctly set in [`config.yaml` configuration file](../installation.md#create-configuration-file). Be sure to look for thinks like spelling mistakes.
+Please verify that the `Path` under the `db` section is correctly set in [`config.yaml` configuration file](../installation/#create-configuration-file). Be sure to look for thinks like spelling mistakes.
 
 If the Node was working correctly and becomes inactive after a configuration change, make sure that `Path` wasn't accidentally changed. This will cause the database to be recostructed and will lead to a slower startup.
 
@@ -451,7 +451,7 @@ If the Node was working correctly and becomes inactive after a configuration cha
 
 ### `“port 13000 already running”`
 
-This could happen if you run both consensus node and SSV node on the same machine - please make sure to change your SSV node port to any other port. Refer to [the p2p section of the installation guide for details](../installation.md#other-configuration).
+This could happen if you run both consensus node and SSV node on the same machine - please make sure to change your SSV node port to any other port. Refer to [the p2p section of the installation guide for details](../installation/#other-configuration).
 
 After updating your port, please restart the SSV node and confirm the error does not appear.
 

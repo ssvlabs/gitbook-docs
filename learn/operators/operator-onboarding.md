@@ -6,7 +6,7 @@ To join the network as an operator a user must run an SSV node.&#x20;
 
 This is software containing the SSV protocol implementation and integration to the network’s smart contracts.
 
-This can be done by installing the [node software](../../operator-user-guides/operator-node/installation.md) on a machine followed by registering the operator either through the [smart contract](../../developers/smart-contracts/ssvnetwork.md#public-registeroperator-publickey-operatorfee) or [webapp](https://app.ssv.network/) interface.
+This can be done by installing the [node software](../../operator-user-guides/operator-node/installation/) on a machine followed by registering the operator either through the [smart contract](../../developers/smart-contracts/ssvnetwork.md#public-registeroperator-publickey-operatorfee) or [webapp](https://app.ssv.network/) interface.
 
 #### Operator Fee
 
@@ -31,4 +31,4 @@ $$
 * Legend
   * $$Annual\;Fee_{usd}$$ - desired fee per year in USD
   * $$SSV_{usd}$$ - $SSV price in USD
-  * $$Blocks_{year}$$ - avg. number of blocks per year ([reference](https://ycharts.com/indicators/ethereum\_blocks\_per\_day))
+  * $$Blocks_{year}$$ - avg. number of blocks per year ([reference](https://ycharts.com/indicators/ethereum_blocks_per_day))
