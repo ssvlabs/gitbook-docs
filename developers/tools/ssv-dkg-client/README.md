@@ -24,7 +24,7 @@ In order for the DKG protocol to execute successfully:
 * separately, an _Initiator_ (one of the Operators, or a separate entity), starts the DKG ceremony by running the `ssv-dkg` tool with the `init` parameter
 * the tool automatically exchange data between the interested parties, as outlined in the Architecture section, until the key shares are created
 
-For details on how to run the tool as an Operator, please head over to [this sub-page containing the related instructions](../../../operator-user-guides/operator-node/installation/enabling-dkg.md).
+For details on how to run the tool as an Operator, please head over to [this sub-page containing the related instructions](../../../operator-user-guides/operator-node/enabling-dkg.md).
 
 Similarly, head over to [this other sub-page ](generate-key-shares.md)for instructions on how to launch the tool as the Initiator of the DKG ceremony.
 

@@ -7,7 +7,7 @@ The table below represents the reference for every Node configuration option ava
 
 Please exercise extreme care and discretion when modifying these settings, as any incorrect changes may result in unintended consequences or system instability.
 
-The parameters used in the [Installation guide](./) should serve the vast majority of users.
+The parameters used in the [Installation guide](installation.md) should serve the vast majority of users.
 {% endhint %}
 
 | YAML                                            | ENV                            | Default          | Description                                                                                                                                          |
@@ -31,7 +31,6 @@ The parameters used in the [Installation guide](./) should serve the vast majori
 | ssv.ValidatorOptions.MinimumPeers               | MINIMUM\_PEERS                 | 2                | The required minimum peers for sync                                                                                                                  |
 | ssv.ValidatorOptions.FullNode                   | FULLNODE                       | FALSE            | Save decided history rather than just highest messages                                                                                               |
 | ssv.ValidatorOptions.Exporter                   | EXPORTER                       | FALSE            |                                                                                                                                                      |
-| ssv.ValidatorOptions.BuilderProposals           | BUILDER\_PROPOSALS             | FALSE            | Use external builders to produce blocks                                                                                                              |
 | ssv.ValidatorOptions.MsgWorkersCount            | MSG\_WORKERS\_COUNT            | 256              | Number of goroutines to use for message workers                                                                                                      |
 | ssv.ValidatorOptions.MsgWorkerBufferSize        | MSG\_WORKER\_BUFFER\_SIZE      | 1024             | Buffer size for message workers                                                                                                                      |
 | eth1                                            |                                |                  |                                                                                                                                                      |
@@ -65,10 +64,10 @@ The parameters used in the [Installation guide](./) should serve the vast majori
 | KeyStore.PrivateKeyFile                         | PRIVATE\_KEY\_FILE             |                  | Operator private key file                                                                                                                            |
 | KeyStore.PasswordFile                           | PASSWORD\_FILE                 |                  | Password for operator private key file decryption                                                                                                    |
 | OperatorPrivateKey                              | OPERATOR\_KEY                  |                  | Operator private key, used to decrypt contract events                                                                                                |
-| MetricsAPIPort                                  | METRICS\_API\_PORT             |                  | Port to listen on for the metrics API.                                                                                                               |
+| MetricsAPIPort                                  | METRICS\_API\_PORT             | 15000            | Port to listen on for the metrics API.                                                                                                               |
 | EnableProfile                                   | ENABLE\_PROFILE                |                  | flag that indicates whether go profiling tools are enabled                                                                                           |
 | NetworkPrivateKey                               | NETWORK\_PRIVATE\_KEY          |                  | private key for network identity                                                                                                                     |
 | WebSocketAPIPort                                | WS\_API\_PORT                  |                  | Port to listen on for the websocket API.                                                                                                             |
 | WithPing                                        | WITH\_PING                     |                  | Whether to send websocket ping messages'                                                                                                             |
-| SSVAPIPort                                      | SSV\_API\_PORT                 |                  | Port to listen on for the SSV API.                                                                                                                   |
+| SSVAPIPort                                      | SSV\_API\_PORT                 | 16000            | Port to listen on for the SSV API.                                                                                                                   |
 | LocalEventsPath                                 | EVENTS\_PATH                   |                  | path to local events                                                                                                                                 |

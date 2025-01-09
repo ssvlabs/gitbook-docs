@@ -6,6 +6,8 @@ This page will go over all the necessary steps to enhance observability of an SS
 
 The SSV node is instrumented with [OpenTelemetry](https://opentelemetry.io/) metrics, where the default exporter is [Prometheus](https://prometheus.io/). You can use [Grafana](https://grafana.com/docs/) to explore the monitoring dashboard. We recommend to have a separate monitoring for your Execution and Beacon nodes to have maximum visibility of your operations.
 
+We aim for this section to be an all-stop shop so that you can self-service and diagnose any issues you may have.&#x20;
+
 ### Requirements <a href="#set-up-and-requirements" id="set-up-and-requirements"></a>
 
 The provided dashboards use `pod` as a label to template across the Grafana panels. This is useful if you are running more than one SSV node as it allows you to see performance metrics for each SSV node.
@@ -39,13 +41,21 @@ scrape_configs:
 
 ### **Monitoring Setup**
 
-**Using an existing monitoring stack**
+#### **Running the sample repository**&#x20;
+
+The easiest way to set up observability is to run the sample repository. It is based on Docker Compose and it will do everything for you, including setting up the SSV node, Prometheus, and Grafana. To run the sample repository, you can follow the instructions in the [Node Installation Guide](../installation.md) and additional details you can find in the [README of the repository](https://github.com/ssvlabs/ssv-stack/blob/main/README.md).
+
+Once you used our repository, open your browser and go to [http://localhost:3000](http://localhost:3000/). If you're not running on local machine you need to expose <mark style="color:green;">**3030 TCP**</mark> port on your server and then can access the Grafana via [http://1.2.3.4:3000](http://1.2.3.4:3000), make sure to change it to your public IP address.
+
+Login with `admin`/`admin` you can change the password later. In the `Dashboards` section you should be able to find the `SSV Operational` dashboard. Unless the node is registered with the SSV network and has validators, some of the dashboard's columns might be empty.
+
+#### **Using an existing monitoring stack**
 
 If you are already running a monitoring stack, scraping metrics from your SSV node has not changed. You will need to ensure that your Prometheus instance is scraping metrics from your SSV node via `MetricsAPIPort` (set in your SSV node's configuration file, 15000 by default).&#x20;
 
 Once again, `pod` label is used, which is common for Kubernetes, but if you are running your SSV node on a different platform, you will need to change this to the correct label.&#x20;
 
-**Kubernetes**
+#### **Kubernetes**
 
 If you are running your SSV node on Kubernetes, you will need to ensure that your Prometheus instance is scraping metrics from your SSV node. For this, we often recommend a project called [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack).
 

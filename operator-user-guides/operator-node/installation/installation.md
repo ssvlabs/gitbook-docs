@@ -1,64 +1,12 @@
 ---
-description: So you want to install an SSV node? You've come to the right place!
+description: In case you don't want to use the SSV Stack automated setup.
 ---
 
-# Node setup
-
-Once you have your node running you'll be able to participate in multiple validator clusters and earn rewards 🥳
-
-{% hint style="success" %}
-SSV node setup is also available using [eth-docker](https://eth-docker.net/Support/SSV/) and [Stereum Launcher](https://stereum.net/), so you can use those if you prefer.
-{% endhint %}
-
-### System Requirements
-
-The SSV node that you are installing with these instructions is only the SSV node, not an Ethereum Execution Client or Beacon Client (e.g. not Get/Lighthouse or Besu/Teku, etc.). You will need those clients to already be running and synced, either on a different machine or the same machine.
-
-All cloud services are supported for your node setup.
-
-💻  Machine running Ubuntu (preferably)
-
-🎛️  8 cores&#x20;
-
-⚡️  4GB RAM
-
-📀  20GB storage (10GB minimum)
-
-🧮  IOPS > 10K
-
-{% hint style="warning" %}
-The minimum system requirements shown above are for a machine that is only running an SSV node. If you plan to run the SSV node on the same machine as your Execution Client and/or Beacon Client, these minimum requirements will be needed **in addition** to your existing requirements.
-{% endhint %}
-
-### Ethereum Node Requirements
-
-The Ethereum clients used by your SSV node can be running on the same machine or a different machine. Ideally, to improve [client diversity](https://clientdiversity.org/#distribution), you will be running minority clients 👀 .
-
-#### Execution Client
-
-This can be any Ethereum Execution client (e.g. Geth, Besu, etc.). You will see this node referenced as ETH1 in the SSV configuration.
+# Manual Node setup
 
 {% hint style="info" %}
-You **MUST** enable WebSocket on your Execution Client as the SSV node requires that connection to work.
-
-The specific configuration will be different for each Execution Client. For example, for Geth, add the command line flag `--ws` to the Geth start command to enable the WebSocket RPC server.
+This is guide is for advanced users, if you are unsure why you'd want to setup manually — we recommend choosing [automated setup with SSV Node stack](../installation.md).
 {% endhint %}
-
-{% hint style="danger" %}
-Please be advised: the [Reth Execution Client](https://reth.rs/) has recently been officially released. It appears to cause an issue that makes it impossible for the SSV node to fetch new validator keyshares registered to an SSV node.
-
-As a result, you should not be using it on mainnet for the time being. Its usage is also discouraged on Holesky, as the problem persists on testnet too, although it is (obviously) less impactful.
-{% endhint %}
-
-{% hint style="danger" %}
-Please be advised: [the Nimbus client](https://nimbus.team/) is a single thread program and it has shown to generate errors when a single client instance is connected to multiple SSV nodes.
-
-As such, **it is not advised to run more than one SSV node per Nimbus instance** due to performance constraints.
-{% endhint %}
-
-#### Beacon Client
-
-This can be any Ethereum Beacon Node client (e.g. Prysm, Lighthouse, Tekou, Nimbus, or any client utilizing standard REST HTTP). You will see this node referenced as ETH2 in the SSV configuration.
 
 ### Pre-requisites
 
@@ -222,60 +170,11 @@ Pay close attention to the `pubKey` field, as the name says, it contains the pub
 Create backups of your `encrypted_private_key.json` and `password` files on a separate device. If any of these files are lost, you will not be able to access your operator ever again.
 {% endhint %}
 
-<details>
-
-<summary>Raw Operator Keys generation (deprecated)</summary>
-
-**Note**
-
-While it is still possible to generate raw (unencrypted) keys, it is advised not to do so. The procedure described in the collapsed section constitutes a legacy and deprecated alternative to the default option, which is generating password-encrypted keys.
-
-As specified in the rest of this guide, **encrypted keys should be considered the default and preferred option**. The procedure listed below is only kept for reference and troubleshooting of Operators with legacy configurations.
-
-***
-
-Please refer to the [Migration section](./#how-do-i-migrate-raw-deprecated-operator-keys) in this guide, if you have previously generated unencrypted keys using this procedure.
-
-The following command can generated unencrypted Operator <mark style="color:green;">**Public Key (PK)**</mark> and <mark style="color:green;">**Secret Key (SK)**</mark> for your Operator node:
-
-{% code overflow="wrap" %}
-```bash
-docker run -it --rm ssvlabs/ssv-node:latest /go/bin/ssvnode generate-operator-keys
-```
-{% endcode %}
-
-The command output will look like this:
-
-<pre class="language-bash" data-overflow="wrap" data-line-numbers><code class="lang-bash">2023-09-11T16:05:09.668494Z	INFO	SSV-Node	generated public key (base64)	{"pk": "LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBNE4waktPRlhDWXJRcU9ZMkY4RWIKa0Rlei8xeGpPMTdvL3hEYkl6d3BQVVBhSFQyTU41RTBySFpSckZsc0lBRzAwUEt6S2hZRnRWZ1pjeGJwOFRQWQpQcnZoUGlQa1ZGQWdGcGhaOFpLZkZlQ3Rqb3pVSkFKdm1PSjZ5c3R4Wi94Y1BjM2RzNDRZWVRvbUxxZU5ZNjRWCi8zOFlZbHZOWlBvWERGdlFBYldheVJwN3BQYWhBYjZMVEVscUNheFgxdHZBK2VuRms1SHVsQ2YyS0VjditMMzUKTXY3ekxqeDB2cnpZNTRUOUVvRTNlT1VMblgwQk5GejV4OGw5RWV6dGFueGJscW1GSkI2VG04R0xPQ295S2gzRwpwSTBtVVBaTkduQmZtZnVRRFpMRVVWd0lQaDdVK2krTWtXM0RoMjFrUmg1N0Z1SHZIREYydUxkNFhJcHdCRm5nCkVRSURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K"}
-<strong>2023-09-11T16:05:09.670031Z	INFO	SSV-Node	generated private key (base64)	{"sk": "LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcGdJQkFBS0NBUUVBNE4waktPRlhDWXJRcU9ZMkY4RWJrRGV6LzF4ak8xN28veERiSXp3cFBVUGFIVDJNCk41RTBySFpSckZsc0lBRzAwUEt6S2hZRnRWZ1pjeGJwOFRQWVBydmhQaVBrVkZBZ0ZwaFo4WktmRmVDdGpvelUKSkFKdm1PSjZ5c3R4Wi94Y1BjM2RzNDRZWVRvbUxxZU5ZNjRWLzM4WVlsdk5aUG9YREZ2UUFiV2F5UnA3cFBhaApBYjZMVEVscUNheFgxdHZBK2VuRms1SHVsQ2YyS0VjditMMzVNdjd6TGp4MHZyelk1NFQ5RW9FM2VPVUxuWDBCCk5GejV4OGw5RWV6dGFueGJscW1GSkI2VG04R0xPQ295S2gzR3BJMG1VUFpOR25CZm1mdVFEWkxFVVZ3SVBoN1UKK2krTWtXM0RoMjFrUmg1N0Z1SHZIREYydUxkNFhJcHdCRm5nRVFJREFRQUJBb0lCQVFEWkZzV0dCeDlIV0J3ZwpvN2lmY0ZDVENDUWZxZXNuZTNiSUlWYmZDb3JwMmVMdWplZ2NFWFRmOTQ3Y0xLekZyY0FLWmZWdzhUZnJuclZiCk5rai9FOFYyczE0KzV0bmVTRWppWjQyV09xNlpxWU1GZDVLcmZTcU9XRUNpSG8xTERnbGpwYWVmWE5UT3NSd0IKdU1NNDgrM0s3OEh6MjV0TkhHRTZEajJnR05ycHdIYWdGQTJueVhSNXhxckR6djFzYk9hSUVlTm1mK25nYUpHSApTWXRPWWx6MXVQQ2FHVnpMQlJBNTM0Y05HOTluU1gzNnhUTXNNZi8vQ3FncHlZQVZRUVJIb0dZektmVTdTRFVyCnlhejFpRmQ3Tnh3MjExMHovd3FuR21oUUFaaGJWYUNLZnJuVHp5ZE9mSEZoUXFUWWQ5ZldsMXhBOSsyOG0wNFYKVHBYRlRydDlBb0dCQVAxVVlmclh0WXZpYVNQUkVQeUlmSmFvTkhBaCtBemZRR0htaTVMc08xNVg0YlBJQUR5bwowWjhuR0hubXV2cTN2Y2NPaXNSQzdIN3dzRUs1MmVWWHI0V1o5T3BPYk5HWG5nc2F4eEhNa2taOG00cVBuR09aCkxzT0hpbUdOWll0Z1ZqVlJZMkdtUTA5L3MwMk51R09KdXZCNXh1TGJpM2hZVEdCam9uSjhpeGJQQW9HQkFPTTcKOEZhcTFYUWJHU0c4VWZTbHFpNFE0MmlnOUlwemxDY3g3OGdFdzJTOU9OOStxbWdZVG43UGZ4M1pzQW5WZHhWNgpIOVZxRG55ai9GaWFXY0gydlhpQi9Td1BCZEpqeENQeThMbHRsUmdGQmc0OFIvbkR3YjBRTVRjaUpGUGhjUHNqClorcnZvLzdFNE1RRWZtcXJpOVhRQVMrVytKQTRRSzRFMnd2dVUxTWZBb0dCQU9kanJQOG5DbzlUNWI4dVZqcWsKSEZDc0lRR1BOWGZrYjNVODFKNEZvcENnNnVxQXN4NjFBSXREZFlyYTRremhpYm1KSWR6MFYvbjJ0TGl0ODBZVgpXcUJJcUxsZm11dXlka3drVUZLRXJkTXVQQkJLN29qV3dTMGQzNXNOUVFRV29ZZWY2SXVvQnZGVmJoeFhaMldiCnh5R2h5YlVxM1hDMkRrVTRuSWZBRkhkbkFvR0JBTWZ0N3RKeVVJaHRaemxWZGs1b2pFa250czVSLzVicGhrck8KRndqSG1CdEVtWXVhNk5mWnV3YThEajMzVUhuMmhXWXlJMXdraWthRUNmenpJVklWaEROSk83WE9LZk1vc0dSbwoxZ0J3T0NRQUY0bmk0L2tQa2FDRlpLZjd0RGJSUGhUWTNBL0xkV0V0WEExYlh0Yi94SE1GSm1YMjBSQWpUbFZPCkZHUjA5bjlGQW9HQkFMT0JFcmZPWHFwaFdFU3FaZjFGRDBxMzU0cmxrTUcxU1hqemxsZUFNU0lvYlVwU1Z2NnQKSlZaVDd3S29MeGhFTlc0cmFjeVNaSW5lY3Fqdm40VEJYTi9Nenp0U2xRNmFTV09UdGN5MXZDRm51R0NmcXZqbQp6V2JvdkUzWnU0QytWM2RKbEx5R1haOXIwNEJ6R2tkNEIwR2o3Ymx1L3M3Zk5uNWovTkIydmx4WgotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo="}
-</strong></code></pre>
-
-First line will have the publick key (the text in quotes right after `pk`, this will be required when registering your operator to the network), and the second line shows the secret key (the text in quotes right after `sk`, keep this safe).
-
-Be careful when you select and copy the entire Secret Key (SK) and make sure to include any "=" characters at the very end 👀
-
-Make sure to store and back up your operator's **Secret Key (SK)** in a safe place. **Do not share** this key with anyone.
-
-***
-
-If using raw (unencrypted) keys for your Operator node, you will need to remove the `KeyStore` section from the `config.yaml` file and add the configuration in the code snippet below, instead (Make sure to substitute `OPERATOR_SECRET_KEY` with the secret key):
-
-```
-# Note: Operator private key can be generated with the `generate-operator-keys` command.
-OperatorPrivateKey: <OPERATOR_SECRET_KEY> you have just created.
-```
-
-</details>
-
-{% hint style="warning" %}
-If you previously generated unencrypted Operator <mark style="color:green;">**Public Key (PK)**</mark> and <mark style="color:green;">**Secret Key (SK)**</mark>, for example if you were running an Operator node in previous testnet versions (Jato-v1), and want to encrypt them, please follow the instructions detailed [here](../maintenance/troubleshooting.md#how-do-i-migrate-raw-deprecated-operator-keys).
-{% endhint %}
-
 ### Create Configuration File
 
 Copy the following `config.yaml` file, just be sure to replace all the placeholders (`ETH2_NODE`, `ETH1_WEBSOCKET_ADDRESS`, `OPERATOR_SECRET_KEY`, etc.) with actual values.
 
-In particular, substitute `ENCRYPTED_PRIVATE_KEY_JSON` with the operator encrypted private key file [generated above](./#generate-operator-keys-encrypted) (e.g. `encrypted_private_key.json`) and `PASSWORD_FILE` with the file containing the password used to generate the encrypted key itself.
+In particular, substitute `ENCRYPTED_PRIVATE_KEY_JSON` with the operator encrypted private key file [generated above](installation.md#generate-operator-keys-encrypted) (e.g. `encrypted_private_key.json`) and `PASSWORD_FILE` with the file containing the password used to generate the encrypted key itself.
 
 ```yaml
 global:
@@ -297,13 +196,13 @@ db:
 ssv:
   # The SSV network to join to
   # Mainnet = Network: mainnet (default)
-  # Testnet (Goerli)  = Network: jato-v2
-  # Testnet (Holesky) = Network: holesky
+  # Testnet = Network: holesky
   Network: mainnet
   
   ValidatorOptions:
-    # Whether to enable MEV block production. Requires the connected Beacon node to be MEV-enabled.
-    # Please see https://docs.ssv.network/operator-user-guides/operator-node/configuring-mev
+    # default value is true
+    # Requires the connected Beacon node to be MEV-enabled.
+    # Please see https://docs.ssv.network/operator-user-guides/operator-node/installation/configuring-mev
     BuilderProposals: false
 
 eth2:
@@ -326,7 +225,7 @@ KeyStore:
   PrivateKeyFile: <ENCRYPTED_PRIVATE_KEY_JSON> # e.g. ./encrypted_private_key.json
   PasswordFile: <PASSWORD_FILE> # e.g. ./password
 
-# This enables monitoring at the specified port, see https://docs.ssv.network/run-a-node/operator-node/maintenance/monitoring
+# This enables monitoring at the specified port, see https://docs.ssv.network/run-a-node/operator-node/monitoring
 MetricsAPIPort: 15000
 # This enables node health endpoint for troubleshooting, see https://docs.ssv.network/operator-user-guides/operator-node/maintenance/troubleshooting
 SSVAPIPort: 16000
@@ -446,7 +345,7 @@ As a small note, this compiled binary could be used to launch the binary [as a `
 
 ### Peer-to-peer ports configuration and firewall <a href="#peer-to-peer-ports-configuration-and-firewall" id="peer-to-peer-ports-configuration-and-firewall"></a>
 
-When you set up your firewall on your SSV node machine, make sure to expose the ports that you set in the [container creation command](./#create-and-start-the-node-using-docker). The defaults are <mark style="color:green;">**12001 UDP**</mark> and <mark style="color:green;">**13001 TCP**</mark>; additional ones are <mark style="color:green;">**15000 TCP**</mark> for Metrics and <mark style="color:green;">**16000 TCP**</mark> for Health endpoint.
+When you set up your firewall on your SSV node machine, make sure to expose the ports that you set in the [container creation command](installation.md#create-and-start-the-node-using-docker). The defaults are <mark style="color:green;">**12001 UDP**</mark> and <mark style="color:green;">**13001 TCP**</mark>; additional ones are <mark style="color:green;">**15000 TCP**</mark> for Metrics and <mark style="color:green;">**16000 TCP**</mark> for Health endpoint.
 
 If you don't want to use the default ports, they can be changed in your `config.yaml` file. Be aware, the **must be changed on the container creation command as well** (simply changing the host port mappings on the Docker command isn't enough!).
 

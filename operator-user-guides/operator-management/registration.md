@@ -1,7 +1,7 @@
 # Registering an Operator
 
 {% hint style="warning" %}
-For information on how to set up and run an SSV Node, please [visit the dedicated page](../operator-node/installation/).
+For information on how to set up and run an SSV Node, please [visit the dedicated page](../operator-node/installation.md).
 {% endhint %}
 
 After successfully running an SSV node, an operator must register it to the SSV Network in order to be discoverable by validators.
@@ -10,7 +10,7 @@ You can register your operator through the SSV network [web app](https://app.ssv
 
 While registering your operator you will need to provide the following parameters:
 
-* [Operator public key](../operator-node/installation/#4.-generate-operator-keys) - Generated in the node installation process (base64 format)
+* [Operator public key](../operator-node/installation.md#4.-generate-operator-keys) - Generated in the node installation process (base64 format)
 * [Operator fee](../../learn/operators/#operator-fee) - The fee charged by the operator per each managed validator
 
 {% hint style="info" %}
@@ -31,11 +31,11 @@ If you are connecting for the first time, you should see a screen like the image
 
 Please select _Join as Operator._
 
-In the following screen, select _Register Operator_ (just make sure [that you followed the guide on Node setup](../operator-node/installation/) and that your SSV Node is running).
+In the following screen, select _Register Operator_ (just make sure [that you followed the guide on Node setup](../operator-node/installation.md) and that your SSV Node is running).
 
 <figure><img src="../../.gitbook/assets/registering_operator_2.png" alt=""><figcaption></figcaption></figure>
 
-The next screen will ask you to input the Operator's public key (refer to [the Node setup guide](../operator-node/installation/#key-pair-generation-and-encryption) for key generation) and provide a confirmation of the Operator owner address.
+The next screen will ask you to input the Operator's public key (refer to [the Node setup guide](../operator-node/installation.md#key-pair-generation-and-encryption) for key generation) and provide a confirmation of the Operator owner address.
 
 Here you will also have to choose whether your Operator status is either [public or private](../../learn/operators/permissioned-operators.md).
 
