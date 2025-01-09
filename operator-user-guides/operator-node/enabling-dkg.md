@@ -17,7 +17,7 @@ In order to successfully participate in DKG ceremonies initiated by stakers, you
 * **Operator ID** - the ID of your operator within the SSV network.
 * **Operator Key Pair**
   * **Public Key** - the public key of the operator&#x20;
-  * **Private Key** - the private key of the operator as an password-encrypted file (if you are in possession of raw text private key, follow [this migration guide to encrypt your existing operator keys](./#how-do-i-migrate-raw-deprecated-operator-keys))
+  * **Private Key** - the private key of the operator as an password-encrypted file (if you are in possession of raw text private key, follow [this migration guide to encrypt your existing operator keys](installation.md#how-do-i-migrate-raw-deprecated-operator-keys))
 * **Machine Endpoint** - the endpoint (`protocol:ip:port`) of the machine intended to run the `ssv-dkg` client (if you have a domain name, instead of an `ip` that works as well)
 
 {% hint style="warning" %}
@@ -289,7 +289,7 @@ To participate in DKG ceremonies without coordination and to enable others to in
 
 Once the DKG tool is up and running, please make sure to update your operator metadata, and provide your DKG Operator endpoint, in the form of `protocol:ip:port` (if you have a domain name, instead of an `ip` that works as well).
 
-Please head over to [the Operator User guide on how to update metadata](../../operator-management/setting-operator-metadata.md) and follow the instructions
+Please head over to [the Operator User guide on how to update metadata](../operator-management/setting-operator-metadata.md) and follow the instructions
 
 ## Test the setup
 

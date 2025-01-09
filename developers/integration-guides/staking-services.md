@@ -32,7 +32,7 @@ Please note that you can always customize your validators’ operator group and 
 
 In order to set up your nodes and register your operators to the network, follow these steps for each operator:
 
-1. [Install operator node](../../operator-user-guides/operator-node/installation/)
+1. [Install operator node](../../operator-user-guides/operator-node/installation.md)
 2. [Register operator](../../operator-user-guides/operator-management/registration.md)
 3. [Monitor node via Grafana](../../operator-user-guides/operator-node/monitoring/monitoring.md) (OPTIONAL but recommended)
 

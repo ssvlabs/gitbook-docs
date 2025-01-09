@@ -2,18 +2,18 @@
 
 Operators provide hardware infrastructure, run the SSV protocol, and are responsible for maintaining the overall health of the SSV network. Operators determine their own fees and are compensated for their integral services to the network by operating and maintaining validators on-behalf of stakers.
 
-To join the network as an operator a user must [install](installation/) the SSV node software, and [register](../operator-management/registration.md) the operator to the network.
+To join the network as an operator a user must [install](installation.md) the SSV node software, and [register](../operator-management/registration.md) the operator to the network.
 
-{% content-ref url="installation/" %}
-[installation](installation/)
+{% content-ref url="installation.md" %}
+[installation.md](installation.md)
 {% endcontent-ref %}
 
-{% content-ref url="installation/configuring-mev.md" %}
-[configuring-mev.md](installation/configuring-mev.md)
+{% content-ref url="configuring-mev.md" %}
+[configuring-mev.md](configuring-mev.md)
 {% endcontent-ref %}
 
-{% content-ref url="installation/enabling-dkg.md" %}
-[enabling-dkg.md](installation/enabling-dkg.md)
+{% content-ref url="enabling-dkg.md" %}
+[enabling-dkg.md](enabling-dkg.md)
 {% endcontent-ref %}
 
 {% content-ref url="../operator-management/registration.md" %}

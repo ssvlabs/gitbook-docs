@@ -2,7 +2,7 @@
 
 This guide outlines the necessary steps required to configure MEV within your SSV node to enable operators to participate in proposing MEV blocks for the validators they manage.
 
-## Prerequisite: Enable MEV in Beacon Client <a href="#prerequisite-enable-mev-in-beacon-client" id="prerequisite-enable-mev-in-beacon-client"></a>
+## Enable MEV in Beacon Client <a href="#prerequisite-enable-mev-in-beacon-client" id="prerequisite-enable-mev-in-beacon-client"></a>
 
 Enable MEV by connecting to the [Builders API](https://github.com/ethereum/builder-specs) from your Beacon client.
 
@@ -20,21 +20,9 @@ Follow the setup guidelines for configuring MEV on your preferred client:
 For reference, the [ETHStaker](https://github.com/eth-educators/ethstaker-guides/blob/main/MEV-relay-list.md) community provides a list of MEV relays and their corresponding endpoints.
 {% endhint %}
 
-## How to enable MEV in SSV node <a href="#how-to-enable-mev-in-ssv-node" id="how-to-enable-mev-in-ssv-node"></a>
+## Enable MEV in SSV node <a href="#how-to-enable-mev-in-ssv-node" id="how-to-enable-mev-in-ssv-node"></a>
 
-Update the `config.yaml` file in the SSV node to enable MEV for your operator:
-
-```yaml
-ssv:
-    ValidatorOptions:
-        BuilderProposals: true
-```
-
-Once the config flag has been updated, rebuild the container and restart the node as outlined in the [Installation guide](https://app.gitbook.com/o/-Mb7OC5dRdirWgUB-coa/s/5j2wcf1k37MM5iWhtP7i/run-a-node/installation-guide).
-
-{% hint style="warning" %}
-It is very important to ensure that Beacon client have been set up with MEV before changing the SSV node configuration to enable it. Failing to do so could result in missed blocks for the validators your operator manages.
-{% endhint %}
+Builder proposals are managed by Beacon Client. So once you've done the previous step, your SSV node will collaborate with MEV searchers.
 
 ## Considerations for MEV Relays Selection
 
