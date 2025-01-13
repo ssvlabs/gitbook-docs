@@ -120,7 +120,7 @@ If you don't want to use the default ports, they can be changed on the next step
 
 {% code lineNumbers="true" %}
 ```bash
-git clone git@github.com:ssvlabs/ssv-stack.git
+git clone https://github.com/ssvlabs/ssv-stack.git
 cd ssv-stack
 ```
 {% endcode %}
