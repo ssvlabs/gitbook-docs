@@ -44,7 +44,7 @@ The second stage outlines how to onboard new or existing validators that your op
 
 In order to assign validator operations to your operators, you must distribute their validator key to KeyShares and register them to the ssv.network.
 
-Follow the [Run a Distributor Validator](../get-started.md) guide for each new validator you want to manage.
+Follow the [Run a Distributor Validator](broken-reference) guide for each new validator you want to manage.
 
 Please note that since validators are assigned to the staking service’s Operators (created during the previous stage), the “Operators Selection” step can be skipped.
 

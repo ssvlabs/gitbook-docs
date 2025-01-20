@@ -1,6 +1,10 @@
 # SSV Keys SDK
 
-The SSV Keys SDK enable users to split a validator key into a predefined threshold of shares via [Shamir-Secret-Sharing (SSS)](https://en.wikipedia.org/wiki/Shamir's\_Secret\_Sharing), and encrypts them with a set of operator keys.
+{% hint style="danger" %}
+Please note: SSV Keys SDK will soon be deprecated as it is becoming part of the [SSV SDK](../ssv-sdk/).
+{% endhint %}
+
+The SSV Keys SDK enable users to split a validator key into a predefined threshold of shares via [Shamir-Secret-Sharing (SSS)](https://en.wikipedia.org/wiki/Shamir's_Secret_Sharing), and encrypts them with a set of operator keys.
 
 In addition to the generation of shares, the tool also uses the validator key to sign the validator’s owner address and his registration nonce to ensure that only the legitimate owner of the validator can register it to the network.
 
