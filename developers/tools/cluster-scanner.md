@@ -1,5 +1,9 @@
 # SSV Scanner SDK
 
+{% hint style="danger" %}
+Please note: SSV Scanner SDK will soon be deprecated as it is becoming part of the [SSV SDK](../ssv-sdk/).
+{% endhint %}
+
 The SSV Scanner SDK enable users to retrieve events data from the SSV network [contract](https://docs.ssv.network/developers/smart-contracts).
 
 The tool is used for retrieving **cluster snapshots** and **registration nonce** which are required as inputs for SSV tooling and smart contract transactions.
