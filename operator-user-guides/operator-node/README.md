@@ -12,8 +12,8 @@ To join the network as an operator a user must [install](installation.md) the SS
 [configuring-mev.md](configuring-mev.md)
 {% endcontent-ref %}
 
-{% content-ref url="enabling-dkg.md" %}
-[enabling-dkg.md](enabling-dkg.md)
+{% content-ref url="installation/enabling-dkg/" %}
+[enabling-dkg](installation/enabling-dkg/)
 {% endcontent-ref %}
 
 {% content-ref url="../operator-management/registration.md" %}

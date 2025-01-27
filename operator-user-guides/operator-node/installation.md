@@ -190,8 +190,8 @@ Alternatively, SSV Node setup is also available using [eth-docker](https://eth-d
 
 You might want to [configure MEV](configuring-mev.md) to increase your rewards for block proposals.&#x20;
 
-You can [enable DKG node ](enabling-dkg.md)to increase your chances of being included in a cluster.
+You can [enable DKG node ](installation/enabling-dkg/)to increase your chances of being included in a cluster.
 
-You might want to learn [how to use your Monitoring stack](monitoring/monitoring.md), to stay on top of your performance.
+You might want to learn [how to use your Monitoring stack](maintenance/monitoring.md), to stay on top of your performance.
 
 If you run into some issues while running the node, try and [take a look at the troubleshooting page](maintenance/troubleshooting.md).

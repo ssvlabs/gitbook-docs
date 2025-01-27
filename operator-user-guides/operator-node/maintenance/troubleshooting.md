@@ -431,7 +431,7 @@ This error signalizes the node could not figure the public IP address of your no
 
 Please verify that the `MetricsAPIPort` variable is correctly set in [`config.yaml` configuration file](../installation.md#create-configuration-file).
 
-For a more in-depth guide on how to set up Node monitoring, refer to [the dedicated page in this section](../monitoring/monitoring.md).
+For a more in-depth guide on how to set up Node monitoring, refer to [the dedicated page in this section](monitoring.md).
 
 ***
 
