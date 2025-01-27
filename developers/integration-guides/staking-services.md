@@ -34,7 +34,7 @@ In order to set up your nodes and register your operators to the network, follow
 
 1. [Install operator node](../../operator-user-guides/operator-node/installation.md)
 2. [Register operator](../../operator-user-guides/operator-management/registration.md)
-3. [Monitor node via Grafana](../../operator-user-guides/operator-node/monitoring/monitoring.md) (OPTIONAL but recommended)
+3. [Monitor node via Grafana](../../operator-user-guides/operator-node/maintenance/monitoring.md) (OPTIONAL but recommended)
 
 ### Validator Onboarding
 
