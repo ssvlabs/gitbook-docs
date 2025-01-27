@@ -29,7 +29,7 @@ For details on how to run the tool as an Operator, please head over to [this sub
 Similarly, head over to [this other sub-page ](generate-key-shares.md)for instructions on how to launch the tool as the Initiator of the DKG ceremony.
 
 {% hint style="success" %}
-**NOTE:** Threshold is computed automatically using 3f+1 tolerance.
+**NOTE:** Threshold is computed automatically using 2f+1 tolerance.
 {% endhint %}
 
 ## Flow Description
@@ -62,6 +62,8 @@ A `ssv-dkg` can handle multiple DKG instances, it saves up to `MaxInstances` (10
 
 {% hint style="info" %}
 The `ssv-dkg` tool has recently been audited, you can find more details about it [on the Security page](../../security.md#audit-resources).
+
+A second audit of the `ssv-dkg` tool covered the necessary changes to introduce keyshares regeneration through DKG. This is also listed [on the Security page](../../security.md#audit-resources).
 {% endhint %}
 
 It is important to briefly explain how the communication between DKG ceremony Initiator and Operators is secured:
