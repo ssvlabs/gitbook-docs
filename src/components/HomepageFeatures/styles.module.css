@@ -1,0 +1,134 @@
+.features {
+  padding: 8rem 0;
+  background: linear-gradient(180deg, #0a0a2e 0%, #1e1e7a 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.featuresGlow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(99,102,241,0.15) 0%, transparent 70%);
+}
+
+.features::before,
+.features::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.features::before {
+  top: 0;
+}
+
+.features::after {
+  bottom: 0;
+}
+
+.featureCard {
+  height: 100%;
+  padding: 3rem;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.featureCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom right,
+    transparent,
+    rgba(255, 255, 255, 0.05)
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.featureCard:hover::before {
+  opacity: 1;
+}
+
+.featureImageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 180px;
+  margin-bottom: 2rem;
+}
+
+.featureImg {
+  max-width: 140px;
+  height: auto;
+  transition: transform 0.4s ease;
+  filter: drop-shadow(0 0 20px rgba(99,102,241,0.2));
+}
+
+.featureCard:hover .featureImg {
+  transform: scale(1.05) translateY(-5px);
+}
+
+.featureContent {
+  text-align: center;
+  position: relative;
+}
+
+.featureTitle {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  font-weight: 700;
+  background: linear-gradient(90deg, #ffffff, #a8a8ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.featureDescription {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+@media screen and (max-width: 996px) {
+  .features {
+    padding: 4rem 0;
+  }
+
+  .featureCard {
+    margin-bottom: 2rem;
+    padding: 2rem;
+  }
+
+  .featureImageContainer {
+    height: 140px;
+    margin-bottom: 1.5rem;
+  }
+
+  .featureTitle {
+    font-size: 1.5rem;
+  }
+
+  .featureDescription {
+    font-size: 1rem;
+  }
+}
