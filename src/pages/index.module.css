@@ -1,0 +1,220 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+.heroBanner {
+  position: relative;
+  padding: 6rem 0;
+  text-align: center;
+  overflow: hidden;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #0a0a2e 0%, #1e1e7a 100%);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.heroPattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.05;
+  background: 
+    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+  transform: perspective(500px) rotateX(30deg);
+  animation: patternMove 20s linear infinite;
+}
+
+@keyframes patternMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 30px 30px;
+  }
+}
+
+.heroGlow {
+  position: absolute;
+  top: -50%;
+  left: -10%;
+  width: 120%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(99,102,241,0.15) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heroTitle {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(90deg, #ffffff 0%, #a8a8ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(168, 168, 255, 0.3);
+  position: relative;
+  line-height: 1.2;
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+.heroSubtitle {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+  animation: fadeInUp 1s ease-out;
+  animation-delay: 0.3s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 3rem;
+  animation: fadeInUp 1s ease-out;
+  animation-delay: 0.6s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.heroButton {
+  padding: 1.2rem 3rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none !important;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.heroButton.primary {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+}
+
+.heroButton.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.heroButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.heroButton::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: rotate(45deg);
+  transition: 0.5s;
+}
+
+.heroButton:hover::after {
+  left: 100%;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 4rem 1rem;
+    min-height: 60vh;
+  }
+
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1.2rem;
+    padding: 0 1rem;
+  }
+
+  .buttonContainer {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .heroButton {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoContainer {
+  margin-bottom: 2rem;
+  animation: fadeInDown 1s ease-out;
+}
+
+.logo {
+  height: 80px;
+  width: auto;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px rgba(168, 168, 255, 0.3);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(168, 168, 255, 0.6),
+                 0 0 30px rgba(168, 168, 255, 0.4);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
