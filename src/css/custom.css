@@ -1,0 +1,73 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #2db1ff;
+  --ifm-color-primary-dark: #0fa6ff;
+  --ifm-color-primary-darker: #00a0ff;
+  --ifm-color-primary-darkest: #0084d2;
+  --ifm-color-primary-light: #4bbcff;
+  --ifm-color-primary-lighter: #5ac2ff;
+  --ifm-color-primary-lightest: #87d2ff;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #2db1ff;
+  --ifm-color-primary-dark: #0fa6ff;
+  --ifm-color-primary-darker: #00a0ff;
+  --ifm-color-primary-darkest: #0084d2;
+  --ifm-color-primary-light: #4bbcff;
+  --ifm-color-primary-lighter: #5ac2ff;
+  --ifm-color-primary-lightest: #87d2ff;
+  --ifm-background-color: #0E0E52;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+.ssv-dark-blue {
+  color: #0E0E52;
+}
+
+.ssv-light-blue {
+  color: #2db1ff;
+}
+
+/* Light mode footer */
+[data-theme='light'] .footer {
+  background-color: #f7f7f7;  /* Light gray for light mode */
+  color: #333333;  /* Dark text for light mode */
+}
+
+/* Dark mode footer */
+[data-theme='dark'] .footer {
+  background-color: #0a0a2e;  /* Keep your dark theme color */
+  color: #ffffff;  /* Light text for dark mode */
+}
+
+/* Footer link colors for light mode */
+[data-theme='light'] .footer .footer__link-item {
+  color: #333333;
+}
+
+/* Footer title colors for light mode */
+[data-theme='light'] .footer .footer__title {
+  color: #0E0E52;  /* SSV dark blue */
+  font-weight: bold;
+}
+
+/* Footer link colors for dark mode */
+[data-theme='dark'] .footer .footer__link-item {
+  color: #ffffff;
+}
+
+/* Footer title colors for dark mode */
+[data-theme='dark'] .footer .footer__title {
+  color: #2db1ff;  /* SSV light blue */
+  font-weight: bold;
+}
