@@ -1,9 +1,9 @@
 ---
 sidebar_label: 'Protocol Overview'
-sidebar_position: 2
+sidebar_position: 5
 ---
 
-# Protocol Overview
+# SSV2.0 - A Based Applications Protocol
 
 SSV 2.0 upgrades will focus on the following:
 
