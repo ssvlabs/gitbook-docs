@@ -4,9 +4,7 @@ The ssv.network testnet is live on the Holesky network with the goal of serving 
 
 ### Webapp
 
-:::embed
 https://app.ssv.network
-:::
 
 ### Smart Contracts (Holesky)
 
@@ -20,10 +18,8 @@ https://app.ssv.network
 
 The tSSV Faucet is a web interface that distributes small amounts of SSV tokens on the Holesky network for validators registration to the ssv.network and testing purposes.
 
-:::embed
 https://faucet.ssv.network/
-:::
 
-:::hint
+:::info
 Funds received through the SSV faucet are not real funds and hold no value.
 :::

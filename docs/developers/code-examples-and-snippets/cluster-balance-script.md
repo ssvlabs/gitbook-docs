@@ -102,7 +102,7 @@ _Prerequisite:_ [_Node.js_](https://nodejs.org/en) _must be installed on the sys
     node fetchData.js
     ```
 
-:::hint
+:::info
 If you get a warning, or an error similar to this:
 
 ```

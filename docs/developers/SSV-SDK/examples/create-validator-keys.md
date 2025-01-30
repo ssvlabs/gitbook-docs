@@ -8,7 +8,7 @@ The SSV SDK does not natively support programatically generating keystores out o
 
 If you do not need to do this programatically, it may be easier to use the [Ethereum Staking Deposit CLI](https://github.com/ethereum/staking-deposit-cli) to generate validator keys.
 
-:::hint
+:::info
 As this is not part of the SSV SDK, SSV is not liable for any misuse of the packages used to generate validator keys in the method show below.
 :::
 
