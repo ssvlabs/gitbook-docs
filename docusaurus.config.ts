@@ -117,9 +117,3 @@ const config: Config = {
 };
 
 export default config;
-// docusaurus.config.js
-//module.exports = {
-//  onBrokenLinks: 'throw',
-  //onBrokenAnchors: 'throw',
-  //onBrokenMarkdownLinks: 'throw',
-//};
