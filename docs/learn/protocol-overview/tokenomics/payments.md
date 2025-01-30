@@ -39,15 +39,16 @@ Similarly, whenever an event changes fee calculations for a cluster (e.g. adding
 
 **Indexes are calculated using this generalized formula:**
 
-```
-index_n = index_{n-1} + (b - b_{n-1}) * f
-```
+$$
+index_n =index_{n-1} + (b - b_{n-1}) * f
+$$
 
-* Legend
-  * index_p - previous index
-  * b - current block
-  * b_p - block number of previous index
-  * f - fee (SSV per block) applicable to the block interval ("previous fee")
+
+#### Legend
+  * $$index_p$$​ - previous index
+  * $$b$$​ - current block
+  * $$b_p$$​ - block number of previous index
+  * $$f$$ - fee ($SSV per block) applicable to the block interval ("previous fee")
 
 ### **Index Calculation Example**
 
@@ -57,21 +58,21 @@ In this example the cluster index is updated each time a new validator is regist
 
 When the first validator is registered, the index is 0, the previous block is 100, and the current block is 170. Let's say the fee is 5 for this example. This means we can put it into our formula:
 
-```
-index = 0 + (170 - 100) * 5
-```
+$$
+index =0 + (170 - 100) * 5
+$$
 
 Which gets us **350.** This process can be repeated for the next action, when a validator is removed.
 
-```
-index = 350 + (220 - 170) * 5
-```
+$$
+index =350 + (220 - 170) * 5
+$$
 
 Which gets us the second index, **600.** We can repeat the process once more to get the last index on the chart.
 
-```
-index = 600 + (300 - 220) * 5
-```
+$$
+index =600 + (300 - 220) * 5
+$$
 
 Which gets us our third index, 1100.
 

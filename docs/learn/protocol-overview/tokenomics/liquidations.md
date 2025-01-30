@@ -25,15 +25,15 @@ The required collateral amount is the highest value between a fixed amount calle
 
 Another way to explain it is to reverse the logic: _Clusters that drop below the liquidation collateral threshold are deemed **Liquidatable** and are at risk of being liquidated._
 
-```
-liquidatable = balance < max(MLC, burn_rate * LTP)
-```
+$$
+liquidatable = balance<max(MLC, burn\;rate * LTP)
+$$
 
-Legend:
-* balance - cluster balance, [please refer to this page for exact calculation](../../../stakers/clusters/cluster-balance.md)) (denominated in SSV tokens)
-* burn_rate - projected cluster expenses (denominated in SSV tokens per block)
-* [MLC](liquidations.md#minimum-liquidation-collateral) - minimum liquidation collateral (denominated in SSV tokens)
-* [LTP](liquidations.md#liquidation-threshold-period) - liquidation threshold period (denominated in blocks)
+#### Legend:
+* $balance$ - cluster balance, [please refer to this page for exact calculation](../../../stakers/clusters/cluster-balance.md)) (denominated in SSV tokens)
+* $burn\;rate$ - projected cluster expenses (denominated in SSV tokens per block)
+* [$MLC$](liquidations.md#minimum-liquidation-collateral) - minimum liquidation collateral (denominated in SSV tokens)
+* [$LTP$](liquidations.md#liquidation-threshold-period) - liquidation threshold period (denominated in blocks)
 
 Liquidated clusters will no longer be managed by operators and will become inactive to perform their duties; this could lead to severe penalties on the Beacon Chain.
 
@@ -57,14 +57,14 @@ Considering that clusters vary in the number of validators and the fees paid to 
 
 The "burn rate" is the rate in which an cluster spends SSV per block, calculated by:
 
-```
-burn_rate = (sum(f_o) + f_n) * n_v
-```
+$$
+burn\;rate = (\sum f_{o}  + f_{n}) * n_{v}
+$$
 
-Legend:
-* f_o - [operator fees](fees.md#operator-fees-) - the fees of all operators in the cluster (denominated in SSV tokens per block)
-* f_n - [network fees](fees.md#network-fees-) - the fees owed to the ssv network (denominated in SSV tokens per block)
-* n_v - number of validators managed by the cluster
+#### Legend:
+  * $$f_o$$ - [operator fees](fees.md#ht1v5x3rp8hp) - the fees of all operators in the cluster (denominated in _SSV tokens per block_)
+  * $$f_n$$ - [network fees](fees.md#k4tw9to38r3v) - the fees owed to the ssv network (denominated in _SSV tokens per block_)
+  * $$n_v$$ - number of validators managed by the cluster
 
 ### Liquidation
 
