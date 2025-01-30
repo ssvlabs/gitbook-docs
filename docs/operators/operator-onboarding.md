@@ -29,11 +29,10 @@ This means that when setting the operator fee through the smart contract (whethe
 
 * To calculate fee per block according to a desired annual fee in fiat (USD):
 
-```
-Fee per block = ( AnnualFee{usd} / SSV{usd} ) / Blocks{year}
-```
+$$ \text{Fee per block} = \dfrac{\dfrac{\text{Annual Fee}_{usd}}{SSV_{usd}}}{Blocks_{year}} $$
+
 
 Where:
-- `Annual Fee USD` - desired fee per year in USD
-- `SSV USD` - SSV price in USD  
-- `Blocks year` - avg. number of blocks per year ([reference](https://ycharts.com/indicators/ethereum_blocks_per_day))
+- $\text{Annual Fee}_{usd}$ - desired fee per year in USD
+- $SSV_{usd}$ - SSV price in USD  
+- $Blocks_{year}$  - avg. number of blocks per year ([reference](https://ycharts.com/indicators/ethereum_blocks_per_day))
