@@ -90,7 +90,7 @@ From the options presented in the next screen, please select DKG
 
 ![Distribute a validator](/img/dkg-ceremony-9.avif)
 :::info
-The latest SSV Smart Contract updates added support for [_bulk operations_](../../developers/smart-contracts/ssvnetwork.md#bulkregistervalidator-publickey-operatorids-shares-amount-cluster), and the latest release of`ssv-dkg` tool has been made compatible with bulk operations.
+The latest SSV Smart Contract updates added support for [_bulk operations_](../../developers/smart-contracts/ssvnetwork.md#bulkregistervalidatorpublickey-operatorids-shares-amount-cluster), and the latest release of`ssv-dkg` tool has been made compatible with bulk operations.
 
 With version 1.1.0 (and above), it is possible to generate keyshares for multiple validators in a single operation.
 :::

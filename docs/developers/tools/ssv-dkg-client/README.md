@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'DKG Client'
+sidebar_label: 'SSV DKG Client'
 sidebar_position: 4
 ---
 
@@ -67,6 +67,8 @@ A `ssv-dkg` can handle multiple DKG instances, it saves up to `MaxInstances` (10
 
 :::info
 The `ssv-dkg` tool has recently been audited, you can find more details about it [on the Security page](../../security.md#audit-resources).
+
+A second audit of the `ssv-dkg` tool covered the necessary changes to introduce keyshares regeneration through DKG. This is also listed [on the Security page](../../security.md#audit-resources).
 :::
 
 It is important to briefly explain how the communication between DKG ceremony Initiator and Operators is secured:

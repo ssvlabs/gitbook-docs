@@ -24,7 +24,7 @@ In the Cluster page, **tap the gear icon** next to the validator you want to rem
 ### Bulk remove
 
 :::success
-The latest SSV Smart Contract updates added support for [_bulk operations_](../../developers/smart-contracts/ssvnetwork.md#bulkremovevalidator-publickey-operatorids-cluster), and the SSV WebApp has been upgraded to include the ability to perform bulk operations on multiple validators at a time.
+The latest SSV Smart Contract updates added support for [_bulk operations_](../../developers/smart-contracts/ssvnetwork.md#bulkremovevalidatorpublickey-operatorids-cluster), and the SSV WebApp has been upgraded to include the ability to perform bulk operations on multiple validators at a time.
 
 This makes it possible to remove multiple validators in a single transaction.
 :::

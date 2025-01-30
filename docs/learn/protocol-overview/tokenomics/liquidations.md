@@ -62,8 +62,8 @@ burn\;rate = (\sum f_{o}  + f_{n}) * n_{v}
 $$
 
 #### Legend:
-  * $$f_o$$ - [operator fees](fees.md#ht1v5x3rp8hp) - the fees of all operators in the cluster (denominated in _SSV tokens per block_)
-  * $$f_n$$ - [network fees](fees.md#k4tw9to38r3v) - the fees owed to the ssv network (denominated in _SSV tokens per block_)
+  * $$f_o$$ - [operator fees](fees.md) - the fees of all operators in the cluster (denominated in _SSV tokens per block_)
+  * $$f_n$$ - [network fees](fees.md) - the fees owed to the ssv network (denominated in _SSV tokens per block_)
   * $$n_v$$ - number of validators managed by the cluster
 
 ### Liquidation

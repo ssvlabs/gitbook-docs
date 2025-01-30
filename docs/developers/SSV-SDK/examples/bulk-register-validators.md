@@ -8,7 +8,7 @@ sidebar_position: 6
 
 This page show show to register any amount of validators to the SSV network.&#x20;
 
-:::hint
+:::info
 Prerequisite: This tutorial assumes you already have keystores generated, or will use the [code illustrated here](create-validator-keys.md) to generate them pragmatically.
 :::
 

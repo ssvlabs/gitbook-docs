@@ -1,7 +1,9 @@
 ---
-description: How to install an SSV node
+sidebar_label: 'Node Setup'
 sidebar_position: 1
 ---
+
+# Running a Node
 
 # Node setup
 
@@ -191,10 +193,10 @@ Alternatively, SSV Node setup is also available using [eth-docker](https://eth-d
 
 ### What's next?
 
-You might want to [configure MEV](./configuring-mev) to increase your rewards for block proposals.&#x20;
+You might want to [configure MEV](configuring-mev) to increase your rewards for block proposals.&#x20;
 
-You can [enable DKG node](./enabling-dkg) to increase your chances of being included in a cluster.
+You can [enable DKG node](enabling-dkg) to increase your chances of being included in a cluster.
 
-You might want to learn [how to use your Monitoring stack](./monitoring/), to stay on top of your performance.
+You might want to learn [how to use your Monitoring stack](monitoring), to stay on top of your performance.
 
-If you run into some issues while running the node, try and [take a look at the troubleshooting page](./maintenance/troubleshooting).
+If you run into some issues while running the node, try and [take a look at the troubleshooting page](maintenance/troubleshooting).

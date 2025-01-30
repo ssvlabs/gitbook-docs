@@ -21,4 +21,5 @@ The ssv.network has undergone multiple audits, you can find the completed audit 
 | Smart Contracts - Multi-operator, multi-address whitelist | June 2024 | [Link](https://github.com/ssvlabs/ssv-network/blob/main/contracts/audits/2024-07-04_Quantstamp_v1.2.0.pdf) | [Quantstamp](https://quantstamp.com/) |
 | SSV Specification - Peer-to-Peer protocol updates - "Alan" fork | October 2024 | [Link](https://github.com/ssvlabs/ssv-spec/blob/main/docs/audits/Hacken_SSV_Spec_Audit.pdf) | [Hacken](https://hacken.io/about/) |
 | SSV Node - Peer-to-Peer protocol updates - "Alan" fork | October 2024 | [Link](https://github.com/ssvlabs/ssv/blob/main/audits/Hacken_SSV_Labs_L1_SSV_Labs_SSV_Node_Aug2024_P_2024_1212_2_20241016.pdf) | [Hacken](https://hacken.io/about/) |
+| SSV DKG - Reshare and resign features | November 2024 | [Link](https://github.com/ssvlabs/ssv/blob/main/audits/Hacken_SSV_Labs_L1_SSV_Labs_SSV_Node_Aug2024_P_2024_1212_2_20241016.pdf) | [Hacken](https://www.chainsecurity.com/) |
 
