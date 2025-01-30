@@ -1,12 +1,11 @@
 ---
-sidebar_label: 'Based Applications'
+sidebar_label: 'Introduction to Based Applications'
 sidebar_position: 1
 --- 
  
-# Introduction to Based Applications
+# SSV2.0 Based Applications Protocol
 
+## Abstract
+The Ethereum validator set is one of the largest and most advanced in the blockchain space. With close to 1.1M active validators (~35M ETH) run by thousands of different entities, it represents the core ethos of Ethereum - a credibly neutral settlement layer. Ethereum’s roadmap favors a polylithic approach for resolving technical challenges (scale, transaction ordering, etc) rather than a monolithic one. The term rollup-centric roadmap was coined by Vitalik Buterin in 2020 and adopted by the wider community. In this paper, we suggest a new term, Based Applications(bApps), to describe a method for re-utilizing Ethereum validators for bootstrapping off-chain services. This approach recognizes the unique properties of Ethereum’s validator set as superior to other forms of security, unlocking an infrastructural layer for a wide range of services.
 
-Validators are the backbone of Ethereum, providing essential services to the blockchain. However, apart from performing duties and securing Ethereum, for the first time we show that Ethereum validators can also serve other decentralized systems with their established Sybil resistance and staked capital.
-
-
-Based Applications(bApps) are a new class of decentralized applications that leverage the Ethereum validator set for enhanced security, bootstrapping, and new capabilities. These applications make use of Ethereum's existing validator set(as opposed to capital) to quickly establish trust and operational resilience without having to build their own validator networks. Examples include based rollups, co-processors, oracles, bridges, and more. Additionally, bApps can serve novel applications like pre-confirmations, where validators can pre-confirm transactions before final inclusion in a block, reducing latency and improving user experience. By utilizing Ethereum's existing validator set, bApps can unlock new possibilities for scalability and user interaction while maintaining a high level of security and decentralization.
+This is a vision for a possible future presented by SSV Labs to the ssv.network community and is subject to DAO approval
