@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Use Cases'
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 # Use Cases
