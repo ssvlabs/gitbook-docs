@@ -3,19 +3,23 @@ sidebar_label: 'Based App Middleware Example'
 sidebar_position: 2
 ---
 
+# :warning: PAGE UNDER CONSTRUCTION :warning:
+
 # BasedAppMiddleware
 
-When [configuring a permissioned Operator](../../operators/operator-management/configuring-a-permissioned-operator), we have the option to set an external whitelising contract to manage this whitelist. To work correctly with the SSV network contract, it must meet certain specifications.
+Services that want to [integrate with SSV's Based Application framework](../based-application-depvelopment/#1-creating-and-configuring-a-bapp) need to develop a smart contract for the services' task that are going to be handled by operators, and register it. To work correctly with the [Based Application Manager contract](../smart-contracts/BasedAppManager.md), this must meet certain specifications.
 
-### What is a valid Whitelisting Contract?
+## What is a valid `BAppMiddleware` Contract?
 
-The operators can choose to whitelist an external contract with custom logic to manage authorized addresses externally. To be used in SSV contracts, it needs to implement the [ISSVWhitelistingContract](https://github.com/ssvlabs/ssv-network/blob/v1.2.0/contracts/interfaces/external/ISSVWhitelistingContract.sol) interface, that requires to implement the `isWhitelisted(address account, uint256 operatorId)` function. This function is called in the register validator process, that must return `true/false` to indicate if the caller (`msg.sender`) is whitelisted for the operator.
+ To be used in the context of the Based Application Manager, services need to develop a smart contract that implements a specific interface, called [`IBAppMiddleware`](https://www.google.com).
+
+<!-- The operators can choose to whitelist an external contract with custom logic to manage authorized addresses externally. To be used in SSV contracts, it needs to implement the [ISSVWhitelistingContract](https://github.com/ssvlabs/ssv-network/blob/v1.2.0/contracts/interfaces/external/ISSVWhitelistingContract.sol) interface, that requires to implement the `isWhitelisted(address account, uint256 operatorId)` function. This function is called in the register validator process, that must return `true/false` to indicate if the caller (`msg.sender`) is whitelisted for the operator.
 
 To check if a contract is a valid whitelisting contract, use the function in the [SSVNetworkViews](ssvnetworkviews.md) contract: [`isWhitelistingContract()`](ssvnetworkviews.md#iswhitelistingcontractcontractaddress)
 
-To check if an account is whitelisted in a whitelisting contract, use the function in the [SSVNetworkViews](ssvnetworkviews.md) contract: [`isAddressWhitelistedInWhitelistingContract()`](ssvnetworkviews.md#isaddresswhitelistedinwhitelistingcontractaddresstocheck-operatorid-whitelistingcontract)
+To check if an account is whitelisted in a whitelisting contract, use the function in the [SSVNetworkViews](ssvnetworkviews.md) contract: [`isAddressWhitelistedInWhitelistingContract()`](ssvnetworkviews.md#isaddresswhitelistedinwhitelistingcontractaddresstocheck-operatorid-whitelistingcontract) -->
 
-### Example contract
+## Example contract
 
 
 ```javascript
