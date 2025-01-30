@@ -29,7 +29,7 @@ This means that when setting the operator fee through the smart contract (whethe
 
 * To calculate fee per block according to a desired annual fee in fiat (USD):
 
-$$ \text{Fee per block} = \dfrac{\dfrac{\text{Annual Fee}_{usd}}{SSV_{usd}}}{Blocks_{year}} $$
+$$ Fee\;per\;block = \dfrac{Annuel\;Fee_{usd}}{SSV_{usd}}\;/\;Blocks_{year} $$
 
 
 Where:
