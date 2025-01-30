@@ -28,10 +28,9 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: TODO
-          aws-region: us-west-2
+          role-to-assume: ${{ secrets.DOCS_AWS_IAM_ROLE }}
+          aws-region: ${{ secrets.DOCS_AWS_REGION }}
 
       - name: Upload files to S3
         run: |
-          aws s3 cp ./build s3://docs.ssv.network --recursive
-
+          aws s3 cp ./build s3://${{ secrets.DOCS_AWS_S3_BUCKET }} --recursive
