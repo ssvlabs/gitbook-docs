@@ -5,16 +5,20 @@ sidebar_position: 1
 
 # Based Application Development
 
-This guide outlines the steps for based applications developers looking to build on the bApps platform.
+This guide outlines the steps for based applications developers looking to build on the Based Applications platform.
 
-## 1. Creating and Configuring a bApp
+## 0. Developing a Based Application Middleware smart contract
+
+The `BAppManager` smart contract developed by SSV Labs accepts registrations of BApps that implement a specific interface. This is outlined [in this dedicated page](./smart-contracts/based-app-middleware-example.md), that also provides a simple example.
+
+## 1. Configuring and Registering the bApp
 
 1. **Define core attributes**:
 - `bApp`: a unique 20-byte EVM address that uniquely identifies the bApp.
-- `tokens`:  A list of ERC-20 tokens to be used in the bApp's security mechanism. For the native ETH token, use the special address [`0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE`](https://github.com/ssvlabs/based-applications/blob/92a5d3d276148604e3fc087c1c121f78b136a741/src/BasedAppManager.sol#L62).
+- `tokens`:  A list of ERC-20 tokens to be used in the bApp's security mechanism. For the native ETH token, use the special address [`0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE`](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L62).
 - `sharedRiskLevels`: a list with $\beta$ values, one for each token, representing the bApp's tolerance for risk (token over-usage).
 2. **Optional Non-Slashable Validator Balance**: If the bApp uses non-slashable validator balance, it should be configured off-chain, in the bApp's network.
-3. **Register the bApp**: Use the [`registerBApp`](https://github.com/ssvlabs/based-applications/blob/92a5d3d276148604e3fc087c1c121f78b136a741/src/BasedAppManager.sol#L249) function of the smart contract:
+3. **Register the bApp**: Use the [`registerBApp`](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L249) function of the smart contract:
 ```javascript
 function registerBApp(
    address bApp,
@@ -28,11 +32,11 @@ function registerBApp(
 
 ## 2. Securing the bApp
 
-Once the bApp is registered, strategies can join it and allocate capital to secure it.
+Once the bApp is registered, `Strategies` can join it and allocate capital to secure it.
 
 ### 2.1 Opting in
 
-The strategy opts-in to the bApp by using the [`optInToBApp`](https://github.com/ssvlabs/based-applications/blob/92a5d3d276148604e3fc087c1c121f78b136a741/src/BasedAppManager.sol#L333) function of the smart contract:
+A Strategy opts-in to the bApp by using the [`optInToBApp`](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L333) function of the smart contract:
 ```javascript
 function optInToBApp(
    uint256 strategyId,
@@ -48,54 +52,63 @@ function optInToBApp(
 
 For example, if `tokens = [SSV]` and `obligationPercentages = [50%]`, then 50% of the strategy's `SSV` balance will be obligated to the bApp.
 
-The strategy’s owner can later update its obligations by modifying existing ones or adding a new token obligation.
+The strategy’s owner can later update their obligations by modifying existing ones or adding a new token obligation.
 
 ### 2.2 Strategy's Funds
 
 To compose their balances, strategies:
-1. receive ERC20 (or ETH) via [**deposits**](https://github.com/ssvlabs/based-applications/blob/92a5d3d276148604e3fc087c1c121f78b136a741/src/BasedAppManager.sol#L376) from accounts.
-2. inherent the non-slashable validator balance from its owner account. Accounts [**delegate**](https://github.com/ssvlabs/based-applications/blob/92a5d3d276148604e3fc087c1c121f78b136a741/src/BasedAppManager.sol#L201) validator balances between themselves, and the strategy inherits its owner's non-delegated balance plus the received balances from other accounts.
+1. receive ERC20 (or ETH) via [**deposits**](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L376) from accounts.
+2. inherit the non-slashable validator balance from the strategy's owner account. Accounts [**delegate**](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L201) validator balances between themselves, and the strategy inherits its owner's non-delegated balance plus the received balances from other accounts.
 
 ## 3. Participant Weight
 
 bApp clients track the weight of each participant in the bApp. For that, clients will:
 
 1. **Gather Obligated Balances**: First, for each token used by the bApp, it should get the obligated balance from each strategy.
-```go
-ObligatedBalance mapping(Token -> Strategy -> Amount)
-```
+   ```go
+   ObligatedBalance mapping(Token -> Strategy -> Amount)
+   ```
 2. **Sum Obligations**: From `ObligatedBalance`, it can sum all obligations and compute the total amount obligated to the bApp by all strategies.
-```go
-TotalBAppBalance mapping(Token -> Amount)
-```
+   ```go
+   TotalBAppBalance mapping(Token -> Amount)
+   ```
 3. **Calculate Risk**: For each token, it should get the risk (token-over usage) of each strategy.
-```go
-Risk mapping(Token -> Strategy -> Float)
-```
+   ```go
+   Risk mapping(Token -> Strategy -> Float)
+   ```
 4. **Compute Risk-Aware Weights**: With this information, it can compute the weight of a participant for a certain token by
 
-$$W_{\text{strategy, token}} = c_{\text{token}} \times \frac{ObligatedBalance[\text{token}][\text{strategy}]}{TotalBAppBalance[\text{token}]} e^{-\beta_{\text{token}} \times max(1, Risk[\text{token}][\text{strategy}])}$$
+   $$
+   W_{\text{strategy, token}} = c_{\text{token}} \times \dfrac{ObligatedBalance[\text{token}][\text{strategy}]}{TotalBAppBalance[\text{token}]} e^{-\beta_{\text{token}} \times max(1, Risk[\text{token}][\text{strategy}])}
+   $$
 
-where $c_{\text{token}}$ is a normalization constant defined as
+   where $c_{\text{token}}$ is a normalization constant defined as
 
-$$c_{\text{token}} = \left( \sum_{\text{strategy}} \frac{ObligatedBalance[\text{token}][\text{strategy}]}{TotalBAppBalance[\text{token}]} e^{-\beta_{\text{token}} \times max(1, Risk[\text{token}][\text{strategy}])} \right)^{-1}$$
+   $$
+   c_{\text{token}} = \left( \sum_{\text{strategy}} \dfrac{ObligatedBalance[\text{token}][\text{strategy}]}{TotalBAppBalance[\text{token}]} e^{-\beta_{\text{token}} \times max(1, Risk[\text{token}][\text{strategy}])} \right)^{-1}
+   $$
 
-
-> [!NOTE]
-> If the bApp uses validator balance, the client should also read a `map[Strategy]ValidatorBalance` with the amount from each strategy. As this capital doesn't involve any type of risk, all risk values can be set to 0. Thus, for this capital, this is equivalent to
-> $$W_{\text{strategy, validator balance}} = \frac{ObligatedBalance[\text{validator balance}][\text{strategy}]}{TotalBAppBalance[\text{validator balance}]}$$
-
+   :::info
+   If the bApp uses validator balance, the client should also read a `map[Strategy]ValidatorBalance` with the amount from each strategy. As this capital doesn't involve any type of risk, all risk values can be set to 0. Thus, for this capital, this is equivalent to
+   $$
+   W_{\text{strategy, validator balance}} = \dfrac{ObligatedBalance[\text{validator balance}][\text{strategy}]}{TotalBAppBalance[\text{validator balance}]}
+   $$
+   :::
 
 5. **Combine into the Final Weight**: With the per-token weights, the final step is to compute a final weight for the participant using a **combination function**. Such function is defined by the bApp and can be tailored to its specific needs. Traditional examples include the arithmetic mean, geometric mean, and harmonic mean.
 
 
-**Example**: Let's consider a bApp that uses tokens $A$ and $B$, and considers $A$ to be twice as important as $B$. Then, it could use the following weighted harmonic mean as its combination function:
+   **Example**: Let's consider a bApp that uses tokens $A$ and $B$, and considers $A$ to be twice as important as $B$. Then, it could use the following weighted harmonic mean as its combination function:
 
-$$W^{\text{final}}_{\text{strategy}} = c_{\text{final}} \times \frac{1}{\frac{2/3}{W_{\text{strategy, A}}} + \frac{1/3}{W_{\text{strategy, B}}}}$$
+   $$
+   W^{\text{final}}_{\text{strategy}} = c_{\text{final}} \times \dfrac{1}{\dfrac{2/3}{W_{\text{strategy, A}}} + \dfrac{1/3}{W_{\text{strategy, B}}}}
+   $$
 
-where $c_{\text{final}}$ is a normalization constant computed as
+   where $c_{\text{final}}$ is a normalization constant computed as
 
-$$c_{\text{final}} = \left( \sum_{\text{strategy}} \frac{1}{\frac{2/3}{W_{\text{strategy, A}}} + \frac{1/3}{W_{\text{strategy, B}}}} \right)^{-1}$$
+   $$
+   c_{\text{final}} = \left( \sum_{\text{strategy}} \dfrac{1}{\dfrac{2/3}{W_{\text{strategy, A}}} + \dfrac{1/3}{W_{\text{strategy, B}}}} \right)^{-1}
+   $$
 
 
 ### 3.1 Fecthing obligated balances, validator balances, and risks
@@ -223,11 +236,11 @@ function Risks(bApp)
 **API Calls**
 
 For reference, we list the API calls used in the above snippets along with the chain state variables that should be read for each call:
-- `GetbAppTokens(bApp)`: [`bAppTokens`](https://github.com/ssvlabs/based-applications/blob/92a5d3d276148604e3fc087c1c121f78b136a741/src/BasedAppManager.sol#L84)
-- `GetStrategies()`: [`strategies`](https://github.com/ssvlabs/based-applications/blob/92a5d3d276148604e3fc087c1c121f78b136a741/src/BasedAppManager.sol#L89)
-- `GetStrategyOptedInToBApp(account, bApp)`: [`accountBAppStrategy`](https://github.com/ssvlabs/based-applications/blob/92a5d3d276148604e3fc087c1c121f78b136a741/src/BasedAppManager.sol#L94)
-- `GetStrategyBalance(strategy)`: [`strategyTokenBalances`](https://github.com/ssvlabs/based-applications/blob/92a5d3d276148604e3fc087c1c121f78b136a741/src/BasedAppManager.sol#L109)
-- `GetObligation(strategy, bApp, token)`: [`obligations`](https://github.com/ssvlabs/based-applications/blob/92a5d3d276148604e3fc087c1c121f78b136a741/src/BasedAppManager.sol#L115)
-- `GetStrategyOwnerAccount(strategy)`: [`strategies`](https://github.com/ssvlabs/based-applications/blob/92a5d3d276148604e3fc087c1c121f78b136a741/src/BasedAppManager.sol#L89)
-- `GetTotalDelegation(account)`: [`totalDelegatedPercentage`](https://github.com/ssvlabs/based-applications/blob/92a5d3d276148604e3fc087c1c121f78b136a741/src/BasedAppManager.sol#L104)
-- `GetDelegatorsToAccount(account)`: [`delegations`](https://github.com/ssvlabs/based-applications/blob/92a5d3d276148604e3fc087c1c121f78b136a741/src/BasedAppManager.sol#L99)
+- `GetbAppTokens(bApp)`: [`bAppTokens`](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L84)
+- `GetStrategies()`: [`strategies`](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L89)
+- `GetStrategyOptedInToBApp(account, bApp)`: [`accountBAppStrategy`](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L94)
+- `GetStrategyBalance(strategy)`: [`strategyTokenBalances`](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L109)
+- `GetObligation(strategy, bApp, token)`: [`obligations`](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L115)
+- `GetStrategyOwnerAccount(strategy)`: [`strategies`](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L89)
+- `GetTotalDelegation(account)`: [`totalDelegatedPercentage`](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L104)
+- `GetDelegatorsToAccount(account)`: [`delegations`](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L99)
