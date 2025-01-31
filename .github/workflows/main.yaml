@@ -1,0 +1,36 @@
+name: deploy website
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: docs
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: ${{ secrets.DOCS_AWS_IAM_ROLE }}
+          aws-region: ${{ secrets.DOCS_AWS_REGION }}
+
+      - name: Upload files to S3
+        run: |
+          aws s3 cp ./build s3://${{ secrets.DOCS_AWS_S3_BUCKET }} --recursive
