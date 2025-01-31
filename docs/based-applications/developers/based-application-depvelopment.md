@@ -62,21 +62,86 @@ To compose their balances, strategies:
 
 ## 3. Participant Weight
 
-bApp clients track the weight of each participant in the bApp. For that, clients will:
+bApp clients need to track the weight of each participant in the bApp. 
 
-1. **Gather Obligated Balances**: First, for each token used by the bApp, it should get the obligated balance from each strategy.
-   ```go
-   ObligatedBalance mapping(Token -> Strategy -> Amount)
+A simple way to do so would be to use the Subgraph and perform a request with this query:
+
+```graphql
+
+query MyQuery {
+  bapp(id: "1") {
+    # this is a mapping table, representing the many-to-many relationship between bapps and strategies
+    strategies {
+      obligations {
+        token
+        percentage
+      }
+      # this is the actual strategy entity
+      strategy {
+        balances {
+          balance
+          token
+        }
+        id
+        owner {
+          delegators {
+            percentage
+            id
+          }
+        }
+      }
+    }
+    bAppTokens {
+      sharedRiskLevel
+      token
+    }
+  }
+}
+```
+
+This will return:
+* **all balances** per token for a given strategy
+* **all obligations** per token for a given strategy
+* TODO add remaining data
+
+For all the strategies that opted-in to a given bApp
+
+1. Clients will have to use this data to obtain a global mapping of `Token -> Strategy -> Amount`
+   
+   This is done by multiplying the `percentage` of obligated tokens by the `balance` of such tokens deposited to the strategy
+
+   ```typescript
+   // build a map that links each token with the mapping of a strategy and their related obligated balance
+   let strategiesObligatedBalancesPerToken: Map<string, Map<number, number>> = new Map();
+   
+   // build the two separate mappings of obligations per token, balances per token
+   // calculate the actual balance obligated for each token
+   // and add the entry to the global mapping
+   for (let strategy of response.data.data.bapp.strategies) {
+      let obligationsPerToken: Map<string, number> = new Map(strategy.obligations.map(
+         (obligation) => return [token, percentage]
+      ))
+      let balancesPerToken: Map<string, number> = new Map(strategy.strategy.balances.map(
+         (obligation) => return [token, balance]
+      ))
+
+      obligationsPerToken.keys().map(
+         (token) => {
+            strategiesObligatedBalancesPerToken.set(token) = new Map([strategy.id, obligationsPerToken.get(token) * balancesPerToken.get(token)])
+         }
+      )
+   }
    ```
-2. **Sum Obligations**: From `ObligatedBalance`, it can sum all obligations and compute the total amount obligated to the bApp by all strategies.
+2. TODO Add Validator balance calculation
+3. **Sum Obligations**: From `ObligatedBalance`, it can sum all obligations and compute the total amount obligated to the bApp by all strategies.
    ```go
    TotalBAppBalance mapping(Token -> Amount)
    ```
-3. **Calculate Risk**: For each token, it should get the risk (token-over usage) of each strategy.
+4. **Calculate Risk**: For each token, it should get the risk (token-over usage) of each strategy.
    ```go
    Risk mapping(Token -> Strategy -> Float)
    ```
-4. **Compute Risk-Aware Weights**: With this information, it can compute the weight of a participant for a certain token by
+5. **Compute Risk-Aware Weights**: With this information, it can compute the weight of a participant for a certain token by
 
    $$
    W_{\text{strategy, token}} = c_{\text{token}} \times \dfrac{ObligatedBalance[\text{token}][\text{strategy}]}{TotalBAppBalance[\text{token}]} e^{-\beta_{\text{token}} \times max(1, Risk[\text{token}][\text{strategy}])}
@@ -95,7 +160,7 @@ bApp clients track the weight of each participant in the bApp. For that, clients
    $$
    :::
 
-5. **Combine into the Final Weight**: With the per-token weights, the final step is to compute a final weight for the participant using a **combination function**. Such function is defined by the bApp and can be tailored to its specific needs. Traditional examples include the arithmetic mean, geometric mean, and harmonic mean.
+6. **Combine into the Final Weight**: With the per-token weights, the final step is to compute a final weight for the participant using a **combination function**. Such function is defined by the bApp and can be tailored to its specific needs. Traditional examples include the arithmetic mean, geometric mean, and harmonic mean.
 
 
    **Example**: Let's consider a bApp that uses tokens $A$ and $B$, and considers $A$ to be twice as important as $B$. Then, it could use the following weighted harmonic mean as its combination function:
@@ -110,137 +175,3 @@ bApp clients track the weight of each participant in the bApp. For that, clients
    c_{\text{final}} = \left( \sum_{\text{strategy}} \dfrac{1}{\dfrac{2/3}{W_{\text{strategy, A}}} + \dfrac{1/3}{W_{\text{strategy, B}}}} \right)^{-1}
    $$
 
-
-### 3.1 Fecthing obligated balances, validator balances, and risks
-
-In this subsection, we detail how the data for computing the participants' weights can be read from the chain state.
-
-**Map of obligation balances**
-
-```r
-function ObligatedBalances(bApp)
-   obligatedBalances = New(Map<Token, Map<Strategy, Amount>>)
-
-   # Get bApp tokens
-   bAppTokens = api.GetbAppTokens(bApp)
-
-   # Loop through every strategy
-   strategies = api.GetStrategies()
-   for strategy in strategies do
-
-      # Check if strategy participates in the bApp
-      ownerAccount := api.GetStrategyOwnerAccount(strategy)
-      if api.GetStrategyOptedInToBApp(ownerAccount, bApp) != strategy then
-         # If not, continue
-         continue
-
-      # Get strategy balance
-      balance = api.GetStrategyBalance(strategy)
-
-      # Add obligated balance for each bApp token
-      for token in bAppTokens do
-         obligationPercentage = api.GetObligation(strategy, bApp, token)
-         obligatedBalances[token][strategy] = obligationPercentage * balance[token]
-
-   return obligatedBalances
-```
-
-**Map of validator balances**
-
-```r
-function ValidatorBalances(bApp)
-   validatorBalances = New(Map<Strategy, Amount>)
-
-   # Loop through every strategy
-   strategies = api.GetStrategies()
-   for strategy in strategies do
-
-      # Get account that owns the strategy
-      ownerAccount = api.GetStrategyOwnerAccount(strategy)
-
-      # Check if strategy participates in the bApp
-      if api.GetStrategyOptedInToBApp(ownerAccount, bApp) != strategy then
-         # If not, continue
-         continue
-
-      # Store validator balance
-      validatorBalances[strategy] = ComputeEffectiveValidatorBalance(ownerAccount)
-
-   return obligatedBalances
-
-
-function ComputeEffectiveValidatorBalance(account)
-
-   total = 0
-
-   # Gets the percentage that the account delegated to others
-   percentageDelegatedToOthers = api.GetTotalDelegation(account)
-
-   # Add non-delegated validator balance
-   accountsOriginalValidatorBalance = GetOriginalValidatorBalance(account)
-   total += accountsOriginalValidatorBalance * (1 - percentageDelegatedToOthers)
-
-   # Get all other accounts that delegated to it along with the percentages
-   delegatorsToAccount = New(Map<Account, Percentage>)
-   delegatorsToAccount = api.GetDelegatorsToAccount(account)
-
-   # Add the delegated balances
-   for delegator, percentage in delegatorsToAccount
-      total += GetOriginalValidatorBalance(delegator) * percentage
-
-   return total
-
-
-function GetOriginalValidatorBalance(account)
-
-   total = 0
-
-   # Get SSV validators from account
-   validatorsPubKeys = SSVNode.GetValidatorsPubKeys(account)
-
-   for PubKey in validatorsPubKeys
-      # Get validator balance and active status
-      balance, isActive = ETHNode.GetValidatorBalance(PubKey)
-
-      if isActive
-         total += balance
-
-   return total
-```
-
-**Map of risks**
-
-```r
-function Risks(bApp)
-   risks = New(Map<Token, Map<Strategy, Percentage>>)
-
-   # Get bApp tokens
-   bAppTokens = api.GetbAppTokens(bApp)
-
-   # Loop through every strategy
-   strategies = api.GetStrategies()
-   for strategy in strategies do
-
-      # Check if strategy participates in the bApp
-      ownerAccount := api.GetStrategyOwnerAccount(strategy)
-      if api.GetStrategyOptedInToBApp(ownerAccount, bApp) != strategy then
-         # If not, continue
-         continue
-
-      # Store risk (i.e. sum of all obligation percentages)
-      risks[token][strategy] = api.AddAllObligationsForToken(strategy, token)
-
-   return risks
-```
-
-**API Calls**
-
-For reference, we list the API calls used in the above snippets along with the chain state variables that should be read for each call:
-- `GetbAppTokens(bApp)`: [`bAppTokens`](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L84)
-- `GetStrategies()`: [`strategies`](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L89)
-- `GetStrategyOptedInToBApp(account, bApp)`: [`accountBAppStrategy`](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L94)
-- `GetStrategyBalance(strategy)`: [`strategyTokenBalances`](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L109)
-- `GetObligation(strategy, bApp, token)`: [`obligations`](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L115)
-- `GetStrategyOwnerAccount(strategy)`: [`strategies`](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L89)
-- `GetTotalDelegation(account)`: [`totalDelegatedPercentage`](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L104)
-- `GetDelegatorsToAccount(account)`: [`delegations`](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L99)
