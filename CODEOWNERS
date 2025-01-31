@@ -1,0 +1,8 @@
+# CODEOWNERS file
+
+# workflow files are sensitive
+.github/workflows/* @vaclav-ssvlabs
+
+# 
+* @RaekwonIII @taylorferran @Alex-ssvlabs
+
