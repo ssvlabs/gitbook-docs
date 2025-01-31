@@ -28,7 +28,7 @@ function registerBApp(
 )
 ```
 - `metadataURI`: A JSON object containing additional details about your bApp, such as its name, description, logo, and website.
-4. **Update Configuration**: After registratering, the bApp configuration can be updated only by the `owner` account.
+4. **Update Configuration**: After registering, the bApp configuration can be updated only by the `owner` account.
 
 ## 2. Securing the bApp
 
