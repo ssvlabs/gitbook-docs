@@ -5,22 +5,20 @@ sidebar_position: 1
 
 # Smart Contracts
 
-[SSV Network Contracts Repository](https://github.com/ssvlabs/based-applications)
+[Based Applications Contracts Repository](https://github.com/ssvlabs/based-applications)
 
 ### Based Applications Contract Addresses
 
-#### Ethereum Mainnet
-
-| Contract                  | Address                                                                                              |
-|---------------------------|------------------------------------------------------------------------------------------------------|
-| BasedAppManager                | - Not deplyed yet - |
+:::warning
+This smart contract is under development and as such, it is only deployed on Holesky testnet
+:::
 
 
 #### Holesky Testnet
 <!-- TODO missing deployment address -->
 | Contract        | Address                                                                                                      |
 |-----------------|-------------------------------------------------------------------------------------------------------------|
-| BasedAppManager       | [- Not deplyed yet -](https://holesky.etherscan.io/address/) |
+| BasedAppManager       | [`0x9B3345F3B1Ce2d8655FC4B6e2ed39322d52aA317`](https://holesky.etherscan.io/address/0x9B3345F3B1Ce2d8655FC4B6e2ed39322d52aA317) |
 
 
 #### ABI
