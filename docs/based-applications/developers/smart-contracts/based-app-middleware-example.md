@@ -1,6 +1,7 @@
 ---
 sidebar_label: 'Based App Middleware Example'
 sidebar_position: 2
+unlisted: true
 ---
 
 # :warning: PAGE UNDER CONSTRUCTION :warning:

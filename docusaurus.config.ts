@@ -39,14 +39,16 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
-
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/ssvlabs/gitbook-docs/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/ssvlabs/gitbook-docs/tree/main/',
+            
         },
         theme: {
           customCss: './src/css/custom.css',
+        },
+        gtag: {
+          trackingID: 'G-PYFERXZQP7',
+          anonymizeIP: true,
         },
       } satisfies Preset.Options,
     ],
