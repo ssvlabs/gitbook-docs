@@ -30,7 +30,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: ${{ secrets.DOCS_AWS_IAM_ROLE }}
-          aws-region: ${{ secrets.DOCS_AWS_REGION }}
+          aws-region: us-west-2
 
       - name: Upload files to S3
         run: |
