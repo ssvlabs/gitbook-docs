@@ -15,7 +15,6 @@ This smart contract is under development and as such, it is only deployed on Hol
 
 
 #### Holesky Testnet
-<!-- TODO missing deployment address -->
 | Contract        | Address                                                                                                      |
 |-----------------|-------------------------------------------------------------------------------------------------------------|
 | BasedAppManager       | [`0x9B3345F3B1Ce2d8655FC4B6e2ed39322d52aA317`](https://holesky.etherscan.io/address/0x9B3345F3B1Ce2d8655FC4B6e2ed39322d52aA317) |
@@ -24,5 +23,4 @@ This smart contract is under development and as such, it is only deployed on Hol
 #### ABI
 
 <!-- TODO missing ABI -->
-* [Mainnet](https://github.com/ssvlabs/based-applications/tree/contract-abi/docs/mainnet/v1.1.0/abi)
 * [Testnet](https://github.com/ssvlabs/based-applications/tree/contract-abi/docs/testnet/v1.1.0/abi)

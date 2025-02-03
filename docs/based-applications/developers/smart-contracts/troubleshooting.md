@@ -12,5 +12,4 @@ The best way to investigate this issue is to inspect the 4-byte selector for the
 
 A useful tool that is able to do this comparison, is [tenderly](https://dashboard.tenderly.co/explorer), thanks to the fact that ssv.network's Smart Contracts have been verified. 
 
-<!-- TODO fix address -->
-Here is the [SSVNetwork contract, for example](https://dashboard.tenderly.co/contract/holesky/0x).  
+Here is the [`BasedAppManager` contract, for example](https://dashboard.tenderly.co/contract/holesky/0x9B3345F3B1Ce2d8655FC4B6e2ed39322d52aA317).  
