@@ -55,22 +55,23 @@ Funding can be made at any time to the cluster’s balance (see [Deposits](../cl
 
 To calculate how much funding is needed to run a validator within its cluster according to a certain **operation period** and the required **liquidation collateral**:
 
-```
-Required_Funding = (O1_fee + O2_fee + O3_fee + O4_fee + N_fee) * (Period + LTP)
-```
+$$
+Required\;Funding = (O1_{fee} + O2_{fee} + O3_{fee} + O4_{fee} + N_{fee}) * (Period + LTP)
+$$
 
 Legend:
-* O1_fee to O4_fee - operator fee (SSV per block)
-* N_fee - network fee (SSV per block)
-* Period - desired operation period (blocks)
-* LTP - liquidation threshold period (blocks)
+* $$O1_{fee}$$ to $$O4_{fee}$$ - operator fee (SSV per block)
+* $$N_{fee}$$ - network fee (SSV per block)
+* $$Period$$ - desired operation period (blocks)
+* $$LTP$$ - liquidation threshold period (blocks)
 
-\
-Single Validator Funding Example
+#### Single Validator Funding Example
 
 Assuming there are 100 blocks per day, **operators and network fee** of 0.001 SSV (per block) and a **liquidation period** of 1 month, the **required funding** for 1 year of **operation period** would be:
 
+$$
 197.5 SSV = ((0.001 + 0.001 + 0.001 + 0.001 + 0.001) * 100 * (365+30))
+$$
 
 :::info
 Please note that maintaining your cluster's operational runway is essential and a user could always deposit more balance to their account, or withdraw as they see fit.

@@ -13,7 +13,7 @@ It is important to be aware that the cluster balance must **always be higher tha
 
 Since operator and network fees are dynamic, the required [**Liquidation Collateral**](../../learn/protocol-overview/tokenomics/liquidations.md#liquidation-collateral) could vary between different clusters. To calculate how much funding is needed as collateral for a cluster, please refer to the [Liquidations page](../../learn/protocol-overview/tokenomics/liquidations.md#liquidators).
 
-    ### Cluster Balance Formula
+### Cluster Balance Formula
 
 As explained in the documentation page related to [Payments](../../learn/protocol-overview/tokenomics/payments.md), the cluster balance is affected by three factors, mainly:
 
@@ -27,49 +27,52 @@ And to keep track of their changes over time, the concept of [Indexes](../../lea
 
 To calculate the updated cluster balance, given the cluster balance from most recent snapshot, you can use this formula:
 
-```
-balance_n = balance_snapshot - (delta_network_fee + delta_operators_fee) * v_c
-```
+$$
+balance_n = balance_{snapshot} - (\Delta_{network\ fee} + \Delta_{operators\ fee}) * v_c
+$$
 
 Legend:
 
-* balance_n - cluster balance at block number `n`
-* delta_network_fee - Change in network fees paid since the last snapshot
-* delta_operator_fee - Change in network fees paid since the last snapshot
-* balance_snapshot - value of the cluster balance on its latest snapshot
-* v_c - Validator Count, the number of validators in the cluster
+* $$balance_n$$ - cluster balance at block number `n`
+* $$\Delta_{network\ fee}$$ - Change in network fees paid since the last snapshot
+* $$\Delta_{operators\ fee}$$ - Change in network fees paid since the last snapshot
+* $$balance_{snapshot}$$ - value of the cluster balance on its latest snapshot
+* $$v_c$$ - Validator Count, the number of validators in the cluster
 
 #### Network fees delta
 
 Below is the formula used to calculate the network fees owed since the last cluster snapshot:
 
-```
-delta_network_fee = nfi_p + (b - nfb_p) * nf - nfi_c
-```
+
+$$
+\Delta_{network\ fee} = nfi_p + (b - nfb_p) * nf - nfi_c
+$$
 
 Legend:
 
-* nfi_p - Protocol Network Fee Index, the latest protocol-wide network fee index
-* b - Block number of the latest blockchain block
-* nf - The current network fee
-* nfb_p - The block number at which the Protocol Network Fee Index was taken
-* nfi_c - Cluster Network Fee Index, the latest network fee index for the given cluster
+* $$\Delta_{network\ fee}$$ - Change in network fees paid since the last snapshot
+* $$nfi_p$$ - Protocol Network Fee Index, the latest protocol-wide network fee index
+* $$b$$ - Block number of the latest blockchain block
+* $$nf$$ - The current network fee
+* $$nfb_p$$ - The block number at which the Protocol Network Fee Index was taken
+* $$nfi_c$$ - Cluster Network Fee Index, the latest network fee index for the given cluster
 
 #### Operators fees delta
 
 Similarly, below is the formula used to calculate the operators fees owed since the last cluster snapshot:
 
-```
-delta_operators_fee = sum(ofi_n + (b - ofb_n) * of_n) - ofi_c
-```
+$$
+\Delta_{operators\ fee} = \sum(ofi_n + (b - ofb_n) * of_n) - ofi_c
+$$
 
 Legend (n represents the nth operator in this cluster):
 
-* ofi_n - Operator Fee Index, the latest protocol-wide network fee index
-* b - Block number of the latest blockchain block
-* ofb_n - The block number at which the Operator Fee Index was taken
-* of_n - The current operator fee for the nth operator
-* ofi_c - Cluster Index, the latest index for the given cluster
+* $$\Delta_{operators\ fee}$$ - Change in network fees paid since the last snapshot
+* $$ofi_n$$ - Operator Fee Index, the latest protocol-wide network fee index
+* $$b$$ - Block number of the latest blockchain block
+* $$ofb_n$$ - The block number at which the Operator Fee Index was taken
+* $$of_n$$ - The current operator fee for the nth operator
+* $$ofi_c$$ - Cluster Index, the latest index for the given cluster
 
 Have a look at how to collect the necessary data to calculate the balance on the [Subgraph Examples page](../../build/tools/ssv-subgraph/subgraph-examples.md#cluster-balance-values).
 
@@ -81,14 +84,14 @@ Any additional funds added to the cluster balance on top of the required collate
 
 To calculate the effects of deposits and withdrawals on your cluster’s operational runway:
 
-```
-Operational_Runway = Residual_Balance / Burn_Rate_cluster
-```
+$$
+Operational\;Runway = Residual\;Balance / Burn\;Rate_{cluster}
+$$
 
 Legend:
 
-* Residual_Balance - Amount of SSV in the cluster balance, exceeding the Liquidation Collateral
-* Burn_Rate_cluster - The rate at which a cluster spends (denominated in SSV tokens per block)
+* $$Residual\;Balance$$ - Amount of SSV in the cluster balance, exceeding the Liquidation Collateral
+* $$Burn\;Rate_{cluster}$$ - The rate at which a cluster spends (denominated in SSV tokens per block)
 
 ### Deposits
 
