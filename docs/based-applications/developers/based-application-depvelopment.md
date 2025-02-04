@@ -62,51 +62,7 @@ To compose their balances, strategies:
 
 ## 3. Participant Weight
 
-bApp clients need to track the weight of each participant in the bApp. 
-
-A simple way to do so would be to use the Subgraph and perform a request with this query:
-
-```graphql
-query MyQuery {
-  bapp(id: "0xaA184b86B4cdb747F4A3BF6e6FCd5e27c1d92c5a") {
-    # this is a mapping table, representing the many-to-many relationship between bapps and strategies
-    strategies {
-      obligations {
-        token
-        percentage
-      }
-      # this is the actual strategy entity
-      strategy {
-        balances {
-          balance
-          token
-        }
-        id
-        owner {
-          delegators {
-            percentage
-            id
-          }
-        }
-      }
-    }
-    bAppTokens {
-      sharedRiskLevel
-      token
-    }
-  }
-}
-```
-
-This will return:
-* **all `Strategies`** that opted in to the `bApp`
-* for each `Strategy`, it will also provide
-  * **all `Obligation`s** per token
-  * **all `balance`s** per token
-  * **all `Account`s** that delegated validator balance to the strategy owner
-* the **shared risk level** for each token added to the bApp
-
-For all the strategies that opted-in to a given bApp, clients will have to:
+bApp clients need to track the weight of each participant in the bApp. For all the strategies that opted-in to a given bApp, clients will need to:
 
 1. **Gather Obligated Balances**: Get the obligated balance from each strategy, for each token used by the bApp.
    ```go
@@ -134,15 +90,27 @@ For all the strategies that opted-in to a given bApp, clients will have to:
    c_{\text{token}} = \left( \sum_{\text{strategy}} \dfrac{ObligatedBalance[\text{token}][\text{strategy}]}{TotalBAppBalance[\text{token}]} e^{-\beta_{\text{token}} \times max(1, Risk[\text{token}][\text{strategy}])} \right)^{-1}
    $$
 
-5. **If the bApp uses validator balance**, the client should also generate a mapping of `Strategy -> Validator Balance` with the amount from each strategy.
-   
-   This is obtained as *the sum of all the validator balances delegated to the owner of the strategy*. Bear in mind, these are stored as percentages, so the actual *effective validator balance* for a given `delegator` has to be looked up the beacon chain (the [`based-apps-sdk`](https://github.com/ssvlabs/based-apps-sdk) provides a function to do this: `getValidatorsBalance(account)`), and then multiplied by the percentage that is delegated.
-   
-   As this capital doesn't involve any type of risk, all risk values can be set to 0. Thus, for this capital, this is equivalent to:
+5. **If the bApp uses validator balance**, the client should also generate a mapping of `Strategy -> Validator Balance` with the amount from each strategy. Clients will need to do this in a couple of steps:
 
-   $$
-   W_{\text{strategy, validator balance}} = \dfrac{ObligatedBalance[\text{validator balance}][\text{strategy}]}{TotalBAppBalance[\text{validator balance}]}
-   $$
+    a. **Gather Delegated Balances**: Get all the delegations made to the owner of a strategy for all the strategies that opted in to a bApp.
+
+      ```go
+      DelegatedBalance mapping(Strategy -> Amount)
+      ```
+    
+      Bear in mind, these are *stored as percentages*. The effective validator balance can be looked up the beacon chain (the [`based-apps-sdk`](https://github.com/ssvlabs/based-apps-sdk) provides a function to do this: `getValidatorsBalance(account)`), and then multiplied by the percentage that is delegated.
+      These values need to be summed, in order to obtain the delegated balance for each owner.
+
+    b. **Sum all delegated balances** for all strategies.
+      ```go
+      TotalBAppDelegatedBalance mapping(Validator Balance -> Amount)
+      ```
+
+    d. **Compute Weights**. As this capital doesn't involve any type of risk, all risk values can be set to 0. Thus, for this capital, this is equivalent to:
+
+      $$
+      W_{\text{strategy, validator balance}} = \dfrac{ObligatedBalance[\text{validator balance}][\text{strategy}]}{TotalBAppBalance[\text{validator balance}]}
+      $$
 
 6. **Combine into the Final Weight**: With the per-token weights, the final step is to compute a final weight for the participant using a **combination function**. Such function is defined by the bApp and can be tailored to its specific needs. Traditional examples include the arithmetic mean, geometric mean, and harmonic mean.
 
