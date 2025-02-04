@@ -4,9 +4,9 @@ In order to reactivate a liquidated cluster, the user must supply the liquidatio
 
 Once reactivated, the clusters’ validator(s) operation will continue. To calculate how much minimal funding (liquidation collateral) is needed to reactivate a cluster:
 
-```
-reactivation Balance> Burn Rate_{cluster} * LTP
-```
+$$
+reactivation\;Balance > BurnRate_{cluster} * LTP
+$$
 
 * Legend
   * $$Burn Rate$$ - the rate at which a cluster spends $SSV per block
