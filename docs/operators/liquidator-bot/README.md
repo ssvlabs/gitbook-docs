@@ -26,3 +26,4 @@ OWNER                                          OPERATORIDS     BALANCE     BURNR
 2. **Liquidating accounts** \
    Once the potential liquidation block is reached the liquidator bot will call the [liquidate()](../../developers/smart-contracts/ssvnetwork#liquidateowner-operatorids-cluster) function in the network contract, if the bot was the first to successfully pass the transaction the cluster will be liquidated and its SSV collateral will be sent to the wallet address which performed the liquidation &#x20;
 
+You can find the [installation instructions here](./installation).

@@ -1,6 +1,6 @@
 ---
 description: How to update operator fees in the SSV network
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 # Update Fee

@@ -1,6 +1,6 @@
 ---
 description: How to offboard as an operator from the SSV network
-sidebar_position: 4
+sidebar_position: 3
 ---
 
 # Offboarding

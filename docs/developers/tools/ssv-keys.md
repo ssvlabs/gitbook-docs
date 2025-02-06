@@ -50,7 +50,7 @@ Using the `ssv-keys` SDK can be simply summarized in 3 steps:
 :::info
 A requirement for splitting the keys of a validator, is to know the validator key owner's nonce (how many times this address has callded the registerValidator() function of the SSV contract) and their address.
 
-These can be obtained via the [SSV Scanner tool](../ssv-scanner/).
+These can be obtained via the [SSV SDK](../SSV-SDK/examples/api-calls/#get-nonce), or the [SSV Subgraph](./ssv-subgraph/subgraph-examples/#account-nonce).
 :::
 
 ## Example
@@ -70,7 +70,7 @@ const keystore = require('./path-to-keystore.json');
 const keystorePassword = 'XYZ';
 
 // The nonce of the owner within the SSV contract (increments after each validator registration), obtained using the ssv-scanner tool
-const TEST_OWNER_NONCE = 1;
+const TEST_OWNER_NONCE = 0;
 // The cluster owner address
 const TEST_OWNER_ADDRESS = '0x81592c3de184a3e2c0dcb5a261bc107bfa91f494';
 
