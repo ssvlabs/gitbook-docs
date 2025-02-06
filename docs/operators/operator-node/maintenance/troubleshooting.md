@@ -12,7 +12,10 @@ import TabItem from '@theme/TabItem';
 
 In order to troubleshoot any issues with the SSV Node, it's a good start to use the `/health` endpoint.
 
-First and foremost, the `SSV_API` port environment variable, or configuration parameter must be set. For that, refer to the [Node Configuration Reference page](../node-configuration-reference.md).
+To use this endpoint you'll first need to configure and open a port:
+- If you are using a `.yaml` file to configure your SSV node — you can just add `SSVAPIPort: 16000` (or any other port) at the end of the file and restart SSV to apply. 
+- If you are using `.env` to configure SSV — use an `SSV_API` environment variable.
+- Then you need to make sure your SSV node/container has `16000` port opened (or other port you chose).
 
 Assuming that the SSV node is running on the local machine, and that the `SSV_API` port is set to `16000`, the health check endpoint can be reached using the `curl` command, for example, just as shown below:
 
@@ -29,9 +32,9 @@ This request will provide a JSON response, here is an example of a response from
   "execution_node": "good",
   "event_syncer": "good",
   "advanced": {
-    "peers": 89,
-    "inbound_conns": 67,
-    "outbound_conns": 22,
+    "peers": 19,
+    "inbound_conns": 7,
+    "outbound_conns": 17,
     "p2p_listen_addresses": [
       "tcp://<X.Y.W.Z>:13001",
       "udp://<X.Y.W.Z>:12001"
@@ -43,7 +46,7 @@ This request will provide a JSON response, here is an example of a response from
 This "self-diagnose" report of the node can be useful to make sure that some essential indicators have the correct values:
 
 * `p2p_listen_addresses` should show the correct public IP & port and the TCP port should be open when checking this IP with a port checker (they have been rendered anonymous for the purpose of this page)
-* `peers` should be at least 60 for operators with more than 100 validators
+* `peers` should be at least 15 for operators with more than 100 validators
 * `inbound_conns` should be at least 20% of the peers (though not an exact number, this is a good indication of healthy connections from the node)
 
 Below, an example of the same report, from a node in bad state:
@@ -56,7 +59,7 @@ Below, an example of the same report, from a node in bad state:
   "event_syncer": "good",
   "advanced": {
     "peers": 5,
-    "inbound_conns": 1,
+    "inbound_conns": 0,
     "outbound_conns": 4,
     "p2p_listen_addresses": [
       "tcp://<X.Y.W.Z>:13004",
@@ -67,6 +70,8 @@ Below, an example of the same report, from a node in bad state:
 ```
 
 ## SSV-Pulse benchmarking tool
+
+Before using this tool — make sure to open [SSV Node Health Endpoint](#ssv-node-health-endpoint).
 
 Our team developed a tool to ease your troubleshooting process, as it analyzes SSV Node, Consensus Node, and Execution Node at the same time. You can find more details on [ssv-pulse GitHub page](https://github.com/ssvlabs/ssv-pulse).
 
@@ -83,14 +88,14 @@ ssv-pulse:
   image: ghcr.io/ssvlabs/ssv-pulse:latest
   command: 
     - 'benchmark'
-    - '--consensus-addr=<YOUR_ADDRESS_HERE>' # Change to your Consensus Node's address, e.g. http://lighthouse:5052
-    - '--execution-addr=<YOUR_ADDRESS_HERE>' # Change to your Execution Node's address, e.g. http://geth:8545
-    - '--ssv-addr=http://ssv_node:16000' #Or Change to your SSV Node's address with SSVAPIPort
+    - '--consensus-addr=<YOUR_ADDRESS_HERE>' # Change to Consensus Node's address, e.g. http://lighthouse:5052
+    - '--execution-addr=<YOUR_ADDRESS_HERE>' # Change to Execution Node's address, e.g. http://geth:8545
+    - '--ssv-addr=<YOUR_ADDRESS_HERE>' # Change to SSV Node's address, e.g. http://ssv_node:16000
     - '--duration=60m'
     # - '--network=holesky' # Add this if you run a Holesky Node
     # - '--platform linux/arm64' # Add this if you run on an arm64 machine
   networks:
-    - ssv
+    - local-docker # Make sure network is the same as yours. Check with command docker network ls.
   pull_policy: always
 ```
 
@@ -284,7 +289,7 @@ Then pull the latest image from SSV:
 docker pull ssvlabs/ssv-node:latest
 ```
 
-And finally... [run the creation command again](../installation.md#start-the-node) to create a new Docker container with the latest SSV image.
+And finally... [run the creation command again](../node-setup/manual-setup#start-the-node) to create a new Docker container with the latest SSV image.
 
 </details>
 
@@ -358,7 +363,7 @@ This section is a collection of common warnings, error messages, statuses and ot
 FATAL	failed to create beacon go-client	{"error": "failed to create http client: failed to confirm node connection: failed to fetch genesis: failed to request genesis: failed to call GET endpoint: Get \"http://5.104.175.133:5057/eth/v1/beacon/genesis\": context deadline exceeded", "errorVerbose":…………….\nfailed to create http client", "address": "http://5.104.175.133:5057"}
 ```
 
-This is likely due to issues with the Beacon layer Node. Verify that `BeaconNodeAddr` has the correct address and port in [`config.yaml` configuration file](../installation).
+This is likely due to issues with the Beacon layer Node. Verify that `BeaconNodeAddr` has the correct address and port in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file).
 
 ***
 
@@ -368,7 +373,7 @@ This is likely due to issues with the Beacon layer Node. Verify that `BeaconNode
 FATAL	could not connect to execution client	{"error": "failed to connect to execution client: dial tcp 5.104.175.133:8541: i/o timeout"}
 ```
 
-This is likely due to issues with the Execution layer Node. Verify that `ETH1Addr` has the correct address and port in [`config.yaml` configuration file](../installation).
+This is likely due to issues with the Execution layer Node. Verify that `ETH1Addr` has the correct address and port in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file).
 
 Finally, make sure that your ETH1 endpoint is running using Websocket. This is required in order to stream events from the network contracts.
 
@@ -380,7 +385,7 @@ Finally, make sure that your ETH1 endpoint is running using Websocket. This is r
 FATAL	could not setup operator private key	{"error": "Operator private key is not matching the one encrypted the storage", "errorVerbose": ...{
 ```
 
-Verify that the Operator Private Key is correctly set in [`config.yaml` configuration file](../installation). In particular, if using unencrypted (raw) keys, that the **private (secret) key** was copied in the configuration file and that it contains all characters (sometimes it contains a  `=`  character that can easily be left out).
+Verify that the Operator Private Key is correctly set in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file). In particular, if using unencrypted (raw) keys, that the **private (secret) key** was copied in the configuration file and that it contains all characters (sometimes it contains a  `=`  character that can easily be left out).
 
 If the node has been stopped and restart, verify that the same configuration has been applied, that the private key has not been changed, and that the `db.Path` configuration points to the same directory as before.
 
@@ -392,7 +397,7 @@ If the node has been stopped and restart, verify that the same configuration has
 FATAL	could not setup network	{"error": "network not supported: jatov2"}
 ```
 
-In the example above, the `Network` in [`config.yaml` configuration file](../installation) was wrongly set to `jatov2` instead of `jato-v2`, so be sure to look for thinks like spelling mistakes.
+In the example above, the `Network` in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file) was wrongly set to `jatov2` instead of `jato-v2`, so be sure to look for thinks like spelling mistakes.
 
 ***
 
@@ -403,7 +408,7 @@ could not create loggerlogging.SetGlobalLogger: unrecognized level: "infor"
 make: *** [Makefile:97: start-node] Error 1
 ```
 
-In the example above, the `LogLevel` variable in [`config.yaml` configuration file](../installation) was wrongly set to `infor` instead of `info`, so be sure to look for thinks like spelling mistakes.
+In the example above, the `LogLevel` variable in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file) was wrongly set to `infor` instead of `info`, so be sure to look for thinks like spelling mistakes.
 
 ***
 
@@ -423,27 +428,27 @@ This error could be caused by using multiple SSV nodes within one Nimbus setup. 
 ERROR P2PNetwork unable to create external multiaddress {"error": "invalid ip address provided: ...
 ```
 
-This error signalizes the node could not figure the public IP address of your node on a startup. You need to provide your SSV Node's address in `p2p: HostAddress:` variable in [your `config.yaml` file.](https://docs.ssv.network/operator-user-guides/operator-node/installation#peer-to-peer-ports-configuration-and-firewall)
+This error signalizes the node could not figure the public IP address of your node on a startup. You need to provide your SSV Node's address in `p2p: HostAddress:` variable in [your `config.yaml` file.](../node-setup/manual-setup#peer-to-peer-ports-configuration-and-firewall)
 
 ***
 
 ### Node Metrics not showing up in Prometheus/Grafana
 
-Please verify that the `MetricsAPIPort` variable is correctly set in [`config.yaml` configuration file](../installation).
+Please verify that the `MetricsAPIPort` variable is correctly set in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file).
 
-For a more in-depth guide on how to set up Node monitoring, refer to [the dedicated page in this section](../monitoring/monitoring.md).
+For a more in-depth guide on how to set up Node monitoring, refer to [the dedicated page in this section](../monitoring).
 
 ***
 
 ### Node does not generate a log file
 
-Please verify that the `LogFilePath` variable is correctly set in [`config.yaml` configuration file](../installation). Be sure to look for thinks like spelling mistakes.
+Please verify that the `LogFilePath` variable is correctly set in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file). Be sure to look for thinks like spelling mistakes.
 
 ***
 
 ### Node takes a long time to become active
 
-Please verify that the `Path` under the `db` section is correctly set in [`config.yaml` configuration file](../installation). Be sure to look for thinks like spelling mistakes.
+Please verify that the `Path` under the `db` section is correctly set in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file). Be sure to look for thinks like spelling mistakes.
 
 If the Node was working correctly and becomes inactive after a configuration change, make sure that `Path` wasn't accidentally changed. This will cause the database to be recostructed and will lead to a slower startup.
 
@@ -451,7 +456,7 @@ If the Node was working correctly and becomes inactive after a configuration cha
 
 ### `"port 13000 already running"` message
 
-This could happen if you run both consensus node and SSV node on the same machine - please make sure to change your SSV node port to any other port. Refer to [the p2p section of the installation guide for details](../installation).
+This could happen if you run both consensus node and SSV node on the same machine - please make sure to change your SSV node port to any other port. Refer to [the p2p section of the node-setup/manual-setup#create-configuration-file guide for details](../node-setup/manual-setup#create-configuration-file).
 
 After updating your port, please restart the SSV node and confirm the error does not appear.
 
@@ -480,7 +485,7 @@ Steps to confirm you use the same key:
 
 1. Find the operator key that you have registered to the network in the [ssv explorer](https://explorer.ssv.network/).
 2. Find the operator public key you have generated in your node during setup.
-3. Compare between the keys -  if they do not match you must update your private key in the node config.yaml file, according to the key generated during your node installation.
+3. Compare between the keys -  if they do not match you must update your private key in the node config.yaml file, according to the key generated during your node node-setup/manual-setup#create-configuration-file.
 
 :::info
 Example log output showing the public key:

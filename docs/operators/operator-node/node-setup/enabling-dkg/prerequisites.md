@@ -23,6 +23,11 @@ deploy:
       memory: 500M
 ```
 
+:::info Please Note
+Computational demands are raising depending on amount validators being created at once.
+An idle DKG node needs almost none resources.
+:::
+
 ## Prerequisites
 
 In order to successfully participate in DKG ceremonies initiated by stakers, you will need to possess and/or provide this information:

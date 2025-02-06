@@ -3,8 +3,6 @@ sidebar_label: 'Node Setup'
 sidebar_position: 1
 ---
 
-# Running a Node
-
 # Node setup
 
 In this section, we will walk through the process of installing the [SSV Node stack](https://github.com/ssvlabs/ssv-stack) using the standard Docker-based setup. This will install and configure the node itself with the monitoring stack:
@@ -13,7 +11,7 @@ In this section, we will walk through the process of installing the [SSV Node st
 * Prometheus
 * Grafana
 
-### Process Overview
+## Process Overview
 
 At a high level, here is what involved in installing an SSV Node:
 
@@ -31,10 +29,10 @@ Once you have your node running you'll be able to participate in multiple valida
 :::
 
 :::warning
-Make sure to check out [Node hardware specs and requirements](broken-reference) before proceeding with the setup.
+Make sure to check out [Node hardware specs and requirements](./hardware-requirements.md) before proceeding with the setup.
 :::
 
-### Pre-requisites
+## Pre-requisites
 
 #### 1. Enable SSH
 
@@ -121,41 +119,43 @@ Make sure to expose the ports on your SSV node machine's firewall, otherwise you
 
 If you don't want to use the default ports, they can be changed on the next step.
 
-### Install SSV Node stack
+## Install SSV Node stack
 
-#### Download the SSV Node stack
+### Download the SSV Node stack
 
 ```bash
 git clone https://github.com/ssvlabs/ssv-stack.git
 cd ssv-stack
 ```
 
-#### Copy the configuration example file
+### Copy the configuration example file
 
 ```bash
 cp ssv.example.env ssv.env
 ```
 
-#### Configure your node
+### Configure your node
 
 Edit the `ssv.env` file and adjust the settings to your needs. The minimum you need to change is:
 
 * `BEACON_NODE_ADDR` - HTTP address of the Beacon node (e.g. `http://1.2.3.4:5052`)
 * `ETH_1_ADDR` - WebSocket address of the Execution node (e.g. `ws://1.2.3.4:8546`)
 * `NETWORK` - The network you are running on (`mainnet`, `holesky`)
+:::info
+Both `BEACON_NODE_ADDR` and `ETH_1_ADDR` support multiple endpoints. Separate them with `;`.
 
-:::warning
-If you already have encrypted key and password files: copy/move them to `./ssv-node-data` (default directory that will be mounted to the docker container's `/data/` folder) and edit the environment variables to the correct file names, e.g.:
+Example: `BEACON_NODE_ADDR=http://1.2.3.4:5052;http://1.2.3.4:5053`
+:::
+If you already have encrypted key and password files: copy/move them to `/ssv-stack/ssv-node-data` and edit the environment variables to the correct file names, e.g.:
 
 * `PRIVATE_KEY_FILE=/data/encrypted_private_key.json`
 * `PASSWORD_FILE=/data/password`
 
-If this is not done correctly, new keys will be automatically generated, and you will see a message in the console indicating this.
-:::
+**If this is done incorrectly**, new keys will be automatically generated, and you will see a message in the console indicating this.
 
-All existing settings are listed on the [Configuration Reference page].
+All existing settings are listed on the [Configuration Reference page](./node-configuration-reference.md).
 
-#### Custom ports
+### Custom ports
 
 We recommend using the default ports for ease of the setup.&#x20;
 
@@ -163,7 +163,7 @@ If you wish to change any of the ports — change them in both `ssv.env` and `do
 
 Changes to those files will be applied after a restart of the node (_if you already started your node_).
 
-### Start the Node
+## Start the Node
 
 To start your node use the following command
 
@@ -185,13 +185,13 @@ Both files are needed to run SSV Node and DKG Node. You can find them under `~/s
 **Backup those files** on a separate device, if any of the two are lost — you will lose access to your operator without a chance to recover.
 :::
 
-### Other setup options
+## Other setup options
 
 The same setup can be recreated manually. The steps are described on the [Manual Node setup page].
 
 Alternatively, SSV Node setup is also available using [eth-docker](https://eth-docker.net/Support/SSV/) and [Stereum Launcher](https://stereum.net/).
 
-### What's next?
+## What's next?
 
 You might want to [configure MEV](configuring-mev) to increase your rewards for block proposals.&#x20;
 

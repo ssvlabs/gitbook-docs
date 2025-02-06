@@ -1,6 +1,6 @@
 ---
 description: Understanding permissioned operators in the SSV network
-sidebar_position: 6
+sidebar_position: 5
 ---
 
 # Permissioned Operators
