@@ -1,19 +1,18 @@
 ---
-description: How to onboard as an operator to the SSV network
-sidebar_position: 2
+sidebar_label: 'Operator Onboarding'
+sidebar_position: 1
 ---
 
-# Operator Onboarding
 
-### **Operator Onboarding**
+# Operator Onboarding
 
 To join the network as an operator a user must run an SSV node.
 
 This is software containing the SSV protocol implementation and integration to the network's smart contracts.
 
-This can be done by installing the [node software](./operator-node/installation) on a machine followed by registering the operator either through the [smart contract](../build/smart-contracts/ssvnetwork#registeroperatorpublickey-operatorfee-setprivate) or [webapp](https://app.ssv.network/) interface.
+This can be done by installing the [node software](../operator-node/running-a-node) on a machine followed by registering the operator either through the [smart contract](../build/smart-contracts/ssvnetwork#registeroperatorpublickey-operatorfee-setprivate) or [webapp](https://app.ssv.network/) interface.
 
-#### Operator Fee
+### Operator Fee
 
 Operators set their own fees - denominated in SSV tokens - to be charged per each validator that selects them as one of their operators.
 
