@@ -8,9 +8,7 @@ import TabItem from '@theme/TabItem';
 
 # Start DKG Node
 
-:::info
 It is advised launching the tool with a Docker compose as it is the most convenient way and only requires to have Docker installed. The team builds a Docker image with every release of the tool.
-:::
 
 ## Configuration
 
@@ -18,7 +16,7 @@ All of the necessary configuration information can be provided via command line 
 
 A good way to manage all the necessary files is to store them in a single folder (in this case `ssv-dkg-data`), together with the `operator.yaml` configuration file.
 
-If you chose to setup your SSV node with the [SSV Stack repository](../../../installation.md#install-ssv-node-stack), your should create `ssv-dkg-data` inside of the existing `ssv-stack` directory.
+If you chose to setup your SSV node with the [SSV Stack repository](../../../installation.md#install-ssv-node-stack), you should create `ssv-dkg-data` inside of the existing `ssv-stack` directory.
 
 The final result should look like so:
 
@@ -49,11 +47,11 @@ ethEndpointURL: http://ethnode:8545 #HTTP Address of Execution Node
 # serverTLSKeyPath: ./data/ssl/tls.key #Only enable if manually generated TLS key
 ```
 
-:::info
+:::warning
 DKG v3.0.0 supports Multisig addresses. Confirmation of Multisig addresses is done on Execution layer, so you need to add `ethEndpointURL` to your `operator.yaml` config. Otherwise, you won't be able to participate in DKG ceremonies involving Multisig addresses.
 :::
 
-:::warning
+:::info
 In the config file above, `./data/` represents the container's shared volume created by the `docker` itself with the `-v` or `volumes` option. You don't need to create `data` directory.
 :::
 

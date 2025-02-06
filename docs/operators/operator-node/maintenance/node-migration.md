@@ -7,7 +7,7 @@ As a node operator, it may happen that the software stack needs to be migrated t
 
 In such a scenario, it is very important to know what operations must be performed, in which order, and what are the sensitive pieces of data that need to be preserved and copied over to the new hardware. Here is a summary:
 
-### Procedure
+## Procedure
 
 In order to migrate the SSV Node to a different machine, it is necessary to shut down the current setup, **before** launching the new one.
 
@@ -17,19 +17,25 @@ Two nodes with the same public key should never be running at the same time. The
 
 So, for this reason, the migration process could be easily summarised in the following steps:
 
-* Backup node files
-* Shut down SSV Node on the current machine
-* Setup SSV Node on the new machine using backups
-* Wait at least one epoch
-* Start SSV Node service on the new machine
+1. Backup node files
+2. Shut down SSV Node on the current machine
+3. Setup SSV Node on the new machine using backups
+4. Wait at least one epoch
+5. Start SSV Node service on the new machine
 
 :::warning
 Please note: if you are also running a DKG operator node, you may have to [follow the DKG operator migration guide](./dkg-operator-migration), if it is running on the same machine as the SSV node, or if it is running on a different machine, but you need to decommission that machine as well.
 :::
 
-### Node backup
+## Node backup
 
-If you have followed [the dedicated Node setup guide](../installation.md), you most likely have (at least) these files in the folder with your node configuration:
+### SSV Stack setup
+
+If you have followed the [automatic node setup with SSV Stack](../node-setup), your files should be in `/ssv-stack/ssv-node-data` directory.
+
+### Manual Node setup
+
+If you have followed [the Manual Node setup guide](../node-setup/manual-setup), you most likely have (at least) these files in the folder with your node configuration:
 
 ```
 ⇒   tree
@@ -64,7 +70,7 @@ The configuration file (`config.yaml` in the code snippet above), is necessary f
 
 Operator keys are, essentially, the authentication method to identify an SSV node, and link it to an operator ID. As a consequence, whenever a node is moved to a different machine, they **absolutely must** be preserved and copied from the existing setup to the new one.
 
-The files in question are `encrypted_private_key.json` and `password` in the snippet above and if you have followed [the Node setup guide](../installation.md), the filenames should be the same for you.
+The files in question are `encrypted_private_key.json` and `password` in the snippet above and if you have followed [the Manual Node setup guide](../node-setup/manual-setup), the filenames should be the same for you.
 
 #### Node database
 

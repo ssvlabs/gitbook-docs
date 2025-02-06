@@ -5,16 +5,16 @@ sidebar_position: 5
 
 The table below represents the reference for every Node configuration option available.
 
-:::danger
-**Caution:** The following configuration options are intended for advanced users with a deep understanding of their impact.
+:::danger Caution
+The following **configuration options are intended for advanced users** with a deep understanding of their impact.
+
+The parameters used in the [Automatic Installation guide](.) and [Manual Installation guide](./manual-setup.md) should serve the vast majority of users.
 
 Please exercise extreme care and discretion when modifying these settings, as any incorrect changes may result in unintended consequences or system instability.
-
-The parameters used in the [Installation guide](installation.md) should serve the vast majority of users.
 :::
 
 | YAML                                            | ENV                            | Default          | Description                                                                                                                                          |
-| ----------------------------------------------- | ------------------------------ | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ------------------------------------------ | ------------------------------ | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | global                                          |                                |                  |                                                                                                                                                      |
 | global.LogLevel                                 | LOG\_LEVEL                     | info             | Defines logger's log level'                                                                                                                          |
 | global.LogFormat                                | LOG\_FORMAT                    | console          | Defines logger's encoding, valid values are 'json' (default) and 'console''                                                                          |
@@ -37,10 +37,10 @@ The parameters used in the [Installation guide](installation.md) should serve th
 | ssv.ValidatorOptions.MsgWorkersCount            | MSG\_WORKERS\_COUNT            | 256              | Number of goroutines to use for message workers                                                                                                      |
 | ssv.ValidatorOptions.MsgWorkerBufferSize        | MSG\_WORKER\_BUFFER\_SIZE      | 1024             | Buffer size for message workers                                                                                                                      |
 | eth1                                            |                                |                  |                                                                                                                                                      |
-| eth1.ETH1Addr                                   | ETH\_1\_ADDR                   |                  | Execution client WebSocket address                                                                                                                   |
+| eth1.ETH1Addr                                   | ETH\_1\_ADDR                   |                  | Execution client WebSocket address. Supports multiple endpoints separated by a `;`                                                                                                                   |
 | eth1.ETH1ConnectionTimeout                      | ETH\_1\_CONNECTION\_TIMEOUT    | 10s              | Execution client connection timeout                                                                                                                  |
 | eth2                                            |                                |                  |                                                                                                                                                      |
-| eth2.BeaconNodeAddr                             | BEACON\_NODE\_ADDR             |                  |                                                                                                                                                      |
+| eth2.BeaconNodeAddr                             | BEACON\_NODE\_ADDR             |                  | Consensus/Beacon client HTTP address. Supports multiple endpoints separated by a `;`                                                                                                                                                      |
 | p2p                                             |                                |                  |                                                                                                                                                      |
 | p2p.Bootnodes                                   | BOOTNODES                      |                  | Bootnodes to use to start discovery, seperated with '                                                                                                |
 | p2p.Discovery                                   | P2P\_DISCOVERY                 | discv5           | Discovery system to use                                                                                                                              |
