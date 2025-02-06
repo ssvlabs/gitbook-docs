@@ -95,7 +95,8 @@ ssv-pulse:
     # - '--network=holesky' # Add this if you run a Holesky Node
     # - '--platform linux/arm64' # Add this if you run on an arm64 machine
   networks:
-    - local-docker # Make sure network is the same as yours. Check with command docker network ls.
+    - host # This allows ssv-pulse to access any docker container hosted on the machine
+           # Alternatively, you can use your existing network instead. Check with docker network ls.
   pull_policy: always
 ```
 
@@ -104,27 +105,29 @@ Then run `docker compose up ssv-pulse` to run the benchmark tool.
   </TabItem>
   <TabItem value="docker-run" label="docker run">
 
-Use the following command to run the benchmark tool:
+  Use the following command to run the benchmark tool:
 
-```bash
-docker run --rm --pull=always --name ssv-pulse \
-ghcr.io/ssvlabs/ssv-pulse:latest benchmark \
---consensus-addr=REPLACE_WITH_ADDR \
---execution-addr=REPLACE_WITH_ADDR \
---ssv-addr=REPLACE_WITH_ADDR \
---duration=60m
-```
+  ```bash
+  docker run --rm --network=host --pull=always --name ssv-pulse \
+  ghcr.io/ssvlabs/ssv-pulse:latest benchmark \
+  --consensus-addr=REPLACE_WITH_ADDR \
+  --execution-addr=REPLACE_WITH_ADDR \
+  --ssv-addr=REPLACE_WITH_ADDR \
+  --duration=60m
+  ```
 
-Replace the various addresses with the respective endpoints, e.g. http://lighthouse:5052, http://geth:8545, and SSV http://ssv_node:16000 (or your other SSVAPIPort).
+  Replace the various addresses with the respective endpoints, e.g. `http://lighthouse:5052`, `http://geth:8545`, and SSV `http://ssv_node:16000` (or your other SSVAPIPort).
 
-If you run a Holesky Node you should add `--network=holesky` to the command.
-
-If you run this on a arm64 machine you should add `--platform linux/arm64` to the command.
-
+  - If you run a Holesky Node you should add `--network=holesky` to the command.
+  - If you run this on a arm64 machine you should add `--platform linux/arm64` to the command.
   </TabItem>
 </Tabs>
 
-The tool will run for 1 hour and provide you with results as a table. An example of output is below:
+#### Benchmark results
+
+The tool will run for 1 hour and provide you with results as a table.
+
+On example below you can see low Peer connection on SSV Node, this most likely caused by closed 16000 port:
 
 ```log
 ┌────────────────┬─────────────┬──────────────────────────────────────────────────────────────┬────────────┬───────────────────────────────────────────────────────────┐
@@ -156,8 +159,6 @@ The tool will run for 1 hour and provide you with results as a table. An example
 │                │             │                       outbound_P50=60                        │            │                                                           │
 └────────────────┴─────────────┴──────────────────────────────────────────────────────────────┴────────────┴───────────────────────────────────────────────────────────┘
 ```
-
-The results signalize low Peer connection on SSV Node, this most probably caused by closed ports.
 
 ## FAQ
 
