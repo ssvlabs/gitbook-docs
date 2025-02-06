@@ -130,6 +130,12 @@ Copy the following `config.yaml` file, just be sure to replace all the placehold
 
 In particular, substitute `ENCRYPTED_PRIVATE_KEY_JSON` with the operator encrypted private key file generated above(e.g. `encrypted_private_key.json`) and `PASSWORD_FILE` with the file containing the password used to generate the encrypted key itself.
 
+:::info
+Both `BeaconNodeAddr` and `ETH1Addr` support multiple endpoints. Separate them with `;`.
+
+Example: `BeaconNodeAddr: http://1.2.3.4:5052;http://1.2.3.4:5053`
+:::
+
 ```yaml
 global:
   # Console output log level 
