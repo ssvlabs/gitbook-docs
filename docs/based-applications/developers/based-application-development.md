@@ -100,7 +100,7 @@ console.info(
 
 This returns a matrix, mapping the risk-adjusted weight of each token to a given strategy.
 
-```json
+```sh
 Strategy-token weights: [
   {
     "id": "10",
