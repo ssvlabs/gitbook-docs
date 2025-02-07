@@ -19,7 +19,7 @@ Retrieves strategy obligations, balances, and delegator information for a bapp:
 
 ```graphql
 query getParticipantWeightDataInput {
-  bapp(id: "1") {
+  bapp(id: "YOUR_BAPP_ADDRESS") {
     strategies {
       obligations {
         token
@@ -55,7 +55,7 @@ Retrieves the metadata URI for a specific bapp:
 
 ```graphql
 query getBappMetadataURI {
-  bapp(id: "1") {
+  bapp(id: "YOUR_BAPP_ADDRESS") {
     metadataURI
   }
 }
@@ -79,7 +79,7 @@ Retrieves all strategy obligated balances for a bapp:
 
 ```graphql
 query getAllStrategyObligatedBalancesForBapp {
-  bapp(id: "1") {
+  bapp(id: "YOUR_BAPP_ADDRESS") {
     strategies {
       strategy {
         balances {
