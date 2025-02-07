@@ -62,69 +62,125 @@ To compose their balances, strategies:
 
 ## 3. Participant Weight
 
-bApp clients need to track the weight of each participant in the bApp. For all the strategies that opted-in to a given bApp, clients will need to:
+Based Application managers need to track the weight of each participant (strategy) in the bApp itself. This process entails two separate steps:
 
-1. **Gather Obligated Balances**: Get the obligated balance from each strategy, for each token used by the bApp.
-   ```go
-   ObligatedBalance mapping(Token -> Strategy -> Amount)
-   ```
-   This is done by multiplying the `percentage` of obligated tokens by the `balance` of such tokens deposited to the strategy
+1. Collecting risk-adjusted strategy weights for each token
+2. Combining such weights into a strategy weight, for each strategy
 
-2. **Sum Obligations**: From `ObligatedBalance`, bApps should sum all obligations and compute the total amount obligated to the bApp by all strategies.
-   ```go
-   TotalBAppBalance mapping(Token -> Amount)
-   ```
-3. **Calculate Risk**: For each token, it should get the risk (token-over usage) of each strategy. This is obtained by summing all the `percentages` in all `Obligations` for a given token, and dividing it by `100`.
-   ```go
-   Risk mapping(Token -> Strategy -> Float)
-   ```
-4. **Compute Risk-Aware Weights**: With this information, bApps can compute the weight of a participant for a certain token by
+### Risk-adjusted strategy-token weights
 
-   $$
-   W_{\text{strategy, token}} = c_{\text{token}} \times \dfrac{ObligatedBalance[\text{token}][\text{strategy}]}{TotalBAppBalance[\text{token}]} e^{-\beta_{\text{token}} \times max(1, Risk[\text{token}][\text{strategy}])}
-   $$
+The first step is made fairly easier thanks to the `based-apps-sdk`, which needs to be installed first:
 
-   where $c_{\text{token}}$ is a normalization constant defined as
+```sh
+npm i @ssv-labs/based-apps-sdk
+```
 
-   $$
-   c_{\text{token}} = \left( \sum_{\text{strategy}} \dfrac{ObligatedBalance[\text{token}][\text{strategy}]}{TotalBAppBalance[\text{token}]} e^{-\beta_{\text{token}} \times max(1, Risk[\text{token}][\text{strategy}])} \right)^{-1}
-   $$
+The SDK provides a function that returns all the risk-adjusted weights for each token, for all the strategies that opted in to a given bApp:
 
-5. **If the bApp uses validator balance**, the client should also generate a mapping of `Strategy -> Validator Balance` with the amount from each strategy. Clients will need to do this in a couple of steps:
+```ts
+import { BasedAppsSDK, chains } from "@ssv-labs/based-apps-sdk";
 
-    a. **Gather Delegated Balances**: Get all the delegations made to the owner of a strategy for all the strategies that opted in to a bApp.
+const sdk = new BasedAppsSDK({
+  chain: chains.holesky.id,
+});
 
-      ```go
-      DelegatedBalance mapping(Strategy -> Amount)
-      ```
-    
-      Bear in mind, these are *stored as percentages*. The effective validator balance can be looked up the beacon chain (the [`based-apps-sdk`](https://github.com/ssvlabs/based-apps-sdk) provides a function to do this: `getValidatorsBalance(account)`), and then multiplied by the percentage that is delegated.
-      These values need to be summed, in order to obtain the delegated balance for each owner.
+// calculate strategy-token weights via the SDK
+const strategyTokenWeights = await sdk.api.calculateParticipantWeights({
+   bAppId: "0x64714cf5db177398729e37627be0fc08f43b17a6",
+});
 
-    b. **Sum all delegated balances** for all strategies.
-      ```go
-      TotalBAppDelegatedBalance mapping(Validator Balance -> Amount)
-      ```
+console.info(
+   `Strategy-token weights: ${JSON.stringify(
+   strategyTokenWeights,
+   undefined,
+   2
+   )}`
+);
+```
 
-    d. **Compute Weights**. As this capital doesn't involve any type of risk, all risk values can be set to 0. Thus, for this capital, this is equivalent to:
+This returns a matrix, mapping the risk-adjusted weight of each token to a given strategy.
 
-      $$
-      W_{\text{strategy, validator balance}} = \dfrac{ObligatedBalance[\text{validator balance}][\text{strategy}]}{TotalBAppBalance[\text{validator balance}]}
-      $$
+```json
+Strategy-token weights: [
+  {
+    "id": "10",
+    "tokenWeights": [
+      {
+        "token": "0x68a8ddd7a59a900e0657e9f8bbe02b70c947f25f",
+        "weight": 0.9267840593141798
+      }
+    ],
+    "validatorBalanceWeight": 0.3
+  },
+  {
+    "id": "2",
+    "tokenWeights": [
+      {
+        "token": "0x68a8ddd7a59a900e0657e9f8bbe02b70c947f25f",
+        "weight": 0.07321594068582021
+      }
+    ],
+    "validatorBalanceWeight": 0.7
+  }
+]
+```
 
-6. **Combine into the Final Weight**: With the per-token weights, the final step is to compute a final weight for the participant using a **combination function**. Such function is defined by the bApp and can be tailored to its specific needs. Traditional examples include the arithmetic mean, geometric mean, and harmonic mean.
+In this example, strategy number `2` has a risk-adjusted weight of `~0.07` for the specified token, but it has a validator balance weight of `0.7`.
 
+Strategy number `10`, has a much bigger risk-adjusted weight of `~0.93` for specified token, but it has a validator balance weight of `0.3`.
 
-**Example**: Let's consider a bApp that uses tokens $A$ and $B$, and considers $A$ to be twice as important as $B$. Then, it could use the following weighted harmonic mean as its combination function:
+For more information on how these risk-adjusted strategy-token weights are calculated, [please visit this page](../learn/based-applications/).
 
-$$
-W^{\text{final}}_{\text{strategy}} = c_{\text{final}} \times \dfrac{1}{\dfrac{2/3}{W_{\text{strategy, A}}} + \dfrac{1/3}{W_{\text{strategy, B}}}}
-$$
+### Final weight
 
-where $c_{\text{final}}$ is a normalization constant computed as
+To combine data from the previous step into the final Weight it is necessary to use a **combination function**. Such function has to be defined by the bApp itself and can be tailored to its specific needs. Traditionally, one good combination functions include the arithmetic mean, geometric mean, and harmonic mean.
 
-$$
-c_{\text{final}} = \left( \sum_{\text{strategy}} \dfrac{1}{\dfrac{2/3}{W_{\text{strategy, A}}} + \dfrac{1/3}{W_{\text{strategy, B}}}} \right)^{-1}
-$$
+Let's consider the bApp from step 1, which uses tokens **`0x68a8ddd7a59a900e0657e9f8bbe02b70c947f25f`** and **validator balance**. For the purpose of our example, this bApp considers **`0x68a8ddd7a59a900e0657e9f8bbe02b70c947f25f`** to be twice times as important as **validator balance**. 
 
-<!-- [At the following page](./participant-weight-example.md), you can find a coded example of how to combine Subgraph data with the logic described above. -->
+:::info
+Note: this is a purely fictional scenario, to show the strong impact of the coefficients attributed to tokens and validator balance, with respect to the final combined weight of a strategy.
+:::
+
+Below it's reported a code snippet, showing how to combine weights from step 1 using a simple arithmetic weighted average in the described scenario:
+
+```ts
+const validatorImportance = 1;
+const ssvTokenImportance = 2;
+
+console.info(`Using arithmetic weighted average to calculate Strategy weights.
+Validator Balance is 2 times more important than 0x68a8ddd7a59a900e0657e9f8bbe02b70c947f25f`);
+
+let simpleAverageStrategyWeights = new Map();
+for (const strategy of strategyTokenWeights) {
+  // calculate the strategy weight, combining token weight and validator balance weight
+  let strategyWeight =
+    ((strategy.validatorBalanceWeight || 0) * validatorImportance +
+      strategy.tokenWeights[0].weight * ssvTokenImportance) /
+    (validatorImportance + ssvTokenImportance);
+  // set the value in the mapping
+  simpleAverageStrategyWeights.set(strategy.id, strategyWeight);
+}
+
+console.info(
+  `Final Strategy weights: ${JSON.stringify(
+    Object.fromEntries(simpleAverageStrategyWeights),
+    undefined,
+    2
+  )}`
+);
+```
+
+This returns a map with the combined risk-adjusted weight of each strategy.
+
+```json
+Using arithmetic weighted average to calculate Strategy weights.
+Validator Balance is 2 times more important than 0x68a8ddd7a59a900e0657e9f8bbe02b70c947f25f
+Final Strategy weights: {
+  "2": 0.28214396045721346,
+  "10": 0.7178560395427865
+}
+```
+
+### Complete example
+
+[The following page](./participant-weight-example.md), shows the full coded example of how to obtain risk-adjusted strategy-token weights, and how to combine them. The example uses a weighted simple average (as shown here), as well as a slightly more involved **combination functions** like weighted geometric average and weighted harmonic average ([explained here](../learn/based-applications/)), and shows the different outcome of the three.
