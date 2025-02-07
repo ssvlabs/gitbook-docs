@@ -129,7 +129,7 @@ In this example, strategy number `2` has a risk-adjusted weight of `~0.07` for t
 
 Strategy number `10`, has a much bigger risk-adjusted weight of `~0.93` for specified token, but it has a validator balance weight of `0.3`.
 
-For more information on how these risk-adjusted strategy-token weights are calculated, [please visit this page](../learn/based-applications/).
+For more information on how these risk-adjusted strategy-token weights are calculated, [please visit this page](../learn/based-applications/strategy-weights.md).
 
 ### Final weight
 
@@ -183,4 +183,4 @@ Final Strategy weights: {
 
 ### Complete example
 
-[The following page](./participant-weight-example.md), shows the full coded example of how to obtain risk-adjusted strategy-token weights, and how to combine them. The example uses a weighted simple average (as shown here), as well as a slightly more involved **combination functions** like weighted geometric average and weighted harmonic average ([explained here](../learn/based-applications/)), and shows the different outcome of the three.
+[The following page](./participant-weight-example.md), shows the full coded example of how to obtain risk-adjusted strategy-token weights, and how to combine them. The example uses a weighted simple average (as shown here), as well as a slightly more involved **combination functions** like weighted geometric average and weighted harmonic average ([explained here](../learn/based-applications/strategy-weights.md)), and shows the different outcome of the three.
