@@ -43,7 +43,7 @@ A set of calls to get information about the SSV network.
 
 Validators are managed within Clusters - the group of operators that were selected to operate them.
 
-:::hint
+:::info
 You must have a validator key to carry out this process, they can be generated programmatically by [as shown in this example](ssv-sdk/examples/create-validator-keys).
 
 **Multiple validators can be registered in a single transaction.**
