@@ -22,7 +22,7 @@ Input:
 
 | Input parameter   | Input type | Description                   | Example input                                |
 | ----------------- | ---------- | ----------------------------- | -------------------------------------------- |
-|  account  | string     | Address of the Based Application | '0x64714cf5db177398729e37627be0fc08f43b17a6' |
+|  account  | string     | Address of the account | '0x64714cf5db177398729e37627be0fc08f43b17a6' |
 
 Example:
 
@@ -40,35 +40,6 @@ Example output:
   validators: [],
   balance: '0'
 }
-```
-
-### `getBappSlashableBalance(string bappAddress)`
-
-Given the address of a Based Application, returns the slashable balance of the Bapp.
-
-Input:
-
-| Input parameter   | Input type | Description                   | Example input                                |
-| ----------------- | ---------- | ----------------------------- | -------------------------------------------- |
-|  bappId  | string     | Address of the Based Application | '0x64714cf5db177398729e37627be0fc08f43b17a6' |
-
-Example:
-
-```typescript
-const getBappSlashableBalance = await sdk.api.getBappSlashableBalance({
-    bAppId: "0x64714cf5db177398729e37627be0fc08f43b17a6",
-});
-```
-
-Example output:
-
-```bash
-[
-  {
-    token: '0x68a8ddd7a59a900e0657e9f8bbe02b70c947f25f',
-    balance: 97110000000000000000n
-  }
-]
 ```
 
 ### `getStrategyTokenWeights(string bappAddress)`
@@ -93,12 +64,30 @@ Example output:
 
 ```bash
 [
-  { id: '10', tokenWeights: [ [Object] ] },
-  { id: '2', tokenWeights: [ [Object] ], validatorBalanceWeight: 1 }
+  {
+    "id": "10",
+    "tokenWeights": [
+      {
+        "token": "0x68a8ddd7a59a900e0657e9f8bbe02b70c947f25f",
+        "weight": 0.9267840593141798
+      }
+    ],
+    "validatorBalanceWeight": 0.0322679969182334
+  },
+  {
+    "id": "2",
+    "tokenWeights": [
+      {
+        "token": "0x68a8ddd7a59a900e0657e9f8bbe02b70c947f25f",
+        "weight": 0.07321594068582021
+      }
+    ],
+    "validatorBalanceWeight": 0.9677320030817667
+  }
 ]
 ```
 
-### `getDelegatedBalances(string bappAddress)`
+### `getDelegatedBalances(string bappAddress)`
 
 Given the address of a Based Application, returns the delegated balances of the Bapp.
 
