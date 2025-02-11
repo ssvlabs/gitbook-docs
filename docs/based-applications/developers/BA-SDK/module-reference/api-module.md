@@ -22,7 +22,7 @@ Input:
 
 | Input parameter   | Input type | Description                   | Example input                                |
 | ----------------- | ---------- | ----------------------------- | -------------------------------------------- |
-|  account  | string     | Address of the Based Application | '0x64714cf5db177398729e37627be0fc08f43b17a6' |
+|  account  | string     | Address of the account | '0x64714cf5db177398729e37627be0fc08f43b17a6' |
 
 Example:
 
@@ -93,8 +93,26 @@ Example output:
 
 ```bash
 [
-  { id: '10', tokenWeights: [ [Object] ] },
-  { id: '2', tokenWeights: [ [Object] ], validatorBalanceWeight: 1 }
+  {
+    "id": "10",
+    "tokenWeights": [
+      {
+        "token": "0x68a8ddd7a59a900e0657e9f8bbe02b70c947f25f",
+        "weight": 0.9267840593141798
+      }
+    ],
+    "validatorBalanceWeight": 0.0322679969182334
+  },
+  {
+    "id": "2",
+    "tokenWeights": [
+      {
+        "token": "0x68a8ddd7a59a900e0657e9f8bbe02b70c947f25f",
+        "weight": 0.07321594068582021
+      }
+    ],
+    "validatorBalanceWeight": 0.9677320030817667
+  }
 ]
 ```
 

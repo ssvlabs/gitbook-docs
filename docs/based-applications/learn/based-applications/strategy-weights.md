@@ -69,3 +69,14 @@ For all the strategies that opted-in to a given bApp, clients will need to:
       $$
 
 6. **Combine into the Final Weight**: With the per-token weights, the final step is to compute a final weight for the participant using a **combination function**. Such function is defined by the bApp and can be tailored to its specific needs. Traditional examples include the arithmetic mean, geometric mean, and harmonic mean.
+
+**Example**: Let's consider a bApp that uses tokens $A$ and $B$, and considers $A$ to be twice as important as $B$. Then, it could use the following weighted harmonic mean as its combination function:
+$$
+W^{\text{final}}_{\text{strategy}} = c_{\text{final}} \times \dfrac{1}{\dfrac{2/3}{W_{\text{strategy, A}}} + \dfrac{1/3}{W_{\text{strategy, B}}}}
+$$
+where $c_{\text{final}}$ is a normalization constant computed as
+$$
+c_{\text{final}} = \left( \sum_{\text{strategy}} \dfrac{1}{\dfrac{2/3}{W_{\text{strategy, A}}} + \dfrac{1/3}{W_{\text{strategy, B}}}} \right)^{-1}
+$$
+
+<!-- [At the following page](./participant-weight-example.md), you can find a coded example of how to combine Subgraph data with the logic described above. -->
