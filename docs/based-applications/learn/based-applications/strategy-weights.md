@@ -20,21 +20,25 @@ To do this manually, follow the steps below and obtain the information by queryi
 
 For all the strategies that opted-in to a given bApp, clients will need to:
 
-1. **Gather Obligated Balances**: Get the obligated balance from each strategy, for each token used by the bApp.
+### 1. **Gather Obligated Balances**
+Get the obligated balance from each strategy, for each token used by the bApp.
    ```go
    ObligatedBalance mapping(Token -> Strategy -> Amount)
    ```
    This is done by multiplying the `percentage` of obligated tokens by the `balance` of such tokens deposited to the strategy.
 
-2. **Sum Obligations**: From `ObligatedBalance`, bApps should sum all obligations and compute the total amount obligated to the bApp by all strategies.
+### 2. **Sum Obligations**
+From `ObligatedBalance`, bApps should sum all obligations and compute the total amount obligated to the bApp by all strategies.
    ```go
    TotalBAppBalance mapping(Token -> Amount)
    ```
-3. **Calculate Risk**: For each token, it should get the risk (token-over usage) of each strategy. This is obtained by summing all the `percentages` in all `Obligations` for a given token, and dividing it by `100`.
+### 3. **Calculate Risk**
+For each token, it should get the risk (token-over usage) of each strategy. This is obtained by summing all the `percentages` in all `Obligations` for a given token, and dividing it by `100`.
    ```go
    Risk mapping(Token -> Strategy -> Float)
    ```
-4. **Compute Risk-Aware Weights**: With this information, bApps can compute the weight of a participant for a certain token by
+### 4. **Compute Risk-Aware Weights**
+With this information, bApps can compute the weight of a participant for a certain token by
 
    $$
    W_{\text{strategy, token}} = c_{\text{token}} \times \dfrac{ObligatedBalance[\text{token}][\text{strategy}]}{TotalBAppBalance[\text{token}]} e^{-\beta_{\text{token}} \times max(1, Risk[\text{token}][\text{strategy}])}
@@ -46,7 +50,8 @@ For all the strategies that opted-in to a given bApp, clients will need to:
    c_{\text{token}} = \left( \sum_{\text{strategy}} \dfrac{ObligatedBalance[\text{token}][\text{strategy}]}{TotalBAppBalance[\text{token}]} e^{-\beta_{\text{token}} \times max(1, Risk[\text{token}][\text{strategy}])} \right)^{-1}
    $$
 
-5. **If the bApp uses validator balance**, the client should also generate a mapping of `Strategy -> Validator Balance` with the amount from each strategy. Clients will need to do this in a couple of steps:
+### 5. **If the bApp uses validator balance**
+ The client should also generate a mapping of `Strategy -> Validator Balance` with the amount from each strategy. Clients will need to do this in a couple of steps:
 
     a. **Gather Delegated Balances**: Get all the delegations made to the owner of a strategy for all the strategies that opted in to a bApp.
 
@@ -68,7 +73,8 @@ For all the strategies that opted-in to a given bApp, clients will need to:
       W_{\text{strategy, validator balance}} = \dfrac{ObligatedBalance[\text{validator balance}][\text{strategy}]}{TotalBAppBalance[\text{validator balance}]}
       $$
 
-6. **Combine into the Final Weight**: With the per-token weights, the final step is to compute a final weight for the participant using a **combination function**. Such function is defined by the bApp and can be tailored to its specific needs. Traditional examples include the arithmetic mean, geometric mean, and harmonic mean.
+### 6. **Combine into the Final Weight**
+With the per-token weights, the final step is to compute a final weight for the participant using a **combination function**. Such function is defined by the bApp and can be tailored to its specific needs. Traditional examples include the arithmetic mean, geometric mean, and harmonic mean.
 
 **Example**: Let's consider a bApp that uses tokens $A$ and $B$, and considers $A$ to be twice as important as $B$. Then, it could use the following weighted harmonic mean as its combination function:
 $$
