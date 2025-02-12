@@ -207,6 +207,13 @@ Events:
 
 Description: Registers new validator to a cluster of provided operators (ids + shares), **fails if** number of operatorIds is greater than 13.
 
+
+:::info
+To deposit the SSV Token, you need to approve the amount of SSV tokens you wish to deposit to the cluster.
+
+The approval transaction must be called on the SSV token contract, with the approval address set to the SSVNetwork contract address. [Both adddresses can be found here.](../smart-contracts)
+:::
+
 | **Parameter** | **Type**                   | **Description**                                                                                                                                                                                                                                                                                                                                                      |
 | ------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | publicKey     | bytes                      | The validator’s public key.                                                                                                                                                                                                                                                                                                                                          |
@@ -221,7 +228,13 @@ Events:
 
 ### **`bulkRegisterValidator(publicKey, operatorIds, shares, amount, cluster)`**
 
-Description: Registers all the new validators provided as argument to a cluster of provided operators (ids + shares), **fails if** number of operatorIds is greater than 13..
+Description: Registers all the new validators provided as argument to a cluster of provided operators (ids + shares), **fails if** number of operatorIds is greater than 13.
+
+:::info
+To deposit the SSV Token, you need to approve the amount of SSV tokens you wish to deposit to the cluster.
+
+The approval transaction must be called on the SSV token contract, with the approval address set to the SSVNetwork contract address. [Both adddresses can be found here.](../smart-contracts)
+:::
 
 | **Parameter** | **Type**                   | **Description**                                                                                                                                                                                                                                                                                                                                                      |
 | ------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -313,6 +326,12 @@ Please note: the number of validators that can be requested to exit from the bea
 
 Description: Deposits SSV token into a cluster, **will fail if** not enough tokens are approved.
 
+:::info
+To deposit the SSV Token, you need to approve the amount of SSV tokens you wish to deposit to the cluster.
+
+The approval transaction must be called on the SSV token contract, with the approval address set to the SSVNetwork contract address. [Both adddresses can be found here.](../smart-contracts)
+:::
+
 | **Parameter** | **Type**                   | **Description**                                                                                                                                                                                           |
 | ------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | owner         | address                    | The cluster owner address                                                                                                                                                                                 |
@@ -341,6 +360,12 @@ Events:
 ### **`reactivate(operatorIds, amount, cluster)`**
 
 Description: Reactivates a liquidated cluster, **will fail** if insufficient SSV tokens to cover the cluster’s liquidation collateral have been deposited.
+
+:::info
+To deposit the SSV Token, you need to approve the amount of SSV tokens you wish to deposit to the cluster.
+
+The approval transaction must be called on the SSV token contract, with the approval address set to the SSVNetwork contract address. [Both adddresses can be found here.](../smart-contracts)
+:::
 
 | **Parameter** | **Type**                   | **Description**                                                                                                                                                                                           |
 | ------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
