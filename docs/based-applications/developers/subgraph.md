@@ -5,32 +5,39 @@ sidebar_label: Based Application Subgraph
 
 # Based Application Subgraph
 
-All of the data for a based application is stored in the [Based Application Subgraph](https://api.studio.thegraph.com/query/53804/ssv-bapps-subgraph/version/latest/graphql?query=query+MyQuery+%7B%0A++__typename+%23%23+Placeholder+value%0A%7D).
+All of the data for a based application is stored in the Based Application Subgraph.
 
 ## Querying the Subgraph
 
-The subgraph can be queried at: `https://api.studio.thegraph.com/query/53804/ssv-bapps-subgraph/version/latest/graphql`
+The subgraph can be queried at this API: `https://api.studio.thegraph.com/query/71118/based-applications-ssv-holesky/version/latest`
 
 ## Example Queries
 
-### Get Participant Weight Data
+### Get Strategy Token Weights Input
 
 Retrieves strategy obligations, balances, and delegator information for a bapp:
 
 ```graphql
-query getParticipantWeightDataInput {
-  bapp(id: "YOUR_BAPP_ADDRESS") {
+query getStrategyTokenWeightsInput {
+  bapp(id: "0xaA184b86B4cdb747F4A3BF6e6FCd5e27c1d92c5c") {
+    bAppTokens {
+      sharedRiskLevel
+      token
+      totalObligatedBalance
+    }
     strategies {
       obligations {
+        obligatedBalance
         token
         percentage
       }
       strategy {
+        id
         balances {
           balance
           token
+          riskValue
         }
-        id
         owner {
           delegators {
             percentage
@@ -40,10 +47,6 @@ query getParticipantWeightDataInput {
           }
         }
       }
-    }
-    bAppTokens {
-      sharedRiskLevel
-      token
     }
   }
 }
