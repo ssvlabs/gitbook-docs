@@ -152,7 +152,7 @@ Output
       "validatorCount": "1",
       "networkFeeIndex": "59597136600",
       "index": "46367642388",
-      "active": true,ß
+      "active": true,
       "balance": "19479447888000000000",
     }
   }
