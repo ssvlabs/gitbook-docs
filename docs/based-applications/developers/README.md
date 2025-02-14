@@ -6,11 +6,14 @@ sidebar_position: 6
 
 # Based Application Development
 
-This guide outlines the steps for based applications developers looking to build on the Based Applications platform.
+This guide outlines the steps for based applications developers looking to build on the Based Applications platform. Below is a diagram that summarizes the Based Applications development flow.
+
+![Based Application Development Flow](/img/based-apps-developer-flow.png)
 
 <!-- ## 0. Developing a Based Application Middleware smart contract
 
 The `BAppManager` smart contract developed by SSV Labs accepts registrations of BApps that implement a specific interface. This is outlined [in this dedicated page](./smart-contracts/based-app-middleware-example.md), that also provides a simple example. -->
+
 
 ## 1. Configuring and Registering the bApp
 
@@ -73,13 +76,13 @@ Based Application managers need to track the weight of each participant (strateg
 The first step is made fairly easier thanks to the `based-apps-sdk`, which needs to be installed first:
 
 ```sh
-npm i @ssv-labs/based-apps-sdk
+npm i @ssv-labs/bapps-sdk
 ```
 
 The SDK provides a function that returns all the risk-adjusted weights for each token, for all the strategies that opted in to a given bApp:
 
 ```ts
-import { BasedAppsSDK, chains } from "@ssv-labs/based-apps-sdk";
+import { BasedAppsSDK, chains } from "@ssv-labs/bapps-sdk";
 
 const sdk = new BasedAppsSDK({
   chain: chains.holesky.id,
@@ -145,22 +148,32 @@ Note: this is a purely fictional scenario, to show the strong impact of the coef
 Below it's reported a code snippet, showing how to combine weights from step 1 using a simple arithmetic weighted average in the described scenario:
 
 ```ts
-const validatorImportance = 1;
-const ssvTokenImportance = 2;
+const tokenCoefficients = [
+  {
+    token: "0x68a8ddd7a59a900e0657e9f8bbe02b70c947f25f",
+    coefficient: 5,
+  },
+  // here you can specify additiona weights for additional tokens
+  // {
+  //   token: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  //   coefficient: 30,
+  // },
+];
+const validatorCoefficient = 1;
 
-console.info(`Using arithmetic weighted average to calculate Strategy weights.
-Validator Balance is 2 times more important than 0x68a8ddd7a59a900e0657e9f8bbe02b70c947f25f`);
-
-let simpleAverageStrategyWeights = new Map();
-for (const strategy of strategyTokenWeights) {
-  // calculate the strategy weight, combining token weight and validator balance weight
-  let strategyWeight =
-    ((strategy.validatorBalanceWeight || 0) * validatorImportance +
-      strategy.tokenWeights[0].weight * ssvTokenImportance) /
-    (validatorImportance + ssvTokenImportance);
-  // set the value in the mapping
-  simpleAverageStrategyWeights.set(strategy.id, strategyWeight);
+console.info(`Weight coefficient for Validator Balance is ${validatorCoefficient}`);
+for (let tokenCoefficient of tokenCoefficients){
+  console.info(`Weight coefficient for token ${tokenCoefficient.token} is ${tokenCoefficient.coefficient}`);
 }
+console.info(`Using arithmetic weighted average to calculate Strategy weights.`);
+
+let simpleAverageStrategyWeights = sdk.utils.calcSimpleStrategyWeights(
+  strategyTokenWeights,
+  {
+    coefficients: tokenCoefficients,
+    validatorCoefficient: validatorCoefficient,
+  }
+);
 
 console.info(
   `Final Strategy weights: ${JSON.stringify(
