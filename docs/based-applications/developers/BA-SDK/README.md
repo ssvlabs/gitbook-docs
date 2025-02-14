@@ -18,13 +18,13 @@ It provides a set of functions for creating and managing based applications by i
 ## Installation
 
 ```bash
-npm i @ssv-labs/based-apps-sdk
+npm i @ssv-labs/bapps-sdk
 ```
 
 ## Example Usage
 
 ```typescript
-import { BasedAppsSDK } from "@ssv-labs/based-apps-sdk";
+import { BasedAppsSDK } from "@ssv-labs/bapps-sdk";
 
 const sdk = new BasedAppsSDK({
   chain: 17000,
