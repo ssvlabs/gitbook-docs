@@ -20,7 +20,7 @@ sidebar_position: 4
 | SSV DAO Vesting           | [0xB8471180C79A0a69C7790A1CCf62e91b3c3559Bf](https://etherscan.io/address/0xB8471180C79A0a69C7790A1CCf62e91b3c3559Bf) |
 | Testnet v1 Rewards Distributor | [0xE16e6Bddf4a1683c029DdC7AEcb567A6095e95A6](https://etherscan.io/address/0xE16e6Bddf4a1683c029DdC7AEcb567A6095e95A6) |
 | Mainnet Rewards Distributor | [0xe16d6138b1d2ad4fd6603acdb329ad1a6cd26d9f](https://etherscan.io/address/0xe16d6138b1d2ad4fd6603acdb329ad1a6cd26d9f) |
-| CDT to SSV Upgrader       | [0x2bf73A478cc6a7bA4E6758A3A52AbDc8CDBa735E](https://etherscan.io/address/0x2bf73A478cc6a7bA4E6758A3A52AbDc8CDBa735E) |
+| CDT to SSV Upgrader **([Deprecated](https://snapshot.box/#/s:mainnet.ssvnetwork.eth/proposal/0xff1b868f97de48db3ba26c5254e9902645ed55b5107a84ee0cbcb98b31973f27))**     | [0x2bf73A478cc6a7bA4E6758A3A52AbDc8CDBa735E](https://etherscan.io/address/0x2bf73A478cc6a7bA4E6758A3A52AbDc8CDBa735E) |
 
 
 #### Holesky Testnet
@@ -34,8 +34,8 @@ sidebar_position: 4
 
 #### ABI
 
-* [Mainnet](https://github.com/ssvlabs/ssv-network/tree/contract-abi/docs/mainnet/v1.1.0/abi)
-* [Testnet](https://github.com/ssvlabs/ssv-network/tree/contract-abi/docs/testnet/v1.1.0/abi)
+* [Mainnet](https://github.com/ssvlabs/ssv-network/tree/contract-abi/docs/mainnet/v1.2.0/abi)
+* [Testnet](https://github.com/ssvlabs/ssv-network/tree/contract-abi/docs/testnet/v1.2.0/abi)
 
 ### Ethereum Deposit Contract Addresses
 
@@ -45,7 +45,6 @@ You will need to send 32 ETH to the Deposit Contract in order to activate a vali
 |------------------|-----------------------------------------------------------------------------------------------------------------|
 | Mainnet          | [0x00000000219ab540356cBB839Cbe05303d7705Fa](https://etherscan.io/address/0x00000000219ab540356cBB839Cbe05303d7705Fa) |
 | Holesky Testnet  | [0x4242424242424242424242424242424242424242](https://holesky.etherscan.io/address/0x4242424242424242424242424242424242424242) |
-| Goerli Testnet   | [0xff50ed3d0ec03ac01d4c79aad74928bff48a7b2b](https://goerli.etherscan.io/address/0xff50ed3d0ec03ac01d4c79aad74928bff48a7b2b) |
 
 
 Please refer to [Ethereum official documentation](https://ethereum.org/en/staking/deposit-contract/) and verify this information. The [official Launchpad also has great guidelines](https://holesky.launchpad.ethereum.org/) to protect from phishing attempts.
