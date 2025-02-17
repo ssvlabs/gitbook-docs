@@ -8,7 +8,7 @@ import Link from '@docusaurus/Link';
 # Dashboard Runbook
 
 <Link 
-  to="/img/SSV-Operational-dashboard.json"
+  to="/files/SSV-Operational-dashboard.json"
   target="_blank"
   download
   className="button button--primary button--lg"
