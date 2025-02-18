@@ -1,12 +1,11 @@
 ---
 sidebar_label: 'Participant Weight Example'
 sidebar_position: 3
-# unlisted: true
 ---
 
 # Participant Weight Script
 
-The script below uses the logic described in the [related section of the Based Application Development page](based-application-depvelopment.md/#3-participant-weight), fetching the data from the Based Application Subgraph, as well as the beacon chain (validator balance), via the `based-apps-sdk`, and returns the Weight for all Strategies that have opted in to a given Based Application. It then combines them with arbitrary logic, defined as a weighted harmonic mean, where validator balance is twice times more impactful than the ERC20 token.
+The script below uses the logic described in the [related section of the Based Application Development page](../../../developers/#3-participant-weight), fetching the data from the Based Application Subgraph, as well as the beacon chain (validator balance), via the `based-apps-sdk`, and returns the Weight for all Strategies that have opted in to a given Based Application. It then combines them with arbitrary logic, defined as a weighted harmonic mean, where validator balance is twice times more impactful than the ERC20 token.
    
 ```typescript
 import { BasedAppsSDK, chains } from "@ssv-labs/bapps-sdk";

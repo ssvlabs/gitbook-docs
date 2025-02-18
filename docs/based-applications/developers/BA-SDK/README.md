@@ -13,7 +13,7 @@ The BA SDK is currently undergoing development and is subject to change.
 
 The BA SDK is a TypeScript library that allows developers to work with the Based Applications. 
 
-It provides a set of functions for creating and managing based applications by interacting with the [BasedAppManager](./smart-contracts/BasedAppManager.md) smart contract.
+It provides a set of functions for creating and managing based applications by interacting with the [BasedAppManager](../smart-contracts/BasedAppManager) smart contract.
 
 ## Installation
 
@@ -27,7 +27,9 @@ npm i @ssv-labs/bapps-sdk
 import { BasedAppsSDK } from "@ssv-labs/bapps-sdk";
 
 const sdk = new BasedAppsSDK({
-  chain: 17000,
+    bamGraphUrl: 'https://api.studio.thegraph.com/query/71118/based-applications-ssv-holesky/version/latest',
+    dvtGraphUrl: 'https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest',
+    beaconchainUrl: 'https://example.com/beacon',
 });
 
 async function main(): Promise<void> {
