@@ -21,7 +21,7 @@ The best way to get started with SSV is using the [SDK](ssv-sdk/), which allows 
 
 ### [SSV SDK](ssv-sdk/)
 
-A comprehensive, open-source developer toolkit that can be used to programatically write scripts for tasks such as [operator management](ssv-sdk/module-reference/operator-module), [keyshare generation](tools/dkg-client/generate-key-shares), and [bulk validator registration.](ssv-sdk/examples/bulk-register-validators)&#x20;
+A comprehensive, open-source developer toolkit that can be used to programmatically write scripts for tasks such as [operator management](ssv-sdk/module-reference/operator-module), [keyshare generation](tools/dkg-client/generate-key-shares), and [bulk validator registration.](ssv-sdk/examples/bulk-register-validators)&#x20;
 
 ### [Smart Contracts](smart-contracts/)
 
@@ -43,8 +43,8 @@ A set of calls to get information about the SSV network.
 
 Validators are managed within Clusters - the group of operators that were selected to operate them.
 
-:::hint
-You must have a validator key to carry out this process, they can be generated programatically by [as shown in this example](ssv-sdk/examples/create-validator-keys).
+:::info
+You must have a validator key to carry out this process, they can be generated programmatically by [as shown in this example](ssv-sdk/examples/create-validator-keys).
 
 **Multiple validators can be registered in a single transaction.**
 :::
