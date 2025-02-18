@@ -9,7 +9,7 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
+  url: 'https://docs.ssv.network/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -129,6 +129,13 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+    },
+    algolia: {
+      // The application ID provided by Algolia
+      appId: 'YXTLMSGB48',
+      // Public API key: it is safe to commit it
+      apiKey: '9e2600a5e43f14bb3808106c74cb5348',
+      indexName: 'ssv',
     },
   } satisfies Preset.ThemeConfig,
 };
