@@ -39,4 +39,4 @@ ssv-dkg-data
 2 directories, 5 files
 ```
 
-Lastly, you need to specify the path to these files using the `serverTLSCertPath` and `serverTLSCertPath` configuration parameters in your `operator.yaml` config file.
+Lastly, you need to specify the path to these files using the `serverTLSCertPath` and `serverTLSKeyPath` configuration parameters in your `operator.yaml` config file.
