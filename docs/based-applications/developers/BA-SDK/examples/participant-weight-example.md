@@ -11,7 +11,8 @@ The script below uses the logic described in the [related section of the Based A
 import { BasedAppsSDK, chains } from "@ssv-labs/bapps-sdk";
 
 const sdk = new BasedAppsSDK({
-  chain: chains.holesky.id
+    chain: 'holesky',
+    beaconchainUrl: 'https://example.com/beacon',
 });
 
 async function main(): Promise<void> {

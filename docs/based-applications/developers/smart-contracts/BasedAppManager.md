@@ -8,6 +8,7 @@ The BasedAppManager contract is the main contract for operations and management.
 
 [Based Applications Contracts Repository](https://github.com/ssvlabs/based-applications/)
 
+
 ## Delegate Validator Balance
 
 ### **`delegateBalance(account, percentage)`**
@@ -61,7 +62,7 @@ Description: Registers a new Based Application (bApp) with specified tokens and 
 Events:
 * `BAppRegistered(address indexed bApp, address indexed owner, address[] tokens, uint32[] sharedRiskLevels, string metadataURI)`
 
-### **`updateMetadataURI(bApp, metadataURI)`**
+### **`updateBAppMetadataURI(bApp, metadataURI)`**
 
 Description: Updates the metadata URI of a Based Application (bApp). Can only be called by the bApp owner.
 
@@ -101,12 +102,29 @@ Events:
 
 ## Strategy
 
-### **`createStrategy()`**
+### **`createStrategy(fee, metadataURI)`**
 
-Description: Creates a new strategy for the caller.
+Description: Creates a new strategy for the caller with specified fee and metadata.
+
+| **Parameter** | **Type** | **Description** |
+| ------------ | -------- | --------------- |
+| fee | uint32 | The fee percentage for the strategy (scaled by 1e4) |
+| metadataURI | string | The metadata URI for the strategy |
 
 Events:
-* `StrategyCreated(uint256 indexed strategyId, address indexed owner)`
+* `StrategyCreated(uint32 indexed strategyId, address indexed owner, uint32 fee, string metadataURI)`
+
+### **`updateStrategyMetadataURI(strategyId, metadataURI)`**
+
+Description: Updates the metadata URI of a strategy. Can only be called by the strategy owner.
+
+| **Parameter** | **Type** | **Description** |
+| ------------ | -------- | --------------- |
+| strategyId | uint32 | The ID of the strategy |
+| metadataURI | string | The new metadata URI |
+
+Events:
+* `StrategyMetadataURIUpdated(uint32 indexed strategyId, string metadataURI)`
 
 ### **`optInToBApp(strategyId, bApp, tokens, obligationPercentages, data)`**
 
@@ -114,14 +132,14 @@ Description: Opts a strategy into a bApp with specified tokens and obligation pe
 
 | **Parameter** | **Type** | **Description** |
 | ------------ | -------- | --------------- |
-| strategyId | uint256 | The ID of the strategy |
+| strategyId | uint32 | The ID of the strategy |
 | bApp | address | The address of the bApp to opt into |
 | tokens | address[] | List of token addresses to create obligations for |
 | obligationPercentages | uint32[] | List of obligation percentages for each token (scaled by 1e4) |
 | data | bytes | Optional parameter that could be required by the service |
 
 Events:
-* `BAppOptedInByStrategy(uint256 indexed strategyId, address indexed bApp, bytes data, address[] tokens, uint32[] obligationPercentages)`
+* `BAppOptedInByStrategy(uint32 indexed strategyId, address indexed bApp, bytes data, address[] tokens, uint32[] obligationPercentages)`
 
 ### **`depositERC20(strategyId, token, amount)`**
 
@@ -129,12 +147,12 @@ Description: Deposits ERC20 tokens into a strategy.
 
 | **Parameter** | **Type** | **Description** |
 | ------------ | -------- | --------------- |
-| strategyId | uint256 | The ID of the strategy to deposit into |
+| strategyId | uint32 | The ID of the strategy to deposit into |
 | token | address | The address of the ERC20 token |
 | amount | uint256 | The amount of tokens to deposit |
 
 Events:
-* `StrategyDeposit(uint256 indexed strategyId, address indexed account, address indexed token, uint256 amount)`
+* `StrategyDeposit(uint32 indexed strategyId, address indexed account, address indexed token, uint256 amount)`
 
 ### **`depositETH(strategyId)`**
 
@@ -142,11 +160,10 @@ Description: Deposits ETH into a strategy.
 
 | **Parameter** | **Type** | **Description** |
 | ------------ | -------- | --------------- |
-| strategyId | uint256 | The ID of the strategy to deposit into |
+| strategyId | uint32 | The ID of the strategy to deposit into |
 
 Events:
-* `StrategyDeposit(uint256 indexed strategyId, address indexed account, address indexed token, uint256 amount)`
-
+* `StrategyDeposit(uint32 indexed strategyId, address indexed account, address indexed token, uint256 amount)`
 
 ### **`fastWithdrawERC20(strategyId, token)`**
 
@@ -154,11 +171,11 @@ Description: Performs a fast withdrawal of ERC20 tokens from a strategy if the t
 
 | **Parameter** | **Type** | **Description** |
 | ------------ | -------- | --------------- |
-| strategyId | uint256 | The ID of the strategy to withdraw from |
+| strategyId | uint32 | The ID of the strategy to withdraw from |
 | token | address | The address of the ERC20 token to withdraw |
 
 Events:
-* `StrategyWithdrawal(uint256 indexed strategyId, address indexed account, address indexed token, uint256 amount, bool isFast)`
+* `StrategyWithdrawal(uint32 indexed strategyId, address indexed account, address indexed token, uint256 amount, bool isFast)`
 
 ### **`fastWithdrawETH(strategyId)`**
 
@@ -166,10 +183,10 @@ Description: Performs a fast withdrawal of ETH from a strategy if the token is n
 
 | **Parameter** | **Type** | **Description** |
 | ------------ | -------- | --------------- |
-| strategyId | uint256 | The ID of the strategy to withdraw from |
+| strategyId | uint32 | The ID of the strategy to withdraw from |
 
 Events:
-* `StrategyWithdrawal(uint256 indexed strategyId, address indexed account, address indexed token, uint256 amount, bool isFast)`
+* `StrategyWithdrawal(uint32 indexed strategyId, address indexed account, address indexed token, uint256 amount, bool isFast)`
 
 ### **`proposeWithdrawal(strategyId, token, amount)`**
 
@@ -177,24 +194,24 @@ Description: Proposes a withdrawal of ERC20 tokens from a strategy, initiating t
 
 | **Parameter** | **Type** | **Description** |
 | ------------ | -------- | --------------- |
-| strategyId | uint256 | The ID of the strategy |
+| strategyId | uint32 | The ID of the strategy |
 | token | address | The address of the ERC20 token to withdraw |
 | amount | uint256 | The amount of tokens to withdraw |
 
 Events:
-* `StrategyWithdrawalProposed(uint256 indexed strategyId, address indexed account, address indexed token, uint256 amount, uint256 unlockTime)`
+* `StrategyWithdrawalProposed(uint32 indexed strategyId, address indexed account, address indexed token, uint256 amount)`
 
 ### **`finalizeWithdrawal(strategyId, token)`**
 
-Description: Finalizes an ERC20 token withdrawal after the timelock period has elapsed. The withdrawal must be completed within the expiry window (WITHDRAWAL_EXPIRE_TIME) after the timelock period ends. Transfers the requested tokens to the caller and updates their strategy balance.
+Description: Finalizes an ERC20 token withdrawal after the timelock period has elapsed. The withdrawal must be completed within the expiry window (WITHDRAWAL_EXPIRE_TIME) after the timelock period ends.
 
 | **Parameter** | **Type** | **Description** |
 | ------------ | -------- | --------------- |
-| strategyId | uint256 | The ID of the strategy |
+| strategyId | uint32 | The ID of the strategy |
 | token | IERC20 | The ERC20 token contract to withdraw |
 
 Events:
-* `StrategyWithdrawal(uint256 indexed strategyId, address indexed account, address indexed token, uint256 amount, bool isFast)`
+* `StrategyWithdrawal(uint32 indexed strategyId, address indexed account, address indexed token, uint256 amount, bool isFast)`
 
 ### **`proposeWithdrawalETH(strategyId, amount)`**
 
@@ -202,13 +219,11 @@ Description: Proposes a withdrawal of ETH from a strategy, initiating the timelo
 
 | **Parameter** | **Type** | **Description** |
 | ------------ | -------- | --------------- |
-| strategyId | uint256 | The ID of the strategy |
+| strategyId | uint32 | The ID of the strategy |
 | amount | uint256 | The amount of ETH to withdraw (in wei) |
 
 Events:
-* `StrategyWithdrawalProposed(uint256 indexed strategyId, address indexed account, address indexed token, uint256 amount, uint256 unlockTime)`
-
-Note: The `token` parameter in the event is set to `ETH_ADDRESS` and the unlock time is calculated as `block.timestamp + WITHDRAWAL_TIMELOCK_PERIOD`.
+* `StrategyWithdrawalProposed(uint32 indexed strategyId, address indexed account, address indexed token, uint256 amount)`
 
 ### **`finalizeWithdrawalETH(strategyId)`**
 
@@ -216,10 +231,10 @@ Description: Finalizes an ETH withdrawal after the timelock period has elapsed.
 
 | **Parameter** | **Type** | **Description** |
 | ------------ | -------- | --------------- |
-| strategyId | uint256 | The ID of the strategy |
+| strategyId | uint32 | The ID of the strategy |
 
 Events:
-* `StrategyWithdrawal(uint256 indexed strategyId, address indexed account, address indexed token, uint256 amount, bool isFast)`
+* `StrategyWithdrawal(uint32 indexed strategyId, address indexed account, address indexed token, uint256 amount, bool isFast)`
 
 ### **`createObligation(strategyId, bApp, token, obligationPercentage)`**
 
@@ -227,13 +242,13 @@ Description: Creates a single obligation for a bApp.
 
 | **Parameter** | **Type** | **Description** |
 | ------------ | -------- | --------------- |
-| strategyId | uint256 | The ID of the strategy |
+| strategyId | uint32 | The ID of the strategy |
 | bApp | address | The address of the bApp |
 | token | address | The token address |
 | obligationPercentage | uint32 | Percentage to obligate (scaled by 1e4) |
 
 Events:
-* `ObligationCreated(uint256 indexed strategyId, address indexed bApp, address indexed token, uint32 percentage)`
+* `ObligationCreated(uint32 indexed strategyId, address indexed bApp, address indexed token, uint32 percentage)`
 
 ### **`fastUpdateObligation(strategyId, bApp, token, obligationPercentage)`**
 
@@ -241,13 +256,13 @@ Description: Quickly updates an obligation percentage higher for a bApp (can onl
 
 | **Parameter** | **Type** | **Description** |
 | ------------ | -------- | --------------- |
-| strategyId | uint256 | The ID of the strategy |
+| strategyId | uint32 | The ID of the strategy |
 | bApp | address | The address of the bApp |
 | token | address | The token address |
 | obligationPercentage | uint32 | New percentage to obligate (must be higher than current) |
 
 Events:
-* `ObligationUpdated(uint256 indexed strate gyId, address indexed bApp, address indexed token, uint32 percentage, bool isFast)`
+* `ObligationUpdated(uint32 indexed strategyId, address indexed bApp, address indexed token, uint32 percentage, bool isFast)`
 
 ### **`proposeUpdateObligation(strategyId, bApp, token, obligationPercentage)`**
 
@@ -255,13 +270,13 @@ Description: Proposes an update to an obligation percentage, initiating the time
 
 | **Parameter** | **Type** | **Description** |
 | ------------ | -------- | --------------- |
-| strategyId | uint256 | The ID of the strategy |
+| strategyId | uint32 | The ID of the strategy |
 | bApp | address | The address of the bApp |
 | token | address | The token address |
 | obligationPercentage | uint32 | New percentage to obligate |
 
 Events:
-* `ObligationUpdateProposed(uint256 indexed strategyId, address indexed sender, address indexed token, uint32 percentage, uint256 unlockTime)`
+* `ObligationUpdateProposed(uint32 indexed strategyId, address indexed sender, address indexed token, uint32 percentage, uint32 unlockTime)`
 
 ### **`finalizeUpdateObligation(strategyId, bApp, token)`**
 
@@ -269,32 +284,57 @@ Description: Finalizes an obligation update after the timelock period has elapse
 
 | **Parameter** | **Type** | **Description** |
 | ------------ | -------- | --------------- |
-| strategyId | uint256 | The ID of the strategy |
+| strategyId | uint32 | The ID of the strategy |
 | bApp | address | The address of the bApp |
 | token | address | The token address |
 
 Events:
-* `ObligationUpdated(uint256 indexed strategyId, address indexed sender, address indexed token, uint32 percentage, bool isFast)`
+* `ObligationUpdated(uint32 indexed strategyId, address indexed sender, address indexed token, uint32 percentage, bool isFast)`
 
 ### **`proposeFeeUpdate(strategyId, proposedFee)`**
 
-Description: Proposes a new fee for a strategy, initiating the timelock period.
+Description: Proposes a new fee for a strategy, initiating the timelock period. The proposed fee cannot exceed the current fee plus maxFeeIncrement.
 
 | **Parameter** | **Type** | **Description** |
 | ------------ | -------- | --------------- |
-| strategyId | uint256 | The ID of the strategy |
-| proposedFee | uint32 | The proposed new fee (cannot exceed current fee + maxFeeIncrement) |
+| strategyId | uint32 | The ID of the strategy |
+| proposedFee | uint32 | The proposed new fee (scaled by 1e4) |
 
 Events:
-* `StrategyFeeUpdateProposed(uint256 indexed strategyId, address indexed sender, uint32 proposedFee, uint32 currentFee, uint256 unlockTime)`
+* `StrategyFeeUpdateProposed(uint32 indexed strategyId, address indexed sender, uint32 proposedFee, uint32 currentFee)`
 
 ### **`finalizeFeeUpdate(strategyId)`**
 
-Description: Finalizes a fee update after the timelock period has elapsed.
+Description: Finalizes a fee update after the timelock period has elapsed. Must be called within the expiry window (FEE_EXPIRE_TIME).
 
 | **Parameter** | **Type** | **Description** |
 | ------------ | -------- | --------------- |
-| strategyId | uint256 | The ID of the strategy |
+| strategyId | uint32 | The ID of the strategy |
 
 Events:
-* `StrategyFeeUpdated(uint256 indexed strategyId, address indexed sender, uint32 newFee, uint32 oldFee)`
+* `StrategyFeeUpdated(uint32 indexed strategyId, address indexed sender, uint32 newFee, uint32 oldFee)`
+
+## Account
+
+### **`updateAccountMetadataURI(metadataURI)`**
+
+Description: Updates the metadata URI of the caller's account.
+
+| **Parameter** | **Type** | **Description** |
+| ------------ | -------- | --------------- |
+| metadataURI | string | The new metadata URI for the account |
+
+Events:
+* `AccountMetadataURIUpdated(address indexed account, string metadataURI)`
+
+## Constants
+
+| **Constant** | **Value** | **Description** |
+| ------------ | --------- | --------------- |
+| FEE_TIMELOCK_PERIOD | 7 days | Time period that must elapse before a fee update can be finalized |
+| FEE_EXPIRE_TIME | 1 day | Window of time after timelock period during which fee update must be finalized |
+| WITHDRAWAL_TIMELOCK_PERIOD | 5 days | Time period that must elapse before a withdrawal can be finalized |
+| WITHDRAWAL_EXPIRE_TIME | 1 day | Window of time after timelock period during which withdrawal must be finalized |
+| OBLIGATION_TIMELOCK_PERIOD | 7 days | Time period that must elapse before an obligation update can be finalized |
+| OBLIGATION_EXPIRE_TIME | 1 day | Window of time after timelock period during which obligation update must be finalized |
+| MAX_PERCENTAGE | 10000 | Maximum value for percentage calculations (100% = 10000) |
