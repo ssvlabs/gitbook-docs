@@ -6,7 +6,7 @@ sidebar_position: 2
 
 This is a read only library which contains all the functions you need to obtain any data relating to Based Applications.
 
-After instantiating the SDK, you can call any of the functions in the utils library like so:
+After instantiating the SDK, you can call any of the functions in the api library like so:
 
 ```typescript
 sdk.api.getValidatorsBalance()

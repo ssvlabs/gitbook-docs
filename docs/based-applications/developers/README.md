@@ -85,7 +85,8 @@ The SDK provides a function that returns all the risk-adjusted weights for each 
 import { BasedAppsSDK, chains } from "@ssv-labs/bapps-sdk";
 
 const sdk = new BasedAppsSDK({
-  chain: chains.holesky.id,
+    chain: 'holesky',
+    beaconchainUrl: 'https://example.com/beacon',
 });
 
 // calculate strategy-token weights via the SDK
@@ -197,4 +198,4 @@ Final Strategy weights: {
 
 ### Complete example
 
-[The following page](./participant-weight-example.md), shows the full coded example of how to obtain risk-adjusted strategy-token weights, and how to combine them. The example uses a weighted simple average (as shown here), as well as a slightly more involved **combination functions** like weighted geometric average and weighted harmonic average ([explained here](../learn/based-applications/strategy-weights.md)), and shows the different outcome of the three.
+[The following page](./BA-SDK/examples/participant-weight-example.md), shows the full coded example of how to obtain risk-adjusted strategy-token weights, and how to combine them. The example uses a weighted simple average (as shown here), as well as a slightly more involved **combination functions** like weighted geometric average and weighted harmonic average ([explained here](../learn/based-applications/strategy-weights.md)), and shows the different outcome of the three.
