@@ -9,7 +9,7 @@ sidebar_position: 1
 :::
 
 
-This is a library will contain all the BasedAppManager contract calls you need for working with Based Applications, such as registering a based application.
+This library will contain all the BasedAppManager contract calls you need for working with Based Applications, such as registering a based application.
 
 
 
