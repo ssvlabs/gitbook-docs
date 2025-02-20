@@ -21,6 +21,8 @@ The SDK is structured into 3 modules:
 - `utils`: Utility functions such as calculating weights.
 - `bam`: Functions for interacting with the BasedAppManager smart contract.
 
+Each module has a dedicated page in the [Module Reference section](./module-reference/).
+
 ## Installation
 
 ```bash
