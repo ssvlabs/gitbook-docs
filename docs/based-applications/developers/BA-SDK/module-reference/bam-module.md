@@ -9,17 +9,7 @@ sidebar_position: 1
 :::
 
 
-This is a library which contains all the BasedAppManager functions you need for working with Based Applications, such as registering a based application.
-
-After instantiating the SDK, you can call any of the functions in the utils library like so:
-
-```typescript
-sdk.bam.registerBapp()
-```
-
-## Function List
-
-### `registerBapp()`
+This is a library will contain all the BasedAppManager contract calls you need for working with Based Applications, such as registering a based application.
 
 
 
