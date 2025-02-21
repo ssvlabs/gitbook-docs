@@ -4,16 +4,16 @@ sidebar_position: 1
 ---
 
 :::warning
-For information on how to set up and run an SSV Node, please [visit the dedicated page](./operator-node/installation.md).
+For information on how to set up and run an SSV Node, please [visit the dedicated page](/operators/operator-node/node-setup).
 :::
 
 After successfully running an SSV node, an operator must register it to the SSV Network in order to be discoverable by validators.
 
-You can register your operator through the SSV network [web app](https://app.ssv.network) or via a transaction directly to the [smart contract](../../build/smart-contracts/ssvnetwork.md#registeroperatorpublickey-operatorfee-setprivate)
+You can register your operator through the SSV network [web app](https://app.ssv.network) or via a transaction directly to the [smart contract](/developers/smart-contracts/ssvnetwork.md#registeroperatorpublickey-operatorfee-setprivate)
 
 While registering your operator you will need to provide the following parameters:
 
-* [Operator public key](../operator-node/installation) - Generated in the node installation process (base64 format)
+* [Operator public key](/operators/operator-node/node-setup) - Generated in the node installation process (base64 format)
 * [Operator fee](../../learn/protocol-overview/tokenomics/fees) - The fee charged by the operator per each managed validator
 
 :::info
@@ -34,13 +34,13 @@ If you are connecting for the first time, you should see a screen like the image
 
 Please select _Join as Operator._
 
-In the following screen, select _Register Operator_ (just make sure [that you followed the guide on Node setup](../operator-node/installation) and that your SSV Node is running).
+In the following screen, select _Register Operator_ (just make sure [that you followed the guide on Node setup](/operators/operator-node/node-setup) and that your SSV Node is running).
 
 ![register-operator](/img/register-an-operator-11.avif)
 
-The next screen will ask you to input the Operator's public key (refer to [the Node setup guide](../operator-node/installation) for key generation) and provide a confirmation of the Operator owner address.
+The next screen will ask you to input the Operator's public key (refer to [the Node setup guide](/operators/operator-node/node-setup) for key generation) and provide a confirmation of the Operator owner address.
 
-Here you will also have to choose whether your Operator status is either [public or private](../permissioned-operators).
+Here you will also have to choose whether your Operator status is either [public or private](/operators/operator-onboarding/permissioned-operators).
 
 :::warning
 Please verify once more that the owner address correspond to the wallet address you want to manage your operators with.
@@ -52,7 +52,7 @@ Click _Next_ when ready.
 
 In the following screen, shown below, you are being asked to set the Operator Fee.
 
-For more information about fees, please [head over to the related page](../../learn/protocol-overview/tokenomics/fees). Just know that it will be possible to update the Operator fees later, [with limitations imposed by the protocol, to protect stakers](../update-fee), for a guide on how to do that, head over to [the dedicated page](./updating-operator-fees).
+For more information about fees, please [head over to the related page](../../learn/protocol-overview/tokenomics/fees). Just know that it will be possible to update the Operator fees later, [with limitations imposed by the protocol, to protect stakers](/operators/operator-onboarding/update-fee), for a guide on how to do that, head over to [the dedicated page](/operators/operator-management/updating-operator-fees).
 
 Enter a number and click _Next_ when ready.
 
