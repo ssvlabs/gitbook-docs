@@ -68,7 +68,7 @@ Despite being rate limited, this endpoint should be sufficient for every develop
 
 In order to use it, you would need to know exactly the query you want to perform, and then perform a `POST` request to the provided endpoint.
 
-Furthermore, a simple project aimed at providing an example of how to use the subgraph to substitute the [`ssv-scanner`](../ssv-scanner/cluster-scanner-cli) tool can be found in this repository: [SSV Scanner Demo Repository](https://github.com/raekwonIII/ssv-scanner-demo)
+Furthermore, a simple project aimed at providing an example of how to use the subgraph to substitute the [`ssv-scanner`](/developers/tools/ssv-scanner) tool can be found in this repository: [SSV Scanner Demo Repository](https://github.com/raekwonIII/ssv-scanner-demo)
 
 ### Production API
 

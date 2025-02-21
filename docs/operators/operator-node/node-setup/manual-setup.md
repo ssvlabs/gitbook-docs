@@ -79,7 +79,7 @@ For more information, you can refer to the [official Go installation instruction
 
 </details>
 
-Once you're connected and have the command line opened, the next steps describe how to configure and run the SSV Node to create keys and start your SSV Node. If you run into some issues while running the node, try and [take a look at the troubleshooting page](./maintenance/troubleshooting.md).
+Once you're connected and have the command line opened, the next steps describe how to configure and run the SSV Node to create keys and start your SSV Node. If you run into some issues while running the node, try and [take a look at the troubleshooting page](/operators/operator-node/maintenance/troubleshooting).
 
 ### Generate Operator Keys (Encrypted)
 
@@ -292,7 +292,7 @@ This does not increase validator resiliency and **could lead to validator slashi
   
   As a small note, this compiled binary could be used to launch the binary [as a `systemd` service](https://manpages.ubuntu.com/manpages/focal/en/man5/systemd.service.5.html), for example.
   :::info
-  Pay close attention to the `pubKey` field, as the name says, it contains the public key, which is needed to [register the Operator on the ssv.network](../operator-management/registration.md).
+  Pay close attention to the `pubKey` field, as the name says, it contains the public key, which is needed to [register the Operator on the ssv.network](/operators/operator-management/registration).
   :::
 
   :::danger
@@ -303,7 +303,7 @@ This does not increase validator resiliency and **could lead to validator slashi
 
 ### Peer-to-peer ports configuration and firewall
 
-When you set up your firewall on your SSV node machine, make sure to expose the ports that you set in the [container creation command](./installation). The defaults are **12001 UDP** and **13001 TCP** additional ones are **15000 TCP** for Metrics and **16000 TCP** for Health endpoint.
+When you set up your firewall on your SSV node machine, make sure to expose the ports that you set in the [container creation command](/operators/operator-node/node-setup/). The defaults are **12001 UDP** and **13001 TCP** additional ones are **15000 TCP** for Metrics and **16000 TCP** for Health endpoint.
 
 If you don't want to use the default ports, they can be changed in your `config.yaml` file. Be aware, the **must be changed on the container creation command as well** (simply changing the host port mappings on the Docker command isn't enough!).
 

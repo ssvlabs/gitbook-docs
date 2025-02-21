@@ -160,7 +160,7 @@ Description: Returns the outstanding SSV balance of a cluster.
 |-----------|------|-------------|
 | owner | address | The cluster owner address |
 | operatorIds | uint64[] | List of cluster operators Ids |
-| cluster | tuple[] | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](../tools/cluster-scanner.md) tool |
+| cluster | tuple[] | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](/developers/tools/ssv-scanner) tool |
 
 Return values:
 
@@ -176,7 +176,7 @@ Description: Returns current ongoing expenses of SSV tokens for a particular SSV
 | ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
 | owner         | address   | The user address                                                                                                         |
 | operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                           |
-| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](../tools/cluster-scanner.md) tool. |
+| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](/developers/tools/ssv-scanner) tool. |
 
 Return values
 
@@ -194,7 +194,7 @@ Description: Returns true if the specified cluster is under the liquidation thre
 | ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
 | owner         | address   | The user address                                                                                                         |
 | operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                           |
-| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](../tools/cluster-scanner.md) tool. |
+| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](/developers/tools/ssv-scanner) tool. |
 
 Return values
 
@@ -210,7 +210,7 @@ Description: Returns true if the provided cluster is liquidated.
 | ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
 | owner         | address   | The user address                                                                                                         |
 | operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                           |
-| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](../tools/cluster-scanner.md) tool. |
+| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](/developers/tools/ssv-scanner) tool. |
 
 Return values
 

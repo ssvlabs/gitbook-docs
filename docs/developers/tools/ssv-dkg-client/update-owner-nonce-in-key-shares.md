@@ -55,9 +55,9 @@ operatorsInfoPath: /data/initiator/operators_info.json
 proofsFilePath: ./output/ceremony-2024-11-18--16-04-55.529/proofs.json
 ```
 
-* For more information on the YAML file configuration, and how to provide it to the tool, [please refer to this section (Additional flag for generate-resign-msg)](dkg-tool-commands-and-configuration.md#additional-flags-for-generate-resign-msg-option). Make sure to add the `proofsFilePath` argument. Just remember that the path to the config file needs to be provided via the `--configPath` flag.
-* Alternatively, the tool can be launched as a binary executable. For more information, please [refer to the appropriate section of this page](dkg-tool-commands-and-configuration.md#executable-binary)
-* For the reference of command line flags, [please refer to this section (Additional flag for generate-resign-msg)](dkg-tool-commands-and-configuration.md#additional-flag-for-generate-resign-msg-option), instead. Remember to add the `proofsFilePath` argument.
+* For more information on the YAML file configuration, and how to provide it to the tool, [please refer to this section (Additional flag for generate-resign-msg)](/developers/tools/ssv-dkg-client/commands-and-config). Make sure to add the `proofsFilePath` argument. Just remember that the path to the config file needs to be provided via the `--configPath` flag.
+* Alternatively, the tool can be launched as a binary executable. For more information, please [refer to the appropriate section of this page](/developers/tools/ssv-dkg-client/commands-and-config)
+* For the reference of command line flags, [please refer to this section (Additional flag for generate-resign-msg)](/developers/tools/ssv-dkg-client/commands-and-config), instead. Remember to add the `proofsFilePath` argument.
 
 This generated message then needs to be signed by the wallet belonging to the `owner` address specified in the initial ceremony (which has to be the same as the one used during the reshare). This can be done [via etherscan](https://etherscan.io/verifiedSignatures), for example, in case of an EOA wallet. Since it is also possible for multi-sig wallets to be the `owner` address for validators, these will have to [provide a signature based on ERC-1271](https://eips.ethereum.org/EIPS/eip-1271).
 
@@ -94,8 +94,8 @@ proofsFilePath: ./output/ceremony-2024-11-18--16-04-55.529/proofs.json
 signatures: 0eb5bce8a1bf52f106233954b096504c934d08962003c41eff1a29e05ddeeebe34133dd66c7fa9512ae74d3124a9f60ee270f312c08c60512a5009ac9bca78911b
 ```
 
-* For more information on the YAML file configuration, and how to provide it to the tool, [please refer to this section (Additional flag for resign command)](dkg-tool-commands-and-configuration.md#additional-flags-for-resign-option). Make sure to add the `proofsFilePath` and `signatures` arguments. Just remember that the path to the config file needs to be provided via the `--configPath` flag.
-* Alternatively, the tool can be launched as a binary executable. For more information, please [refer to the appropriate section of this page](dkg-tool-commands-and-configuration.md#executable-binary)
-* For the reference of command line flags, [please refer to this section (Additional flag for resign command)](dkg-tool-commands-and-configuration.md#additional-flags-for-resign-commands), instead. Remember to add the `proofsFilePath` and `signatures` arguments.
+* For more information on the YAML file configuration, and how to provide it to the tool, [please refer to this section (Additional flag for resign command)](/developers/tools/ssv-dkg-client/commands-and-config). Make sure to add the `proofsFilePath` and `signatures` arguments. Just remember that the path to the config file needs to be provided via the `--configPath` flag.
+* Alternatively, the tool can be launched as a binary executable. For more information, please [refer to the appropriate section of this page](/developers/tools/ssv-dkg-client/commands-and-config)
+* For the reference of command line flags, [please refer to this section (Additional flag for resign command)](/developers/tools/ssv-dkg-client/commands-and-config), instead. Remember to add the `proofsFilePath` and `signatures` arguments.
 
 For more information about the output of a DKG ceremony, and what each file does, what you should use it for, please refer to the [Ceremony Output Summary page](ceremony-output-summary.md).
