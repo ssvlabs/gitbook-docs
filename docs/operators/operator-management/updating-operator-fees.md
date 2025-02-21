@@ -21,7 +21,7 @@ Then, on the _Operator Details_ screen, click on the _Update Fee_ button at the 
 
 ### Increasing Operator fee
 
-In the following screen you'll be asked to enter a new fee. Just pay attention: there are limits imposed by the protocol for incrementing the Operator fee, please read more about this in [the dedicated section](../update-fee).
+In the following screen you'll be asked to enter a new fee. Just pay attention: there are limits imposed by the protocol for incrementing the Operator fee, please read more about this in [the dedicated section](/operators/operator-onboarding/update-fee).
 
 ![update-fee](/img/update-operator-fees-3.avif)
 

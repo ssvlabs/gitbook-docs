@@ -61,7 +61,7 @@ The complete operator registry of the network and their corresponding **ids/keys
 
 To assign validator operation to the selected operators, the pool's validator(s) keys must be distributed into corresponding KeyShares.
 
-To do this, gather the **keystore files** you generated during the 1st step - "validator key generation" and the **operator ids & keys** fetched during the 2nd step - "pool operators selection". Then use the [SSV Key Distributor](../../tools/ssv-keys-distributor.md) tools to extract your validator's key and distribute them to KeyShares.
+To do this, gather the **keystore files** you generated during the 1st step - "validator key generation" and the **operator ids & keys** fetched during the 2nd step - "pool operators selection". Then use the [SSV Key Distributor](/developers/tools/ssv-keys) tools to extract your validator's key and distribute them to KeyShares.
 
 The tools will output the following set of variables which are required to store in your pool's validators registry for each of your validators during the 4th step - "validator registry setup":
 
@@ -84,7 +84,7 @@ For each of your future pool validators, you must store the following data:
 
 ### 5. Operational Balance Funding
 
-The pool manager contract must be funded with a sufficient ETH and SSV balance to cover its validators' **future** registration to the beacon chain (deposits) and operational costs on the ssv network (see [validator funding](../../../learn/stakers/validators/validator-onboarding.md#\_kumpogh364aq)).
+The pool manager contract must be funded with a sufficient ETH and SSV balance to cover its validators' **future** registration to the beacon chain (deposits) and operational costs on the ssv network (see [validator funding](/stakers/validators/validator-onboarding)).
 
 With each validator activation (outlined below during the [operation stage](operation-stage.md)), a portion of these funds will be deposited to cover its expenses.
 

@@ -21,7 +21,7 @@ As explained in the documentation page related to [Payments](../../learn/protoco
 * Operator fees
 * Number of validators
 
-And to keep track of their changes over time, the concept of [Indexes](../../learn/protocol-overview/tokenomics/payments.md#indexes) have been introduced. This, in turn, means that indexes for network fees and operator fees are necessary to calculate the cluster balance, as well as [the "snapshot" of the cluster status](../../build/tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot), taken the last time this was updated (the cluster snapshot is also used in smart contract transactions).
+And to keep track of their changes over time, the concept of [Indexes](../../learn/protocol-overview/tokenomics/payments.md#indexes) have been introduced. This, in turn, means that indexes for network fees and operator fees are necessary to calculate the cluster balance, as well as [the "snapshot" of the cluster status](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), taken the last time this was updated (the cluster snapshot is also used in smart contract transactions).
 
 #### Cluster balance
 
@@ -74,9 +74,9 @@ Legend (n represents the nth operator in this cluster):
 * $$of_n$$ - The current operator fee for the nth operator
 * $$ofi_c$$ - Cluster Index, the latest index for the given cluster
 
-Have a look at how to collect the necessary data to calculate the balance on the [Subgraph Examples page](../../build/tools/ssv-subgraph/subgraph-examples.md#cluster-balance-values).
+Have a look at how to collect the necessary data to calculate the balance on the [Subgraph Examples page](/developers/tools/ssv-subgraph/subgraph-examples#cluster-balance-values).
 
-A programmatic example of calculating the cluster balance has been added to the [Code examples](../../build/code-examples-and-snippets/cluster-balance-script.md) section.
+A programmatic example of calculating the cluster balance has been added to the [SSV SDK](/developers/SSV-SDK/module-reference/api-module#getclusterbalanceclusterid-daoaddress-operatorids).
 
 ### Operational Runway
 

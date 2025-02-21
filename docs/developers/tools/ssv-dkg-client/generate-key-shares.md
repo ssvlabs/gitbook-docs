@@ -42,8 +42,8 @@ network: "holesky"
 operatorsInfoPath: /data/initiator/operators_info.json
 ```
 
-* For more information on the YAML file configuration, and how to provide it to the tool, [please refer to this section](dkg-tool-commands-and-configuration.md#yaml-configuration-file). Just remember that the path to the config file needs to be provided via the `--configPath` flag
-* Alternatively, the tool can be launched as a binary executable. For more information, please [refer to the appropriate section of this page](dkg-tool-commands-and-configuration.md#command-line-flags)
-* For the reference of command line flags, [please refer to this section](dkg-tool-commands-and-configuration.md#command-line-flags), instead
+* For more information on the YAML file configuration, and how to provide it to the tool, [please refer to this section](/developers/tools/ssv-dkg-client/commands-and-config). Just remember that the path to the config file needs to be provided via the `--configPath` flag
+* Alternatively, the tool can be launched as a binary executable. For more information, please [refer to the appropriate section of this page](/developers/tools/ssv-dkg-client/commands-and-config)
+* For the reference of command line flags, [please refer to this section](/developers/tools/ssv-dkg-client/commands-and-config), instead
 
 For more information about the output of a DKG ceremony, and what each file does, what you should use it for, please refer to the [Ceremony Output Summary page](ceremony-output-summary.md).

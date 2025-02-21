@@ -7,7 +7,7 @@ sidebar_position: 2
 
 The SSV token is used as as the payment layer of the network and the cluster balance is necessary to reward its operators.
 
-For more information on this topic, please refer to [the dedicated learning page](../../learn/stakers/clusters/cluster-balance.md).
+For more information on this topic, please refer to [the dedicated learning page](/stakers/clusters/cluster-balance).
 
 Make sure to connect your Web3 wallet with the WebApp, and that the address corresponds with the one you want to manage your Validators with.
 

@@ -42,7 +42,7 @@ In the following screen, select the validators you want to remove from ssv.netwo
 The following screen alerts you of the implications of removing the validator from the cluster.
 
 :::warning
-This will cause the validator to go offline. It is advised to have an alternative validator setup ready to continue operating outside ssv.network, [as explained here](../../learn/stakers/validators/validator-offboarding.md).
+This will cause the validator to go offline. It is advised to have an alternative validator setup ready to continue operating outside ssv.network, [as explained here](/stakers/validators/validator-offboarding).
 
 Removing the validator is **NOT** reversible, the validator will have to be registered anew on the ssv.network, should you intend to join again.
 
