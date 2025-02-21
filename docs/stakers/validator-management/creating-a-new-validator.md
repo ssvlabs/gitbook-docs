@@ -6,7 +6,7 @@ sidebar_position: 1
 # Creating a new validator
 
 :::info
-Note: Instead of creating a validator key pair and then distribute that into Key Shares, you can run a Distributed Key Generation ceremony, thanks to the [SSV DKG Client](../../build/tools/dkg-client/).
+Note: Instead of creating a validator key pair and then distribute that into Key Shares, you can run a Distributed Key Generation ceremony, thanks to the [SSV DKG Client](/developers/tools/ssv-dkg-client/).
 :::
 
 This guide shows how to create a new set of validator keys for the Holesky testnet. For Ethereum mainnet, simply change Launchpad configuration from the page's dropdown menu, and refer to this [Deposit Contract](https://etherscan.io/address/0x00000000219ab540356cBB839Cbe05303d7705Fa) on mainnet, instead.

@@ -8,7 +8,7 @@ Distributed validators are managed within Clusters - the group of operators that
 
 To run a validator through the SSV network, a user must distribute their validator key to their selected cluster and register it to the network’s smart contract.
 
-This can be done via the [web app ](https://app.ssv.network/)interface or through the smart contracts and developer tools (see [get started](../../../build/) guide).
+This can be done via the [web app ](https://app.ssv.network/)interface or through the smart contracts and developer tools (see [get started](/developers/) guide).
 
 #### Operators Selection <a href="#_jm9n7m464k0" id="_jm9n7m464k0"></a>
 
@@ -31,7 +31,7 @@ Stakers have the freedom to select and customize the group of operators that wil
 
 Factors to consider in cluster formation:
 
-* **Reputation** - ssv.network is permissionless network that is open to anyone to join as an operator. Operators can range from professional companies with proven experience in node operations all the way to home operators who are running their own infrastructure. The DAO maintains a curated-list of operators called “[Verified Operators](../../operators/verified-operators.md)” to help stakers distinguish between them.
+* **Reputation** - ssv.network is permissionless network that is open to anyone to join as an operator. Operators can range from professional companies with proven experience in node operations all the way to home operators who are running their own infrastructure. The DAO maintains a curated-list of operators called “[Verified Operators](/operators/operator-onboarding/verified-operators)” to help stakers distinguish between them.
 * **Performance** -  current and historical [performance](../../learn/performance/) of operators is a great indicator of operators reliability. Stakers can track operators performance through the ssv.network’s [explorer](http://explorer.ssv.network) to evaluate operators track record and to consistently monitor their validators.
 * **Diversification** - diversity of the cluster's tech stack enhances resilience to individual hardware and software failures, allowing distributed validators to remain operational even if a component fails. To mitigate single point of failures, a staker should strive to have operator diversification across various aspects such as execution and consensus clients, cloud providers, and geolocation.
 * **MEV** - every time a validator is assigned a block proposal, one operator within its cluster is selected to lead the proposal of the block. Given that MEV-enabled blocks are broadcasted through relays, only operators supporting the relay chosen by the leader can broadcast it to the network. Therefore, it is in stakers best interest to form their validator cluster with operators that has greater correlation in the relays they support:

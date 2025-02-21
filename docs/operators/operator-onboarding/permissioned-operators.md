@@ -10,7 +10,7 @@ sidebar_position: 5
 Permissioned Operators (also known as "Private") are Operators that have selected to authorize only a list of wallet addresses to register validators to them. There are multiple reasons why an Operator would want this, and various reasons why they would **not** want to choose this option, and why this disabled by default.
 
 :::tip New feature
-The latest version of the SSVNetworks smart contract adds the ability to set multiple whitelisted addresses to multiple operators in bulk. Information on how to do this via the webapp can be found [here](./operator-management/configuring-a-permissioned-operator).
+The latest version of the SSVNetworks smart contract adds the ability to set multiple whitelisted addresses to multiple operators in bulk. Information on how to do this via the webapp can be found [here](/operators/operator-management/configuring-a-permissioned-operator).
 :::
 
 #### How to identify Permissioned Operators
@@ -52,7 +52,7 @@ In practical terms, this means renouncing the potential profits from public cust
 
 The **`setOperatorMultipleWhitelists`** smart contract function allows to whitelist a set of addresses to a number of different with the permission to register validators to the specified operators.
 
-Conveniently, [the ssv.network WebApp](https://app.ssv.network/) offers a way to interact with the smart contract through a UI, and you can get guidance on the process [on this page in this documentation](../../operator-user-guides/operator-management/configuring-a-permissioned-operator.md).
+Conveniently, [the ssv.network WebApp](https://app.ssv.network/) offers a way to interact with the smart contract through a UI, and you can get guidance on the process [on this page in this documentation](/operators/operator-management/configuring-a-permissioned-operator).
 
 :::info
 It's important to note that configuring Permissioned Operator only affects **future validator registrations**.

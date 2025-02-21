@@ -8,7 +8,7 @@ unlisted: true
 
 # BasedAppMiddleware
 
-Services that want to [integrate with SSV's Based Application framework](../based-application-depvelopment/#1-configuring-and-registering-the-bapp) need to develop a smart contract for the services' task that are going to be handled by operators, and register it. To work correctly with the [Based Application Manager contract](../smart-contracts/BasedAppManager.md), this must meet certain specifications.
+Services that want to [integrate with SSV's Based Application framework](/based-applications/developers/) need to develop a smart contract for the services' task that are going to be handled by operators, and register it. To work correctly with the [Based Application Manager contract](../smart-contracts/BasedAppManager.md), this must meet certain specifications.
 
 ## What is a valid `BAppMiddleware` Contract?
 

@@ -55,9 +55,9 @@ proofsFilePath: ./output/ceremony-2024-11-18--16-04-55.529/proofs.json
 newOperatorIDs: [5, 6, 7, 8]
 ```
 
-* For more information on the YAML configuration file, and how to provide it to the tool, [please refer to this section (Additional flag for generate-reshare-msg)](dkg-tool-commands-and-configuration.md#additional-flags-for-generate-reshare-msg-option). Make sure to add the `proofsFilePath` parameter to the YAML configuration file&#x20;
-* Alternatively, the tool can be launched as a binary executable. For more information, please [refer to the appropriate section of this page](dkg-tool-commands-and-configuration.md#executable-binary)
-* For the reference of command line flags, [please refer to this section (Additional flag for generate-reshare-msg)](dkg-tool-commands-and-configuration.md#additional-flag-for-generate-reshare-msg-option), instead. Remember to add the `proofsFilePath` flag.
+* For more information on the YAML configuration file, and how to provide it to the tool, [please refer to this section (Additional flag for generate-reshare-msg)](/developers/tools/ssv-dkg-client/commands-and-config). Make sure to add the `proofsFilePath` parameter to the YAML configuration file&#x20;
+* Alternatively, the tool can be launched as a binary executable. For more information, please [refer to the appropriate section of this page](/developers/tools/ssv-dkg-client/commands-and-config)
+* For the reference of command line flags, [please refer to this section (Additional flag for generate-reshare-msg)](/developers/tools/ssv-dkg-client/commands-and-config), instead. Remember to add the `proofsFilePath` flag.
 
 This generated message then needs to be signed by the wallet belonging to the `owner` address specified in the initial ceremony (which has to be the same as the one used during the reshare). This can be done [via etherscan](https://etherscan.io/verifiedSignatures), for example, in case of an EOA wallet. Since it is also possible for multi-sig wallets to be the `owner` address for validators, these will have to [provide a signature based on ERC-1271](https://eips.ethereum.org/EIPS/eip-1271).
 
@@ -96,8 +96,8 @@ newOperatorIDs: [5, 6, 7, 8]
 signatures: 111886aa25a07bbd9cb64e50e3237f98a6ecabad6f448bc9c4736ccebcacb45c56ecac273b076a5d0b1f19619bf808741dff2d8019c728e16a953d3a0b5ff4771b
 ```
 
-* For more information on the YAML file configuration, and how to provide it to the tool, [please refer to this section (Additional flag for reshare command)](dkg-tool-commands-and-configuration.md#additional-flags-for-reshare-option).&#x20;
-* Alternatively, the tool can be launched as a binary executable. For more information, please [refer to the appropriate section of this page](dkg-tool-commands-and-configuration.md#executable-binary)
-* For the reference of command line flags, [please refer to this section (Additional flag for reshare command)](dkg-tool-commands-and-configuration.md#additional-flags-for-reshare-commands), instead.
+* For more information on the YAML file configuration, and how to provide it to the tool, [please refer to this section (Additional flag for reshare command)](/developers/tools/ssv-dkg-client/commands-and-config).&#x20;
+* Alternatively, the tool can be launched as a binary executable. For more information, please [refer to the appropriate section of this page](/developers/tools/ssv-dkg-client/commands-and-config)
+* For the reference of command line flags, [please refer to this section (Additional flag for reshare command)](/developers/tools/ssv-dkg-client/commands-and-config), instead.
 
 For more information about the output of a DKG ceremony, and what each file does, what you should use it for, please refer to the [Ceremony Output Summary page](ceremony-output-summary.md).
