@@ -1,7 +1,7 @@
 ---
 title: BA SDK
 sidebar_label: BA SDK
-sidebar_position: 1
+sidebar_position: 3
 ---
 
 :::warning
