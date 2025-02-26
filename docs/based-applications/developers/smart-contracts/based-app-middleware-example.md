@@ -4,51 +4,49 @@ sidebar_position: 2
 unlisted: true
 ---
 
-# :warning: PAGE UNDER CONSTRUCTION :warning:
-
 # BasedAppMiddleware
 
 Services that want to [integrate with SSV's Based Application framework](/based-applications/developers/) need to develop a smart contract for the services' task that are going to be handled by operators, and register it. To work correctly with the [Based Application Manager contract](../smart-contracts/BasedAppManager.md), this must meet certain specifications.
 
 ## What is a valid `BAppMiddleware` Contract?
 
- To be used in the context of the Based Application Manager, services need to develop a smart contract that implements a specific interface, called [`IBAppMiddleware`](https://www.google.com).
-
-<!-- The operators can choose to whitelist an external contract with custom logic to manage authorized addresses externally. To be used in SSV contracts, it needs to implement the [ISSVWhitelistingContract](https://github.com/ssvlabs/ssv-network/blob/v1.2.0/contracts/interfaces/external/ISSVWhitelistingContract.sol) interface, that requires to implement the `isWhitelisted(address account, uint256 operatorId)` function. This function is called in the register validator process, that must return `true/false` to indicate if the caller (`msg.sender`) is whitelisted for the operator.
-
-To check if a contract is a valid whitelisting contract, use the function in the [SSVNetworkViews](ssvnetworkviews.md) contract: [`isWhitelistingContract()`](ssvnetworkviews.md#iswhitelistingcontractcontractaddress)
-
-To check if an account is whitelisted in a whitelisting contract, use the function in the [SSVNetworkViews](ssvnetworkviews.md) contract: [`isAddressWhitelistedInWhitelistingContract()`](ssvnetworkviews.md#isaddresswhitelistedinwhitelistingcontractaddresstocheck-operatorid-whitelistingcontract) -->
+ To be used in the context of the Based Application Manager, services need to develop a smart contract that implements a specific interface, called `IBAppMiddleware`.
 
 ## Example contract
 
+In this example contract we inherit both `BasedAppCore` and `BasedAppWhitelisted`.
 
 ```javascript
-// SPDX-License-Identifier: GPL-3.0-or-later pragma solidity 0.8.24;
-import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
-interface ISSVWhitelistingContract { 
-    /// @notice Checks if the caller is whitelisted 
-    /// @param account The account that is being checked for whitelisting 
-    /// @param operatorId The SSV Operator Id which is being checked function
-    isWhitelisted(address account, uint256 operatorId) external view returns (bool); 
-}
-contract WhitelistingContract is ISSVWhitelistingContract, ERC165 {
-    mapping(address => bool) public whitelisted;
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity 0.8.28;
 
-    function setWhitelistedAddress(address account) external {
-        whitelisted[account] = true;
+import {BasedAppCore} from "@ssv/src/middleware/modules/core/BasedAppCore.sol";
+import {BasedAppWhitelisted} from "@ssv/src/middleware/modules/BasedAppWhitelisted.sol";
+
+contract WhitelistExample is BasedAppCore, BasedAppWhitelisted {
+    constructor(address _basedAppManager, address owner) BasedAppCore(_basedAppManager, owner) {
+        isWhitelisted[owner] = true;
     }
-    
-    function removeWhitelistedAddress(address account) external {
-        whitelisted[account] = false;
+
+    function addWhitelisted(address account) external override onlyOwner {
+        if (isWhitelisted[account]) revert AlreadyWhitelisted();
+        if (account == address(0)) revert ZeroAddress();
+        isWhitelisted[account] = true;
     }
-    
-    function isWhitelisted(address account, uint256) external view override returns (bool) {
-        return whitelisted[account];
+
+    function removeWhitelisted(address account) external override onlyOwner {
+        if (!isWhitelisted[account]) revert NotWhitelisted();
+        delete isWhitelisted[account];
     }
-    
-    function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
-        return interfaceId == type(ISSVWhitelistingContract).interfaceId || super.supportsInterface(interfaceId);
+
+    function optInToBApp(
+        uint32, /*strategyId*/
+        address[] calldata, /*tokens*/
+        uint32[] calldata, /*obligationPercentages*/
+        bytes calldata /*data*/
+    ) external view override onlySSVBasedAppManager returns (bool success) {
+        if (!isWhitelisted[msg.sender]) revert NonWhitelistedCaller();
+        return true;
     }
 }
 ```
