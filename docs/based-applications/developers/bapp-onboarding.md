@@ -6,12 +6,17 @@ sidebar_position: 2
 
 # Based Application Onboarding
 
-This guide outlines the steps for based applications developers looking to build on the Based Applications platform. Below is a diagram that summarizes the Based Applications development flow.
+This guide outlines the steps for based applications developers looking to build on the Based Applications platform. Below is a diagram that summarizes the full Based Applications development flow.
 
-1. Configuring and Registering the bApp
-2. 
+1. Create and Register the bApp
+2. Create a strategy
+3. Opt-in Strategies to the bApp
+4. Strategy is secured by token deposits or validator balance delegation
 
-![Based Application Development Flow](/img/based-apps-developer-flow.png)
+<div className="theme-code-block">
+  <img src="/img/bapp-onboarding-light.png" className="light-mode-only" alt="bApp Flow Light Mode" />
+  <img src="/img/bapp-onboarding-dark.png" className="dark-mode-only" alt="bApp Flow Dark Mode" />
+</div>
 <!-- ## 0. Developing a Based Application Middleware smart contract
 
 The `BAppManager` smart contract developed by SSV Labs accepts registrations of BApps that implement a specific interface. This is outlined [in this dedicated page](./smart-contracts/based-app-middleware-example.md), that also provides a simple example. -->
@@ -40,7 +45,15 @@ function registerBApp(
 
 Once the bApp is registered, `Strategies` can join it and allocate capital to secure it.
 
-TODO more description on this step
+Strategies can be registered by using the [`createStrategy`](./smart-contracts/BasedAppManager#createstrategyfee-metadatauri) function of the smart contract:
+```javascript
+function createStrategy(
+   uint256 fee,
+   string calldata metadataURI
+)
+```
+- `fee`: The fee to be paid to the operator for participating in the bApp.
+- `metadataURI`: A JSON object containing additional details about the strategy, such as its name, description, logo, and website.
 
 ## 3 Opting in
 
@@ -74,3 +87,5 @@ Based Application managers need to track the weight of each participant (strateg
 
 1. Collecting risk-adjusted strategy weights for each token
 2. Combining such weights into a strategy weight, for each strategy
+
+To see the process of how this is used in practice, please refer to the [example on the Get Started](./get-started.md) page.
