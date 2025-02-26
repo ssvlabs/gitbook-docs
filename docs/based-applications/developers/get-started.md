@@ -15,32 +15,23 @@ In Based Applications, the obligated token balance and delegated validator balan
 
 The vote calculation follows this flow chart:
 
-![Vote Calculation Flow Chart]
+![Vote Calculation Flow Chart](../../../static/img/example-flow-chart.png)
 
 - Collect strategies opted-in to the bapp
 - Collect total validator balance delegated to all opted-in strategy owners
-- Use configuration for the "significance" of tokens and validator balance
+- collect total obligated token balances
+- Get "significance" of tokens and validator balance from config
 - Calculate risk-adjusted weights for each token, for each strategy
 - Normalize the obtained weights
 - Combine strategy-token weights into a final weight for each strategy
-- Simulate how the strategies would collaborate and agree on a simple example task (next block slot)
 
-## On-chain vs Off-chain
+## BApp client(s)
 
-The initial execution and follow-up validation of a task is done on-chain. This is to ensure that the task is valid and that the outcome is correct.
+Operators will run a client which is specific to the bApp they have opted into. Such client should implement the steps described above, and use the strategy weights as voting power, however they see fit. The example we provide shows two separate strategies completing the task independently, then voting on the result, and ensuring a consensus (majority vote) is reached.
 
-Operators will run a client which is specific to the bApp they have opted into. This client will be responsible for listening for tasks to complete, and submitting the result of the task once it is completed.
+Different Based Applications may have different needs, and as such, the steps described below may vary. Tasks on bApps can be triggered in a variety of ways depending on the bApp; the bApp client could even be based on scheduling, or off-chain conditions.
 
-
-## Executing Tasks 
-
-Tasks on bApps can be triggered by a variety of methods depending on the bApp. This action of a user requesting a task is the first step in the process.
-
-When the task is requested, the operators which secure this bApp will get to work on completing it.
-
-After they have completed the task, they will broadcast their vote on what they believe to be the correct outcome.
-
-Once enough of the participants (strategies) have broadcasted their vote on the outcome of the task to make up a majority, and the participants come to a consensus on the correct outcome, the task will be verified as complete.
+The innovation represented by SSV's Based Applications, is that when a client has completed its execution, it will use the strategy weight to "vote" for its own result, and this will represent the risk-adjusted value of the sum of slashable and non-slashable capital attached to the strategy itself.
 
 ### Example
 
@@ -51,15 +42,20 @@ The executable example for what is described below can be found [in this reposit
 In the example for this bApp, it has been built with one task, the task is to return the most recent slot number.
 
 Example flow:
-- User requests the task on the bApp to obtain the slot number
+- User requests the task on the bApp to obtain the slot number (by simply launching the application)
+- The example app will proceed to calculate the strategies' weight as explained above
 - Operators will get to work on executing the task
 - Operators will retrieve the slot number
-- `Strategy 4` will vote to complete the task returning slot number 11139593 
+- `Strategy 4` will vote to complete the task returning slot number 11139593
 - `Strategy 4` only has 13.54% of the total weight, so it will not be enough to complete the task. 
 - Now that there is no majority, the task will not be verified as complete, we must wait for more votes to be broadcasted.
 - `Strategy 5` will also vote to complete the task returning slot number 11139593
 - `Strategy 5` has 86.46% of the total weight, so it will be enough to complete the task.
 - There is now a majority of 100% of the total weight, so the task will be verified as complete.
+
+Example flow chart:
+
+![Simple Block Agreement Example Flow Chart](../../../static/img/simulated-flow.png)
 
 Output from the example bApp:
 
