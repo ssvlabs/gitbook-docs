@@ -13,10 +13,12 @@ This guide outlines the steps for based applications developers looking to build
 3. Opt-in Strategies to the bApp
 4. Strategy is secured by token deposits or validator balance delegation
 
-<div className="theme-code-block">
-  <img src="/img/bapp-onboarding-light.png" className="light-mode-only" alt="bApp Flow Light Mode" />
-  <img src="/img/bapp-onboarding-dark.png" className="dark-mode-only" alt="bApp Flow Dark Mode" />
-</div>
+![bApp Flow](../../../static/img/bapp-onboarding-dark.png)
+
+<!-- <div className="theme-code-block">
+  <img src="../../../static/img/bapp-onboarding-light.png" className="light-mode-only" alt="bApp Flow Light Mode" />
+  <img src="../../../static/img/bapp-onboarding-dark.png" className="dark-mode-only" alt="bApp Flow Dark Mode" />
+</div> -->
 <!-- ## 0. Developing a Based Application Middleware smart contract
 
 The `BAppManager` smart contract developed by SSV Labs accepts registrations of BApps that implement a specific interface. This is outlined [in this dedicated page](./smart-contracts/based-app-middleware-example.md), that also provides a simple example. -->
