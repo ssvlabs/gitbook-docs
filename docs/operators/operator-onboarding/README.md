@@ -10,7 +10,7 @@ To join the network as an operator a user must run an SSV node.
 
 This is software containing the SSV protocol implementation and integration to the network's smart contracts.
 
-This can be done by installing the [node software](../operator-node/running-a-node) on a machine followed by registering the operator either through the [smart contract](../build/smart-contracts/ssvnetwork#registeroperatorpublickey-operatorfee-setprivate) or [webapp](https://app.ssv.network/) interface.
+This can be done by installing the [node software](/operators/operator-node/) on a machine followed by registering the operator either through the [smart contract](/developers/smart-contracts/ssvnetwork#registeroperatorpublickey-operatorfee-setprivate) or [webapp](https://app.ssv.network/) interface.
 
 ### Operator Fee
 

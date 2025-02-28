@@ -197,6 +197,6 @@ You might want to [configure MEV](configuring-mev) to increase your rewards for 
 
 You can [enable DKG node](enabling-dkg) to increase your chances of being included in a cluster.
 
-You might want to learn [how to use your Monitoring stack](monitoring), to stay on top of your performance.
+You might want to learn [how to use your Monitoring stack](/operators/operator-node/monitoring/), to stay on top of your performance.
 
-If you run into some issues while running the node, try and [take a look at the troubleshooting page](maintenance/troubleshooting).
+If you run into some issues while running the node, try and [take a look at the troubleshooting page](/operators/operator-node/maintenance/troubleshooting).

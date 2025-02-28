@@ -13,7 +13,7 @@ The SSV Keys SDK enable users to split a validator key into a predefined thresho
 
 In addition to the generation of shares, the tool also uses the validator key to sign the validator’s owner address and his registration nonce to ensure that only the legitimate owner of the validator can register it to the network.
 
-The shares and the signature are constructed as **sharesData** which is used during [validator registration](../../smart-contracts/ssvnetwork) through the SSV smart contract in order to facilitate their distribution from stakers to operators.
+The shares and the signature are constructed as **sharesData** which is used during [validator registration](/developers/smart-contracts/ssvnetwork) through the SSV smart contract in order to facilitate their distribution from stakers to operators.
 
 :::info
 Please note that **shares** can be shared publicly since only assigned operators are able to decrypt them.
@@ -50,7 +50,7 @@ Using the `ssv-keys` SDK can be simply summarized in 3 steps:
 :::info
 A requirement for splitting the keys of a validator, is to know the validator key owner's nonce (how many times this address has callded the registerValidator() function of the SSV contract) and their address.
 
-These can be obtained via the [SSV SDK](../SSV-SDK/examples/api-calls/#get-nonce), or the [SSV Subgraph](./ssv-subgraph/subgraph-examples/#account-nonce).
+These can be obtained via the [SSV SDK](/developers/SSV-SDK/module-reference/api-module#getownernoncestring-account_address), or the [SSV Subgraph](./ssv-subgraph/subgraph-examples/#account-nonce).
 :::
 
 ## Example
