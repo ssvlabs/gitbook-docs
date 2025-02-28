@@ -3,7 +3,14 @@ sidebar_label: 'Participant Weight Example'
 sidebar_position: 3
 ---
 
-# Participant Weight Script
+# Participant Weight Example
+
+Based Application managers need to track the weight of each participant (strategy) in the bApp itself. This process entails two separate steps:
+
+1. Collecting risk-adjusted strategy weights for each token
+2. Combining such weights into a strategy weight, for each strategy
+
+To see the process of how this is used in practice, please refer to the [example on the Get Started](../../get-started) page.
 
 ### Risk-adjusted strategy-token weights
 
@@ -68,7 +75,7 @@ In this example, strategy number `2` has a risk-adjusted weight of `~0.07` for t
 
 Strategy number `10`, has a much bigger risk-adjusted weight of `~0.93` for specified token, but it has a validator balance weight of `0.3`.
 
-For more information on how these risk-adjusted strategy-token weights are calculated, [please visit this page](../learn/based-applications/strategy-weights.md).
+For more information on how these risk-adjusted strategy-token weights are calculated, [please visit this page](../learn/based-applications/strategy-weights).
 
 ### Final weight
 
