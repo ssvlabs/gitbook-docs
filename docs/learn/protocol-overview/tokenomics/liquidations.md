@@ -39,11 +39,11 @@ Liquidated clusters will no longer be managed by operators and will become inact
 
 ### Minimum Liquidation Collateral
 
-This is a fixed constant, set by the SSV DAO and accessible through the [SSV Network Views smart contract](../../../build/smart-contracts/ssvnetworkviews.md#getminimumliquidationcollateral) or via the [Subgraph](../../../build/tools/ssv-subgraph/subgraph-examples.md#dao-constants-and-protocol-network-fee-index).
+This is a fixed constant, set by the SSV DAO and accessible through the [SSV Network Views smart contract](/developers/smart-contracts/ssvnetworkviews#getminimumliquidationcollateral) or via the [Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#dao-constants-and-protocol-network-fee-index).
 
 ### **Liquidation Threshold Period**
 
-This is another fixed constant, set by the SSV DAO and accessible through the [SSV Network Views smart contract](../../../build/smart-contracts/ssvnetworkviews.md#getliquidationthresholdperiod-) or via the [Subgraph](../../../build/tools/ssv-subgraph/subgraph-examples.md#dao-constants-and-protocol-network-fee-index). This can be defined as:
+This is another fixed constant, set by the SSV DAO and accessible through the [SSV Network Views smart contract](/developers/smart-contracts/ssvnetworkviews#getliquidationthresholdperiod-) or via the [Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#dao-constants-and-protocol-network-fee-index). This can be defined as:
 
 > The minimum period (in blocks) for a cluster to maintain sufficient balance before they can be liquidated
 

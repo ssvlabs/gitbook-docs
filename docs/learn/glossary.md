@@ -71,7 +71,7 @@ Tying it all together, the consensus layer of SSV is based on the Istanbul Byzan
 
 ### KeyShare
 
-Using [Distributed Key Generation](../../../build/tools/dkg-client/), the SSV protocol encrypts and splits a validator key into multiple “KeyShares”. The KeyShares are then distributed to multiple non-trusting nodes, run by operators. This allows the key to be generated and then stored securely offline while the KeyShares that represent it actually run the validator.
+Using [Distributed Key Generation](/developers/tools/ssv-dkg-client/), the SSV protocol encrypts and splits a validator key into multiple “KeyShares”. The KeyShares are then distributed to multiple non-trusting nodes, run by operators. This allows the key to be generated and then stored securely offline while the KeyShares that represent it actually run the validator.
 
 ### Liquidation
 

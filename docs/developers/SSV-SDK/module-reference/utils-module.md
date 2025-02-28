@@ -162,7 +162,7 @@ Example output:
 
 ### `getClusterBalance()`
 
-Returns the[ balance of a cluster](../../../learn/stakers/clusters/cluster-balance.md).&#x20;
+Returns the[ balance of a cluster](/stakers/clusters/cluster-balance).&#x20;
 
 <table data-full-width="true"><thead><tr><th></th><th width="147"></th><th></th><th></th></tr></thead><tbody><tr><td>Input Parameter</td><td>Input Type </td><td>Description </td><td>Example Input </td></tr><tr><td>operatorIds</td><td>number[]</td><td>Operator ID array</td><td>[1,2,3,4]</td></tr></tbody></table>
 

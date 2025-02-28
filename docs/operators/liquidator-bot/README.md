@@ -5,7 +5,7 @@ sidebar_position: 9
 
 # Liquidator Bot
 
-The SSV Liquidator bot executes [liquidations](../../learn/protocol-overview/tokenomics/liquidations.md) on ssv.network [clusters](../../learn/stakers/clusters/) that do not hold enough balance to pay for their [operational fees](../../learn/protocol-overview/tokenomics/fees.md)
+The SSV Liquidator bot executes [liquidations](../../learn/protocol-overview/tokenomics/liquidations.md) on ssv.network [clusters](/stakers/clusters/) that do not hold enough balance to pay for their [operational fees](../../learn/protocol-overview/tokenomics/fees.md)
 
 The liquidator bot performs 2 main processes:
 

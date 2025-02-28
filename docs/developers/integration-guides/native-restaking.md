@@ -30,7 +30,7 @@ The smart contract address you will get at the end of the process will be respon
 
 Native Restaking is the process of pointing an Ethereum validator's [withdrawal credentials](https://notes.ethereum.org/@launchpad/withdrawals-faq#Q-What-are-withdrawals) to the user's [EigenPod](https://docs.eigenlayer.xyz/eigenlayer/restaking-guides/restaking-user-guide/native-restaking/create-eigenpod/). So in order to do that, you need to create a new validator.
 
-You can do that using [this guide in our documentation](../../validator-user-guides/validator-management/creating-a-new-validator.md), but the most important thing is to set the validator's withdrawal credentials to the EigenPod. So when [generating the validator keys](../../validator-user-guides/validator-management/creating-a-new-validator.md#generate-validator-keys) using this command:
+You can do that using [this guide in our documentation](/stakers/validator-management/creating-a-new-validator), but the most important thing is to set the validator's withdrawal credentials to the EigenPod. So when [generating the validator keys](/stakers/validator-management/creating-a-new-validator#generate-validator-keys) using this command:
 
 ```bash
 ./deposit new-mnemonic --num_validators 1  --chain mainnet  --eth1_withdrawal_address [YOUR_EIGENPOD_ADDRESS]
@@ -53,10 +53,10 @@ On the other hand, it appears that the trend for EigenLayer users at the moment 
 
 Thanks to ssv.network, it is not necessary to operate your own validator by setting up, running and managing dedicated hardware. You can simply register it on the network, and choose which operators will run validator operations for you.
 
-Follow [this guide in our documentation to register the new validator](../../validator-user-guides/validator-management/distributing-a-validator.md) with restaking capabilities on ssv.network, just like you would do with any other Ethereum validator.
+Follow [this guide in our documentation to register the new validator](/stakers/validator-management/distributing-a-validator) with restaking capabilities on ssv.network, just like you would do with any other Ethereum validator.
 
 :::info
 It is important to **NOT** direct execution rewards (`suggested_fee_recipient`) to the EigenPod as these funds would be irretrievable.
 
-For more information on this topic, please refer to [the dedicated learning page](../../learn/stakers/validators/validator-rewards.md).
+For more information on this topic, please refer to [the dedicated learning page](/stakers/validators/validator-rewards).
 :::
