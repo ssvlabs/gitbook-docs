@@ -7,7 +7,7 @@ sidebar_position: 5
 
 Make sure to connect your Web3 wallet with the WebApp, and that the address corresponds with the one you want to manage your Operators with.
 
-:::info
+:::info Note
 **Note:** Your account is associated with your Web3 wallet.
 :::
 
@@ -26,6 +26,10 @@ From the dropdown, choose the _Edit Details_ option.
 In the following screen, fill-in the form with the information you want to edit.
 
 Remember: the more details you can provide the better, as it will help stakers making informed decision when selecting operators to manage their validator clusters.
+
+:::warning Please note
+Currently, the `Description` part does not allow to use symbols `, . ; :`. Don't use the symbols to avoid errors when submitting the metadata.
+:::
 
 ![setting-operator-metadata](/img/set-operator-metadata-4.avif)
 When you are done, click the _Update_ button, the WebApp will ask you to provide a signature of a message.

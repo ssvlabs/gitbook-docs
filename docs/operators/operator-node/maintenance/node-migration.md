@@ -72,8 +72,8 @@ Operator keys are, essentially, the authentication method to identify an SSV nod
 
 The files in question are `encrypted_private_key.json` and `password` in the snippet above and if you have followed [the Manual Node setup guide](../node-setup/manual-setup), the filenames should be the same for you.
 
-#### Node database
+#### Node database (optional)
 
-This is a less known requirement for a node, and yet, something quite important. The node database persists information about duties performed and it's quite important to make sure it is backed up and copied over from the current setup.
+The node database persists information about duties performed. It can be synced from scratch within minutes, if you want to save time - you can back it up and move to the new machine too.
 
 The `data/db` folder in the snippet above represents such database. If you are unsure where to find it in your specific setup, please have a look at the `db.Path` parameter of the node configuration file, to understand where it is store (be mindful, if you are running the SSV node in Docker container, this path will be relative to the container itself, and any volumes mounted to it).
