@@ -1,6 +1,7 @@
 ---
 title: Based Application Subgraph
 sidebar_label: Based Application Subgraph
+sidebar_position: 4
 ---
 
 # Based Application Subgraph
