@@ -5,7 +5,7 @@ sidebar_position: 3
 
 # SSV Scanner SDK
 
-The SSV Scanner SDK enables users to retrieve events data from the SSV network [contract](https://docs.ssv.network/developers/smart-contracts).
+The SSV Scanner SDK enables users to retrieve events data from the SSV network [contract](/developers/smart-contracts/).
 
 The tool is used for retrieving **cluster snapshots** and **registration nonce** which are required as inputs for SSV tooling and smart contract transactions.
 
@@ -17,15 +17,15 @@ Clusters are unique to each account and are defined by the combination of the va
 
 Cluster snapshots are required for SSV contract transactions with cluster related functions which require the **cluster object** as input:
 
-* [registerValidator()](../smart-contracts/ssvnetwork.md#registervalidatorpublickey-operatorids-shares-amount-cluster)
-* [removeValidator()](../smart-contracts/ssvnetwork#removevalidatorpublickey-operatorids-cluster)
-* [deposit()](../smart-contracts/ssvnetwork.md#depositowner-operatorids-amount-cluster)
-* [withdraw()](../smart-contracts/ssvnetwork.md#withdrawoperatorids-amount-cluster)
-* [getBalance()](../smart-contracts/ssvnetworkviews.md#getbalance-owner-operatorids-cluster)
-* [reactivate()](../smart-contracts/ssvnetwork.md#reactivateoperatorids-amount-cluster)
-* [isLiquidated()](../smart-contracts/ssvnetworkviews.md#isliquidated-owner-operatorids-cluster)
-* [isLiquidatable()](../smart-contracts/ssvnetworkviews.md#isliquidatable-owner-operatorids-cluster)
-* [liquidate()](../smart-contracts/ssvnetwork.md#liquidateowner-operatorids-cluster)
+* [registerValidator()](/developers/smart-contracts/ssvnetwork.md#registervalidatorpublickey-operatorids-shares-amount-cluster)
+* [removeValidator()](/developers/smart-contracts/ssvnetwork#removevalidatorpublickey-operatorids-cluster)
+* [deposit()](/developers/smart-contracts/ssvnetwork.md#depositowner-operatorids-amount-cluster)
+* [withdraw()](/developers/smart-contracts/ssvnetwork.md#withdrawoperatorids-amount-cluster)
+* [getBalance()](/developers/smart-contracts/ssvnetworkviews.md#getbalance-owner-operatorids-cluster)
+* [reactivate()](/developers/smart-contracts/ssvnetwork.md#reactivateoperatorids-amount-cluster)
+* [isLiquidated()](/developers/smart-contracts/ssvnetworkviews.md#isliquidated-owner-operatorids-cluster)
+* [isLiquidatable()](/developers/smart-contracts/ssvnetworkviews.md#isliquidatable-owner-operatorids-cluster)
+* [liquidate()](/developers/smart-contracts/ssvnetwork.md#liquidateowner-operatorids-cluster)
 
 Cluster snapshots are updated after each transaction with a cluster related function, and will emit a new **cluster object** (the latest snapshot) which will be required for making the succeeding transaction.
 
@@ -41,7 +41,7 @@ The registration nonce is a sequence number that represents the number of valida
 
 The registration nonce increments after each validator registration and does not decrease when a validator is removed.
 
-The registration nonce is required as input for the [SSV Keys](../ssv-key-distributor/) tool, which outputs the **sharesData** payload required for the [validator registration](https://docs.ssv.network/developers/smart-contracts/ssvnetwork#registervalidatorpublickey-operatorids-shares-amount-cluster) transaction in the SSV contract.
+The registration nonce is required as input for the [SSV Keys](/developers/tools/ssv-keys) tool, which outputs the **sharesData** payload required for the [validator registration](https://docs.ssv.network/developers/smart-contracts/ssvnetwork#registervalidatorpublickey-operatorids-shares-amount-cluster) transaction in the SSV contract.
 
 :::info
 Please note that alternatively, instead of using this tool to retrieve the **registration nonce**, you could just keep track of the number of validator registrations you have made and use it as the input for the succeeding validator registrations.
@@ -73,7 +73,7 @@ The usage of SSV scanner SDK is rather simple. Given a set of parameters, some g
 
 `ClusterScanner` is able to extract the snapshot of the cluster, including the number of validators in it, information about the network fee, the operator's fees, its balance and if it's active or not.
 
-`NonceScanner` can be used to verify how many times a certain address (the cluster owner) has registered a validator on SSV network, by invoking the `registerValidator()` function of the SSV smart contract (see [the smart contracts](../../smart-contracts/) page for the correct address). This counter is called "nonce".
+`NonceScanner` can be used to verify how many times a certain address (the cluster owner) has registered a validator on SSV network, by invoking the `registerValidator()` function of the SSV smart contract (see [the smart contracts](/developers/smart-contracts/) page for the correct address). This counter is called "nonce".
 
 This information is not only useful, but necessary for the validator key splitting ceremony. As such, this is used
 

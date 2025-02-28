@@ -16,7 +16,7 @@ All of the necessary configuration information can be provided via command line 
 
 A good way to manage all the necessary files is to store them in a single folder (in this case `ssv-dkg-data`), together with the `operator.yaml` configuration file.
 
-If you chose to setup your SSV node with the [SSV Stack repository](../../../installation.md#install-ssv-node-stack), you should create `ssv-dkg-data` inside of the existing `ssv-stack` directory.
+If you chose to setup your SSV node with the [SSV Stack repository](/operators/operator-node/node-setup/#install-ssv-node-stack), you should create `ssv-dkg-data` inside of the existing `ssv-stack` directory.
 
 The final result should look like so:
 
@@ -59,7 +59,7 @@ In the config file above, `./data/` represents the container's shared volume cre
 
 <Tabs>
 <TabItem value="SSV Stack">
-If you did set up SSV node with [the SSV Stack repository](../../../installation.md#install-ssv-node-stack), you can simply add DKG to your existing setup.
+If you did set up SSV node with [the SSV Stack repository](/operators/operator-node/node-setup/#install-ssv-node-stack), you can simply add DKG to your existing setup.
 
 1. Your `ssv-dkg-data` directory should be inside of the `ssv-stack`.
 2. Edit the `docker-compose.yaml` file that you already have.
