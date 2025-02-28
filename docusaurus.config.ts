@@ -9,7 +9,7 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
+  url: 'https://docs.ssv.network/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -19,8 +19,8 @@ const config: Config = {
   organizationName: 'ssvlabs', // Usually your GitHub org/user name.
   projectName: 'ssv-docs', // Usually your repo name.
 
-  onBrokenLinks: 'ignore',
-  onBrokenMarkdownLinks: 'ignore',
+  onBrokenLinks: 'warn',
+  onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -129,6 +129,13 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+    },
+    algolia: {
+      // The application ID provided by Algolia
+      appId: 'YXTLMSGB48',
+      // Public API key: it is safe to commit it
+      apiKey: '9e2600a5e43f14bb3808106c74cb5348',
+      indexName: 'ssv',
     },
   } satisfies Preset.ThemeConfig,
 };
