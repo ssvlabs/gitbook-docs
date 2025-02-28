@@ -19,12 +19,13 @@ This guide outlines the steps for based applications developers looking to build
   <img src="../../../static/img/bapp-onboarding-light.png" className="light-mode-only" alt="bApp Flow Light Mode" />
   <img src="../../../static/img/bapp-onboarding-dark.png" className="dark-mode-only" alt="bApp Flow Dark Mode" />
 </div> -->
-<!-- ## 0. Developing a Based Application Middleware smart contract
 
-The `BAppManager` smart contract developed by SSV Labs accepts registrations of BApps that implement a specific interface. This is outlined [in this dedicated page](./smart-contracts/based-app-middleware-example.md), that also provides a simple example. -->
+## 1. Developing a Based Application Middleware smart contract
+
+The `BAppManager` smart contract developed by SSV Labs accepts registrations of BApps that implement a specific interface. This is outlined [in this dedicated page](./smart-contracts/based-app-middleware-example.md), that also provides a simple example.
 
 
-## 1. Configuring and Registering the bApp
+## 2. Configuring and Registering the bApp
 
 1. **Define core attributes**:
 - `bApp`: a unique 20-byte EVM address that uniquely identifies the bApp.
@@ -43,7 +44,7 @@ function registerBApp(
 - `metadataURI`: A JSON object containing additional details about your bApp, such as its name, description, logo, and website.
 4. **Update Configuration**: After registering, the bApp configuration can be updated only by the `owner` account.
 
-## 2. Operators registering Strategies
+## 3. Operators registering Strategies
 
 Once the bApp is registered, `Strategies` can join it and allocate capital to secure it.
 
@@ -57,7 +58,7 @@ function createStrategy(
 - `fee`: The fee to be paid to the operator for participating in the bApp.
 - `metadataURI`: A JSON object containing additional details about the strategy, such as its name, description, logo, and website.
 
-## 3 Opting in
+## 4. Opting in
 
 A Strategy opts-in to the bApp by using the [`optInToBApp`](./smart-contracts/BasedAppManager#optintobappstrategyid-bapp-tokens-obligationpercentages-data) function of the smart contract:
 ```javascript
@@ -77,7 +78,7 @@ For example, if `tokens = [SSV]` and `obligationPercentages = [50%]`, then 50% o
 
 The strategy’s owner can later update their obligations by modifying existing ones or adding a new token obligation.
 
-## 4 Strategy's Funds
+## 5. Strategy's Funds
 
 To compose their balances, strategies:
 1. receive ERC20 (or ETH) via [**deposits**](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L376) from accounts.
