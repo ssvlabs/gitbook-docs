@@ -214,11 +214,3 @@ In this section, we go over what things to look out for and how to monitor them.
 
 * Ensure Ethereum clients are running optimally.
 * Ensure your clients have their ports open and all relevant firewall rules are set for appropriate discovery.
-
-### Monitoring Options
-
-#### Option 1: Using Metrics
-[Content for metrics option...]
-
-#### Option 2: Using Alerts  
-[Content for alerts option...]
