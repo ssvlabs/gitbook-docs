@@ -71,3 +71,19 @@
   color: #2db1ff;  /* SSV light blue */
   font-weight: bold;
 }
+
+.light-mode-only {
+  display: none;
+}
+
+[data-theme='light'] .light-mode-only {
+  display: block;
+}
+
+.dark-mode-only {
+  display: none;
+}
+
+[data-theme='dark'] .dark-mode-only {
+  display: block;
+}
