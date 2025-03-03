@@ -342,7 +342,41 @@ The tool will run for 1 hour and provide you with results as a table.
 Focus on the `Value` column and check results manually. `Healthy✅` status **can be inaccurate**. 
 :::
 
-On example below you can see low Peer connection on SSV Node, this most likely caused by closed 16000 port:
+Let's look at example below. `Unhealthy` statuses on SSV and Execution are there because minimum peer value was 0, that is likely due to restart right before running the benchmark. p50 values are completely normal, so this is a false alarm:
+```log
+┌────────────────┬─────────────┬──────────────────────────────────────────────────────────┬────────────┬──────────────────────────────────────────────────────────┐
+│   Group Name   │ Metric Name │                          Value                           │   Health   │                         Severity                         │
+├────────────────┼─────────────┼──────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────────┤
+│   Consensus    │   Client    │          Lighthouse/v5.3.0-d6ba8c3/x86_64-linux          │ Healthy✅  │                      Version: None                       │
+├────────────────┼─────────────┼──────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────────┤
+│   Consensus    │   Latency   │ min=63.301µs, p10=99.168µs, p50=147.59µs, p90=386.902µs, │ Healthy✅  │ DurationMin: None, DurationP10: None, DurationP50: None, │
+│                │             │                      max=1.697228ms                      │            │           DurationP90: None, DurationMax: None           │
+├────────────────┼─────────────┼──────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────────┤
+│   Consensus    │    Peers    │        min=98, p10=100, p50=104, p90=110, max=110        │ Healthy✅  │                       Count: None                        │
+├────────────────┼─────────────┼──────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────────┤
+│   Consensus    │ Attestation │     missed_attestations=0, unready_blocks_200_ms=0,      │ Healthy✅  │ Correctness: None, MissedBlock: None, FreshAttestation:  │
+│                │             │                     missed_blocks=2                      │            │                None, ReceivedBlock: None                 │
+│                │             │       fresh_attestations=294 received_blocks=294,        │            │                                                          │
+│                │             │                   correctness=100.00 %                   │            │                                                          │
+├────────────────┼─────────────┼──────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────────┤
+│   Execution    │    Peers    │          min=0, p10=50, p50=50, p90=50, max=50           │ Unhealthy⚠️ │                       Count: High                        │
+├────────────────┼─────────────┼──────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────────┤
+│   Execution    │   Latency   │ min=63.362µs, p10=96.627µs, p50=146.984µs, p90=382.03µs, │ Healthy✅  │ DurationP10: None, DurationP50: None, DurationP90: None, │
+│                │             │                      max=1.672445ms                      │            │           DurationMax: None, DurationMin: None           │
+├────────────────┼─────────────┼──────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────────┤
+│      SSV       │    Peers    │          min=0, p10=27, p50=28, p90=30, max=31           │ Unhealthy⚠️ │                       Count: High                        │
+├────────────────┼─────────────┼──────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────────┤
+│      SSV       │ Connections │      inbound_min=0, inbound_P50=20, outbound_min=0,      │ Unhealthy⚠️ │   InboundConnections: High, OutboundConnections: High    │
+│                │             │                      outbound_P50=9                      │            │                                                          │
+├────────────────┼─────────────┼──────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────────┤
+│ Infrastructure │     CPU     │   user_P50=8.37%, system_P50=1.06%, total=17826400938    │ Healthy✅  │                 System: None, User: None                 │
+├────────────────┼─────────────┼──────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────────┤
+│ Infrastructure │   Memory    │        total_P50=31978.74MB, used_P50=27604.35MB,        │ Healthy✅  │    Used: None, Free: None, Total: None, Cached: None     │
+│                │             │         cached_P50=3264.24MB, free_P50=493.46MB          │            │                                                          │
+└────────────────┴─────────────┴──────────────────────────────────────────────────────────┴────────────┴──────────────────────────────────────────────────────────┘
+```
+
+Another example where `Unhealthy` **is actually accurate**. You can see low Peer connection on SSV Node, this most likely caused by closed 16000 port:
 
 ```log
 ┌────────────────┬─────────────┬──────────────────────────────────────────────────────────────┬────────────┬───────────────────────────────────────────────────────────┐
@@ -371,7 +405,7 @@ On example below you can see low Peer connection on SSV Node, this most likely c
 │      SSV       │    Peers    │            min=0, p10=0, p50=0, p90=0, max=0                 │ Unhealthy⚠️ │                        Count: High                        │
 ├────────────────┼─────────────┼──────────────────────────────────────────────────────────────┼────────────┼───────────────────────────────────────────────────────────┤
 │      SSV       │ Connections │        inbound_min=0, inbound_P50=0, outbound_min=0,         │ Unhealthy⚠️ │    OutboundConnections: High, InboundConnections: High    │
-│                │             │                       outbound_P50=60                        │            │                                                           │
+│                │             │                       outbound_P50=0                        │            │                                                           │
 └────────────────┴─────────────┴──────────────────────────────────────────────────────────────┴────────────┴───────────────────────────────────────────────────────────┘
 ```
 </details>
