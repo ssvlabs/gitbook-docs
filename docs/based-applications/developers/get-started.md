@@ -7,53 +7,104 @@ sidebar_position: 1
 
 ## Developing a Based Application
 
+This guide outlines the steps for based applications developers looking to build on the Based Applications platform. Below is a diagram that summarizes the full Based Applications development flow.
+
+1. Implement Based Application middleware contract
+2. Create and Register the bApp
+3. Strategies creation
+4. Strategies opt-in to the bApp
+5. Strategies secured by token deposits or validator balance delegation
+6. Build BApp client for strategies to operate
+
+![bApp Flow](../../../static/img/bapp-onboarding-dark.png)
+
 This will walk through the process of what is needed to register and run a Based Application. To develop a bApp, you will need to develop a client which participants (represented as strategies) will run. This client will be responsible for listening for tasks to take on, and submitting the result of the task once it is completed.
 
-## BApp client(s)
+<!-- <div className="theme-code-block">
+  <img src="../../../static/img/bapp-onboarding-light.png" className="light-mode-only" alt="bApp Flow Light Mode" />
+  <img src="../../../static/img/bapp-onboarding-dark.png" className="dark-mode-only" alt="bApp Flow Dark Mode" />
+</div> -->
 
-Operators will run a client which is specific to the bApp they have opted into. Such client should use the strategy weights as voting power, however they see fit. The example we provide shows two separate strategies completing the task independently, then voting on the result, and ensuring a consensus (majority vote) is reached.
+## 1. Developing a Based Application Middleware smart contract
 
-Different Based Applications may have different needs, and as such, the steps described below may vary. Tasks on bApps can be triggered in a variety of ways depending on the bApp; the bApp client could even be based on scheduling, or off-chain conditions.
+The `BAppManager` smart contract developed by SSV Labs accepts registrations of BApps that implement a specific interface. This is outlined [in this dedicated page](./smart-contracts/based-app-interface.md), that also provides a simple example.
 
-The innovation represented by SSV's Based Applications, is that when a client has completed its execution, it will use the strategy weight to "vote" for its own result, and this will represent the risk-adjusted value of the sum of slashable and non-slashable capital attached to the strategy itself.
+## 2. Configuring and Registering the bApp
+
+1. **Define core attributes**:
+- `bApp`: a unique 20-byte EVM address that uniquely identifies the bApp.
+- `tokens`:  A list of ERC-20 tokens to be used in the bApp's security mechanism. For the native ETH token, use the special address [`0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE`](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L62).
+- `sharedRiskLevels`: a list with $\beta$ values, one for each token, representing the bApp's tolerance for risk (token over-usage).
+2. **Optional Non-Slashable Validator Balance**: If the bApp uses non-slashable validator balance, it should be configured off-chain, in the bApp's network.
+3. **Register the bApp**: Use the [`registerBApp`](./smart-contracts/BasedAppManager#registerbappbapp-tokens-sharedrisklevels-metadatauri) function of the smart contract:
+```javascript
+function registerBApp(
+   address bApp,
+   address[] calldata tokens,
+   uint32[] calldata sharedRiskLevels,
+   string calldata metadataURI
+)
+```
+- `metadataURI`: A JSON object containing additional details about your bApp, such as its name, description, logo, and website.
+4. **Update Configuration**: After registering, the bApp configuration can be updated only by the `owner` account.
+
+## 3. Strategies creation
+
+Node managers can register a Strategy at any point in time, and in some way this is independent of the BApp itself. So the cardinal order in this step is only representative of the requirement for the BApp.
+
+Strategies can be registered by using the [`createStrategy`](./smart-contracts/BasedAppManager#createstrategyfee-metadatauri) function of the smart contract:
+
+```javascript
+function createStrategy(
+   uint256 fee,
+   string calldata metadataURI
+)
+```
+- `fee`: The fee to be paid to the operator for participating in the bApp.
+- `metadataURI`: A JSON object containing additional details about the strategy, such as its name, description, logo, and website.
+
+## 4. Opting in
+
+A Strategy opts-in to the bApp by using the [`optInToBApp`](./smart-contracts/BasedAppManager#optintobappstrategyid-bapp-tokens-obligationpercentages-data) function of the smart contract:
+
+```javascript
+function optInToBApp(
+   uint256 strategyId,
+   address bApp,
+   address[] calldata tokens,
+   uint32[] calldata obligationPercentages,
+   bytes calldata data
+)
+```
+- `tokens`: List of tokens to obligate to the bApp.
+- `obligationPercentages`: The proportion of each token's balance to commit to the bApp.
+- `data`: An extra optional field for off-chain information required by the bApp for participation.
+
+For example, if `tokens = [SSV]` and `obligationPercentages = [50%]`, then 50% of the strategy's `SSV` balance will be obligated to the bApp.
+
+The strategy’s owner can later update their obligations by modifying existing ones or adding a new token obligation.
+
+## 5. Strategy's Funds
+
+To compose their balances, strategies:
+1. receive ERC20 (or ETH) via [**deposits**](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L376) from accounts.
+2. inherit the non-slashable validator balance from the strategy's owner account. Accounts [**delegate**](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L201) validator balances between themselves, and the strategy inherits its owner's non-delegated balance plus the received balances from other accounts.
+
+## 6. Build BApp client
+
+Operators will run a client which is specific to the bApp they have opted into. Different Based Applications may have different needs, and as such, the actual implementations vary a lot: the triggers for BApp-specific logic execution can be based on blockchain events, they could be based on scheduling, or other off-chain conditions.
+
+One thing the BApp clients should have in common is that they should calculate the **strategy weights** derived from the balance (tokens and validator balances) allocated to the strategy, as well as the associated **risk** for these balances and use these as voting power. The innovation represented by SSV's Based Applications, is that when a client has completed its execution, it will use the strategy weight to "vote" for its own result, and this will represent the risk-adjusted value of the sum of slashable and non-slashable capital attached to the strategy itself.
+
+The BApp SDK provides high level functions to do this, facilitating the process. For an in-depth look at how all of this works, [please have a look at the dedicated example page](./bapp-example.md). This shows two separate strategies completing a simple task (provide the next Ethereum block number) independently, then voting on the result, and ensuring a consensus (majority vote) is reached.
 
 ### Example
 
-Below we have an example client, it has been built with one task, the task is to return the most recent slot number.
+
 
 Example client flow:
 
-1. A task is requested on the bApp.
-The application initializes and prepares to fetch the latest slot number.
 
-2. The example app calculates the strategies' weight.
-```calculateWeight()``` is called for each operator to determine their weight in the voting system.
-
-3. Operators start executing the task.
-The system prepares for multiple operators to fetch the latest slot number.
-
-4. Operators retrieve the slot number.
-```fetchSlot()``` is called to obtain the latest slot number.
-
-5. Strategy 1 votes to complete the task, returning slot number 11139593.
-```signAndBroadcastTask(11139593)``` is called to sign and broadcast the vote.
-The vote is processed using ```processVote()```.
-
-6. Strategy 1 only has 13.54% of the total weight, so it is not enough to complete the task.
-```checkMajority()``` is called but does not find a majority, so the task remains incomplete.
-
-7. No majority is reached, waiting for more votes.
-The system remains in a waiting state for additional votes.
-
-8. Strategy 2 votes to complete the task, returning slot number 11139593.
-```signAndBroadcastTask(11139593)``` is called again for Strategy 2.
-The vote is processed using processVote().
-
-9. Strategy 2 has 86.46% of the total weight, reaching the majority threshold.
-```checkMajority()``` is called again and confirms that the total weight surpasses the threshold.
-
-10. Since 100% of the total weight has now voted, the task is verified as complete.
-The system acknowledges that the task is fully verified.
 
 Example pseudocode:
 
@@ -142,41 +193,5 @@ async run() {
 }
 ```
 
-To run the code itself, you could initiate it with something like this:
 
-```
-// Mock network object with a broadcast function
-const mockNetwork = {
-broadcast: (vote) => console.log(`📡 Mock broadcast:`, vote),
-};
-
-// Instantiates the client and starts the voting process
-const client = new BasedClient(
-'operator-1', // Unique identifier
-'https://holesky.infura.io/v3/YOUR_PROJECT_ID', // Ethereum provider endpoint
-mockNetwork // Mock network object
-);
-
-client.run(); // Executes the client
-```
-
-Example flow chart:
-
-![Simple Block Agreement Example Flow Chart](../../../static/img/simulated-flow.png)
-
-## Voting Power
-
-In Based Applications, the obligated token balance and delegated validator balance are used to attribute a weight to each Strategy, which is then used to vote on whatever task the client should be accomplishing.
-
-The vote calculation follows this flow chart:
-
-![Vote Calculation Flow Chart](../../../static/img/example-flow-chart.png)
-
-- Collect strategies opted-in to the bapp
-- Collect total validator balance delegated to all opted-in strategy owners
-- collect total obligated token balances
-- Get "significance" of tokens and validator balance from config
-- Calculate risk-adjusted weights for each token, for each strategy
-- Normalize the obtained weights
-- Combine strategy-token weights into a final weight for each strategy
 
