@@ -334,12 +334,12 @@ Then run `docker compose up ssv-pulse` to run the benchmark tool.
 
 <details>
 
-<summary><strong>How to interpret Benchmark results?</strong></summary>
+<summary><strong>Beware the benchmark results</strong></summary>
 
 The tool will run for 1 hour and provide you with results as a table.
 
-:::note Please note!
-Focus on the `Value` column and check results manually. `Healthy✅` status **can be inaccurate**. 
+:::warning Please note
+Use the `Value` column as the ultimate validation tool. Don't just look at the `Health` column, as this can sometimes be misleading. 
 :::
 
 Let's look at example below. `Unhealthy` statuses on SSV and Execution are there because minimum peer value was 0, that is likely due to restart right before running the benchmark. p50 values are completely normal, so this is a false alarm:
