@@ -58,7 +58,7 @@ console.log(responseData);
   <TabItem value="curl" label="cURL">
 
 ```bash
-curl -X POST "https://api.studio.thegraph.com/proxy/71118/ssv-network-holesky/version/latest" \
+curl -X POST "https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest" \
   -H "Content-Type: application/json" \
   -d '{
     "query": "query AccountNonceQuery { account(id: \"0x004f13516f00ccc4aca6560c115bee5aaf5f758b\") { nonce }}"
@@ -134,7 +134,7 @@ console.log(responseData);
   <TabItem value="curl" label="cURL">
 
 ```bash
-curl -X POST "https://api.studio.thegraph.com/proxy/71118/ssv-network-holesky/version/latest" \
+curl -X POST "https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest" \
   -H "Content-Type: application/json" \
   -d '{
     "query": "query ClusterSnapshot { cluster(id: \"0x000b4369b71b6634f27f5de9cbaaabb0d21b8be5-399-429-694-699\") { active balance index lastUpdateBlockNumber networkFeeIndex validatorCount }}"
@@ -222,7 +222,7 @@ console.log(responseData);
   <TabItem value="curl" label="cURL">
 
 ```bash
-curl -X POST "https://api.studio.thegraph.com/proxy/71118/ssv-network-holesky/version/latest" \
+curl -X POST "https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest" \
   -H "Content-Type: application/json" \
   -d '{
     "query": "query daoValues { daovalues(id: \"0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA\") { declareOperatorFeePeriod executeOperatorFeePeriod liquidationThreshold minimumLiquidationCollateral networkFee networkFeeIndex networkFeeIndexBlockNumber operatorFeeIncreaseLimit operatorMaximumFee }}"
@@ -330,7 +330,7 @@ console.log(responseData);
   <TabItem value="curl" label="cURL">
 
 ```bash
-curl -X POST "https://api.studio.thegraph.com/proxy/71118/ssv-network-holesky/version/latest" \
+curl -X POST "https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest" \
   -H "Content-Type: application/json" \
   -d '{
     "query": "query clusterBalanceValues {    _meta {     block {     number }}   daovalues(id: \"0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA\") {     networkFee      networkFeeIndex     networkFeeIndexBlockNumber      }   operators(where: {id_in: [\"11\", \"13\", \"24\", \"29\"]}) {       fee     feeIndex        feeIndexBlockNumber }   cluster(id: \"0xaa184b86b4cdb747f4a3bf6e6fcd5e27c1d92c5c-11-13-24-29\") {       validatorCount      networkFeeIndex     index   balance }}"
@@ -448,7 +448,7 @@ console.log(responseData);
   <TabItem value="curl" label="cURL">
 
 ```bash
-curl -X POST "https://api.studio.thegraph.com/proxy/71118/ssv-network-holesky/version/latest" \
+curl -X POST "https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest" \
   -H "Content-Type: application/json" \
   -d '{
     "query": "query ListOfValidatorsPerOwner { validators(where: {owner: \"0xcdb35fe42e19860b061ba6d1d85ce12c8f491ddf\"}) { id owner { id }}}"
@@ -535,7 +535,7 @@ console.log(responseData);
   <TabItem value="curl" label="cURL">
 
 ```bash
-curl -X POST "https://api.studio.thegraph.com/proxy/71118/ssv-network-holesky/version/latest" \
+curl -X POST "https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest" \
   -H "Content-Type: application/json" \
   -d '{
     "query": "query ValidatorData { validator(id: \"0x80006ff500fc36a6ae4ce7b643be3856ffe052ef36e5a6223dc9f7021b1dae02539c919751bba870f7ac9fccb86e06cf\") { removed operators(first: 10) { operatorId }}}"
