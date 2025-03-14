@@ -5,9 +5,10 @@ sidebar_position: 2
 
 # Based App Example
 
+
 The example discussed in this page can be found at this repository:
 
-[`https://github.com/ssvlabs/examples`](https://github.com/ssvlabs/examples)
+[![Based Apps Examples Repo](https://img.shields.io/badge/GitHub-SSV%20Labs%20Examples-24292e?style=for-the-badge&logo=github)](https://github.com/ssvlabs/examples)
 
 It has been built to execute one task: fetch the most recent block and reach a majority vote on the slot number.
 

@@ -57,6 +57,8 @@ Example output:
 }
 ```
 
+---
+
 ### `calcGeometricStrategyWeights()`
 
 Given a set of weights for the strategies for a bapp, returns the geometric mean of these. 
@@ -106,6 +108,8 @@ Example output:
   "36": 1
 }
 ```
+
+---
 
 ### `calcHarmonicStrategyWeights()`
 
