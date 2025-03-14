@@ -9,7 +9,7 @@ This library will contain all the BasedAppManager contract calls you need for wo
 After instantiating the SDK, you can call any of the functions in the utils library like so:
 
 ```typescript
-sdk.bam.delegateBalance()
+sdk.core.contracts.bapp.write.delegateBalance()
 ```
 
 ## Function List
@@ -28,7 +28,12 @@ Delegates a percentage of an account's balance to another account.
 **Example:**
 
 ```typescript
-await sdk.bam.delegateBalance("0xReceiverAddress", 10);
+const receipt = await sdk.core.contracts.bapp.write.delegateBalance({
+    args: {
+      account: "0xA4831B989972605A62141a667578d742927Cbef9",
+      percentage: 10,
+    },
+  }).then((tx) => tx.wait())
 ```
 
 ---
@@ -47,7 +52,12 @@ Updates the delegation percentage for an existing delegation.
 **Example:**
 
 ```typescript
-await sdk.bam.updateDelegatedBalance("0xReceiverAddress", 7500);
+const receipt = await sdk.core.contracts.bapp.write.updateDelegatedBalance({
+  args: {
+    account: "0xReceiverAddress",
+    percentage: 10,
+  },
+}).then((tx) => tx.wait())
 ```
 
 ---
@@ -60,12 +70,16 @@ Removes a delegation.
 
 | Input parameter | Input type | Description |
 |----------------|------------|-------------|
-| receiver | string | Address of the account to remove delegation from. |
+| account | string | Address of the account to remove delegation from. |
 
 **Example:**
 
 ```typescript
-await sdk.bam.removeDelegatedBalance("0xReceiverAddress");
+const receipt = await sdk.core.contracts.bapp.write.removeDelegatedBalance({
+  args: {
+    account: "0xReceiverAddress",
+  },
+}).then((tx) => tx.wait())
 ```
 
 ---
@@ -86,7 +100,14 @@ Registers a new bApp.
 **Example:**
 
 ```typescript
-await sdk.bam.registerBApp("0xOwnerAddress", "0xbAppAddress", ["0xToken1", "0xToken2"], 10);
+const receipt = await sdk.core.contracts.bapp.write.registerBApp ({
+  args: {
+    bApp: "0x384c9f3e8d640b0bfee18e5ae70a0257acd8e214",
+    metadataURI: "https://example.com/metadata",
+    tokens: ["0x3f1c547b21f65e10480de3ad8e19faac46c95034"],
+    sharedRiskLevels: [1, 2, 3],
+  },
+}).then((tx) => tx.wait())
 ```
 
 ---
@@ -101,11 +122,18 @@ Adds new tokens to an existing bApp.
 |----------------|------------|-------------|
 | bAppAddress | string | Address of the bApp. |
 | tokens | string[] | List of token addresses. |
+| sharedRiskLevel | number | Risk level of the bApp. |
 
 **Example:**
 
 ```typescript
-await sdk.bam.addTokensToBApp("0xbAppAddress", ["0xToken3", "0xToken4"]);
+const receipt = await sdk.core.contracts.bapp.write.addTokensToBApp ({
+  args: {
+    bApp: "0x384c9f3e8d640b0bfee18e5ae70a0257acd8e214",
+    tokens: ["0x3f1c547b21f65e10480de3ad8e19faac46c95034"],
+    sharedRiskLevels: [1, 2, 3],
+  },
+}).then((tx) => tx.wait())
 ```
 
 ---
@@ -119,11 +147,17 @@ Creates a new delegation strategy.
 | Input parameter | Input type | Description |
 |----------------|------------|-------------|
 | fee | number | Fee percentage (scaled by 1e4). |
+| metadataURI | string | The metadata URI for the strategy |
 
 **Example:**
 
 ```typescript
-await sdk.bam.createStrategy(300);
+const receipt = await sdk.core.contracts.bapp.write.createStrategy({
+    args: {
+        fee: 10000,
+        metadataURI: "https://example.com/metadata",
+    },
+}).then((tx) => tx.wait())
 ```
 
 ---
@@ -144,7 +178,15 @@ Links a strategy to a bApp with specific obligations.
 **Example:**
 
 ```typescript
-await sdk.bam.optInToBApp(1, "0xbAppAddress", ["0xToken1", "0xToken2"], [5000, 4000]);
+const receipt = await sdk.core.contracts.bapp.write.optInToBApp({
+  args: {
+    strategyId: 1,
+    bApp: "0x384c9f3e8d640b0bfee18e5ae70a0257acd8e214",
+    tokens: ["0x3f1c547b21f65e10480de3ad8e19faac46c95034"],
+    obligationPercentages: [1, 2, 3],
+    data: "0x",
+  },
+}).then((tx) => tx.wait())
 ```
 
 ---
@@ -164,7 +206,13 @@ Deposits ERC20 tokens into a strategy.
 **Example:**
 
 ```typescript
-await sdk.bam.depositERC20(1, "0xTokenAddress", 1000);
+const receipt = await sdk.core.contracts.bapp.write.depositERC20({
+  args: {
+    strategyId: 1,
+    token: "0x3f1c547b21f65e10480de3ad8e19faac46c95034",
+    amount: 2n,
+  },
+}).then((tx) => tx.wait())
 ```
 
 ---
@@ -175,15 +223,23 @@ Deposits ETH into a strategy.
 
 **Input parameters:**
 
+:::info
+Note that was pass the amount in the value field here, not within the function arguments
+:::
+
 | Input parameter | Input type | Description |
 |----------------|------------|-------------|
 | strategyId | number | ID of the strategy. |
-| amount | number | ETH amount to deposit. |
 
 **Example:**
 
 ```typescript
-await sdk.bam.depositETH(1, 2);
+const receipt = await sdk.core.contracts.bapp.write.depositETH({
+  value: 2n,
+  args: {
+    strategyId: 1
+  },
+}).then((tx) => tx.wait())
 ```
 
 ---
@@ -203,8 +259,15 @@ Withdraws ERC20 tokens from a strategy if the token is not used in obligations.
 **Example:**
 
 ```typescript
-await sdk.bam.fastWithdrawERC20(1, "0xTokenAddress", 500);
+const receipt = await sdk.core.contracts.bapp.write.fastWithdrawERC20({
+  args: {
+    strategyId: 1,
+    token: "0x3f1c547b21f65e10480de3ad8e19faac46c95034",
+    amount: 2n,
+  },
+}).then((tx) => tx.wait())
 ```
+
 
 ---
 
@@ -222,7 +285,12 @@ Withdraws ETH from the strategy if not used in obligations.
 **Example:**
 
 ```typescript
-await sdk.bam.fastWithdrawETH(1, 2);
+const receipt = await sdk.core.contracts.bapp.write.fastWithdrawETH({
+  args: {
+    strategyId: 1,
+    amount: 2n,
+  },
+}).then((tx) => tx.wait())
 ```
 
 ---
@@ -242,7 +310,13 @@ Initiates a withdrawal request for ERC20 tokens.
 **Example:**
 
 ```typescript
-await sdk.bam.proposeWithdrawal(1, "0xTokenAddress", 1000);
+const receipt = await sdk.core.contracts.bapp.write.proposeWithdrawal({
+  args: {
+    strategyId: 1,
+    token: "0x3f1c547b21f65e10480de3ad8e19faac46c95034",
+    amount: 2n,
+  },
+}).then((tx) => tx.wait())
 ```
 
 ---
@@ -261,7 +335,12 @@ Completes an ERC20 withdrawal after the timelock period.
 **Example:**
 
 ```typescript
-await sdk.bam.finalizeWithdrawal(1, "0xTokenAddress");
+const receipt = await sdk.core.contracts.bapp.write.finalizeWithdrawal({
+  args: {
+    strategyId: 1,
+    token: "0x3f1c547b21f65e10480de3ad8e19faac46c95034",
+  },
+}).then((tx) => tx.wait())
 ```
 
 ### `proposeWithdrawalETH()`
@@ -278,7 +357,12 @@ Initiates a withdrawal request for ETH.
 **Example:**
 
 ```typescript
-await sdk.bam.proposeWithdrawalETH(1, 2);
+const receipt = await sdk.core.contracts.bapp.write.proposeWithdrawalETH({
+  args: {
+    strategyId: 1,
+    amount: 2n,
+  },
+}).then((tx) => tx.wait())
 ```
 
 ---
@@ -296,7 +380,11 @@ Completes an ETH withdrawal after the timelock period.
 **Example:**
 
 ```typescript
-await sdk.bam.finalizeWithdrawalETH(1);
+const receipt = await sdk.core.contracts.bapp.write.finalizeWithdrawalETH({
+  args: {
+    strategyId: 1,
+  },
+}).then((tx) => tx.wait())
 ```
 
 ---
@@ -317,7 +405,14 @@ Adds a new obligation for a bApp.
 **Example:**
 
 ```typescript
-await sdk.bam.createObligation(1, "0xbAppAddress", "0xTokenAddress", 5000);
+const receipt = await sdk.core.contracts.bapp.write.createObligation({
+  args: {
+    strategyId: 1,
+    bApp: "0x384c9f3e8d640b0bfee18e5ae70a0257acd8e214",
+    token: "0x3f1c547b21f65e10480de3ad8e19faac46c95034",
+    obligationPercentage: 100,
+  },
+}).then((tx) => tx.wait())
 ```
 
 ---
@@ -338,7 +433,14 @@ Quickly updates the obligation percentage for a bApp.
 **Example:**
 
 ```typescript
-await sdk.bam.fastUpdateObligation(1, "0xbAppAddress", "0xTokenAddress", 6000);
+const receipt = await sdk.core.contracts.bapp.write.fastUpdateObligation({
+  args: {
+    strategyId: 1,
+    bApp: "0x384c9f3e8d640b0bfee18e5ae70a0257acd8e214",
+    token: "0x3f1c547b21f65e10480de3ad8e19faac46c95034",
+    obligationPercentage: 100,
+  },
+}).then((tx) => tx.wait())
 ```
 
 ---
@@ -359,7 +461,14 @@ Proposes an update to an obligation percentage for a bApp.
 **Example:**
 
 ```typescript
-await sdk.bam.proposeUpdateObligation(1, "0xbAppAddress", "0xTokenAddress", 7000);
+const receipt = await sdk.core.contracts.bapp.write.proposeUpdateObligation({
+  args: {
+    strategyId: 1,
+    bApp: "0x384c9f3e8d640b0bfee18e5ae70a0257acd8e214",
+    token: "0x3f1c547b21f65e10480de3ad8e19faac46c95034",
+    obligationPercentage: 100,
+  },
+}).then((tx) => tx.wait())
 ```
 
 ---
@@ -379,7 +488,13 @@ Finalizes an obligation update after the timelock period.
 **Example:**
 
 ```typescript
-await sdk.bam.finalizeUpdateObligation(1, "0xbAppAddress", "0xTokenAddress");
+const receipt = await sdk.core.contracts.bapp.write.finalizeUpdateObligation({
+  args: {
+    strategyId: 1,
+    bApp: "0x384c9f3e8d640b0bfee18e5ae70a0257acd8e214",
+    token: "0x3f1c547b21f65e10480de3ad8e19faac46c95034",
+  },
+}).then((tx) => tx.wait())
 ```
 
 ---
@@ -398,7 +513,12 @@ Proposes a fee update for a strategy.
 **Example:**
 
 ```typescript
-await sdk.bam.proposeFeeUpdate(1, 2500);
+const receipt = await sdk.core.contracts.bapp.write.proposeFeeUpdate({
+  args: {
+    strategyId: 1,
+    proposedFee: 100,
+  },
+}).then((tx) => tx.wait())
 ```
 
 ---
@@ -416,7 +536,34 @@ Finalizes a fee update after the timelock period.
 **Example:**
 
 ```typescript
-await sdk.bam.finalizeFeeUpdate(1);
+const receipt = await sdk.core.contracts.bapp.write.finalizeFeeUpdate({
+  args: {
+    strategyId: 1,
+  },
+}).then((tx) => tx.wait())
 ```
 
+---
 
+### `updateAccountMetadataURI()`
+
+Updates the metadata URI of the caller's account.
+
+**Input parameters:**
+
+| Input parameter | Input type | Description |
+|----------------|------------|-------------|
+| metadataURI | string | The new metadata URI for the account. |
+
+**Example:**
+
+```typescript
+await sdk.core.contracts.bapp.write.updateAccountMetadataURI({
+  args: {
+    metadataURI: "https://example.com/metadata",
+  },
+}).then((tx) => tx.wait())
+
+  console.log("receipt", receipt);
+}
+```
