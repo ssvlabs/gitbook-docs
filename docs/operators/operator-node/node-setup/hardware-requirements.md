@@ -24,3 +24,16 @@ Please check your clients' documentation for the hardware requirements. Usually 
 * [Teku](https://docs.teku.consensys.io/get-started/system-requirements)
 * [Nimbus](https://nimbus.guide/hardware.html)
 * [Lodestar](https://chainsafe.github.io/lodestar/run/getting-started/quick-start-custom-guide#hardware-requirements)
+
+## Hardware usage reference
+For your reference, we checked resource usage depending on # of managed validators.
+
+Tests were done on *Testnet*, so Mainnet will require slighthly more resources.
+
+### SSV node
+
+![Resource usage by SSV node depending on number of validators](/img/table_SSV.png)
+
+### Execution and Consensus nodes
+
+![Resource usage by Execution and Consensus nodes depending on number of validators](/img/table_ELCL.png)

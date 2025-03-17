@@ -1,6 +1,6 @@
 ---
 title: DKG Operator Migration
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 If you need to migrate the DKG operator node to a different machine, you need to know what operations must be performed, in which order, and what are the sensitive pieces of data that need to be preserved and copied over to the new hardware.

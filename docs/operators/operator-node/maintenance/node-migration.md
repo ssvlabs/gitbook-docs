@@ -1,6 +1,6 @@
 ---
 title: Node Migration
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 As a node operator, it may happen that the software stack needs to be migrated to a different machine, for various reasons.
