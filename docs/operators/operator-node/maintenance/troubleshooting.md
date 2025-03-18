@@ -255,7 +255,7 @@ As an alternative for SSV running as a systemd service, you can expose 16000 por
 
 ### SSV 0 inbound connections
 
-![SSV 0 Inbound](/img/SSV0Inbound.png)
+![SSV 0 Inbound](/img/SSV0inbound.png)
 
 The healthy number of SSV peers is 10-30, depending on the number of clusters you participate in. Make sure you see both *inbound* and *outbound* connections. If inbound are at 0, then your P2P ports are closed.
 
@@ -275,7 +275,7 @@ The other common cause for SSV’s poor performance is errors such as `future ms
 
 ### Execution 0 peers
 
-![Execution 0 Peers](/img/Execution0Peers.png)
+![Execution 0 Peers](/img/Execution0peers.png)
 
 In this example you see Execution node has 0 peers while there is data in Latency row. In such a case, your Execution node likely has peers, but its `net` namespace is disabled and the benchmark tool can’t fetch the `net_peerCount` results. 
 
