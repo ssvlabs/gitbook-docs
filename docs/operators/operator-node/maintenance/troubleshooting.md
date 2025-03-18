@@ -244,7 +244,7 @@ Below is a table with issues description, their probable causes and solutions. Y
 
 ### SSV 0 Peers
 
-![SSV 0 Peers](/img/SSV0Peerss.png)
+![SSV 0 Peers](/img/SSV0peerss.png)
 
 If you see SSV shows 0 peers and connections that means you have not opened 16000 port on your container, and the tool can’t reach the correct endpoint. If you are running your node as a  systemd service, you’ll likely see the same result. 
 
