@@ -42,7 +42,9 @@ Example output:
 }
 ```
 
-### `getStrategyTokenWeights(string bappAddress)`
+---
+
+### `getStrategyTokenWeights()`
 
 Used to calculate the weights of the strategies in a given Bapp.
 
@@ -87,7 +89,9 @@ Example output:
 ]
 ```
 
-### `getDelegatedBalances(string bappAddress)`
+---
+
+### `getDelegatedBalances()`
 
 Given the address of a Based Application, returns the delegated balances of the Bapp.
 
@@ -116,6 +120,8 @@ Example output:
   ]
 }
 ```
+
+---
 
 ### `getObligatedBalances(string bappAddress)`
 
@@ -160,4 +166,211 @@ Example output:
     }
   ]
 }
+```
+
+---
+
+### `getBappMetadataURI()`
+
+Retrieves the metadata URI for a specific bApp.
+
+**Input:**
+
+| Input parameter | Input type | Description |
+|----------------|------------|-------------|
+| bappAddress | string | Address of the bApp |
+
+**Example:**
+
+```typescript
+const metadataURI = await sdk.api.getBappMetadataURI({ bAppId: "0x89EF15BC1E7495e3dDdc0013C0d2B049d487b2fD" });
+```
+
+**Example output:**
+```
+{
+  metadataURI: 'https://github.com/ssvlabs/examples/tree/main/simple-block-agreement/based-application/metadata.json'
+}
+```
+
+---
+
+### `getAllBappsMetadataURIs()`
+
+Retrieves metadata URIs for all bApps.
+
+**Input:** No input required.
+
+**Example:**
+
+```typescript
+const metadataURIs = await sdk.api.getAllBappsMetadataURIs();
+```
+
+
+**Example output:**
+```
+[
+  {
+    id: '0x384c9f3e8d640b0bfee18e5ae70a0257acd8e214',
+    metadataURI: 'https://metadata-pi.vercel.app/metadata.json'
+  },
+  {
+    id: '0x89ef15bc1e7495e3dddc0013c0d2b049d487b2fd',
+    metadataURI: 'https://github.com/ssvlabs/examples/tree/main/simple-block-agreement/based-application/metadata.json'
+  },
+  {
+    id: '0x8f3a66bb003ebbd5fb115981dfad8d8400fceb76',
+    metadataURI: 'https://github.com/ssvlabs/examples/tree/main/simple-block-agreement/based-application/metadata.json'
+  }
+]
+```
+---
+
+
+### `getAllStrategyObligatedBalancesForBapp()`
+
+Retrieves all strategy obligated balances for a bApp.
+
+**Input:**
+
+| Input parameter | Input type | Description |
+|----------------|------------|-------------|
+| bappAddress | string | Address of the bApp |
+
+**Example:**
+
+```typescript
+const balances = await sdk.api.getAllStrategyObligatedBalancesForBapp({ bAppId: "0x89EF15BC1E7495e3dDdc0013C0d2B049d487b2fD" });
+console.log(JSON.stringify(balances));
+```
+
+**Example output:**
+```
+{"strategies":[{"strategy":{"balances":[{"balance":"100000000000000000000","token":"0xad45a78180961079bfaeee349704f411dff947c6"}]}},{"strategy":{"balances":[{"balance":"30000000000000000000","token":"0xad45a78180961079bfaeee349704f411dff947c6"}]}}]}
+```
+
+---
+
+### `getDepositedBalancesForStrategy()`
+
+Retrieves a list of delegators and their percentages for a strategy.
+
+**Input:**
+
+| Input parameter | Input type | Description |
+|----------------|------------|-------------|
+| strategyId | string | ID of the strategy |
+
+**Example:**
+
+```typescript
+const deposits = await sdk.api.getDepositedBalancesForStrategy({ strategyId: "1" });
+```
+
+**Example output:**
+
+```
+{"deposits":[]}
+```
+
+---
+
+### `getAllStrategiesDepositedTo()`
+
+Retrieves all strategies an account has deposited to.
+
+**Input:**
+
+| Input parameter | Input type | Description |
+|----------------|------------|-------------|
+| accountAddress | string | Address of the account |
+
+**Example:**
+
+```typescript
+const strategies = await sdk.api.getAllStrategiesDepositedTo({ accountId: "0xA4831B989972605A62141a667578d742927Cbef9" });
+console.log(JSON.stringify(strategies));
+```
+
+---
+
+**Example output:**
+
+```
+{"deposits":[]}
+```
+
+
+### `getTotalDelegatedPercentageForAccount()`
+
+Retrieves the total delegated percentage for an account.
+
+**Input:**
+
+| Input parameter | Input type | Description |
+|----------------|------------|-------------|
+| accountAddress | string | Address of the account |
+
+**Example:**
+
+```typescript
+const delegatedPercentage = await sdk.api.getTotalDelegatedPercentageForAccount({ accountId: "0xA4831B989972605A62141a667578d742927Cbef9" });
+console.log(JSON.stringify(delegatedPercentage));
+```
+
+**Example output:**
+
+```
+"0"
+```
+
+
+---
+
+### `getAllStrategiesForBapp()`
+
+Retrieves all strategy IDs associated with a bApp.
+
+**Input:**
+
+| Input parameter | Input type | Description |
+|----------------|------------|-------------|
+| bappAddress | string | Address of the bApp |
+
+**Example:**
+
+```typescript
+const strategies = await sdk.api.getAllStrategiesForBapp({ bAppId: "0x89EF15BC1E7495e3dDdc0013C0d2B049d487b2fD" });
+console.log(JSON.stringify(strategies));
+```
+
+**Example output:**
+```
+["4","5"]
+```
+
+---
+
+### `getAllStrategiesForAccount()`
+
+Retrieves all strategies and their balances for an account.
+
+**Input:**
+
+| Input parameter | Input type | Description |
+|----------------|------------|-------------|
+| accountAddress | string | Address of the account |
+
+**Example:**
+
+```typescript
+const strategies = await sdk.api.getAllStrategiesForAccount({ accountId: "0xA4831B989972605A62141a667578d742927Cbef9" });
+console.log(JSON.stringify(strategies));
+```
+
+**Example output:**
+
+```
+["4","5"]
 ```
