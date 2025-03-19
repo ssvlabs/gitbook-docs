@@ -6,7 +6,14 @@ sidebar_position: 1
 
 The BasedAppManager contract is the main contract for operations and management.
 
-[![Based Applications Contracts Repository](https://img.shields.io/badge/GitHub-Based%20Applications%20Contracts-24292e?style=for-the-badge&logo=github)](https://github.com/ssvlabs/based-applications/)
+
+<a href="https://github.com/ssvlabs/based-applications">
+  <img 
+    src="https://img.shields.io/badge/GitHub-SSV%20BA%20Contracts-24292e?style=for-the-badge&logo=github" 
+    alt="Based Applications Contracts Repository" 
+    style={{width: '400px'}}
+  />
+</a>
 
 ## Delegate Validator Balance
 

@@ -8,7 +8,13 @@ sidebar_position: 2
 
 The example discussed in this page can be found at this repository:
 
-[![Based Apps Examples Repo](https://img.shields.io/badge/GitHub-SSV%20Labs%20Examples-24292e?style=for-the-badge&logo=github)](https://github.com/ssvlabs/examples)
+<a href="https://github.com/ssvlabs/examples">
+  <img 
+    src="https://img.shields.io/badge/GitHub-SSV%20Labs%20Examples-24292e?style=for-the-badge&logo=github" 
+    alt="Based Apps Examples Repo" 
+    style={{width: '400px'}}
+  />
+</a>
 
 It has been built to execute one task: fetch the most recent block and reach a majority vote on the slot number.
 

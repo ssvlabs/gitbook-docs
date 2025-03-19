@@ -5,7 +5,13 @@ sidebar_position: 3
 
 # Smart Contracts
 
-[Based Applications Contracts Repository](https://github.com/ssvlabs/based-applications)
+<a href="https://github.com/ssvlabs/based-applications">
+  <img 
+    src="https://img.shields.io/badge/GitHub-SSV%20BA%20Contracts-24292e?style=for-the-badge&logo=github" 
+    alt="Based Applications Contracts Repository" 
+    style={{width: '400px'}}
+  />
+</a>
 
 ### Based Applications Contract Addresses
 
