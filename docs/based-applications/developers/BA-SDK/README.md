@@ -33,29 +33,44 @@ npm i @ssv-labs/bapps-sdk
 
 | Input name | Input type | Optional |
 |------------|------------|----------|
-| chain | string | No |
 | beaconchainUrl | string | No |
+| public_client | [Viem public client](https://viem.sh/docs/clients/public.html) | No |
+| wallet_client | [Viem wallet client](https://viem.sh/docs/clients/wallet) | No |
 
 ## Example Usage
 
 ```typescript
 import { BasedAppsSDK } from "@ssv-labs/bapps-sdk";
+import { createPublicClient, createWalletClient, http } from 'viem'
+import { privateKeyToAccount } from 'viem/accounts'
+
+// Setup viem clients
+const chain = chains.mainnet // or chains.holesky
+const transport = http()
+
+const publicClient = createPublicClient({
+  chain,
+  transport,
+})
+
+const account = privateKeyToAccount('0x...')
+const walletClient = createWalletClient({
+  account,
+  chain,
+  transport,
+})
 
 const sdk = new BasedAppsSDK({
-    chain: 'holesky',
-    beaconchainUrl: 'https://example.com/beacon',
-});
+   beaconchainUrl: 'https://example.com/beacon',
+   publicClient,
+   walletClient,
+ })
 
 async function main(): Promise<void> {
 
     const obligatedBalances = await sdk.api.getObligatedBalances({
       bAppId: "0x64714cf5db177398729e37627be0fc08f43b17a6",
     });
-
-    console.log("--------------------------------");
-    console.log(obligatedBalances);
-    console.log("--------------------------------");
-
 }
 
 main();
