@@ -23,6 +23,14 @@ sidebar_position: 4
 | CDT to SSV Upgrader **([Deprecated](https://snapshot.box/#/s:mainnet.ssvnetwork.eth/proposal/0xff1b868f97de48db3ba26c5254e9902645ed55b5107a84ee0cbcb98b31973f27))**     | [0x2bf73A478cc6a7bA4E6758A3A52AbDc8CDBa735E](https://etherscan.io/address/0x2bf73A478cc6a7bA4E6758A3A52AbDc8CDBa735E) |
 
 
+### Hoodi Testnet
+
+| Contract        | Address                                                                                                      |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| SSV Token         | [0x9F5d4Ec84fC4785788aB44F9de973cF34F7A038e](https://hoodi.etherscan.io/address/0x9F5d4Ec84fC4785788aB44F9de973cF34F7A038e) |
+| SSV Network       | [0x58410Bef803ECd7E63B23664C586A6DB72DAf59c](https://hoodi.etherscan.io/address/0x58410Bef803ECd7E63B23664C586A6DB72DAf59c) |
+| SSV Network Views | [0x5AdDb3f1529C5ec70D77400499eE4bbF328368fe](https://hoodi.etherscan.io/address/0x5AdDb3f1529C5ec70D77400499eE4bbF328368fe) |
+
 #### Holesky Testnet
 
 | Contract        | Address                                                                                                      |
@@ -44,7 +52,11 @@ You will need to send 32 ETH to the Deposit Contract in order to activate a vali
 | Ethereum network | Address                                                                                                         |
 |------------------|-----------------------------------------------------------------------------------------------------------------|
 | Mainnet          | [0x00000000219ab540356cBB839Cbe05303d7705Fa](https://etherscan.io/address/0x00000000219ab540356cBB839Cbe05303d7705Fa) |
+| Hoodi Testnet  | [0x00000000219ab540356cBB839Cbe05303d7705Fa](https://hoodi.etherscan.io/address/0x00000000219ab540356cBB839Cbe05303d7705Fa) |
 | Holesky Testnet  | [0x4242424242424242424242424242424242424242](https://holesky.etherscan.io/address/0x4242424242424242424242424242424242424242) |
+
+
+0x00000000219ab540356cBB839Cbe05303d7705Fa
 
 
 Please refer to [Ethereum official documentation](https://ethereum.org/en/staking/deposit-contract/) and verify this information. The [official Launchpad also has great guidelines](https://holesky.launchpad.ethereum.org/) to protect from phishing attempts.

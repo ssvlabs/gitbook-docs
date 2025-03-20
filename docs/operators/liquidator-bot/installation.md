@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 ### Prerequisites
 
-* [x] Wallet funded with sufficient ETH for transaction gas fees on the chosen network (Mainnet or Holesky)
+* [x] Wallet funded with sufficient ETH for transaction gas fees on the chosen network (Mainnet or Holesky or Hoodi)
 * [x] Execution layer node end-point
 * [x] Reliable internet connection
 
