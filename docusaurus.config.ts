@@ -134,7 +134,7 @@ const config: Config = {
       // The application ID provided by Algolia
       appId: 'YXTLMSGB48',
       // Public API key: it is safe to commit it
-      apiKey: '9e2600a5e43f14bb3808106c74cb5348',
+      apiKey: '085fa557da240e5496727edfb32e2fb9',
       indexName: 'ssv',
     },
   } satisfies Preset.ThemeConfig,
