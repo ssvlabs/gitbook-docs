@@ -1,10 +1,22 @@
 # Testnet
 
-The ssv.network testnet is live on the Holesky network with the goal of serving as a testing environment for protocol development and for teams building on top of ssv.network.
+The ssv.network testnet is live on the Hoodi and Holesky networks with the goal of serving as a testing environment for protocol development and for teams building on top of ssv.network.
+
+:::info
+Holesky will be faded out with Hoodi becoming the primary testnet for SSV.
+:::
 
 ### Webapp
 
 https://app.ssv.network
+
+### Smart Contracts (Hoodi)
+
+| **Contract**      | **Address**                                                                                                                   |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| SSV Token         | [0x9F5d4Ec84fC4785788aB44F9de973cF34F7A038e](https://hoodi.etherscan.io/address/0x9F5d4Ec84fC4785788aB44F9de973cF34F7A038e) |
+| SSV Network       | [0x58410Bef803ECd7E63B23664C586A6DB72DAf59c](https://hoodi.etherscan.io/address/0x58410Bef803ECd7E63B23664C586A6DB72DAf59c) |
+| SSV Network Views | [0x5AdDb3f1529C5ec70D77400499eE4bbF328368fe](https://hoodi.etherscan.io/address/0x5AdDb3f1529C5ec70D77400499eE4bbF328368fe) |
 
 ### Smart Contracts (Holesky)
 
@@ -16,7 +28,7 @@ https://app.ssv.network
 
 ### tSSV Faucet <a href="#id-652a6sxy0wse" id="id-652a6sxy0wse"></a>
 
-The tSSV Faucet is a web interface that distributes small amounts of SSV tokens on the Holesky network for validators registration to the ssv.network and testing purposes.
+The tSSV Faucet is a web interface that distributes small amounts of SSV tokens on the Holesky (and Hoodi soon) network for validators registration to the ssv.network and testing purposes.
 
 https://faucet.ssv.network/
 

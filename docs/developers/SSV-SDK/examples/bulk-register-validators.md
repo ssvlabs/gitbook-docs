@@ -33,7 +33,7 @@ You can use these like so to instantiate the SDK and store it an object:
 
 ```typescript
 // Setup viem clients
-const chain = chains.mainnet // or chains.holesky
+const chain = chains.mainnet // or chains.holesky or chains.hoodi
 const transport = http()
 
 const publicClient = createPublicClient({
