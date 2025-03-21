@@ -1,6 +1,6 @@
 ---
 title: Node Configuration Reference
-sidebar_position: 5
+sidebar_position: 7
 ---
 
 The table below represents the reference for every Node configuration option available.
