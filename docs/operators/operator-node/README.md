@@ -10,11 +10,12 @@ Operators provide hardware infrastructure, run the SSV protocol, and are respons
 To join the network as an operator a user must [install](./node-setup) the SSV node software, and [register](../operator-management/registration.md) the operator to the network.
 
 * [Installation Guide](./node-setup)
-* [Configuring MEV](/operators/operator-node/node-setup/configuring-mev)
-* [Enabling DKG](/operators/operator-node/node-setup/enabling-dkg/)
+    * [Configuring MEV](/operators/operator-node/node-setup/configuring-mev)
+    * [Configuring Preconfirmations](./node-setup/configuring-primev.md)
+    * [Enabling DKG](/operators/operator-node/node-setup/enabling-dkg/)
 * [Operator Registration](../operator-management/registration.md)
+    * [Setting Operator Metadata](../operator-management/setting-operator-metadata.md)
+    * [Updating Operator Fees](../operator-management/updating-operator-fees.md)
 * [Configuring a Permissioned Operator](../operator-management/configuring-a-permissioned-operator.md)
-* [Setting Operator Metadata](../operator-management/setting-operator-metadata.md)
-* [Updating Operator Fees](../operator-management/updating-operator-fees.md)
 * [Withdrawing Earnings](../operator-management/withdrawing-earnings.md)
 * [Removing an Operator](../operator-management/removing-an-operator.md)

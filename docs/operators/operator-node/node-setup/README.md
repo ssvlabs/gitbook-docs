@@ -187,7 +187,7 @@ Both files are needed to run SSV Node and DKG Node. You can find them under `~/s
 
 ## Other setup options
 
-The same setup can be recreated manually. The steps are described on the [Manual Node setup page].
+The same setup can be recreated manually. The steps are described on the [Manual Node setup page](./manual-setup.md).
 
 Alternatively, SSV Node setup is also available using [eth-docker](https://eth-docker.net/Support/SSV/) and [Stereum Launcher](https://stereum.net/).
 

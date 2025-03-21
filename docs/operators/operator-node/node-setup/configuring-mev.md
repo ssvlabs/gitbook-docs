@@ -1,6 +1,6 @@
 ---
 title: Configuring MEV
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 This guide outlines the necessary steps required to configure MEV within your SSV node to enable operators to participate in proposing MEV blocks for the validators they manage.
