@@ -14,8 +14,7 @@ To give you a short summary of the steps you'll need to take:
 1. [Install MEV Boost client](#install-mev-boost-client)
 2. [Choose preconf-compatible relays](#choose-compatible-relays)
 3. [Enable MEV in Beacon Client](#enable-mev-in-beacon-client)
-4. [Enable MEV in SSV](#enable-mev-in-ssv-node)
-5. [Register your validator(s) with PrimEV](#register-your-validator-with-primev)
+4. [Register your validator(s) with PrimEV](#register-your-validator-with-primev)
 
 ## Install MEV Boost client
 
@@ -39,13 +38,7 @@ Follow the setup guidelines for configuring MEV on your preferred client:
 
 ## Enable MEV in SSV node
 
-Builder proposals are managed by Beacon Client. You only need to make sure your SSV's `config.yaml` file has the following variable enabled. 
-```yaml
-ssv:
-  ValidatorOptions:
-    BuilderProposals: true 
-    # default value is true
-```
+Builder proposals are managed by Beacon Client. So once you've done the previous step, your SSV node will collaborate with MEV searchers.
 
 ## Register your validator with PrimEV
 

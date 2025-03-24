@@ -160,10 +160,9 @@ ssv:
   Network: mainnet
   
   ValidatorOptions:
-    # default value is true
+    # Block proposals are by default controlled by Beacon Node.
     # Requires the connected Beacon node to be MEV-enabled.
     # Please see https://docs.ssv.network/operator-user-guides/operator-node/installation/configuring-mev
-    BuilderProposals: false
 
 eth2:
   # HTTP URL of the Beacon node to connect to.
