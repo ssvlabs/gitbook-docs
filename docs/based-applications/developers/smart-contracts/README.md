@@ -22,7 +22,7 @@ This smart contract is under development and as such, it is only deployed on Hol
 #### Hoodi Testnet
 | Contract        | Address                                                                                                      |
 |-----------------|-------------------------------------------------------------------------------------------------------------|
-| BasedAppManager       | [`0x3F2983b813054Eba76Ae137DfA77836CA8b00ACE`](https://hoodi.etherscan.io/address/0x3F2983b813054Eba76Ae137DfA77836CA8b00ACE) |
+| BasedAppManager       | [`0x3F2983b813054Eba76Ae137DfA77836CA8b00ACE`](https://hoodi.cloud.blockscout.com/address/0x3F2983b813054Eba76Ae137DfA77836CA8b00ACE) |
 
 #### Holesky Testnet
 | Contract        | Address                                                                                                      |

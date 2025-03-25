@@ -2,9 +2,9 @@
 sidebar_position: 1
 ---
 
-# BasedAppManager
+# SSVBasedApps
 
-The BasedAppManager contract is the main contract for operations and management.
+The SSVBasedApps contract is the main contract for operations and management.
 
 
 <a href="https://github.com/ssvlabs/based-applications">

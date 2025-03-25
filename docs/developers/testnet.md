@@ -14,9 +14,9 @@ https://app.ssv.network
 
 | **Contract**      | **Address**                                                                                                                   |
 | ----------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| SSV Token         | [0x9F5d4Ec84fC4785788aB44F9de973cF34F7A038e](https://hoodi.etherscan.io/address/0x9F5d4Ec84fC4785788aB44F9de973cF34F7A038e) |
-| SSV Network       | [0x58410Bef803ECd7E63B23664C586A6DB72DAf59c](https://hoodi.etherscan.io/address/0x58410Bef803ECd7E63B23664C586A6DB72DAf59c) |
-| SSV Network Views | [0x5AdDb3f1529C5ec70D77400499eE4bbF328368fe](https://hoodi.etherscan.io/address/0x5AdDb3f1529C5ec70D77400499eE4bbF328368fe) |
+| SSV Token         | [0x9F5d4Ec84fC4785788aB44F9de973cF34F7A038e](https://hoodi.cloud.blockscout.com/address/0x9F5d4Ec84fC4785788aB44F9de973cF34F7A038e) |
+| SSV Network       | [0x58410Bef803ECd7E63B23664C586A6DB72DAf59c](https://hoodi.cloud.blockscout.com/address/0x58410Bef803ECd7E63B23664C586A6DB72DAf59c) |
+| SSV Network Views | [0x5AdDb3f1529C5ec70D77400499eE4bbF328368fe](https://hoodi.cloud.blockscout.com/address/0x5AdDb3f1529C5ec70D77400499eE4bbF328368fe) |
 
 ### Smart Contracts (Holesky)
 
