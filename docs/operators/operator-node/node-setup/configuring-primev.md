@@ -1,9 +1,9 @@
 ---
-title: Configuring PrimEV
+title: Configuring Primev
 sidebar_position: 5
 ---
 
-This guide outlines the necessary steps required to configure MEV-commit within your SSV node to enable operators to participate in MEV and preconfirmations. You can learn more about the concept and technical details on [PrimEV documentation](https://docs.primev.xyz/v1.0.0/get-started/welcome-to-primev). 
+This guide outlines the necessary steps required to configure MEV-commit within your SSV node to enable operators to participate in MEV and preconfirmations. You can learn more about the concept and technical details on [Primev documentation](https://docs.Primev.xyz/v1.0.0/get-started/welcome-to-Primev). 
 
 :::warning
 You should only participate if you're managing all operators in the cluster. If you will participate without one or many operators in the cluster — your MEV-commit collateral will be slashed. As an individual operator, you can always choose to [use regular MEV Boost](./configuring-mev.md).
@@ -14,7 +14,7 @@ To give you a short summary of the steps you'll need to take:
 1. [Install MEV Boost client](#install-mev-boost-client)
 2. [Choose preconf-compatible relays](#choose-compatible-relays)
 3. [Enable MEV in Beacon Client](#enable-mev-in-beacon-client)
-4. [Register your validator(s) with PrimEV](#register-your-validator-with-primev)
+4. [Register your validator(s) with Primev](#register-your-validator-with-Primev)
 
 ## Install MEV Boost client
 
@@ -22,7 +22,7 @@ The process is best described by the mev-boost team on [their GitHub page](https
 
 ## Choose compatible relays
 
-MEV-commit friendly relays are mentioned on [the PrimEV documentation](https://docs.primev.xyz/v1.0.0/get-started/validators/validator-guide#supporting-relays), you will find relays' URLs there too.
+MEV-commit friendly relays are mentioned on [the Primev documentation](https://docs.Primev.xyz/v1.0.0/get-started/validators/validator-guide#supporting-relays), you will find relays' URLs there too.
 
 ## Enable MEV in Beacon Client
 
@@ -40,7 +40,7 @@ Follow the setup guidelines for configuring MEV on your preferred client:
 
 Builder proposals are managed by Beacon Client. So once you've done the previous step, your SSV node will collaborate with MEV searchers.
 
-## Register your validator with PrimEV
+## Register your validator with Primev
 
 :::info
 Without completion of this step you will be practically using MEV Boost without any additional rewards.
@@ -50,7 +50,7 @@ The registry accepts validator's public key as the validator opt-in identifier. 
 
 The `VanillaRegistry.minStake` parameter represents how much ETH must be staked per validator pubkey to define that validator as opted-in to mev-commit. On Mainnet, `minStake` is 1 ETH, while on Holesky it’s 0.0001 ETH.
 
-- To learn more about this process, feel free to check out [PrimEV's explanation here](https://docs.primev.xyz/v1.0.0/get-started/validators/vanilla).
+- To learn more about this process, feel free to check out [Primev's explanation here](https://docs.Primev.xyz/v1.0.0/get-started/validators/vanilla).
 - To start the registration process, you can use [Mainnet](https://validators.mev-commit.xyz/) and [Holesky](https://holesky.validators.mev-commit.xyz/dashboard) validator dashboards. 
 You will need to submit your validators' pubkeys in a `.txt` file, each key on new line or separated by `,`.
 

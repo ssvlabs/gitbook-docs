@@ -140,7 +140,7 @@ Edit the `ssv.env` file and adjust the settings to your needs. The minimum you n
 
 * `BEACON_NODE_ADDR` - HTTP address of the Beacon node (e.g. `http://1.2.3.4:5052`)
 * `ETH_1_ADDR` - WebSocket address of the Execution node (e.g. `ws://1.2.3.4:8546`)
-* `NETWORK` - The network you are running on (`mainnet`, `holesky`)
+* `NETWORK` - The network you are running on (`mainnet`, `holesky`, `hoodi`)
 :::info
 Both `BEACON_NODE_ADDR` and `ETH_1_ADDR` support multiple endpoints. Separate them with `;`.
 
@@ -162,6 +162,16 @@ We recommend using the default ports for ease of the setup.&#x20;
 If you wish to change any of the ports — change them in both `ssv.env` and `docker-compose.yaml`, then get [back to exposing those ports in your firewall];
 
 Changes to those files will be applied after a restart of the node (_if you already started your node_).
+
+### Hoodi specific
+**❗Do not use the following version on any network, except Hoodi**
+
+If you want to start your node with Hoodi network - you will need to use specific version of SSV. This can be set in your `docker-compose.yaml` file:
+```yaml
+  ssv-node:
+    image: docker.io/ssvlabs/ssv-node:v2.2.0-unstable.1
+```
+Also make sure you've set the correct network in your `.env` file to `NETWORK=hoodi`.
 
 ## Start the Node
 

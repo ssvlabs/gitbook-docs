@@ -156,7 +156,8 @@ db:
 ssv:
   # The SSV network to join to
   # Mainnet = Network: mainnet (default)
-  # Testnet = Network: holesky
+  # Holesky = Network: holesky
+  # Hoodi = Network: hoodi
   Network: mainnet
   
   ValidatorOptions:

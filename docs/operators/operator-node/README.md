@@ -11,7 +11,7 @@ To join the network as an operator a user must [install](./node-setup) the SSV n
 
 * [Installation Guide](./node-setup)
     * [Configuring MEV](/operators/operator-node/node-setup/configuring-mev)
-    * [Configuring Preconfirmations](./node-setup/configuring-primev.md)
+    * [Configuring Primev](./node-setup/configuring-primev.md)
     * [Enabling DKG](/operators/operator-node/node-setup/enabling-dkg/)
 * [Operator Registration](../operator-management/registration.md)
     * [Setting Operator Metadata](../operator-management/setting-operator-metadata.md)
