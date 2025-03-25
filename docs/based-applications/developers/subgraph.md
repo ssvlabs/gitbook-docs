@@ -10,7 +10,9 @@ All of the data for a based application is stored in the Based Application Subgr
 
 ## Querying the Subgraph
 
-The subgraph can be queried at this API: `https://api.studio.thegraph.com/query/71118/based-applications-ssv-holesky/version/latest`
+The subgraph can be queried at this API for holesky: `https://api.studio.thegraph.com/query/71118/based-applications-ssv-holesky/version/latest`
+
+**Subgraphs for Hoodi will be available soon.**
 
 ## Example Queries
 
