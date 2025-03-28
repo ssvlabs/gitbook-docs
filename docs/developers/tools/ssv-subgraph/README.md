@@ -23,7 +23,9 @@ A series of examples of the most useful queries and the data accessible via the 
 
 ## Querying SSV Protocol smart contract data
 
-Currently, there are two official Subgraphs deployed, one for [Ethereum Mainnet](https://thegraph.com/explorer/subgraphs/7V45fKPugp9psQjgrGsfif98gWzCyC6ChN7CW98VyQnr?view=Playground\&chain=arbitrum-one), and another one for [Holesky testnet](https://thegraph.com/explorer/subgraphs/2fc6xRiZ2PaPYE2fBRZ1fB1SFS3PojvCXB8fFguXQZk6?view=Overview\&chain=arbitrum-one). **Subgraphs for Hoodi will be available soon.**
+Currently, there are two official Subgraphs deployed, one for [Ethereum Mainnet](https://thegraph.com/explorer/subgraphs/7V45fKPugp9psQjgrGsfif98gWzCyC6ChN7CW98VyQnr?view=Playground\&chain=arbitrum-one), and another one for [Holesky testnet](https://thegraph.com/explorer/subgraphs/2fc6xRiZ2PaPYE2fBRZ1fB1SFS3PojvCXB8fFguXQZk6?view=Overview\&chain=arbitrum-one). 
+
+**Subgraphs for Hoodi will be available soon.**
 
 There are a few ways to access SSV smart contract data through The Graph.
 

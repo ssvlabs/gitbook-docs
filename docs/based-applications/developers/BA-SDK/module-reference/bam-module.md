@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # BAM Module
 
-This library will contain all the BasedAppManager contract calls you need for working with Based Applications, such as registering a based application.
+This library will contain all the SSVBasedApps contract calls you need for working with Based Applications, such as registering a based application.
 
 After instantiating the SDK, you can call any of the functions in the utils library like so:
 

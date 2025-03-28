@@ -19,7 +19,7 @@ Input:
 
 | Input parameter            | Input type                        | Description                                         | Example input |
 | -------------------------- | -------------------------------- | --------------------------------------------------- | ------------- |
-| `strategyTokenWeights`     | `StrategyWeight[]`               | Output of `getStrategyTokenWeights()`              | See [here](./api-module.md#getstrategytokenweightsstring-bappaddress) |
+| `strategyTokenWeights`     | `StrategyWeight[]`               | Output of `getStrategyTokenWeights()`              | See [here](./api-module.md#getstrategytokenweights) |
 | `weightCalculationOptions` | `object`                         | Options for weight calculation                     | See breakdown below |
 | ├─ `coefficients`          | `{ token: string, coefficient: number }[]` | Array of token addresses and their coefficients    | `[ { token: "0x68a8...", coefficient: 5 } ]` |
 | ├─ `validatorCoefficient`  | `number`                         | Coefficient for validator balance                  | `1` |
@@ -67,7 +67,7 @@ Input:
 
 | Input parameter            | Input type                        | Description                                         | Example input |
 | -------------------------- | -------------------------------- | --------------------------------------------------- | ------------- |
-| `strategyTokenWeights`     | `StrategyWeight[]`               | Output of `getStrategyTokenWeights()`              | See [here](./api-module.md#getstrategytokenweightsstring-bappaddress) |
+| `strategyTokenWeights`     | `StrategyWeight[]`               | Output of `getStrategyTokenWeights()`              | See [here](./api-module.md#getstrategytokenweights) |
 | `weightCalculationOptions` | `object`                         | Options for weight calculation                     | See breakdown below |
 | ├─ `coefficients`          | `{ token: string, coefficient: number }[]` | Array of token addresses and their coefficients    | `[ { token: "0x68a8...", coefficient: 5 } ]` |
 | ├─ `validatorCoefficient`  | `number`                         | Coefficient for validator balance                  | `1` |
@@ -119,7 +119,7 @@ Input:
 
 | Input parameter            | Input type                        | Description                                         | Example input |
 | -------------------------- | -------------------------------- | --------------------------------------------------- | ------------- |
-| `strategyTokenWeights`     | `StrategyWeight[]`               | Output of `getStrategyTokenWeights()`              | See [here](./api-module.md#getstrategytokenweightsstring-bappaddress) |
+| `strategyTokenWeights`     | `StrategyWeight[]`               | Output of `getStrategyTokenWeights()`              | See [here](./api-module.md#getstrategytokenweights) |
 | `weightCalculationOptions` | `object`                         | Options for weight calculation                     | See breakdown below |
 | ├─ `coefficients`          | `{ token: string, coefficient: number }[]` | Array of token addresses and their coefficients    | `[ { token: "0x68a8...", coefficient: 5 } ]` |
 | ├─ `validatorCoefficient`  | `number`                         | Coefficient for validator balance                  | `1` |
