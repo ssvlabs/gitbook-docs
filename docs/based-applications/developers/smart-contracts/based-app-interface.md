@@ -5,7 +5,7 @@ sidebar_position: 2
 
 # BasedApp Interface
 
-Services that want to [integrate with SSV's Based Application framework](/based-applications/developers/) need to develop a smart contract, and register it to the [Based Application Manager contract](../smart-contracts/BasedAppManager.md). To be accepted by the Based Application Manager contract, this must meet certain specifications.
+Services that want to [integrate with SSV's Based Application framework](/based-applications/developers/) need to develop a smart contract, and register it to the [Based Application Manager contract](../smart-contracts/SSVBasedApps.md). To be accepted by the Based Application Manager contract, this must meet certain specifications.
 
 ## What is a valid `BasedApp` Contract?
 

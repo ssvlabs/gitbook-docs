@@ -33,10 +33,10 @@ The `BAppManager` smart contract developed by SSV Labs accepts registrations of 
 
 1. **Define core attributes**:
 - `bApp`: a unique 20-byte EVM address that uniquely identifies the bApp.
-- `tokens`:  A list of ERC-20 tokens to be used in the bApp's security mechanism. For the native ETH token, use the special address [`0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE`](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L62).
+- `tokens`:  A list of ERC-20 tokens to be used in the bApp's security mechanism. For the native ETH token, use the special address [`0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE`](https://github.com/ssvlabs/based-applications/blob/main/src/SSVBasedApps.sol#L74).
 - `sharedRiskLevels`: a list with $\beta$ values, one for each token, representing the bApp's tolerance for risk (token over-usage).
 2. **Optional Non-Slashable Validator Balance**: If the bApp uses non-slashable validator balance, it should be configured off-chain, in the bApp's network.
-3. **Register the bApp**: Use the [`registerBApp`](./smart-contracts/BasedAppManager#registerbappbapp-tokens-sharedrisklevels-metadatauri) function of the smart contract:
+3. **Register the bApp**: Use the [`registerBApp`](./smart-contracts/SSVBasedApps#registerbappbapp-tokens-sharedrisklevels-metadatauri) function of the smart contract:
 ```javascript
 function registerBApp(
    address bApp,
@@ -52,7 +52,7 @@ function registerBApp(
 
 Node managers can register a Strategy at any point in time, and in some way this is independent of the BApp itself. So the cardinal order in this step is only representative of the requirement for the BApp.
 
-Strategies can be registered by using the [`createStrategy`](./smart-contracts/BasedAppManager#createstrategyfee-metadatauri) function of the smart contract:
+Strategies can be registered by using the [`createStrategy`](./smart-contracts/SSVBasedApps#createstrategyfee-metadatauri) function of the smart contract:
 
 ```javascript
 function createStrategy(
@@ -65,7 +65,7 @@ function createStrategy(
 
 ## 4. Opting in
 
-A Strategy opts-in to the bApp by using the [`optInToBApp`](./smart-contracts/BasedAppManager#optintobappstrategyid-bapp-tokens-obligationpercentages-data) function of the smart contract:
+A Strategy opts-in to the bApp by using the [`optInToBApp`](./smart-contracts/SSVBasedApps#optintobappstrategyid-bapp-tokens-obligationpercentages-data) function of the smart contract:
 
 ```javascript
 function optInToBApp(
@@ -87,8 +87,8 @@ The strategy’s owner can later update their obligations by modifying existing 
 ## 5. Strategy's Funds
 
 To compose their balances, strategies:
-1. receive ERC20 (or ETH) via [**deposits**](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L376) from accounts.
-2. inherit the non-slashable validator balance from the strategy's owner account. Accounts [**delegate**](https://github.com/ssvlabs/based-applications/blob/main/src/BasedAppManager.sol#L201) validator balances between themselves, and the strategy inherits its owner's non-delegated balance plus the received balances from other accounts.
+1. receive ERC20 (or ETH) via [**deposits**](https://github.com/ssvlabs/based-applications/blob/main/src/SSVBasedApps.sol#305) from accounts.
+2. inherit the non-slashable validator balance from the strategy's owner account. Accounts [**delegate**](https://github.com/ssvlabs/based-applications/blob/main/src/SSVBasedApps.sol#188) validator balances between themselves, and the strategy inherits its owner's non-delegated balance plus the received balances from other accounts.
 
 ## 6. Build BApp client
 

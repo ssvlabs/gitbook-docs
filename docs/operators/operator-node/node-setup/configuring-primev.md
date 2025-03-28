@@ -14,7 +14,7 @@ To give you a short summary of the steps you'll need to take:
 1. [Install MEV Boost client](#install-mev-boost-client)
 2. [Choose preconf-compatible relays](#choose-compatible-relays)
 3. [Enable MEV in Beacon Client](#enable-mev-in-beacon-client)
-4. [Register your validator(s) with Primev](#register-your-validator-with-Primev)
+4. [Register your validator(s) with Primev](#register-your-validator-with-primev)
 
 ## Install MEV Boost client
 

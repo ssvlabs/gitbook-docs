@@ -13,7 +13,7 @@ For a based application, it is important to know how much capital each strategy 
 ## How to calculate the weights of a strategy
 
 :::info
-To do this programmatically, read this section in the [Based Applications developer documentation](../../developers/BA-SDK/examples/participant-weight-example).
+To do this programmatically, read this section in the [Based Applications developer documentation](../../developers/bapp-example).
 
 To do this manually, follow the steps below and obtain the information by querying the [Based Application Subgraph](../../developers/subgraph).
 :::

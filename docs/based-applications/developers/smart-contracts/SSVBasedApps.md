@@ -62,7 +62,7 @@ Description: Registers a new Based Application (bApp) with specified tokens and 
 | ------------ | -------- | --------------- |
 | bApp | address | The address of the bApp to register |
 | tokens | address[] | List of token addresses the bApp accepts |
-| sharedRiskLevels | uint32[] | Risk levels for each token (max 100000) |
+| sharedRiskLevels | uint32[] | New risk levels for each token (max 100000) (scaled by 1e4, so 2.5 = 25000) |
 | metadataURI | string | metadata URI of the bApp, which is a link (e.g., http://example.com) to a JSON file containing metadata such as the name, description, logo, etc. |
 
 Events:
@@ -88,7 +88,7 @@ Description: Adds new tokens to an existing bApp.
 | ------------ | -------- | --------------- |
 | bApp | address | The address of the bApp |
 | tokens | address[] | List of new token addresses to add |
-| sharedRiskLevels | uint32[] | Risk levels for each new token |
+| sharedRiskLevels | uint32[] | New risk levels for each token (max 100000) (scaled by 1e4, so 2.5 = 25000) |
 
 Events:
 * `TokensAddedToBApp(address indexed bApp, address[] tokens, uint32[] sharedRiskLevels)`
@@ -101,7 +101,7 @@ Description: Updates the shared risk levels for existing tokens in a bApp. Can o
 | ------------ | -------- | --------------- |
 | bApp | address | The address of the bApp |
 | tokens | address[] | List of token addresses to update |
-| sharedRiskLevels | uint32[] | New risk levels for each token (max 100000) |
+| sharedRiskLevels | uint32[] | New risk levels for each token (max 100000) (scaled by 1e4, so 2.5 = 25000) |
 
 Events:
 * `BAppTokensUpdated(address indexed bApp, address[] tokens, uint32[] sharedRiskLevels)`
