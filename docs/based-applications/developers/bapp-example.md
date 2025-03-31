@@ -18,7 +18,7 @@ The example discussed in this page can be found at this repository:
 
 It has been built to execute one task: fetch the most recent block and reach a majority vote on the slot number.
 
-The simple example implemented [here]([`https://github.com/ssvlabs/examples`](https://github.com/ssvlabs/examples)) and used as reference in this page does not currently use the SDK as it breaks down the steps further, with verbose logging, for illustrative purposes, as this is the most important thing that BApp client developers need to familiarize with.
+The simple example implemented [here](https://github.com/ssvlabs/examples) and used as reference in this page does not currently use the SDK as it breaks down the steps further, with verbose logging, for illustrative purposes, as this is the most important thing that BApp client developers need to familiarize with.
 
 When launched, the application the first action it takes is to fetch on-chain data for the given Based Application, in order to calculate the Strategy weights.
 
@@ -28,7 +28,7 @@ In Based Applications, the **obligated token balance and delegated validator bal
 
 For an overview of these steps as well as a thorough explanation on the calculations, [please refer to this page in the Learn section](../learn/based-applications/strategy-weights.md).
 
-Developers should, however, not worry too much about it, as all of this can be accomplished thanks to high-level SDK functions: [`getStrategyTokenWeights()`](./BA-SDK/module-reference/api-module.md#getstrategytokenweightsstring-bappaddress) and [`calcArithmeticStrategyWeights()`](./BA-SDK/module-reference/utils-module.md#calcsimplestrategyweights) (as well as its other variants).
+Developers should, however, not worry too much about it, as all of this can be accomplished thanks to high-level SDK functions: [`getStrategyTokenWeights()`](./BA-SDK/module-reference/api-module.md#getstrategytokenweights) and [`calcArithmeticStrategyWeights()`](./BA-SDK/module-reference/utils-module.md#calcarithmeticstrategyweights) (as well as its other variants).
 
 The vote calculation follows these steps:
 
