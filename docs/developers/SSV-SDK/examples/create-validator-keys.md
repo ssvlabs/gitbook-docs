@@ -35,7 +35,7 @@ import type { Address } from 'abitype'
 import type { Hex } from 'viem'
 import { sha256, toBytes, toHex } from 'viem'
 
-const chainConfigs: Record&#x3C;keyof typeof chains, ChainConfig> = {
+const chainConfigs: Record<keyof typeof chains, ChainConfig> = {
   mainnet: mainnetChainConfig,
   holesky: holeskyChainConfig,
 }
@@ -115,7 +115,7 @@ export async function createValidatorKeys({
 
   const chainConfig = chainConfigs[chain]
 
-  for (let i = index; i &#x3C; count; i++) {
+  for (let i = index; i < count; i++) {
     const sk = bls.SecretKey.fromBytes(deriveEth2ValidatorKeys(masterSK, i).signing)
     const pubkey = sk.toPublicKey()
     const pubkeyBytes = pubkey.toBytes()
