@@ -5,12 +5,10 @@ unlisted: true
 
 # Gas Limit Change
 
-Recently, Ethereum community suggested an increase in Gas Limit to 36M (see https://pumpthegas.org). 
-
-The default gas limit is 30M and recent SSV release makes it configurable as long as the operator committees converge on the same value.
+The default gas limit is 30M and SSV makes it configurable as long as the operator committees converge on the same value.
 
 :::danger Attention
-All operators in the committee **MUST** set the same gas limit, otherwise MEV registrations would fail and the validators would eventually not propose MEV blocks and instead fall back to local non-MEV blocks.
+All operators in the committee **MUST** set the same gas limit. Otherwise, MEV registrations would fail. The validators would eventually not propose MEV blocks and instead fall back to vanilla blocks (non-MEV blocks built locally).
 
 **Do this only on private operators, and on clusters where you either can control all the operators, or coordinate with them**.
 :::
@@ -26,7 +24,7 @@ ValidatorOptions:
     ExperimentalGasLimit: 36000000
 ```
 
-Gas limit for local blocks (non-MEV) are set by the Execution Node  which you should ideally be set to the same value.
+Gas limit for vanilla blocks (non-MEV blocks built locally) are set by the Execution Node  which you should ideally be set to the same value.
 
 
 ## Verification 

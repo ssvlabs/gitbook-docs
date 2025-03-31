@@ -170,10 +170,10 @@ Alternatively, the tool can be launched providing the appropriate values to each
 
 ```bash
 docker run --rm -v ${pwd}:/ssv-dkg/data/ -it "ssvlabs/ssv-dkg:latest" init \
-    --owner &#x3C;OWNER_ADDRESS> \
-    --nonce &#x3C;OWNER_NONCE> \
-<strong>    --withdrawAddress &#x3C;WITHDRAWAL_ADDRESS> \
-</strong>    --operatorIDs &#x3C;OPERATOR_IDS_LIST> \
+    --owner <OWNER_ADDRESS> \
+    --nonce <OWNER_NONCE> \
+    --withdrawAddress <WITHDRAWAL_ADDRESS> \
+    --operatorIDs <OPERATOR_IDS_LIST> \
     --operatorsInfo "[{\"id\":121,\"public_key\":\"LS0tLS1CRUdJTiBSU0Eg...}]" \
     --network holesky \
     --tlsInsecure \

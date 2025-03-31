@@ -7,15 +7,6 @@ sidebar_position: 1
 
 ## Minimum requirements
 
-:::danger CPU requirements
-The tool has cryptopgrahic dependencies on certain CPU features:
-- CPU has to have `BMI2 and ADX/AVX2` support.
-- On MacOS devices you need to **disable** Rosetta.
-
-If the requirements are not met - staker won't be able to generate keys with your DKG node and will see this specific error:
-`failed to validate ceremony proof: invalid proof validator pubkey`.
-:::
-
 The minimum requirement is an AWS `t3.small` or equivalent machine dedicated to run DKG.&#x20;
 The recommend requirement is an AWS `t3.medium` or higher tier machine  ([https://aws.amazon.com/ec2/instance-types/](https://aws.amazon.com/ec2/instance-types/)).
 

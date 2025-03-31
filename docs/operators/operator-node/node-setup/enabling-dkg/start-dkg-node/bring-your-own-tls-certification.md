@@ -5,7 +5,9 @@ sidebar_position: 2
 
 # Bring Your Own TLS Certification
 
+:::info Note
 By default, the certificates will be generated automatically on the first start of DKG tool. **The following steps are not required for the correct setup**.
+:::
 
 However, if you want to generate the certificates yourself, you can follow the steps below.
 
