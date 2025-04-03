@@ -28,7 +28,7 @@ In the following screen, fill-in the form with the information you want to edit.
 Remember: the more details you can provide the better, as it will help stakers making informed decision when selecting operators to manage their validator clusters.
 
 :::warning Please note
-Currently, the `Description` part does not allow to use symbols `, . ; :`. Don't use the symbols to avoid errors when submitting the metadata.
+Currently, the `Description` and `Name` parts do not allow to use symbols `, . ; :`. Please don't use them, otherwise you'll see errors when submitting the metadata.
 :::
 
 ![setting-operator-metadata](/img/set-operator-metadata-4.avif)
