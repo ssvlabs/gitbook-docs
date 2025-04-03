@@ -19,7 +19,7 @@ Please head over to [the Operator User guide on how to update metadata](../../..
 
 You can test out if your DKG node is correctly setup, with these simple steps:
 
-* fetch operator metadata from [SSV-API](https://api.ssv.network/documentation/#/v4) (e.g. `https://api.ssv.network/api/v4/<holesky | mainnet>/operators/<OPERATOR_ID>` choosing the right network and substituting your operator ID) and get `dkg_address` from the output
+* fetch operator metadata from [SSV-API](https://api.ssv.network/documentation/#/v4) (e.g. `https://api.ssv.network/api/v4/<hoodi | holesky | mainnet>/operators/<OPERATOR_ID>` choosing the right network and substituting your operator ID) and get `dkg_address` from the output
 * run the command:`docker run --rm "ssvlabs/ssv-dkg:latest" ping --ip <DKG_ADDRESS>` where `<DKG_ADDRESS>` is the address used in the previous step
 
 It should tell you if the operator is online and is updated to the latest version.

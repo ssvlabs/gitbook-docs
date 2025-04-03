@@ -249,8 +249,9 @@ Below is a table with issues description, their probable causes and solutions. Y
 If you see SSV shows 0 peers and connections that means you have not opened 16000 port on your container, and the tool can’t reach the correct endpoint. If you are running your node as a  systemd service, you’ll likely see the same result. 
 
 #### Solution
-Open `SSVAPIPort` on the SSV container. By default the config value is 16000, you can adjust it in the `config.yaml` file if you wish.
-As an alternative for SSV running as a systemd service, you can expose 16000 port externally and use a public IP address. Lastly, you can check the same data via curl command `curl http://localhost:16000/v1/node/health`.
+- Open `SSVAPIPort` on the SSV container. By default the port is 16000, optionally can be changed in `config.yaml`.
+- As an alternative for SSV running as a systemd service, you can expose 16000 port externally and use a public IP address. 
+- Lastly, you can check the same data via curl command `curl http://localhost:16000/v1/node/health`.
 
 
 ### SSV 0 inbound connections
@@ -280,7 +281,10 @@ The other common cause for SSV’s poor performance is errors such as `future ms
 In this example you see Execution node has 0 peers while there is data in Latency row. In such a case, your Execution node likely has peers, but its `net` namespace is disabled and the benchmark tool can’t fetch the `net_peerCount` results. 
 
 #### Solution
-If you have a monitoring setup on your Execution node you can find the peer count on your dashboard. Otherwise, you should enable `net` namespace, here is how to do it [on Geth](https://geth.ethereum.org/docs/fundamentals/command-line-options) (`--http.api`) and [on Nethermind](https://docs.nethermind.io/fundamentals/configuration#jsonrpc-additionalrpcurls) (`JsonRpc.AdditionalRpcUrls`).
+- If you have a monitoring setup on your Execution node you can find the peer count on your dashboard. 
+- Otherwise, you should enable `net` namespace
+  - How to do it [on Geth](https://geth.ethereum.org/docs/fundamentals/command-line-options) (`--http.api`) 
+  - And [on Nethermind](https://docs.nethermind.io/fundamentals/configuration#jsonrpc-additionalrpcurls) (`JsonRpc.AdditionalRpcUrls`).
 
 ### Execution peer count
 
@@ -291,8 +295,8 @@ The healthy number of Execution peers is 25-75, depending on your client and its
 In this example, the client is Besu and 25 `maxpeers` is the default value, so everything is good. If you see 25 on Geth that is too low, as the default `maxpeers` for Geth is 50. Also, if you see an abnormal number of peers you might have issues with your ISP. That is common with home setups where local ISPs can’t provide enough concurrent connections.
 
 #### Solution
-Adjust the `--maxpeers` value as per your client’s documented default value and restart Execution node. 
-If you suspect the issue is with concurrent connection limit, refer to [the relevant section here](#network-congestion).
+- Adjust the `--maxpeers` value as per your client’s documented default value and restart Execution node. 
+- If you suspect the issue is with concurrent connection limit, refer to [the relevant section here](#network-congestion).
 
 
 ### Consensus or Execution latency
@@ -302,13 +306,9 @@ If you suspect the issue is with concurrent connection limit, refer to [the rele
 If you are running SSV, Execution, and Consensus on the same server - you should see latency 10ms or lower. Running clients on different servers is suboptimal and you will see latency around 150ms. Any value above can be considered unhealthy, as it affects your performance a lot.
 
 #### Solution
-Relocate your nodes to be closer to each other. Or better run SSV, Execution, and Consensus on the same server.
-
-For nodes hosted on several servers it is strongly recommended to use NTP server to keep timestamps in sync (e.g. [chrony](https://ethdocker.com/Usage/LinuxSecurity/#time-synchronization-on-linux)) and [TCP BBR congestion control](https://www.cyberciti.biz/cloud-computing/increase-your-linux-server-internet-speed-with-tcp-bbr-congestion-control/).
-
-If you find your latency is >150ms with closely located nodes — likely your network is congested, it depends on the network limitations your setup has. If you are using bare metal providers or cloud computing services to host your nodes - they should have visibility into your network congestion. For home setups it can be hard to find the limit or track it at all, as local ISPs rarely provide this information (e.g. actual throughput of their hardware in place).
-A sign of an overloaded network can be higher latency between your clients, sync issues, and unstable performance.
-
+- Relocate your nodes to be closer to each other. For the best performance run SSV, Execution, and Consensus on the same server.
+- If you find your latency is >150ms with closely located nodes — likely your network is congested, it depends on the network limitations your setup has. If you are using bare metal providers or cloud computing services to host your nodes - they should have visibility into your network congestion. For home setups it can be hard to find the limit or track it at all, as local ISPs rarely provide this information (e.g. actual throughput of their hardware in place). You can refer to [the relevant section here](#network-congestion).
+- For nodes hosted on several servers it is strongly recommended to use NTP server to keep timestamps in sync (e.g. [chrony](https://ethdocker.com/Usage/LinuxSecurity/#time-synchronization-on-linux)) and [TCP BBR congestion control](https://www.cyberciti.biz/cloud-computing/increase-your-linux-server-internet-speed-with-tcp-bbr-congestion-control/).
 
 ### Consensus peer count
 
@@ -318,7 +318,10 @@ By default, `maxpeers` value on Consensus nodes is in the range of 50-150, depen
 Peer count is a double-edged sword. Having too few peers can cause sync issues, while having too many will “eat” all of your network bandwidth causing performance issues and RPC calls delay.
 
 #### Solution
-Stick to the recommended `maxpeers` value provided by your client’s documentation (e.g. 70 for Prysm, 100 for Lighthouse).
+- Stick to the recommended `maxpeers` value provided by your client’s documentation 
+  - `--p2p-max-peers=70` [for Prysm](https://docs.prylabs.network/docs/prysm-usage/parameters#beacon-node-flags)
+  - `--target-peers=100` [for Lighthouse](https://lighthouse-book.sigmaprime.io/faq.html?highlight=peer#network-monitoring-and-maintenance-1)
+  - `--p2p-peer-upper-bound=100` [for Teku](https://docs.teku.consensys.io/reference/cli#p2p-peer-lower-bound)
 
 ### Consensus missed blocks
 
@@ -330,11 +333,11 @@ The healthy number of missed blocks is 0-2. If you are seeing significantly more
 Such an issue can come from multiple directions, from configuration faults to hardware resources deficiency. You can cross-check this with [the log analyzer tool](#ssv-pulse-log-analysis).
 
 #### Solution
-Firstly, make sure your peer counts are in the healthy range for both Consensus and Execution nodes, you can refer to relevant sections. Other than that, this issue might be coming from hardware bottlenecks. 
+- Make sure your peer counts are in the healthy range for both Consensus and Execution nodes, you can refer to relevant sections above.
 
-For example, your disk doesn’t have enough free space and/or IOPS limit of your disk is too low to keep up with the new blocks production. [Regular pruning of your databases](https://everstake.one/blog/how-to-prune-an-eth-20-node-with-prysm-and-geth-as-an-external-execution-layer) can be helpful, if that’s not helpful change the hardware. 
-
-Another example is not enough RAM, you can adjust the available resources for your node (e.g. Execution needs less RAM than most Consensus nodes), regular restarts every week might help slightly. Once again, if that’s not helpful enough you’ll need to upscale.
+Other than that, this issue might be coming from hardware bottlenecks:
+- For example, your disk doesn’t have enough free space and/or IOPS limit of your disk is too low to keep up with the new blocks production. [Regular pruning of your databases](https://everstake.one/blog/how-to-prune-an-eth-20-node-with-prysm-and-geth-as-an-external-execution-layer) can be helpful, if that’s not helpful change the hardware. 
+- Another example is not enough RAM, you can adjust the available resources for your node (e.g. Execution needs less RAM than most Consensus nodes), regular restarts every week might help slightly. Once again, if that’s not helpful enough you’ll need to upscale.
 
 
 ### RAM and CPU usage
@@ -394,11 +397,11 @@ So your setup has to handle at least 120+50+15 = 185 concurrent connections. Tha
 If your setup has a bottleneck in concurrent connections you will see unstable peer count, sync issues, performance issues, delayed RPC calls. Same with congested network - not enough bandwidth.
 
 #### Solution
-First of all, we need to understand the current network usage which can be done with monitoring provided by your server hosting, or with Linux [tools such as iperf](https://www.golinuxcloud.com/linux-monitor-network-traffic/). Monitoring peer count on your Consensus and Execution nodes can give you a hint into this.
+1. First of all, we need to understand the current network usage which can be done with monitoring provided by your server hosting, or with Linux [tools such as iperf](https://www.golinuxcloud.com/linux-monitor-network-traffic/). Monitoring peer count on your Consensus and Execution nodes can give you a hint into this.
 
-Secondly, we need to learn if there are network limitations imposed on your setup. As already mentioned, network usage can be limited by your router, ISP, server/bare metal provider, and hardware. With ISPs and server providers that limit can be undisclosed, so you might need to ask them about an existing limitation.
+2. Secondly, we need to learn if there are network limitations imposed on your setup. As already mentioned, network usage can be limited by your router, ISP, server/bare metal provider, and hardware. With ISPs and server providers that limit can be undisclosed, so you might need to ask them about an existing limitation.
 
-Lastly, expand the limits and improve your setup. The industry standard for network congestion control is [TCP BBR](https://www.cyberciti.biz/cloud-computing/increase-your-linux-server-internet-speed-with-tcp-bbr-congestion-control/) and we strongly recommend using it.
+3. Lastly, expand the limits and improve your setup. The industry standard for network congestion control is [TCP BBR](https://www.cyberciti.biz/cloud-computing/increase-your-linux-server-internet-speed-with-tcp-bbr-congestion-control/) and we strongly recommend using it.
 
 ### Disk performance
 
@@ -406,9 +409,9 @@ This metric is also not observed in the benchmark results. In our tests we have 
 It is fairly easy to detect insufficient free space - one or many of your nodes will be in a restart loop, as they fail to write new data on the disk. However, detecting not-so-well performing disks is not as easy. That is why the industry standard disk is NVMe or at least fairly powerful SSD. 
 
 #### Solution
-There are a couple of tools called `noatime` and `swappiness`, you could use to optimize your disk usage for running Ethereum clients. They are described by [eth-docker team on their docs](https://ethdocker.com/Usage/LinuxSecurity/#additional-and-recommended-linux-performance-tuning), we highly recommend utilizing them.
+- There are a couple of tools called `noatime` and `swappiness`, you could use to optimize your disk usage for running Ethereum clients. They are described by [eth-docker team on their docs](https://ethdocker.com/Usage/LinuxSecurity/#additional-and-recommended-linux-performance-tuning), we highly recommend utilizing them.
 
-Disk issues arise generally if you don’t have enough free space or if the disk is not performant enough in terms of IOPS. So in case your nodes are hosted in a cloud/bare metal environment you can always upscale. For home stakers the only option is to upgrade their setup.
+- Disk issues arise generally if you don’t have enough free space or if the disk is not performant enough in terms of IOPS. So in case your nodes are hosted in a cloud/bare metal environment you can always upscale. For home stakers the only option is to upgrade their setup.
 
 
 ## SSV Node health endpoint
@@ -500,7 +503,7 @@ To use this tool you can use docker compose or a docker command below:
 
   Replace the various addresses with the respective endpoints, e.g. `http://lighthouse:5052`, `http://geth:8545`, and SSV `http://ssv_node:16000` (or your other SSVAPIPort).
 
-  - If you run a Holesky Node you should add `--network=holesky` to the command.
+  - If you run a Hoodi Node you should add `--network=hoodi` to the command.
   - If you run this on a arm64 machine you should add `--platform linux/arm64` to the command.
   </TabItem>
   <TabItem value="docker-compose" label="docker compose">
@@ -518,7 +521,7 @@ services:
       - '--execution-addr=<YOUR_ADDRESS_HERE>' # Change to Execution Node's address, e.g. http://geth:8545
       - '--ssv-addr=<YOUR_ADDRESS_HERE>' # Change to SSV Node's address, e.g. http://ssv_node:16000
       - '--duration=60m'
-      # - '--network=holesky' # Add this if you run a Holesky Node
+      # - '--network=hoodi' # Add this if you run a Hoodi Node
       # - '--platform linux/arm64' # Add this if you run on an arm64 machine
     networks:
       - host # This allows ssv-pulse to access any docker container hosted on the machine
@@ -617,12 +620,16 @@ If curious, you can find more details on [ssv-pulse GitHub page](https://github.
 
 To use this tool follow the steps below:
 1. Locate debug log files. Usually they're in the same folder as config and named `debug-2025-03-10T....log`
-2. Copy one or several log files into a separate folder
+2. Copy one or several log files into a **new** folder
 3. `cd` into that folder
 4. Run the command below:
 ```bash
 docker run --rm --pull=always -v .:/logs ghcr.io/ssvlabs/ssv-pulse:latest analyzer --log-files-directory=/logs
 ```
+
+:::info
+Log files need to be placed in a fresh new directory. Otherwise you might see an error `panic: invalid character '\x00' looking for beginning of value`.
+:::
 
 Tool will automatically detect the Node ID for each log file. If you have logs from multiple nodes - we recommend choosing logs with similar timestamps.
 

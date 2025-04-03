@@ -170,6 +170,13 @@ eth2:
   BeaconNodeAddr: <ETH2_NODE> # e.g. http://example.url:5052
   # If you want to use multiple endpoints you can divide them with ;
   # e.g. http://example.url:5052;http://example.url:5053
+  
+  # Enables improved attestation accuracy by scoring responses from multiple Beacon nodes.
+  # Will have no effect with only 1 endpoint.
+  WithWeightedAttestationData: false
+
+  #Enables parallel Attestation and Sync Committee submissions to multiple Beacon nodes.
+  WithParallelSubmissions: false
 
 eth1:
   # WebSocket URL of the Eth1 node to connect to.
