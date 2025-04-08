@@ -10,13 +10,25 @@ import TabItem from '@theme/TabItem';
 
 It is advised launching the tool with a Docker compose as it is the most convenient way and only requires to have Docker installed. The team builds a Docker image with every release of the tool.
 
-## Configuration
+## SSV Stack
+If you chose to setup your SSV node with the [SSV Stack repository](/operators/operator-node/node-setup/#install-ssv-node-stack),
+you can start the DKG node in three steps:
+1. Edit configuration file `./dkg-data/operator.yaml`
+    - `operatorID` - the ID of your operator
+    - `ethEndpointURL` - HTTP Address of your Execution node endpoint
+
+
+2. Run the command `docker compose --profile dkg up -d`
+
+
+      - Make sure you're running from `ssv-stack` directory
+3. Go to the [**Final Steps**](../final-steps.md)
+
+## Manual Configuration
 
 All of the necessary configuration information can be provided via command line parameters, but a YAML config file is often the most convenient way, thus it's what this documentation page will be discussing.
 
 A good way to manage all the necessary files is to store them in a single folder (in this case `ssv-dkg-data`), together with the `operator.yaml` configuration file.
-
-If you chose to setup your SSV node with the [SSV Stack repository](/operators/operator-node/node-setup/#install-ssv-node-stack), you should create `ssv-dkg-data` inside of the existing `ssv-stack` directory.
 
 The final result should look like so:
 
@@ -58,42 +70,6 @@ In the config file above, `./data/` represents the container's shared volume cre
 ## Start SSV-DKG Node
 
 <Tabs>
-<TabItem value="SSV Stack">
-If you did set up SSV node with [the SSV Stack repository](/operators/operator-node/node-setup/#install-ssv-node-stack), you can simply add DKG to your existing setup.
-
-1. Your `ssv-dkg-data` directory should be inside of the `ssv-stack`.
-2. Edit the `docker-compose.yaml` file that you already have.
-3. Add the following content at the end of your file, but before the `networks:` part
-
-```yaml
-  ssv-dkg:  
-    image: ssvlabs/ssv-dkg:latest
-    pull_policy: always
-    restart: "unless-stopped"
-    container_name: ssv-dkg
-    networks:
-      - local-docker
-    volumes:
-      - ./ssv-dkg-data:/ssv-dkg/data
-    ports:
-      - 3030:3030/tcp
-    command:
-      ["start-operator", "--configPath", "./data/operator.yaml"]
-      
-# You should leave "networks: ..." below this
-```
-
-4. Start your DKG with the command `sudo docker compose up ssv-dkg`
-
-:::info
-This command will keep the terminal busy, showing the container's logs. It is useful to make sure that the tool start up sequence runs correctly.
-
-You can detach the terminal at any time by hitting `Ctrl-c` key combination, or closing the terminal itself. The tool will be stopped, but it will restart automatically, thanks to the `restart: "unless-stopped"` startup parameter.
-
-If you are sure that the tool works and don't care about the logs — you can use `-d` parameter `sudo docker compose up -d ssv-dkg`.
-:::
-</TabItem>
-
 <TabItem value="docker-compose">
 To start and manage the DKG tool in the most convenient way, it is advised to use `docker-compose`.
 
@@ -223,6 +199,5 @@ If the `--configPath` parameter is not provided, `ssv-dkg` will be looking for a
 </TabItem>
 </Tabs>
 
-:::danger
-When you set up your firewall on your DKG node machine, **make sure to expose the port you set in the configuration** (and Docker container creation command, if running on Docker). The default is **3030**.
-:::
+## What's next?
+Once you're done with all the steps here, go to the [**the Final Steps**](../final-steps.md).

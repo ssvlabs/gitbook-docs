@@ -5,6 +5,11 @@ sidebar_position: 3
 
 # Final Steps
 
+## Open port 3030❗
+**Make sure to expose the port you set on your machine's firewall** (and Docker container creation command, if running on Docker). The default is **3030**.
+
+**Otherwise**, your DKG node will not be available for stakers, as a result you will get less validators. 
+
 ## Update Operator Metadata
 
 :::warning

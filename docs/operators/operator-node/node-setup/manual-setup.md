@@ -196,6 +196,9 @@ KeyStore:
   PrivateKeyFile: <ENCRYPTED_PRIVATE_KEY_JSON> # e.g. ./encrypted_private_key.json
   PasswordFile: <PASSWORD_FILE> # e.g. ./password
 
+# Enables Doppelganger Protection for validators, see https://github.com/ssvlabs/ssv/blob/v2.3.0/doppelganger/README.md
+EnableDoppelgangerProtection: false
+
 # This enables monitoring at the specified port, see https://docs.ssv.network/run-a-node/operator-node/monitoring
 MetricsAPIPort: 15000
 # This enables node health endpoint for troubleshooting, see https://docs.ssv.network/operator-user-guides/operator-node/maintenance/troubleshooting
