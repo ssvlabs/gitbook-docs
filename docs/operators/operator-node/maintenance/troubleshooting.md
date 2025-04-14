@@ -488,6 +488,21 @@ Benchmark analyzes SSV, Consensus, and Execution Nodes at the same time. If curi
 
 To use this tool you can use docker compose or a docker command below:
 <Tabs>
+  <TabItem value="ssv-stack" label="SSV Stack">
+
+  If you did setup your SSV node with the [SSV Stack repository](/operators/operator-node/node-setup/#install-ssv-node-stack), you already have the benchmark tool partially setup.
+
+  To run the benchmark tool:
+  * Open `docker-compose.yaml` file in your `ssv-stack` directory
+  * Scroll down to the `ssv-pulse` service, at the very bottom
+  * Replace the various addresses with the respective endpoints:
+      * `--consensus-addr` to your Consensus HTTP, e.g. `http://127.0.0.1:5052`
+      * `--execution-addr` to your Execution HTTP, e.g. `http://127.0.0.1:8545`
+      * If you run a Hoodi node you should uncomment `--network=hoodi` (delete #)
+      * If you run this on a arm64 machine you should uncomment `--platform linux/arm64`
+  * Run `docker compose run ssv-pulse`
+
+  </TabItem>
   <TabItem value="docker-run" label="docker run">
 
   Use the following command to run the benchmark tool:
@@ -534,84 +549,11 @@ Then run `docker compose up ssv-pulse` to run the benchmark tool.
   </TabItem>
 </Tabs>
 
-<details>
-
-<summary><strong>Beware the benchmark results</strong></summary>
-
-The tool will run for 1 hour and provide you with results as a table.
-
-:::warning Please note
+:::warning When analysing results
 Use the `Value` column as the ultimate validation tool. Don't just look at the `Health` column, as this can sometimes be misleading. 
+
+Now you can get back to the [**Checklists for Troubleshooting**](#checklists-for-troubleshooting) to interpret results.
 :::
-
-Let's look at example below. `Unhealthy` statuses on SSV and Execution are there because minimum peer value was 0, that is likely due to restart right before running the benchmark. p50 values are completely normal, so this is a false alarm:
-```log
-┌────────────────┬─────────────┬──────────────────────────────────────────────────────────┬────────────┬──────────────────────────────────────────────────────────┐
-│   Group Name   │ Metric Name │                          Value                           │   Health   │                         Severity                         │
-├────────────────┼─────────────┼──────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────────┤
-│   Consensus    │   Client    │          Lighthouse/v5.3.0-d6ba8c3/x86_64-linux          │ Healthy✅  │                      Version: None                       │
-├────────────────┼─────────────┼──────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────────┤
-│   Consensus    │   Latency   │ min=63.301µs, p10=99.168µs, p50=147.59µs, p90=386.902µs, │ Healthy✅  │ DurationMin: None, DurationP10: None, DurationP50: None, │
-│                │             │                      max=1.697228ms                      │            │           DurationP90: None, DurationMax: None           │
-├────────────────┼─────────────┼──────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────────┤
-│   Consensus    │    Peers    │        min=98, p10=100, p50=104, p90=110, max=110        │ Healthy✅  │                       Count: None                        │
-├────────────────┼─────────────┼──────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────────┤
-│   Consensus    │ Attestation │     missed_attestations=0, unready_blocks_200_ms=0,      │ Healthy✅  │ Correctness: None, MissedBlock: None, FreshAttestation:  │
-│                │             │                     missed_blocks=2                      │            │                None, ReceivedBlock: None                 │
-│                │             │       fresh_attestations=294 received_blocks=294,        │            │                                                          │
-│                │             │                   correctness=100.00 %                   │            │                                                          │
-├────────────────┼─────────────┼──────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────────┤
-│   Execution    │    Peers    │          min=0, p10=50, p50=50, p90=50, max=50           │ Unhealthy⚠️ │                       Count: High                        │
-├────────────────┼─────────────┼──────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────────┤
-│   Execution    │   Latency   │ min=63.362µs, p10=96.627µs, p50=146.984µs, p90=382.03µs, │ Healthy✅  │ DurationP10: None, DurationP50: None, DurationP90: None, │
-│                │             │                      max=1.672445ms                      │            │           DurationMax: None, DurationMin: None           │
-├────────────────┼─────────────┼──────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────────┤
-│      SSV       │    Peers    │          min=0, p10=27, p50=28, p90=30, max=31           │ Unhealthy⚠️ │                       Count: High                        │
-├────────────────┼─────────────┼──────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────────┤
-│      SSV       │ Connections │      inbound_min=0, inbound_P50=20, outbound_min=0,      │ Unhealthy⚠️ │   InboundConnections: High, OutboundConnections: High    │
-│                │             │                      outbound_P50=9                      │            │                                                          │
-├────────────────┼─────────────┼──────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────────┤
-│ Infrastructure │     CPU     │   user_P50=8.37%, system_P50=1.06%, total=17826400938    │ Healthy✅  │                 System: None, User: None                 │
-├────────────────┼─────────────┼──────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────────┤
-│ Infrastructure │   Memory    │        total_P50=31978.74MB, used_P50=27604.35MB,        │ Healthy✅  │    Used: None, Free: None, Total: None, Cached: None     │
-│                │             │         cached_P50=3264.24MB, free_P50=493.46MB          │            │                                                          │
-└────────────────┴─────────────┴──────────────────────────────────────────────────────────┴────────────┴──────────────────────────────────────────────────────────┘
-```
-
-Another example where `Unhealthy` **is actually accurate**. You can see low Peer connection on SSV Node, this most likely caused by closed 16000 port:
-
-```log
-┌────────────────┬─────────────┬──────────────────────────────────────────────────────────────┬────────────┬───────────────────────────────────────────────────────────┐
-│   Group Name   │ Metric Name │                            Value                             │   Health   │                         Severity                          │
-├────────────────┼─────────────┼──────────────────────────────────────────────────────────────┼────────────┼───────────────────────────────────────────────────────────┤
-│ Infrastructure │     CPU     │     user_P50=13.54%, system_P50=1.80%, total=87903220930     │ Healthy✅  │                 System: None, User: None                  │
-├────────────────┼─────────────┼──────────────────────────────────────────────────────────────┼────────────┼───────────────────────────────────────────────────────────┤
-│ Infrastructure │   Memory    │         total_P50=128580.05MB, used_P50=54250.51MB,          │ Healthy✅  │     Cached: None, Used: None, Free: None, Total: None     │
-│                │             │          cached_P50=66262.48MB, free_P50=4250.07MB           │            │                                                           │
-├────────────────┼─────────────┼──────────────────────────────────────────────────────────────┼────────────┼───────────────────────────────────────────────────────────┤
-│   Consensus    │   Client    │ teku/v24.10.0/linux-x86_64/-eclipseadoptium-openjdk64bitser- │ Healthy✅  │                       Version: None                       │
-│                │             │                        vervm-java-21                         │            │                                                           │
-├────────────────┼─────────────┼──────────────────────────────────────────────────────────────┼────────────┼───────────────────────────────────────────────────────────┤
-│   Consensus    │   Latency   │        min=415.643µs, p10=720.518µs, p50=2.856258ms,         │ Healthy✅  │                      Duration: None                       │
-│                │             │               p90=3.519113ms, max=595.473628ms               │            │                                                           │
-├────────────────┼─────────────┼──────────────────────────────────────────────────────────────┼────────────┼───────────────────────────────────────────────────────────┤
-│   Consensus    │    Peers    │         min=276, p10=287, p50=299, p90=300, max=300          │ Healthy✅  │                        Count: None                        │
-├────────────────┼─────────────┼──────────────────────────────────────────────────────────────┼────────────┼───────────────────────────────────────────────────────────┤
-│   Consensus    │ Attestation │       missed_attestations=0, unready_blocks_200_ms=0,        │ Healthy✅  │ Correctness: None, ReceivedBlock: None, FreshAttestation: │
-│                │             │                       missed_blocks=1                        │            │                  None, MissedBlock: None                  │
-│                │             │         fresh_attestations=296 received_blocks=297,          │            │                                                           │
-│                │             │                     correctness=99.66 %                      │            │                                                           │
-├────────────────┼─────────────┼──────────────────────────────────────────────────────────────┼────────────┼───────────────────────────────────────────────────────────┤
-│   Execution    │    Peers    │         min=232, p10=238, p50=245, p90=250, max=253          │ Healthy✅  │                        Count: None                        │
-├────────────────┼─────────────┼──────────────────────────────────────────────────────────────┼────────────┼───────────────────────────────────────────────────────────┤
-│      SSV       │    Peers    │            min=0, p10=0, p50=0, p90=0, max=0                 │ Unhealthy⚠️ │                        Count: High                        │
-├────────────────┼─────────────┼──────────────────────────────────────────────────────────────┼────────────┼───────────────────────────────────────────────────────────┤
-│      SSV       │ Connections │        inbound_min=0, inbound_P50=0, outbound_min=0,         │ Unhealthy⚠️ │    OutboundConnections: High, InboundConnections: High    │
-│                │             │                       outbound_P50=0                        │            │                                                           │
-└────────────────┴─────────────┴──────────────────────────────────────────────────────────────┴────────────┴───────────────────────────────────────────────────────────┘
-```
-</details>
-
 ## SSV-Pulse log analysis
 
 The same SSV-Pulse is capable of analysing your logs and also logs of other nodes. This is especially useful if you have access to logs of all nodes in the cluster (e.g. you're running the whole cluster yourself). 

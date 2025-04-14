@@ -10,6 +10,9 @@ In this section, we will walk through the process of installing the [SSV Node st
 * SSV Node
 * Prometheus
 * Grafana
+* Alert manager
+* DKG Node
+* Benchmark tool
 
 ## Process Overview
 
@@ -24,11 +27,7 @@ Please note the process implies you will setup Execution and Beacon clients on y
 
 Once you have your node running you'll be able to participate in multiple validator clusters and earn rewards 🥳
 
-:::warning
-**Backup those files** on a separate device, if any of the two are lost — you will lose access to your operator without a chance to recover.
-:::
-
-:::warning
+:::warning Hardware
 Make sure to check out [Node hardware specs and requirements](./hardware-requirements.md) before proceeding with the setup.
 :::
 
@@ -115,7 +114,10 @@ Git is needed to download the SSV Node stack on your machine.
 
 #### 4. Adjust Firewall
 
-Make sure to expose the ports on your SSV node machine's firewall, otherwise your node won't be able to run correctly. The default P2P ports are **12001 UDP** and **13001 TCP** additional ones are **15000 TCP** for Metrics and **16000 TCP**for Health endpoint.
+Make sure to expose the ports on your SSV node machine's firewall, otherwise your node won't be able to run correctly. The default ports are :
+- P2P - **12001 UDP** and **13001 TCP** 
+- Metrics - **15000 TCP** 
+- Health endpoint - **16000 TCP**
 
 If you don't want to use the default ports, they can be changed on the next step.
 
@@ -146,10 +148,12 @@ Both `BEACON_NODE_ADDR` and `ETH_1_ADDR` support multiple endpoints. Separate th
 
 Example: `BEACON_NODE_ADDR=http://1.2.3.4:5052;http://1.2.3.4:5053`
 :::
-If you already have encrypted key and password files: copy/move them to `/ssv-stack/ssv-node-data` and edit the environment variables to the correct file names, e.g.:
-
-* `PRIVATE_KEY_FILE=/data/encrypted_private_key.json`
-* `PASSWORD_FILE=/data/password`
+***
+If you already have encrypted key and password files: 
+* Copy/move them to `/ssv-stack/ssv-node-data` 
+* Edit the environment variables to the correct file names, e.g.:
+    * `PRIVATE_KEY_FILE=/data/encrypted_private_key.json`
+    * `PASSWORD_FILE=/data/password`
 
 **If this is done incorrectly**, new keys will be automatically generated, and you will see a message in the console indicating this.
 
@@ -159,7 +163,8 @@ All existing settings are listed on the [Configuration Reference page](./node-co
 
 We recommend using the default ports for ease of the setup.&#x20;
 
-If you wish to change any of the ports — change them in both `ssv.env` and `docker-compose.yaml`, then get [back to exposing those ports in your firewall];
+If you wish to change any of the ports — change them in both `ssv.env` and `docker-compose.yaml`, then get [back to exposing those ports in your firewall](#4-adjust-firewall).
+
 
 Changes to those files will be applied after a restart of the node (_if you already started your node_).
 
@@ -187,7 +192,7 @@ Or you can start it in the background, so there won't be logs in your CLI
 docker compose up -d
 ```
 
-:::info
+:::info Backup your files
 On the first start the Node will generate a random `password` and encrypted `private_key` files.&#x20;
 
 Both files are needed to run SSV Node and DKG Node. You can find them under `~/ssv-stack/ssv-node-data` directory.&#x20;
@@ -203,10 +208,10 @@ Alternatively, SSV Node setup is also available using [eth-docker](https://eth-d
 
 ## What's next?
 
-You might want to [configure MEV](configuring-mev) to increase your rewards for block proposals.&#x20;
+* You might want to [configure MEV](configuring-mev) to increase your rewards for block proposals.&#x20;
 
-You can [enable DKG node](enabling-dkg) to increase your chances of being included in a cluster.
+* You can [enable DKG node](enabling-dkg) to increase your chances of being included in a cluster.
 
-You might want to learn [how to use your Monitoring stack](/operators/operator-node/monitoring/), to stay on top of your performance.
+* You might want to learn [how to use your Monitoring stack](/operators/operator-node/monitoring/), to stay on top of your performance.
 
-If you run into some issues while running the node, try and [take a look at the troubleshooting page](/operators/operator-node/maintenance/troubleshooting).
+* If you run into some issues while running the node, try and [take a look at the troubleshooting page](/operators/operator-node/maintenance/troubleshooting).
