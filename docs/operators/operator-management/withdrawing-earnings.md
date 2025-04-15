@@ -1,6 +1,6 @@
 ---
 title: Withdrawing earnings
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 ### Connect your Web3 wallet to WebApp.

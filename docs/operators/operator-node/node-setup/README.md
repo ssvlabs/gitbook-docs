@@ -168,16 +168,6 @@ If you wish to change any of the ports — change them in both `ssv.env` and `do
 
 Changes to those files will be applied after a restart of the node (_if you already started your node_).
 
-### Hoodi specific
-**❗Do not use the following version on any network, except Hoodi**
-
-If you want to start your node with Hoodi network - you will need to use specific version of SSV. This can be set in your `docker-compose.yaml` file:
-```yaml
-  ssv-node:
-    image: docker.io/ssvlabs/ssv-node:v2.2.0-unstable.1
-```
-Also make sure you've set the correct network in your `.env` file to `NETWORK=hoodi`.
-
 ## Start the Node
 
 To start your node use the following command

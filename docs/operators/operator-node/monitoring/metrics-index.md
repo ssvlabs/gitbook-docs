@@ -1,6 +1,6 @@
 ---
 title: Metrics Index
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 This document outlines the metrics instrumented in the SSV node (upstream dependencies not included), including their types, descriptions, and labels. They can help you build your own dashboards.

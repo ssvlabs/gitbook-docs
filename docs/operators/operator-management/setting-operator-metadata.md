@@ -1,6 +1,6 @@
 ---
 title: Setting Operator metadata
-sidebar_position: 5
+sidebar_position: 2
 ---
 
 ### Connect your Web3 wallet to WebApp.
