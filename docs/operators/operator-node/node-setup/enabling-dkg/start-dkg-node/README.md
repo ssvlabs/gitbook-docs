@@ -187,7 +187,7 @@ Here's an explanation of each parameter:
 
 #### Launch with YAML config file
 
-It is also possible to use YAML configuration file, just as it was shown in the [Configuration section above](./#configuration).
+It is also possible to use YAML configuration file, just as it was shown in the [Configuration section above](#manual-configuration).
 
 Then the tool can be launched from the root folder, by running this command:
 

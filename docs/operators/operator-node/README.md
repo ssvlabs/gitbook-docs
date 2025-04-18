@@ -10,6 +10,7 @@ This section is to help you install and run your SSV Node 🚀
 The steps to follow on your journey:
 1. [**Install SSV Node**](./node-setup)
     * [Hardware Requirements](./node-setup/hardware-requirements.md) - to make sure your hardware is sufficient.
+    * [Best Practices](./node-setup/best-practices.md) - tips for better performance of your setup.
     * [*Node Configuration Reference*](./node-setup/node-configuration-reference.md) - (*optional*) reference of SSV's node config.
     * [*Manual Node Setup*](./node-setup/manual-setup.md) - (*optional*) alternative setup guide with manual installation.
 2. [**Install Sidecars**](/operators/operator-node/node-setup/enabling-dkg/)
