@@ -23,7 +23,7 @@ Several key factors influence this:
 - **Hardware Resources:** Adequate CPU, sufficient RAM, and fast, reliable storage are necessary.
 
 ## **Major impact**
-More obvious, more impactful.
+High‑priority practices that ensure reliable, on‑time duty submissions. Might sound obvious, but are often overlooked.
 
 ### **For Home Setups**
 - **Hardware:** Usual setup has 4- to 8-core CPU (focus on single-thread performance) and 32GB RAM.
@@ -35,7 +35,7 @@ More obvious, more impactful.
 - **CPU frequency is a major factor**. Fast cores with moderate-to-high core count are the recipe. Ensure each server can turbo boost to high frequency, yet avoid agressive overclocking.
 - **Disk and Redundancy:** NVMe SSDs are mandatory. Many use RAID1 mirroring or have failover nodes ready in case of disk failure. Recommended to use ext4 if unsure about ZFS's complexities. Improving read/write speed has one of the greatest impacts.
 - **RAM Considerations:** Usually RAM is not the limiting factor. Abundant RAM enables disk caching for the execution client database – reducing disk reads and writes. ECC memory is advisable to protect against bit flips in long-running servers. 
-- **Form Factor and Data Center:** Run on a mix of bare metal servers in colocation data centers and cloud VM instances. In either case, redundancy across hardware and geographic distribution is a best practice. 
+- **Form Factor and Data Center:** If you have multiple EL+CL setups - run them on different bare metal servers, in colocation data centers, or cloud VM instances. Redundancy across hardware and geographic distribution is a best practice. 
 - **Firewalls and DDoS Protection:** One way to handle DDoS is to have a firewall or load balancer. It's advised to use your provider's DDoS protection solutions (e.g. CloudFlare). The goal is to not block or throttle legitimate p2p ports – maintaining full peer connectivity.
  
 ### Sufficient Hardware
@@ -102,7 +102,7 @@ Continuous monitoring is essential to maintain good performance and quickly dete
 ***
 
 ## **Minor impact**
-Less obvious, less impactful.
+Fine‑tuning tips for sustained performance and resilience.
 
 ### Disk Optimization
 Improving storage speed (minimizing read/write latency) has one of the greatest impacts on performance.
@@ -220,5 +220,5 @@ SSV supports all clients, but that doesn't mean any client will suit your setup.
 **Considerations:**  
 - **Besu and Teku** were reported to be not a great fit together, with SSV specifically.
 - **Erigon (EL)** has the largest ledger in ELs, is heavy on RAM usage, and lower sync speed. For home setups with limited resources it can cause issues.
-- **Nimbus (CL)** performs well on a low validator count, however, post ~250 it won't be able to scale properly and you might have to switch clients.
+- **Nimbus (CL)** performs well on a low validator count. However, with more than ~250 validators it won't be able to scale properly and you might have to switch the client.
 - **Lighthouse (CL)** has the largest ledger in CLs, consider this when choosing EL pair to it. Especially when Disk size is limited.
