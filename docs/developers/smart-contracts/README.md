@@ -33,17 +33,9 @@ sidebar_position: 4
 
 | Contract        | Address                                                                                                      |
 | ----------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| SSV Token         | [0x9F5d4Ec84fC4785788aB44F9de973cF34F7A038e](https://hoodi.cloud.blockscout.com/address/0x9F5d4Ec84fC4785788aB44F9de973cF34F7A038e) |
-| SSV Network       | [0x58410Bef803ECd7E63B23664C586A6DB72DAf59c](https://hoodi.cloud.blockscout.com/address/0x58410Bef803ECd7E63B23664C586A6DB72DAf59c) |
-| SSV Network Views | [0x5AdDb3f1529C5ec70D77400499eE4bbF328368fe](https://hoodi.cloud.blockscout.com/address/0x5AdDb3f1529C5ec70D77400499eE4bbF328368fe) |
-
-#### Holesky Testnet
-
-| Contract        | Address                                                                                                      |
-|-----------------|-------------------------------------------------------------------------------------------------------------|
-| SSV Token       | [0xad45A78180961079BFaeEe349704F411dfF947C6](https://holesky.etherscan.io/address/0xad45A78180961079BFaeEe349704F411dfF947C6) |
-| SSVNetwork      | [0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA](https://holesky.etherscan.io/address/0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA) |
-| SSVNetworkViews | [0x352A18AEe90cdcd825d1E37d9939dCA86C00e281](https://holesky.etherscan.io/address/0x352A18AEe90cdcd825d1E37d9939dCA86C00e281) |
+| SSV Token         | [0x9F5d4Ec84fC4785788aB44F9de973cF34F7A038e](https://hoodi.etherscan.io/address/0x9F5d4Ec84fC4785788aB44F9de973cF34F7A038e) |
+| SSV Network       | [0x58410Bef803ECd7E63B23664C586A6DB72DAf59c](https://hoodi.etherscan.io/address/0x58410Bef803ECd7E63B23664C586A6DB72DAf59c) |
+| SSV Network Views | [0x5AdDb3f1529C5ec70D77400499eE4bbF328368fe](https://hoodi.etherscan.io/address/0x5AdDb3f1529C5ec70D77400499eE4bbF328368fe) |
 
 
 #### ABI
@@ -58,8 +50,7 @@ You will need to send 32 ETH to the Deposit Contract in order to activate a vali
 | Ethereum network | Address                                                                                                         |
 |------------------|-----------------------------------------------------------------------------------------------------------------|
 | Mainnet          | [0x00000000219ab540356cBB839Cbe05303d7705Fa](https://etherscan.io/address/0x00000000219ab540356cBB839Cbe05303d7705Fa) |
-| Hoodi Testnet    | [0x00000000219ab540356cBB839Cbe05303d7705Fa](https://hoodi.cloud.blockscout.com/address/0x00000000219ab540356cBB839Cbe05303d7705Fa) |
-| Holesky Testnet  | [0x4242424242424242424242424242424242424242](https://holesky.etherscan.io/address/0x4242424242424242424242424242424242424242) |
+| Hoodi Testnet    | [0x00000000219ab540356cBB839Cbe05303d7705Fa](https://hoodi.etherscan.io/address/0x00000000219ab540356cBB839Cbe05303d7705Fa) |
 
 
-Please refer to [Ethereum official documentation](https://ethereum.org/en/staking/deposit-contract/) and verify this information. The [official Launchpad also has great guidelines](https://holesky.launchpad.ethereum.org/) to protect from phishing attempts.
+Please refer to [Ethereum official documentation](https://ethereum.org/en/staking/deposit-contract/) and verify this information. The [official Launchpad also has great guidelines](https://hoodi.launchpad.ethereum.org/) to protect from phishing attempts.

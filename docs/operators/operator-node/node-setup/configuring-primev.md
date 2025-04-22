@@ -48,10 +48,10 @@ Without completion of this step you will be practically using MEV Boost without 
 
 The registry accepts validator's public key as the validator opt-in identifier. Any account can stake on behalf of validator pubkey(s), and only that account has the ability to unstake in the future.
 
-The `VanillaRegistry.minStake` parameter represents how much ETH must be staked per validator pubkey to define that validator as opted-in to mev-commit. On Mainnet, `minStake` is 1 ETH, while on Holesky it’s 0.0001 ETH.
+The `VanillaRegistry.minStake` parameter represents how much ETH must be staked per validator pubkey to define that validator as opted-in to mev-commit. On Mainnet, `minStake` is 1 ETH, while on Hoodi it’s 0.0001 ETH.
 
 - To learn more about this process, feel free to check out [Primev's explanation here](https://docs.Primev.xyz/v1.0.0/get-started/validators/vanilla).
-- To start the registration process, you can use [Mainnet](https://validators.mev-commit.xyz/) and [Holesky](https://holesky.validators.mev-commit.xyz/dashboard) validator dashboards. 
+- To start the registration process, you can use the [Mainnet](https://validators.mev-commit.xyz/) validator dashboard. 
 You will need to submit your validators' pubkeys in a `.txt` file, each key on new line or separated by `,`.
 
 ## Showcase Supported Relays

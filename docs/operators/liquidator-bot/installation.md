@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 ### Prerequisites
 
-* [x] Wallet funded with sufficient ETH for transaction gas fees on the chosen network (Mainnet or Holesky or Hoodi)
+* [x] Wallet funded with sufficient ETH for transaction gas fees on the chosen network (Mainnet or Hoodi)
 * [x] Execution layer node end-point
 * [x] Reliable internet connection
 
@@ -40,7 +40,7 @@ This installation requires NodeJS on your machine.
   <TabItem value="cli" label="Option 1: Using CLI Arguments">
 
 ```sh
-yarn cli --ssv-sync-env=<prod | stage> --ssv-sync=<v4.holesky | v4.mainnet | v4.prater> --node-url=<NODE_URL>  --private-key=<PRIVATE_KEY>  --gas-price=slow --max-visible-blocks=<MAX_BLOCKS>
+yarn cli --ssv-sync-env=<prod | stage> --ssv-sync=<v4.hoodi | v4.mainnet | v4.prater> --node-url=<NODE_URL>  --private-key=<PRIVATE_KEY>  --gas-price=slow --max-visible-blocks=<MAX_BLOCKS>
 ```
 
   </TabItem>
@@ -55,7 +55,7 @@ GAS_PRICE=medium  # low | medium | high
 HIDE_TABLE=false
 MAX_VISIBLE_BLOCKS=50000
 SSV_SYNC_ENV=prod # prod or stage, prod - is default value
-SSV_SYNC=v4.prater # v4.holesky | v4.mainnet | v4.prater
+SSV_SYNC=v4.prater # v4.hoodi | v4.mainnet | v4.prater
 ```
 
   </TabItem>
@@ -64,17 +64,17 @@ SSV_SYNC=v4.prater # v4.holesky | v4.mainnet | v4.prater
 :::warning
 Make sure that `--ssv-sync` and `--node-url` parameters (or `SSV_SYNC` and `NODE_URL` environment variables) are all relative to the same blockchain.
 
-For example, for Holesky (using a sample QuickNode RPC endpoint), the command should look like this:
+For example, for hoodi (using a sample QuickNode RPC endpoint), the command should look like this:
 
 ```sh
 yarn cli \
 --ssv-sync-env=prod \
---ssv-sync=v4.holesky \
---node-url=https://red-silent-dawn.ethereum-holesky.quiknode.pro/<ACCOUNT_ID>/  \
+--ssv-sync=v4.hoodi \
+--node-url=https://red-silent-dawn.ethereum-hoodi.quiknode.pro/<ACCOUNT_ID>/  \
 --private-key=<PRIVATE_KEY>  \
 --gas-price=slow    \
 --max-visible-blocks=5000
 ```
 
-The smart contract addresses were taken [from this page](../../developers/smart-contracts/#holesky-testnet), in this instance.
+The smart contract addresses were taken [from this page](../../developers/smart-contracts/#hoodi-testnet), in this instance.
 :::

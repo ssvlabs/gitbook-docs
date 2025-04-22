@@ -23,17 +23,15 @@ A series of examples of the most useful queries and the data accessible via the 
 
 ## Querying SSV Protocol smart contract data
 
-Currently, there are two official Subgraphs deployed, one for [Ethereum Mainnet](https://thegraph.com/explorer/subgraphs/7V45fKPugp9psQjgrGsfif98gWzCyC6ChN7CW98VyQnr?view=Playground\&chain=arbitrum-one), and another one for [Holesky testnet](https://thegraph.com/explorer/subgraphs/2fc6xRiZ2PaPYE2fBRZ1fB1SFS3PojvCXB8fFguXQZk6?view=Overview\&chain=arbitrum-one). 
+Currently, there are two official Subgraphs deployed, one for [Ethereum Mainnet](https://thegraph.com/explorer/subgraphs/7V45fKPugp9psQjgrGsfif98gWzCyC6ChN7CW98VyQnr?view=Playground\&chain=arbitrum-one)
 
-**Subgraphs for Hoodi will be available soon.**
+**Explorer for Hoodi will be available soon.**
 
 There are a few ways to access SSV smart contract data through The Graph.
 
 ### Subgraph Playground user interface
 
 First of all, you can access the Subgraph page on the Graph Explorer, and use it to experiment and prototype queries using the provided Playground.
-
-For example, head over to [this page to access the Playground of the Holesky Subgraph](https://thegraph.com/explorer/subgraphs/2fc6xRiZ2PaPYE2fBRZ1fB1SFS3PojvCXB8fFguXQZk6?view=Playground\&chain=arbitrum-one).
 
 ![Subgraph Playground](/img/subgraph-1.avif)
 
@@ -60,10 +58,10 @@ The developer API is typically not publicly accessed, but it is provided below, 
 https://api.studio.thegraph.com/query/71118/ssv-network-ethereum/version/latest
 ```
 
-#### Developer API for Holesky testnet SSV Subgraph
+#### Developer API for Hoodi testnet SSV Subgraph
 
 ```
-https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest
+https://api.studio.thegraph.com/query/71118/ssv-network-hoodi/version/latest
 ```
 
 Despite being rate limited, this endpoint should be sufficient for every development use case.

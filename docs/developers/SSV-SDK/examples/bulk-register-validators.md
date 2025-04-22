@@ -33,7 +33,7 @@ You can use these like so to instantiate the SDK and store it an object:
 
 ```typescript
 // Setup viem clients
-const chain = chains.mainnet // or chains.holesky or chains.hoodi
+const chain = chains.mainnet // or chains.hoodi
 const transport = http()
 
 const publicClient = createPublicClient({
@@ -138,7 +138,7 @@ async function main(): Promise<void> {
     const private_key: `0x${string}` = process.env.PRIVATE_KEY as `0x${string}`;
 
     // Setup viem clients
-    const chain = chains.holesky // or chains.mainnet
+    const chain = chains.hoodi // or chains.mainnet
     const transport = http()
 
     const publicClient = createPublicClient({

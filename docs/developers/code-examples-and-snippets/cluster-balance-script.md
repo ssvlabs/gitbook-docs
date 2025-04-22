@@ -12,7 +12,7 @@ Details on the formulas used can be found in the documentation page related to [
 import fetch from "node-fetch";
 
 // Define the GraphQL endpoint URL
-const url = "https://api.studio.thegraph.com/query/71118/ssv-network-holesky/version/latest";
+const url = "https://api.studio.thegraph.com/query/71118/ssv-network-hoodi/version/latest";
 
 // Define the GraphQL query - Update operators and account address to query different clusters
 const query = `{

@@ -142,7 +142,7 @@ Edit the `ssv.env` file and adjust the settings to your needs. The minimum you n
 
 * `BEACON_NODE_ADDR` - HTTP address of the Beacon node (e.g. `http://1.2.3.4:5052`)
 * `ETH_1_ADDR` - WebSocket address of the Execution node (e.g. `ws://1.2.3.4:8546`)
-* `NETWORK` - The network you are running on (`mainnet`, `holesky`, `hoodi`)
+* `NETWORK` - The network you are running on (`mainnet`, `hoodi`)
 :::info
 Both `BEACON_NODE_ADDR` and `ETH_1_ADDR` support multiple endpoints. Separate them with `;`.
 

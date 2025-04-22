@@ -9,9 +9,9 @@ sidebar_position: 1
 Note: Instead of creating a validator key pair and then distribute that into Key Shares, you can run a Distributed Key Generation ceremony, thanks to the [SSV DKG Client](/developers/tools/ssv-dkg-client/).
 :::
 
-This guide shows how to create a new set of validator keys for the Holesky testnet. For Ethereum mainnet, simply change Launchpad configuration from the page's dropdown menu, and refer to this [Deposit Contract](https://etherscan.io/address/0x00000000219ab540356cBB839Cbe05303d7705Fa) on mainnet, instead.
+This guide shows how to create a new set of validator keys for the Hoodi testnet. For Ethereum mainnet, simply change Launchpad configuration from the page's dropdown menu, and refer to this [Deposit Contract](https://etherscan.io/address/0x00000000219ab540356cBB839Cbe05303d7705Fa) on mainnet, instead.
 
-The official [Staking Launchpad](https://holesky.launchpad.ethereum.org/) (follow [this link for mainnet](https://launchpad.ethereum.org/)) allows developers to create a new validator via the web interface, but the procedure on the Web UI can be hardly integrated in an automated process.
+The official [Staking Launchpad](https://hoodi.launchpad.ethereum.org/) (follow [this link for mainnet](https://launchpad.ethereum.org/)) allows developers to create a new validator via the web interface, but the procedure on the Web UI can be hardly integrated in an automated process.
 
 What's more important, the Launchpad procedure includes steps related to the Execution client and Consensus client. These are not unnecessary and the steps should be skipped.
 
@@ -24,12 +24,12 @@ The essential steps to create a new validator are only these two:
 1. Generate validator keys
 2. Activate previously generated keys
 
-For this reason, an alternative and shorter route to the Launchpad is to use the [Staking Deposit CLI](https://github.com/ethereum/staking-deposit-cli) and the [Staking Deposit Contract](https://holesky.etherscan.io/address/0x4242424242424242424242424242424242424242).
+For this reason, an alternative and shorter route to the Launchpad is to use the [Staking Deposit CLI](https://github.com/ethereum/staking-deposit-cli) and the [Staking Deposit Contract](https://hoodi.etherscan.io/address/0x4242424242424242424242424242424242424242).
 
 ### Prerequisites
 
 * Confidence using the command line, and command line interfaces
-* ETH (or Holesky ETH): 32 + ~0.1 for gas fees to activate the validator keys
+* ETH (or Hoodi ETH): 32 + ~0.1 for gas fees to activate the validator keys
 
 ### Generate validator keys
 
@@ -42,10 +42,10 @@ Head over to the official [Staking Deposit CLI](https://github.com/ethereum/stak
 
 There are additional arguments to be provided to change language, reference chain, create multiple validator keys at once, or provide an address for withdrawing staking rewards.
 
-Here's the command used to create one set of validator keys for the holesky testnet, providing the address to withdraw staking rewards (you must have ownership of such address):
+Here's the command used to create one set of validator keys for the hoodi testnet, providing the address to withdraw staking rewards (you must have ownership of such address):
 
 ```bash
-./deposit new-mnemonic --num_validators 1  --chain holesky  --eth1_withdrawal_address [YOUR_ETHEREUM_WALLET_ADDRESS]
+./deposit new-mnemonic --num_validators 1  --chain hoodi  --eth1_withdrawal_address [YOUR_ETHEREUM_WALLET_ADDRESS]
 ```
 
 At this point you should open the terminal of your Operating System, type the command above, with the correct values and parameters, according to your configuration.
@@ -64,12 +64,12 @@ Take note of the keys location, you'll need the file named `deposit_data-[TIMEST
 
 To activate the validator keys you must deposit the 32 ETH (or testETH) to the Deposit Contract on chain. There are two options to do so:
 
-1. Directly interacting with the [Staking Deposit Contract](https://holesky.etherscan.io/address/0x4242424242424242424242424242424242424242)
-2. Using the official [Staking Launchpad](https://holesky.launchpad.ethereum.org/en/), and GUI
+1. Directly interacting with the [Staking Deposit Contract](https://hoodi.etherscan.io/address/0x4242424242424242424242424242424242424242)
+2. Using the official [Staking Launchpad](https://hoodi.launchpad.ethereum.org/en/), and GUI
 
 #### Activate via Staking Deposit Smart Contract
 
-A quick way to send transactions to the Staking Deposit Contract is to visit the [Staking Deposit Contract](https://holesky.etherscan.io/address/0x4242424242424242424242424242424242424242) page on Etherscan, and browse the _Contract_ tab, then select the _Write Contract_ option.
+A quick way to send transactions to the Staking Deposit Contract is to visit the [Staking Deposit Contract](https://hoodi.etherscan.io/address/0x4242424242424242424242424242424242424242) page on Etherscan, and browse the _Contract_ tab, then select the _Write Contract_ option.
 
 ![Create a new validator](/img/create-a-new-val-2.png)
 
@@ -97,7 +97,7 @@ Here's an example:
     "deposit_message_root": "d09880f5dab2c46c7d4e6d7148c54eebd4b33db44b2cd194dff3a8aaff6ad9eb",
     "deposit_data_root": "aa9bb085dc0410d2013cff51e98ae2a41a81512a0676fbe0397c3cd997f1fb87",
     "fork_version": "01017000",
-    "network_name": "holesky",
+    "network_name": "hoodi",
     "deposit_cli_version": "2.7.0"
   }
 ]
@@ -111,7 +111,7 @@ Alternatively, the smart contract transaction can be generated via SDKs such as 
 
 #### Activate via official Staking Launchpad
 
-If you don't trust performing the transaction via Etherscan's Beta functionality, or simply prefer a more official route, you can visit the [Staking Launchpad](https://holesky.launchpad.ethereum.org/en/) and access the full procedure to create a new validator, by clicking _Become a Validator_.
+If you don't trust performing the transaction via Etherscan's Beta functionality, or simply prefer a more official route, you can visit the [Staking Launchpad](https://hoodi.launchpad.ethereum.org/en/) and access the full procedure to create a new validator, by clicking _Become a Validator_.
 
 ![Create a new validator](/img/create-a-new-val-3.png)
 
