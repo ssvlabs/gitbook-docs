@@ -27,7 +27,7 @@ High‑priority practices that ensure reliable, on‑time duty submissions. Migh
 
 ### **For Home Setups**
 - **Hardware:** Usual setup has 4- to 8-core CPU (focus on single-thread performance) and 32GB RAM.
-- **Disk:** NVMe SSDs are strongly recommended. 2TB size should serve you until ~2026. You can have 4TB to be on the safe side. Stick to `ext4` filesystem, as it has proven more performant. 
+- **Disk:** NVMe SSDs are strongly recommended. 2TB size should serve you until ~2026. You can have 4TB to be on the safe side. If you're unsure with filesystem to use, stick to `ext4`, as it is performant and the easiest to maintain. 
 - **Reliability:** Use UPS and keep machine well-ventilated. Sudden power loss or thermal throttling can both cause downtime or missed duties.
 - **Internet Connectivity:** Ensure your ISP doesn't impose strict data caps. Choose a plan with at least 10 Mbps upload speed, but latency and reliability make the difference.
 
@@ -36,8 +36,8 @@ High‑priority practices that ensure reliable, on‑time duty submissions. Migh
 - **Disk and Redundancy:** NVMe SSDs are mandatory. Many use RAID1 mirroring or have failover nodes ready in case of disk failure. Recommended to use ext4 if unsure about ZFS's complexities. Improving read/write speed has one of the greatest impacts.
 - **RAM Considerations:** Usually RAM is not the limiting factor. Abundant RAM enables disk caching for the execution client database – reducing disk reads and writes. ECC memory is advisable to protect against bit flips in long-running servers. 
 - **Form Factor and Data Center:** If you have multiple EL+CL setups - run them on different bare metal servers, in colocation data centers, or cloud VM instances. Redundancy across hardware and geographic distribution is a best practice. 
-- **Firewalls and DDoS Protection:** One way to handle DDoS is to have a firewall or load balancer. It's advised to use your provider's DDoS protection solutions (e.g. CloudFlare). The goal is to not block or throttle legitimate p2p ports – maintaining full peer connectivity.
- 
+- **Firewalls and DDoS Protection:** Configure protection if you believe there is a chance for DDoS attack, make sure the p2p ports allow full connectivity. The goal is to not block or throttle legitimate p2p ports.
+
 ### Sufficient Hardware
 **Recommendation:**  
   Ensure your hardware meets or exceeds [recommended specifications](./hardware-requirements.md). On the same page you will find a table comparing # of validators to resources used.
@@ -59,9 +59,9 @@ Ensure all required ports are open and correctly configured on your setup.
 **Critical Ports:**
   - **SSV P2P:** Typically 12001 UDP and 13001 TCP (or as specified in your configuration)
   - **Execution P2P:** Typically 30303 TCP and UDP (for Geth and Nethermind)
-  - **Execution RPC:** HTTP 8545 and WS 8546 (for Geth and Nethermind)
+  - **Execution RPC:** HTTP 8545 and WS 8546 (for Geth and Nethermind), **open only to SSV Node!**.
   - **Consensus P2P:** Depends on your client, make sure to follow your client's documentation to open the correct ports.
-  - **Consensus RPC:** Depends on your client (e.g. 3500 for Prysm, 5052 for Lighthouse).
+  - **Consensus RPC:** Depends on your client (e.g. 3500 for Prysm, 5052 for Lighthouse), **open only to SSV Node!**.
 
 **Dos and Don'ts:**
   - **Do:** Verify firewall settings (using tools like UFW) to ensure these ports are exposed.
