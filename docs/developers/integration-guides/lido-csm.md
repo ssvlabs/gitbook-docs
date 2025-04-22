@@ -11,9 +11,9 @@ In this guide we'll run through how to create validator keys, register them on t
 :::info
 This page has been written for mainnet CSM. **If you want to try it on testnet first** you can use these parameters for the withdrawal and execution layer addresses:
 
-* Lido CSM testnet page: [https://csm.testnet.fi/keys/submit](https://csm.testnet.fi/keys/submit)
-* Lido Withdrawal Vault: [`0xF0179dEC45a37423EAD4FaD5fCb136197872EAd9`](https://holesky.etherscan.io/address/0xF0179dEC45a37423EAD4FaD5fCb136197872EAd9)
-* Lido Execution Layer Rewards Vault on Holesky: [`0xE73a3602b99f1f913e72F8bdcBC235e206794Ac8`](https://holesky.etherscan.io/address/0xE73a3602b99f1f913e72F8bdcBC235e206794Ac8)
+* Lido CSM testnet page: [https://csm.testnet.fi/](https://csm.testnet.fi/)
+* Lido Withdrawal Vault on Hoodi: [`0x4473dCDDbf77679A643BdB654dbd86D67F8d32f2`](https://hoodi.etherscan.io/address/0x4473dCDDbf77679A643BdB654dbd86D67F8d32f2)
+* Lido Execution Layer Rewards Vault on Hoodi: [`0x9b108015fe433F173696Af3Aa0CF7CDb3E104258`](https://hoodi.etherscan.io/address/0x9b108015fe433F173696Af3Aa0CF7CDb3E104258)
 :::
 
 ### Key conditions for validators registered to CSM

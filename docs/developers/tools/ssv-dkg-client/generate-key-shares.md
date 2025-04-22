@@ -38,7 +38,7 @@ withdrawAddress: 0xaA184b86B4cdb747F4A3BF6e6FCd5e27c1d92c5a
 owner: 0xaA184b86B4cdb747F4A3BF6e6FCd5e27c1d92c5a
 nonce: 0
 tlsInsecure: true 
-network: "holesky"
+network: "hoodi"
 operatorsInfoPath: /data/initiator/operators_info.json
 ```
 

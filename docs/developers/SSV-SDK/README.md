@@ -41,7 +41,7 @@ import { createPublicClient, createWalletClient, http } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
 
 // Setup viem clients
-const chain = chains.mainnet // or chains.holesky
+const chain = chains.mainnet // or chains.hoodi
 const transport = http()
 
 const publicClient = createPublicClient({

@@ -50,7 +50,7 @@ withdrawAddress: 0xaA184b86B4cdb747F4A3BF6e6FCd5e27c1d92c5a
 owner: 0xa1a66CC5d309F19Fb2Fda2b7601b223053d0f7F5
 nonce: 0
 tlsInsecure: true 
-network: "holesky"
+network: "hoodi"
 operatorsInfoPath: /data/initiator/operators_info.json
 proofsFilePath: ./output/ceremony-2024-11-18--16-04-55.529/proofs.json
 ```
@@ -88,7 +88,7 @@ withdrawAddress: 0xaA184b86B4cdb747F4A3BF6e6FCd5e27c1d92c5a
 owner: 0xaA184b86B4cdb747F4A3BF6e6FCd5e27c1d92c5a
 nonce: 0
 tlsInsecure: true 
-network: "holesky"
+network: "hoodi"
 operatorsInfoPath: /data/initiator/operators_info.json
 proofsFilePath: ./output/ceremony-2024-11-18--16-04-55.529/proofs.json
 signatures: 0eb5bce8a1bf52f106233954b096504c934d08962003c41eff1a29e05ddeeebe34133dd66c7fa9512ae74d3124a9f60ee270f312c08c60512a5009ac9bca78911b
