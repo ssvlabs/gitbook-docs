@@ -25,22 +25,27 @@ Several key factors influence this:
 ## **Major impact**
 High‑priority practices that ensure reliable, on‑time duty submissions. Might sound obvious, but are often overlooked.
 
+:::info Hardware and performance
+Most of hardware-related suggestions below are for Execution (EL) and Consensus (CL) clients. SSV client is light and [hardware requirements are moderate](./hardware-requirements.md). EL and CL require much more resources to run effectively.
+:::
+
 ### **For Home Setups**
 - **Hardware:** Usual setup has 4- to 8-core CPU (focus on single-thread performance) and 32GB RAM.
-- **Disk:** NVMe SSDs are strongly recommended. 2TB size should serve you until ~2026. You can have 4TB to be on the safe side. If you're unsure with filesystem to use, stick to `ext4`, as it is performant and the easiest to maintain. 
-- **Reliability:** Use UPS and keep machine well-ventilated. Sudden power loss or thermal throttling can both cause downtime or missed duties.
+- **Disk:** NVMe SSDs are strongly recommended. If you're unsure with filesystem to use, stick to `ext4`, as it is performant and the easiest to maintain. 
+- **Reliability:** Use a UPS and ensure the machine is well-ventilated. Sudden power loss or thermal throttling can cause downtime or result in missed duties
 - **Internet Connectivity:** Ensure your ISP doesn't impose strict data caps. Choose a plan with at least 10 Mbps upload speed, but latency and reliability make the difference.
+- **[Follow EthStaker hardware section](https://ethstaker.org/staking-hardware)** as their guides are focused on running Execution and Consensus nodes.
 
 ### **For Enterprise Grade**
-- **CPU frequency is a major factor**. Fast cores with moderate-to-high core count are the recipe. Ensure each server can turbo boost to high frequency, yet avoid agressive overclocking.
-- **Disk and Redundancy:** NVMe SSDs are mandatory. Many use RAID1 mirroring or have failover nodes ready in case of disk failure. Recommended to use ext4 if unsure about ZFS's complexities. Improving read/write speed has one of the greatest impacts.
+- **CPU frequency is a major factor**. Fast cores with a moderate to high core count are ideal. Ensure each server can turbo boost to a high frequency, but avoid aggressive overclocking.
+- **Disk and Redundancy:** NVMe SSDs are mandatory. Many use RAID1 mirroring or have failover nodes ready in case of disk failure. The easiest filesystem to maintain is `ext4`, we also found `xfs` is more performant. Improving read/write speed has one of the greatest impacts.
 - **RAM Considerations:** Usually RAM is not the limiting factor. Abundant RAM enables disk caching for the execution client database – reducing disk reads and writes. ECC memory is advisable to protect against bit flips in long-running servers. 
 - **Form Factor and Data Center:** If you have multiple EL+CL setups - run them on different bare metal servers, in colocation data centers, or cloud VM instances. Redundancy across hardware and geographic distribution is a best practice. 
 - **Firewalls and DDoS Protection:** Configure protection if you believe there is a chance for DDoS attack, make sure the p2p ports allow full connectivity. The goal is to not block or throttle legitimate p2p ports.
 
 ### Sufficient Hardware
 **Recommendation:**  
-  Ensure your hardware meets or exceeds [recommended specifications](./hardware-requirements.md). On the same page you will find a table comparing # of validators to resources used.
+Ensure your hardware meets or exceeds [SSV recommended specifications](./hardware-requirements.md). These requirements are in additional to what you need for Execution + Consensus. On the same page you will find a table comparing # of validators to resources used.
 
 **Dos and Don'ts:**
   - **Do:** DYOR on the hardware provider or hardware parts for home setup. Verify your specs, as well as quality of hardware provider.
@@ -70,7 +75,7 @@ Ensure all required ports are open and correctly configured on your setup.
   
 ### Consolidated Infrastructure
 **Recommendation:**  
-Location of your clients plays a direct role in performance. Co-hosting clients minimizes network latency, improves block import timings, and provides more time for SSV rounds.
+Location of your clients plays a direct role in performance. Co-hosting Execution and Consensus clients minimizes network latency, improves block import timings, and provides more time for SSV rounds.
 
 **Dos and Don'ts:**
   - **Do:** Co-host your Execution (EL) and Consensus (CL) clients on a single machine in production environments.
@@ -123,17 +128,6 @@ Improving storage speed (minimizing read/write latency) has one of the greatest 
 - **Don't** fill the drive beyond ~85 % capacity.  
 - **Don't** run on default scheduler settings (e.g., `cfq` or `deadline`) for NVMe.  
 
-### CPU Optimization
-
-**Recommendation:**  
-CPU is the essential resource that directly affects validator's performance. Optimize your CPU profile by following the steps below.
-
-**Dos and Dont's:**
-- **Do:** Set CPU Governor to Performance, you can [follow this StackExchange thread](https://askubuntu.com/questions/1021748/set-cpu-governor-to-performance-in-18-04).
-- **Do:** Set Low Latency CPU profile. Most modern BIOS versions have that in place. [RedHat wrote a great runbook](https://access.redhat.com/sites/default/files/attachments/201501-perf-brief-low-latency-tuning-rhel7-v2.1.pdf) on how to optimize your CPU profile. There is a checklist on page 5 that you can follow.
-- **Do:** Limit the CPU usage for each of your applications/clients. This is easier to accomplish when using containers.
-- **Don't:** Leave your CPU resources unlimited to all clients, leading to CPU spikes and lowered performance.
-
 ### Keep clients updated
 **Recommendation:**
 Keep your clients updated, while prioritizing stability over following every upgrade. Ethereum staking is an ever-evolving place and even established clients sometimes provide significant boosts in performance with newer releases.
@@ -146,43 +140,7 @@ Keep your clients updated, while prioritizing stability over following every upg
 ### System Tuning Tools
 
 **NTP & Time Synchronization:**  
-  - [Use chrony](https://ethdocker.com/Usage/LinuxSecurity/#time-synchronization-on-linux) or an equivalent NTP service to ensure synchronized clocks across your nodes.
-  
-
-
-### Kernel Tuning and Advanced Virtual Network
-#### Linux Kernel Tuning
-  - Use a recent kernel (5.10+), you can check with `uname -r`.
-  - Set your TCP congestion control to BBR (if supported) by [following this guide](https://www.cyberciti.biz/cloud-computing/increase-your-linux-server-internet-speed-with-tcp-bbr-congestion-control/).
-  - Adjust kernel parameters to improve TCP performance. Increase TCP read and write buffer sizes by tuning parameters like `net.core.rmem_max` and `net.core.wmem_max`. Set the buffer size in bytes, e.g. to set it to 256KBs use `echo 'net.core.wmem_max=25165824' >> /etc/sysctl.conf`
-  - Fine-tune parameters such as `net.core.rmem_max`, `net.core.wmem_max`, `net.core.netdev_max_backlog` and `net.ipv4.tcp_max_syn_backlog` to handle higher traffic volumes.
-  - Evaluate and adjust interrupt moderation and other NIC-related settings to reduce processing overhead.
-#### Tuning the Virtual Network Environment
-  - In virtualized or cloud environments, choose instance types that support enhanced networking (e.g., AWS's Elastic Network Adapter or Azure Accelerated Networking).
-  - When using container orchestration, select a low-overhead CNI (Container Network Interface) plugin such as Calico or Cilium, configured to minimize latency.
-  - Consider using host networking or direct-passthrough configurations if your security model allows for it.
-
-**Dos and Don'ts:**
-  - **Do:** Carefully test any kernel or network stack changes in a staging environment before applying them in production.
-  - **Don't:** Apply multiple conflicting tuning parameters without validation or research.
-
-### Containerization Trade-offs
-
-**Recommendation:**  
-  Evaluate your deployment method. Containerization (using Kubernetes, Helm, Docker Compose, or Podman) offers manageability with minimal latency impact if properly configured.
-**Dos and Don'ts:**
-  - **Do:** Use container orchestration for streamlined operations and scalability.
-  - **Do:** Ensure proper network configuration, as per documentation of your containerization method (e.g. CNI on kubernetes).
-  - **Don't:** Choose containerization if it interferes with interactive operations (e.g., password entry) or results in misconfigured network settings.
-
-
-### Database Maintenance
-**Recommendation:**  
-  Periodically prune your Execution and Consensus databases (e.g., on a monthly basis) to manage disk usage. Pruning is primarily a maintenance task for storage management and does not provide significant performance boosts.
-
-**Dos and Don'ts:**
-  - **Do:** Schedule pruning during periods of low activity.
-  - **Don't:** Expect dramatic performance improvements solely from database pruning.
+  - [Use chrony](https://ethdocker.com/Usage/LinuxSecurity/#time-synchronization-on-linux) or an equivalent NTP service to ensure synchronized clocks across your nodes. This should be used on all instances (e.g. if you are running SSV and Ethereum nodes on separate instances).
 
 ### SSV-Specific
 
@@ -214,11 +172,46 @@ eth2:
   WithParallelSubmissions: true   # Sends duties to all nodes concurrently
 ```
 
-### EL and CL Clients
-SSV supports all clients, but that doesn't mean any client will suit your setup. Consider our recommendations below.
+### Containerization Trade-offs
 
-**Considerations:**  
-- **Besu and Teku** were reported to be not a great fit together, with SSV specifically.
-- **Erigon (EL)** has the largest ledger in ELs, is heavy on RAM usage, and lower sync speed. For home setups with limited resources it can cause issues.
-- **Nimbus (CL)** performs well on a low validator count. However, with more than ~250 validators it won't be able to scale properly and you might have to switch the client.
-- **Lighthouse (CL)** has the largest ledger in CLs, consider this when choosing EL pair to it. Especially when Disk size is limited.
+**Recommendation:**  
+  Evaluate your deployment method. Containerization (using Kubernetes, Helm, Docker Compose, or Podman) offers manageability with minimal latency impact if properly configured.
+**Dos and Don'ts:**
+  - **Do:** Use container orchestration for streamlined operations and scalability.
+  - **Do:** Ensure proper network configuration, as per documentation of your containerization method (e.g. CNI on kubernetes).
+  - **Don't:** Choose containerization if it interferes with interactive operations (e.g., password entry) or results in misconfigured network settings.
+
+
+### Database Maintenance
+**Recommendation:**  
+  Periodically prune your Execution and Consensus databases (e.g., on a monthly basis) to manage disk usage. Pruning is primarily a maintenance task for storage management and does not provide significant performance boosts.
+
+**Dos and Don'ts:**
+  - **Do:** Schedule pruning during periods of low activity.
+  - **Don't:** Expect dramatic performance improvements solely from database pruning.
+
+### Kernel Tuning and Advanced Virtual Network
+
+:::danger Do not follow if unsure
+Kernel changes are intricate and can easily go wrong. If you are not familiar with these settings and changes, please do not proceed.
+:::
+
+#### Linux Kernel Tuning
+  - Use a recent kernel (5.10+), you can check with `uname -r`.
+  - Set your TCP congestion control to BBR (if supported) by [following this guide](https://www.cyberciti.biz/cloud-computing/increase-your-linux-server-internet-speed-with-tcp-bbr-congestion-control/).
+  - Adjust kernel parameters to improve TCP performance. Increase TCP read and write buffer sizes by tuning parameters like `net.core.rmem_max` and `net.core.wmem_max`. Set the buffer size in bytes, e.g. to set it to 256KBs use `echo 'net.core.wmem_max=25165824' >> /etc/sysctl.conf`
+  - Fine-tune parameters such as `net.core.rmem_max`, `net.core.wmem_max`, `net.core.netdev_max_backlog` and `net.ipv4.tcp_max_syn_backlog` to handle higher traffic volumes.
+  - Evaluate and adjust interrupt moderation and other NIC-related settings to reduce processing overhead.
+#### Tuning the Virtual Network Environment
+  - In virtualized or cloud environments, choose instance types that support enhanced networking (e.g., AWS's Elastic Network Adapter or Azure Accelerated Networking).
+  - When using container orchestration, select a low-overhead CNI (Container Network Interface) plugin such as Calico or Cilium, configured to minimize latency.
+  - Consider using host networking or direct-passthrough configurations if your security model allows for it.
+#### CPU Optimization
+- Set CPU Governor to Performance, you can start [with this archlinux page](https://wiki.archlinux.org/title/CPU_frequency_scaling#Scaling_governors).
+- Set Low Latency CPU profile. Most modern BIOS versions have that in place. [RedHat wrote a great runbook](https://access.redhat.com/sites/default/files/attachments/201501-perf-brief-low-latency-tuning-rhel7-v2.1.pdf) on how to optimize your CPU profile. There is a checklist on page 5 that you can follow.
+- Limit the CPU usage for each of your applications/clients. This is easier to accomplish when using containers.
+
+**Dos and Don'ts:**
+  - **Do:** Carefully test any kernel or network stack changes in a staging environment before applying them in production.
+  - **Don't:** Apply multiple conflicting tuning parameters without validation or research.
+  - **Don't:** Leave your CPU resources unlimited to all clients, leading to CPU spikes and lowered performance.
