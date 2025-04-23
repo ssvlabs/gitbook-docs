@@ -142,6 +142,9 @@ Keep your clients updated, while prioritizing stability over following every upg
 **NTP & Time Synchronization:**  
   - [Use chrony](https://ethdocker.com/Usage/LinuxSecurity/#time-synchronization-on-linux) or an equivalent NTP service to ensure synchronized clocks across your nodes. This should be used on all instances (e.g. if you are running SSV and Ethereum nodes on separate instances).
 
+**TCP Congestion Control**
+  - Set your TCP congestion control to BBR by [following this guide](https://www.cyberciti.biz/cloud-computing/increase-your-linux-server-internet-speed-with-tcp-bbr-congestion-control/), if supported by your kernel version.
+
 ### SSV-Specific
 
 **Failover for EL and CL clients:**  
@@ -189,29 +192,3 @@ eth2:
 **Dos and Don'ts:**
   - **Do:** Schedule pruning during periods of low activity.
   - **Don't:** Expect dramatic performance improvements solely from database pruning.
-
-### Kernel Tuning and Advanced Virtual Network
-
-:::danger Do not follow if unsure
-Kernel changes are intricate and can easily go wrong. If you are not familiar with these settings and changes, please do not proceed.
-:::
-
-#### Linux Kernel Tuning
-  - Use a recent kernel (5.10+), you can check with `uname -r`.
-  - Set your TCP congestion control to BBR (if supported) by [following this guide](https://www.cyberciti.biz/cloud-computing/increase-your-linux-server-internet-speed-with-tcp-bbr-congestion-control/).
-  - Adjust kernel parameters to improve TCP performance. Increase TCP read and write buffer sizes by tuning parameters like `net.core.rmem_max` and `net.core.wmem_max`. Set the buffer size in bytes, e.g. to set it to 256KBs use `echo 'net.core.wmem_max=25165824' >> /etc/sysctl.conf`
-  - Fine-tune parameters such as `net.core.rmem_max`, `net.core.wmem_max`, `net.core.netdev_max_backlog` and `net.ipv4.tcp_max_syn_backlog` to handle higher traffic volumes.
-  - Evaluate and adjust interrupt moderation and other NIC-related settings to reduce processing overhead.
-#### Tuning the Virtual Network Environment
-  - In virtualized or cloud environments, choose instance types that support enhanced networking (e.g., AWS's Elastic Network Adapter or Azure Accelerated Networking).
-  - When using container orchestration, select a low-overhead CNI (Container Network Interface) plugin such as Calico or Cilium, configured to minimize latency.
-  - Consider using host networking or direct-passthrough configurations if your security model allows for it.
-#### CPU Optimization
-- Set CPU Governor to Performance, you can start [with this archlinux page](https://wiki.archlinux.org/title/CPU_frequency_scaling#Scaling_governors).
-- Set Low Latency CPU profile. Most modern BIOS versions have that in place. [RedHat wrote a great runbook](https://access.redhat.com/sites/default/files/attachments/201501-perf-brief-low-latency-tuning-rhel7-v2.1.pdf) on how to optimize your CPU profile. There is a checklist on page 5 that you can follow.
-- Limit the CPU usage for each of your applications/clients. This is easier to accomplish when using containers.
-
-**Dos and Don'ts:**
-  - **Do:** Carefully test any kernel or network stack changes in a staging environment before applying them in production.
-  - **Don't:** Apply multiple conflicting tuning parameters without validation or research.
-  - **Don't:** Leave your CPU resources unlimited to all clients, leading to CPU spikes and lowered performance.
