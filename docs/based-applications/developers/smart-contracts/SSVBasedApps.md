@@ -171,29 +171,6 @@ Description: Deposits ETH into a strategy.
 Events:
 * `StrategyDeposit(uint32 indexed strategyId, address indexed account, address indexed token, uint256 amount)`
 
-### **`fastWithdrawERC20(strategyId, token)`**
-
-Description: Performs a fast withdrawal of ERC20 tokens from a strategy if the token is not used in any obligations.
-
-| **Parameter** | **Type** | **Description** |
-| ------------ | -------- | --------------- |
-| strategyId | uint32 | The ID of the strategy to withdraw from |
-| token | address | The address of the ERC20 token to withdraw |
-
-Events:
-* `StrategyWithdrawal(uint32 indexed strategyId, address indexed account, address indexed token, uint256 amount, bool isFast)`
-
-### **`fastWithdrawETH(strategyId)`**
-
-Description: Performs a fast withdrawal of ETH from a strategy if the token is not used in any obligations.
-
-| **Parameter** | **Type** | **Description** |
-| ------------ | -------- | --------------- |
-| strategyId | uint32 | The ID of the strategy to withdraw from |
-
-Events:
-* `StrategyWithdrawal(uint32 indexed strategyId, address indexed account, address indexed token, uint256 amount, bool isFast)`
-
 ### **`proposeWithdrawal(strategyId, token, amount)`**
 
 Description: Proposes a withdrawal of ERC20 tokens from a strategy, initiating the timelock period. Cannot be used for ETH withdrawals (use proposeWithdrawalETH instead). The amount must be greater than 0 and not exceed the user's balance in the strategy.
@@ -319,6 +296,56 @@ Description: Finalizes a fee update after the timelock period has elapsed. Must 
 
 Events:
 * `StrategyFeeUpdated(uint32 indexed strategyId, address indexed sender, uint32 newFee, uint32 oldFee)`
+
+### **`reduceFee(strategyId, proposedFee)`**
+
+Description: Reduces the fee for a strategy. This function allows strategy owners to decrease their fee percentage.
+
+| **Parameter** | **Type** | **Description** |
+| ------------ | -------- | --------------- |
+| strategyId | uint32 | The ID of the strategy |
+| proposedFee | uint32 | The new proposed fee percentage (scaled by 1e4) |
+
+Events:
+* `StrategyFeeUpdated(uint32 indexed strategyId, address indexed sender, uint32 newFee, uint32 oldFee)`
+
+### **`slash(strategyId, bApp, token, percentage, data)`**
+
+Description: Slashes a strategy's balance for a specific bApp and token. This function is used to penalize strategies that fail to meet their obligations.
+
+| **Parameter** | **Type** | **Description** |
+| ------------ | -------- | --------------- |
+| strategyId | uint32 | The ID of the strategy to slash |
+| bApp | address | The address of the bApp |
+| token | address | The token address to slash |
+| percentage | uint32 | The percentage of the balance to slash (scaled by 1e4) |
+| data | bytes | Additional data required for the slashing operation |
+
+Events:
+* `StrategySlashed(uint32 indexed strategyId, address indexed bApp, address indexed token, uint32 percentage, uint256 amount)`
+
+### **`withdrawSlashingFund(token, amount)`**
+
+Description: Withdraws slashing funds for a specific token from the slashing fund.
+
+| **Parameter** | **Type** | **Description** |
+| ------------ | -------- | --------------- |
+| token | address | The address of the token to withdraw |
+| amount | uint256 | The amount of tokens to withdraw |
+
+Events:
+* `SlashingFundWithdrawn(address indexed token, uint256 amount)`
+
+### **`withdrawETHSlashingFund(amount)`**
+
+Description: Withdraws ETH from the slashing fund.
+
+| **Parameter** | **Type** | **Description** |
+| ------------ | -------- | --------------- |
+| amount | uint256 | The amount of ETH to withdraw (in wei) |
+
+Events:
+* `ETHSlashingFundWithdrawn(uint256 amount)`
 
 ## Account
 
