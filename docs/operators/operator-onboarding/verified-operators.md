@@ -13,7 +13,7 @@ ssv.network is an open protocol in which stakers (validators) can freely choose 
 
 In addition, operating a validator requires constant monitoring, maintenance, and uptime to avoid penalties and slashing. As such, validators require stability and consistency from the operators managing their distributed validator.
 
-To address the above, the SSV [DAO](/learn/introduction/governance) maintains a curated list of [Verified Operators](https://ssvnetwork.notion.site/79bcc809d3884534abc3785a45cad599?pvs=24). From a staker perspective, the verification adds another dimension to the operator selection process. It allows the staker to limit their choice to a narrowed list of verified operators instead of choosing between all of the operators in the network.
+To address the above, the SSV [DAO](/learn/introduction/governance) maintains a curated list of [Verified Operators](https://ssvnetwork.notion.site/Verified-Operator-Program-9aa7cb59cefe4e998b296cfc57bd4032#c5e74527a9ea4448a32476cbda02b970). From a staker perspective, the verification adds another dimension to the operator selection process. It allows the staker to limit their choice to a narrowed list of verified operators instead of choosing between all of the operators in the network.
 
 Verified Operators can be recognized in the operator selection list on the WebApp, thanks to a badge, looking like this:![](https://app.ssv.network/images/operator\_type/verified.svg)
 

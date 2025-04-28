@@ -37,3 +37,7 @@ Tests were done on *Testnet*, so Mainnet will require slighthly more resources.
 ### Execution and Consensus nodes
 
 ![Resource usage by Execution and Consensus nodes depending on number of validators](/img/table_ELCL.png)
+
+## Best Practices
+
+Sufficient hardware is not the only important part. Check out [**Best Practices**](./best-practices.md) page to ensure best performance.
