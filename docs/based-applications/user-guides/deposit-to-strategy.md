@@ -5,17 +5,17 @@ sidebar_position: 2
 
 # How to Deposit Tokens to a Strategy 
 
-Strategies are used to secure Based Applications, the most common use cases of bApps [are described on this page](../learn/based-applications/use-cases.md). Strategies are often created by node operators that want to engage with bApps and earn rewards for securing them. 
+Strategies are used to secure Based Applications, the most common use cases of bApps [are described on this page](../learn/based-applications/use-cases.md). Strategies are often created by node operators (not necessarily SSV node operators) that want to engage with bApps and earn rewards for securing them. 
 
 As a token holder, you can participate in the protocol by depositing your assets to strategies. Doing that will contribute to the security of bApps and allows you to earn a share of the strategy's rewards. You can read more [about the Rewards for securing bApps](../learn/ssv2.0-a-based-applications-protocol/ultra-sound-ssv/rewards.md).
 
-The deposited tokens are considered a slashable asset and are exposed to inherent risk. As such you can expect the share of rewards to be bigger than what applies to non-slashable assets. For more information refer [to the dedicated page](../learn/based-applications/slashable-vs-non-slashable-assets-and-how-bapps-use-them.md).
+The deposited tokens are considered a slashable asset and are exposed to inherent risk. As such you can expect the share of rewards to be bigger than what applies to non-slashable assets. For more information refer [to this dedicated page](../learn/based-applications/slashable-vs-non-slashable-assets-and-how-bapps-use-them.md).
 
 ## 1. Go to My Account page
 
 Navigate to the [SSV Webapp](https://app.stage.ssv.network/account/my-delegations), login with your chosen wallet and click on My Account.
 
-This page will display a list depositable assets this wallet holds. 
+This page will display a list of depositable assets this wallet holds. 
 
 <div style={{ textAlign: 'center' }}>
   <img src="/img/deposit-to-strategy-1.jpeg" alt="" />
@@ -33,7 +33,7 @@ In this example, Hoodi ETH has been selected.
 
 A list of strategies that support Hoodi ETH will be displayed. 
 
-To the right of the one of the strategies listed, click deposit.
+Hovering your mouse cursor to the right of the one of the strategies listed, reveals a "Deposit" button. Click it to deposit.
 
 <div style={{ textAlign: 'center' }}>
   <img src="/img/deposit-to-strategy-3.jpeg" alt="" />
@@ -61,9 +61,9 @@ After signing, a pop-up will appear to indicate the transaction is being process
   <img src="/img/deposit-to-strategy-6.jpeg" alt="" />
 </div>
 
-## 4. Check asset is deposited
+## 4. Verify asset is deposited
 
-Once the transaction completes, naviagate back to the My Account page, and click the drop-down for the asset deposited.
+Once the transaction completes, navigate back to the My Account page, and click the drop-down for the asset deposited.
 
 The strategy and amount deposited to will now show up here.
 

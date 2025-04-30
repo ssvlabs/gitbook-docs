@@ -7,7 +7,7 @@ sidebar_position: 1
 
 Strategies are used to secure Based Applications, the most common use cases of bApps [are described on this page](../learn/based-applications/use-cases.md).
 
-Strategies are often created by node operators that want to engage with bApps and earn rewards for securing them. You can read more [about the Rewards for securing bApps](../learn/ssv2.0-a-based-applications-protocol/ultra-sound-ssv/rewards.md).
+Strategies are often created by node operators (not necessarily SSV node operators) that want to engage with bApps and earn rewards for securing them. You can read more [about the Rewards for securing bApps](../learn/ssv2.0-a-based-applications-protocol/ultra-sound-ssv/rewards.md).
 
 ## 1. Go to Strategies page
 
