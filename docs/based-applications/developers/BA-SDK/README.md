@@ -39,6 +39,9 @@ npm i @ssv-labs/bapps-sdk
 
 ## Example Usage
 
+The `extendedConfig` parameter in th `BasedAppsSDK` constructor is optional, if not provided, the SDK will use the development endpoint. Bear in mind that this is rate limited, though, so it is strongly advised to use an API key with the free plan.
+For more information regarding your subgraph API key, please refer to the [dedicated Subgraph page](../subgraph.md#based-application-subgraph).
+
 ```typescript
 import { BasedAppsSDK } from "@ssv-labs/bapps-sdk";
 import { createPublicClient, createWalletClient, http } from 'viem'
@@ -64,6 +67,11 @@ const sdk = new BasedAppsSDK({
    beaconchainUrl: 'https://example.com/beacon',
    publicClient,
    walletClient,
+   extendedConfig: {
+    subgraph: {
+      apiKey: "<YOUR_SUBGRAPH_API_KEY>"
+    }
+  }
  })
 
 async function main(): Promise<void> {
