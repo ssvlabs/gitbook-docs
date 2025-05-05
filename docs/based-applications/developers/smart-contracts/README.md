@@ -22,10 +22,10 @@ This smart contract is under development and as such, it is only deployed on the
 #### Hoodi Testnet
 | Contract        | Address                                                                                                      |
 |-----------------|-------------------------------------------------------------------------------------------------------------|
-| SSVBasedApps       | [`0x3F2983b813054Eba76Ae137DfA77836CA8b00ACE`](https://hoodi.etherscan.io/address/0x3F2983b813054Eba76Ae137DfA77836CA8b00ACE) |
+| SSVBasedApps       | [`0xc7fCFeEc5FB9962bDC2234A7a25dCec739e27f9f`](https://hoodi.etherscan.io/address/0xc7fCFeEc5FB9962bDC2234A7a25dCec739e27f9f) |
 
 
 #### ABI
 
 <!-- TODO missing ABI -->
-* [Testnet](https://github.com/ssvlabs/based-applications/tree/contract-abi/docs/testnet/v1.1.0/abi)
+* [Testnet](https://github.com/ssvlabs/based-applications/tree/contract-abi/docs/prod/v0.1.0)

@@ -23,9 +23,7 @@ A series of examples of the most useful queries and the data accessible via the 
 
 ## Querying SSV Protocol smart contract data
 
-Currently, there are two official Subgraphs deployed, one for [Ethereum Mainnet](https://thegraph.com/explorer/subgraphs/7V45fKPugp9psQjgrGsfif98gWzCyC6ChN7CW98VyQnr?view=Playground\&chain=arbitrum-one)
-
-**Explorer for Hoodi will be available soon.**
+Currently, there are two official Subgraphs deployed, one for [Ethereum Mainnet](https://thegraph.com/explorer/subgraphs/7V45fKPugp9psQjgrGsfif98gWzCyC6ChN7CW98VyQnr?view=Playground\&chain=arbitrum-one) and one for the [Hoodi Testnet](https://thegraph.com/explorer/subgraphs/F4AU5vPCuKfHvnLsusibxJEiTN7ELCoYTvnzg3YHGYbh?view=Query&chain=arbitrum-one)
 
 There are a few ways to access SSV smart contract data through The Graph.
 
@@ -33,53 +31,23 @@ There are a few ways to access SSV smart contract data through The Graph.
 
 First of all, you can access the Subgraph page on the Graph Explorer, and use it to experiment and prototype queries using the provided Playground.
 
-![Subgraph Playground](/img/subgraph-1.avif)
+![Subgraph Playground](/img/subgraph-1.png)
 
 It's possible to access the underlying GraphQL schema, by clicking the _folder icon_ on the right of the playground. This is self-documenting, similarly (and more) to Swagger for a RESTful API, but it's also more powerful, since it will allow you to build queries through simple point-and-click interactions.
 
 Once you are satisfied with the query you built, click on the _Play_ button in the center to launch it and obtain the result.
 
-![Subgraph Playground](/img/subgraph-2.avif)
+![Subgraph Playground](/img/subgraph-2.png)
 
 
 Further documentation about the schema can be accessed by clicking on the _book icon_ on the right of the Playground window.
 
-### Developer API
+### Query API
 
-:::info
-The developer API is rate limited and should only be used for infrequent queries that are not data heavy, like a single owner nonce, or the cluster snapshot information for a single cluster.
-:::
+The screenshot below shows the lower section of the _Query_ page.
 
-The developer API is typically not publicly accessed, but it is provided below, to foster development of applications built on the SSV protocol. Here are the Developer endpoints for the two deployed Subgraphs:
+![Subgraph Playground](/img/subgraph-3.png)
 
-#### Developer API for Ethereum Mainnet SSV Subgraph
+It provides instructions on how to query this subgraph programmatically, using the public endpoint and an API-key. You can generate your own API key by visiting the [Subgraph Studio page](https://thegraph.com/studio/apikeys/), and selecting API Keys at the top. The free plan allows 100 thousand queries per month, which should be plenty for your development needs.
 
-```
-https://api.studio.thegraph.com/query/71118/ssv-network-ethereum/version/latest
-```
-
-#### Developer API for Hoodi testnet SSV Subgraph
-
-```
-https://api.studio.thegraph.com/query/71118/ssv-network-hoodi/version/latest
-```
-
-Despite being rate limited, this endpoint should be sufficient for every development use case.
-
-In order to use it, you would need to know exactly the query you want to perform, and then perform a `POST` request to the provided endpoint.
-
-Furthermore, a simple project aimed at providing an example of how to use the subgraph to substitute the [`ssv-scanner`](/developers/tools/ssv-scanner) tool can be found in this repository: [SSV Scanner Demo Repository](https://github.com/raekwonIII/ssv-scanner-demo)
-
-### Production API
-
-As previously mentioned, the Developer API is accessible to anyone for free, but it's rate limited. As such, it should be used for sporadic, light requests.
-
-For demanding and very frequent requests, you should be using the Production API, for which the data is provided by decentralized indexers, who get rewarded by the protocol tokenomics for providing the service.
-
-In order to use this endpoint, head over to the Subgraph's page and click on the _Query_ button.
-
-![Subgraph Playground](/img/subgraph-3.avif)
-
-As you can see, the provided URL requires an API key, follow the documentation in the page, to find out how to create one.
-
-Once you have obtained your API key, you can essentially follow the instructions in the previous section, only substituting the URL in the examples with your new endpoint.
+Delving deeper into programmatically querying the endpoint: in order do this, you would need to know exactly the query you want to perform, and then perform a `POST` request to the provided endpoint, adding the API key as a header to the request.
