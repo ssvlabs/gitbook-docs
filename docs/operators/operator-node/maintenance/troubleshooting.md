@@ -82,7 +82,8 @@ This means that the Docker container running your node will always try to restar
 
 <details>
 
-<summary><strong>My node is not participating in cluster consensus</strong></summary>
+<summary><strong>My node is not attesting</strong></summary>
+There are several reasons for your node to not participate in cluster's consensus:
 
 1. Verify that the `network` in config has the correct value for the blockchain you are trying to operate on.
 
@@ -92,7 +93,7 @@ This means that the Docker container running your node will always try to restar
 
 4. If the SSV node logs don't report any errors, please verify the clients logs themselves. If the disk they are running on does not support fast IOPS, they might struggle to stay in sync with the blockchain.
 
-5. It is finally possible that the clients don't report any errors, but the issue persists. In this cases, try and re-sync execution and/or beacon client(s), to fix potential initialization issues.
+5. It is finally possible that the clients don't report any errors, but the issue persists. In this cases, try and re-sync ssv (by deleting `db` folder). If that doesn't help, try to re-sync execution and/or beacon client(s), and then re-sync ssv node again. That should fix potential initialization issues.
 
 6. If you can't find the reason for this issue, feel free to ask our team for help in our [Discord channel](https://discord.com/invite/ssvnetworkofficial).
 
