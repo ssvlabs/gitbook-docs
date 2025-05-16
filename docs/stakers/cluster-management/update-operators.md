@@ -9,7 +9,7 @@ sidebar_position: 5
 Please do not change more than 2 operators in a cluster. Each set of **generated shares will always be valid** when their signing threshold is met (e.g. 3/4). To reduce the risks, it is advised to not change more than 2 of the validator's managing operators when changing its cluster.
 :::
 
-Before we jump into step-by-step instructions, we need to verify how your validator was generated. Depending on that fact, your steps will differ:
+First of all, it's important to verify how the validator was generated. Depending on that fact, your steps will differ:
 1. [**Validators with Keystore**](#1-validators-with-keystore) — follow if you have the `keystore.....json` file of your validator.
 2. [**DKG-generated Validators**](#2-dkg-generated-validators) — follow if you have the `ceremony-YYYY-MM-DD...` folder with `keyshares` and `proofs` for your validators.
 3. [**I don't have neither**](#3-i-dont-have-neither)

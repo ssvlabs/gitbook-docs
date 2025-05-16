@@ -6,7 +6,7 @@ sidebar_position: 1
 
 Below is the theoretical context around Validator Onboarding, you can find actionable steps on pages:
 - [Validator management](../validator-management/README.md), if you don't have a cluster yet.
-- [Adding validators](../cluster-management/) in existing clusters
+- [Adding validators](../cluster-management/adding-validator-to-existing-cluster.md) in existing clusters.
 
 ### Introduction 
 
