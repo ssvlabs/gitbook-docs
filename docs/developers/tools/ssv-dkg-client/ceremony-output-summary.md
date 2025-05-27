@@ -95,7 +95,7 @@ ceremony-[timestamp]
 ```
 
 #### Details about `sharesData` field
-Below is an example of `sharesData` from a Hoodi validator broken down:
+Below is an example of `sharesData` from a Hoodi validator with 4 operators. Each segment is highlighted with color:
 
 <div style={{ textAlign: 'center', width: '100%', margin: '0 auto' }}>
   <img src="/img/sharesData.png" alt="" />
