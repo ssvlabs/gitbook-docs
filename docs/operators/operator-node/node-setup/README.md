@@ -114,10 +114,11 @@ Git is needed to download the SSV Node stack on your machine.
 
 #### 4. Adjust Firewall
 
-Make sure to expose the ports on your SSV node machine's firewall, otherwise your node won't be able to run correctly. The default ports are :
+Make sure to expose the ports on your SSV node machine's firewall, otherwise your node won't be able to run correctly. The default ports are:
 - P2P - **12001 UDP** and **13001 TCP** 
 - Metrics - **15000 TCP** 
 - Health endpoint - **16000 TCP**
+- DKG port - **3030 TCP**
 
 If you don't want to use the default ports, they can be changed on the next step.
 
@@ -143,13 +144,18 @@ Edit the `ssv.env` file and adjust the settings to your needs. The minimum you n
 * `BEACON_NODE_ADDR` - HTTP address of the Beacon node (e.g. `http://1.2.3.4:5052`)
 * `ETH_1_ADDR` - WebSocket address of the Execution node (e.g. `ws://1.2.3.4:8546`)
 * `NETWORK` - The network you are running on (`mainnet`, `hoodi`)
-:::info
+
+All existing settings are listed on the [Configuration Reference page](./node-configuration-reference.md).
+:::info Multiple Endpoints
 Both `BEACON_NODE_ADDR` and `ETH_1_ADDR` support multiple endpoints. Separate them with `;`.
 
 Example: `BEACON_NODE_ADDR=http://1.2.3.4:5052;http://1.2.3.4:5053`
 :::
-***
-If you already have encrypted key and password files: 
+
+### Password and private key
+On the first start the Node will generate a random `password` and encrypted `private_key` files. You can find the files under `~/ssv-stack/ssv-node-data` directory.&#x20;
+
+**If you already have encrypted key and password files**: 
 * Copy/move them to `/ssv-stack/ssv-node-data` 
 * Edit the environment variables to the correct file names, e.g.:
     * `PRIVATE_KEY_FILE=/data/encrypted_private_key.json`
@@ -157,7 +163,12 @@ If you already have encrypted key and password files:
 
 **If this is done incorrectly**, new keys will be automatically generated, and you will see a message in the console indicating this.
 
-All existing settings are listed on the [Configuration Reference page](./node-configuration-reference.md).
+
+:::info Backup your files
+Both password and private key are needed to run SSV and DKG Nodes. 
+
+**Backup those files** on a separate device, if any of the two are lost — you will lose access to your operator without a chance to recover.
+:::
 
 ### Custom ports
 
@@ -171,24 +182,20 @@ Changes to those files will be applied after a restart of the node (_if you alre
 ## Start the Node
 
 To start your node use the following command
-
 ```bash
 docker compose up
 ```
 
 Or you can start it in the background, so there won't be logs in your CLI
-
 ```bash
 docker compose up -d
 ```
 
-:::info Backup your files
-On the first start the Node will generate a random `password` and encrypted `private_key` files.&#x20;
+## Start DKG Node
+You can also run the stack with DKG, simplifying the setup process. 
 
-Both files are needed to run SSV Node and DKG Node. You can find them under `~/ssv-stack/ssv-node-data` directory.&#x20;
+The instructions are on the ["Enablind DKG" section](./enabling-dkg/start-dkg-node/README.md).
 
-**Backup those files** on a separate device, if any of the two are lost — you will lose access to your operator without a chance to recover.
-:::
 
 ## Other setup options
 

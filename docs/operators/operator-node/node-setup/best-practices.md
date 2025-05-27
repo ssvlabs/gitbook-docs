@@ -7,10 +7,11 @@ sidebar_position: 3
 
 This guide outlines key recommendations to ensure the best Performance and Correctness of your node. The guide will be updated as we get new information.
 
-The page is divided into three parts:
-- [**Introduction**](#introduction) - understanding the Performance, Correctness, and their key factors.
-- [**Major impact**](#major-impact) - vital tips, more obvious.
-- [**Minor impact**](#minor-impact) - fine-tuning tips, nice-to-have, less obvious.
+The page is divided into four parts:
+- [**Introduction**](#introduction) - Understanding the Performance, Correctness, and their key factors.
+- [**SSV-specific**](#ssv-specific) - Features of SSV that will improve Performance or Correctness.
+- [**Major impact**](#major-impact) - Vital tips, more obvious.
+- [**Minor impact**](#minor-impact) - Fine-tuning tips, nice-to-have, less obvious.
 
 
 ## **Introduction**
@@ -22,6 +23,52 @@ Several key factors influence this:
 - **Network Throughput & Latency:** Minimal network delay is critical, especially for production setups.
 - **Hardware Resources:** Adequate CPU, sufficient RAM, and fast, reliable storage are necessary.
 
+## **SSV-specific**
+
+#### Failover for EL and CL clients 
+```yaml
+eth2:
+  # HTTP URL of the Beacon node to connect to.
+  BeaconNodeAddr: http://example.url:5052;http://example.url:5053
+
+eth1:
+  # WebSocket URL of the Execution node to connect to.
+  ETH1Addr: ws://example.url:8546/ws;ws://example.url:8547/ws
+```
+- When the first node goes offline or out of sync, SSV will switch to the next endpoint.
+- Endpoints should be set in the order you want them to be used. The first node will be the primary one.
+- Failover works in round-robin way, so once SSV circled through all of the endpoints it will start from the first one again.
+- When SSV node restarts it will always start with the first endpoint from the list.
+
+
+#### Weighted Attestation Data
+```yaml
+eth2:
+  WithWeightedAttestationData: true   # Enables WAD
+```
+- The feature only works with 2+ CL endpoints (`BeaconNodeAddr`) configured.
+- Improves attestation accuracy by scoring responses from multiple Beacon nodes based on epoch and slot proximity. Adds slight latency to duties but includes safeguards (timeouts, retries). 
+
+#### Parallel Data Submission
+```yaml
+eth2:
+  WithParallelSubmissions: true   # Sends duties to all nodes concurrently
+```
+- The feature only works with 2+ CL endpoints (`BeaconNodeAddr`) configured.
+- SSV will submit duty data to all Beacon nodes in parallel. This built-in configuration ensures high availability and improves performance.
+
+
+#### Doppelganger Protection
+```yaml
+EnableDoppelgangerProtection: true # Enables Doppelganger Protection
+```
+- Doppelganger Protection (DG) checks if the managed validators are attesting elsewhere at the moment of SSV node start. That prevents double signature which is a slashable event.
+- SSV with DG enabled will be offline for the first 3 epochs after the node start.
+- If enough nodes in the cluster have DG enabled and are online - a restarted node will not wait for 3 epochs. Node can identify that there's a DG quorum going on and will join it. This process is almost as quick as restart of a node without DG.
+- If you manage all nodes in the cluster — it is recommended to restart one by one. Otherwise, it will take 3 epochs to do the DG checks.
+- To learn more technical details please refer to [our documentation page on GitHub](https://github.com/ssvlabs/ssv/blob/v2.3.0/doppelganger/README.md).
+
+
 ## **Major impact**
 High‑priority practices that ensure reliable, on‑time duty submissions. Might sound obvious, but are often overlooked.
 
@@ -32,7 +79,7 @@ Most of hardware-related suggestions below are for Execution (EL) and Consensus 
 ### **For Home Setups**
 - **Hardware:** Usual setup has 4- to 8-core CPU (focus on single-thread performance) and 32GB RAM.
 - **Disk:** NVMe SSDs are strongly recommended. If you're unsure with filesystem to use, stick to `ext4`, as it is performant and the easiest to maintain. 
-- **Reliability:** Use a UPS and ensure the machine is well-ventilated. Sudden power loss or thermal throttling can cause downtime or result in missed duties
+- **Reliability:** Use a UPS and ensure the machine is well-ventilated. Sudden power loss or thermal throttling can cause downtime or result in missed duties.
 - **Internet Connectivity:** Ensure your ISP doesn't impose strict data caps. Choose a plan with at least 10 Mbps upload speed, but latency and reliability make the difference.
 - **[Follow EthStaker hardware section](https://ethstaker.org/staking-hardware)** as their guides are focused on running Execution and Consensus nodes.
 
@@ -62,8 +109,8 @@ Ensure your hardware meets or exceeds [SSV recommended specifications](./hardwar
 Ensure all required ports are open and correctly configured on your setup.
 
 **Critical Ports:**
-  - **SSV P2P:** Typically 12001 UDP and 13001 TCP (or as specified in your configuration)
-  - **Execution P2P:** Typically 30303 TCP and UDP (for Geth and Nethermind)
+  - **SSV P2P:** Typically 12001 UDP and 13001 TCP (or as specified in your configuration).
+  - **Execution P2P:** Typically 30303 TCP and UDP (for Geth and Nethermind).
   - **Execution RPC:** HTTP 8545 and WS 8546 (for Geth and Nethermind), **open only to SSV Node!**.
   - **Consensus P2P:** Depends on your client, make sure to follow your client's documentation to open the correct ports.
   - **Consensus RPC:** Depends on your client (e.g. 3500 for Prysm, 5052 for Lighthouse), **open only to SSV Node!**.
@@ -83,9 +130,6 @@ Location of your clients plays a direct role in performance. Co-hosting Executio
   - **Don't:** Use public RPCs, as they're proven to have low performance, also they can't be configured to produce blocks.
 
 ### Network Throughput and Latency
-
-**Recommendation:**  
-  Optimize your overall network performance by implementing the following best practices:
 
 **Minimizing Intermediate Layers**
     - Reduce the number of intermediate hops (such as redundant routers, proxies, or firewalls) between your nodes and connected services.
@@ -144,36 +188,6 @@ Keep your clients updated, while prioritizing stability over following every upg
 
 **TCP Congestion Control**
   - Set your TCP congestion control to BBR by [following this guide](https://www.cyberciti.biz/cloud-computing/increase-your-linux-server-internet-speed-with-tcp-bbr-congestion-control/), if supported by your kernel version.
-
-### SSV-Specific
-
-**Failover for EL and CL clients:**  
-
-```yaml
-eth2:
-  # HTTP URL of the Beacon node to connect to.
-  BeaconNodeAddr: http://example.url:5052;http://example.url:5053
-
-eth1:
-  # WebSocket URL of the Eth1 node to connect to.
-  ETH1Addr: ws://example.url:8546/ws;ws://example.url:8547/ws
-```
-
-**Weighted Attestation Data**
-- The feature only works with 2+ CL endpoints configured
-- Improves attestation accuracy by scoring responses from multiple Beacon nodes based on epoch and slot proximity. Adds slight latency to duties but includes safeguards (timeouts, retries). 
-```yaml
-eth2:
-  WithWeightedAttestationData: true   # Enables WAD
-```
-
-**Parallel Data Submission**
-- The feature only works with 2+ CL endpoints (`BeaconNodeAddr`) configured
-- Take advantage of the SSV client's native ability to submit duty data in parallel. This built-in configuration helps ensure high availability and improve performance:
-```yaml
-eth2:
-  WithParallelSubmissions: true   # Sends duties to all nodes concurrently
-```
 
 ### Containerization Trade-offs
 
