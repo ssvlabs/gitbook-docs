@@ -162,7 +162,7 @@ ssv:
   ValidatorOptions:
     # Block proposals are by default controlled by Beacon Node.
     # Requires the connected Beacon node to be MEV-enabled.
-    # Please see https://docs.ssv.network/operator-user-guides/operator-node/installation/configuring-mev
+    # Please see https://docs.ssv.network/operators/operator-node/node-setup/configuring-mev
 
 eth2:
   # HTTP URL of the Beacon node to connect to.
@@ -198,9 +198,9 @@ KeyStore:
 # Enables Doppelganger Protection for validators, see https://github.com/ssvlabs/ssv/blob/v2.3.0/doppelganger/README.md
 EnableDoppelgangerProtection: false
 
-# This enables monitoring at the specified port, see https://docs.ssv.network/run-a-node/operator-node/monitoring
+# This enables monitoring at the specified port, see https://docs.ssv.network/operators/operator-node/monitoring/
 MetricsAPIPort: 15000
-# This enables node health endpoint for troubleshooting, see https://docs.ssv.network/operator-user-guides/operator-node/maintenance/troubleshooting
+# This enables node health endpoint for troubleshooting, see https://docs.ssv.network/operators/operator-node/maintenance/troubleshooting
 SSVAPIPort: 16000
 ```
 

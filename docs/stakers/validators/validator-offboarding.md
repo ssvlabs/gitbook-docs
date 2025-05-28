@@ -5,6 +5,8 @@ sidebar_position: 3
 
 # Validator Offboarding
 
+Below is the theoretical context around Validator Offboarding, you can find actionable [steps in our separate guide](../cluster-management/removing-a-validator.md).
+
 Validators can leave the network at any time, whether to run it by themselves or migrate it to a different service.
 
 Removing a validator will cause its operators to stop managing it, which will lead to its inactivation and can result in penalties on the Beacon Chain because it's no longer maintained by the network.

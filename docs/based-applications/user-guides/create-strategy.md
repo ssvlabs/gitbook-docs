@@ -23,23 +23,34 @@ This page will display a list of the Strategies you already created.
 
 Once you clicked on "Create Strategy" you will see a list of available bApps you can choose from. 
 
-In this example, we will skip this step and choose "I'll do it later" on the bottom of the page.
+In this example, we will choose MNT-Receiver bApp by clicking "Select" on the right side of the list.
 
 <div style={{ textAlign: 'center' }}>
   <img src="/img/create-strategy-2.png" alt="" />
 </div>
 
-## 3. Set Fee and Obligations
+## 3. Set Obligations
 
-You will be prompted to set the Obligations and the Fees for your strategy. If you did not choose any bApp on the previous step, the Obligations step will be skipped and you will go to the "Set Fee" stage.
+You will be prompted to set the Obligations and add Data for your strategy. If you did not choose any bApp on the previous step, the Obligations step will be skipped and you will go to the "Set Fee" stage.
 
-Enter an amount for your Fee, and click the Continue button.
+- `Obligations` is % of the strategy to be obligated to chosen bApp. In the example on screenshot below, 30% of the strategy's MNT balance will be obligated to the bApp.
+You can later update your obligations by modifying existing ones or adding a new token obligation.
 
-<div style={{ textAlign: 'center', width: '60%', margin: '0 auto' }}>
+- `Add Data` is an optional field for off-chain information required by some bApps for participation. Please check this bApp’s documentation [before opting-in](../developers/get-started/#4-opting-in). 
+
+<div style={{ textAlign: 'center' }}>
+  <img src="/img/create-strategy-7.png" alt="" />
+</div>
+
+## 4. Set Fee
+
+You can choose the fee rate on bApp rewards. Enter an amount for your Fee, and click the Continue button.
+
+<div style={{ textAlign: 'center', width: '100%', margin: '0 auto' }}>
   <img src="/img/create-strategy-3.png" alt="" />
 </div>
 
-## 4. Provide Metadata
+## 5. Provide Metadata
 
 Metadata for your Strategy and your Account will have to be set with `.json` files.
 
@@ -67,7 +78,7 @@ Once you provided URI to those files, you will see that information on the page.
 
 After you verified the information, click on Continue.
 
-## 5. Sign transactions
+## 6. Sign transactions
 
 To create your Strategy you will need to sign 2 transactions.
 
@@ -84,7 +95,7 @@ After the first one is completed, another pop-up will appear to sign Registratio
 </div>
 
 
-## 6. Check the created Strategy
+## 7. Check the created Strategy
 
 Once both of the transactions are completed, you will be redirected to the page of your newly created Strategy.
 
