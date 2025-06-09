@@ -169,13 +169,13 @@ Each Based Application requires a client implementation, to be run by each strat
 
 In this example, the strategy client will:
 
-**4.1** Listen for tasks to process, monitoring events emitted from ```createNewTask()```
+* Listen for tasks to process, monitoring events emitted from ```createNewTask()``` ([**4.1**](#41-task-listening-implementation))
 
-**4.2** Execute tasks off-chain, fetching the current ETH price
+* Execute tasks off-chain, fetching the current ETH price ([**4.2**](#42-task-execution))
 
-**4.3** Cast votes on the correct price, signing messages containing the task number and fetched price
+* Cast votes on the correct price, signing messages containing the task number and fetched price ([**4.3**](#43-task-outcome-voting))
 
-**4.4** After majority vote determination, the last voting strategy signs the ```respondToTask()``` function and publishes the price on-chain
+* After majority vote determination, the last voting strategy signs the ```respondToTask()``` function and publishes the price on-chain ([**4.4**](#44-majority-vote-submission))
 
 
 ### Code Snippets
