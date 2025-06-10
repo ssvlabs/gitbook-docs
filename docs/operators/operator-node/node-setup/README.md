@@ -1,9 +1,9 @@
 ---
-sidebar_label: 'Node Setup'
+sidebar_label: 'Setup SSV Node'
 sidebar_position: 1
 ---
 
-# Node setup
+# Setup SSV Node 
 
 In this section, we will walk through the process of installing the [SSV Node stack](https://github.com/ssvlabs/ssv-stack) using the standard Docker-based setup. This will install and configure the node itself with the monitoring stack:
 
@@ -194,7 +194,7 @@ docker compose up -d
 ## Start DKG Node
 You can also run the stack with DKG, simplifying the setup process. 
 
-The instructions are on the ["Enablind DKG" section](./enabling-dkg/start-dkg-node/README.md).
+The instructions are on the ["Enablind DKG" section](/operators/operator-node/setup-sidecars/enabling-dkg/).
 
 
 ## Other setup options
@@ -205,9 +205,9 @@ Alternatively, SSV Node setup is also available using [eth-docker](https://eth-d
 
 ## What's next?
 
-* You might want to [configure MEV](configuring-mev) to increase your rewards for block proposals.&#x20;
+* You might want to [configure MEV](/operators/operator-node/setup-sidecars/configuring-mev) to increase your rewards for block proposals.&#x20;
 
-* You can [enable DKG node](enabling-dkg) to increase your chances of being included in a cluster.
+* You can [enable DKG node](/operators/operator-node/setup-sidecars/enabling-dkg/) to increase your chances of being included in a cluster.
 
 * You might want to learn [how to use your Monitoring stack](/operators/operator-node/monitoring/), to stay on top of your performance.
 

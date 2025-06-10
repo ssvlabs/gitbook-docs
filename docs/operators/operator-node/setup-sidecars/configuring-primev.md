@@ -1,6 +1,6 @@
 ---
 title: Configuring Primev
-sidebar_position: 5
+sidebar_position: 3
 ---
 
 This guide outlines the necessary steps required to configure MEV-commit within your SSV node to enable operators to participate in MEV and preconfirmations. You can learn more about the concept and technical details on [Primev documentation](https://docs.Primev.xyz/v1.0.0/get-started/welcome-to-Primev). 
