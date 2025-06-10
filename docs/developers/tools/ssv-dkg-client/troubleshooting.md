@@ -12,7 +12,7 @@ sidebar_position: 7
 2025-02-18T11:46:49.637474Z	FATAL	dkg-initiator	😥 Failed to initiate DKG ceremony: 	{"error": "failed to validate ceremony proof: invalid proof validator pubkey"}
 ```
 
-This error appears if `ssv-dkg` tool has not met [the hardware requirements](../../../operators/operator-node/node-setup/enabling-dkg/prerequisites), CPU specifically.
+This error appears if `ssv-dkg` tool has not met [the hardware requirements](/operators/operator-node/setup-sidecars/enabling-dkg/prerequisites), CPU specifically.
 
 The requirements are for both initiator and operator, the error will appear if any of parties have not met them.
 
