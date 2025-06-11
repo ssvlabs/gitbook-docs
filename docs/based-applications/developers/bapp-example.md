@@ -44,9 +44,14 @@ This bApp example implements two functions:
 - ```createNewTask()```
 - ```respondToTask()```
 
-These functions handle the initial task request from users (```createNewTask()```), triggering an event. The client listens for this event to begin task execution. Upon completion, the client pushes data back on-chain (```respondToTask()```)
+These functions handle the initial task request from users (```createNewTask()```), triggering an event. 
+The client listens for this event to begin task execution. 
+Upon completion, the client pushes data back on-chain (```respondToTask()```)
 
-This example uses ECDSA for verification (any verification method can be used), where strategy owners sign messages containing the task number and ETH price for their vote on the client. Signatures are stored in an array and sent in the ```respondToTask()``` function along with public keys. The contract verifies signatures and confirms each address has opted into the bApp before saving the price.
+This example uses ECDSA for verification (any verification method can be used), where strategy owners or a signer they have delegated sign 
+messages containing the task number and ETH price for their vote on the client. 
+Signatures are stored in an array and sent in the ```respondToTask()``` function along with public keys. 
+The contract verifies signatures and confirms each address has opted into the bApp or is a delegated signer before saving the price.
 
 :::info
 Steps to deploy and verify the contract are included in the README of the repo. 
@@ -75,7 +80,8 @@ function respondToTask(
     uint32 taskNumber,
     uint256 ethPrice,
     bytes[] calldata signatures,
-    address[] calldata signers
+    address[] calldata signers,
+    uint32 strategyId
 ) external {
     // check that the task is valid and hasn't been responded to yet
     if (taskHash != allTaskHashes[taskNumber]) { revert TaskMismatch(); }
@@ -85,32 +91,60 @@ function respondToTask(
 
     // Create the message that was signed (task num + price)
     bytes32 messageHash = keccak256(abi.encodePacked(taskNumber, ethPrice));
+
+    // Get the strategy signer 
+    address strategySignerAddress = strategySigner[strategyId];
     
     // Verify each signature
     for (uint i = 0; i < signatures.length; i++) {
+
         // Recover the signer address from the signature
         address recoveredSigner = messageHash.recover(signatures[i]);
-        
-        // Verify the recovered signer matches the expected signer
-        if (recoveredSigner != signers[i]) {
-            revert InvalidSigner();
-        }
 
-        // Check if the signer has opted into this bApp
-        uint32 strategyId = IAccountBAppStrategy(address(ssvBasedApps)).accountBAppStrategy(recoveredSigner, address(this));
-        if (strategyId == 0) {
-            revert NotOptedIn();
+        if (strategySignerAddress != address(0)) {
+            // if strategy has a signer set, verify this signer is the correct one
+            if (strategySignerAddress != signers[i]) {
+                revert InvalidSigner();
+            }
+        } else {
+            // if strategy has no signer set, check the signer is the owner of the strategy
+            uint32 derivedStrategyId = IAccountBAppStrategy(address(ssvBasedApps)).accountBAppStrategy(recoveredSigner, address(this));
+            if (derivedStrategyId != strategyId) {
+                revert NotOptedIn();
+            }
         }
     }
 
     // Store the response
     allTaskResponses[msg.sender][taskNumber] = abi.encode(ethPrice);
+    mostRecentPrice = ethPrice;
 
     // Emit event with the ETH price
     emit TaskResponded(taskNumber, taskHash, msg.sender, ethPrice);
 }
 ```
 
+In this example the ```optInToBapp``` function is also overridden, this is what is called when a strategy opts in to a bApp. 
+Here in the data field an encoded public address is passed in (e.g 0x000000000000000000000000ac5a7ce31843e737cd38938a8efdec0be5e728b4).
+This address can then be used as the signer address which is run on the client. 
+
+```typescript
+function optInToBApp(
+    uint32 strategyId,
+    address[] calldata,
+    uint32[] calldata,
+    bytes calldata data
+) external override onlySSVBasedAppManager returns (bool success) {
+    // Decode the padded address correctly from bytes32
+    address signer = address(uint160(uint256(abi.decode(data, (bytes32)))));
+    // Store the address in the mapping
+    strategySigner[strategyId] = signer;
+
+    emit DebugOptIn(strategyId, signer, testOne[1], testTwo[2]);
+
+    return true;
+}
+```
 ## 2. Registering a bApp to the network 
 
 After contract deployment, the register function becomes available.
@@ -135,13 +169,13 @@ Each Based Application requires a client implementation, to be run by each strat
 
 In this example, the strategy client will:
 
-**4.1** Listen for tasks to process, monitoring events emitted from ```createNewTask()```
+* Listen for tasks to process, monitoring events emitted from ```createNewTask()``` ([**4.1**](#41-task-listening-implementation))
 
-**4.2** Execute tasks off-chain, fetching the current ETH price
+* Execute tasks off-chain, fetching the current ETH price ([**4.2**](#42-task-execution))
 
-**4.3** Cast votes on the correct price, signing messages containing the task number and fetched price
+* Cast votes on the correct price, signing messages containing the task number and fetched price ([**4.3**](#43-task-outcome-voting))
 
-**4.4** After majority vote determination, the last voting strategy signs the ```respondToTask()``` function and publishes the price on-chain
+* After majority vote determination, the last voting strategy signs the ```respondToTask()``` function and publishes the price on-chain ([**4.4**](#44-majority-vote-submission))
 
 
 ### Code Snippets
@@ -287,10 +321,51 @@ const { request } = await publicClient.simulateContract({
     BigInt(task.ethPrice),
     signatures as `0x${string}`[],
     signers as `0x${string}`[],
+    strategyId
     ],
     account: walletClient.account,
 });
 
 // Send the transaction
 const hash = await walletClient.writeContract(request);
+```
+
+The client will wait for tasks to be created, and then process the votes based on each strategies weight. 
+
+The output is as follows:
+
+```bash 
+[Heartbeat] Client is running and waiting for new tasks...
+[Heartbeat] Client is running and waiting for new tasks...
+[Heartbeat] Client is running and waiting for new tasks...
+[Heartbeat] Client is running and waiting for new tasks...
+[11:57:18] 📡 Message Hash: 0x2333df8c374a71c2e843dfd787ab8b96f6431d43858758b5b49bed88b1cb6ff7
+[11:57:18] 📡 Task Number: 10
+[11:57:18] 📡 ETH Price: 2483
+[11:57:18] 📡 Signature: 0x5d4a762890e1b7fa8fe6affddd3c6f2a897b566bbce524f4e4932f31dd6a183c455405c1a4e5fb0438daaa60df17e354de2e7188492e6ad6776716e008eb1bf11b
+[11:57:18] 📡 Signer Address: 0xac5a7Ce31843e737CD38938A8EfDEc0BE5e728b4
+[11:57:18] 📡 ════════════════════════════════════════════════════════════════════════════════
+[11:57:18] 📊 New on-chain task detected:
+[11:57:18] 📡 Task Index: 10
+[11:57:18] 📡 Task Hash: 0xfa311eaab35462b5895f378e86e51f16d9d8e0c8dbe5b6ea9990ea3dd1b6fe5c
+[11:57:18] 📡 Current ETH Price: $2483
+[11:57:18] 📡 Status: Waiting for votes...
+[11:57:18] 📡 ════════════════════════════════════════════════════════════════════════════════
+
+Current votes for this task:
+Strategy 13: 33.3%
+Strategy 15: 66.7%
+Total: 100.0%
+
+
+Majority reached! Strategy 15 will send the transaction.
+
+Strategy ID: 15
+Number of Signatures: 1
+ETH Price: $2483
+Task Number: 10
+════════════════════════════════════════════════════════════════════════════════
+Transaction submitted: 0x7c11297736ef700635e971a6729f5ec319ac6780da02617a62c22ef566e85008
+
+════════════════════════════════════════════════════════════════════════════════
 ```
