@@ -369,11 +369,12 @@ After deploying the contract, call the `registerBapp` function with:
 After registering the bApp, you need to create and configure a strategy:
 
 1. Create a new strategy with the desired tokens
-2. Set the data field to be an encoded address of the signer. For example:
+2. Opt into the bApp with this strategy and set the data field to be an encoded address of the signer. 
+
+For example:
 ```solidity
 0x000000000000000000000000ac5a7ce31843e737cd38938a8efdec0be5e728b4
 ```
-3. Opt into the bApp with this strategy
 
 Once the strategy is opted in, it can be used with the bApp and process tasks using the client.
 
@@ -399,8 +400,6 @@ npm install
 BAPP_ADDRESS="0xBb00B761d0670f09d80fe176a2b0fB33e91fbCe9"
 PRIVATE_KEY_1="0x00000000000000000000000000000000000000"
 ```
-
-## Usage
 
 Run the client with your private key and strategy. You can pass the private key in two ways:
 
