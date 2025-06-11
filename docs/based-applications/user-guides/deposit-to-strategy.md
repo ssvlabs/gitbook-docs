@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Deposit To a Strategy'
-sidebar_position: 2
+sidebar_label: 'Deposit to a Strategy'
+sidebar_position: 3
 ---
 
 # How to Deposit Tokens to a Strategy 

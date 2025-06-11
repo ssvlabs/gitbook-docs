@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Delegate Validator Balance'
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 # How to Delegate Validator Balance
