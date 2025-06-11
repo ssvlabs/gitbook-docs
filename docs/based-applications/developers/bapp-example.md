@@ -69,8 +69,8 @@ function createNewTask() external returns (bytes32) {
 
     // store hash of task on-chain, emit event, and increase taskNum
     allTaskHashes[latestTaskNum] = taskHash;
-    emit NewTaskCreated(latestTaskNum, taskHash);
     latestTaskNum = latestTaskNum + 1;
+    emit NewTaskCreated(latestTaskNum, taskHash);
 
     return taskHash;
 }
@@ -332,40 +332,149 @@ const hash = await walletClient.writeContract(request);
 
 The client will wait for tasks to be created, and then process the votes based on each strategies weight. 
 
-The output is as follows:
 
-```bash 
-[Heartbeat] Client is running and waiting for new tasks...
-[Heartbeat] Client is running and waiting for new tasks...
-[Heartbeat] Client is running and waiting for new tasks...
-[Heartbeat] Client is running and waiting for new tasks...
-[11:57:18] 📡 Message Hash: 0x2333df8c374a71c2e843dfd787ab8b96f6431d43858758b5b49bed88b1cb6ff7
-[11:57:18] 📡 Task Number: 10
-[11:57:18] 📡 ETH Price: 2483
-[11:57:18] 📡 Signature: 0x5d4a762890e1b7fa8fe6affddd3c6f2a897b566bbce524f4e4932f31dd6a183c455405c1a4e5fb0438daaa60df17e354de2e7188492e6ad6776716e008eb1bf11b
-[11:57:18] 📡 Signer Address: 0xac5a7Ce31843e737CD38938A8EfDEc0BE5e728b4
-[11:57:18] 📡 ════════════════════════════════════════════════════════════════════════════════
-[11:57:18] 📊 New on-chain task detected:
-[11:57:18] 📡 Task Index: 10
-[11:57:18] 📡 Task Hash: 0xfa311eaab35462b5895f378e86e51f16d9d8e0c8dbe5b6ea9990ea3dd1b6fe5c
-[11:57:18] 📡 Current ETH Price: $2483
-[11:57:18] 📡 Status: Waiting for votes...
-[11:57:18] 📡 ════════════════════════════════════════════════════════════════════════════════
+## 5. Deploying the bApp
+
+To deploy and run this bApp example, follow these steps:
+
+### 5.1 Deploy and Verify the Contract
+
+1. Clone the repository:
+```bash
+git clone https://github.com/ssvlabs/examples.git
+```
+
+2. Install dependencies:
+```bash
+cd bapp-contracts
+forge install
+```
+
+3. Compile the contracts:
+```bash
+forge build
+```
+
+For detailed deployment and verification steps, refer to the [bApp contracts repository](https://github.com/ssvlabs/examples/tree/main/bapp-contracts).
+
+### 5.2 Register the bApp
+
+After deploying the contract, call the `registerBapp` function with:
+- Required token addresses
+- Shared risk levels for each token
+- bApp metadata URI
+
+### 5.3 Create and Configure Strategy
+
+After registering the bApp, you need to create and configure a strategy:
+
+1. Create a new strategy with the desired tokens
+2. Set the data field to be an encoded address of the signer. For example:
+```solidity
+0x000000000000000000000000ac5a7ce31843e737cd38938a8efdec0be5e728b4
+```
+3. Opt into the bApp with this strategy
+
+Once the strategy is opted in, it can be used with the bApp and process tasks using the client.
+
+### 5.4 Run the Client
+
+1. Clone the repository:
+```bash
+git clone https://github.com/ssvlabs/examples.git
+```
+
+2. Navigate to the project directory:
+```bash
+cd eth-price-oracle-client
+```
+
+3. Install dependencies:
+```bash
+npm install
+```
+
+4. Create a `.env` file in the root directory with your configuration:
+```bash
+BAPP_ADDRESS="0xBb00B761d0670f09d80fe176a2b0fB33e91fbCe9"
+PRIVATE_KEY_1="0x00000000000000000000000000000000000000"
+```
+
+## Usage
+
+Run the client with your private key and strategy. You can pass the private key in two ways:
+
+1. Directly in the command:
+```bash
+PRIVATE_KEY=your_private_key_here npm run dev -- --strategy 19 --calculation_type arithmetic
+```
+
+2. Using a variable from your .env file for each strategy (recommended):
+```bash
+PRIVATE_KEY=$PRIVATE_KEY_1 npm run dev -- --strategy 19 --calculation_type arithmetic
+```
+
+Run with specific strategy and calculation type:
+```bash
+PRIVATE_KEY=$PRIVATE_KEY_1 npm run dev -- --strategy 19 --calculation_type arithmetic
+```
+
+The client will start listening for tasks and processing them according to the configured strategy.
+
+### 5.5 Testing the bApp
+
+With the client running and strategy configured, you can test the bApp by:
+
+1. Calling `createTask()` on the bApp contract
+2. The client will automatically:
+   - Listen for the task event
+   - Process the task
+   - Collect votes from strategies
+   - Submit the response when over 50% of the votes are received
+
+The client will output the progress of task processing, including:
+- Task detection
+- Current ETH price
+- Vote collection
+- Transaction submission
+
+Example output:
+```bash
+[11:25:18] 📊 New on-chain task detected:
+[11:25:18] 📡 Task Index: 6
+[11:25:18] 📡 Task Hash: 0xb7cb56eea4633617d9d325d473639864635101a2b6b1d2815e37f612b1cd8763
+[11:25:18] 📡 Current ETH Price: $2766
+[11:25:18] 📡 Status: Waiting for votes...
+[11:25:18] 📡 ════════════════════════════════════════════════════════════════════════════════
+[11:25:19] 📡 Message Hash: 0xecfd47d50765a3cc634836159308820aa890976fcf986ba7aabc6152384a29b0
+[11:25:19] 📡 Task Number: 6
+[11:25:19] 📡 ETH Price: 2766
+[11:25:19] 📡 Signature: 0xb0ed945fc4b40837bb0c15049ad7ea262ff7edb9ff8f6955c72e7cad186376855fab5f7e0c4eed4bf48b9a140f51e7d4fcf5bd1017ddef453d8024e5046242361c
+[11:25:19] 📡 Signer Address: 0xA4831B989972605A62141a667578d742927Cbef9
 
 Current votes for this task:
-Strategy 13: 33.3%
-Strategy 15: 66.7%
-Total: 100.0%
+Strategy 17: 16.0%
+Strategy 19: 50.0%
+Total: 66.0%
 
+Majority reached! Strategy 19 will send the transaction.
 
-Majority reached! Strategy 15 will send the transaction.
-
-Strategy ID: 15
-Number of Signatures: 1
-ETH Price: $2483
-Task Number: 10
+Found 2 signatures for task 0xb7cb56eea4633617d9d325d473639864635101a2b6b1d2815e37f612b1cd8763
+Signature 1: 0xca088123e9f070f2c53cc00326d2efba14fc4b2d8bd6018bbdc9bf869f7eb4737d52b7666c5251864e449f102ed0feab5cfbce0fd9630462822d2111a8b6d2381b
+Signer 1: 0x4da9f34f83d608cAB03868662e93c96Bc9793495
+Strategy ID 1: 17
+Signature 2: 0xb0ed945fc4b40837bb0c15049ad7ea262ff7edb9ff8f6955c72e7cad186376855fab5f7e0c4eed4bf48b9a140f51e7d4fcf5bd1017ddef453d8024e5046242361c
+Signer 2: 0xA4831B989972605A62141a667578d742927Cbef9
+Strategy ID 2: 19
+Number of Signatures: 2
+ETH Price: $2766
+Task Number: 6
 ════════════════════════════════════════════════════════════════════════════════
-Transaction submitted: 0x7c11297736ef700635e971a6729f5ec319ac6780da02617a62c22ef566e85008
-
+Transaction submitted: 0x6cebc199aa47e7c46853056002c7a88b2fa47953cd58187b61e117cc5b1f0747
+Number of Signatures: 2
+ETH Price: $2766
+Task Number: 6
 ════════════════════════════════════════════════════════════════════════════════
 ```
+
+The bApp will store the details of the tasks execution and the latest price on-chain.
