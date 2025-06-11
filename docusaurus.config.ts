@@ -138,6 +138,38 @@ const config: Config = {
       indexName: 'ssv',
     },
   } satisfies Preset.ThemeConfig,
+    plugins: [
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        fromExtensions: ['html'],
+        createRedirects(existingPath) {
+          console.log('[Redirect plugin] Existing path:', existingPath);
+          const redirectFolders: Record<string, string> = {
+            '/operators/operator-node/setup-sidecars/enabling-dkg': '/operators/operator-node/node-setup/enabling-dkg',
+          };
+          const redirectFiles: Record<string, string> = {
+            '/operators/operator-node/setup-sidecars/configuring-mev': '/operators/operator-node/node-setup/configuring-mev',
+            '/operators/operator-node/setup-sidecars/configuring-primev': '/operators/operator-node/node-setup/configuring-primev',
+          };
+          for (const [newPath, oldPath] of Object.entries(redirectFolders)) {
+            if (existingPath === newPath || existingPath.startsWith(`${newPath}/`)) {
+              const subPath = existingPath.slice(newPath.length);
+              const fromPath = `${oldPath}${subPath}`;
+              console.log(`[Redirect plugin] Redirecting folder: ${fromPath} → ${existingPath}`);
+              return [fromPath];
+            }
+          }
+          if (redirectFiles[existingPath]) {
+            const from = redirectFiles[existingPath];
+            console.log(`[Redirect plugin] Redirecting file: ${from} → ${existingPath}`);
+            return [from];
+          }
+          return undefined;
+        },
+      },
+    ],
+  ]
 };
 
 export default config;

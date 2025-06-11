@@ -21,7 +21,7 @@ The  `ssv-dkg` tool provides 3 main functionalities, detailed in the following p
 * [Re-generate Key Shares with a different operator set](change-operator-set-and-reshare-validator-key-shares.md)
 * [Re-generate the signature of Key Shares through the same operator set (changing owner, nonce)](update-owner-nonce-in-key-shares.md)
 Additional option, only for SSV node operators, treated in the related section:
-* [Start the DKG server](../../../operators/operator-node/node-setup/enabling-dkg)
+* [Start the DKG server](/docs/operators/operator-node/setup-sidecars/enabling-dkg/README.md)
 In order to provide these features, the following options are available:
 * `init` - initiates a DKG ceremony to generate new Key Shares and a new validator pubkey
 * `generate-reshare-msg` - generates a message with the content of a `proofs.json` file from a past ceremony, that needs to be signed by the `owner`  used in that ceremony, in order for a `reshare` ceremony to take place

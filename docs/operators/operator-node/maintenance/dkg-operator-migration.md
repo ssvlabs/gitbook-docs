@@ -13,8 +13,8 @@ The recommended migration process could be summarised in the following steps:
 
 * Backup DKG files (if applicable)
 * Shut down DKG operator (if applicable) on the current machine
-* [Start DKG operator on the new machine](../node-setup/enabling-dkg/start-dkg-node/)
-* [Update operator metadata on the SSV WebApp](../node-setup/enabling-dkg/final-steps#update-operator-metadata)
+* [Start DKG operator on the new machine](/operators/operator-node/setup-sidecars/enabling-dkg/start-dkg-node/)
+* [Update operator metadata on the SSV WebApp](/operators/operator-node/setup-sidecars/enabling-dkg/final-steps#update-operator-metadata)
 
 :::info
 Please note: since the DKG node does not have to be on the same machine as the SSV node, one can be migrated without having to migrate the other.
@@ -22,7 +22,7 @@ Please note: since the DKG node does not have to be on the same machine as the S
 
 ### DKG backup (if necessary)
 
-If you have followed [the dedicated guide to enable DKG for your operator](../node-setup/enabling-dkg/start-dkg-node/), you most likely have (at least) these files in the folder with your node configuration:
+If you have followed [the dedicated guide to enable DKG for your operator](/operators/operator-node/setup-sidecars/enabling-dkg/start-dkg-node/), you most likely have (at least) these files in the folder with your node configuration:
 
 ```
 ⇒   tree
