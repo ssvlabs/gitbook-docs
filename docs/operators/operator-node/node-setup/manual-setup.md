@@ -1,6 +1,6 @@
 ---
 description: In case you don't want to use the SSV Stack automated setup.
-sidebar_position: 6
+sidebar_position: 7
 ---
 
 import Tabs from '@theme/Tabs';
@@ -162,7 +162,7 @@ ssv:
   ValidatorOptions:
     # Block proposals are by default controlled by Beacon Node.
     # Requires the connected Beacon node to be MEV-enabled.
-    # Please see https://docs.ssv.network/operators/operator-node/node-setup/configuring-mev
+    # Please see https://docs.ssv.network/operators/operator-node/setup-sidecars/configuring-mev
 
 eth2:
   # HTTP URL of the Beacon node to connect to.
