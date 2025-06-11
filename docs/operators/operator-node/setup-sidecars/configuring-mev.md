@@ -13,11 +13,11 @@ This integration will grant you access to a network of block builders, who colla
 
 Follow the setup guidelines for configuring MEV on your preferred client:
 
-* [Prysm](https://docs.prylabs.network/docs/advanced/builder)
+* [Prysm](https://www.offchainlabs.com/prysm/docs/configure-prysm/builder/)
 * [Teku](https://docs.teku.consensys.net/how-to/configure/use-proposer-config-file)
-* [Lighthouse](https://lighthouse-book.sigmaprime.io/builders.html?highlight=mev#maximal-extractable-value-mev)
+* [Lighthouse](https://lighthouse-book.sigmaprime.io/advanced_builders.html?highlight=mev#maximal-extractable-value-mev)
 * [Nimbus](https://nimbus.guide/external-block-builder.html)
-* [Lodestar](https://chainsafe.github.io/lodestar/usage/mev-integration/)
+* [Lodestar](https://chainsafe.github.io/lodestar/run/beacon-management/mev-and-builder-integration)
 
 :::info
 For reference, the [ETHStaker](https://github.com/eth-educators/ethstaker-guides/blob/main/MEV-relay-list.md) community provides a list of MEV relays and their corresponding endpoints.
