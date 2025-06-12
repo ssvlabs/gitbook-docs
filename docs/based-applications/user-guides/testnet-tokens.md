@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Testnet tokens'
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 # Acquire Testnet tokens
