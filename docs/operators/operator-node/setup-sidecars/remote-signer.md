@@ -438,6 +438,10 @@ database, cleaning keys in Web3Signer is required to ensure all shares are prope
 
 ## Security Considerations
 
+:::warning Slashing database backups
+SSV's database is critical to prevent slashing. Its loss or corruption can lead to double-signing and severe penalties if operation continues. It is **crucial** for operators to implement a robust backup and recovery strategy for their databases (PostgreSQL for Web3Signer, or the node's local database for local signing setups). Failure to maintain database backups can lead to significant financial loss. Operators are responsible for their own database management and protection.
+:::
+
 1. **Network Security**: Ensure communication between all components occurs over secure networks.
 2. **Key Protection**: Store operator keys securely restricting access to them.
 3. **Access Control**: Limit access to the SSV-Signer and Web3Signer endpoints to only the necessary services/IP addresses.
