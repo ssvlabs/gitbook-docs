@@ -68,6 +68,11 @@ EnableDoppelgangerProtection: true # Enables Doppelganger Protection
 - If you manage all nodes in the cluster — it is recommended to restart one by one. Otherwise, it will take 3 epochs to do the DG checks.
 - To learn more technical details please refer to [our documentation page on GitHub](https://github.com/ssvlabs/ssv/blob/v2.3.0/doppelganger/README.md).
 
+#### Database backups
+SSV's database is critical to prevent slashing (PostgreSQL for Web3Signer, or the node's local database `db` for local signing setups). Its loss or corruption can lead to double-signing and severe penalties if operation continues.
+
+Be sure to implement a robust backup and recovery strategy for your database(s), it is **crucial** for operators. Failure to maintain database backups can lead to significant financial loss. Operators are responsible for their own database management and protection.
+
 
 ## **Major impact**
 High‑priority practices that ensure reliable, on‑time duty submissions. Might sound obvious, but are often overlooked.

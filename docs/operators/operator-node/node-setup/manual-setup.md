@@ -324,3 +324,8 @@ p2p:
   UdpPort: 12001
   TcpPort: 13001
 ```
+
+### Database backups
+SSV's database (folder named `db`) is critical to prevent slashing. Its loss or corruption can lead to double-signing and severe penalties if operation continues.
+
+Be sure to implement a robust backup and recovery strategy for your database(s), it is **crucial** for operators. Failure to maintain database backups can lead to significant financial loss. Operators are responsible for their own database management and protection.
