@@ -97,3 +97,7 @@ For example, if we have a calculation of `rate(ssv_network_peers_connected[1m])`
 Rates are a powerful way to see how a metric changes over time, but they force us to specify a time interval to calculate the rate. Rather than hardcoding intervals in our dashboards, we leverage `__rate_interval` all across our dashboards to calculate rates over a given time interval. You can read more about `__rate_interval` it in [Grafana's post](https://grafana.com/blog/2020/09/28/new-in-grafana-7.2-__rate_interval-for-prometheus-rate-queries-that-just-work/). This, however, means that you need to configure your Prometheus data source to match Prometheus's scrape interval. You can do this in the Grafana UI by clicking on the Prometheus datasource and then changing it under `Interval behaviour`. Having a mismatch between those two will result in incorrect rate calculations and dashboards not being displayed correctly.
 
 The default scrape interval for Prometheus is 1 minute, whereas the default interval for a Prometheus data source in Grafana is 15 seconds.
+## Traces
+
+SSV Node supports distributed tracing via OpenTelemetry. Traces provide deep visibility into node operations and can help diagnose performance issues. See the [Traces guide](./traces/README.md) for setup and configuration details.
+
