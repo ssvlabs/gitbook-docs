@@ -199,9 +199,9 @@ The instructions are on the ["Enablind DKG" section](/operators/operator-node/se
 
 ## Other setup options
 
-The same setup can be recreated manually. The steps are described on the [Manual Node setup page](./manual-setup.md).
-
-Alternatively, SSV Node setup is also available using [eth-docker](https://eth-docker.net/Support/SSV/) and [Stereum Launcher](https://stereum.net/).
+1. The same setup can be recreated manually. The steps are described on the [Manual Node setup page](./manual-setup.md).
+2. There is an alternative SSV client called Anchor, developed by Sigma Prime. [Official documentation for Anchor](https://anchor-book.sigmaprime.io/running_node.html) (recommended for Testnet only).
+3. Alternatively, SSV Node setup is also available using [eth-docker](https://eth-docker.net/Support/SSV/) and [Stereum Launcher](https://stereum.net/).
 
 ## Database backups
 SSV's database (folder named `db`) is critical to prevent slashing. Its loss or corruption can lead to double-signing and severe penalties if operation continues.

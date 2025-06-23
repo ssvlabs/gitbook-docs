@@ -3,15 +3,18 @@ title: Node Configuration Reference
 sidebar_position: 8
 ---
 
-The table below represents the reference for every Node configuration option available.
-
 :::danger Caution
 The following **configuration options are intended for advanced users** with a deep understanding of their impact.
 
-The parameters used in the [Automatic Installation guide](.) and [Manual Installation guide](./manual-setup.md) should serve the vast majority of users.
+The parameters used in the [Automatic Installation guide](./README.md) and [Manual Installation guide](./manual-setup.md) should serve the vast majority of users.
 
 Please exercise extreme care and discretion when modifying these settings, as any incorrect changes may result in unintended consequences or system instability.
 :::
+
+## Configuration Reference
+
+The table below represents the reference for every Node configuration option available.
+
 
 | YAML                                            | ENV                            | Default          | Description                                                                                                                                          |
 | ------------------------------------------ | ------------------------------ | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -78,3 +81,17 @@ Please exercise extreme care and discretion when modifying these settings, as an
 | LocalEventsPath                                 | EVENTS\_PATH                   |                  | path to local events                                                                                                                                 |
 | Graffiti                                 | GRAFFITI                   |        ssv.network          | Custom graffiti for block proposals                                                                                                                                 |
 | EnableDoppelgangerProtection                                 | ENABLE\_DOPPELGANGER\_PROTECTION                   |        false          | Enables Doppelganger Protection                                                                                                                                 |
+
+## API Methods Reference
+
+When SSV Node is configured with `SSVAPIPort` - you can call several methods with it. An example call would look like `curl http://localhost:16000/v1/node/health`.
+
+All methods are described below:
+
+| Method    | Output description          |
+| ------------------------------------------  | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+|  `/v1/node/health`         | Output will post information peers (inbound and outbound), and addresses used for P2P communication. [Described in details here](/docs/operators/operator-node/maintenance/troubleshooting.md#ssv-node-health-endpoint).                               |
+|  `/v1/node/identity`      | Prints out your `peer_id`, p2p addresses, subnets the node participates in, version of the node.                                   |
+|  `/v1/node/peers`       | Prints out infromation about current peers: id, addresses, direction, subnets, peer's node version.                                  |
+|  `/v1/node/topics`         | Prints an array of all peers' ids, and also separate arrays for peers split by topic.                                 |
+|  `/v1/validators`         | Prints information about **all** validators on the network.                                  |
