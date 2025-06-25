@@ -43,7 +43,7 @@ On the Strategy's page you can see how much time is left until the pending perio
   <img src="/img/change-strategy-fee-4.png" alt="" />
 </div>
 
-## 5. Finalzie the Fee change
+## 5. Finalize the Fee change
 
 :::warning Please note 
 You have to finalize the change in 1 day after the pending period is over. If you will miss that window of time, the request will be expired and you will need to start over.

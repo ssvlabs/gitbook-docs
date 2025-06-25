@@ -430,6 +430,8 @@ The health check endpoint can be reached using the `curl` command, for example:
 curl http://localhost:16000/v1/node/health
 ```
 
+There are other API methods, they're [referenced on this doc page](/docs/operators/operator-node/node-setup/node-configuration-reference.md#api-methods-reference).
+
 <details>
 
 <summary>How to understand the results?</summary>
