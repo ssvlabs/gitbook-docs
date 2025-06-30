@@ -374,3 +374,57 @@ console.log(JSON.stringify(strategies));
 ```
 ["4","5"]
 ```
+
+
+
+
+### `getParticipantWeights(bAppId)`
+
+Accepts a bApp ID (contract address) and returns the participant weights for that Based Application.
+
+**Input:**
+
+| Input parameter | Input type | Description |
+|----------------|------------|-------------|
+| bappId | string | The contract address of the Based Application |
+
+**Example:**
+
+```typescript
+const bAppId = "0x1234567890abcdef1234567890abcdef12345678"
+const weights = await sdk.api.getParticipantWeights({ bAppId })
+```
+
+**Example output:**
+
+```json
+[
+    {
+        "id": "17",
+        "tokenWeights": [
+            {
+                "token": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                "weight": 0.16666666666666666
+            }
+        ]
+    },
+    {
+        "id": "18",
+        "tokenWeights": [
+            {
+                "token": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                "weight": 0.3333333333333333
+            }
+        ]
+    },
+    {
+        "id": "19",
+        "tokenWeights": [
+            {
+                "token": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                "weight": 0.5
+            }
+        ]
+    }
+]
+```

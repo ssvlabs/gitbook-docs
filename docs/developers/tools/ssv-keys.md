@@ -3,8 +3,10 @@ sidebar_label: 'SSV Keys'
 sidebar_position: 2
 ---
 
-:::warning
+:::danger
 Please note: SSV Keys SDK will soon be deprecated as it is becoming part of the SSV SDK.
+
+The same functionality should be done programatically with [this guide.](../SSV-SDK/examples/generate-and-validate-keyshares.md)
 :::
 
 # SSV Keys SDK

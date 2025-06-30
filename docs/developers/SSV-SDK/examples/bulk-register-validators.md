@@ -12,7 +12,19 @@ This page show show to register any amount of validators to the SSV network.&#x2
 Prerequisite: This tutorial assumes you already have keystores generated, or will use the [code illustrated here](create-validator-keys.md) to generate them pragmatically.
 :::
 
-#### 1. Import <a href="#id-1-installation" id="id-1-installation"></a>
+
+Bulk Register flow:
+
+![Get Started](/img/get-started-2.avif)
+
+Running a distributed validator is a process composed of these steps (outlined in the above schema):
+
+1. Select the cluster of operators to manage your validators.
+2. Split your validator keys to shares.
+3. Retrieve your cluster’s latest snapshot data.
+4. Register your validatora to the SSV network.
+
+#### a. Import <a href="#id-1-installation" id="id-1-installation"></a>
 
 ```typescript
 import { SSVSDK, chains } from '@ssv-labs/ssv-sdk'
@@ -20,7 +32,7 @@ import { parseEther, createPublicClient, createWalletClient, http } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
 ```
 
-#### 2. Instantiation[​](https://coruscating-salmiakki-327f4b.netlify.app/build/SSV-SDK/get-started#3-instantiation) <a href="#id-3-instantiation" id="id-3-instantiation"></a>
+#### b. Instantiation[​](https://coruscating-salmiakki-327f4b.netlify.app/build/SSV-SDK/get-started#3-instantiation) <a href="#id-3-instantiation" id="id-3-instantiation"></a>
 
 To instantiate the SDK, provide a number of parameters:
 
@@ -55,7 +67,7 @@ const sdk = new SSVSDK({
 })
 ```
 
-#### 3. Usage[​](https://coruscating-salmiakki-327f4b.netlify.app/build/SSV-SDK/get-started#4-usage) <a href="#id-4-usage" id="id-4-usage"></a>
+#### c. Usage[​](https://coruscating-salmiakki-327f4b.netlify.app/build/SSV-SDK/get-started#4-usage) <a href="#id-4-usage" id="id-4-usage"></a>
 
 Next we can use that keystore to generate our keyshare transaction payload:
 

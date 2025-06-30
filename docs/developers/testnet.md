@@ -1,3 +1,8 @@
+---
+sidebar_label: 'Testnet'
+sidebar_position: 9
+---
+
 # Testnet
 
 The ssv.network testnet is live on the Hoodi network with the goal of serving as a testing environment for protocol development and for teams building on top of ssv.network.
