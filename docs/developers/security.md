@@ -1,3 +1,8 @@
+---
+sidebar_label: 'Security'
+sidebar_position: 8
+---
+
 # Security
 
 ## Bug Bounty Program

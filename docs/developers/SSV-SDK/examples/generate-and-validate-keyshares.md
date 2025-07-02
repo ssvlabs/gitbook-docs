@@ -4,9 +4,12 @@ sidebar_position: 4
 
 # Generate and validate keyshares
 
-This page shows how to generate keyshares from a set of keystore files.&#x20;
 
-These keyshares will then be validated with a different function to ensure they will register correctly.&#x20;
+This part of the SDK enable users to programmatically generate validator keys and split them into threshold of shares via [Shamir-Secret-Sharing (SSS)](https://en.wikipedia.org/wiki/Shamir's\_Secret\_Sharing), encrypted with a set of operator keys.
+
+The shares and the signature are constructed as **sharesData** which is used during [validator registration](/developers/smart-contracts/ssvnetwork) through the SSV smart contract in order to facilitate their distribution from stakers to operators.
+
+In addition to the generation of shares, the SDK also takes the keyshares file and the operator IDs, and validates that the following registration will succeed. 
 
 ### Generate keyshares
 

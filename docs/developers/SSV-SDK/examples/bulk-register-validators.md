@@ -12,7 +12,21 @@ This page show show to register any amount of validators to the SSV network.&#x2
 Prerequisite: This tutorial assumes you already have keystores generated, or will use the [code illustrated here](create-validator-keys.md) to generate them pragmatically.
 :::
 
-#### 1. Import <a href="#id-1-installation" id="id-1-installation"></a>
+
+Bulk Register flow:
+
+![Get Started](/img/get-started-2.avif)
+
+Running a distributed validator is a process composed of these steps (outlined in the above schema):
+
+1. Select the cluster of operators to manage your validators.
+2. Split your validator keys to shares.
+3. Retrieve your cluster’s latest snapshot data.
+4. Register your validators to the SSV network.
+
+Throughout this page there are notes to inform the user of when each step is performed. 
+
+#### a. Import <a href="#id-1-installation" id="id-1-installation"></a>
 
 ```typescript
 import { SSVSDK, chains } from '@ssv-labs/ssv-sdk'
@@ -20,7 +34,7 @@ import { parseEther, createPublicClient, createWalletClient, http } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
 ```
 
-#### 2. Instantiation[​](https://coruscating-salmiakki-327f4b.netlify.app/build/SSV-SDK/get-started#3-instantiation) <a href="#id-3-instantiation" id="id-3-instantiation"></a>
+#### b. Instantiation[​](https://coruscating-salmiakki-327f4b.netlify.app/build/SSV-SDK/get-started#3-instantiation) <a href="#id-3-instantiation" id="id-3-instantiation"></a>
 
 To instantiate the SDK, provide a number of parameters:
 
@@ -55,7 +69,10 @@ const sdk = new SSVSDK({
 })
 ```
 
-#### 3. Usage[​](https://coruscating-salmiakki-327f4b.netlify.app/build/SSV-SDK/get-started#4-usage) <a href="#id-4-usage" id="id-4-usage"></a>
+#### c. Usage[​](https://coruscating-salmiakki-327f4b.netlify.app/build/SSV-SDK/get-started#4-usage) <a href="#id-4-usage" id="id-4-usage"></a>
+
+**Step 1.** (Select the cluster of operators to manage your validators) is performed here, we choose the operator IDs for our cluster, 
+and pass this into our ```generateKeyShares``` function. This function will then perform **Step 2.** (Split your validator keys to shares).
 
 Next we can use that keystore to generate our keyshare transaction payload:
 
@@ -84,6 +101,10 @@ await sdk.contract.token.write
 ```
 
 Then finally the `registerValidators` function can be called and return the transaction receipt:
+
+**Step 3.** (Retrieve your cluster’s latest snapshot data) is performed internally within this function using the data provided when creating the keyshares. 
+
+**Step 4.** (Register your validators to the SSV network) is performed on completion of this function, when the transaction is processed successfully. 
 
 ```typescript
 const txn_receipt = await sdk.clusters.registerValidators({ 
