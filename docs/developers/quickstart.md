@@ -92,9 +92,9 @@ If you need to choose operators, feel free to browse [SSV Explorer](https://expl
 
     Alternatively, you can do it using [The Graph UI](https://thegraph.com/explorer/subgraphs/F4AU5vPCuKfHvnLsusibxJEiTN7ELCoYTvnzg3YHGYbh?view=Query&chain=arbitrum-one). 
 
-    An example of how Hoodi Subgraph can fetch the operator data is below. You will need to adjust `operatorIDs` and replace `YOUR_API_KEY`.
+    An example of how Hoodi Subgraph can fetch the operator data is below. The code snippet considers you have environment variables (`SUBGRAPH_API_KEY` and `OPERATOR_IDS`) in an `.env` file:
     ```json
-        const operatorIDs = ["1", "2", "3", "4"]
+    const operatorIDs = process.env.OPERATOR_IDS
     const url = "https://gateway.thegraph.com/api/subgraphs/id/F4AU5vPCuKfHvnLsusibxJEiTN7ELCoYTvnzg3YHGYbh";
     const query = `
     query ValidatorData($operatorIDs: [Bytes!]) {
@@ -109,7 +109,7 @@ If you need to choose operators, feel free to browse [SSV Explorer](https://expl
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer <YOUR_API_KEY>'
+            'Authorization': `Bearer ${process.env.SUBGRAPH_API_KEY}`
         },
         body: JSON.stringify({ query, variables })
     });
@@ -184,16 +184,18 @@ From the response you will need `id` and `public_key` contents:
 Pass the collected operator info into ```generateKeyShares``` function in the code below.
 
 ### **3. Split validator keys**
-Use the collected data and your keystore to generate the keyshare transaction payload:
+Use the collected data and your keystore to generate the keyshare transaction payload. 
+
+The code snippet below considers you have environment variables (`KEYSTORE_PASSWORD` and `OWNER_ADDRESS`)  in an `.env` file. Also, `nonce` is being handled automatically in the [full code example](#full-code-example):
 
 ```typescript
 const keysharesPayload = await sdk.utils.generateKeyShares({
-  keystore: JSON.stringify(keystore),
-  keystore_password: 'test1234',
-  operator_keys: operators.map((operator) => operator.publicKey),
-  operator_ids: operators.map((operator) => operator.id),
-  owner_address: "YOUR_OWNER_ADDRESS",
-  nonce: "NONCE_OF_OWNER_ADDRESS",
+    keystore: keystoreValues,
+    keystore_password: process.env.KEYSTORE_PASSWORD,
+    operator_keys: operators.map((operator) => operator.publicKey),
+    operator_ids: operators.map((operator) => operator.id),
+    owner_address: process.env.OWNER_ADDRESS,
+    nonce: nonce,
 })
 ```
 
