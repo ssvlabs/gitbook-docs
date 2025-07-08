@@ -5,7 +5,7 @@ sidebar_position: 2
 
 # Add Obligation
 
-After you've [opted-in to at least one bApp](/gitbook-docs/docs/based-applications/user-guides/obligation-features/opt-in-to-bapp.md), you can Add more Obligations to a bApp.
+After you've [opted-in to at least one bApp](/based-applications/user-guides/strategy-features/opt-in-to-bapp.md), you can Add more Obligations to a bApp.
 
 ## 1. Open Strategy page
 

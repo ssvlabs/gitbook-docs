@@ -6,21 +6,13 @@ sidebar_position: 1
 
 Below is the theoretical context around Validator Onboarding, you can find actionable steps on pages:
 - [Validator management](../validator-management/README.md), if you don't have a cluster yet.
-- [Adding validators](../cluster-management/adding-validator-to-existing-cluster.md) in existing clusters.
-
-### Introduction 
-
-Distributed validators are managed within Clusters - the group of operators that were selected to operate them.
-
-To run a validator through the SSV network, a user must distribute their validator key to their selected cluster and register it to the network’s smart contract.
-
-This can be done via the [web app ](https://app.ssv.network/)interface or through the smart contracts and developer tools (see [get started](/developers/) guide).
+- [Adding validators](../cluster-management/adding-validator-to-existing-cluster.md), if you already have a cluster.
 
 ### Operators Selection <a href="#_jm9n7m464k0" id="_jm9n7m464k0"></a>
 
-To form your cluster, you must select your preferred group of operators to manage it.
+To onboard a validator you need to form your cluster — you must select your preferred group of operators to manage it.
 
-The complete operator registry can be accessed through the ssv.network’s [webapp](http://app.ssv.network), [explorer](http://explorer.ssv.network) and [SSV API](https://api.ssv.network/documentation/).
+The complete operator registry can be accessed through the ssv.network’s [webapp](http://app.ssv.network), [explorer](http://explorer.ssv.network), and [SSV API](https://api.ssv.network/documentation/).
 
 The number of operators you select must be 3f+1 compatible, whereas f is the number of faulty operators that your cluster could endure (more operators, greater fault tolerance).
 

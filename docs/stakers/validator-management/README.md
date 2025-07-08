@@ -1,9 +1,9 @@
 ---
-description: Validator management
+description: Validator Management
 sidebar_position: 3
 ---
 
-# Validator management
+# Validator Management
 
 - [**Creating a new validator**](./creating-a-new-validator.md) — This guide shows how to create a new set of validator keys.
 - [**Distributing a validator**](distributing-a-validator.md) - This guide will help to distribute your validators.

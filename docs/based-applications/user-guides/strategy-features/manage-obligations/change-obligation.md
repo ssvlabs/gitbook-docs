@@ -5,7 +5,7 @@ sidebar_position: 3
 
 # Change Obligations
 
-After you've [opted-in to at least one bApp](/gitbook-docs/docs/based-applications/user-guides/obligation-features/opt-in-to-bapp.md), you can edit the Obligations for a certain bApp.
+After you've [opted-in to at least one bApp](/based-applications/user-guides/strategy-features/opt-in-to-bapp.md), you can edit the Obligations for a certain bApp.
 
 ## 1. Open Strategy page
 
