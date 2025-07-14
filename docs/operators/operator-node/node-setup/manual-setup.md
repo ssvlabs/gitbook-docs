@@ -210,7 +210,7 @@ Make sure your `ETH1Addr` endpoint is communicating **over WebSocket** and **not
 
 ### Start the Node
 
-:::danger
+:::danger Potential slashing!
 **Do not** run multiple instances of SSV Node with the same set Operator keys.
 
 This does not increase validator resiliency and **could lead to validator slashing**.
@@ -278,21 +278,31 @@ This does not increase validator resiliency and **could lead to validator slashi
 
   A prerequisite for this is to have `go` version 1.22 installed on the system, and an optional requirement is to have the `make` tool installed as well (alternatively you could run the corresponding command defined in the `Makefile`).
 
-  ##### Clone repository
-  Clone the `ssv-dkg` repository in your local machine:
+  #### Clone repository
+  Clone the `ssv` repository in your local machine:
 
   ```bash
   git clone git@github.com:ssvlabs/ssv.git
   ```
 
-  ##### Build
-  From the project's root folder, run the following command:
+  #### Choose the version
+  Inspect the list of the SSV versions. From the project's root folder, run the command:
+  ```bash
+  git tag
+  ```
 
+  And then choose the latest stable version (**change the** `v1.2.3` **to the version you want to use**):
+  ```bash
+  git checkout tags/v1.2.3
+  ```
+
+  #### Build
+  To build the SSV with the chosen version run the command:
   ```bash
   make build
   ```
   
-  ##### Launch the node
+  #### Launch the node
   To start your node, run the following command:
   ```bash
   ./bin/ssvnode start-node
@@ -300,11 +310,11 @@ This does not increase validator resiliency and **could lead to validator slashi
   By default, the node expects the config file you have created in the previous step to be at this path `./config/config.yaml`. If your setup is different, you can use the `CONFIG_PATH` environment variable to provide a custom path for the config file.
   
   As a small note, this compiled binary could be used to launch the binary [as a `systemd` service](https://manpages.ubuntu.com/manpages/focal/en/man5/systemd.service.5.html), for example.
-  :::info
+  :::info pubKey
   Pay close attention to the `pubKey` field, as the name says, it contains the public key, which is needed to [register the Operator on the ssv.network](/operators/operator-management/registration).
   :::
 
-  :::danger
+  :::danger Create Backups!
   Create backups of your `encrypted_private_key.json` and `password` files on a separate device. If any of these files are lost, you will not be able to access your operator ever again.
   :::
   </TabItem>

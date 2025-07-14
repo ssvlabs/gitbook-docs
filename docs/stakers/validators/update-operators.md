@@ -1,6 +1,6 @@
 ---
 description: How to update operators for your validator
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # Update Operators

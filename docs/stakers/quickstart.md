@@ -1,18 +1,29 @@
 ---
-description: Distributing a validator
+description: Quickstart
+sidebar_label: 'Quickstart'
 sidebar_position: 2
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Distributing a validator
+# Quickstart
+The quickest way to engage with ssv network is to distribute and register your validator. Feel free to start with Testnet and then proceed to Mainnet.
 
-In order to distribute a validator you'll need — its keys, have made the deposit to the Deposit Contract to activate it, and own the necessary amount of SSV tokens to cover operational costs.
+In order to run a validator, you'll need to be in possession of its keys, have made the deposit to the Deposit Contract to activate it, and own the necessary amount of SSV tokens to cover operational costs.
 
 :::note Don't have validator keys?
-To learn how to create a new set of validator keys and activate them, [please refer to this guide](creating-a-new-validator.md).
+To learn how to create a new set of validator keys and activate them, [please refer to this guide](/docs/stakers/validator-management/creating-a-new-validator.md).
 :::
+
+### Overview
+At a high level, here is what involved in distributing your validator:
+1. [Connect your wallet](#connect-your-web3-wallet-to-webapp)
+2. [Select Operators](#select-operators)
+3. [Split and register your validator key](#key-splitting)
+4. [Set the cluster runway](#validator-operational-runway)
+5. [Deposit SSV](#ssv-balance-deposit)
+
 
 ### Connect your Web3 wallet to WebApp
 
@@ -22,36 +33,19 @@ Make sure to connect your Web3 wallet with the WebApp, and that the address corr
 **Your account is associated with your Web3 wallet**. This wallet will be the owner, so having access to it is vital. It can only be changed by removing validator and register using a new wallet.
 :::
 
-<Tabs>
-  <TabItem value="new-accounts" label="New Accounts">
+When creating a new account, you are presented with the option of _Distribute Validator_ or _Join as an Operator_.
 
-  When creating a new account, you are presented with the option of _**Distribute Validator**_ or _**Join as an Operator**_.
+Select _**Distribute a Validator**_.
 
-  Select _Distribute a Validator_.
+![Distribute a validator](/img/distributing-a-val-1.avif)
 
-  ![Distribute a validator](/img/distributing-a-val-1.avif)
-
-  </TabItem>
-  <TabItem value="existing-accounts" label="Existing Accounts">
-
-  In the My Account page, click on Add Cluster to create a new one.
-
-  ![Distribute a validator](/img/distributing-a-val-2.avif)
-
-  Alternatively, you can [onboard additional validators to an **existing cluster**](../cluster-management/adding-validator-to-existing-cluster.md).
-
-  </TabItem>
-</Tabs>  
-
-#### Ethereum validator disclaimer
-
-Accept the disclaimer by clicking _Next_ if you have all the pre-requisites.
+Accept the disclaimer by clicking _**Next**_ if you have all the pre-requisites.
 
 ![Distribute a validator](/img/distributing-a-val-3.avif)
 
 ### Select operators
 
-Now, select four [(alternatively 7, 10, or 13)](/docs/stakers/validators/validator-onboarding.md#operators-selection-) operators to manage your validator. Please note the **Yearly Fee** for the setup you created before hitting the Next button.
+Now, select four operators to manage your validator. Please note the **Yearly Fee** for the setup you created before hitting the Next button.
 
 :::info Verified Operators
 **Important:** [Verified Operators (VOs)](/docs/operators/operator-onboarding/verified-operators.md) are operators that have been granted the **Verified** status by the DAO for completing KYC and providing consistent high-quality service. You can sort the operator list by their daily performance, yearly fee, and # of validators they manage. You can also filter to view only Verified Operators.
@@ -66,7 +60,7 @@ The next screen will allow you to generate KeyShares for your validator key.
 - On Mainnet, only the Offline option is available.
 
 :::success Multiple Keystores
-The latest SSV Smart Contract updates added support for [_bulk operations_](../../developers/smart-contracts/ssvnetwork.md#bulkregistervalidatorpublickey-operatorids-shares-amount-cluster), and the latest release of`ssv-keys` has been made compatible with bulk operations. With version 1.1.0 (and above), it is possible to generate keyshares for multiple keystores in a single operation/transaction.
+The latest SSV Smart Contract updates added support for [_bulk operations_](/developers/smart-contracts/ssvnetwork#bulkregistervalidatorpublickey-operatorids-shares-amount-cluster), and the latest release of `ssv-keys` has been made compatible with bulk operations. With version 1.1.0 (and above), it is possible to generate keyshares for multiple keystores in a single operation/transaction.
 :::
 
 ![Distribute a validator](/img/distributing-a-val-5.avif)
@@ -74,7 +68,7 @@ The latest SSV Smart Contract updates added support for [_bulk operations_](../.
 <Tabs>
   <TabItem value="offline" label="Offline Key Splitting">
 
-    Offline key splitting is the most secure option, although less convenient, as it requires running a command line tool. For more information, refer to the specific [User Guide on how to use the ssv-keys CLI tool](../tools/ssv-keys-cli.md).
+    Offline key splitting is the most secure option, although less convenient, as it requires running a command line tool. For more information, refer to the specific [User Guide on how to use the ssv-keys CLI tool](/docs/stakers/tools/ssv-keys-cli.md).
 
     ![Distribute a validator](/img/distributing-a-val-8.avif)
 
@@ -107,13 +101,14 @@ The latest SSV Smart Contract updates added support for [_bulk operations_](../.
   </TabItem>
 </Tabs>  
 
+
 ### Validator operational runway
 
 You can select the operational runway period of your validator, in accordance with the **Yearly Fee** of previously selected operators. This will dictate the initial amount of SSV to be deposited in the cluster, but it can always be managed later.
 
 ![Distribute a validator](/img/distributing-a-val-11.avif)
 
-**Please read carefully and understand how fees are managed and the risks of account** [**liquidation**](../../learn/glossary.md#liquidation) **if your account balance falls below the** [**Threshold Balance**](../../learn/glossary.md#liquidation-collateral)**.**
+**Please read carefully and understand how fees are managed and the risks of account** [**liquidation**](/docs/learn/glossary.md#liquidation) **if your account balance falls below the** [**Threshold Balance**](/docs/learn/glossary.md#liquidation-collateral)**.**
 
 ![Distribute a validator](/img/distributing-a-val-12.avif)
 

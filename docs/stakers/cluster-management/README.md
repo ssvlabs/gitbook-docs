@@ -1,9 +1,9 @@
 ---
-description: Cluster management
+description: Cluster Management
 sidebar_position: 5
 ---
 
-# Cluster management
+# Cluster Management
 
 **Follow the guides in this section:**
 - [**Add validator**](./adding-validator-to-existing-cluster.md) to existing cluster
