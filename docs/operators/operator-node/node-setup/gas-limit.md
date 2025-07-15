@@ -1,6 +1,5 @@
 ---
 title: Gas Limit
-unlisted: true
 ---
 
 # Gas Limit Change

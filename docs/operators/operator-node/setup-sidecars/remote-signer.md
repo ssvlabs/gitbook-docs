@@ -1,7 +1,6 @@
 ---
 title: SSV Remote Signer
 sidebar_position: 4
-unlisted: true
 ---
 
 import Tabs from '@theme/Tabs';
@@ -82,14 +81,16 @@ Run `web3signer` with the arguments in the example. You might need to change HTT
 <Tabs>
   <TabItem value="docker-example" label="Docker example">
   ```bash
-  docker run -p 9000:9000 consensys/web3signer:latest \
-  --http-listen-port=9000 \
+  docker run -p 9000:9000 consensys/web3signer:latest --http-listen-port=9000 \
+  --tls-keystore-file=/path/to/keystore.p12 \
+  --tls-keystore-password-file=/path/to/password.txt \
+  --tls-known-clients-file=/path/to/knownClients.txt
   eth2 \
   --network=mainnet \
   --slashing-protection-db-url="jdbc:postgresql://${POSTGRES_HOST}/web3signer" \
   --slashing-protection-db-username=postgres \
   --slashing-protection-db-password=password \
-  --key-manager-api-enabled=true
+  --key-manager-api-enabled=true \
   ```
   </TabItem>
   <TabItem value="release-file" label="Release file example">
@@ -103,7 +104,8 @@ Run `web3signer` with the arguments in the example. You might need to change HTT
     --key-manager-api-enabled=true
     ```
   </TabItem>
-  <TabItem value="TLS-enabled" label="TLS-enabled Web3Signer">
+  <TabItem value="TLS-disabled" label="TLS-disabled Web3Signer">
+  **Only for testing, do not use this in production:**
     ```bash
     web3signer --http-listen-port=9000 \
     eth2 \
@@ -111,13 +113,11 @@ Run `web3signer` with the arguments in the example. You might need to change HTT
     --slashing-protection-db-url="jdbc:postgresql://${POSTGRES_HOST}/web3signer" \
     --slashing-protection-db-username=postgres \
     --slashing-protection-db-password=password \
-    --key-manager-api-enabled=true \
-    --tls-keystore-file=/path/to/keystore.p12 \
-    --tls-keystore-password-file=/path/to/password.txt \
-    --tls-known-clients-file=/path/to/knownClients.txt
+    --key-manager-api-enabled=true
     ```
-    This configures Web3Signer to accept secure connections from SSV-Signer. When TLS is enabled on Web3Signer, make sure
-    to:
+    This configures Web3Signer to accept secure connections from SSV-Signer. 
+    
+    When TLS is enabled on Web3Signer, make sure to:
     1. Use `https://` in the `WEB3SIGNER_ENDPOINT` value for SSV-Signer
     2. Configure client TLS options for SSV-Signer to connect securely (
     see [Client TLS Configuration](#client-tls-configuration-ssv-signer-connecting-to-web3signer) section for detailed
@@ -188,7 +188,7 @@ SSVSigner:
 
 ### 5. Configure TLS for SSV-Signer
 
-SSV-Signer supports TLS to secure connections in two ways:
+SSV-Signer requires TLS (unless `--allow-insecure-http` is provided) to secure connections in two ways:
 
 1. **Server TLS** - Secures incoming connections from SSV nodes to SSV-Signer
 2. **Client TLS** - Secures outgoing connections from SSV-Signer to Web3Signer
@@ -373,32 +373,38 @@ WEB3SIGNER_SERVER_CERT_FILE=/path/to/server.pem \
 SSV-Signer supports various TLS configuration combinations for both server and client connections. Understanding these
 options helps ensure secure and proper setup.
 
+**TLS Enforcement Notes**
+- TLS 1.3 is enforced for all TLS connections (`MinTLSVersion = tls.VersionTLS13`).
+- **SSV-Signer server** (accepting connections from the SSV node) requires:
+    - A PKCS12 keystore file with the server certificate (`KEYSTORE_FILE`)
+    - A password file to decrypt the keystore (`KEYSTORE_PASSWORD_FILE`)
+    - A known clients file with SHA-256 fingerprints mapped by Common Name (`KNOWN_CLIENTS_FILE`)
+- **SSV-Signer client** (connecting to **Web3Signer**) requires:
+    - A PKCS12 keystore file with a client certificate (`WEB3SIGNER_KEYSTORE_FILE`) **if Web3Signer enforces mutual TLS**
+    - A password file to decrypt the client keystore (`WEB3SIGNER_KEYSTORE_PASSWORD_FILE`) (mandatory if the client cert is required)
+    - A PEM-encoded Web3Signer certificate (`WEB3SIGNER_SERVER_CERT_FILE`) to verify its identity using SHA-256 fingerprint pinning (**always required**)
+- TLS may be disabled for testing using the `--allow-insecure-http` flag (`ALLOW_INSECURE_HTTP` env). Do not use it in production!
+
 **Server TLS Validation Rules** (SSV-Signer accepting connections from SSV node):
 
-| Configuration | KEYSTORE_FILE | KEYSTORE_PASSWORD_FILE | KNOWN_CLIENTS_FILE | Validity  | Description                                                    |
-|---------------|---------------|------------------------|--------------------|-----------|----------------------------------------------------------------|
-| No TLS        | ❌             | ❌                      | ❌                  | ✅ Valid   | No TLS encryption for incoming connections                     |
-| Basic TLS     | ✅             | ✅                      | ❌                  | ✅ Valid   | Server presents certificate but doesn't verify clients         |
-| Mutual TLS    | ✅             | ✅                      | ✅                  | ✅ Valid   | Server verifies client certificates against known fingerprints |
-| Invalid       | ✅             | ❌                      | ❌                  | ❌ Invalid | Missing keystore password file                                 |
-| Invalid       | ❌             | ❌                      | ✅                  | ❌ Invalid | Client verification without server certificate                 |
+| Configuration | KEYSTORE FILE | KEYSTORE PASSWORD FILE | KNOWN CLIENTS FILE | Connection Validity  | Description                                                    |
+|---------------|---------------|------------------------|--------------------|------------------|----------------------------------------------------------------|
+| No TLS        | ❌             | ❌                      | ❌                  | ⚠️ Invalid unless insecure HTTP is allowed   | No TLS encryption for incoming connections                     |
+| Basic TLS     | ✅             | ✅                      | ❌                  | ⚠️ Invalid unless insecure HTTP is allowed   | Server presents certificate but doesn't verify clients         |
+| Mutual TLS    | ✅             | ✅                      | ✅                  | ✅ Valid                   | Server verifies client certificates against known fingerprints |
+| Invalid       | ✅             | ❌                      | ❌                  | ❌ Invalid                 | Missing keystore password file                                 |
+| Invalid       | ❌             | ❌                      | ✅                  | ❌ Invalid                 | Client verification without server certificate                 |
 
 **Client TLS Validation Rules** (SSV-Signer connecting to Web3Signer):
 
-| Configuration      | WEB3SIGNER_KEYSTORE_FILE | WEB3SIGNER_KEYSTORE_PASSWORD_FILE | WEB3SIGNER_SERVER_CERT_FILE | Validity  | Description                                                |
+| Configuration      | WEB3SIGNER KEYSTORE FILE | WEB3SIGNER KEYSTORE PASSWORD FILE | WEB3SIGNER SERVER CERT FILE | Validity  | Description                                          |
 |--------------------|--------------------------|-----------------------------------|-----------------------------|-----------|------------------------------------------------------------|
-| No TLS             | ❌                        | ❌                                 | ❌                           | ✅ Valid   | No TLS for outgoing connections (use HTTP endpoint)        |
-| Certificate Only   | ❌                        | ❌                                 | ✅                           | ✅ Valid   | Verify server using trusted certificate                    |
-| Client Certificate | ✅                        | ✅                                 | ❌                           | ✅ Valid   | Present client certificate for mutual TLS                  |
+| No TLS             | ❌                        | ❌                                 | ❌                           | ⚠️ Invalid unless insecure HTTP is allowed   | No TLS for outgoing connections (use HTTP endpoint)        |
+| Certificate Only   | ❌                        | ❌                                 | ✅                           | ⚠️ Invalid unless insecure HTTP is allowed   | Verify server using trusted certificate                    |
+| Client Certificate | ✅                        | ✅                                 | ❌                           | ⚠️ Invalid unless insecure HTTP is allowed   | Present client certificate for mutual TLS                  |
 | Full Mutual TLS    | ✅                        | ✅                                 | ✅                           | ✅ Valid   | Present client certificate and verify server (most secure) |
 | Invalid            | ✅                        | ❌                                 | ❌                           | ❌ Invalid | Missing keystore password file                             |
 
-When implementing TLS, consider:
-
-- For production environments, use Full Mutual TLS configuration for maximum security
-- The server always requires both keystore and password file if TLS is enabled
-- Client side can use fingerprint verification without presenting a certificate
-- TLS 1.3 is enforced as the minimum protocol version for all TLS connections
 
 </details>
 
