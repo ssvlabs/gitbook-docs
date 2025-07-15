@@ -157,6 +157,7 @@ ssv:
   # The SSV network to join to
   # Mainnet = Network: mainnet (default)
   # Hoodi = Network: hoodi
+  # Sepolia = Network: sepolia
   Network: mainnet
   
   ValidatorOptions:
