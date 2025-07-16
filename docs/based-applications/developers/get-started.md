@@ -16,7 +16,7 @@ This guide outlines the steps for based applications developers looking to build
 5. Strategies secured by token deposits or validator balance delegation
 6. Build BApp client for strategies to operate
 
-![bApp Flow](../../../static/img/bapp-onboarding-dark.png)
+![bApp Flow](../../../static/img/based-apps-developer-flow.png)
 
 This will walk through the process of what is needed to register and run a Based Application. To develop a bApp, you will need to develop a client which participants (represented as strategies) will run. This client will be responsible for listening for tasks to take on, and submitting the result of the task once it is completed.
 

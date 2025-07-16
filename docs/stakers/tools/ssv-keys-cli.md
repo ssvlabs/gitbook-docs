@@ -22,37 +22,38 @@ The `SSV Keys CLI` tool is a command-line interface that splits a validator key 
    * `ssv-keys.exe` - for Windows
 3. Run file via terminal
 
-  </TabItem>
-  <TabItem value="yarn" label="Method 2: yarn">
+:::info Please note
+If your operating system prevents you from running the executable you can open it from the file manager (Finder in case of macOS), right-click on it, and click the Open menu. Once opened, click the **open** or **allow** button when you are asked to do so. After this go back to the console and try to run it again.
+:::
 
-Clone the keys repo
+  </TabItem>
+  <TabItem value="pnpm" label="Method 2: pnpm">
+
+1. Navigate to the [SSV GitHub](https://github.com/ssvlabs/ssv-keys/releases/latest) releases section
+2. Clone the repository using the lastest tag. Change the `v2.0.0` part  of command to the tag you found.
 
 ```bash
-git clone https://github.com/ssvlabs/ssv-keys.git --branch=v0.0.18
+git clone https://github.com/ssvlabs/ssv-keys.git --branch=v2.0.0
 ```
 
-Navigate to repo `ssv-keys`
+3. Navigate to repo `ssv-keys`
 
 ```bash
 cd ssv-keys
 ```
 
-Run yarn
+4. Install dependencies
 
 ```bash
-yarn
+npm install -g pnpm@latest-10 && pnpm install
 ```
 
   </TabItem>
 </Tabs>
 
-:::info
-Please note that If your operating system prevents you from running the executable you can open it from the file manager (Finder in case of macOS), right-click on it, and click the Open menu. Once opened, click the **open** or **allow** button when you are asked to do so. After this go back to the console and try to run it again.
-:::
-
 ### Command Arguments
 
-You can use **`shares --help`** to see all arguments. Note that if there are missing arguments that the CLI needs, it will ask you for them.
+Note that if there are missing arguments that the CLI needs, it will ask you for them.
 
 | Argument | Type | Description |
 |----------|------|-------------|
@@ -90,10 +91,10 @@ You can use **`shares --help`** to see all arguments. Note that if there are mis
 ```
 
   </TabItem>
-  <TabItem value="yarn" label="yarn">
+  <TabItem value="pnpm" label="pnpm">
 
 ```bash
-yarn cli shares \
+pnpm run cli shares \
 --keystore=<KEYSTORE_FILE_FILE> \
 --password=<FILE_PASSWORD> \
 --operator-ids=<OPERATOR1_ID,OPERATOR2_ID, OPERATOR3_ID, OPERATOR4_ID> \
@@ -184,10 +185,10 @@ This is true also in the case of a single validator key, where the array will on
 ```
 
   </TabItem>
-  <TabItem value="yarn" label="yarn">
+  <TabItem value="pnpm" label="pnpm">
 
 ```bash
-yarn cli shares \
+pnpm run cli shares \
 --keystore=<PATH_TO_MULTIPLE_KEYSTORE_FILES> \
 --password=<FILE_PASSWORD> \
 --operator-ids=<OPERATOR1_ID,OPERATOR2_ID, OPERATOR3_ID, OPERATOR4_ID> \
