@@ -5,7 +5,15 @@ sidebar_position: 1
  
 # SSV2.0 Based Applications Protocol
 
-## Abstract
-The Ethereum validator set is one of the largest and most advanced in the blockchain space. With close to 1.1M active validators (~35M ETH) run by thousands of different entities, it represents the core ethos of Ethereum - a credibly neutral settlement layer. Ethereum’s roadmap favors a polylithic approach for resolving technical challenges (scale, transaction ordering, etc) rather than a monolithic one. The term rollup-centric roadmap was coined by Vitalik Buterin in 2020 and adopted by the wider community. In this paper, we suggest a new term, Based Applications(bApps), to describe a method for re-utilizing Ethereum validators for bootstrapping off-chain services. This approach recognizes the unique properties of Ethereum’s validator set as superior to other forms of security, unlocking an infrastructural layer for a wide range of services.
+SSV2.0 is a revolutionary bootstrapping model that unlocks new opportunities for validators by bootstrapping off-chain services called “based applications” (bApps). SSV 2.0 enables validators to do more and earn more by extending their security to all applications — creating a new asset class: the Validator. 
 
-This is a vision for a possible future presented by SSV Labs to the ssv.network community and is subject to DAO approval
+![Withdrawal vs. Validation keys for Bootstrapping services](/img/bapps-intro.png)
+
+## How to integrate with SSV 2.0
+
+- Developers can [start building a bApp](/based-applications/developers/get-started) to bootstrap security of service. 
+- Infrastructure operators can [create a Strategy](/based-applications/user-guides/create-strategy) to secure bApp(s) and earn rewards for that.
+- Stakers / Token holders can [delegate validator's balance](/based-applications/user-guides/delegate-validator) and [deposit tokens](/based-applications/user-guides/deposit-to-strategy) to a strategy.
+
+Based Applications is a new concept and it's important to understand to get the most value out of it. Start by reading our [blog post on SSV 2.0](https://ssv.network/blog/technology/unveiling-ssv2-0-the-based-applications-protocol/#:~:text=scalable%20based%20economy.-,bApps%3A%20Extending%20Ethereum%E2%80%99s%20Security%20to%20ALL%20Applications,-Enhanced%20Security%20Through), and if you want to dive deeper check out [the SSV 2.0 white paper](/based-applications/learn/).
+

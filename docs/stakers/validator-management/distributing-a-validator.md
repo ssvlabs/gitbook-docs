@@ -1,12 +1,13 @@
 ---
-description: Distributing a validator
+description: Migrating a validator
+title: Migrating a validator
 sidebar_position: 2
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Distributing a validator
+# Migrating a validator
 
 In order to distribute a validator you'll need — its keys, have made the deposit to the Deposit Contract to activate it, and own the necessary amount of SSV tokens to cover operational costs.
 
@@ -61,12 +62,15 @@ Now, select four [(alternatively 7, 10, or 13)](/docs/stakers/validators/validat
 
 ### Key splitting
 
-The next screen will allow you to generate KeyShares for your validator key. 
+The next screen will allow you to generate KeyShares for your validator key(s).
 - On Testnet, this can be done Online, directly on the WebApp, or Offline, on your computer.
 - On Mainnet, only the Offline option is available.
 
-:::success Multiple Keystores
-The latest SSV Smart Contract updates added support for [_bulk operations_](../../developers/smart-contracts/ssvnetwork.md#bulkregistervalidatorpublickey-operatorids-shares-amount-cluster), and the latest release of`ssv-keys` has been made compatible with bulk operations. With version 1.1.0 (and above), it is possible to generate keyshares for multiple keystores in a single operation/transaction.
+:::warning Keep your keys safe!
+To avoid losing your keystores to an attacker, follow these best practices:
+- Split the keys on an offline machine. Ideally, on an "air-gapped" hardware;
+- Use Secure Vaults to store your keystores, mnemonic, and password (e.g. AWS KMS, HashiCorp Vault);
+- If you have a key-management service, use firewall/whitelisting rules and disable unused APIs.
 :::
 
 ![Distribute a validator](/img/distributing-a-val-5.avif)
