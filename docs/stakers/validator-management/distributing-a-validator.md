@@ -125,7 +125,9 @@ You can select the operational runway period of your validator, in accordance wi
 
 The following screen alerts you of the potential dangers of registering a validator on the SSV network, if the same set of validator keys is also being used by other consensus and validator clients.
 
-Please make sure to stop any other running validator setup, if you have any.
+:::danger Avoid slashing
+Stop any other running validator setup with the keys you want to register with SSV. Failing to do this will lead to double signing which is a slashable event.
+:::
 
 ![Distribute a validator](/img/distributing-a-val-13.avif)
 
