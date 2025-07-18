@@ -9,7 +9,7 @@ sidebar_position: 3
 Please do not change more than 2 operators in a cluster. Each set of **generated shares will always be valid** when their signing threshold is met (e.g. 3/4). To reduce the risks, it is advised to not change more than 2 of the validator's managing operators when changing its cluster.
 :::
 
-Below is the theoretical context around Updating Operators, you can find actionable [steps in our separate guide](../cluster-management/update-operators.md).
+Below is the educational context around Updating Operators, you can find actionable [steps in our separate guide](../cluster-management/update-operators.md).
 
 ### Update Operators
 

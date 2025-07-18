@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Validator Onboarding
 
-Below is the theoretical context around Validator Onboarding, you can find actionable steps on pages:
+Below is the educational context around Validator Onboarding, you can find actionable steps on pages:
 - [Validator management](../validator-management/README.md), if you don't have a cluster yet.
 - [Adding validators](../cluster-management/adding-validator-to-existing-cluster.md), if you already have a cluster.
 
