@@ -1,6 +1,6 @@
 # Reactivation
 
-The following the theoretical context behind Cluster Reactivation. To see the actionable steps, please follow [this guide instead](../cluster-management/re-activating-a-cluster.md).
+The following the educational context behind Cluster Reactivation. To see the actionable steps, please follow [this guide instead](../cluster-management/re-activating-a-cluster.md).
 
 In order to reactivate a liquidated cluster, the user must supply the liquidation collateral required for their cluster. It is advised to deposit more than the reactivation amount so the cluster will have an operational runway. Users that only deposit the liquidation collateral may be liquidated soon after because they did not compensate for the operational cost of their cluster’s managed validator(s).
 

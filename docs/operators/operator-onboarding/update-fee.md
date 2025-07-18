@@ -5,7 +5,7 @@ sidebar_position: 2
 
 # Update Fee
 
-Here you will find theoretical concepts, to see the actionable steps to Updating Fee [check out this page](/operators/operator-management/updating-operator-fees).
+On this page you will find educational concepts, to see the actionable steps to Updating Fee [check out this page](/operators/operator-management/updating-operator-fees).
 
 Fees are initially set when registering an operator but can be changed at any point in time.
 

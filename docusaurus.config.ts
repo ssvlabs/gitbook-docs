@@ -41,7 +41,7 @@ const config: Config = {
           rehypePlugins: [rehypeKatex],
           editUrl:
             'https://github.com/ssvlabs/gitbook-docs/tree/main/',
-            
+          showLastUpdateTime: true,
         },
         theme: {
           customCss: './src/css/custom.css',

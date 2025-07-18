@@ -9,9 +9,7 @@ The Graph is a decentralized indexing protocol for the Ethereum (and other EVM-c
 
 The Graph can be used for querying data related to the SSV protocol and develop applications on top of it.
 
-:::info
-### New to GraphQL?
-
+:::info New to GraphQL?
 Before diving into subgraph queries, get familiar with GraphQL basics: [Learn GraphQL](https://graphql.org/learn/)
 :::
 
@@ -19,13 +17,15 @@ A Subgraph that implements the necessary logic to index all the events emitted b
 
 ## Examples
 
-A series of examples of the most useful queries and the data accessible via the Subgraph is available at the [Subgraph Examples subpage](subgraph-examples.md).
+We prepared examples of queries, **it's likely** the **query you need already exists**. A series of examples of the most useful queries and the data accessible via the Subgraph is available at the [Subgraph Examples subpage](subgraph-examples.md).
 
 ## Querying SSV Protocol smart contract data
 
-Currently, there are two official Subgraphs deployed, one for [Ethereum Mainnet](https://thegraph.com/explorer/subgraphs/7V45fKPugp9psQjgrGsfif98gWzCyC6ChN7CW98VyQnr?view=Playground\&chain=arbitrum-one) and one for the [Hoodi Testnet](https://thegraph.com/explorer/subgraphs/F4AU5vPCuKfHvnLsusibxJEiTN7ELCoYTvnzg3YHGYbh?view=Query&chain=arbitrum-one)
+Currently, there are two official Subgraphs deployed:
+- [Ethereum Mainnet](https://thegraph.com/explorer/subgraphs/7V45fKPugp9psQjgrGsfif98gWzCyC6ChN7CW98VyQnr?view=Playground\&chain=arbitrum-one)
+- [Hoodi Testnet](https://thegraph.com/explorer/subgraphs/F4AU5vPCuKfHvnLsusibxJEiTN7ELCoYTvnzg3YHGYbh?view=Query&chain=arbitrum-one)
 
-There are a few ways to access SSV smart contract data through The Graph.
+There are a few ways to access SSV smart contract data through The Graph. Below you will see how to do it via [The Graph interface](#subgraph-playground-user-interface) or [Query API](#query-api).
 
 ### Subgraph Playground user interface
 

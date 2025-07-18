@@ -80,6 +80,12 @@ ERROR P2PNetwork unable to create external multiaddress {"error": "invalid ip ad
 
 This error signalizes the node could not figure the public IP address of your node on a startup. You need to provide your SSV Node's address in `p2p: HostAddress:` variable in [your `config.yaml` file.](../node-setup/manual-setup#peer-to-peer-ports-configuration-and-firewall)
 
+The error can also mention `communications error to 208.67.220.222#53: timed out`. The IP address is attributed to service SSV Node uses to check your IP address. You can cross-check if the service is available with this command:
+```bash
+dig +short myip.opendns.com @resolver4.opendns.com
+```
+If you see the same timeout error as above, that means your machine can not reach the service and you need to look further into allowing this connection on your server/machine.
+
 ***
 
 ### Node Metrics not showing up in Prometheus/Grafana

@@ -5,7 +5,7 @@ sidebar_position: 3
 
 # Validator Offboarding
 
-Below is the theoretical context around Validator Offboarding, you can find actionable [steps in our separate guide](../cluster-management/removing-a-validator.md).
+Below is the educational context around Validator Offboarding, you can find actionable [steps in our separate guide](../cluster-management/removing-a-validator.md).
 
 Validators can leave the network at any time, whether to run it by themselves or migrate it to a different service.
 

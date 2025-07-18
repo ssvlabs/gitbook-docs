@@ -421,7 +421,7 @@ To use this endpoint you'll first need to configure and open a specific port:
 1. By default, you can use port `16000`.
 2. *If* you want to use another port:
     - In `.yaml` configuration file you can edit  `SSVAPIPort: 16000` and restart to apply.
-    - In `.env` configuration file you can edit `SSV_API=16000` variable and restart to apply.
+    - In `.env` configuration file you can edit `SSV_API_PORT=16000` variable and restart to apply.
 3. Make sure your SSV node/container has `16000` port opened (or other port you chose).
 
 The health check endpoint can be reached using the `curl` command, for example:
