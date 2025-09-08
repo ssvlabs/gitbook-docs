@@ -17,6 +17,7 @@ The steps to follow on your journey:
     * [Enable DKG](/operators/operator-node/setup-sidecars/enabling-dkg/) - to participate in DKG ceremonies and get more validators.
     * [Configure MEV](/operators/operator-node/setup-sidecars/configuring-mev) - to increase rewards for block proposals.
     * [Configure Primev](/operators/operator-node/setup-sidecars/configuring-primev) - alternative to MEV, includes Pre-confirmations.
+    * [Configure Commit-Boost](/operators/operator-node/setup-sidecars/configuring-commit-boost) - alternative to MEV, includes Pre-confirmations.
     * [*Configure SSV Remote Signer*](/operators/operator-node/setup-sidecars/remote-signer) - *(optional)* separates the key management functions from the SSV node.
 3. [**Monitoring setup**](/operators/operator-node/monitoring/README.md)
     * [Dashboard Runbook](/operators/operator-node/monitoring/dashboard-runbook.md) - install our Grafana dashboard and learn how to use it.
