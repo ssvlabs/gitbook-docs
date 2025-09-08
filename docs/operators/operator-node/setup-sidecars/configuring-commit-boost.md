@@ -1,35 +1,58 @@
 ---
-title: Configuring Commit-boost
+title: Configuring Commit-Boost
 sidebar_position: 4
-unlisted: true
 ---
 
-This guide outlines the necessary steps required to configure Commit-boost with your SSV node to enable operators to participate in MEV and commitments (e.g. preconfirmations). You can learn more about the concept and technical details on [Commit-boost documentation](https://commit-boost.github.io/commit-boost-client/overview). 
+## Introduction
 
-:::warning Potential Slashing
-**If you have a commitment with a collateral**  - only use commit-boost when managing the whole cluster. If any of the nodes in a cluster will not follow your commitment, your collateral will be slashed.
-:::
+**Commit-Boost** is a sidecar that enables validators to participate in MEV (Maximal Extractable Value) and also gives them the option to offer new block construction services. When used for MEV, Commit-Boost provides validators with additional tools for risk mitigation and performance compared to current solutions like MEV-Boost. For other services, it includes an optional Signer interface that streamlines the process for validators to opt in.
+
+Validators must choose to opt into these services; running Commit-Boost does not automatically require them to offer all or any of the available services through the Signer. The choice is always up to the validator.
+
+It's important to note that you can run Commit-Boost in a few different ways:
+- For MEV only: This setup is similar to how validators currently run MEV-Boost. With Commit-Boost and the PBS (Proposer-Builder Separation) service, validators get more tools and improved performance.
+- For MEV + Another Service: In this case, validators participate in MEV but also opt into another service, such as preconfirmations through ETHGas.
+- For MEV + Multiple Services: When validators run Commit-Boost, they choose which services to offer. For example, if two services are available, they could choose to use Commit-Boost for MEV + Service 1 + Service 2, or they might only choose to run it for MEV + Service 1.
+
+Commit-Boost was built by a community of validators, developers, researchers, and other contributors across Ethereum, it's built for Ethereum, by Ethereum. It is supported by a non-profit and is fully open-source and free to use.
+
+## Configuring Commit-Boost
+
+This guide outlines the necessary steps required to configure Commit-boost with your SSV node to enable operators to participate in MEV and commitments (e.g. preconfirmations). 
+
+It is important to note that Commit-Boost has two main parts:
+1. MEV, or the PBS service.
+2. Other commitments or services validators can offer for block construction.
+
+You can learn more about the concept and technical details on [Commit-boost documentation](https://commit-boost.github.io/commit-boost-client/overview). 
+
 
 ## Overview
-To give you a short summary of the steps you'll need to take:
-1. [Install Commit-boost client](#install-commit-boost-client)
-2. [Choose relays](#choose-any-relays)
-3. [Enable MEV in Beacon Client](#enable-mev-in-beacon-client)
-4. [Choose any preconf/commitment (optional)](#choose-any-preconfcommitment-optional)
+The guide is split into two parts explained above. Here is a summary of the steps you'll need to take:
 
-## Install Commit-boost client
+**Part 1:**
+
+  - [Install Commit-boost client](#install-commit-boost-client)
+  - [Choose relays](#choose-any-relays)
+  - [Enable MEV in Beacon Client](#enable-mev-in-beacon-client)
+
+**Part 2:**
+
+  - [Using Commit-Boost for Other Services](#using-commit-boost-for-other-services-eg-preconfirmations)
+
+## Install Commit-Boost client
 
 The process is best described by the commit-boost team on [their documentation](https://commit-boost.github.io/commit-boost-client/get_started/overview). 
 
-## Choose any relays
+### Choose any relays
 
-At this point, the commit-boost client acts the same way regular mev-boost would. Unless you're participating in any commitments/preconfirmations, you can choose any mev-boost compatible relays.
+To use Commit-Boost for MEV, the client acts very similarly to how validators currently use MEV-Boost. You can choose any MEV-Boost-compatible relays, and the workflow is identical. We also note that Commit-Boost comes with performance  [enhancements](https://github.com/Commit-Boost/commit-boost-client/tree/main/benches/pbs), additional [reporting](https://github.com/Commit-Boost/commit-boost-client/tree/main/crates/metrics) and tools such as the [multiplexer](https://youtu.be/PPWwpPx4it0?si=mcJfGDlozd1AITBj&t=1380) to help validators gain insight and reduce risk. 
 
-## Enable MEV in Beacon Client
+### Enable MEV in Beacon Client
 
-Your mev-boost endpoint should be used by Beacon Client in the Builder endpoint variable. Make sure the endpoint and its port are accessible by your Beacon Client.
+Your Commit-Boost endpoint should be used by Beacon Client in the Builder endpoint variable. Make sure the endpoint and its port are accessible by your Beacon Client.
 
-Follow the setup guidelines for configuring MEV on your preferred client:
+Follow the setup guidelines for configuring Builder endpoint on your preferred client:
 
 * [Prysm](https://docs.prylabs.network/docs/advanced/builder)
 * [Teku](https://docs.teku.consensys.net/how-to/configure/use-proposer-config-file)
@@ -37,17 +60,25 @@ Follow the setup guidelines for configuring MEV on your preferred client:
 * [Nimbus](https://nimbus.guide/external-block-builder.html)
 * [Lodestar](https://chainsafe.github.io/lodestar/usage/mev-integration/)
 
-## Enable MEV in SSV node
+### Enable MEV in SSV node
 
-Builder proposals are managed by Beacon Client. So once you've done the previous step, your SSV node will collaborate with MEV searchers.
+Builder proposals are managed by Beacon Client. So once you've done the previous step, your SSV node will collaborate with Commit-Boost relays.
 
-## Choose any preconf/commitment (optional)
+### Using Commit-Boost for Other Services (e.g. Preconfirmations)
 
-:::info Rewards
-Without completion of this step you will be practically using MEV Boost without any additional rewards.
+:::warning Potential Slashing
+**If you have a commitment with a collateral**  - only use commit-boost when managing all nodes in the cluster. 
+
+If any of the nodes in a cluster will not follow your commitment, your collateral will be slashed.
 :::
 
-At this point, you can choose any commitments or preconfirmations to participate with. As an example, you can check out [EthGas Github page](https://github.com/ethgas-developer/ethgas-preconf-commit-boost-module) with installation and participation instructions.
+Without completing this step, you will be using Commit-Boost similarly to how MEV-Boost is used, only benefiting from the additional tooling and performance of Commit-Boost.
+
+One of the unique features of Commit-Boost is that validators have a standardized interface, the Signer, to provide other services. These services can vary but revolve around offering services to end users of blockspace. Multiple teams are building these services. The Signer acts as a standardized interface that allows validators to opt in and provide these services.
+
+One way to think of the Signer + Commit-Boost is that it acts as an app store, allowing validators to choose which "apps" they want to run. An early example of a service is preconfirmations. For more details on the Signer, please see the Commit-Boost team’s [documentation](https://commit-boost.github.io/commit-boost-client/api).
+
+An example of a current service is **ETHGas**. This protocol allows validators to offer services such as full-slot auctions, [preconfirmations](https://eth-fabric.github.io/website/education/awesome-based-preconfs), and other services. For example, you can check out the [EthGas Github page](https://github.com/ethgas-developer/ethgas-preconf-commit-boost-module) for installation and participation instructions.
 
 Once again, **only commit when you are managing all operators in a cluster**, otherwise your collateral will be slashed.
 
