@@ -83,7 +83,6 @@ const config: Config = {
         {to: '/developers/', label: 'Developers', position: 'left'},
         {to: '/stakers/', label: 'Stakers', position: 'left'},
         {to: '/operators/', label: 'Operators', position: 'left'},
-        {to: '/based-applications/', label: 'Based Applications', position: 'left'},
         {
           href: 'https://github.com/ssvlabs',
           label: 'GitHub',
