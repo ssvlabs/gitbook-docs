@@ -57,20 +57,20 @@ You can use these like so to instantiate the SDK and store it an object:
 
 ```typescript
 // Setup viem clients
-const chain = chains.mainnet // or chains.hoodi
+const chain = chains.hoodi as any // or chains.mainnet
 const transport = http()
 
 const publicClient = createPublicClient({
   chain,
   transport,
-})
+}) as any
 
 const account = privateKeyToAccount('0x...')
 const walletClient = createWalletClient({
   account,
   chain,
   transport,
-})
+}) as any
 
 // Initialize SDK with viem clients
 const sdk = new SSVSDK({
@@ -93,8 +93,8 @@ If you need to choose operators, feel free to browse [SSV Explorer](https://expl
     Alternatively, you can do it using [The Graph UI](https://thegraph.com/explorer/subgraphs/F4AU5vPCuKfHvnLsusibxJEiTN7ELCoYTvnzg3YHGYbh?view=Query&chain=arbitrum-one). 
 
     An example of how Hoodi Subgraph can fetch the operator data is below. The code snippet considers you have environment variables (`SUBGRAPH_API_KEY` and `OPERATOR_IDS`) in an `.env` file:
-    ```json
-    const operatorIDs = process.env.OPERATOR_IDS
+    ```typescript
+    const operatorIDs = JSON.parse(process.env.OPERATOR_IDS)
     const url = "https://gateway.thegraph.com/api/subgraphs/id/F4AU5vPCuKfHvnLsusibxJEiTN7ELCoYTvnzg3YHGYbh";
     const query = `
     query ValidatorData($operatorIDs: [Bytes!]) {
@@ -116,7 +116,7 @@ If you need to choose operators, feel free to browse [SSV Explorer](https://expl
 
     const responseData: any = await response.json();
     const web3 = new Web3();
-    const operators = responseData.data.operators.map((operator: any) => {return {
+    const operators: { id: string; publicKey: string }[] = responseData.data.operators.map((operator: any) => {return {
         id: operator.id,
         publicKey: web3.eth.abi.decodeParameter("string", operator.publicKey)
     }})
@@ -192,8 +192,8 @@ The code snippet below considers you have environment variables (`KEYSTORE_PASSW
 const keysharesPayload = await sdk.utils.generateKeyShares({
     keystore: keystoreValues,
     keystore_password: process.env.KEYSTORE_PASSWORD,
-    operator_keys: operators.map((operator) => operator.publicKey),
-    operator_ids: operators.map((operator) => operator.id),
+    operator_keys: operators.map((operator: { id: string; publicKey: string }) => operator.publicKey),
+    operator_ids: operators.map((operator: { id: string; publicKey: string }) => Number(operator.id)),
     owner_address: process.env.OWNER_ADDRESS,
     nonce: nonce,
 })
@@ -263,36 +263,33 @@ async function main(): Promise<void> {
         !process.env.OWNER_ADDRESS || 
         !process.env.KEYSTORE_PASSWORD || 
         !process.env.OPERATOR_IDS || 
-        !process.env.SUBGRAPH_API_KEY {
+        !process.env.SUBGRAPH_API_KEY) {
         throw new Error('Required environment variables are not set');
     }
 
     const private_key: `0x${string}` = process.env.PRIVATE_KEY as `0x${string}`;
 
     // Setup viem clients
-    const chain = chains.hoodi // or chains.mainnet
+    const chain = chains.hoodi as any // or chains.mainnet
     const transport = http()
 
     const publicClient = createPublicClient({
         chain,
         transport
-    })
+    }) as any
 
     const account = privateKeyToAccount(private_key as `0x${string}`)
     const walletClient = createWalletClient({
         account,
         chain,
         transport,
-    })
+    }) as any
 
     // Initialize SDK with viem clients
     const sdk = new SSVSDK({
         publicClient,
         walletClient,
     })
-
-    console.log(operators.keys)
-    console.log(operators.ids.map((id) => Number(id)))
 
     const directoryPath = process.env.KEYSTORE_FILE_DIRECTORY;
     let keystoresArray: { name: string; keystore: any }[];
@@ -317,7 +314,7 @@ async function main(): Promise<void> {
     let nonce = Number(await sdk.api.getOwnerNonce({ owner: process.env.OWNER_ADDRESS }))
     console.log("Initial nonce: ", nonce)
 
-    const operatorIDs = process.env.OPERATOR_IDS
+    const operatorIDs = JSON.parse(process.env.OPERATOR_IDS)
     const url = "https://gateway.thegraph.com/api/subgraphs/id/F4AU5vPCuKfHvnLsusibxJEiTN7ELCoYTvnzg3YHGYbh";
     const query = `
     query ValidatorData($operatorIDs: [Bytes!]) {
@@ -339,10 +336,13 @@ async function main(): Promise<void> {
 
     const responseData: any = await response.json();
     const web3 = new Web3();
-    const operators = responseData.data.operators.map((operator: any) => {return {
+    const operators: { id: string; publicKey: string }[] = responseData.data.operators.map((operator: any) => {return {
         id: operator.id,
         publicKey: web3.eth.abi.decodeParameter("string", operator.publicKey)
     }})
+
+    console.log(operators.map((operator: { id: string; publicKey: string }) => operator.publicKey))
+    console.log(operators.map((operator: { id: string; publicKey: string }) => Number(operator.id)))
 
     const chunkSize = 40; // Number of validators per transaction 
     for (let i = 0; i < keystoresArray.length; i += chunkSize) {
@@ -353,8 +353,8 @@ async function main(): Promise<void> {
         const keysharesPayload = await sdk.utils.generateKeyShares({
             keystore: keystoreValues,
             keystore_password: process.env.KEYSTORE_PASSWORD,
-            operator_keys: operators.map((operator) => operator.publicKey),
-            operator_ids: operators.map((operator) => operator.id),
+            operator_keys: operators.map((operator: { id: string; publicKey: string }) => operator.publicKey),
+            operator_ids: operators.map((operator: { id: string; publicKey: string }) => Number(operator.id)),
             owner_address: process.env.OWNER_ADDRESS,
             nonce: nonce,
         })
