@@ -95,7 +95,7 @@ There are several reasons for your node to not participate in cluster's consensu
 
 5. It is finally possible that the clients don't report any errors, but the issue persists. In this cases, try and re-sync ssv (by deleting `db` folder). If that doesn't help, try to re-sync execution and/or beacon client(s), and then re-sync ssv node again. That should fix potential initialization issues.
 
-6. If you can't find the reason for this issue, feel free to ask our team for help in our [Discord channel](https://discord.com/invite/ssvnetworkofficial).
+6. If you can't find the reason for this issue, feel free to ask our team for help in our [Discord channel](https://discord.gg/5vT22pRBrf).
 
 </details>
 
@@ -623,7 +623,7 @@ You will always find your performance as the best in cluster. This is expected a
 </details>
 ***
 :::info Didn't find the answer you are looking for?
-Reach out to other network operators on our [Discord channel](https://discord.gg/ssvnetworkofficial)
+Reach out to other network operators on our [Discord channel](https://discord.gg/5vT22pRBrf)
 :::
 
 [^1]: 

@@ -21,4 +21,4 @@ Apart from essentials, you may benefit from [setting up a DKG node](/operators/o
 
 Last but not least, use our [Grafana dashboard](/operators/operator-node/monitoring/dashboard-runbook) to monitor your node in real time, and check out the [Troubleshooting section](/operators/operator-node/maintenance/troubleshooting) to get to the root of any issue you might have with your node.
 
-We suggest to skim through all of the guides on our documentation, to get familiar with all of the concepts and possible actions. If you still have questions, feel free to ask them on the [official Discord channel](https://discord.com/invite/ssvnetworkofficial).
+We suggest to skim through all of the guides on our documentation, to get familiar with all of the concepts and possible actions. If you still have questions, feel free to ask them on the [official Discord channel](https://discord.gg/5vT22pRBrf).

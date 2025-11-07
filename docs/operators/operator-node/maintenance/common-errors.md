@@ -139,7 +139,7 @@ Example log output showing the public key:
 :::
 
 :::info
-Didn't find the answer you are looking for? Reach out to other network operators on our [Discord channel](https://discord.gg/ssvnetworkofficial)
+Didn't find the answer you are looking for? Reach out to other network operators on our [Discord channel](https://discord.gg/5vT22pRBrf)
 :::
 
 [^1]: 

@@ -85,7 +85,7 @@ Go to the original repository and submit a pull request with a clear description
 ## 📢 Community & Support
 For any questions, feel free to reach out:
 
-- Join the [SSV Network Discord](https://discord.com/invite/ssvnetworkofficial)
+- Join the [SSV Network Discord](https://discord.gg/5vT22pRBrf)
 - Open an issue on this repo
 
 Thank you for contributing to SSV Docs! 🚀
