@@ -111,7 +111,7 @@ const config: Config = {
           items: [
             {
               label: 'Discord',
-              href: 'https://discord.com/invite/ssvnetworkofficial',
+              href: 'https://discord.gg/5vT22pRBrf',
             },
             {
               label: 'Twitter',
