@@ -94,4 +94,4 @@ If you can't find neither of the mentioned files — the only option is to [exit
 
 Once the validator is exited and you received your ETH, you can generate your validator keys again, store them securely, and choose new operators for your cluster.
 
-If you are unsure about any of the steps mentioned in this guide, you can ask for assistance from [our Discord community](https://discord.com/invite/ssvnetworkofficial).
+If you are unsure about any of the steps mentioned in this guide, you can ask for assistance from [our Discord community](https://discord.gg/5vT22pRBrf).
