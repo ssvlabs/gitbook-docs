@@ -3470,7 +3470,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(rate(ssv_validator_pre_consensus_duration_seconds_bucket{pod=~\"$pod\"}[$__rate_interval])) by (le)",
+          "expr": "sum(rate(ssv_runner_pre_consensus_duration_seconds_bucket{pod=~\"$pod\"}[$__rate_interval])) by (le)",
           "format": "heatmap",
           "hide": false,
           "instant": false,
@@ -3558,7 +3558,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(rate(ssv_validator_consensus_duration_seconds_bucket{pod=~\"$pod\"}[$__rate_interval])) by (le)",
+          "expr": "sum(rate(ssv_runner_consensus_duration_seconds_bucket{pod=~\"$pod\"}[$__rate_interval])) by (le)",
           "format": "heatmap",
           "hide": false,
           "instant": false,
@@ -3645,7 +3645,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(rate(ssv_validator_post_consensus_duration_seconds_bucket{pod=~\"$pod\"}[$__rate_interval])) by (le)",
+          "expr": "sum(rate(ssv_runner_post_consensus_duration_seconds_bucket{pod=~\"$pod\"}[$__rate_interval])) by (le)",
           "format": "heatmap",
           "hide": false,
           "instant": false,
@@ -4093,7 +4093,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(ssv_validator_submissions{pod=~\"$pod\"}) by (ssv_beacon_role)",
+          "expr": "sum(ssv_runner_submissions{pod=~\"$pod\"}) by (ssv_beacon_role)",
           "format": "heatmap",
           "hide": false,
           "instant": false,

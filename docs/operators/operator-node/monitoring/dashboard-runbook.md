@@ -33,7 +33,7 @@ In this section, we go over what things to look out for and how to monitor them.
 
 * `ssv_p2p_discovery_peers_total`: Total discovered peers.
 * `ssv_p2p_discovery_peers_accepted_total`: Accepted peers during discovery.
-* `ssv_p2p_discovery_peers_rejected_total`: Rejected peers (with `ssv_p2p_discovery_rejection_reason`).
+* `ssv_p2p_discovery_peers_skipped_total`: Skipped peers (with `ssv_p2p_discovery_skip_reason`).
 
 **Things to Watch For:**
 
@@ -146,9 +146,9 @@ In this section, we go over what things to look out for and how to monitor them.
 
 **Key Metrics to Monitor:**
 
-* `ssv_validator_pre_consensus_duration_seconds_bucket`: Pre-consensus duration.
-* `ssv_validator_consensus_duration_seconds_bucket`: Consensus duration.
-* `ssv_validator_post_consensus_duration_seconds_bucket`: Post-consensus duration.
+* `ssv_runner_pre_consensus_duration_seconds_bucket`: Pre-consensus duration.
+* `ssv_runner_consensus_duration_seconds_bucket`: Consensus duration.
+* `ssv_runner_post_consensus_duration_seconds_bucket`: Post-consensus duration.
 
 **Things to Watch For:**
 
@@ -168,7 +168,7 @@ In this section, we go over what things to look out for and how to monitor them.
 **Key Metrics to Monitor:**
 
 * `ssv_validator_validators_per_status`: Validators by status.
-* `ssv_validator_submissions`: Number of submissions per role.
+* `ssv_runner_submissions`: Number of submissions per role.
 
 **Things to Watch For:**
 
