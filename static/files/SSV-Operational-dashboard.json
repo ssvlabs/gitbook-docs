@@ -1,53 +1,4 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_PROMETHEUS",
-      "label": "Prometheus",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "prometheus",
-      "pluginName": "Prometheus"
-    }
-  ],
-  "__elements": {},
-  "__requires": [
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "11.5.2"
-    },
-    {
-      "type": "panel",
-      "id": "heatmap",
-      "name": "Heatmap",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "piechart",
-      "name": "Pie chart",
-      "version": ""
-    },
-    {
-      "type": "datasource",
-      "id": "prometheus",
-      "name": "Prometheus",
-      "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "stat",
-      "name": "Stat",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "timeseries",
-      "name": "Time series",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": [
       {
@@ -67,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": null,
+  "id": 4177,
   "links": [],
   "panels": [
     {
@@ -86,8 +37,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -97,7 +49,7 @@
             "steps": [
               {
                 "color": "#2db1ff",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -122,7 +74,7 @@
         ]
       },
       "gridPos": {
-        "h": 4,
+        "h": 6,
         "w": 5,
         "x": 0,
         "y": 1
@@ -145,12 +97,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -163,7 +115,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(ssv_validator_validators_per_status{pod=~\"$pod\", ssv_validator_status=\"slashed\"}) by (ssv_validator_status)",
@@ -179,8 +131,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "This is responsible for syncing SSV network smart contract events.",
       "fieldConfig": {
@@ -191,7 +144,7 @@
             "steps": [
               {
                 "color": "#2db1ff",
-                "value": null
+                "value": 0
               }
             ]
           }
@@ -199,7 +152,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 6,
         "w": 7,
         "x": 5,
         "y": 1
@@ -222,12 +175,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -245,8 +198,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -260,7 +214,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           }
@@ -305,12 +259,12 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -325,7 +279,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -343,8 +297,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -358,7 +313,7 @@
             "steps": [
               {
                 "color": "#2db1ff",
-                "value": null
+                "value": 0
               }
             ]
           }
@@ -387,12 +342,12 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -407,7 +362,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -425,8 +380,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -440,7 +396,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           }
@@ -485,12 +441,12 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -505,7 +461,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "ssv_cl_sync_status{pod=~\"$pod\", ssv_cl_sync_status!=\"synced\"} != 0",
@@ -521,8 +477,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -536,7 +493,7 @@
             "steps": [
               {
                 "color": "#2db1ff",
-                "value": null
+                "value": 0
               }
             ]
           }
@@ -565,12 +522,12 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -585,7 +542,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "ssv_cl_sync_status{pod=~\"$pod\", ssv_cl_sync_status!=\"synced\"} != 0",
@@ -601,8 +558,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -612,7 +570,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -624,7 +582,7 @@
         "h": 3,
         "w": 5,
         "x": 0,
-        "y": 5
+        "y": 7
       },
       "id": 107,
       "options": {
@@ -644,12 +602,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -666,8 +624,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "If one of these two is very low it might signal that you have issues reaching out other peers, or that other peers can't connect to you.",
       "fieldConfig": {
@@ -678,7 +637,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -690,7 +649,7 @@
         "h": 3,
         "w": 7,
         "x": 5,
-        "y": 5
+        "y": 7
       },
       "id": 155,
       "options": {
@@ -710,12 +669,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(ssv_p2p_connections_active{pod=~\"$pod\"}) by (ssv_p2p_connection_direction)",
@@ -731,8 +690,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "This is the latency to the Consensus Layer client for all calls. If you want a breakdown of which calls take longer or percentiles, scroll to the `Ethereum Clients` section.",
       "fieldConfig": {
@@ -751,7 +711,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 8,
         "w": 12,
         "x": 12,
         "y": 7
@@ -796,12 +756,12 @@
           "unit": "s"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(rate(ssv_cl_request_duration_seconds_bucket{pod=~\"$pod\"}[$__rate_interval])) by (le)",
@@ -818,8 +778,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -843,7 +804,7 @@
         "h": 5,
         "w": 6,
         "x": 0,
-        "y": 8
+        "y": 10
       },
       "id": 302,
       "options": {
@@ -860,18 +821,19 @@
           "fields": "",
           "values": false
         },
+        "sort": "desc",
         "tooltip": {
           "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(ssv_p2p_peers_per_version{pod=~\"$pod\"}) by (ssv_node_version)",
@@ -887,8 +849,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -920,6 +883,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -935,7 +899,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -978,7 +942,7 @@
         "h": 5,
         "w": 6,
         "x": 6,
-        "y": 8
+        "y": 10
       },
       "id": 318,
       "options": {
@@ -994,12 +958,12 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(ssv_doppelganger_validators_state{pod=~\"$pod\", ssv_doppelganger_validators_unsafe=\"false\"})",
@@ -1012,7 +976,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(ssv_doppelganger_validators_state{pod=~\"$pod\", ssv_doppelganger_validators_unsafe=\"true\"}) by ()",
@@ -1028,8 +992,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -1060,6 +1025,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1075,7 +1041,7 @@
             "steps": [
               {
                 "color": "dark-red",
-                "value": null
+                "value": 0
               }
             ]
           }
@@ -1086,7 +1052,7 @@
         "h": 6,
         "w": 12,
         "x": 0,
-        "y": 13
+        "y": 15
       },
       "id": 301,
       "options": {
@@ -1102,12 +1068,12 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(ssv_p2p_peers_per_topic{pod=~\"$pod\"}) by (ssv_p2p_topic_name)",
@@ -1122,8 +1088,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "All validators have to attest once per epoch. We can estimate performance by looking at `active validators` / `submitted attestations by the SSV node`. Submitted attestations have a delay of 1 epoch so if the node was restarted recently it will not have enough information about the first epoch since restart.",
       "fieldConfig": {
@@ -1155,6 +1122,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1171,7 +1139,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -1183,7 +1151,7 @@
         "h": 6,
         "w": 12,
         "x": 12,
-        "y": 13
+        "y": 15
       },
       "id": 109,
       "options": {
@@ -1199,16 +1167,16 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(ssv_validator_submissions{pod=~\"$pod\", ssv_beacon_role=\"ATTESTER\"}) / sum(ssv_validator_validators_per_status{pod=~\"$pod\", ssv_validator_status=\"participating\"})",
+          "expr": "sum(ssv_runner_submissions{pod=~\"$pod\", ssv_beacon_role=\"ATTESTER\"}) / sum(ssv_validator_validators_per_status{pod=~\"$pod\", ssv_validator_status=\"participating\"})",
           "instant": false,
           "legendFormat": "Submitted percentage",
           "range": true,
@@ -1224,7 +1192,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 38
+        "y": 21
       },
       "id": 32,
       "panels": [],
@@ -1233,8 +1201,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -1266,6 +1235,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1281,7 +1251,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1297,7 +1267,7 @@
         "h": 5,
         "w": 8,
         "x": 0,
-        "y": 39
+        "y": 22
       },
       "id": 46,
       "options": {
@@ -1313,12 +1283,12 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(rate(ssv_p2p_discovery_peers_accepted_total{pod=~\"$pod\"}[$__rate_interval])) by (pod)",
@@ -1333,8 +1303,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -1366,6 +1337,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1381,7 +1353,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1397,7 +1369,7 @@
         "h": 5,
         "w": 8,
         "x": 8,
-        "y": 39
+        "y": 22
       },
       "id": 156,
       "options": {
@@ -1413,12 +1385,12 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(rate(ssv_p2p_discovery_peers_skipped_total{pod=~\"$pod\"}[$__rate_interval])) by (pod, ssv_p2p_discovery_skip_reason)",
@@ -1433,8 +1405,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -1465,6 +1438,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1480,7 +1454,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1496,7 +1470,7 @@
         "h": 5,
         "w": 8,
         "x": 16,
-        "y": 39
+        "y": 22
       },
       "id": 47,
       "options": {
@@ -1512,12 +1486,12 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(rate(ssv_p2p_discovery_peers_total{pod=~\"$pod\"}[$__rate_interval])) by (pod)",
@@ -1536,7 +1510,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 44
+        "y": 27
       },
       "id": 33,
       "panels": [],
@@ -1545,8 +1519,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -1577,6 +1552,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1591,7 +1567,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -1606,7 +1583,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 45
+        "y": 28
       },
       "id": 48,
       "options": {
@@ -1622,12 +1599,12 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "(sum(rate(ssv_p2p_connections_connected_total{pod=~\"$pod\"}[$__rate_interval])) by (pod)) * 60",
@@ -1642,8 +1619,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -1674,6 +1652,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1688,7 +1667,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -1703,7 +1683,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 45
+        "y": 28
       },
       "id": 49,
       "options": {
@@ -1719,12 +1699,12 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "(sum(rate(ssv_p2p_connections_disconnected_total{pod=~\"$pod\"}[$__rate_interval])) by (pod)) * 60",
@@ -1739,8 +1719,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -1771,6 +1752,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1785,7 +1767,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -1800,7 +1783,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 45
+        "y": 28
       },
       "id": 50,
       "options": {
@@ -1816,12 +1799,12 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "(sum(rate(ssv_p2p_connections_filtered_total{pod=~\"$pod\"}[$__rate_interval])) by (pod)) * 60",
@@ -1836,8 +1819,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -1868,6 +1852,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1882,7 +1867,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -1897,7 +1883,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 53
+        "y": 36
       },
       "id": 51,
       "options": {
@@ -1913,12 +1899,12 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(ssv_p2p_peers_connected{pod=~\"$pod\"}) by (pod)",
@@ -1930,7 +1916,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(ssv_p2p_connections_active{pod=~\"$pod\"}) by (ssv_p2p_connection_direction, pod)",
@@ -1946,8 +1932,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -1979,6 +1966,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1993,7 +1981,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -2008,7 +1997,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 59
+        "y": 42
       },
       "id": 52,
       "options": {
@@ -2024,12 +2013,12 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(ssv_p2p_peers_per_topic{pod=~\"$pod\"}) by (ssv_p2p_topic_name)",
@@ -2045,8 +2034,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -2077,6 +2067,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -2091,7 +2082,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -2106,7 +2098,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 59
+        "y": 42
       },
       "id": 53,
       "options": {
@@ -2122,12 +2114,12 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(ssv_p2p_peers_per_version{pod=~\"$pod\"}) by (ssv_node_version)",
@@ -2146,7 +2138,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 68
+        "y": 51
       },
       "id": 54,
       "panels": [],
@@ -2155,8 +2147,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -2187,6 +2180,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -2201,7 +2195,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -2217,7 +2212,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 69
+        "y": 52
       },
       "id": 55,
       "options": {
@@ -2233,12 +2228,12 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(rate(ssv_p2p_messages_in_total{pod=~\"$pod\"}[$__rate_interval])) by (pod) * 60",
@@ -2250,7 +2245,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "-(sum(rate(ssv_p2p_messages_out_total{pod=~\"$pod\"}[$__rate_interval])) by (pod) * 60)",
@@ -2266,8 +2261,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -2298,6 +2294,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -2312,7 +2309,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -2328,7 +2326,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 76
+        "y": 59
       },
       "id": 60,
       "options": {
@@ -2339,15 +2337,17 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(rate(ssv_p2p_stream_requests_received_total{pod=~\"$pod\"}[$__rate_interval])) * 60",
@@ -2359,7 +2359,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "-(sum(rate(ssv_p2p_stream_requests_sent_total{pod=~\"$pod\"}[$__rate_interval])) * 60)",
@@ -2375,8 +2375,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -2407,6 +2408,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -2421,7 +2423,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -2437,7 +2440,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 76
+        "y": 59
       },
       "id": 61,
       "options": {
@@ -2448,15 +2451,17 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(rate(ssv_p2p_stream_responses_received_total{pod=~\"$pod\"}[$__rate_interval])) * 60",
@@ -2468,7 +2473,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "-(sum(rate(ssv_p2p_stream_responses_sent_total{pod=~\"$pod\"}[$__rate_interval])) * 60)",
@@ -2488,7 +2493,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 83
+        "y": 66
       },
       "id": 34,
       "panels": [],
@@ -2497,8 +2502,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -2531,6 +2537,7 @@
               "type": "log"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -2545,7 +2552,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               }
             ]
           },
@@ -2557,7 +2565,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 84
+        "y": 67
       },
       "id": 62,
       "options": {
@@ -2568,15 +2576,17 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(rate(ssv_p2p_message_validations_accepted_total{pod=~\"$pod\"}[$__rate_interval])) * 60",
@@ -2589,7 +2599,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(rate(ssv_p2p_message_validations_ignored_total{pod=~\"$pod\"}[$__rate_interval])) * 60",
@@ -2602,7 +2612,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(rate(ssv_p2p_message_validations_rejected_total{pod=~\"$pod\"}[$__rate_interval])) * 60",
@@ -2618,8 +2628,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -2652,6 +2663,7 @@
               "type": "log"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -2666,7 +2678,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               }
             ]
           }
@@ -2677,7 +2690,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 84
+        "y": 67
       },
       "id": 95,
       "options": {
@@ -2688,15 +2701,17 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(rate(ssv_p2p_message_validations_rejected_total{pod=~\"$pod\"}[$__rate_interval])) by (ssv_p2p_message_validation_discard_reason) * 60",
@@ -2712,8 +2727,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -2746,6 +2762,7 @@
               "type": "log"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -2760,7 +2777,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               }
             ]
           }
@@ -2771,7 +2789,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 84
+        "y": 67
       },
       "id": 63,
       "options": {
@@ -2782,15 +2800,17 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(rate(ssv_p2p_message_validations_ignored_total{pod=~\"$pod\"}[$__rate_interval])) by (ssv_p2p_message_validation_discard_reason) * 60",
@@ -2806,8 +2826,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -2829,7 +2850,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 92
+        "y": 75
       },
       "id": 64,
       "options": {
@@ -2871,12 +2892,12 @@
           "unit": "s"
         }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(rate(ssv_p2p_message_validations_duration_seconds_bucket{pod=~\"$pod\"}[$__rate_interval])) by (le)",
@@ -2897,7 +2918,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 98
+        "y": 81
       },
       "id": 35,
       "panels": [],
@@ -2906,8 +2927,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -2929,7 +2951,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 99
+        "y": 82
       },
       "id": 65,
       "options": {
@@ -2971,12 +2993,12 @@
           "unit": "s"
         }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(rate(ssv_duty_scheduler_slot_ticker_delay_duration_seconds_bucket{pod=~\"$pod\"}[$__rate_interval])) by (le)",
@@ -2993,8 +3015,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -3027,6 +3050,7 @@
               "type": "log"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -3041,7 +3065,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -3057,7 +3082,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 105
+        "y": 88
       },
       "id": 66,
       "options": {
@@ -3068,16 +3093,17 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(rate(ssv_duty_scheduler_executions_total{pod=~\"$pod\"}[$__rate_interval])) by (ssv_runner_role) * 60",
@@ -3098,7 +3124,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 111
+        "y": 94
       },
       "id": 36,
       "panels": [],
@@ -3107,8 +3133,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -3118,7 +3145,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#2db1ff"
+                "color": "#2db1ff",
+                "value": 0
               }
             ]
           }
@@ -3129,7 +3157,7 @@
         "h": 6,
         "w": 4,
         "x": 0,
-        "y": 112
+        "y": 95
       },
       "id": 70,
       "options": {
@@ -3149,12 +3177,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -3172,8 +3200,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -3206,6 +3235,7 @@
               "type": "log"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -3220,7 +3250,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -3235,7 +3266,7 @@
         "h": 6,
         "w": 10,
         "x": 4,
-        "y": 112
+        "y": 95
       },
       "id": 68,
       "options": {
@@ -3246,16 +3277,17 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(rate(ssv_event_syncer_handler_events_processed_total{pod=~\"$pod\"}[$__rate_interval])) by (ssv_event_syncer_event_name)",
@@ -3272,8 +3304,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -3306,6 +3339,7 @@
               "type": "log"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -3320,7 +3354,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               }
             ]
           }
@@ -3347,7 +3382,7 @@
         "h": 6,
         "w": 10,
         "x": 14,
-        "y": 112
+        "y": 95
       },
       "id": 69,
       "options": {
@@ -3358,16 +3393,17 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(rate(ssv_event_syncer_handler_events_failed_total{pod=~\"$pod\"}[$__rate_interval])) by (ssv_event_syncer_event_name)",
@@ -3388,7 +3424,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 118
+        "y": 101
       },
       "id": 37,
       "panels": [],
@@ -3397,8 +3433,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -3420,7 +3457,7 @@
         "h": 6,
         "w": 8,
         "x": 0,
-        "y": 119
+        "y": 102
       },
       "id": 72,
       "options": {
@@ -3462,15 +3499,15 @@
           "unit": "s"
         }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(rate(ssv_validator_pre_consensus_duration_seconds_bucket{pod=~\"$pod\"}[$__rate_interval])) by (le)",
+          "expr": "sum(rate(ssv_runner_pre_consensus_duration_seconds_bucket{pod=~\"$pod\"}[$__rate_interval])) by (le)",
           "format": "heatmap",
           "hide": false,
           "instant": false,
@@ -3485,8 +3522,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -3508,7 +3546,7 @@
         "h": 6,
         "w": 8,
         "x": 8,
-        "y": 119
+        "y": 102
       },
       "id": 73,
       "options": {
@@ -3550,15 +3588,15 @@
           "unit": "s"
         }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(rate(ssv_validator_consensus_duration_seconds_bucket{pod=~\"$pod\"}[$__rate_interval])) by (le)",
+          "expr": "sum(rate(ssv_runner_consensus_duration_seconds_bucket{pod=~\"$pod\"}[$__rate_interval])) by (le)",
           "format": "heatmap",
           "hide": false,
           "instant": false,
@@ -3572,8 +3610,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -3595,7 +3634,7 @@
         "h": 6,
         "w": 8,
         "x": 16,
-        "y": 119
+        "y": 102
       },
       "id": 74,
       "options": {
@@ -3637,15 +3676,15 @@
           "unit": "s"
         }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(rate(ssv_validator_post_consensus_duration_seconds_bucket{pod=~\"$pod\"}[$__rate_interval])) by (le)",
+          "expr": "sum(rate(ssv_runner_post_consensus_duration_seconds_bucket{pod=~\"$pod\"}[$__rate_interval])) by (le)",
           "format": "heatmap",
           "hide": false,
           "instant": false,
@@ -3659,8 +3698,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -3682,7 +3722,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 125
+        "y": 108
       },
       "id": 76,
       "options": {
@@ -3724,15 +3764,15 @@
           "unit": "s"
         }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(rate(ssv_validator_duty_duration_seconds_bucket{pod=~\"$pod\", ssv_beacon_role=\"ATTESTER\"}[$__rate_interval])) by (le)",
+          "expr": "sum(rate(ssv_runner_duty_duration_seconds_bucket{pod=~\"$pod\", ssv_runner_role=\"COMMITTEE\"}[$__rate_interval])) by (le)",
           "format": "heatmap",
           "hide": false,
           "instant": false,
@@ -3746,8 +3786,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -3769,7 +3810,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 125
+        "y": 108
       },
       "id": 99,
       "options": {
@@ -3811,15 +3852,15 @@
           "unit": "s"
         }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(rate(ssv_validator_duty_duration_seconds_bucket{pod=~\"$pod\", ssv_beacon_role=\"AGGREGATOR\"}[$__rate_interval])) by (le)",
+          "expr": "sum(rate(ssv_runner_duty_duration_seconds_bucket{pod=~\"$pod\", ssv_runner_role=\"AGGREGATOR\"}[$__rate_interval])) by (le)",
           "format": "heatmap",
           "hide": false,
           "instant": false,
@@ -3833,8 +3874,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -3856,7 +3898,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 132
+        "y": 115
       },
       "id": 97,
       "options": {
@@ -3898,15 +3940,15 @@
           "unit": "s"
         }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(rate(ssv_validator_duty_duration_seconds_bucket{pod=~\"$pod\", ssv_beacon_role=\"SYNC_COMMITTEE\"}[$__rate_interval])) by (le)",
+          "expr": "sum(rate(ssv_runner_duty_duration_seconds_bucket{pod=~\"$pod\", ssv_runner_role=\"SYNC_COMMITTEE_CONTRIBUTION\"}[$__rate_interval])) by (le)",
           "format": "heatmap",
           "hide": false,
           "instant": false,
@@ -3915,13 +3957,14 @@
           "refId": "A"
         }
       ],
-      "title": "Duty full flow duration histogram SYNC COMMITTEE role",
+      "title": "Duty full flow duration histogram SYNC COMMITTEE CONTRIBUTION role",
       "type": "heatmap"
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -3943,7 +3986,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 132
+        "y": 115
       },
       "id": 75,
       "options": {
@@ -3985,15 +4028,15 @@
           "unit": "s"
         }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(rate(ssv_validator_duty_duration_seconds_bucket{pod=~\"$pod\", ssv_beacon_role=\"PROPOSER\"}[$__rate_interval])) by (le)",
+          "expr": "sum(rate(ssv_runner_duty_duration_seconds_bucket{pod=~\"$pod\", ssv_runner_role=\"PROPOSER\"}[$__rate_interval])) by (le)",
           "format": "heatmap",
           "hide": false,
           "instant": false,
@@ -4007,8 +4050,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -4041,6 +4085,7 @@
               "type": "log"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -4055,7 +4100,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -4070,7 +4116,7 @@
         "h": 6,
         "w": 12,
         "x": 0,
-        "y": 139
+        "y": 122
       },
       "id": 98,
       "options": {
@@ -4081,19 +4127,20 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(ssv_validator_submissions{pod=~\"$pod\"}) by (ssv_beacon_role)",
+          "expr": "sum(ssv_runner_submissions{pod=~\"$pod\"}) by (ssv_beacon_role)",
           "format": "heatmap",
           "hide": false,
           "instant": false,
@@ -4107,8 +4154,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -4141,6 +4189,7 @@
               "type": "log"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -4155,7 +4204,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               }
             ]
           }
@@ -4182,7 +4232,7 @@
         "h": 6,
         "w": 12,
         "x": 12,
-        "y": 139
+        "y": 122
       },
       "id": 77,
       "options": {
@@ -4193,19 +4243,20 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(rate(ssv_validator_submissions_failed_total{pod=~\"$pod\"}[$__rate_interval])) by (ssv_beacon_role)",
+          "expr": "sum(rate(ssv_runner_submissions_failed_total{pod=~\"$pod\"}[$__rate_interval])) by (ssv_beacon_role)",
           "format": "heatmap",
           "hide": false,
           "instant": false,
@@ -4223,7 +4274,119 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 145
+        "y": 128
+      },
+      "id": 38,
+      "panels": [],
+      "title": "QBFT Consensus Instance",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 129
+      },
+      "id": 82,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(\n  0.99,\n  sum by (ssv_validator_stage, le) (\n    rate(ssv_validator_stage_duration_seconds_bucket{pod=~\"$pod\"}[$__rate_interval])\n  )\n) * 1000",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Validator Stage Duration Per Stage, p99 (ms)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 136
       },
       "id": 78,
       "panels": [],
@@ -4232,8 +4395,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -4264,6 +4428,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -4278,7 +4443,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -4293,7 +4459,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 146
+        "y": 137
       },
       "id": 79,
       "options": {
@@ -4304,15 +4470,17 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(rate(ssv_validator_errors_total{pod=~\"$pod\"}[$__rate_interval])) by (pod)",
@@ -4327,8 +4495,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -4359,6 +4528,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -4373,7 +4543,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -4388,7 +4559,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 146
+        "y": 137
       },
       "id": 96,
       "options": {
@@ -4399,15 +4570,17 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(rate(ssv_validator_validators_removed_total{pod=~\"$pod\"}[$__rate_interval])) by (pod)",
@@ -4422,8 +4595,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -4454,6 +4628,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -4468,7 +4643,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -4483,7 +4659,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 154
+        "y": 145
       },
       "id": 80,
       "options": {
@@ -4494,15 +4670,17 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(ssv_validator_validators_per_status{pod=~\"$pod\"}) by (ssv_validator_status, pod)",
@@ -4521,319 +4699,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 162
-      },
-      "id": 38,
-      "panels": [],
-      "title": "QBFT Consensus Instance",
-      "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "log": 2,
-              "type": "log"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "s"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 8,
-        "x": 0,
-        "y": 163
-      },
-      "id": 81,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "11.2.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(rate(ssv_validator_stage_duration_seconds_bucket{pod=~\"$pod\"}[$__rate_interval])) by (ssv_runner_role)",
-          "format": "time_series",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Validator Stage Duration per role",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "log": 2,
-              "type": "log"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              }
-            ]
-          },
-          "unit": "s"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 8,
-        "x": 8,
-        "y": 163
-      },
-      "id": 82,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "11.2.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(rate(ssv_validator_stage_duration_seconds_bucket{pod=~\"$pod\"}[$__rate_interval])) by (ssv_validator_stage)",
-          "format": "time_series",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Validator Stage Duration Per Stage",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "log": 2,
-              "type": "log"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "s"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 8,
-        "x": 16,
-        "y": 163
-      },
-      "id": 83,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "11.2.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(rate(ssv_validator_stage_duration_seconds_bucket{pod=~\"$pod\"}[$__rate_interval])) by (ssv_validator_duty_round)",
-          "format": "time_series",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Validator Stage Duration per round",
-      "type": "timeseries"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 169
+        "y": 153
       },
       "id": 40,
       "panels": [],
@@ -4842,8 +4708,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -4856,7 +4723,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -4871,7 +4739,7 @@
         "h": 6,
         "w": 8,
         "x": 0,
-        "y": 170
+        "y": 154
       },
       "id": 87,
       "options": {
@@ -4891,12 +4759,12 @@
         "textMode": "value_and_name",
         "wideLayout": true
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -4914,8 +4782,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -4925,7 +4794,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "#EAB839",
@@ -4945,7 +4815,7 @@
         "h": 6,
         "w": 8,
         "x": 8,
-        "y": 170
+        "y": 154
       },
       "id": 89,
       "options": {
@@ -4965,12 +4835,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -4988,8 +4858,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -4999,7 +4870,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               }
             ]
           }
@@ -5026,7 +4898,7 @@
         "h": 6,
         "w": 8,
         "x": 16,
-        "y": 170
+        "y": 154
       },
       "id": 93,
       "options": {
@@ -5046,12 +4918,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -5069,8 +4941,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -5092,7 +4965,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 176
+        "y": 160
       },
       "id": 92,
       "options": {
@@ -5134,12 +5007,12 @@
           "unit": "s"
         }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(rate(ssv_el_request_duration_seconds_bucket{pod=~\"$pod\"}[$__rate_interval])) by (le)",
@@ -5156,8 +5029,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -5170,7 +5044,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               }
             ]
           }
@@ -5181,7 +5056,7 @@
         "h": 6,
         "w": 8,
         "x": 0,
-        "y": 182
+        "y": 166
       },
       "id": 88,
       "options": {
@@ -5201,12 +5076,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -5224,8 +5099,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -5235,7 +5111,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "#EAB839",
@@ -5255,7 +5132,7 @@
         "h": 6,
         "w": 8,
         "x": 8,
-        "y": 182
+        "y": 166
       },
       "id": 90,
       "options": {
@@ -5275,12 +5152,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -5298,8 +5175,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -5321,7 +5199,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 188
+        "y": 172
       },
       "id": 91,
       "options": {
@@ -5363,12 +5241,12 @@
           "unit": "s"
         }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(rate(ssv_cl_request_duration_seconds_bucket{pod=~\"$pod\"}[$__rate_interval])) by (le)",
@@ -5385,8 +5263,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -5418,6 +5297,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -5432,7 +5312,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               }
             ]
           },
@@ -5458,7 +5339,7 @@
                 "id": "custom.hideFrom",
                 "value": {
                   "legend": false,
-                  "tooltip": false,
+                  "tooltip": true,
                   "viz": true
                 }
               }
@@ -5470,7 +5351,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 194
+        "y": 178
       },
       "id": 94,
       "options": {
@@ -5481,16 +5362,17 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "histogram_quantile(.90, sum(rate(ssv_cl_request_duration_seconds_bucket{pod=~\"$pod\", http_response_error_status_code=\"\"}[$__rate_interval])) by (http_route_name, le, http_request_method))",
@@ -5504,7 +5386,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "histogram_quantile(.50, sum(rate(ssv_cl_request_duration_seconds_bucket{pod=~\"$pod\", http_response_error_status_code=\"\"}[$__rate_interval])) by (http_route_name, le, http_request_method))",
@@ -5521,8 +5403,9 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -5554,6 +5437,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -5568,7 +5452,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -5584,7 +5469,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 200
+        "y": 184
       },
       "id": 317,
       "options": {
@@ -5595,16 +5480,17 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "12.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(ssv_cl_request_duration_seconds_count{pod=~\"$pod\", http_response_error_status_code!=\"\"}) by (http_response_error_status_code, http_request_method, http_route_name, pod)",
@@ -5625,7 +5511,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 206
+        "y": 190
       },
       "id": 41,
       "panels": [],
@@ -5638,7 +5524,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 207
+        "y": 191
       },
       "id": 42,
       "panels": [],
@@ -5651,7 +5537,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 208
+        "y": 192
       },
       "id": 43,
       "panels": [],
@@ -5664,7 +5550,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 209
+        "y": 193
       },
       "id": 44,
       "panels": [],
@@ -5677,7 +5563,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 210
+        "y": 194
       },
       "id": 45,
       "panels": [],
@@ -5685,16 +5571,26 @@
       "type": "row"
     }
   ],
+  "preload": false,
   "refresh": "",
-  "schemaVersion": 40,
+  "schemaVersion": 42,
   "tags": [],
   "templating": {
     "list": [
       {
-        "current": {},
+        "current": {
+          "text": [
+            "mainnet-ssv-node-1-0",
+            "mainnet-ssv-node-2-0"
+          ],
+          "value": [
+            "mainnet-ssv-node-1-0",
+            "mainnet-ssv-node-2-0"
+          ]
+        },
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "prometheus"
         },
         "definition": "label_values(otel_scope_info{otel_scope_name=~\"github.com/ssvlabs/.*\"},pod)",
         "includeAll": true,
@@ -5713,13 +5609,12 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "SSV Operational",
   "uid": "ee5oo8td4ya68f",
-  "version": 135,
-  "weekStart": ""
+  "version": 139
 }

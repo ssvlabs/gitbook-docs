@@ -28,7 +28,7 @@ This document outlines the metrics instrumented in the SSV node (upstream depend
 * [ssv\_p2p\_connections\_connected\_total](metrics-index.md#ssv_p2p_connections_connected_total)
 * [ssv\_p2p\_connections\_disconnected\_total](metrics-index.md#ssv_p2p_connections_disconnected_total)
 * [ssv\_p2p\_discovery\_peers\_accepted\_total](metrics-index.md#ssv_p2p_discovery_peers_accepted_total)
-* [ssv\_p2p\_discovery\_peers\_rejected\_total](metrics-index.md#ssv_p2p_discovery_peers_rejected_total)
+* [ssv\_p2p\_discovery\_peers\_skipped\_total](metrics-index.md#ssv_p2p_discovery_peers_skipped_total)
 * [ssv\_p2p\_discovery\_peers\_total](metrics-index.md#ssv_p2p_discovery_peers_total)
 * [ssv\_p2p\_message\_validations\_accepted\_total](metrics-index.md#ssv_p2p_message_validations_accepted_total)
 * [ssv\_p2p\_message\_validations\_duration\_seconds\_bucket](metrics-index.md#ssv_p2p_message_validations_duration_seconds_bucket)
@@ -40,26 +40,25 @@ This document outlines the metrics instrumented in the SSV node (upstream depend
 * [ssv\_p2p\_peers\_connected](metrics-index.md#ssv_p2p_peers_connected)
 * [ssv\_p2p\_peers\_per\_topic](metrics-index.md#ssv_p2p_peers_per_topic)
 * [ssv\_p2p\_peers\_per\_version](metrics-index.md#ssv_p2p_peers_per_version)
-* [ssv\_p2p\_stream\_requests\_received\_total](metrics-index.md#ssv_p2p_stream_requests_received_total)
 * [ssv\_p2p\_stream\_requests\_sent\_total](metrics-index.md#ssv_p2p_stream_requests_sent_total)
 * [ssv\_p2p\_stream\_responses\_received\_total](metrics-index.md#ssv_p2p_stream_responses_received_total)
-* [ssv\_p2p\_stream\_responses\_sent\_total](metrics-index.md#ssv_p2p_stream_responses_sent_total)
-* [ssv\_validator\_consensus\_duration\_seconds\_bucket](metrics-index.md#ssv_validator_consensus_duration_seconds_bucket)
-* [ssv\_validator\_consensus\_duration\_seconds\_count](metrics-index.md#ssv_validator_consensus_duration_seconds_count)
-* [ssv\_validator\_consensus\_duration\_seconds\_sum](metrics-index.md#ssv_validator_consensus_duration_seconds_sum)
-* [ssv\_validator\_duty\_duration\_seconds\_bucket](metrics-index.md#ssv_validator_duty_duration_seconds_bucket)
-* [ssv\_validator\_duty\_duration\_seconds\_count](metrics-index.md#ssv_validator_duty_duration_seconds_count)
-* [ssv\_validator\_duty\_duration\_seconds\_sum](metrics-index.md#ssv_validator_duty_duration_seconds_sum)
-* [ssv\_validator\_post\_consensus\_duration\_seconds\_bucket](metrics-index.md#ssv_validator_post_consensus_duration_seconds_bucket)
-* [ssv\_validator\_post\_consensus\_duration\_seconds\_count](metrics-index.md#ssv_validator_post_consensus_duration_seconds_count)
-* [ssv\_validator\_post\_consensus\_duration\_seconds\_sum](metrics-index.md#ssv_validator_post_consensus_duration_seconds_sum)
-* [ssv\_validator\_pre\_consensus\_duration\_seconds\_bucket](metrics-index.md#ssv_validator_pre_consensus_duration_seconds_bucket)
-* [ssv\_validator\_pre\_consensus\_duration\_seconds\_count](metrics-index.md#ssv_validator_pre_consensus_duration_seconds_count)
-* [ssv\_validator\_pre\_consensus\_duration\_seconds\_sum](metrics-index.md#ssv_validator_pre_consensus_duration_seconds_sum)
+* [ssv\_runner\_consensus\_duration\_seconds\_bucket](metrics-index.md#ssv_runner_consensus_duration_seconds_bucket)
+* [ssv\_runner\_consensus\_duration\_seconds\_count](metrics-index.md#ssv_runner_consensus_duration_seconds_count)
+* [ssv\_runner\_consensus\_duration\_seconds\_sum](metrics-index.md#ssv_runner_consensus_duration_seconds_sum)
+* [ssv\_runner\_duty\_duration\_seconds\_bucket](metrics-index.md#ssv_runner_duty_duration_seconds_bucket)
+* [ssv\_runner\_duty\_duration\_seconds\_count](metrics-index.md#ssv_runner_duty_duration_seconds_count)
+* [ssv\_runner\_duty\_duration\_seconds\_sum](metrics-index.md#ssv_runner_duty_duration_seconds_sum)
+* [ssv\_runner\_post\_consensus\_duration\_seconds\_bucket](metrics-index.md#ssv_runner_post_consensus_duration_seconds_bucket)
+* [ssv\_runner\_post\_consensus\_duration\_seconds\_count](metrics-index.md#ssv_runner_post_consensus_duration_seconds_count)
+* [ssv\_runner\_post\_consensus\_duration\_seconds\_sum](metrics-index.md#ssv_runner_post_consensus_duration_seconds_sum)
+* [ssv\_runner\_pre\_consensus\_duration\_seconds\_bucket](metrics-index.md#ssv_runner_pre_consensus_duration_seconds_bucket)
+* [ssv\_runner\_pre\_consensus\_duration\_seconds\_count](metrics-index.md#ssv_runner_pre_consensus_duration_seconds_count)
+* [ssv\_runner\_pre\_consensus\_duration\_seconds\_sum](metrics-index.md#ssv_runner_pre_consensus_duration_seconds_sum)
+* [ssv\_runner\_submissions](metrics-index.md#ssv_runner_submissions)
+* [ssv\_validator\_duty\_rounds\_changed\_total](metrics-index.md#ssv_validator_duty_rounds_changed_total)
 * [ssv\_validator\_stage\_duration\_seconds\_bucket](metrics-index.md#ssv_validator_stage_duration_seconds_bucket)
 * [ssv\_validator\_stage\_duration\_seconds\_count](metrics-index.md#ssv_validator_stage_duration_seconds_count)
 * [ssv\_validator\_stage\_duration\_seconds\_sum](metrics-index.md#ssv_validator_stage_duration_seconds_sum)
-* [ssv\_validator\_submissions](metrics-index.md#ssv_validator_submissions)
 * [ssv\_validator\_validators\_per\_status](metrics-index.md#ssv_validator_validators_per_status)
 
 ***
@@ -363,17 +362,17 @@ This document outlines the metrics instrumented in the SSV node (upstream depend
 
 ***
 
-#### `ssv_p2p_discovery_peers_rejected_total`
+#### `ssv_p2p_discovery_peers_skipped_total`
 
 **Type:** counter
 
-**Description:** total number of peers rejected during discovery
+**Description:** total number of peers skipped during discovery
 
 **Labels:**
 
 * `otel_scope_name`
 * `otel_scope_version`
-* `ssv_p2p_discovery_rejection_reason`
+* `ssv_p2p_discovery_skip_reason`
 
 ***
 
@@ -525,20 +524,6 @@ This document outlines the metrics instrumented in the SSV node (upstream depend
 
 ***
 
-#### `ssv_p2p_stream_requests_received_total`
-
-**Type:** counter
-
-**Description:** total number of stream requests received
-
-**Labels:**
-
-* `otel_scope_name`
-* `otel_scope_version`
-* `ssv_p2p_protocol_id`
-
-***
-
 #### `ssv_p2p_stream_requests_sent_total`
 
 **Type:** counter
@@ -567,192 +552,207 @@ This document outlines the metrics instrumented in the SSV node (upstream depend
 
 ***
 
-#### `ssv_p2p_stream_responses_sent_total`
+#### ssv_runner_consensus_duration_seconds_bucket
+
+**Type:** histogram
+
+**Description:** consensus duration
+
+**Labels:**
+
+* `le`
+* `otel_scope_name`
+* `otel_scope_version`
+* `ssv_runner_role`
+
+***
+
+#### `ssv_runner_consensus_duration_seconds_count`
+
+**Type:** histogram
+
+**Description:** consensus duration
+
+**Labels:**
+
+* `otel_scope_name`
+* `otel_scope_version`
+* `ssv_runner_role`
+
+***
+
+#### `ssv_runner_consensus_duration_seconds_sum`
+
+**Type:** histogram
+
+**Description:** consensus duration
+
+**Labels:**
+
+* `otel_scope_name`
+* `otel_scope_version`
+* `ssv_runner_role`
+
+***
+
+#### `ssv_runner_duty_duration_seconds_bucket`
+
+**Type:** histogram
+
+**Description:** duty duration
+
+**Labels:**
+
+* `le`
+* `otel_scope_name`
+* `otel_scope_version`
+* `ssv_beacon_role`
+* `ssv_validator_duty_round`
+
+***
+
+#### `ssv_runner_duty_duration_seconds_count`
+
+**Type:** histogram
+
+**Description:** duty duration
+
+**Labels:**
+
+* `otel_scope_name`
+* `otel_scope_version`
+* `ssv_beacon_role`
+* `ssv_validator_duty_round`
+
+***
+
+#### `ssv_runner_duty_duration_seconds_sum`
+
+**Type:** histogram
+
+**Description:** duty duration
+
+**Labels:**
+
+* `otel_scope_name`
+* `otel_scope_version`
+* `ssv_beacon_role`
+* `ssv_validator_duty_round`
+
+***
+
+#### `ssv_runner_post_consensus_duration_seconds_bucket`
+
+**Type:** histogram
+
+**Description:** post consensus duration
+
+**Labels:**
+
+* `le`
+* `otel_scope_name`
+* `otel_scope_version`
+* `ssv_runner_role`
+
+***
+
+#### `ssv_runner_post_consensus_duration_seconds_count`
+
+**Type:** histogram
+
+**Description:** post consensus duration
+
+**Labels:**
+
+* `otel_scope_name`
+* `otel_scope_version`
+* `ssv_runner_role`
+
+***
+
+#### `ssv_runner_post_consensus_duration_seconds_sum`
+
+**Type:** histogram
+
+**Description:** post consensus duration
+
+**Labels:**
+
+* `otel_scope_name`
+* `otel_scope_version`
+* `ssv_runner_role`
+
+***
+
+#### `ssv_runner_pre_consensus_duration_seconds_bucket`
+
+**Type:** histogram
+
+**Description:** pre consensus duration
+
+**Labels:**
+
+* `le`
+* `otel_scope_name`
+* `otel_scope_version`
+* `ssv_runner_role`
+
+***
+
+#### `ssv_runner_pre_consensus_duration_seconds_count`
+
+**Type:** histogram
+
+**Description:** pre consensus duration
+
+**Labels:**
+
+* `otel_scope_name`
+* `otel_scope_version`
+* `ssv_runner_role`
+
+***
+
+#### `ssv_runner_pre_consensus_duration_seconds_sum`
+
+**Type:** histogram
+
+**Description:** pre consensus duration
+
+**Labels:**
+
+* `otel_scope_name`
+* `otel_scope_version`
+* `ssv_runner_role`
+
+***
+
+#### `ssv_runner_submissions`
+
+**Type:** gauge
+
+**Description:** number of duty submissions
+
+**Labels:**
+
+* `otel_scope_name`
+* `otel_scope_version`
+* `ssv_beacon_role`
+
+***
+
+#### `ssv_validator_duty_rounds_changed_total`
 
 **Type:** counter
 
-**Description:** total number of stream responses sent(as response to a peer request)
+**Description:** number of round changes per duty, with their reasons
 
 **Labels:**
 
 * `otel_scope_name`
 * `otel_scope_version`
-* `ssv_p2p_protocol_id`
-
-***
-
-#### `ssv_validator_consensus_duration_seconds_bucket`
-
-**Type:** histogram
-
-**Description:** consensus duration
-
-**Labels:**
-
-* `le`
-* `otel_scope_name`
-* `otel_scope_version`
-* `ssv_runner_role`
-
-***
-
-#### `ssv_validator_consensus_duration_seconds_count`
-
-**Type:** histogram
-
-**Description:** consensus duration
-
-**Labels:**
-
-* `otel_scope_name`
-* `otel_scope_version`
-* `ssv_runner_role`
-
-***
-
-#### `ssv_validator_consensus_duration_seconds_sum`
-
-**Type:** histogram
-
-**Description:** consensus duration
-
-**Labels:**
-
-* `otel_scope_name`
-* `otel_scope_version`
-* `ssv_runner_role`
-
-***
-
-#### `ssv_validator_duty_duration_seconds_bucket`
-
-**Type:** histogram
-
-**Description:** duty duration
-
-**Labels:**
-
-* `le`
-* `otel_scope_name`
-* `otel_scope_version`
-* `ssv_beacon_role`
 * `ssv_validator_duty_round`
-
-***
-
-#### `ssv_validator_duty_duration_seconds_count`
-
-**Type:** histogram
-
-**Description:** duty duration
-
-**Labels:**
-
-* `otel_scope_name`
-* `otel_scope_version`
-* `ssv_beacon_role`
-* `ssv_validator_duty_round`
-
-***
-
-#### `ssv_validator_duty_duration_seconds_sum`
-
-**Type:** histogram
-
-**Description:** duty duration
-
-**Labels:**
-
-* `otel_scope_name`
-* `otel_scope_version`
-* `ssv_beacon_role`
-* `ssv_validator_duty_round`
-
-***
-
-#### `ssv_validator_post_consensus_duration_seconds_bucket`
-
-**Type:** histogram
-
-**Description:** post consensus duration
-
-**Labels:**
-
-* `le`
-* `otel_scope_name`
-* `otel_scope_version`
-* `ssv_runner_role`
-
-***
-
-#### `ssv_validator_post_consensus_duration_seconds_count`
-
-**Type:** histogram
-
-**Description:** post consensus duration
-
-**Labels:**
-
-* `otel_scope_name`
-* `otel_scope_version`
-* `ssv_runner_role`
-
-***
-
-#### `ssv_validator_post_consensus_duration_seconds_sum`
-
-**Type:** histogram
-
-**Description:** post consensus duration
-
-**Labels:**
-
-* `otel_scope_name`
-* `otel_scope_version`
-* `ssv_runner_role`
-
-***
-
-#### `ssv_validator_pre_consensus_duration_seconds_bucket`
-
-**Type:** histogram
-
-**Description:** pre consensus duration
-
-**Labels:**
-
-* `le`
-* `otel_scope_name`
-* `otel_scope_version`
-* `ssv_runner_role`
-
-***
-
-#### `ssv_validator_pre_consensus_duration_seconds_count`
-
-**Type:** histogram
-
-**Description:** pre consensus duration
-
-**Labels:**
-
-* `otel_scope_name`
-* `otel_scope_version`
-* `ssv_runner_role`
-
-***
-
-#### `ssv_validator_pre_consensus_duration_seconds_sum`
-
-**Type:** histogram
-
-**Description:** pre consensus duration
-
-**Labels:**
-
-* `otel_scope_name`
-* `otel_scope_version`
-* `ssv_runner_role`
+* `ssv_validator_duty_round_change_reason`
 
 ***
 
@@ -803,19 +803,6 @@ This document outlines the metrics instrumented in the SSV node (upstream depend
 * `ssv_validator_duty_round`
 * `ssv_validator_stage`
 
-***
-
-#### `ssv_validator_submissions`
-
-**Type:** gauge
-
-**Description:** number of duty submissions
-
-**Labels:**
-
-* `otel_scope_name`
-* `otel_scope_version`
-* `ssv_beacon_role`
 
 ***
 
