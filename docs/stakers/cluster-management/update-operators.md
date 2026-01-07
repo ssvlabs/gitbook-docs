@@ -5,6 +5,14 @@ sidebar_position: 5
 
 # Update Operators
 
+:::warning Legacy SSV Clusters
+Updating operators (resharing) for validators in legacy SSV clusters is **no longer supported**. If you need to change operators:
+1. [Migrate your cluster to ETH](./migrating-to-eth-clusters.md) first
+2. Then follow the reshare process
+
+The reshare functionality only works for clusters using ETH payments.
+:::
+
 :::warning Collusion risks
 Please do not change more than 2 operators in a cluster. Each set of **generated shares will always be valid** when their signing threshold is met (e.g. 3/4). To reduce the risks, it is advised to not change more than 2 of the validator's managing operators when changing its cluster.
 :::

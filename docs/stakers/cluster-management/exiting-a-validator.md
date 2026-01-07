@@ -5,6 +5,10 @@ sidebar_position: 6
 
 # Exiting a validator
 
+:::info Exiting validators from legacy SSV clusters
+You **can** exit validators from legacy SSV clusters. Exiting is one of the few operations still supported for legacy clusters, as it allows you to gracefully withdraw your stake from the beacon chain before letting the cluster liquidate or migrating to ETH.
+:::
+
 ### Connect your Web3 wallet to the WebApp
 
 Make sure to connect your Web3 wallet with the WebApp, and that the address corresponds with the one you want to manage your Validators with.

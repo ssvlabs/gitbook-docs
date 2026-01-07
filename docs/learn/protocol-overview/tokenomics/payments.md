@@ -5,17 +5,26 @@ sidebar_position: 2
 
 # Payments
 
-Payments are facilitated by maintaining a cluster balance in the SSV network smart contract, which keeps a balance sheet for all clusters. All balances are in the unit of the SSV token itself.
+Payments are facilitated by maintaining a cluster balance in the SSV network smart contract, which keeps a balance sheet for all clusters. 
 
-Clusters are created when registering validators to the network are accessible and owned by the wallet address that transmitted the transaction. This means that the address is the cluster's owner, enabling it to manage its balance and its chosen validators/operators.
+SSV Network supports two cluster types:
+
+- **ETH Clusters** (recommended): Balances denominated in native ETH
+- **Legacy SSV Clusters**: Balances denominated in SSV tokens
+
+Clusters are created when registering validators to the network and are accessible and owned by the wallet address that transmitted the transaction. This means that the address is the cluster's owner, enabling it to manage its balance and its chosen validators/operators.
+
+:::tip ETH Clusters
+New clusters automatically use ETH for payments, providing simpler accounting and enabling SSV token holders to earn ETH rewards from network activity.
+:::
 
 The most important concept behind cluster balance calculation is that it depends on essentially three factors:
 
-* Network fee
-* Operator fees
-* Number of validators
+* Network fee (paid in ETH for ETH clusters, SSV for legacy clusters)
+* Operator fees (paid in ETH for ETH clusters, SSV for legacy clusters)
+* Number of validators (or effective balance for ETH clusters)
 
-And all of them can change at any point in time. So in order to maintain an up-to-date cluster balance, one would have to keep track of such factors, and the period for which they applied.
+All of these factors can change at any point in time. To maintain an up-to-date cluster balance, the system tracks these factors and the period for which they applied.
 
 These are tracked using an essential component called an Index.
 
