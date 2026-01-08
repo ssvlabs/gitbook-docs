@@ -7,22 +7,21 @@ sidebar_position: 2
 
 Payments are facilitated by maintaining a cluster balance in the SSV network smart contract, which keeps a balance sheet for all clusters. 
 
-SSV Network supports two cluster types:
-
-- **ETH Clusters** (recommended): Balances denominated in native ETH
-- **Legacy SSV Clusters**: Balances denominated in SSV tokens
+**Clusters pay fees in native ETH**, providing simpler and more efficient fee payment.
 
 Clusters are created when registering validators to the network and are accessible and owned by the wallet address that transmitted the transaction. This means that the address is the cluster's owner, enabling it to manage its balance and its chosen validators/operators.
 
-:::tip ETH Clusters
-New clusters automatically use ETH for payments, providing simpler accounting and enabling SSV token holders to earn ETH rewards from network activity.
+:::warning Legacy SSV Clusters
+Existing SSV-based clusters are treated as legacy. Support for actively operating them under the SSV payment model has been removed. While these clusters may continue running as long as they have sufficient runway, they can no longer be maintained through operational changes.
+
+**The only forward path is [migration to ETH](../../../stakers/cluster-management/migrating-to-eth-clusters.md).**
 :::
 
 The most important concept behind cluster balance calculation is that it depends on essentially three factors:
 
-* Network fee (paid in ETH for ETH clusters, SSV for legacy clusters)
-* Operator fees (paid in ETH for ETH clusters, SSV for legacy clusters)
-* Number of validators (or effective balance for ETH clusters)
+* Network fee
+* Operator fees
+* Effective balance
 
 All of these factors can change at any point in time. To maintain an up-to-date cluster balance, the system tracks these factors and the period for which they applied.
 

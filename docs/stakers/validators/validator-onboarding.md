@@ -84,5 +84,5 @@ Maintaining your cluster's operational runway is essential. You can always depos
 :::
 
 :::note Legacy SSV Clusters
-If you're operating a legacy SSV cluster (funded with SSV tokens), new validators can be added to ETH clusters instead.
+If you're operating a legacy SSV cluster (funded with SSV tokens), new validators **cannot** be added to it. They can, however, be added to ETH clusters instead.
 :::

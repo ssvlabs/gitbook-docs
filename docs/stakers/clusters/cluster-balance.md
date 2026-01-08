@@ -25,7 +25,7 @@ As explained in the documentation page related to [Payments](../../learn/protoco
 
 * Network fee
 * Operator fees
-* Number of validators (weighted by effective balance)
+* Effective balance
 
 To track changes over time, the concept of [Indexes](../../learn/protocol-overview/tokenomics/payments.md#indexes) has been introduced. Indexes for network fees and operator fees are necessary to calculate the cluster balance, along with [the "snapshot" of the cluster status](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), taken the last time it was updated (the cluster snapshot is also used in smart contract transactions).
 
