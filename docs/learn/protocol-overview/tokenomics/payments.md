@@ -5,17 +5,25 @@ sidebar_position: 2
 
 # Payments
 
-Payments are facilitated by maintaining a cluster balance in the SSV network smart contract, which keeps a balance sheet for all clusters. All balances are in the unit of the SSV token itself.
+Payments are facilitated by maintaining a cluster balance in the SSV network smart contract, which keeps a balance sheet for all clusters. 
 
-Clusters are created when registering validators to the network are accessible and owned by the wallet address that transmitted the transaction. This means that the address is the cluster's owner, enabling it to manage its balance and its chosen validators/operators.
+**Clusters pay fees in native ETH**, providing simpler and more efficient fee payment.
+
+Clusters are created when registering validators to the network and are accessible and owned by the wallet address that transmitted the transaction. This means that the address is the cluster's owner, enabling it to manage its balance and its chosen validators/operators.
+
+:::warning Legacy SSV Clusters
+Existing SSV-based clusters are treated as legacy. Support for actively operating them under the SSV payment model has been removed. While these clusters may continue running as long as they have sufficient runway, they can no longer be maintained through operational changes.
+
+**The only forward path is [migration to ETH](../../../stakers/cluster-management/migrating-to-eth-clusters.md).**
+:::
 
 The most important concept behind cluster balance calculation is that it depends on essentially three factors:
 
 * Network fee
 * Operator fees
-* Number of validators
+* Effective balance
 
-And all of them can change at any point in time. So in order to maintain an up-to-date cluster balance, one would have to keep track of such factors, and the period for which they applied.
+All of these factors can change at any point in time. To maintain an up-to-date cluster balance, the system tracks these factors and the period for which they applied.
 
 These are tracked using an essential component called an Index.
 

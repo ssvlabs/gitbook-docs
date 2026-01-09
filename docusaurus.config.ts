@@ -150,7 +150,9 @@ const config: Config = {
           const redirectFiles: Record<string, string> = {
             '/operators/operator-node/setup-sidecars/configuring-mev': '/operators/operator-node/node-setup/configuring-mev',
             '/operators/operator-node/setup-sidecars/configuring-primev': '/operators/operator-node/node-setup/configuring-primev',
-            '/developers/quickstart':'/developers/SSV-SDK/examples/bulk-register-validators'
+            '/developers/quickstart':'/developers/SSV-SDK/examples/bulk-register-validators',
+            '/stakers/cluster-management/depositing-ssv': '/stakers/cluster-management/depositing-eth',
+            '/stakers/cluster-management/withdrawing-ssv': '/stakers/cluster-management/withdrawing-eth'
           };
           for (const [newPath, oldPath] of Object.entries(redirectFolders)) {
             if (existingPath === newPath || existingPath.startsWith(`${newPath}/`)) {

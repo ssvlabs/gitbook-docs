@@ -5,7 +5,13 @@ sidebar_position: 2
 
 # Cluster Balance
 
-With the SSV token serving as the payment layer of the network, the cash flow between stakers and operators is facilitated by maintaining an SSV balance in a cluster. The cluster balance needs to be kept in check to ensure the continued operation of its validator(s) and below it is explained how to calculate the balance of a cluster at a specific blockchain block.
+:::danger Legacy SSV Clusters
+**SSV-based payments are frozen.** Existing SSV clusters cannot be actively maintained under the SSV payment model. The only forward path is to [migrate to ETH](../../stakers/cluster-management/migrating-to-eth-clusters.md).
+
+While this documentation primarily focuses on **ETH clusters** (the current standard), the formulas and concepts also apply to legacy SSV clusters during the transition period. Where payment currency matters, substitute SSV for ETH in legacy clusters.
+:::
+
+The cluster balance needs to be kept in check to ensure the continued operation of its validator(s). This page explains how to calculate cluster balance at a specific blockchain block.
 
 It is important to be aware that the cluster balance must **always be higher than the required** collateral for the cluster, so only the portion of the cluster balance exceeding the Liquidation Collateral can be used to calculate the Operational Runway.
 
@@ -15,13 +21,13 @@ Since operator and network fees are dynamic, the required [**Liquidation Collate
 
 ### Cluster Balance Formula
 
-As explained in the documentation page related to [Payments](../../learn/protocol-overview/tokenomics/payments.md), the cluster balance is affected by three factors, mainly:
+As explained in the documentation page related to [Payments](../../learn/protocol-overview/tokenomics/payments.md), cluster balance is affected by three main factors:
 
 * Network fee
 * Operator fees
-* Number of validators
+* Effective balance
 
-And to keep track of their changes over time, the concept of [Indexes](../../learn/protocol-overview/tokenomics/payments.md#indexes) have been introduced. This, in turn, means that indexes for network fees and operator fees are necessary to calculate the cluster balance, as well as [the "snapshot" of the cluster status](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), taken the last time this was updated (the cluster snapshot is also used in smart contract transactions).
+To track changes over time, the concept of [Indexes](../../learn/protocol-overview/tokenomics/payments.md#indexes) has been introduced. Indexes for network fees and operator fees are necessary to calculate the cluster balance, along with [the "snapshot" of the cluster status](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), taken the last time it was updated (the cluster snapshot is also used in smart contract transactions).
 
 #### Cluster balance
 
@@ -33,11 +39,11 @@ $$
 
 Legend:
 
-* $$balance_n$$ - cluster balance at block number `n`
+* $$balance_n$$ - cluster balance at block number `n` in ETH
 * $$\Delta_{network\ fee}$$ - Change in network fees paid since the last snapshot
-* $$\Delta_{operators\ fee}$$ - Change in network fees paid since the last snapshot
+* $$\Delta_{operators\ fee}$$ - Change in operator fees paid since the last snapshot
 * $$balance_{snapshot}$$ - value of the cluster balance on its latest snapshot
-* $$v_c$$ - Validator Count, the number of validators in the cluster
+* $$v_c$$ - vUnits based on effective balance
 
 #### Network fees delta
 
@@ -90,8 +96,8 @@ $$
 
 Legend:
 
-* $$Residual\;Balance$$ - Amount of SSV in the cluster balance, exceeding the Liquidation Collateral
-* $$Burn\;Rate_{cluster}$$ - The rate at which a cluster spends (denominated in SSV tokens per block)
+* $$Residual\;Balance$$ - Amount of ETH in the cluster balance, exceeding the Liquidation Collateral
+* $$Burn\;Rate_{cluster}$$ - The rate at which a cluster spends ETH per block
 
 ### Deposits
 

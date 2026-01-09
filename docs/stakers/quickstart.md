@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 # Quickstart
 The quickest way to engage with ssv network is to distribute and register your validator. Feel free to start with Testnet and then proceed to Mainnet.
 
-In order to run a validator, you'll need to be in possession of its keys, have made the deposit to the Deposit Contract to activate it, and own the necessary amount of SSV tokens to cover operational costs.
+In order to run a validator, you'll need to be in possession of its keys, have made the deposit to the Deposit Contract to activate it, and own the necessary amount of ETH to cover operational costs.
 
 :::note Don't have validator keys?
 To learn how to create a new set of validator keys and activate them, [please refer to this guide](/docs/stakers/validator-management/creating-a-new-validator.md).
@@ -22,7 +22,7 @@ At a high level, here is what involved in distributing your validator:
 2. [Select Operators](#select-operators)
 3. [Split and register your validator key](#key-splitting)
 4. [Set the cluster runway](#validator-operational-runway)
-5. [Deposit SSV](#ssv-balance-deposit)
+5. [Deposit ETH](#eth-balance-deposit)
 
 
 ### Connect your Web3 wallet to WebApp
@@ -104,7 +104,7 @@ The latest SSV Smart Contract updates added support for [_bulk operations_](/dev
 
 ### Validator operational runway
 
-You can select the operational runway period of your validator, in accordance with the **Yearly Fee** of previously selected operators. This will dictate the initial amount of SSV to be deposited in the cluster, but it can always be managed later.
+You can select the operational runway period of your validator, in accordance with the **Yearly Fee** of previously selected operators. This will dictate the initial amount of ETH to be deposited in the cluster, but it can always be managed later.
 
 ![Distribute a validator](/img/distributing-a-val-11.avif)
 
@@ -127,15 +127,11 @@ The next screen presents a summary of your validator setup.
 ![Distribute a validator](/img/distributing-a-val-14.avif)
 
 
-By clicking on Register validator(s), you'll be proposed to sign transactions to confirm your choice and transfer the SSV balance necessary to cover for the operational costs.
+By clicking on Register validator(s), you'll be proposed to sign a transaction to confirm your choice and deposit the ETH balance necessary to cover for the operational costs.
 
-:::info Two transactions
-**Note:** If this is the first time you are registering a validator to ssv.network, you will be required to make two transactions - one to approve the SSV smart contract and another one to register the validator.
-:::
+### ETH Balance deposit
 
-### SSV Balance deposit
-
-Now, finalize the validator registration by signing the transaction and adding SSV tokens to your account balance.
+Now, finalize the validator registration by signing the transaction and adding ETH to your cluster balance.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img src="/img/distributing-a-val-15.png" alt="Distribute a validator" />
