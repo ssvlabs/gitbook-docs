@@ -6,12 +6,26 @@ sidebar_position: 3
 
 Secret Shared Validator ($SSV) is the native token of [ssv.network](https://ssv.network/).&#x20;
 
-$SSV's main use cases are payments and governance.&#x20;
+$SSV's main use cases are payments, staking, and governance.&#x20;
 
 * **Payments** - serve as a way for stakers to compensate operators for managing their validators
+* **Staking** - stake SSV tokens to earn ETH rewards from network fees and support oracle infrastructure
 * **Governance** - a way to participate in ssv.network related decision-making and treasury allocations.&#x20;
 
-$SSV is playing a pivotal role in the network’s ability to harness a community and motivate the right stakeholders to meaningfully contribute to the network.
+$SSV is playing a pivotal role in the network's ability to harness a community and motivate the right stakeholders to meaningfully contribute to the network.
+
+## SSV as an ETH Accrual Token
+
+SSV Network has evolved to enable the SSV token to accrue real ETH revenue from network activity. Token holders can now stake their SSV to earn ETH rewards generated from network fees paid by clusters. This creates sustainable yield tied directly to network usage and growth.
+
+**Key benefits:**
+* Earn real ETH yield from actual network activity
+* Support the network's oracle infrastructure through staking
+* Participate in securing effective balance reporting for validators
+
+As more validators use SSV Network, more ETH fees flow to SSV stakers, aligning token value with protocol growth.
+
+Learn more in the [SSV Staking Guide](/stakers/ssv-staking/).
 
 ### **Tokenomics**
 
