@@ -9,7 +9,7 @@ On this page you will find educational concepts, to see the actionable steps to 
 
 Fees are initially set when registering an operator but can be changed at any point in time.
 
-Fee changes are generally initiated to stay competitive with other operators or to align with SSV market price fluctuations.
+Fee changes are generally initiated to stay competitive with other operators.
 
 ### Fee Increase Process
 
