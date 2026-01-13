@@ -17,6 +17,9 @@ The network uses ETH-based payments for clusters and operators:
 
 This transition from SSV token payments to ETH enables the network to generate real ETH revenue that can be distributed to SSV stakers.
 
+![Operators receive ETH payments and generate ETH rewards for stakers. Stakers pay ETH and receive generated ETH rewards in return.](/img/tokenomics-readme-1.png)
+*Operators receive ETH payments and generate ETH rewards for stakers. Stakers pay ETH and receive generated ETH rewards in return.*
+
 ### Legacy SSV Clusters
 
 Existing SSV token-based clusters continue to operate:
