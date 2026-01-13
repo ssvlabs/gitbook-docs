@@ -12,7 +12,7 @@ An operator can choose to leave the network at any time. Choosing to remove an o
 * Remove themself from the network and they will no longer be discoverable by other validators.
 
 :::warning
-Please be aware: this process is irreversible and removed Operators would not be able to reactivate or register this operator back in the future.
+Please be aware: this process is **irreversible** and removed Operators would not be able to reactivate or register this operator back in the future.
 
 Attempting to register an Operator using the same private key will result in an error. In such a case, Operator registration must be done with with a new key.
 :::
