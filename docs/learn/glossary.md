@@ -15,7 +15,7 @@ The Beacon Chain is a brand-new, proof-of-stake blockchain that stores and manag
 
 The group (usually 4, in compliance with [the fault tolerance rule is accepted](../../../stakers/validators/validator-onboarding)) of non-trusting operators that manage a set (one, or multiple) validator(s). Each operator in the cluster holds a share of the complete validator key, for more information, see [Shamir Secret Sharing](glossary.md#shamir-secret-sharing).
 
-Clusters can be **ETH clusters** (pay fees in ETH) or **SSV clusters** (legacy, pay fees in SSV tokens).
+Clusters pay fees in ETH, which is the standard payment method. Older clusters may still pay fees in SSV tokens, but can migrate to ETH-based payments via `migrateClusterToETH()`.
 
 ### Consensus Client
 
@@ -67,15 +67,6 @@ In SSV Network, effective balances are reported by oracles and used to calculate
 ### Epochs & Slots
 
 An epoch lasts approximately 6.4 minutes, and includes 32 slots. A slot lasts 12 seconds, during and is the time period in which a randomly selected validator proposes a block.
-
-### ETH Cluster
-
-A cluster that pays operator and network fees in ETH rather than SSV tokens. ETH clusters are the new standard for SSV Network, enabling ETH revenue to flow to SSV stakers. Key features:
-
-- Pay fees in native ETH
-- Fees calculated using effective balance (EB) and vUnits
-- Support variable-balance validators post-Pectra
-- Can be created directly or migrated from legacy SSV clusters
 
 ### ETH Staking Services
 
@@ -176,22 +167,26 @@ ssv.network allows access to a decentralized ETH staking infrastructure with SSV
 
 * **Staking** – Stake SSV to earn ETH rewards from network fees and support oracle infrastructure
 * **Governance** – Submitting votes and voting on DAO proposals
-* **Fees** – Operators receive fees from managing validators (ETH in new clusters, SSV in legacy clusters)
+* **Payments** – The network receives fees paid in ETH by clusters, and the accrued ETH is converted into value for SSV stakers through the staking mechanism
 * **Grants** – DAO funding for developers and contributors helping to grow the network
 
 When you stake SSV, you receive cSSV tokens and earn real ETH yield from network activity, making SSV an "ETH Accrual Token."
+
+### SSV Staker
+
+An SSV token holder who stakes their SSV tokens to earn ETH rewards from network fees. By staking, they also contribute voting weight to the network's oracle system, which reports validator effective balances to the blockchain.
 
 ### Staker
 
 Services or individual ETH holders that wish to leverage SSV/DVT technology for optimal liveness, security and decentralization of their validator(s). Stakers put 32 ETH "at stake" for each validator they want to run. In the PoS consensus mechanism, validators secure the Ethereum blockchain and earn ETH rewards in return for doing so.
 
-"Staker" can also refer to SSV token holders who stake their SSV to earn ETH rewards from network fees.
+### SSV Staking
+
+The process of staking SSV tokens to earn ETH rewards from network fees. SSV Staking also contributes to the network's oracle infrastructure by providing voting weight for effective balance reporting.
 
 ### Staking
 
 Staking is the contributory action of running a node in a PoS consensus mechanism blockchain. One must 'put at stake' a certain amount of network tokens in order to participate in securing the blockchain by verifying and adding blocks. On Ethereum, the minimum threshold to participate as a validator is 32 ETH. Validators will earn ETH rewards for honestly attesting to and adding blocks. A validator risks decreasing their stake by participating in malicious behaviors or for time spent offline, disconnected from the network.
-
-In the context of SSV Network, staking can also refer to staking SSV tokens to earn ETH rewards from network fees.
 
 ### Total Value Locked (TVL)
 

@@ -28,7 +28,9 @@ Existing SSV token-based clusters continue to operate:
 
 SSV token holders can stake their tokens to earn **real ETH yield** generated from network activity. This makes SSV an **ETH Accrual Token** where network fees flow directly to stakers.
 
-When clusters pay fees in ETH, a portion flows into the SSV Staking contract and is distributed proportionally to all stakers. As the network grows and more validators use SSV, more ETH fees are generated, increasing rewards for stakers.
+When clusters pay fees in ETH, a portion flows into the SSV Staking contract and is distributed proportionally to all stakers. Staked SSV also supports the network's oracle infrastructure by providing voting weight for effective balance reporting.
+
+As the network grows and more validators use SSV, more ETH fees are generated, increasing rewards for stakers.
 
 Learn more in the [SSV Staking Guide](/stakers/ssv-staking/).
 
