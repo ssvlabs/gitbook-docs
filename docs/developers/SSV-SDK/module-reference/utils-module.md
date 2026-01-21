@@ -14,11 +14,16 @@ sdk.utils.generateKeyShares()
 
 Accepts all parameters necessary to compute the keyshares, does this in the background using ssv-keys library, returns the keyshares as an object or saves it to file.
 
-Input:
+| Input parameter | Input type | Description | Example input |
+|----------------|------------|-------------|---------------|
+| operator_keys | string[] | Array of operator public keys to register the validator to | ["LS0tLS1CRUdJTi...", "LS0tLS1CRUdJTi...", "LS0tLS1CRUdJTi...", "LS0tLS1CRUdJTi..."] |
+| operator_ids | integer[]  | Array of operator IDs to register the validator to. | [12, 34, 56, 78] |
+| keystore | string | Validator keystore file created when generating the validator. Passed as object programmatically or file path. | ‘./path-to-keystore.json' |
+| keystore_password | string | Password for the attached keystore file. | '1234' |
+| owner_address | string | Address of the validator Owner. | '0x81592c3de184a3e2c0dcb5a261bc107bfa91f494' |
+| nonce | bigint | Nonce of the owner address | 24 |
 
-<table data-header-hidden><thead><tr><th></th><th width="127"></th><th></th><th></th></tr></thead><tbody><tr><td>Input parameter</td><td>Input type</td><td>Description</td><td>Example input</td></tr><tr><td> operator_keys[]</td><td>string</td><td>List of operator public keys to register the validator to.</td><td>["LS0tLS1CRUdJTi...", "LS0tLS1CRUdJTi...", "LS0tLS1CRUdJTi...", "LS0tLS1CRUdJTi..."]</td></tr><tr><td> operator_ids[]</td><td>integer</td><td>List of operator IDs to register the validator to.</td><td>[12, 34, 56, 78]</td></tr><tr><td> keystore</td><td>string</td><td>Validator keystore file created when generating the validator. Passed as object programmatically or file path.</td><td>‘./path-to-keystore.json'</td></tr><tr><td> keystore_password</td><td>string</td><td>Password for the attached keystore file.</td><td>‘123’</td></tr><tr><td> owner_address</td><td>string</td><td>Address of the validator Owner.</td><td>'0x81592c3de184a3e2c0dcb5a261bc107bfa91f494'</td></tr><tr><td>nonce</td><td>bigint</td><td>Nonce of the owner address</td><td>24</td></tr></tbody></table>
-
-Example:
+#### Example:
 
 ```typescript
 const ownerAddress = "0xA4831B989972605A62141a667578d742927Cbef9"
@@ -48,20 +53,20 @@ Example output:
 
 Checks a JSON file of keyshares and returns whether it is valid or not.&#x20;
 
-<table data-full-width="true"><thead><tr><th></th><th width="147"></th><th></th><th></th></tr></thead><tbody><tr><td>Input Parameter</td><td>Input Type </td><td>Description </td><td>Example Input </td></tr><tr><td>operators</td><td>'id[]' | 'publicKey[]'</td><td>Array of operator ids or public keys</td><td>OperatorArrayObject</td></tr><tr><td>keyshares</td><td>string | object</td><td>Generated keyshares</td><td>Keyshares json file </td></tr></tbody></table>
+| Input parameter | Input type | Description | Example input |
+|----------------|------------|-------------|---------------|
+| account | string | Owner address of the validators in keyshares | 0x012f55B6Cc5D57F943F1E79cF00214B652513f88 |
+| operators | 'id[]' OR 'publicKey[]' | Array of operator ids or public keys | ['1','2','3','4'] |
+| keyshares | string OR object | Generated keyshares | Keyshares json file |
 
-Example:
+
+#### Example:
 
 ```typescript
-const operatorObjectArray = [{
-  publicKey: string
-  id: string
-}]
-
-await sdk.utils.validateKeysharesJSON({
+const validatedShares = await sdk.utils.validateKeysharesJSON({
         account: '0x012f55B6Cc5D57F943F1E79cF00214B652513f88',
-        operators: operatorObjectArray,
-        keyshares: keyshareFile,
+        operators: ['1','2','3','4'],
+        keyshares: keysharesJsonFile,
       });
 ```
 
@@ -100,14 +105,18 @@ Example output:
 
 Checks keyshares json file and returns whether it is valid or not.&#x20;
 
-<table data-full-width="true"><thead><tr><th></th><th width="147"></th><th></th><th></th></tr></thead><tbody><tr><td>Input Parameter</td><td>Input Type </td><td>Description </td><td>Example Input </td></tr><tr><td>operatorIds</td><td>'id[]' | 'publicKey[]'</td><td>Array of operator ids or public keys</td><td>['1','2','3','4']</td></tr><tr><td>keyshares</td><td>string | object</td><td>Generated keyshares</td><td>Keyshares json file</td></tr></tbody></table>
+| Input parameter | Input type | Description | Example input |
+|----------------|------------|-------------|---------------|
+| operatorIds | string[] | Array of operator ids | ['1','2','3','4'] |
+| keyshares | string OR object | Generated keyshares | Keyshares json file |
 
-Example:
+
+#### Example:
 
 ```typescript
 const validatedShares = await sdk.utils.validateSharesPreRegistration({
+    operatorIds: ['1','2','3','4'],
     keyshares: keysharesJsonFile,
-    operatorIds: ['242','686','707','736'],
  });
 ```
 
@@ -146,12 +155,14 @@ Example output:
 
 Checks how many validators an operator has registered, compares it with the maximum amount of validators that can be registered, and returns the amount that can be registered.&#x20;
 
-<table data-full-width="true"><thead><tr><th></th><th width="147"></th><th></th><th></th></tr></thead><tbody><tr><td>Input Parameter</td><td>Input Type </td><td>Description </td><td>Example Input </td></tr><tr><td>id</td><td>string</td><td>Operator ID</td><td>"1"</td></tr></tbody></table>
+| Input parameter | Input type | Description | Example input |
+|----------------|------------|-------------|---------------|
+| id | string | Operator ID | "1” |
 
-Example:
+#### Example:
 
 ```typescript
-const result = await getOperatorCapacity('1')
+const result = await sdk.utils.getOperatorCapacity('1')
 ```
 
 Example output:
@@ -162,21 +173,53 @@ Example output:
 
 ### `getClusterBalance()`
 
-Returns the[ balance of a cluster](/stakers/clusters/cluster-balance).&#x20;
+Accepts a cluster ID to identify the cluster, for which the balance needs to be fetched. Returns the[ balance of a cluster](/stakers/clusters/cluster-balance).&#x20;
 
-<table data-full-width="true"><thead><tr><th></th><th width="147"></th><th></th><th></th></tr></thead><tbody><tr><td>Input Parameter</td><td>Input Type </td><td>Description </td><td>Example Input </td></tr><tr><td>operatorIds</td><td>number[]</td><td>Operator ID array</td><td>[1,2,3,4]</td></tr></tbody></table>
+| Input parameter | Input type | Description | Example input |
+|----------------|------------|-------------|---------------|
+| cluster_Id | string | A cluster_id in its computed ID form. | “0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8” |
 
-Example:
+#### Example:
 
 ```typescript
-const result = await getClusterBalance([1,2,3,4])
+const result = await sdk.utils.getClusterBalance(“0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8”)
 ```
 
 Example output:
 
 ```typescript
 {
-    balance: 1728318231823, // ssv in wei
+    balance: 1728318231823, // ETH in gwei
     operationalRunway: 123, // days left in cluster runway
  }
 ```
+
+### `calcDepositFromRunway()`
+
+Accepts a string, and a number. Calculates the ETH needed to be deposited, in order to achieve the specified cluster runway. Returns a success message or relevant error. 
+
+The function fetches the cluster snapshot using the provided ID, calculate the Burn Rate of the cluster, and reverse [the Operational Runway formula](https://docs.ssv.network/stakers/clusters/cluster-balance/#operational-runway) , to explicit the needed Cluster Balance to obtain the specified Runway.
+
+| Input parameter | Input type | Description | Example input |
+|----------------|------------|-------------|---------------|
+| cluster_Id | string | A cluster_id in its computed ID form. | “0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8” |
+| runway | number | Desired Runway length, measured in number of days.  | 45 |
+
+
+#### Example:
+
+```typescript
+const result = await sdk.utils.calcDepositFromRunway({
+        cluster_Id: “0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8”,
+        runway: 45,
+      });
+```
+
+Example output:
+
+```typescript
+{
+  1728318231823, // ETH in gwei
+}
+```
+

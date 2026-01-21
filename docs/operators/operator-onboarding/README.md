@@ -15,9 +15,9 @@ This can be done by installing the [node software](/operators/operator-node/) on
 ### Operator Fee
 
 :::tip ETH vs SSV fees
-**Previously registered operators** will have 2 separate balances — in ETH and SSV token. Once all clusters they manage migrate to ETH, the operator will only have ETH balance. 
+**Previously registered operators will have a default ETH fee** which [they can change as usual](/operators/operator-management/updating-operator-fees.md). They will also have 2 separate balances — in ETH and SSV token. Once clusters they manage migrate to ETH, the operator will only have ETH balance.
 
-**All newly registered operators** will only have ETH balance, without an option to be paid in SSV token.
+**Newly registered operators** will only have ETH balance, without an option to be paid in SSV token.
 :::
 
 Operators set their own fees denominated in ETH. This fee will be charged per each 32 ETH staked with validators that selects them as one of their operators.

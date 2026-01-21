@@ -6,7 +6,7 @@ sidebar_position: 2
 # Cluster Balance
 
 :::danger Legacy SSV Clusters
-**SSV-based payments are frozen.** Existing SSV clusters cannot be actively maintained under the SSV payment model. The only forward path is to [migrate to ETH](../../stakers/cluster-management/migrating-to-eth-clusters.md).
+**SSV-based payments are frozen.** Existing SSV clusters cannot be actively maintained under the SSV payment model. The only forward path is to [migrate to ETH](/stakers/cluster-management/migrating-to-eth-clusters.md).
 
 While this documentation primarily focuses on **ETH clusters** (the current standard), the formulas and concepts also apply to legacy SSV clusters during the transition period. Where payment currency matters, substitute SSV for ETH in legacy clusters.
 :::
@@ -17,24 +17,24 @@ It is important to be aware that the cluster balance must **always be higher tha
 
 ![Operational Runway](/img/cluster-balance-1.avif)
 
-Since operator and network fees are dynamic, the required [**Liquidation Collateral**](../../learn/protocol-overview/tokenomics/liquidations.md#liquidation-collateral) could vary between different clusters. To calculate how much funding is needed as collateral for a cluster, please refer to the [Liquidations page](../../learn/protocol-overview/tokenomics/liquidations.md#liquidators).
+Since operator and network fees are dynamic, the required [**Liquidation Collateral**](/learn/protocol-overview/tokenomics/liquidations.md#liquidation-collateral) could vary between different clusters. To calculate how much funding is needed as collateral for a cluster, please refer to the [Liquidations page](/learn/protocol-overview/tokenomics/liquidations.md).
 
 ### Cluster Balance Formula
 
-As explained in the documentation page related to [Payments](../../learn/protocol-overview/tokenomics/payments.md), cluster balance is affected by three main factors:
+As explained in the documentation page related to [Payments](/learn/protocol-overview/tokenomics/payments.md), cluster balance is affected by three main factors:
 
 * Network fee
 * Operator fees
 * Effective balance
 
-To track changes over time, the concept of [Indexes](../../learn/protocol-overview/tokenomics/payments.md#indexes) has been introduced. Indexes for network fees and operator fees are necessary to calculate the cluster balance, along with [the "snapshot" of the cluster status](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), taken the last time it was updated (the cluster snapshot is also used in smart contract transactions).
+To track changes over time, the concept of [Indexes](/learn/protocol-overview/tokenomics/payments.md#indexes) has been introduced. Indexes for network fees and operator fees are necessary to calculate the cluster balance, along with [the "snapshot" of the cluster status](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), taken the last time it was updated (the cluster snapshot is also used in smart contract transactions).
 
 #### Cluster balance
 
 To calculate the updated cluster balance, given the cluster balance from most recent snapshot, you can use this formula:
 
 $$
-balance_n = balance_{snapshot} - (\Delta_{network\ fee} + \Delta_{operators\ fee}) * v_c
+balance_n = balance_{snapshot} - (\Delta_{network\ fee} + \Delta_{operators\ fee}) * e_{b} / 32
 $$
 
 Legend:
@@ -43,7 +43,7 @@ Legend:
 * $$\Delta_{network\ fee}$$ - Change in network fees paid since the last snapshot
 * $$\Delta_{operators\ fee}$$ - Change in operator fees paid since the last snapshot
 * $$balance_{snapshot}$$ - value of the cluster balance on its latest snapshot
-* $$v_c$$ - vUnits based on effective balance
+* $$e_b$$ - total effective balance of validators managed by the cluster
 
 #### Network fees delta
 
