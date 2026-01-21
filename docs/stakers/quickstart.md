@@ -20,7 +20,7 @@ To learn how to create a new set of validator keys and activate them, [please re
 At a high level, here is what involved in distributing your validator:
 1. [Connect your wallet](#connect-your-web3-wallet-to-webapp)
 2. [Select Operators](#select-operators)
-3. [Split and register your validator key](#key-splitting)
+3. [Split your validator key](#key-splitting)
 4. [Set the cluster runway](#validator-operational-runway)
 5. [Deposit SSV](#ssv-balance-deposit)
 
@@ -33,15 +33,13 @@ Make sure to connect your Web3 wallet with the WebApp, and that the address corr
 **Your account is associated with your Web3 wallet**. This wallet will be the owner, so having access to it is vital. It can only be changed by removing validator and register using a new wallet.
 :::
 
-When creating a new account, you are presented with the option of _Distribute Validator_ or _Join as an Operator_.
+When creating a new account, you can **Create a new cluster** for your validators.
 
-Select _**Distribute a Validator**_.
-
-![Distribute a validator](/img/distributing-a-val-1.avif)
+![Distribute a validator](/img/distributing-a-val-1.png)
 
 Accept the disclaimer by clicking _**Next**_ if you have all the pre-requisites.
 
-![Distribute a validator](/img/distributing-a-val-3.avif)
+![Distribute a validator](/img/distributing-a-val-3.png)
 
 ### Select operators
 
@@ -51,19 +49,15 @@ Now, select four operators to manage your validator. Please note the **Yearly Fe
 **Important:** [Verified Operators (VOs)](/docs/operators/operator-onboarding/verified-operators.md) are operators that have been granted the **Verified** status by the DAO for completing KYC and providing consistent high-quality service. You can sort the operator list by their daily performance, yearly fee, and # of validators they manage. You can also filter to view only Verified Operators.
 :::
 
-![Distribute a validator](/img/distributing-a-val-4.avif)
+![Distribute a validator](/img/distributing-a-val-4.png)
 
 ### Key splitting
 
 The next screen will allow you to generate KeyShares for your validator key. 
-- On Testnet, this can be done Online, directly on the WebApp, or Offline, on your computer.
-- On Mainnet, only the Offline option is available.
+- **On Testnet**, this can be done Online, directly on the WebApp, or Offline, on your computer.
+- **On Mainnet, only the Offline** option is available.
 
-:::success Multiple Keystores
-The latest SSV Smart Contract updates added support for [_bulk operations_](/developers/smart-contracts/ssvnetwork#bulkregistervalidatorpublickey-operatorids-shares-amount-cluster), and the latest release of `ssv-keys` has been made compatible with bulk operations. With version 1.1.0 (and above), it is possible to generate keyshares for multiple keystores in a single operation/transaction.
-:::
-
-![Distribute a validator](/img/distributing-a-val-5.avif)
+![Distribute a validator](/img/distributing-a-val-5.png)
 
 <Tabs>
   <TabItem value="offline" label="Offline Key Splitting">
@@ -79,7 +73,7 @@ The latest SSV Smart Contract updates added support for [_bulk operations_](/dev
 
     Once uploaded, if successfully validated, advance to the next screen clicking Next.
 
-    ![Distribute a validator](/img/distributing-a-val-10.avif)
+    ![Distribute a validator](/img/distributing-a-val-10.png)
 
   </TabItem>
   <TabItem value="online" label="Online Key Splitting">
@@ -101,16 +95,22 @@ The latest SSV Smart Contract updates added support for [_bulk operations_](/dev
   </TabItem>
 </Tabs>  
 
+### Effective Balance input
+
+For accurate runway estimation, you need to manually input the Effective Balance of your validators. If this won't be done, it will be defaulted to each validator having 32 ETH balance. You can read more about [Effective Balance accounting](/stakers/clusters/effective-balance) for detailed calculations of fees.
+
+Read the warning on the page, input your Effective Balance and proceed to the next step.
+    ![Distribute a validator](/img/distributing-a-val-EB.png)
 
 ### Validator operational runway
 
 You can select the operational runway period of your validator, in accordance with the **Yearly Fee** of previously selected operators. This will dictate the initial amount of SSV to be deposited in the cluster, but it can always be managed later.
 
-![Distribute a validator](/img/distributing-a-val-11.avif)
+![Distribute a validator](/img/distributing-a-val-11.png)
 
-**Please read carefully and understand how fees are managed and the risks of account** [**liquidation**](/docs/learn/glossary.md#liquidation) **if your account balance falls below the** [**Threshold Balance**](/docs/learn/glossary.md#liquidation-collateral)**.**
+**Please read carefully and understand how fees are managed and the risks of account** [**liquidation**](/learn/protocol-overview/tokenomics/liquidations.md) **if your account balance falls below the** [**Threshold Balance**](/learn/protocol-overview/tokenomics/liquidations.md#liquidation-collateral).
 
-![Distribute a validator](/img/distributing-a-val-12.avif)
+![Distribute a validator](/img/distributing-a-val-12.png)
 
 ### Slashing warning
 
@@ -118,13 +118,13 @@ The following screen alerts you of the potential dangers of registering a valida
 
 Please make sure to stop any other running validator setup, if you have any.
 
-![Distribute a validator](/img/distributing-a-val-13.avif)
+![Distribute a validator](/img/distributing-a-val-13.png)
 
 ### Validator summary
 
 The next screen presents a summary of your validator setup.
 
-![Distribute a validator](/img/distributing-a-val-14.avif)
+![Distribute a validator](/img/distributing-a-val-14.png)
 
 
 By clicking on Register validator(s), you'll be proposed to sign transactions to confirm your choice and transfer the SSV balance necessary to cover for the operational costs.
@@ -138,12 +138,14 @@ By clicking on Register validator(s), you'll be proposed to sign transactions to
 Now, finalize the validator registration by signing the transaction and adding SSV tokens to your account balance.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
-  <img src="/img/distributing-a-val-15.png" alt="Distribute a validator" />
+  <img 
+    src="/img/distributing-a-val-16.png" 
+    alt="Distribute a validator" 
+    style={{ width: '50%', maxWidth: '500px' }}
+  />
 </div>
 
 You will need to confirm the transaction in your web3 wallet.
-
-![Distribute a validator](/img/distributing-a-val-16.avif)
 
 Once the transaction has been signed and confirmed by the network, you'll be presented with the summary screen.
 

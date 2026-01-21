@@ -2,47 +2,66 @@
 
 This script automatically monitors the balance of multiple clusters on the SSV network at regular intervals. It calculates the current balance of each cluster by:
 
-* Querying the subgraph for the relevant data (see the [Subgraph Examples](../tools/ssv-subgraph/subgraph-examples) page for more information)
+* Querying the subgraph for the relevant data (see the [Subgraph Examples](/developers/tools/ssv-subgraph/subgraph-examples) page for more information)
 * Using these values to compute the current cluster balance for each specified cluster, outputting the amount in SSV
 
-Details on the formulas used can be found in the documentation page related to [Cluster Balance](../../stakers/clusters/cluster-balance).
+Details on the formulas used can be found in the documentation page related to [Cluster Balance](/stakers/clusters/cluster-balance).
 
 ## Cluster Balance Calculation
 
 The core calculation function that computes the cluster balance:
 
 ```typescript
-function calculateClusterBalance(responseData: GraphQLResponse, clusterName: string): ClusterCalculationResult | null {
-  
-  // Network Fee Calculation
-  const networkFee =
-    parseInt(responseData.data.daovalues.networkFeeIndex) +
-    (responseData.data._meta.block.number -
-      parseInt(responseData.data.daovalues.networkFeeIndexBlockNumber)) *
-      parseInt(responseData.data.daovalues.networkFee) -
-    responseData.data.cluster.networkFeeIndex * 10000000;
+export const getClusterBalance = async (
+  config: ConfigReturnType,
+  { operatorIds }: GetClusterBalanceArgs,
+) => {
+  const query = await config.api.getClusterBalance({
+    daoAddress: config.contractAddresses.setter,
+    operatorIds: operatorIds.map(String),
+    clusterId: createClusterId(config.walletClient.account!.address, operatorIds),
+  })
 
-  // Operator Fee Calculation
-  let operatorFee = -responseData.data.cluster.index * 10000000;
-  for (let operator of responseData.data.operators) {
-    operatorFee +=
-      parseInt(operator.feeIndex) +
-      (responseData.data._meta.block.number -
-        parseInt(operator.feeIndexBlockNumber)) *
-        parseInt(operator.fee);
+  if (!query.cluster || !query.daovalues || !query._meta) {
+    throw new Error('Could not fetch cluster balance')
   }
 
-  // Cluster Balance Calculation
-  const clusterBalance =
-    responseData.data.cluster.balance -
-    (networkFee + operatorFee) * responseData.data.cluster.validatorCount;
+  const cumulativeNetworkFee =
+    BigInt(query.daovalues.networkFeeIndex) +
+    (BigInt(query._meta.block.number) - BigInt(query.daovalues.networkFeeIndexBlockNumber)) *
+      BigInt(query.daovalues.networkFee) -
+    BigInt(query.cluster.networkFeeIndex) * 10000000n
+
+  const cumulativeOperatorFee = query.operators.reduce(
+    (acc, operator) => {
+      return (
+        acc +
+        BigInt(operator.feeIndex) +
+        (BigInt(query._meta!.block.number) - BigInt(operator.feeIndexBlockNumber)) *
+          BigInt(operator.fee)
+      )
+    },
+    -BigInt(query.cluster.index) * 10000000n,
+  )
+
+  const operatorsFee = query.operators.reduce((acc, operator) => acc + BigInt(operator.fee), 0n)
+
+  const calculatedClusterBalance =
+    BigInt(query.cluster.balance) -
+      (cumulativeNetworkFee + cumulativeOperatorFee) * BigInt(query.cluster.validatorCount) || 1n
+
+  const burnRate =
+    (operatorsFee + BigInt(query.daovalues.networkFee)) * BigInt(query.cluster.validatorCount) || 1n
+
+  const mLc = BigInt(query.daovalues.minimumLiquidationCollateral)
+  const LC = bigintMax(mLc, burnRate * BigInt(query.daovalues.liquidationThreshold))
+  const runwaySSV = calculatedClusterBalance - LC
+  const operationalRunway = runwaySSV / burnRate / globals.BLOCKS_PER_DAY
 
   return {
-    networkFee,
-    operatorFee,
-    clusterBalance,
-    validatorCount: responseData.data.cluster.validatorCount,
-  };
+    balance: calculatedClusterBalance,
+    operationalRunway,
+  }
 }
 ```
 
@@ -111,11 +130,11 @@ async function fetchClusterData(url: string, query: string, apiKey: string) {
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
   };
-  
+
   if (apiKey) {
     headers["Authorization"] = `Bearer ${apiKey}`;
   }
-  
+
   const response = await fetch(url, {
     method: "POST",
     headers,
@@ -125,6 +144,12 @@ async function fetchClusterData(url: string, query: string, apiKey: string) {
   return await response.json();
 }
 
+/**
+ * Replaced with Script #1's balance logic, adapted to Script #2's data shape + return shape.
+ * - Uses BigInt to avoid precision loss.
+ * - Keeps Script #2's expected return keys: networkFee, operatorFee, clusterBalance, validatorCount.
+ * - Computes the same "cumulative network/operator fee" and "effective cluster balance" as Script #1.
+ */
 function calculateClusterBalance(responseData: any, cluster: ClusterConfig) {
   if (responseData.errors) {
     console.error(`[${cluster.name}] GraphQL errors:`, responseData.errors);
@@ -133,6 +158,11 @@ function calculateClusterBalance(responseData: any, cluster: ClusterConfig) {
 
   if (!responseData.data) {
     console.error(`[${cluster.name}] No data in response`);
+    return null;
+  }
+
+  if (!responseData.data._meta?.block?.number) {
+    console.error(`[${cluster.name}] _meta.block.number is missing`);
     return null;
   }
 
@@ -151,32 +181,48 @@ function calculateClusterBalance(responseData: any, cluster: ClusterConfig) {
     return null;
   }
 
+  const toBigInt = (v: any, label: string): bigint => {
+    if (typeof v === "bigint") return v;
+    if (typeof v === "number") return BigInt(v);
+    if (typeof v === "string" && v.trim() !== "") {
+      return BigInt(v);
+    }
+    throw new Error(`[${cluster.name}] Invalid ${label}: ${String(v)}`);
+  };
+
+  const blockNumber = toBigInt(responseData.data._meta.block.number, "_meta.block.number");
+  const daoValues = responseData.data.daovalues;
+  const clusterData = responseData.data.cluster;
+  const operators = responseData.data.operators as Array<any>;
+
   const networkFee =
-    parseInt(responseData.data.daovalues.networkFeeIndex) +
-    (responseData.data._meta.block.number -
-      parseInt(responseData.data.daovalues.networkFeeIndexBlockNumber)) *
-      parseInt(responseData.data.daovalues.networkFee) -
-    responseData.data.cluster.networkFeeIndex * 10000000;
+    toBigInt(daoValues.networkFeeIndex, "daovalues.networkFeeIndex") +
+    (blockNumber -
+      toBigInt(daoValues.networkFeeIndexBlockNumber, "daovalues.networkFeeIndexBlockNumber")) *
+      toBigInt(daoValues.networkFee, "daovalues.networkFee") -
+    toBigInt(clusterData.networkFeeIndex, "cluster.networkFeeIndex") * 10_000_000n;
 
-  let operatorFee = -responseData.data.cluster.index * 10000000;
+  const operatorFee = operators.reduce(
+    (acc: bigint, operator: any) => {
+      return (
+        acc +
+        toBigInt(operator.feeIndex, "operator.feeIndex") +
+        (blockNumber - toBigInt(operator.feeIndexBlockNumber, "operator.feeIndexBlockNumber")) *
+          toBigInt(operator.fee, "operator.fee")
+      );
+    },
+    -toBigInt(clusterData.index, "cluster.index") * 10_000_000n,
+  );
 
-  for (let operator of responseData.data.operators) {
-    operatorFee +=
-      parseInt(operator.feeIndex) +
-      (responseData.data._meta.block.number -
-        parseInt(operator.feeIndexBlockNumber)) *
-        parseInt(operator.fee);
-  }
-
+  const validatorCount = toBigInt(clusterData.validatorCount, "cluster.validatorCount");
   const clusterBalance =
-    responseData.data.cluster.balance -
-    (networkFee + operatorFee) * responseData.data.cluster.validatorCount;
+    toBigInt(clusterData.balance, "cluster.balance") - (networkFee + operatorFee) * validatorCount;
 
   return {
-    networkFee,
-    operatorFee,
-    clusterBalance,
-    validatorCount: responseData.data.cluster.validatorCount,
+    networkFee,      // BigInt
+    operatorFee,     // BigInt
+    clusterBalance,  // BigInt (effective balance after accrued fees)
+    validatorCount,  // BigInt
   };
 }
 
@@ -242,7 +288,7 @@ startMonitoring();
 
 Create a `config.json` file in the same directory as your script with the following structure:
 
-```json
+```typescript
 {
   "intervalSeconds": 10,
   "graphqlUrl": "https://api.studio.thegraph.com/query/71118/ssv-network-hoodi/version/latest",

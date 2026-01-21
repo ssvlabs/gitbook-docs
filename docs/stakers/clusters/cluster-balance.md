@@ -11,7 +11,7 @@ It is important to be aware that the cluster balance must **always be higher tha
 
 ![Operational Runway](/img/cluster-balance-1.avif)
 
-Since operator and network fees are dynamic, the required [**Liquidation Collateral**](../../learn/protocol-overview/tokenomics/liquidations.md#liquidation-collateral) could vary between different clusters. To calculate how much funding is needed as collateral for a cluster, please refer to the [Liquidations page](../../learn/protocol-overview/tokenomics/liquidations.md#liquidators).
+Since operator and network fees are dynamic, the required [**Liquidation Collateral**](/learn/protocol-overview/tokenomics/liquidations.md#liquidation-collateral) could vary between different clusters. To calculate how much funding is needed as collateral for a cluster, please refer to the [Liquidations page](/learn/protocol-overview/tokenomics/liquidations.md).
 
 ### Cluster Balance Formula
 
@@ -28,7 +28,7 @@ And to keep track of their changes over time, the concept of [Indexes](../../lea
 To calculate the updated cluster balance, given the cluster balance from most recent snapshot, you can use this formula:
 
 $$
-balance_n = balance_{snapshot} - (\Delta_{network\ fee} + \Delta_{operators\ fee}) * v_c
+balance_n = balance_{snapshot} - (\Delta_{network\ fee} + \Delta_{operators\ fee}) * e_{b} / 32
 $$
 
 Legend:
