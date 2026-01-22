@@ -4,11 +4,11 @@ sidebar_position: 2
 
 # API calls
 
-This page will show how to use the API module to do various calls. The API module is used to get data such as the Account Nonce, or Cluster Snapshot, both are covered on this page.&#x20;
+This page will show how to use the API module to do various calls. The API module is used to get data such as the Account Nonce, or Cluster Snapshot, both are covered on this page. 
 
 For the full list of functions you can check the [API Module Reference](../module-reference/api-module.md).
 
-### Get Nonce&#x20;
+### Get Nonce 
 
 ``` typescript
  const ownerNonce = await sdk.api.getOwnerNonce({ 

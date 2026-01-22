@@ -51,7 +51,7 @@ Example output:
 
 ### `validateKeysharesJSON()`
 
-Checks a JSON file of keyshares and returns whether it is valid or not.&#x20;
+Checks a JSON file of keyshares and returns whether it is valid or not. 
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
@@ -103,7 +103,7 @@ Example output:
 
 ### `validateSharesPreRegistration()`
 
-Checks keyshares json file and returns whether it is valid or not.&#x20;
+Checks keyshares json file and returns whether it is valid or not. 
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
@@ -153,7 +153,7 @@ Example output:
 
 ### `getOperatorCapacity()`
 
-Checks how many validators an operator has registered, compares it with the maximum amount of validators that can be registered, and returns the amount that can be registered.&#x20;
+Checks how many validators an operator has registered, compares it with the maximum amount of validators that can be registered, and returns the amount that can be registered. 
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
@@ -173,7 +173,7 @@ Example output:
 
 ### `getClusterBalance()`
 
-Accepts a cluster ID to identify the cluster, for which the balance needs to be fetched. Returns the[ balance of a cluster](/stakers/clusters/cluster-balance).&#x20;
+Accepts a cluster ID to identify the cluster, for which the balance needs to be fetched. Returns the[ balance of a cluster](/stakers/clusters/cluster-balance). 
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|

@@ -29,7 +29,7 @@ These two conditions are necessary and cannot be omitted.
 Changing the fee recipient on SSV applies to **all validators owned by an account**. So if you have registered CSM validators in the past, or intend to register validators that will not be part of CSM in the future, please utilize a different account, or you will be effectively **donating the execution rewards to Lido** instead of keeping them for yourself.
 
 
-### Prerequisites&#x20;
+### Prerequisites 
 
 * Over 2 ETH for CSM bonding and gas for transactions.
 * SSV tokens when registering your validator to the network
@@ -59,7 +59,7 @@ To register your validator with SSV you can follow [the related guide in this do
 You can move onto the next step once your validator is registered to a cluster as shown below.
 
 
-### 3. Set the Fee Recipient&#x20;
+### 3. Set the Fee Recipient 
 
 As mentioned at the top of this guide, a requirement from Lido for all the validators registered to the CSM is that the fee recipient is set to the Lido Execution Layer Rewards Vault.
 
@@ -77,7 +77,7 @@ In the following screen, set the address to this value:
 Enter the address, click update, and sign the transaction with your wallet.
 
 
-### 4. Deposit bond on Lido CSM&#x20;
+### 4. Deposit bond on Lido CSM 
 
 The following, and final step is to deposit the 2 ETH bond to Lido along with the validator deposit data to add the validator to the activation queue. Lido will deposit the 32 ETH needed for the activation to happen.
 
@@ -104,4 +104,4 @@ To check your validator you can use this link, making sure to swap `<YOUR_VALIDA
 https://beaconcha.in/validator/<YOUR_VALIDATOR_PUBLIC_KEY_HERE>
 ```
 
-Once the validator has been activated, the SSV operators you have chosen in step two will handle the validator duties for you.&#x20;
+Once the validator has been activated, the SSV operators you have chosen in step two will handle the validator duties for you. 

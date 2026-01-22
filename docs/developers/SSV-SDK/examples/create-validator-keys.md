@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Create Validator Keys
 
-The SSV SDK does not natively support programmatically generating keystores out of the box, but a number of external libraries can be used to achieve this.&#x20;
+The SSV SDK does not natively support programmatically generating keystores out of the box, but a number of external libraries can be used to achieve this. 
 
 If you do not need to do this programmatically, it may be easier to use the [Ethereum Staking Deposit CLI](https://github.com/ethereum/staking-deposit-cli) to generate validator keys. To generate Hoodi validator keys you can use [eth-educators' Staking Deposit CLI fork](https://github.com/eth-educators/ethstaker-deposit-cli).
 

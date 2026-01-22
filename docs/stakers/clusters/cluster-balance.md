@@ -34,7 +34,7 @@ To track changes over time, the concept of [Indexes](/learn/protocol-overview/to
 To calculate the updated cluster balance, given the cluster balance from most recent snapshot, you can use this formula:
 
 $$
-balance_n = balance_{snapshot} - (\Delta_{network\ fee} + \Delta_{operators\ fee}) * e_{b} / 32
+balance_n = balance_{snapshot} - (\Delta_{network\ fee} + \Delta_{operators\ fee}) * eb / 32
 $$
 
 Legend:
@@ -43,7 +43,7 @@ Legend:
 * $$\Delta_{network\ fee}$$ - Change in network fees paid since the last snapshot
 * $$\Delta_{operators\ fee}$$ - Change in operator fees paid since the last snapshot
 * $$balance_{snapshot}$$ - value of the cluster balance on its latest snapshot
-* $$e_b$$ - total effective balance of validators managed by the cluster
+* $$eb$$ - total effective balance of validators managed by the cluster
 
 #### Network fees delta
 

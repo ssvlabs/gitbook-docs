@@ -21,6 +21,6 @@ Validators are distributed to several operators, forming a cluster. Each cluster
 
 Practically speaking, there are several ways to interact with a cluster. For example, [depositing ETH to fund your cluster](/stakers/cluster-management/depositing-eth/), [adding more validators](/stakers/cluster-management/adding-validator-to-existing-cluster), and other actions listed on [the Cluster Management section](/stakers/cluster-management).
 
-Finally, there is an option to automate the onboarding through a script, if you manage a large number of validators. [Check out the example](/docs/developers/quickstart.md) of how to do it using our SDK is the starting place.
+Finally, there is an option to automate the onboarding through a script, if you manage a large number of validators. [Check out the developer Quickstart](/docs/developers/README.md) which shows how to automate validator onboarding using our SDK.
 
 We suggest to skim through all of the guides on our documentation, to get familiar with all of the concepts and possible actions. If you still have questions, feel free to ask them on the [official Discord channel](https://discord.gg/5vT22pRBrf).

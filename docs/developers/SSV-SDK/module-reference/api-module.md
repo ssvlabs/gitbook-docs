@@ -72,7 +72,7 @@ const operatorIds = [242, 686, 707, 736]
 const clusterID = createClusterId(ownerAddress, operatorIds)
 ```
 
-Example output:&#x20;
+Example output: 
 
 ```bash
 1179fed483c8c1b0327c8667521162015fa8cbe1a1b047a26baf0f0971a81929
@@ -132,7 +132,7 @@ Example output:
 
 ### `getClusters(owner)`
 
-Accepts an owner address. Returns details about all of the clusters that they own.&#x20;
+Accepts an owner address. Returns details about all of the clusters that they own. 
 
 <table data-header-hidden><thead><tr><th></th><th width="116"></th><th></th><th></th></tr></thead><tbody><tr><td>Input parameter</td><td>Input type</td><td>Description</td><td>Example input</td></tr><tr><td>owner</td><td>string</td><td>An owner address</td><td>"0xA4831B989972605A62141a667578d742927Cbef9"</td></tr></tbody></table>
 
