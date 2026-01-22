@@ -232,7 +232,7 @@ txn_receipt = await sdk.clusters.exitValidators({
 
 ### `validateSharesPostRegistration()`
 
-Accepts a transaction hash of the validator registration contract call.&#x20;
+Accepts a transaction hash of the validator registration contract call. 
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|

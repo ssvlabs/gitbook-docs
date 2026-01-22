@@ -33,7 +33,7 @@ Similarly, the [SSV Explorer](https://explorer.ssv.network/operators/1) also sho
 
 ![permissioned-operator](/img/permissioned-operators-2.avif)
 
-### SSV Subgraph&#x20;
+### SSV Subgraph 
 
 SSV also provide a subgraph to easily look up information on permissioned Operators, this tracks all the events surrounding whitelisting and means we can check which operators are private, and which addresses are whitelisted per operator. You can find out more details on how to use the subgraph [**here**](../../developers/tools/ssv-subgraph/)**.**
 

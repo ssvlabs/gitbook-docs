@@ -27,7 +27,7 @@ In order to provide these features, the following options are available:
 * `generate-reshare-msg` - generates a message with the content of a `proofs.json` file from a past ceremony, that needs to be signed by the `owner`  used in that ceremony, in order for a `reshare` ceremony to take place
 * `reshare` - initiates a DKG ceremony to re-generate Key Shares involving a different operator set
 * `generate-resign-msg` - generates a message with the content of a `proofs.json` file from a past ceremony, that needs to be signed by the `owner`  used in that ceremony, in order for a `resign`ceremony to take place
-* `resign` - initiates a DKG ceremony to re-generate the signature portion of existing Key Shares, providing the ability to generate Key Shares for the same validator public key, for a different `owner`, or adjusting the `nonce` for the same `owner`&#x20;
+* `resign` - initiates a DKG ceremony to re-generate the signature portion of existing Key Shares, providing the ability to generate Key Shares for the same validator public key, for a different `owner`, or adjusting the `nonce` for the same `owner` 
 
 ### Configuration input
 As previously mentioned, the user can provide input to the tool either through a config file, or through a a series of command line flags.

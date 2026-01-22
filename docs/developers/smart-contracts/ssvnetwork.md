@@ -242,12 +242,12 @@ Events:
 * `ClusterMigratedToETH(address owner, uint64[] operatorIds, uint256 ethDeposited, uint256 ssvRefunded, uint32 effectiveBalance, Cluster cluster)`
 
 
-### **`registerValidator(publicKey, operatorIds, shares, amount, cluster)`**
+### **`registerValidator(publicKey, operatorIds, shares, cluster)`**
 
 Registers new validator to a cluster of provided operators (ids + shares), **fails if** number of operatorIds is greater than 13.
 
 :::info Recent Changes
-The interface of the contract and SDK function are virtually unchanged, to allow for backward compatibility, but the **function is now payable**. 
+This smart contract function signature has changed since SSV Staking was introduced. The `amount` parameter has been removed, and the function is now `payable` instead. Please adjust any contract integrations accordingly.
 :::
 
 | **Parameter** | **Type**                   | **Description**                                                                                                                                                                                                                                                                                                                                                      |
@@ -255,14 +255,13 @@ The interface of the contract and SDK function are virtually unchanged, to allow
 | publicKey     | bytes                      | The validator’s public key.                                                                                                                                                                                                                                                                                                                                          |
 | operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                                                                                                                                                                                       |
 | sharesData    | bytes                      | String of keyshares - obtained by splitting the validator key using the [SSV-Keys](../tools/ssv-keys) tool.                                                                                                                                                                                                                                           |
-| amount        | uint256 (casted to uint64) | Amount of ETH to be deposited as payment (not mandatory). Amount must be shrinkable (divisible by 10000000)                                                                                                                                                                                                |
 | cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](../tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
 
 Events:
 
 * `ValidatorAdded(address indexed owner, uint64[] operatorIds, bytes publicKey, bytes shares, Cluster cluster)`
 
-### **`bulkRegisterValidator(publicKey, operatorIds, shares, amount, cluster)`**
+### **`bulkRegisterValidator(publicKey, operatorIds, shares, cluster)`**
 
 Description: Registers all the new validators provided as argument to a cluster of provided operators (ids + shares), **fails if** number of operatorIds is greater than 13.
 
@@ -271,7 +270,6 @@ Description: Registers all the new validators provided as argument to a cluster 
 | publicKeys    | bytes\[]                   | An array of validators’ public keys.                                                                                                                                                                                                                                                                                                                                 |
 | operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                                                                                                                                                                                       |
 | sharesData    | bytes\[]                   | An array of strings of keyshares - obtained by splitting the validator key using the [SSV-Keys](../tools/ssv-keys) Each element in this array must relate to a public key in the <code>publicKeys</code> array.                                                                                                        |
-| amount        | uint256 (casted to uint64) | Amount of ETH to be deposited as payment (not mandatory). Amount must be shrinkable (divisible by 10000000)p>                                                                                                                                                                                                      |
 | cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](../tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
 
 Events:
@@ -352,17 +350,16 @@ The function emits as many `ValidatorExited` events, as is the length of the pro
 Please note: the number of validators that can be requested to exit from the beacon chain with the`bulkExitValidator` function is limited by the total transaction size to a maximum of **500 validator keys at a time.**
 
 
-### **`deposit(owner, operatorIds, amount, cluster)`**
+### **`deposit(owner, operatorIds, cluster)`**
 
 :::info Recent Changes
-The interface of the contract and SDK function are virtually unchanged, to allow for backward compatibility, but the **function is now payable**. 
+This smart contract function signature has changed since SSV Staking was introduced. The `amount` parameter has been removed, and the function is now `payable` instead. Please adjust any contract integrations accordingly.
 :::
 
 | **Parameter** | **Type**                   | **Description**                                                                                                                                                                                           |
 | ------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | owner         | address                    | The cluster owner address                                                                                                                                                                                 |
 | operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                            |
-| amount        | uint256 (casted to uint64) | ETH amount to be deposited. Amount must be shrinkable (divisible by 10000000)                                                                                   |
 | cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot), or [SSV Scanner](../tools/ssv-scanner) tools. |
 
 Events:
@@ -397,20 +394,18 @@ Events:
 
 * `ClusterWithdrawn(address indexed owner, uint64[] operatorIds, uint256 value, Cluster cluster)`
 
-### **`reactivate(operatorIds, amount, cluster)`**
+### **`reactivate(operatorIds, cluster)`**
 
 Description: Reactivates a liquidated cluster, **will fail** if insufficient ETH to cover the cluster’s liquidation collateral have been deposited.
 
 :::info Recent Changes
-The interface of the contract and SDK function are virtually unchanged, to allow for backward compatibility, but the **function is now payable**. 
+This smart contract function signature has changed since SSV Staking was introduced. The `amount` parameter has been removed, and the function is now `payable` instead. Please adjust any contract integrations accordingly.
 :::
 
 
 | **Parameter** | **Type**                   | **Description**                                                                                                                                                                                           |
 | ------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                            |
-| amount        | uint256 (casted to uint64) | ETH amount to be deposited. Amount must be shrinkable (divisible by 10000000)
-                                              |
+| operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                            |                                              |
 | cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot), or [SSV Scanner](../tools/ssv-scanner) tools. |
 
 Events:

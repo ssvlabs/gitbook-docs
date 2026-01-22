@@ -144,12 +144,6 @@ async function fetchClusterData(url: string, query: string, apiKey: string) {
   return await response.json();
 }
 
-/**
- * Replaced with Script #1's balance logic, adapted to Script #2's data shape + return shape.
- * - Uses BigInt to avoid precision loss.
- * - Keeps Script #2's expected return keys: networkFee, operatorFee, clusterBalance, validatorCount.
- * - Computes the same "cumulative network/operator fee" and "effective cluster balance" as Script #1.
- */
 function calculateClusterBalance(responseData: any, cluster: ClusterConfig) {
   if (responseData.errors) {
     console.error(`[${cluster.name}] GraphQL errors:`, responseData.errors);
@@ -288,7 +282,7 @@ startMonitoring();
 
 Create a `config.json` file in the same directory as your script with the following structure:
 
-```typescript
+```json
 {
   "intervalSeconds": 10,
   "graphqlUrl": "https://api.studio.thegraph.com/query/71118/ssv-network-hoodi/version/latest",
