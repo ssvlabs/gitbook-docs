@@ -17,7 +17,7 @@ Description: Registers a new operator (key) with a set fee, **fails if** fee is 
 | **Parameter** | **Type**                             | **Description**                                                                                                                                                                                     |
 | ------------- | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | publicKey     | bytes                                | The operator public key (generated as part of the node setup).                                                                                                                                      |
-| operatorFee   | uint256(casted to uint64) | The fee charged by the operator (denominated as $SSV tokens per block)                                                                                                                              |
+| operatorFee   | uint256(casted to uint64) | The fee charged by the operator (denominated as ETH per block)                                                                                                                              |
 | setPrivate    | bool                                 | A flag to set the operator to private or public during registration. Calls the [**`setOperatorsPrivateUnchecked`**](ssvnetwork.md#setoperatorsprivateuncheckedoperatorids)function if set to true. |
 
 Events:
@@ -39,7 +39,7 @@ Events:
 
 ### **`withdrawOperatorEarnings(operatorId)`**
 
-Description: Withdraws a specified amount of SSV tokens from provided operator balance to msg.sender, **will fail if** msg.sender is not the operator owner.
+Description: Withdraws a specified amount of ETH from provided operator balance to msg.sender, **will fail if** msg.sender is not the operator owner.
 
 | **Parameter** | **Type**                   | **Description**                                                                                                  |
 | ------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -52,6 +52,32 @@ Events:
 
 ### `withdrawAllOperatorEarnings`**`(operatorId)`**
 
+Description: Withdraws all ETH earnings from provided operator balance to msg.sender, **will fail if** msg.sender is not the operator owner.
+
+| **Parameter** | **Type** | **Description** |
+| ------------- | -------- | --------------- |
+| operatorId    | uint64   | The operator id |
+
+Events:
+
+* `OperatorWithdrawn(address indexed owner, uint64 indexed operatorId, uint256 value)`
+
+
+### **`withdrawOperatorEarningsSSV(operatorId)`**
+
+Description: Withdraws a specified amount of SSV tokens from provided operator balance to msg.sender, **will fail if** msg.sender is not the operator owner.
+
+| **Parameter** | **Type**                   | **Description**                                                                                                  |
+| ------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| operatorId    | uint64                     | The operator id                                                                                                  |
+| amount        | uint256 (casted to uint64) | Amount must be shrinkable (divisible by 10000000) |
+
+Events:
+
+* `OperatorWithdrawn(address indexed owner, uint64 indexed operatorId, uint256 value)`
+
+### `withdrawAllOperatorEarningsSSV`**`(operatorId)`**
+
 Description: Withdraws all SSV tokens earnings from provided operator balance to msg.sender, **will fail if** msg.sender is not the operator owner.
 
 | **Parameter** | **Type** | **Description** |
@@ -62,7 +88,7 @@ Events:
 
 * `OperatorWithdrawn(address indexed owner, uint64 indexed operatorId, uint256 value)`
 
-### **`setOperatorWhitelists (operatorIds, whitelisted)`**
+### **`setOperatorsWhitelists (operatorIds, whitelisted)`**
 
 Description: For a list of operators provided, set a list of whitelisted addresses which can register validators to these operators.
 
@@ -75,7 +101,7 @@ Events:
 
 * `OperatorMultipleWhitelistUpdated(uint64[] operatorIds, address[] whitelistAddresses)`
 
-### **`removeOperatorWhitelists (operatorIds, whitelisted)`**
+### **`removeOperatorsWhitelists (operatorIds, whitelisted)`**
 
 Description: For a list of operators provided, remove a list of whitelisted addresses.
 
@@ -112,7 +138,7 @@ Events:
 
 * `OperatorPrivacyStatusUpdated(uint64[] operatorIds, bool toPrivate)`
 
-### **`setOperatorWhitelistingContract(operatorIds, whitelistingContract)`**
+### **`setOperatorsWhitelistingContract(operatorIds, whitelistingContract)`**
 
 Description: For a list of operators provided, set an external whitelisting contract to manage the whitelist for these operators. [Must be a valid whitelisting contract.](external-whitelist-contract-example.md)
 
@@ -144,7 +170,7 @@ Description: Initiates the first step of the operator fee update cycle - declara
 | **Parameter** | **Type**                   | **Description**                                 |
 | ------------- | -------------------------- | ----------------------------------------------- |
 | operatorId    | uint64                     | The operator id                                 |
-| operatorFee   | uint256 (casted to uint64) | New fee (denominated as $SSV tokens per block). |
+| operatorFee   | uint256 (casted to uint64) | New fee (denominated as ETH per block). |
 
 Events:
 
@@ -181,7 +207,7 @@ Description: Reduce the operator fee, does not abide by the restrictions of fee 
 | Parameter  | Type                       | Description                                     |
 | ---------- | -------------------------- | ----------------------------------------------- |
 | operatorId | uint64                     | The operator id                                 |
-| fee        | uint256 (casted to uint64) | New fee (denominated as $SSV tokens per block). |
+| fee        | uint256 (casted to uint64) | New fee (denominated as ETH per block). |
 
 Events:
 
@@ -203,15 +229,25 @@ Events:
 
 ## Cluster Methods <a href="#hqxi798q7b6v" id="hqxi798q7b6v"></a>
 
-### **`registerValidator(publicKey, operatorIds, shares, amount, cluster)`**
+### `migrateClusterToETH(operatorIds, amount, cluster)`
 
-Description: Registers new validator to a cluster of provided operators (ids + shares), **fails if** number of operatorIds is greater than 13.
+| **Parameter**       | **Type** | **Description**                                      |
+| ------------------- | -------- | ---------------------------------------------------- |
+| operatorIds | uint64[]  | An array of operator IDs of the cluster. |
+| amount | uint256  | Amount of ETH to deposit to cluster's balance after migration. |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](../tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
+
+Events:
+
+* `ClusterMigratedToETH(address owner, uint64[] operatorIds, uint256 ethDeposited, uint256 ssvRefunded, uint32 effectiveBalance, Cluster cluster)`
 
 
-:::info
-To deposit the SSV Token, you need to approve the amount of SSV tokens you wish to deposit to the cluster.
+### **`registerValidator(publicKey, operatorIds, shares, cluster)`**
 
-The approval transaction must be called on the SSV token contract, with the approval address set to the SSVNetwork contract address. [Both adddresses can be found here.](../smart-contracts)
+Registers new validator to a cluster of provided operators (ids + shares), **fails if** number of operatorIds is greater than 13.
+
+:::info Recent Changes
+This smart contract function signature has changed since SSV Staking was introduced. The `amount` parameter has been removed, and the function is now `payable` instead. Please adjust any contract integrations accordingly.
 :::
 
 | **Parameter** | **Type**                   | **Description**                                                                                                                                                                                                                                                                                                                                                      |
@@ -219,29 +255,21 @@ The approval transaction must be called on the SSV token contract, with the appr
 | publicKey     | bytes                      | The validator’s public key.                                                                                                                                                                                                                                                                                                                                          |
 | operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                                                                                                                                                                                       |
 | sharesData    | bytes                      | String of keyshares - obtained by splitting the validator key using the [SSV-Keys](../tools/ssv-keys) tool.                                                                                                                                                                                                                                           |
-| amount        | uint256 (casted to uint64) | Amount of SSV token to be deposited as payment (not mandatory). Amount must be shrinkable (divisible by 10000000)                                                                                                                                                                                                |
 | cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](../tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
 
 Events:
 
 * `ValidatorAdded(address indexed owner, uint64[] operatorIds, bytes publicKey, bytes shares, Cluster cluster)`
 
-### **`bulkRegisterValidator(publicKey, operatorIds, shares, amount, cluster)`**
+### **`bulkRegisterValidator(publicKey, operatorIds, shares, cluster)`**
 
 Description: Registers all the new validators provided as argument to a cluster of provided operators (ids + shares), **fails if** number of operatorIds is greater than 13.
-
-:::info
-To deposit the SSV Token, you need to approve the amount of SSV tokens you wish to deposit to the cluster.
-
-The approval transaction must be called on the SSV token contract, with the approval address set to the SSVNetwork contract address. [Both adddresses can be found here.](../smart-contracts)
-:::
 
 | **Parameter** | **Type**                   | **Description**                                                                                                                                                                                                                                                                                                                                                      |
 | ------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | publicKeys    | bytes\[]                   | An array of validators’ public keys.                                                                                                                                                                                                                                                                                                                                 |
 | operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                                                                                                                                                                                       |
 | sharesData    | bytes\[]                   | An array of strings of keyshares - obtained by splitting the validator key using the [SSV-Keys](../tools/ssv-keys) Each element in this array must relate to a public key in the <code>publicKeys</code> array.                                                                                                        |
-| amount        | uint256 (casted to uint64) | Amount of SSV token to be deposited as payment (not mandatory).Amount must be shrinkable (divisible by 10000000)p>                                                                                                                                                                                                      |
 | cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](../tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
 
 Events:
@@ -322,21 +350,16 @@ The function emits as many `ValidatorExited` events, as is the length of the pro
 Please note: the number of validators that can be requested to exit from the beacon chain with the`bulkExitValidator` function is limited by the total transaction size to a maximum of **500 validator keys at a time.**
 
 
-### **`deposit(owner, operatorIds, amount, cluster)`**
+### **`deposit(owner, operatorIds, cluster)`**
 
-Description: Deposits SSV token into a cluster, **will fail if** not enough tokens are approved.
-
-:::info
-To deposit the SSV Token, you need to approve the amount of SSV tokens you wish to deposit to the cluster.
-
-The approval transaction must be called on the SSV token contract, with the approval address set to the SSVNetwork contract address. [Both adddresses can be found here.](../smart-contracts)
+:::info Recent Changes
+This smart contract function signature has changed since SSV Staking was introduced. The `amount` parameter has been removed, and the function is now `payable` instead. Please adjust any contract integrations accordingly.
 :::
 
 | **Parameter** | **Type**                   | **Description**                                                                                                                                                                                           |
 | ------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | owner         | address                    | The cluster owner address                                                                                                                                                                                 |
 | operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                            |
-| amount        | uint256 (casted to uint64) | $SSV amount to be deposited. Amount must be shrinkable (divisible by 10000000)                                                                                   |
 | cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot), or [SSV Scanner](../tools/ssv-scanner) tools. |
 
 Events:
@@ -344,6 +367,20 @@ Events:
 * `ClusterDeposited(address indexed owner, uint64[] operatorIds, uint256 value, Cluster cluster)`
 
 ### **`withdraw(operatorIds, amount, cluster)`**
+
+Description: Withdraws a specified amount of ETH from cluster of msg.sender, **will fail if** msg.sender tries to withdraw more than the cluster’s liquidation collateral. To withdraw the entire cluster balance and stop its operation use liquidate().
+
+| **Parameter** | **Type**                   | **Description**                                                                                                                                                                                           |
+| ------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                            |
+| amount        | uint256 (casted to uint64) | Amount to be withdrawn. Amount must be shrinkable (divisible by 10000000)                                                                                         |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot), or [SSV Scanner](../tools/ssv-scanner) tools. |
+
+Events:
+
+* `ClusterWithdrawn(address indexed owner, uint64[] operatorIds, uint256 value, Cluster cluster)`
+
+### **`withdrawSSV(operatorIds, amount, cluster)`**
 
 Description: Withdraws a specified amount of SSV tokens from cluster of msg.sender, **will fail if** msg.sender tries to withdraw more than the cluster’s liquidation collateral. To withdraw the entire cluster balance and stop its operation use liquidate().
 
@@ -357,21 +394,18 @@ Events:
 
 * `ClusterWithdrawn(address indexed owner, uint64[] operatorIds, uint256 value, Cluster cluster)`
 
-### **`reactivate(operatorIds, amount, cluster)`**
+### **`reactivate(operatorIds, cluster)`**
 
-Description: Reactivates a liquidated cluster, **will fail** if insufficient SSV tokens to cover the cluster’s liquidation collateral have been deposited.
+Description: Reactivates a liquidated cluster, **will fail** if insufficient ETH to cover the cluster’s liquidation collateral have been deposited.
 
-:::info
-To deposit the SSV Token, you need to approve the amount of SSV tokens you wish to deposit to the cluster.
-
-The approval transaction must be called on the SSV token contract, with the approval address set to the SSVNetwork contract address. [Both adddresses can be found here.](../smart-contracts)
+:::info Recent Changes
+This smart contract function signature has changed since SSV Staking was introduced. The `amount` parameter has been removed, and the function is now `payable` instead. Please adjust any contract integrations accordingly.
 :::
+
 
 | **Parameter** | **Type**                   | **Description**                                                                                                                                                                                           |
 | ------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                            |
-| amount        | uint256 (casted to uint64) | $SSV amount to be deposited. Amount must be shrinkable (divisible by 10000000)
-                                              |
+| operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                            |                                              |
 | cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot), or [SSV Scanner](../tools/ssv-scanner) tools. |
 
 Events:
@@ -396,6 +430,20 @@ Events:
 
 * `ClusterLiquidated(address indexed owner, uint64[] operatorIds, Cluster cluster)`
 
+### **`liquidateSSV(owner, operatorIds, cluster)`**
+
+Description: Liquidates an SSV-based cluster sends their balances to the msg.sender (the Liquidator), **will fail** if the cluster is not liquidatable (see isLiquidatable()).
+
+| **Parameter** | **Type**  | **Description**                                                                                                                                                                                           |
+| ------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| owner         | address   | The cluster owner address                                                                                                                                                                                 |
+| operatorIds   | unit64\[] | List of cluster operators Ids.                                                                                                                                                                            |
+| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot), or [SSV Scanner](../tools/ssv-scanner) tools. |
+
+Events:
+
+* `ClusterLiquidated(address indexed owner, uint64[] operatorIds, Cluster cluster)`
+
 ## Governance Methods <a href="#id-31cymrhcphoi" id="id-31cymrhcphoi"></a>
 
 ### **`updateNetworkFee(networkFee)`**
@@ -404,13 +452,38 @@ Description: Updates network fee.
 
 | **Parameter** | **Type**                   | **Description**                                                                      |
 | ------------- | -------------------------- | ------------------------------------------------------------------------------------ |
-| networkFee    | uint256 (casted to uint64) | The fee charged by the network per validator (denominated as $SSV tokens per block). |
+| networkFee    | uint256 (casted to uint64) | The fee charged by the network per validator (denominated as ETH per block). |
 
 Events:
 
 * `NetworkFeeUpdated(uint256 oldFee, uint256 newFee)`
 
+### **`updateNetworkFeeSSV(networkFee)`**
+
+Description: Updates network fee.
+
+| **Parameter** | **Type**                   | **Description**                                                                      |
+| ------------- | -------------------------- | ------------------------------------------------------------------------------------ |
+| networkFee    | uint256 (casted to uint64) | The fee charged by the network per validator (denominated as SSV tokens per block). |
+
+Events:
+
+* `NetworkFeeUpdatedSSV(uint256 oldFee, uint256 newFee)`
+
+
 ### **`withdrawNetworkEarnings(amount)`**
+
+Description: Withdraws accumulated network fees in ETH to DAO treasury.
+
+| **Parameter** | **Type**                   | **Description**                                                                                                   |
+| ------------- | -------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| amount        | uint256 (casted to uint64) | Amount to be withdrawn. Amount must be shrinkable (divisible by 10000000) |
+
+Events:
+
+* `NetworkEarningsWithdrawn(uint256 value, address recipient)`
+
+### **`withdrawNetworkSSVEarnings(amount)`**
 
 Description: Withdraws accumulated network fees in SSV token to DAO treasury.
 
@@ -434,7 +507,31 @@ Events:
 
 * `LiquidationThresholdPeriodUpdated(uint64 value)`
 
+### **`updateLiquidationThresholdPeriodSSV(blocks)`**
+
+Description: Sets the minimum period (in blocks) after which a cluster can be liquidated.
+
+| **Parameter** | **Type** | **Description**                               |
+| ------------- | -------- | --------------------------------------------- |
+| blocks        | uint64   | Duration in blocks to have sufficient balance |
+
+Events:
+
+* `LiquidationThresholdPeriodSSVUpdated(uint64 value)`
+
 ### `updateMaxiumumOperatorFee`**`(maxFee)`**
+
+Description: Updates the maximum fee an operator that uses ETH can set
+
+| **Parameter** | **Type** | **Description**                                          |
+| ------------- | -------- | -------------------------------------------------------- |
+| maxFee        | uint64   | Maximum fee (in ETH per year) an operator can set |
+
+Events:
+
+* `OperatorMaximumFeeUpdated(uint64 maxFee)`
+
+### `updateMaxiumumOperatorFeeSSV`**`(maxFee)`**
 
 Description: Updates the maximum fee an operator that uses SSV token can set
 
@@ -444,19 +541,33 @@ Description: Updates the maximum fee an operator that uses SSV token can set
 
 Events:
 
-* `OperatorMaximumFeeUpdated(uint64 maxFee)`
+* `OperatorMaximumFeeSSVUpdated(uint64 maxFee)`
+
 
 ### `updateMinimumLiquidationCollateral(amount)`
 
-Description: Sets the minimum collateral (in $SSV) each cluster must keep in his balance.
+Description: Sets the minimum collateral (in ETH) each cluster must keep in his balance.
 
 | **Parameter** | **Type**                   | **Description**                                                                                                     |
 | ------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| amount        | uint256 (casted to uint64) | Amount of SSV collateral. Amount must be shrinkable (divisible by 10000000) |
+| amount        | uint256 (casted to uint64) | Amount of ETH collateral. Amount must be shrinkable (divisible by 10000000) |
 
 Events:
 
 * `MinimumLiquidationCollateralUpdated(uint256 value)`
+
+### `updateMinimumLiquidationCollateralSSV(amount)`
+
+Description: Sets the minimum collateral (in SSV token) each cluster must keep in his balance.
+
+| **Parameter** | **Type**                   | **Description**                                                                                                     |
+| ------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| amount        | uint256 (casted to uint64) | Amount of SSV token collateral. Amount must be shrinkable (divisible by 10000000) |
+
+Events:
+
+* `MinimumLiquidationCollateralSSVUpdated(uint256 value)`
+
 
 ### **`updateOperatorFeeIncreaseLimit(newOperatorMaxFeeIncrease)`**
 

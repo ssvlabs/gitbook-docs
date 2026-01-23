@@ -82,7 +82,7 @@ To manage account balance, the staking service can deposit or withdraw funds fro
 * [Deposit]
 * [Withdraw]
 
-#### Validator Management&#x20;
+#### Validator Management 
 
 Validators are fully customizable in the ssv.network, giving service providers more flexibility and control over their operations. Having the ability to update the operator group managing your validators can be useful when you want to spin up an additional operator or use another operator’s services. Additionally, being able to offboard a validator can help if one of your users wants to stop their validator operation or migrate to a different service.
 

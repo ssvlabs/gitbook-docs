@@ -55,7 +55,7 @@ proofsFilePath: ./output/ceremony-2024-11-18--16-04-55.529/proofs.json
 newOperatorIDs: [5, 6, 7, 8]
 ```
 
-* For more information on the YAML configuration file, and how to provide it to the tool, [please refer to this section (Additional flag for generate-reshare-msg)](/developers/tools/ssv-dkg-client/commands-and-config). Make sure to add the `proofsFilePath` parameter to the YAML configuration file&#x20;
+* For more information on the YAML configuration file, and how to provide it to the tool, [please refer to this section (Additional flag for generate-reshare-msg)](/developers/tools/ssv-dkg-client/commands-and-config). Make sure to add the `proofsFilePath` parameter to the YAML configuration file 
 * Alternatively, the tool can be launched as a binary executable. For more information, please [refer to the appropriate section of this page](/developers/tools/ssv-dkg-client/commands-and-config)
 * For the reference of command line flags, [please refer to this section (Additional flag for generate-reshare-msg)](/developers/tools/ssv-dkg-client/commands-and-config), instead. Remember to add the `proofsFilePath` flag.
 
@@ -96,7 +96,7 @@ newOperatorIDs: [5, 6, 7, 8]
 signatures: 111886aa25a07bbd9cb64e50e3237f98a6ecabad6f448bc9c4736ccebcacb45c56ecac273b076a5d0b1f19619bf808741dff2d8019c728e16a953d3a0b5ff4771b
 ```
 
-* For more information on the YAML file configuration, and how to provide it to the tool, [please refer to this section (Additional flag for reshare command)](/developers/tools/ssv-dkg-client/commands-and-config).&#x20;
+* For more information on the YAML file configuration, and how to provide it to the tool, [please refer to this section (Additional flag for reshare command)](/developers/tools/ssv-dkg-client/commands-and-config). 
 * Alternatively, the tool can be launched as a binary executable. For more information, please [refer to the appropriate section of this page](/developers/tools/ssv-dkg-client/commands-and-config)
 * For the reference of command line flags, [please refer to this section (Additional flag for reshare command)](/developers/tools/ssv-dkg-client/commands-and-config), instead.
 

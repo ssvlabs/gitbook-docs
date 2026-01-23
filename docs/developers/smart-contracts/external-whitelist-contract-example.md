@@ -4,9 +4,9 @@ sidebar_position: 4
 
 # External Whitelist Contract example
 
-When [configuring a permissioned Operator](../../operators/operator-management/configuring-a-permissioned-operator), we have the option to set an external whitelising contract to manage this whitelist. To work correctly with the SSV network contract, it must meet certain specifications.&#x20;
+When [configuring a permissioned Operator](../../operators/operator-management/configuring-a-permissioned-operator), we have the option to set an external whitelising contract to manage this whitelist. To work correctly with the SSV network contract, it must meet certain specifications. 
 
-### What is a valid Whitelisting Contract?&#x20;
+### What is a valid Whitelisting Contract? 
 
 The operators can choose to whitelist an external contract with custom logic to manage authorized addresses externally. To be used in SSV contracts, it needs to implement the [ISSVWhitelistingContract](https://github.com/ssvlabs/ssv-network/blob/v1.2.0/contracts/interfaces/external/ISSVWhitelistingContract.sol) interface, that requires to implement the `isWhitelisted(address account, uint256 operatorId)` function. This function is called in the register validator process, that must return `true/false` to indicate if the caller (`msg.sender`) is whitelisted for the operator.
 

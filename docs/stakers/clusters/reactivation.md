@@ -1,14 +1,14 @@
 # Reactivation
 
-The following the educational context behind Cluster Reactivation. To see the actionable steps, please follow [this guide instead](../cluster-management/re-activating-a-cluster.md).
+The following the educational context behind Cluster Reactivation. To see the actionable steps, please follow [this guide instead](/stakers/cluster-management/re-activating-a-cluster.md).
 
 :::warning Legacy SSV Clusters
-**SSV-based payments are frozen.** Legacy SSV clusters must [migrate to ETH](../cluster-management/migrating-to-eth-clusters.md) before they can be reactivated.
+**SSV-based payments are frozen.** Legacy SSV clusters must [migrate to ETH](/stakers/cluster-management/migrating-to-eth-clusters.md) before they can be reactivated.
 
 This documentation focuses on **ETH clusters** (the current standard), but the formulas also apply to legacy SSV clusters during the transition period.
 :::
 
-In order to reactivate a liquidated cluster, the user must supply the liquidation collateral required for their cluster. It is advised to deposit more than the reactivation amount so the cluster will have an operational runway. Users that only deposit the liquidation collateral may be liquidated soon after because they did not compensate for the operational cost of their cluster's managed validator(s).
+In order to reactivate a [liquidated cluster](/learn/protocol-overview/tokenomics/liquidations.md), the user must supply the liquidation collateral required for their cluster. It is advised to deposit more than the reactivation amount so the cluster will have an operational runway. Users that only deposit the liquidation collateral may be liquidated soon after because they did not compensate for the operational cost of their cluster's managed validator(s).
 
 Once reactivated, the clusters' validator(s) operation will continue. To calculate how much minimal funding (liquidation collateral) is needed to reactivate a cluster:
 
@@ -16,6 +16,6 @@ $$
 reactivation\;Balance > BurnRate_{cluster} * LTP
 $$
 
-* Legend
+#### Legend
   * $$Burn Rate$$ - the rate at which a cluster spends ETH per block
   * $$LTP$$ - liquidation threshold period

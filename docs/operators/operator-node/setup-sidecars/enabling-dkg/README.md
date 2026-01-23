@@ -17,6 +17,6 @@ Also, in order to access logs it is necessary to utilize permanent storage when 
 
 You can setup your `ssv-dkg` node by following these three pages:
 
-1. [**Prerequisites**](prerequisites.md)&#x20;
-2. [**Start DKG Node**](start-dkg-node/)&#x20;
+1. [**Prerequisites**](prerequisites.md) 
+2. [**Start DKG Node**](start-dkg-node/) 
 3. [**Final Steps**](final-steps.md)
