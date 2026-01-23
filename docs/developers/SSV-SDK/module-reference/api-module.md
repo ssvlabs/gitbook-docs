@@ -14,11 +14,9 @@ sdk.api.getOwnerNonce()
 
 Accepts a list of addresses, fetches their nonces using subgraph, returns as a list.
 
-Input parameters:
-
 <table data-header-hidden><thead><tr><th></th><th width="139"></th><th></th><th></th></tr></thead><tbody><tr><td>Input parameter</td><td>Input type</td><td>Description</td><td>Example input</td></tr><tr><td>account_address</td><td>string</td><td>An array of owner addresses.</td><td>[“0xA4831B989972605A62141a667578d742927Cbef9”]</td></tr></tbody></table>
 
-Examples input:
+#### Example:
 
 ```typescript
 const ownerAddress = "0xA4831B989972605A62141a667578d742927Cbef9"
@@ -35,11 +33,9 @@ Example output:
 
 Accepts a list of addresses, fetches cluster snapshots using subgraph, returns as a list.
 
-Input:
-
 <table data-header-hidden><thead><tr><th></th><th width="116"></th><th></th><th></th></tr></thead><tbody><tr><td>Input parameter</td><td>Input type</td><td>Description</td><td>Example input</td></tr><tr><td>cluster_id</td><td>string</td><td>An array of cluster IDs in their computed ID form.</td><td>[“4c0239091131c3e57e9555c540bcfd00bcd2484a9c4048f13411f22329511131”]</td></tr></tbody></table>
 
-Example:
+#### Example:
 
 ```typescript
 const clusterSnapshot = await sdk.api.getClusterSnapshot({id: clusterID})
@@ -61,14 +57,13 @@ Example output:
 
 Accepts the owner address and a list of operator IDs, computes and returns the cluster ID hash.
 
-Input:
 
 | Input parameter   | Input type | Description                   | Example input                                |
 | ----------------- | ---------- | ----------------------------- | -------------------------------------------- |
 |  owner\_address   | string     | Address of the cluster Owner. | '0x81592c3de184a3e2c0dcb5a261bc107bfa91f494' |
 |  operator\_ids\[] | integer    | List of operator IDs.         | \[12, 34, 56, 78]                            |
 
-Example:
+#### Example:
 
 ```typescript
 import { createClusterId } from '@ssv-labs/ssv-sdk/utils'
@@ -77,7 +72,7 @@ const operatorIds = [242, 686, 707, 736]
 const clusterID = createClusterId(ownerAddress, operatorIds)
 ```
 
-Example output:&#x20;
+Example output: 
 
 ```bash
 1179fed483c8c1b0327c8667521162015fa8cbe1a1b047a26baf0f0971a81929
@@ -87,11 +82,9 @@ Example output:&#x20;
 
 Accepts a cluster id in it's hashed form. Returns details about the cluster.
 
-Input:
-
 <table data-header-hidden><thead><tr><th></th><th width="116"></th><th></th><th></th></tr></thead><tbody><tr><td>Input parameter</td><td>Input type</td><td>Description</td><td>Example input</td></tr><tr><td>cluster_id</td><td>string</td><td>A cluster ID in it's computed form</td><td>“4c0239091131c3e57e9555c540bcfd00bcd2484a9c4048f13411f22329511131”</td></tr><tr><td>daoAddress</td><td>string</td><td>Address of the DAO (chain specific)</td><td>"0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA"</td></tr><tr><td>operatorIds</td><td>string[]</td><td>A list of operator Ids</td><td>[1,2,3,4]</td></tr></tbody></table>
 
-Example:
+#### Example:
 
 ```typescript
 const ownerAddress = "0xA4831B989972605A62141a667578d742927Cbef9"
@@ -116,11 +109,9 @@ Example output:
 
 Accepts a cluster id in it's hashed form. Returns details about the cluster.
 
-Input:
-
 <table data-header-hidden><thead><tr><th></th><th width="116"></th><th></th><th></th></tr></thead><tbody><tr><td>Input parameter</td><td>Input type</td><td>Description</td><td>Example input</td></tr><tr><td>cluster_id</td><td>string</td><td>An array of cluster IDs in their computed ID form.</td><td>[“4c0239091131c3e57e9555c540bcfd00bcd2484a9c4048f13411f22329511131”]</td></tr></tbody></table>
 
-Example:
+#### Example:
 
 ```typescript
 const clusterData = await sdk.api.getCluster({id: clusterID})
@@ -141,13 +132,11 @@ Example output:
 
 ### `getClusters(owner)`
 
-Accepts an owner address. Returns details about all of the clusters that they own.&#x20;
-
-Input:
+Accepts an owner address. Returns details about all of the clusters that they own. 
 
 <table data-header-hidden><thead><tr><th></th><th width="116"></th><th></th><th></th></tr></thead><tbody><tr><td>Input parameter</td><td>Input type</td><td>Description</td><td>Example input</td></tr><tr><td>owner</td><td>string</td><td>An owner address</td><td>"0xA4831B989972605A62141a667578d742927Cbef9"</td></tr></tbody></table>
 
-Example:
+#### Example:
 
 ```typescript
 const ownerAddress = "0xA4831B989972605A62141a667578d742927Cbef9"
@@ -183,11 +172,9 @@ Example output:
 
 Accepts an operator ID and returns details about the operator.
 
-Input:
-
 <table data-header-hidden><thead><tr><th></th><th width="116"></th><th></th><th></th></tr></thead><tbody><tr><td>Input parameter</td><td>Input type</td><td>Description</td><td>Example input</td></tr><tr><td>id</td><td>string</td><td>A single operator ID</td><td>"4"</td></tr></tbody></table>
 
-Example:
+#### Example:
 
 ```typescript
 const operatorData = await sdk.api.getOperator({id: "4"})
@@ -210,11 +197,9 @@ Example output:
 
 Accepts a list of operator IDs and returns details about them.
 
-Input:
-
 <table data-header-hidden><thead><tr><th></th><th width="116"></th><th></th><th></th></tr></thead><tbody><tr><td>Input parameter</td><td>Input type</td><td>Description</td><td>Example input</td></tr><tr><td>operatorIds</td><td>string[]</td><td>A single operator ID</td><td>["4","5"]</td></tr></tbody></table>
 
-Example:
+#### Example:
 
 ```typescript
 const operatorData = await sdk.api.getOperators({operatorIds: ["4","5"]})
@@ -247,11 +232,9 @@ Example output:
 
 Accepts a validator ID and returns details about the validator.
 
-Input:
-
 <table data-header-hidden><thead><tr><th></th><th width="116"></th><th></th><th></th></tr></thead><tbody><tr><td>Input parameter</td><td>Input type</td><td>Description</td><td>Example input</td></tr><tr><td>id</td><td>string</td><td>A single validator ID</td><td>0x0c74493afd8082f86485e4172be72678b0feb1494087ee6abe7d7ea7437c2a3fc6c06193040c6e24cdf59c9081d1c7a9</td></tr></tbody></table>
 
-Example:
+#### Example:
 
 ```typescript
 const validatorData = await sdk.api.getValidators({id: "0x0c74493afd8082f86485e4172be72678b0feb1494087ee6abe7d7ea7437c2a3fc6c06193040c6e24cdf59c9081d1c7a9"})
@@ -269,11 +252,9 @@ Example output:
 
 Accepts an validator ID and returns details about the validator.
 
-Input:
-
 <table data-header-hidden><thead><tr><th></th><th width="116"></th><th></th><th></th></tr></thead><tbody><tr><td>Input parameter</td><td>Input type</td><td>Description</td><td>Example input</td></tr><tr><td>ids</td><td>string[]</td><td>An array of validator IDs</td><td>["0x0c74493afd8082f86485e4172be72678b0feb1494087ee6abe7d7ea7437c2a3fc6c06193040c6e24cdf59c9081d1c7a9", "0x1a85052f3b9d17e73ec76c472220c80ada65a19a0fd177344b1e9f6173d51136c400120989dbd9ff498defc99dfe5181"]</td></tr></tbody></table>
 
-Example:
+#### Example:
 
 ```typescript
 const validatorData = await sdk.api.getValidators({id: ["0x0c74493afd8082f86485e4172be72678b0feb1494087ee6abe7d7ea7437c2a3fc6c06193040c6e24cdf59c9081d1c7a9", "0x1a85052f3b9d17e73ec76c472220c80ada65a19a0fd177344b1e9f6173d51136c400120989dbd9ff498defc99dfe5181"]})
