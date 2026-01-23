@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Lido CSM
 
-Lido's Community Staking Module lets community stakers utilize the Lido protocol to run validators in a permissionless manner. We can combine this with the SSV network to incorporate DVT into CSM.
+Lido's [Community Staking Module](https://lido.fi/csm) lets community stakers utilize the Lido protocol to run validators in a permissionless manner. We can combine this with the SSV network to incorporate DVT into CSM.
 
 In this guide we'll run through how to create validator keys, register them on the SSV network with SSV network operators, and post the bond through CSM to activate the validator.
 
@@ -79,7 +79,7 @@ Enter the address, click update, and sign the transaction with your wallet.
 
 ### 4. Deposit bond on Lido CSM&#x20;
 
-The following, and final step is to deposit the 2 ETH bond to Lido along with the validator deposit data to add the validator to the activation queue. Lido will deposit the 32 ETH needed for the activation to happen.
+The following, and final step is to deposit the 1.3 - 2.4 ETH bond to Lido along with the validator deposit data to add the validator to the activation queue. Lido will deposit the 32 ETH needed for the activation to happen.
 
 Browse to [https://csm.lido.fi/](https://csm.lido.fi/) and connect your wallet.
 
