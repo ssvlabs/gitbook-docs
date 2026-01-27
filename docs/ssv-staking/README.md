@@ -1,19 +1,19 @@
 ---
-sidebar_position: 6
+sidebar_position: 1
 ---
 
 # SSV Staking
 
-SSV Staking enables SSV token holders to earn real ETH yield by staking their tokens and supporting the network's oracle infrastructure. When you stake SSV, you receive cSSV (Compound SSV) tokens and earn ETH rewards generated from network fees.
+SSV Staking enables SSV token holders to be rewarded with ETH by staking their tokens and supporting the network's oracle infrastructure. When you stake SSV, you receive cSSV (Compound SSV) tokens and are rewarded with ETH.
 
 ## Overview
 
 SSV Network has transitioned to a model where network fees are paid in ETH, creating a sustainable revenue stream that flows directly to SSV stakers. By staking your SSV tokens, you:
 
-- **Earn ETH rewards** - Receive a proportional share of network fees collected from clusters
 - **Support the network** - Your staked weight contributes to oracle consensus for effective balance reporting
 - **Maintain liquidity** - Receive transferable cSSV tokens that represent your staked position
 - **Retain flexibility** - Claim rewards anytime and unstake with a 7-day cooldown period
+- **Earn ETH rewards** - Receive ETH rewards collected from clusters for maintaining the network
 
 <!-- TODO: Add screenshot - SSV Staking Overview -->
 

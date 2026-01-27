@@ -8,7 +8,7 @@ sidebar_position: 1
 
 The ssv.network utilizes a free-market approach such that operators can set their desired fees. This approach drives competition between operators and helps ensure that operator services are provided to stakers at lower costs.
 
-When operators register to the network, they set their fee (denominated in ETH, and also in SSV token only for previously registered operators), which is then charged to each validator that selects them as an operator.
+When operators register to the network, they set their fee, which is then charged to each validator that selects them as an operator.
 
 For simplicity and standardization, fees charged for using the network are normalized as annual payments. Although, in practice, they are paid to operators on an ongoing basis - per each passing block (contrary to a single payment model).
 
