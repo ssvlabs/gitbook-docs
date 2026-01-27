@@ -189,6 +189,7 @@ query daoValues {
     quorum
     accEthPerShare
     latestMerkleRoot
+    totalEffectiveBalance
   }
 }
 ```
@@ -213,6 +214,7 @@ query daoValues {
     quorum
     accEthPerShare
     latestMerkleRoot
+    totalEffectiveBalance
   }
 }`;
 
@@ -235,7 +237,7 @@ console.log(responseData);
 curl -X POST "https://api.studio.thegraph.com/query/71118/ssv-network-hoodi/version/latest" \
   -H "Content-Type: application/json" \
   -d '{
-    "query": "query daoValues { daovalues(id: \"0x58410Bef803ECd7E63B23664C586A6DB72DAf59c\") { declareOperatorFeePeriod executeOperatorFeePeriod liquidationThreshold minimumLiquidationCollateral networkFee networkFeeIndex networkFeeIndexBlockNumber operatorFeeIncreaseLimit operatorMaximumFee quorum accEthPerShare latestMerkleRoot }}"
+    "query": "query daoValues { daovalues(id: \"0x58410Bef803ECd7E63B23664C586A6DB72DAf59c\") { declareOperatorFeePeriod executeOperatorFeePeriod liquidationThreshold minimumLiquidationCollateral networkFee networkFeeIndex networkFeeIndexBlockNumber operatorFeeIncreaseLimit operatorMaximumFee quorum accEthPerShare latestMerkleRoot totalEffectiveBalance }}"
 }'
 ```
 
@@ -259,6 +261,7 @@ Output
       "quorum": "7500",
       "accEthPerShare": "74267140000000",
       "latestMerkleRoot": "0xad75cf901",
+      "totalEffectiveBalance": "75631987215784140000000",
     }
   }
 }
@@ -704,6 +707,7 @@ query ValidatorCountPerOperator {
     totalWithdrawn
     isPrivate
     validatorCount
+    totalEffectiveBalance
     whitelisted {
       id
     }
@@ -724,6 +728,7 @@ query ValidatorCountPerOperator {
     totalWithdrawn
     isPrivate
     validatorCount
+    totalEffectiveBalance
     whitelisted {
       id
     }
@@ -749,7 +754,7 @@ console.log(responseData);
 curl -X POST "https://api.studio.thegraph.com/query/71118/ssv-network-hoodi/version/latest" \
   -H "Content-Type: application/json" \
   -d '{
-    "query": "query ValidatorCountPerOperator { operator(id: \"7\") { fee removed totalWithdrawn validatorCount isPrivate whitelisted { id } }}"
+    "query": "query ValidatorCountPerOperator { operator(id: \"7\") { fee removed totalWithdrawn validatorCount totalEffectiveBalance isPrivate whitelisted { id } }}"
 }'
 ```
 
@@ -765,8 +770,110 @@ Output:
       "removed": false,
       "totalWithdrawn": "0",
       "validatorCount": "318",
+      "totalEffectiveBalance": "651264",
       "isPrivate": false,
       "whitelisted": []
+    }
+  }
+}
+```
+
+### Oracle data by ID (oracle ID, address, total delegated amount and its delegators)
+
+Returns oracle ID, address, total delegated amount and its delegators of a given Oracle
+
+<Tabs>
+  <TabItem value="graphql" label="GraphQL">
+
+```graphql
+query OracleData {
+  operator(id: "1") {
+    totalDelegatedAmount
+    oracleId
+    oracleAddress
+    id
+    delegators {
+      amount
+      delegator {
+        id
+      }
+    }
+  }
+  }
+}
+```
+
+  </TabItem>
+  <TabItem value="javascript" label="JavaScript">
+
+```javascript
+const url = "https://api.studio.thegraph.com/query/71118/ssv-network-hoodi/version/latest";
+const query = `
+query OracleData {
+  operator(id: "1") {
+    totalDelegatedAmount
+    oracleId
+    oracleAddress
+    id
+    delegators {
+      amount
+      delegator {
+        id
+      }
+    }
+  }
+  }
+}`;
+
+const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ query })
+});
+
+const responseData = await response.json();
+console.log(responseData);
+```
+
+  </TabItem>
+  <TabItem value="curl" label="cURL">
+
+```bash
+curl -X POST "https://api.studio.thegraph.com/query/71118/ssv-network-hoodi/version/latest" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "query OracleData { operator(id: \"1\") { totalDelegatedAmount oracleId oracleAddress id delegators { amount delegator { id } } } } }"
+}'
+```
+
+  </TabItem>
+</Tabs>
+
+Output:
+```json
+{
+  "data": {
+    "oracle": {
+      "totalDelegatedAmount": "5421250000000000000000",
+      "oracleId": "1",
+      "oracleAddress": "0x011684890d10ecc4473f2a4a8b0f2cb7f19c66eb",
+      "id": "1",
+      "delegators": [
+        {
+          "amount": "7750000000000000000",
+          "delegator": {
+            "id": "0x4f0f5ab30f62b62ed0466b697f0ec7b30560ee48"
+          }
+        },
+        {
+          "amount": "6250000000000000000",
+          "delegator": {
+            "id": "0x599fdcd9b73052226721f093fe7b0bddd393fbdf"
+          }
+        }
+      ]
     }
   }
 }
