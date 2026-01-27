@@ -18,7 +18,7 @@ Return values:
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| fee | uint256 | The fee charged by the network (denominated as $SSV tokens per block) |
+| fee | uint256 | The fee charged by the network (denominated as SSV tokens per block) |
 
 ### **`getNetworkEarnings ()`**
 
@@ -108,7 +108,7 @@ Return values:
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | owner | address | The operator's admin address (for management purposes) |
-| fee | uint64256 | The fee charged by the operator (denominated as $SSV tokens per block) |
+| fee | uint64256 | The fee charged by the operator (denominated as SSV tokens per block) |
 | validatorCount | uint32 | The amount of managed validators |
 | whitelistedContract | address | The external contract set to manage this operator's whitelisted addresses |
 | isPrivate | boolean | Indication if operator is permissioned |
@@ -126,7 +126,7 @@ Return values
 
 | **Parameter** | **Type** | **Description**                                                        |
 | ------------- | -------- | ---------------------------------------------------------------------- |
-| declaredFee   | uint256  | The fee charged by the operator (denominated as $SSV tokens per block) |
+| declaredFee   | uint256  | The fee charged by the operator (denominated as SSV tokens per block) |
 
 ### **`getOperatorDeclaredFee (operatorId)`**
 
@@ -148,7 +148,7 @@ Return values
 
 | **Parameter** | **Type** | **Description**                                |
 | ------------- | -------- | ---------------------------------------------- |
-| balance       | uint256  | Operators outstanding earnings in $SSV tokens. |
+| balance       | uint256  | Operators outstanding earnings in SSV tokens. |
 
 ### Cluster Methods <a href="#s1a6da24gvwp" id="s1a6da24gvwp"></a>
 
@@ -166,7 +166,7 @@ Return values:
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| balance | uint256 | Clusters outstanding balance denominated in $SSV tokens |
+| balance | uint256 | Clusters outstanding balance denominated in SSV tokens |
 
 ### **`getBurnRate (owner, operatorIds, cluster)`**
 

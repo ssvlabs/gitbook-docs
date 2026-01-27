@@ -165,12 +165,12 @@ The SSV Node software maintain peer-to-peer connections with other Nodes to hand
 
 ssv.network allows access to a decentralized ETH staking infrastructure with SSV token as the protocol's native token. It has 4 main purposes:
 
-* **Staking** – Stake SSV to earn ETH rewards from network fees and support oracle infrastructure
 * **Governance** – Submitting votes and voting on DAO proposals
 * **Payments** – The network receives fees paid in ETH by clusters, and the accrued ETH is converted into value for SSV stakers through the staking mechanism
 * **Grants** – DAO funding for developers and contributors helping to grow the network
+* **Staking** – Stake SSV to earn ETH rewards from network fees and support oracle infrastructure
 
-When you stake SSV, you receive cSSV tokens and earn real ETH yield from network activity, making SSV an "ETH Accrual Token."
+When you stake SSV, you receive cSSV tokens and get rewarded with ETH from network activity, making SSV an "ETH Accrual Token."
 
 ### SSV Staker
 

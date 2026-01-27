@@ -62,8 +62,8 @@ Required\,Funding =( O1fee+O2_{fee}+ O3_{fee} + O4_{fee}+N_{fee})*LTP  + (N_{fee
 
 Legend:
 ```
-* $$O1...4_{fee}$$ - operator fee ($SSV per block)
-* $$N_{fee}$$ - [network fee] ($SSV per block)​
+* $$O1...4_{fee}$$ - operator fee (SSV per block)
+* $$N_{fee}$$ - [network fee] (SSV per block)​
 * $$Period$$ - operation period (blocks)
 * $$LTP$$ - [liquidation threshold period]
 ```

@@ -56,7 +56,7 @@ $$
   * $$index_p$$​ - previous index
   * $$b$$​ - current block
   * $$b_p$$​ - block number of previous index
-  * $$f$$ - fee ($SSV per block) applicable to the block interval ("previous fee")
+  * $$f$$ - fee (SSV per block) applicable to the block interval ("previous fee")
 
 ### **Index Calculation Example**
 
