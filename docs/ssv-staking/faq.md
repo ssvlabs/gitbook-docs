@@ -4,13 +4,11 @@ sidebar_position: 5
 
 # SSV Staking FAQ
 
-Common questions about staking SSV tokens, earning ETH rewards, and the unstaking process.
-
 ## General Staking
 
 ### What is SSV Staking?
 
-SSV Staking allows SSV token holders to earn real ETH yield from network fees. When you stake SSV, you receive cSSV tokens and earn a proportional share of network fees paid by clusters.
+SSV Staking allows SSV token holders to support oracle infrastructure. When you stake SSV, you receive cSSV tokens to keep participating in SSV Network governance and earn a proportional share of network fees paid by clusters. While you hold cSSV, ETH rewards accrue to the wallet holding cSSV and can be claimed at any time without the need to unstake SSV
 
 ### How do I start staking?
 
@@ -50,20 +48,9 @@ Yes! Each wallet can stake independently. Rewards are tracked separately per wal
 Your Rewards = (Your cSSV / Total cSSV) × Total Network Fees
 ```
 
-Your share is proportional to your percentage of total staked SSV.
-
 ### When do rewards start?
 
 Rewards begin accruing immediately after your staking transaction is confirmed.
-
-### What's the current APY?
-
-APY varies based on:
-- Total ETH staked in the network (fee volume)
-- Network fee rate set by the DAO
-- Total SSV staked
-
-Check the staking dashboard for current estimates.
 
 ### Do rewards auto-compound?
 
@@ -269,10 +256,6 @@ Yes! You can restake immediately after withdrawal with no waiting period. Howeve
 
 Network fees paid by ETH clusters. A portion of fees flows to the SSV Staking contract and is distributed to cSSV holders.
 
-### What makes SSV an "ETH Accrual Token"?
-
-SSV accrues real ETH revenue from network activity. More validators using SSV = more ETH fees = higher rewards for stakers.
-
 ### How does network growth affect rewards?
 
 More validators → More fees collected → Higher total rewards (but distributed among all stakers)
@@ -318,6 +301,6 @@ Only contact official SSV support channels. Ignore unsolicited DMs offering help
 - [Stake SSV](stake-ssv.md) - Step-by-step staking
 - [Claim Rewards](claim-rewards.md) - Claiming process
 - [Unstake SSV](unstake-ssv.md) - Unstaking guide
-- [Tokenomics](../../learn/protocol-overview/tokenomics/README.md) - Economic model
-- [Glossary](../../learn/glossary.md) - Key definitions
+- [Tokenomics](/learn/tokenomics/README.md) - Economic model
+- [Glossary](/learn/glossary.md) - Key definitions
 

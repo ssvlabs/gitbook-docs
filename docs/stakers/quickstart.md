@@ -108,7 +108,7 @@ You can select the operational runway period of your validator, in accordance wi
 
 ![Distribute a validator](/img/distributing-a-val-11.png)
 
-**Please read carefully and understand how fees are managed and the risks of account** [**liquidation**](/learn/protocol-overview/tokenomics/liquidations.md) **if your account balance falls below the** [**Threshold Balance**](/learn/protocol-overview/tokenomics/liquidations.md#liquidation-collateral).
+**Please read carefully and understand how fees are managed and the risks of account** [**liquidation**](/learn/tokenomics/liquidations.md) **if your account balance falls below the** [**Threshold Balance**](/learn/tokenomics/liquidations.md#liquidation-collateral).
 
 ![Distribute a validator](/img/distributing-a-val-12.png)
 

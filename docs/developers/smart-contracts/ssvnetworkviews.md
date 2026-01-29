@@ -8,7 +8,7 @@ The SSVNetworkViews contract is for reading information about the network and it
 
 [SSV Views Contracts Repository](https://github.com/ssvlabs/ssv-network/tree/main/contracts)
 
-### General Methods
+## General Methods
 
 ### **`getNetworkFee ()`**
 
@@ -18,7 +18,7 @@ Return values:
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| fee | uint256 | The fee charged by the network (denominated as $SSV tokens per block) |
+| fee | uint256 | The fee charged by the network (denominated as ETH per block) |
 
 ### **`getNetworkEarnings ()`**
 
@@ -48,7 +48,7 @@ Return values
 
 | **Parameter** | **Type** | **Description**                                                                                      |
 | ------------- | -------- | ---------------------------------------------------------------------------------------------------- |
-| amount        | uint256  | The minimum amount of SSV which a cluster has to have (liquidation collateral) to not be liquidated. |
+| amount        | uint256  | The minimum amount of ETH which a cluster has to have (liquidation collateral) to not be liquidated. |
 
 ### **`getOperatorFeeIncreaseLimit()`**
 
@@ -75,13 +75,13 @@ Return values:
 
 ### **`getMaximumOperatorFee()`**
 
-Description: **Gets the operator maximum fee for operators that use SSV token**
+Description: **Gets the operator maximum fee for operators that use ETH token**
 
 Return values
 
 | Parameter | Type   | Description                      |
 | --------- | ------ | -------------------------------- |
-| maxFee    | uint64 | The maximum fee value (SSV/year) |
+| maxFee    | uint64 | The maximum fee value (ETH/year) |
 
 ### `getValidatorsPerOperatorLimit()`
 
@@ -93,7 +93,7 @@ Return values
 | --------------- | -------- | -------------------------------------------- |
 | Validator limit | uint32   | amount of validators an operator may manage. |
 
-### Operator Methods <a href="#ha5jkuo5opxs" id="ha5jkuo5opxs"></a>
+## Operator Methods <a href="#ha5jkuo5opxs" id="ha5jkuo5opxs"></a>
 
 ### **`getOperatorById (operatorId)`**
 
@@ -108,7 +108,7 @@ Return values:
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | owner | address | The operator's admin address (for management purposes) |
-| fee | uint64256 | The fee charged by the operator (denominated as $SSV tokens per block) |
+| fee | uint64256 | The fee charged by the operator (denominated as ETH per block) |
 | validatorCount | uint32 | The amount of managed validators |
 | whitelistedContract | address | The external contract set to manage this operator's whitelisted addresses |
 | isPrivate | boolean | Indication if operator is permissioned |
@@ -126,7 +126,7 @@ Return values
 
 | **Parameter** | **Type** | **Description**                                                        |
 | ------------- | -------- | ---------------------------------------------------------------------- |
-| declaredFee   | uint256  | The fee charged by the operator (denominated as $SSV tokens per block) |
+| declaredFee   | uint256  | The fee charged by the operator (denominated as ETH per block) |
 
 ### **`getOperatorDeclaredFee (operatorId)`**
 
@@ -148,13 +148,13 @@ Return values
 
 | **Parameter** | **Type** | **Description**                                |
 | ------------- | -------- | ---------------------------------------------- |
-| balance       | uint256  | Operators outstanding earnings in $SSV tokens. |
+| balance       | uint256  | Operators outstanding earnings in ETH. |
 
-### Cluster Methods <a href="#s1a6da24gvwp" id="s1a6da24gvwp"></a>
+## Cluster Methods <a href="#s1a6da24gvwp" id="s1a6da24gvwp"></a>
 
 ### **`getBalance (owner, operatorIds, cluster)`**
 
-Description: Returns the outstanding SSV balance of a cluster.
+Description: Returns the outstanding ETH balance of a cluster.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -166,35 +166,35 @@ Return values:
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| balance | uint256 | Clusters outstanding balance denominated in $SSV tokens |
+| balance | uint256 | Clusters outstanding balance denominated in ETH |
 
 ### **`getBurnRate (owner, operatorIds, cluster)`**
 
-Description: Returns current ongoing expenses of SSV tokens for a particular SSV cluster balance on per block basis (aggregates all expenses for all the validators in this cluster).\\
+Description: Returns current ongoing expenses of ETH for a particular SSV cluster balance on per block basis (aggregates all expenses for all the validators in this cluster).\\
 
 | **Parameter** | **Type**  | **Description**                                                                                                          |
 | ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
 | owner         | address   | The user address                                                                                                         |
 | operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                           |
-| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](/developers/tools/ssv-scanner) tool. |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
 
 Return values
 
 | **Parameter** | **Type** | **Description**                                     |
 | ------------- | -------- | --------------------------------------------------- |
-| burnRate      | uint256  | The rate per block in which the account spends SSV. |
+| burnRate      | uint256  | The rate per block in which the account spends ETH. |
 
-### Liquidator Methods <a href="#id-39qo7wl8s1he" id="id-39qo7wl8s1he"></a>
+## Liquidator Methods <a href="#id-39qo7wl8s1he" id="id-39qo7wl8s1he"></a>
 
 ### **`isLiquidatable (owner, operatorIds, cluster)`**
 
-Description: Returns true if the specified cluster is under the liquidation threshold and can be liquidated.\\
+Description: Returns true if the specified cluster is under the liquidation threshold and can be liquidated.
 
 | **Parameter** | **Type**  | **Description**                                                                                                          |
 | ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
 | owner         | address   | The user address                                                                                                         |
 | operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                           |
-| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](/developers/tools/ssv-scanner) tool. |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
 
 Return values
 
@@ -210,7 +210,7 @@ Description: Returns true if the provided cluster is liquidated.
 | ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
 | owner         | address   | The user address                                                                                                         |
 | operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                           |
-| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](/developers/tools/ssv-scanner) tool. |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
 
 Return values
 
@@ -262,3 +262,150 @@ Return values
 | **Parameter** | **Type** | **Description**                               |
 | ------------- | -------- | --------------------------------------------- |
 | isWhitelisted | bool     | True if address is whitelisted, false if not. |
+
+## Legacy Methods
+
+### **`getBalanceSSV (owner, operatorIds, cluster)`**
+
+Description: Returns the outstanding SSV balance of a legacy (SSV-based) cluster.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| owner | address | The cluster owner address |
+| operatorIds | uint64[] | List of cluster operators Ids |
+| cluster | tuple[] | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](/developers/tools/ssv-scanner) tool |
+
+Return values:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| balance | uint256 | Clusters outstanding balance denominated in SSV |
+
+### **`getBurnRateSSV (owner, operatorIds, cluster)`**
+
+Description: Returns current ongoing expenses of SSV for a particular SSV cluster balance on per block basis (aggregates all expenses for all the validators in this cluster).\\
+
+| **Parameter** | **Type**  | **Description**                                                                                                          |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
+| owner         | address   | The user address                                                                                                         |
+| operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                           |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
+
+Return values
+
+| **Parameter** | **Type** | **Description**                                     |
+| ------------- | -------- | --------------------------------------------------- |
+| burnRate      | uint256  | The rate per block in which the account spends ETH. |
+
+### **`getNetworkFeeSSV ()`**
+
+Description: Returns current network fee for legacy (SSV-based) clusters.
+
+Return values:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| fee | uint256 | The fee charged by the network (denominated as SSV per block) |
+
+### **`getNetworkEarningsSSV ()`**
+
+Description: Returns accumulated network fees not yet withdrawn from the legacy (SSV-based) clusters.
+
+Return values:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| amount | uint256 | Amount of fees accumulated in the network treasury |
+
+### **`getLiquidationThresholdPeriodSSV ()`**
+
+Description: Returns the minimum duration (in blocks) which legacy cluster has to have sufficient balance (liquidation collateral) to not be liquidated.
+
+Return values
+
+| **Parameter** | **Type** | **Description**                                                                                                             |
+| ------------- | -------- | --------------------------------------------------------------------------------------------------------------------------- |
+| blocks        | uint64   | The minimum duration (blocks) which legacy cluster has to have sufficient balance (liquidation collateral) to not be liquidated. |
+
+### **`getMinimumLiquidationCollateralSSV()`**
+
+Description: Returns the minimum amount which legacy cluster has to have sufficient balance (liquidation collateral) to not be liquidated.
+
+Return values
+
+| **Parameter** | **Type** | **Description**                                                                                      |
+| ------------- | -------- | ---------------------------------------------------------------------------------------------------- |
+| amount        | uint256  | The minimum amount of SSV which a cluster has to have (liquidation collateral) to not be liquidated. |
+
+### **`getMaximumOperatorFeeSSV()`**
+
+Description: **Gets the operator maximum fee for operators that use SSV token**
+
+Return values
+
+| Parameter | Type   | Description                      |
+| --------- | ------ | -------------------------------- |
+| maxFee    | uint64 | The maximum fee value (SSV/year) |
+
+### **`getOperatorByIdSSV (operatorId)`**
+
+Description: Returns operator's data for operators participating in legacy clusters.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| operatorId | uint64 | The operator id |
+
+Return values:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| owner | address | The operator's admin address (for management purposes) |
+| fee | uint64256 | The fee charged by the operator (denominated as SSV per block) |
+| validatorCount | uint32 | The amount of managed validators |
+| whitelistedContract | address | The external contract set to manage this operator's whitelisted addresses |
+| isPrivate | boolean | Indication if operator is permissioned |
+| active | boolean | Operator network status |
+
+### **`getOperatorFeeSSV (operatorId)`**
+
+Description: returns current operator's fee (not declared).
+
+| **Parameter** | **Type** | **Description** |
+| ------------- | -------- | --------------- |
+| operatorId    | uint64   | The operator id |
+
+Return values
+
+| **Parameter** | **Type** | **Description**                                                        |
+| ------------- | -------- | ---------------------------------------------------------------------- |
+| declaredFee   | uint256  | The fee charged by the operator (denominated as SSV per block) |
+
+### **getOperatorEarningsSSV (operatorId)**
+
+Description: Returns the outstanding earnings of an operator participating legacy cluster(s).
+
+| **Parameter** | **Type** | **Description** |
+| ------------- | -------- | --------------- |
+| operatorId    | uint64   | The operator id |
+
+Return values
+
+| **Parameter** | **Type** | **Description**                                |
+| ------------- | -------- | ---------------------------------------------- |
+| balance       | uint256  | Operators outstanding earnings in SSV. |
+
+### **`isLiquidatableSSV (owner, operatorIds, cluster)`**
+
+Description: Returns true if the specified legacy cluster is under the liquidation threshold and can be liquidated.
+
+| **Parameter** | **Type**  | **Description**                                                                                                          |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
+| owner         | address   | The user address                                                                                                         |
+| operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                           |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
+
+Return values
+
+| **Parameter** | **Type** | **Description**                             |
+| ------------- | -------- | ------------------------------------------- |
+| isLiquidatable | boolean  | Indication if a legacy cluster could be liquidated |

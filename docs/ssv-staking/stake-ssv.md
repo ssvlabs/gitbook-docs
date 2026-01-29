@@ -4,8 +4,6 @@ sidebar_position: 2
 
 # Stake SSV
 
-Stake SSV tokens to earn ETH rewards from network fees while supporting the network's oracle infrastructure.
-
 ## Prerequisites
 
 - SSV tokens in your wallet
@@ -111,4 +109,4 @@ After staking:
 - [Claim Rewards](claim-rewards.md) - How to claim ETH rewards
 - [Unstake SSV](unstake-ssv.md) - Unstaking process
 - [FAQ](faq.md) - Common questions and answers
-- [Glossary](../../learn/glossary.md) - Key terms and definitions
+- [Glossary](/learn/glossary.md) - Key terms and definitions
