@@ -20,9 +20,9 @@ The network uses ETH-based payments for clusters and operators:
 
 ## SSV token utility
 
-Staked SSV supports the network's oracle infrastructure by providing voting weight for effective balance reporting. Also, when clusters pay fees in ETH, a portion flows into the SSV Staking contract and is distributed proportionally to all stakers. 
+Staked SSV supports the network's oracle infrastructure by providing voting weight for effective balance reporting. 
 
-As the network grows and more validators use SSV, more ETH fees are generated, increasing rewards for stakers. Learn more in the [SSV Staking Guide](/ssv-staking/).
+Also, when clusters pay fees in ETH, a portion flows into the SSV Staking contract and is distributed proportionally to all token holders. Learn more in the [SSV Staking Guide](/ssv-staking/).
 
 ## Dual Utility Model
 
@@ -33,7 +33,7 @@ SSV token serves multiple purposes in the ecosystem:
 | **Governance** | Vote on protocol decisions and treasury allocation | Decentralized control |
 | **Oracle Support** | Staked SSV supports oracle consensus | Network security and accuracy |
 | **Legacy Payments** | SSV tokens still used in legacy clusters | Backward compatibility |
-| **Staking** | Stake SSV to receive rewards denominated in ETH | Real yield for token holders |
+| **Staking** | Stake SSV to support the network's oracle infrastructure | Provides voting weight for effective balance reporting |
 
 ## Economic Sustainability
 

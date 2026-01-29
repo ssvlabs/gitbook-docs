@@ -11,10 +11,6 @@ To use the ssv.network, stakers are required to deposit a sufficient balance of 
 
 ![Liquidation Collateral](/img/liquidation-1.avif)
 
-:::warning Legacy SSV Clusters
-This documentation focuses on **ETH clusters** (the current standard), but the formulas also apply to legacy SSV clusters during the transition period.
-:::
-
 ### Liquidators
 
 Since transactions on Ethereum aren't free, and users can't incur additional costs if their account runs out of balance, an incentivization model is required to keep the system solvent.

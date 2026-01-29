@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # SSV Staking
 
-SSV Staking enables SSV token holders to be rewarded with ETH by staking their tokens and supporting the network's oracle infrastructure. When you stake SSV, you receive cSSV (Compound SSV) tokens and are rewarded with ETH.
+SSV Staking enables SSV token holders to support the network's oracle infrastructure and get rewards. When you stake SSV, you receive cSSV (Compound SSV) tokens and can continue to participate in SSV Network governance processes.
 
 ## Overview
 
@@ -13,7 +13,6 @@ SSV Network has transitioned to a model where network fees are paid in ETH, crea
 - **Support the network** - Your staked weight contributes to oracle consensus for effective balance reporting
 - **Maintain liquidity** - Receive transferable cSSV tokens that represent your staked position
 - **Retain flexibility** - Claim rewards anytime and unstake with a 7-day cooldown period
-- **Earn ETH rewards** - Receive ETH rewards collected from clusters for maintaining the network
 
 <!-- TODO: Add screenshot - SSV Staking Overview -->
 
@@ -22,16 +21,15 @@ SSV Network has transitioned to a model where network fees are paid in ETH, crea
 ### The Staking Flow
 
 ```
-Stake SSV → Receive cSSV → Earn ETH → Claim Rewards → Unstake (7-day cooldown)
+Stake SSV → Receive cSSV → Claim Rewards → Unstake (7-day cooldown)
 ```
 
 1. **Stake SSV tokens** - Deposit your SSV tokens into the staking contract
 2. **Receive cSSV** - Get cSSV tokens representing your staked position (1:1 initially)
-3. **Earn ETH** - Network fees from clusters flow to stakers proportionally
-4. **Claim rewards** - Withdraw your accumulated ETH rewards anytime
-5. **Unstake** - Initiate unstaking with a 7-day cooldown, then withdraw SSV + remaining rewards
+3. **Claim rewards** - Withdraw your accumulated ETH rewards anytime
+4. **Unstake** - Initiate unstaking with a 7-day cooldown, then withdraw SSV + remaining rewards
 
-### ETH Reward Flow
+### ETH Fees Flow
 
 Network fees flow from clusters to SSV stakers through the following mechanism:
 
