@@ -172,7 +172,7 @@ ssv.network allows access to a decentralized ETH staking infrastructure with SSV
 
 ### SSV Staker
 
-An SSV token holder who stakes their SSV tokens to earn ETH rewards from network fees. By staking, they also contribute voting weight to the network's oracle system, which reports validator effective balances to the blockchain.
+An SSV token holder who stakes their SSV tokens to contribute voting weight to the network's oracle system, which reports validator effective balances to the blockchain. When staking SSV a holder receives cSSV which also allows to participates in SSV governance. While holding cSSV, ETH rewards accrue to the wallet holding cSSV.
 
 ### Staker
 

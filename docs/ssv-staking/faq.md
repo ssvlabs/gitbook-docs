@@ -8,7 +8,7 @@ sidebar_position: 5
 
 ### What is SSV Staking?
 
-SSV Staking allows SSV token holders to support oracle infrastructure. When you stake SSV, you receive cSSV tokens to keep participating in SSV Network governance and earn a proportional share of network fees paid by clusters.
+SSV Staking allows SSV token holders to support oracle infrastructure. When you stake SSV, you receive cSSV tokens to keep participating in SSV Network governance and earn a proportional share of network fees paid by clusters. While you hold cSSV, ETH rewards accrue to the wallet holding cSSV and can be claimed at any time without the need to unstake SSV
 
 ### How do I start staking?
 
@@ -301,6 +301,6 @@ Only contact official SSV support channels. Ignore unsolicited DMs offering help
 - [Stake SSV](stake-ssv.md) - Step-by-step staking
 - [Claim Rewards](claim-rewards.md) - Claiming process
 - [Unstake SSV](unstake-ssv.md) - Unstaking guide
-- [Tokenomics](/learn/protocol-overview/tokenomics/README.md) - Economic model
+- [Tokenomics](/learn/tokenomics/README.md) - Economic model
 - [Glossary](/learn/glossary.md) - Key definitions
 
