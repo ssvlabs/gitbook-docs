@@ -1,16 +1,15 @@
 ---
-sidebar_position: 6
+sidebar_position: 1
 ---
 
 # SSV Staking
 
-SSV Staking enables SSV token holders to earn real ETH yield by staking their tokens and supporting the network's oracle infrastructure. When you stake SSV, you receive cSSV (Compound SSV) tokens and earn ETH rewards generated from network fees.
+SSV Staking enables SSV token holders to support the network's oracle infrastructure and get rewards. When you stake SSV, you receive cSSV (Compound SSV) tokens and can continue to participate in SSV Network governance processes. While you hold cSSV, ETH rewards accrue to the wallet holding cSSV and can be claimed at any time without the need to unstake SSV.
 
 ## Overview
 
 SSV Network has transitioned to a model where network fees are paid in ETH, creating a sustainable revenue stream that flows directly to SSV stakers. By staking your SSV tokens, you:
 
-- **Earn ETH rewards** - Receive a proportional share of network fees collected from clusters
 - **Support the network** - Your staked weight contributes to oracle consensus for effective balance reporting
 - **Maintain liquidity** - Receive transferable cSSV tokens that represent your staked position
 - **Retain flexibility** - Claim rewards anytime and unstake with a 7-day cooldown period
@@ -22,16 +21,15 @@ SSV Network has transitioned to a model where network fees are paid in ETH, crea
 ### The Staking Flow
 
 ```
-Stake SSV → Receive cSSV → Earn ETH → Claim Rewards → Unstake (7-day cooldown)
+Stake SSV → Receive cSSV → Claim Rewards → Unstake (7-day cooldown)
 ```
 
 1. **Stake SSV tokens** - Deposit your SSV tokens into the staking contract
 2. **Receive cSSV** - Get cSSV tokens representing your staked position (1:1 initially)
-3. **Earn ETH** - Network fees from clusters flow to stakers proportionally
-4. **Claim rewards** - Withdraw your accumulated ETH rewards anytime
-5. **Unstake** - Initiate unstaking with a 7-day cooldown, then withdraw SSV + remaining rewards
+3. **Claim rewards** - Withdraw your accumulated ETH rewards anytime
+4. **Unstake** - Initiate unstaking with a 7-day cooldown, then withdraw SSV + remaining rewards
 
-### ETH Reward Flow
+### ETH Fees Flow
 
 Network fees flow from clusters to SSV stakers through the following mechanism:
 
@@ -68,8 +66,6 @@ Unlike rebasing tokens where your balance increases, cSSV uses an **index-based 
 2. The reward index increases as network fees flow in
 3. Your claimable ETH = (cSSV balance) × (reward index increase)
 4. Claim rewards anytime without affecting your cSSV balance
-
-This model is based on Synthetix's StakingRewards.sol pattern and provides better composability with other DeFi protocols.
 
 ### Example
 

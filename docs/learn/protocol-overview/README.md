@@ -1,6 +1,7 @@
 ---
 sidebar_label: 'Protocol Overview'
 sidebar_position: 2
+unlisted: true
 ---
 
 # Protocol Overview

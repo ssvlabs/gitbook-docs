@@ -17,17 +17,17 @@ It is important to be aware that the cluster balance must **always be higher tha
 
 ![Operational Runway](/img/cluster-balance-1.avif)
 
-Since operator and network fees are dynamic, the required [**Liquidation Collateral**](/learn/protocol-overview/tokenomics/liquidations.md#liquidation-collateral) could vary between different clusters. To calculate how much funding is needed as collateral for a cluster, please refer to the [Liquidations page](/learn/protocol-overview/tokenomics/liquidations.md).
+Since operator and network fees are dynamic, the required [**Liquidation Collateral**](/learn/tokenomics/liquidations.md#liquidation-collateral) could vary between different clusters. To calculate how much funding is needed as collateral for a cluster, please refer to the [Liquidations page](/learn/tokenomics/liquidations.md).
 
 ### Cluster Balance Formula
 
-As explained in the documentation page related to [Payments](/learn/protocol-overview/tokenomics/payments.md), cluster balance is affected by three main factors:
+As explained in the documentation page related to [Payments](/learn/tokenomics/payments.md), cluster balance is affected by three main factors:
 
 * Network fee
 * Operator fees
 * Effective balance
 
-To track changes over time, the concept of [Indexes](/learn/protocol-overview/tokenomics/payments.md#indexes) has been introduced. Indexes for network fees and operator fees are necessary to calculate the cluster balance, along with [the "snapshot" of the cluster status](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), taken the last time it was updated (the cluster snapshot is also used in smart contract transactions).
+To track changes over time, the concept of [Indexes](/learn/tokenomics/payments.md#indexes) has been introduced. Indexes for network fees and operator fees are necessary to calculate the cluster balance, along with [the "snapshot" of the cluster status](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), taken the last time it was updated (the cluster snapshot is also used in smart contract transactions).
 
 #### Cluster balance
 
