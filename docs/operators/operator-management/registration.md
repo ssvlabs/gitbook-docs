@@ -14,7 +14,7 @@ You can register your operator through the SSV network [web app](https://app.ssv
 While registering your operator you will need to provide the following parameters:
 
 * [Operator public key](/operators/operator-node/node-setup) - Generated in the node installation process (base64 format)
-* [Operator fee](../../learn/protocol-overview/tokenomics/fees) - The fee charged by the operator per each managed validator
+* [Operator fee](/learn/tokenomics/fees) - The fee charged by the operator per each managed validator
 
 :::info
 The wallet address used to register the operator is the only address that will hold management permissions for it.
@@ -52,7 +52,7 @@ Click _Next_ when ready.
 
 In the following screen, shown below, you are being asked to set the Operator Fee.
 
-For more information about fees, please [head over to the related page](../../learn/protocol-overview/tokenomics/fees). Just know that it will be possible to update the Operator fees later, [with limitations imposed by the protocol, to protect stakers](/operators/operator-onboarding/update-fee), for a guide on how to do that, head over to [the dedicated page](/operators/operator-management/updating-operator-fees).
+For more information about fees, please [head over to the related page](/learn/tokenomics/fees). Just know that it will be possible to update the Operator fees later, [with limitations imposed by the protocol, to protect stakers](/operators/operator-onboarding/update-fee), for a guide on how to do that, head over to [the dedicated page](/operators/operator-management/updating-operator-fees).
 
 Enter a number and click _Next_ when ready.
 

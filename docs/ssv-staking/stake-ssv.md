@@ -109,4 +109,4 @@ After staking:
 - [Claim Rewards](claim-rewards.md) - How to claim ETH rewards
 - [Unstake SSV](unstake-ssv.md) - Unstaking process
 - [FAQ](faq.md) - Common questions and answers
-- [Glossary](../../learn/glossary.md) - Key terms and definitions
+- [Glossary](/learn/glossary.md) - Key terms and definitions

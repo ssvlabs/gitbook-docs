@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # SSV Staking
 
-SSV Staking enables SSV token holders to support the network's oracle infrastructure and get rewards. When you stake SSV, you receive cSSV (Compound SSV) tokens and can continue to participate in SSV Network governance processes.
+SSV Staking enables SSV token holders to support the network's oracle infrastructure and get rewards. When you stake SSV, you receive cSSV (Compound SSV) tokens and can continue to participate in SSV Network governance processes. While you hold cSSV, ETH rewards accrue to the wallet holding cSSV and can be claimed at any time without the need to unstake SSV.
 
 ## Overview
 
@@ -66,8 +66,6 @@ Unlike rebasing tokens where your balance increases, cSSV uses an **index-based 
 2. The reward index increases as network fees flow in
 3. Your claimable ETH = (cSSV balance) × (reward index increase)
 4. Claim rewards anytime without affecting your cSSV balance
-
-This model is based on Synthetix's StakingRewards.sol pattern and provides better composability with other DeFi protocols.
 
 ### Example
 

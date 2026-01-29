@@ -26,7 +26,7 @@ Learn more in the [SSV Staking Guide](/ssv-staking/).
 
 ### **Tokenomics**
 
-Below is a summary of SSV Tokenomics, you can find more details on the [Tokenomics dedicated docs page](/learn/protocol-overview/tokenomics/README.md).
+Below is a summary of SSV Tokenomics, you can find more details on the [Tokenomics dedicated docs page](/learn/tokenomics/README.md).
 
 SSV is designed to exponentially progress the network's core values:
 
