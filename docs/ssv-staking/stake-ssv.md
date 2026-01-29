@@ -4,8 +4,6 @@ sidebar_position: 2
 
 # Stake SSV
 
-Stake SSV tokens to earn ETH rewards from network fees while supporting the network's oracle infrastructure.
-
 ## Prerequisites
 
 - SSV tokens in your wallet

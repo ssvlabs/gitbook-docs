@@ -209,7 +209,7 @@ Events:
 | ------------------- | -------- | ---------------------------------------------------- |
 | operatorIds | uint64[]  | An array of operator IDs of the cluster. |
 | amount | uint256  | Amount of ETH to deposit to cluster's balance after migration. |
-| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](../tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools |
 
 Events:
 
@@ -220,7 +220,7 @@ Events:
 
 Registers new validator to a cluster of provided operators (ids + shares), **fails if** number of operatorIds is greater than 13. The ETH amount to deposit must be [supplied via `msg.value`](https://docs.ethers.org/v4/api-contract.html#overrides).
 
-:::info Recent Changes
+:::info Breaking Changes
 With the [introduction of ETH payments](https://ssv.network/blog/introduction-to-ssv-staking), the smart contract function signature has changed. The `amount` parameter has been removed, and the function is now `payable`. The ETH amount to deposit must be supplied via `msg.value`. Update your integrations accordingly, in line with [the ethers documentation](https://docs.ethers.org/v4/api-contract.html#overrides).
 :::
 
@@ -229,8 +229,7 @@ With the [introduction of ETH payments](https://ssv.network/blog/introduction-to
 | publicKey     | bytes                      | The validator’s public key.                                                                                                                                                                                                                                                                                                                                          |
 | operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                                                                                                                                                                                       |
 | sharesData    | bytes                      | String of keyshares - obtained by splitting the validator key using the [SSV-Keys](../tools/ssv-keys) tool.                                                                                                                                                                                                                                           |
-| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](../tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
-
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools |
 Events:
 
 * `ValidatorAdded(address indexed owner, uint64[] operatorIds, bytes publicKey, bytes shares, Cluster cluster)`
@@ -239,7 +238,7 @@ Events:
 
 Description: Registers all the new validators provided as argument to a cluster of provided operators (ids + shares), **fails if** number of operatorIds is greater than 13. The ETH amount to deposit must be [supplied via `msg.value`](https://docs.ethers.org/v4/api-contract.html#overrides).
 
-:::info Recent Changes
+:::info Breaking Changes
 With the [introduction of ETH payments](https://ssv.network/blog/introduction-to-ssv-staking), the smart contract function signature has changed. The `amount` parameter has been removed, and the function is now `payable`. The ETH amount to deposit must be supplied via `msg.value`. Update your integrations accordingly, in line with [the ethers documentation](https://docs.ethers.org/v4/api-contract.html#overrides).
 :::
 
@@ -248,8 +247,7 @@ With the [introduction of ETH payments](https://ssv.network/blog/introduction-to
 | publicKeys    | bytes\[]                   | An array of validators’ public keys.                                                                                                                                                                                                                                                                                                                                 |
 | operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                                                                                                                                                                                       |
 | sharesData    | bytes\[]                   | An array of strings of keyshares - obtained by splitting the validator key using the [SSV-Keys](../tools/ssv-keys) Each element in this array must relate to a public key in the <code>publicKeys</code> array.                                                                                                        |
-| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](../tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
-
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools |
 Events:
 
 * `ValidatorAdded(address indexed owner, uint64[] operatorIds, bytes publicKey, bytes shares, Cluster cluster)`
@@ -332,7 +330,7 @@ Please note: the number of validators that can be requested to exit from the bea
 
 The ETH amount to deposit must be [supplied via `msg.value`](https://docs.ethers.org/v4/api-contract.html#overrides).
 
-:::info Recent Changes
+:::info Breaking Changes
 With the [introduction of ETH payments](https://ssv.network/blog/introduction-to-ssv-staking), the smart contract function signature has changed. The `amount` parameter has been removed, and the function is now `payable`. The ETH amount to deposit must be supplied via `msg.value`. Update your integrations accordingly, in line with [the ethers documentation](https://docs.ethers.org/v4/api-contract.html#overrides).
 :::
 
@@ -364,7 +362,7 @@ Events:
 
 Description: Reactivates a liquidated cluster, **will fail** if insufficient ETH to cover the cluster’s liquidation collateral have been deposited. The ETH amount to deposit must be [supplied via `msg.value`](https://docs.ethers.org/v4/api-contract.html#overrides).
 
-:::info Recent Changes
+:::info Breaking Changes
 With the [introduction of ETH payments](https://ssv.network/blog/introduction-to-ssv-staking), the smart contract function signature has changed. The `amount` parameter has been removed, and the function is now `payable`. The ETH amount to deposit must be supplied via `msg.value`. Update your integrations accordingly, in line with [the ethers documentation](https://docs.ethers.org/v4/api-contract.html#overrides).
 :::
 

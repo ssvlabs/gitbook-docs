@@ -8,32 +8,32 @@ import TabItem from '@theme/TabItem';
 
 # Quickstart 
 
-SSV is a permissionless network that enables the distribution of validator operations between non-trusting operators.
+SSV is a permissionless network that enables the distribution of validator operations between non-trusting operators. If you're new to SSV network, go through [the Learn section](/learn/introduction/) to understand its core concepts first.
 
-If you're new to ssv network, go through [the Learn section](/learn/introduction/) to understand its core concepts first.
+This guide explains how to generate validator keys, split them into key shares, and register them on the Hoodi testnet via the SSV-SDK. 
 
-Essential items for integrating with SSV:
+### Introduction
+
+Before getting started, review the following list of essential items for integrating with SSV:
 - [Quickstart guide below](#overview) shows how to automate bulk validator registration.
 - You can also find several [other Guides](/developers/SSV-SDK/examples/) in the respective section.
 - On-chain data is made available via [Subgraph](/developers/tools/ssv-subgraph/) and the [SSV API](/developers/tools/ssv-api) (e.g. operator metadata).
 - We recommend integrating with SSV by using [the SDK](/developers/SSV-SDK/). You can better understand how it is structured with [SSV SDK Module Reference](/developers/SSV-SDK/module-reference/).
 - Lastly, you can start experimenting by interacting with [our Hoodi Testnet](/developers/testnet) smart contracts, before interacting [with the Mainnet ones](/developers/smart-contracts/README.md).
 
-:::note Prerequisite
-This tutorial assumes you already have keystores generated, or will use the [*code illustrated here*](/developers/SSV-SDK/examples/create-validator-keys) to generate them pragmatically.
-:::
-
 ### Overview
 
-Bulk registration flow is roughly outlined in the schema above. 
-
-**Below are the actual steps you will need to take:**
+The steps you will need to take:
 1. [Installation](#1-installation)
 2. [Select operators and collect their data](#2-select-operators-and-collect-their-data)
 3. [Split your validator keys to shares](#3-split-validator-keys)
 4. [Register your validators to the SSV network](#4-register-validators)
 
 There is also [Full code example](#full-code-example) by the end of this page.
+
+:::note Prerequisite
+This tutorial assumes you already have keystores generated, or will use the [*code illustrated here*](/developers/SSV-SDK/examples/create-validator-keys) to generate them pragmatically.
+:::
 
 ### **1. Installation**
 

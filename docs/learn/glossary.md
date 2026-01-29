@@ -168,9 +168,7 @@ ssv.network allows access to a decentralized ETH staking infrastructure with SSV
 * **Governance** – Submitting votes and voting on DAO proposals
 * **Payments** – The network receives fees paid in ETH by clusters, and the accrued ETH is converted into value for SSV stakers through the staking mechanism
 * **Grants** – DAO funding for developers and contributors helping to grow the network
-* **Staking** – Stake SSV to earn ETH rewards from network fees and support oracle infrastructure
-
-When you stake SSV, you receive cSSV tokens and get rewarded with ETH from network activity, making SSV an "ETH Accrual Token."
+* **Staking** – Stake SSV to support oracle infrastructure
 
 ### SSV Staker
 
