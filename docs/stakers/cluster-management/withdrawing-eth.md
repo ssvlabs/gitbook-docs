@@ -7,12 +7,6 @@ sidebar_position: 3
 
 You can withdraw excess ETH from your cluster balance at any time, as long as you maintain the minimum [liquidation collateral](../clusters/cluster-balance.md) required for your cluster.
 
-:::info Legacy SSV Clusters & SSV Withdrawal
-If you have a legacy SSV cluster and want to recover your SSV balance:
-- **To stay in the network:** [Migrate to ETH](./migrating-to-eth-clusters.md) - this automatically refunds your entire SSV balance
-- **To leave the network:** Allow your cluster to be liquidated - this also returns your SSV balance
-:::
-
 ### Connect your Web3 wallet to the WebApp
 
 Make sure to connect your Web3 wallet with the WebApp, and that the address corresponds with the one you want to manage your Validators with.

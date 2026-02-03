@@ -4,14 +4,11 @@ sidebar_position: 3
 
 # Claim Rewards
 
-Claim your accumulated ETH rewards from SSV staking anytime without unstaking.
-
 ## Overview
 
-As an SSV staker, you earn ETH rewards proportional to your share of total staked SSV. These rewards:
+As an SSV staker, you earn network fees proportional to your share of total staked SSV. These rewards:
 
 - Accrue continuously as clusters pay network fees
-- Are tracked separately from your cSSV balance
 - Can be claimed anytime without affecting your staking position
 - Do not auto-compound (your cSSV balance stays constant)
 
@@ -19,13 +16,13 @@ As an SSV staker, you earn ETH rewards proportional to your share of total stake
 
 ### Step 1: Connect Wallet
 
-Navigate to the SSV Network webapp and connect your wallet holding cSSV tokens.
+Navigate to the [SSV Network webapp](https://app.ssv.network/) and connect your wallet holding cSSV tokens.
 
 <!-- TODO: Add screenshot - Connect Wallet -->
 
 ### Step 2: View Unclaimed Rewards
 
-Go to the "Staking" section and locate the "Unclaimed Rewards" panel showing total ETH available, reward history, current APY, and last claim timestamp.
+Click on the "Stake" to enter your staking dashboard and see the unclaimed rewards.
 
 <!-- TODO: Add screenshot - Unclaimed Rewards Dashboard -->
 
@@ -74,18 +71,6 @@ Your Rewards = (Your cSSV / Total cSSV) × Total Network Fees
 - Continue earning new rewards immediately
 - Can claim again when rewards accumulate
 
-## Manual Compounding
-
-cSSV does not auto-compound. To compound rewards:
-
-1. Claim ETH rewards
-2. Swap ETH for SSV tokens
-3. Stake the new SSV tokens
-4. Receive additional cSSV
-5. Earn rewards on larger cSSV balance
-
-⚠️ **Note**: Requires manual action and incurs transaction costs.
-
 ## Rewards During Unstaking
 
 ⚠️ **Critical**: Rewards stop accruing the MOMENT you initiate unstaking, not after the 7-day cooldown.
@@ -101,7 +86,7 @@ cSSV does not auto-compound. To compound rewards:
 
 If you transfer cSSV tokens to another wallet:
 
-- **You keep**: All unclaimed ETH rewards accrued up to the transfer
+- **You keep**: All unclaimed rewards accrued up to the transfer
 - **Recipient gets**: The cSSV tokens
 - **Recipient earns**: New rewards from the transfer moment onward
 - **You can still**: Claim your historical rewards

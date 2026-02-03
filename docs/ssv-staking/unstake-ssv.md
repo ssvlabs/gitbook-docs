@@ -46,7 +46,7 @@ Go to the "Staking" section and locate your staking position details (staked SSV
 
 ### Step 3: Review and Claim Rewards
 
-Check if you have unclaimed ETH rewards. **Strongly recommended**: Claim them now before proceeding.
+Check if you have unclaimed rewards. **Strongly recommended**: Claim them now before proceeding.
 
 ### Step 4: Initiate Unstaking
 
@@ -98,26 +98,18 @@ After cooldown ends, return to the dashboard, click "Withdraw", review details, 
 
 Once confirmed:
 - SSV tokens returned to your wallet
-- Any unclaimed ETH rewards sent
+- Any unclaimed rewards sent
 - cSSV tokens burned from circulation
 - Staking position closed
 - Oracle weight removed
 
 <!-- TODO: Add screenshot - Withdrawal Complete Confirmation -->
 
-## Why 7-Day Cooldown?
-
-The cooldown period serves three purposes:
-
-1. **Oracle Stability** - Prevents rapid voting weight changes and maintains consensus reliability
-2. **Protocol Security** - Protects against flash-stake attacks and manipulation
-3. **Future Governance** - Prepares for governance mechanisms and protocol backstop functionality
-
 ## What Happens During Cooldown
 
 | Aspect | Status | Details |
 |--------|--------|---------|
-| **Rewards** | ❌ Stopped | No new ETH rewards accrue |
+| **Rewards** | ❌ Stopped | No new rewards accrue |
 | **Oracle weight** | ✅ Active | Voting power still counts |
 | **Claim rewards** | ✅ Allowed | Can claim accumulated ETH |
 | **Transfer cSSV** | ❌ Not allowed | Tokens locked for unstaking |
@@ -140,31 +132,11 @@ You can unstake a portion of your cSSV while keeping the rest staked:
 - During cooldown: 400 cSSV earns nothing, 600 cSSV still earning
 - After cooldown: Withdraw 400 SSV, keep 600 SSV staked
 
-## Critical: When Rewards Stop
-
-```
-[Staking] → [Initiate Unstake] → [7-Day Cooldown] → [Withdraw]
-   ✅ Earning         ❌ STOPS HERE      ❌ No rewards    ❌ No rewards
-```
-
-⚠️ **Most Important**: Rewards stop the moment you initiate unstaking, NOT after the cooldown period.
-
-To maximize rewards:
-- Let rewards accumulate before unstaking
-- Claim all unclaimed ETH
-- Consider timing (don't unstake before large fee distributions)
-- Remember you lose 7 days of potential rewards
-
 ## After Withdrawal
 
 Once complete:
 - Original SSV tokens returned
-- All claimed ETH rewards (if claimed)
+- All claimed rewards (if claimed)
 - cSSV tokens burned (removed from circulation)
 - Oracle weight removed
 - Staking position closed
-
-## Restaking
-
-You can restake immediately after withdrawal with no waiting period. However, frequent unstaking and restaking incurs gas costs.
-

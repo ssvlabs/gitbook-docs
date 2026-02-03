@@ -5,10 +5,6 @@ sidebar_position: 1
 
 # Adding validator to existing cluster
 
-:::warning Legacy SSV Clusters
-Adding validators to legacy SSV clusters is **no longer supported**. If you have a legacy SSV cluster, you must [migrate to ETH](./migrating-to-eth-clusters.md) first before adding new validators.
-:::
-
 ### Connect your Web3 wallet to the WebApp
 
 Make sure to connect your Web3 wallet with the WebApp, and that the address corresponds with the one you want to manage your Validators with.

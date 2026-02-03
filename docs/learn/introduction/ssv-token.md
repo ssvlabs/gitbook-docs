@@ -20,16 +20,10 @@ Staked SSV supports the network's oracle infrastructure by providing voting weig
 **Key benefits:**
 * Support the network's oracle system for validator balance reporting
 * Participate in securing decentralized oracle consensus
-* Receive ETH rewards from actual network activity
+* Receive rewards from actual network activity
 
 Learn more in the [SSV Staking Guide](/ssv-staking/).
 
 ### **Tokenomics**
 
-Below is a summary of SSV Tokenomics, you can find more details on the [Tokenomics dedicated docs page](/learn/tokenomics/README.md).
-
-SSV is designed to exponentially progress the network's core values:
-
-1. **Decentralized DAO governance -** no single entity or group should have control over the network.
-2. **DAO treasury -** continuously increase the DAO’s treasury value (for-profit DAO). A stable, and well-funded treasury will allow the DAO to expedite development efforts, allocate grants and engage in revenue share schemes for DAO members.
-3. **Operator income -** a growing network will affect operator compensation. Higher income will incentivize new operators to join the network and existing ones to improve their service, performance, and competitiveness.
+You can find more details on the [Tokenomics dedicated docs page](/learn/tokenomics/README.md).

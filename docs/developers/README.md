@@ -86,9 +86,7 @@ const sdk = new SSVSDK({
 ```
 
 ### **2. Select operators and collect their data**
-A cluster can have 4, 7, 10, or 13 operators — the bigger your cluster, the higher yearly fee, and the more reliable your validator operations.
-
-If you already know the operator IDs you can proceed to any of the 3 options below to get their data. 
+A cluster can have 4, 7, 10, or 13 operators. If you already know the operator IDs you can proceed to any of the 3 options below to get their data. 
 
 If you need to choose operators, feel free to browse [SSV Explorer](https://explorer.ssv.network/operators) to find the operators you will add to your cluster. Then proceed to the steps below. Please note, some of the operators are Private and only allow specific whitelisted addresses to onboard validators to them.
 

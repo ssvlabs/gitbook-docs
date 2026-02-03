@@ -5,10 +5,6 @@ sidebar_position: 4
 
 # Re-activating a cluster
 
-:::warning Legacy SSV Clusters
-Re-activating legacy SSV clusters is **no longer supported**. If your legacy SSV cluster was liquidated, you must [migrate to ETH](./migrating-to-eth-clusters.md) to continue operating on the network.
-:::
-
 ### Connect your Web3 wallet to the WebApp
 
 Make sure to connect your Web3 wallet with the WebApp, and that the address corresponds with the one you want to manage your Validators with.

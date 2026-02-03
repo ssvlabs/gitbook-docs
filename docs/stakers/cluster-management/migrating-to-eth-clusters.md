@@ -54,10 +54,7 @@ Before migrating, ensure you have:
 - Sufficient ETH to cover:
   - Initial cluster funding (operational runway)
   - Gas fees for the migration transaction
-
-:::tip Operational Runway
-We recommend depositing enough ETH for at least 90 days of operations to avoid frequent top-ups.
-:::
+  - We recommend depositing enough ETH for at least 90 days of operations to avoid frequent top-ups.
 
 ## Migration Process
 
@@ -65,8 +62,9 @@ We recommend depositing enough ETH for at least 90 days of operations to avoid f
 
 :::info Coming Soon
 The SSV WebApp will provide a guided migration flow. 
-**SCREENSHOTS/gUIDE TO FOLLOW IN ANOTHER PR**
 :::
+
+<!-- TODO: Add screenshots and instructions here -->
 
 ### Via Smart Contract
 

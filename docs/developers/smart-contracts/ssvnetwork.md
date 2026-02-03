@@ -328,6 +328,8 @@ Please note: the number of validators that can be requested to exit from the bea
 
 ### **`deposit(owner, operatorIds, cluster)`**
 
+Description: Deposits ETH into a cluster balance, will fail if not enough tokens are approved.
+
 The ETH amount to deposit must be [supplied via `msg.value`](https://docs.ethers.org/v4/api-contract.html#overrides).
 
 :::info Breaking Changes
@@ -401,23 +403,11 @@ Description: Updates network fee.
 
 | **Parameter** | **Type**                   | **Description**                                                                      |
 | ------------- | -------------------------- | ------------------------------------------------------------------------------------ |
-| networkFee    | uint256 (casted to uint64) | The fee charged by the network per validator (denominated as ETH per block). |
+| networkFee    | uint256 (casted to uint64) | The fee charged by the network per 32 ETH (denominated as ETH per block). |
 
 Events:
 
 * `NetworkFeeUpdated(uint256 oldFee, uint256 newFee)`
-
-### **`withdrawNetworkEarnings(amount)`**
-
-Description: Withdraws accumulated network fees in ETH to DAO treasury.
-
-| **Parameter** | **Type**                   | **Description**                                                                                                   |
-| ------------- | -------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| amount        | uint256 (casted to uint64) | Amount to be withdrawn. Amount must be shrinkable (divisible by 10000000) |
-
-Events:
-
-* `NetworkEarningsWithdrawn(uint256 value, address recipient)`
 
 ### **`updateLiquidationThresholdPeriod(blocks)`**
 
@@ -433,7 +423,7 @@ Events:
 
 ### `updateMaxiumumOperatorFee`**`(maxFee)`**
 
-Description: Updates the maximum fee an operator that uses ETH can set
+Description: Updates the maximum yearly fee per 32 ETH an operator can set
 
 | **Parameter** | **Type** | **Description**                                          |
 | ------------- | -------- | -------------------------------------------------------- |
@@ -560,7 +550,7 @@ Events:
 
 ### **`updateLiquidationThresholdPeriodSSV(blocks)`**
 
-Description: Sets the minimum period (in blocks) after which a cluster can be liquidated.
+Description: Sets the minimum period (in blocks) after which an SSV-based cluster can be liquidated.
 
 | **Parameter** | **Type** | **Description**                               |
 | ------------- | -------- | --------------------------------------------- |
@@ -570,21 +560,9 @@ Events:
 
 * `LiquidationThresholdPeriodSSVUpdated(uint64 value)`
 
-### `updateMaxiumumOperatorFeeSSV`**`(maxFee)`**
-
-Description: Updates the maximum fee an operator that uses SSV token can set
-
-| **Parameter** | **Type** | **Description**                                          |
-| ------------- | -------- | -------------------------------------------------------- |
-| maxFee        | uint64   | Maximum fee (in SSV tokens per year) an operator can set |
-
-Events:
-
-* `OperatorMaximumFeeSSVUpdated(uint64 maxFee)`
-
 ### `updateMinimumLiquidationCollateralSSV(amount)`
 
-Description: Sets the minimum collateral (in SSV token) each cluster must keep in his balance.
+Description: Sets the minimum collateral each SSV-based cluster must keep in his balance.
 
 | **Parameter** | **Type**                   | **Description**                                                                                                     |
 | ------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------- |

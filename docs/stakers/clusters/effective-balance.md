@@ -5,64 +5,38 @@ sidebar_position: 3
 
 # Effective Balance Accounting
 
-Effective Balance Accounting was brought together with SSV Staking update. With it in place fees, cluster runway, and liquidations are calculated across the SSV Network by aligning them with validators’ actual effective balance, rather than assuming a fixed 32 ETH per validator.
-This change is required to natively support [Ethereum’s post-Pectra validator model](https://consensys.io/blog/ethereum-pectra-upgrade), where a single validator can secure and earn rewards on significantly more than 32 ETH. Historically, this gap was partially addressed through off-chain mechanisms, while Effective Balance Accounting brings this logic fully on-chain and applies it consistently across network fees, operator fees, and cluster payments.
+Across the SSV Network, fees, cluster runway, and liquidation parameters are calculated based on validators’ actual effective balance. [Under Ethereum’s Pectra validator model](https://consensys.io/blog/ethereum-pectra-upgrade), a single validator can secure the network and earn rewards with an effective balance ranging from 32 to 2048 ETH.
 
 ## Effective Balance Monitoring
-Under this new model it is crucial to closely monitor each validator's on-chain effective balance. This is performed by the set of [Oracles](/learn/protocol-overview/oracles), periodically fetching on-chain data. 
+This monitoring is performed by the set of [Oracles](/learn/protocol-overview/oracles), periodically fetching validators’ effective balance data from the Beacon Chain and report it on-chain.
 
-However, these oracles only monitor already registered validators. When just registering new validators you will be prompted to fill in the total Effective Balance (EB) of registered validators yourself. This is optional and is done for accurate runway estimation. 
+Oracles monitor only validators that have already been registered. During the registration of new validators, stakers may  provide the total Effective Balance (EB) of the validators being registered. This information is used solely to improve the accuracy of initial runway estimations.
 
-Below is an example of what can happen if a staker fails to provide factual EB when prompted:
-1. Register a validator with EB of 2048 ETH
-2. Claim its EB as 32 ETH during registration to ssv network
-3. See runway estimation as if the validator has EB of 32 ETH
-4. Deposit the fees according to the *incorrect* estimations
-5. Once oracles get the information that the validator has EB of 2048 ETH, the actual fees will jump by 64 times
-6. The cluster's runway becomes 64 times shorter, and is at high risk of liquidation
+Providing an incorrect EB can lead to misleading runway estimates and unexpected fee changes. For example:
+1. A validator with an effective balance of 2048 ETH is registered
+2. The validator is declared as having 32 ETH during registration
+3. Runway estimation is computed based on 32 ETH
+4. Fees are deposited according to the underestimated runway
+5. Once the oracle reports the actual EB, fees increase by 64×
+6. The cluster runway is reduced accordingly, increasing liquidation risk
 
-## Accounting Changes
-Effective Balance Accounting changes how fees are calculated at the cluster level, by replacing validator count as a proxy with the cluster’s effective balance.
-
-In the ETH-based model, effective balance becomes the billing unit. Fees are defined per 32 ETH of effective balance and scale with a cluster’s total effective balance:
+## Fees Calculations
+Effective balance is used as the billing unit for fee calculation. Fees are defined per 32 ETH of effective balance and scale linearly with a cluster’s total effective balance, as shown below:
 
 $$
 (f_o + f_n) * Total Effective Balance / 32
 $$
 
 #### Legend:
-  * $$f_o$$ - operator fees *(per 32 ETH)* - the fees of all operators in the cluster (denominated in _ETH per block_)
-  * $$f_n$$ - network fees *(per 32 ETH)* - the fees owed to the ssv network (denominated in _ETH per block_)
-  * $$Total Effective Balance$$ - the cumulative effective balance of all validators belonging to the cluster
+  * $$f_o$$ - operator fees *(per 32 ETH)*, representing the combined fees of all operators in the cluster, denominated in _ETH per block_
+  * $$f_n$$ - network fees *(per 32 ETH)*, representing fees owed to the SSV network, denominated in _ETH per block_
+  * $$Total Effective Balance$$ - the he sum of effective balances across all validators in the cluster
 
 #### Under this model:
 - Fees are denominated in ETH
-- Fees are proportional to the actual Effective Balance of a cluster they secure
-- Validator count does *not* affect the fees.
-- Effective balance can be distributed across validator keys in any way. For more details, see [Examples](#examples) below.
-- Effective balance-based accounting applies only to ETH-based clusters. 
-
-
-### Legacy Clusters (SSV-based)
-:::info Legacy Model
-SSV-based clusters continue operating under the validator-count model until they migrate. After the migration, **ETH-based model becomes the only accounting model** used by the protocol.
-:::
-
-In the SSV-based model, validators act as a proxy for effective balance.
-Each validator is implicitly assumed to represent a fixed 32 ETH of effective balance. Fees therefore scale linearly with the number of validators in the cluster, regardless of how much effective balance those validators actually secure.
-
-$$
-(f_o + f_n) * Validator Count
-$$
-
-#### Legend:
-  * $$f_o$$ - operator fees *(per Validator)* - the fees of all operators in the cluster (denominated in _SSV tokens per block_)
-  * $$f_n$$ - network fees *(per Validator)* - the fees owed to the ssv network (denominated in _SSV tokens per block_)
-
-#### Under this model:
-- Fees are defined per validator
-- Total fees scale with validator count
-- Consolidated validators are not fully accounted for
+- Fees scale proportionally with the cluster’s actual effective balance
+- The validator count does *not* affect the fee calculation
+- Effective balance may be split across validator keys in any manner (see [Examples](#examples))
 
 ## Examples
 
