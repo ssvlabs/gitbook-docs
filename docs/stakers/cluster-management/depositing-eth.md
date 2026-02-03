@@ -9,10 +9,6 @@ All clusters on SSV Network use native ETH for fee payments to operators and the
 
 For more information on cluster balance mechanics, please refer to [the dedicated learning page](/stakers/clusters/cluster-balance).
 
-:::warning Legacy SSV Clusters
-If you have a legacy SSV cluster, you cannot deposit additional SSV. The only way to maintain your cluster is to [migrate to ETH](./migrating-to-eth-clusters.md), which automatically refunds your SSV balance.
-:::
-
 ### Connect your Web3 wallet to the WebApp
 
 Make sure to connect your Web3 wallet with the WebApp, and that the address corresponds with the one you want to manage your Validators with.

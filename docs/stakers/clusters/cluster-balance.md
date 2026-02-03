@@ -5,12 +5,6 @@ sidebar_position: 2
 
 # Cluster Balance
 
-:::danger Legacy SSV Clusters
-**SSV-based payments are frozen.** Existing SSV clusters cannot be actively maintained under the SSV payment model. The only forward path is to [migrate to ETH](/stakers/cluster-management/migrating-to-eth-clusters.md).
-
-While this documentation primarily focuses on **ETH clusters** (the current standard), the formulas and concepts also apply to legacy SSV clusters during the transition period. Where payment currency matters, substitute SSV for ETH in legacy clusters.
-:::
-
 The cluster balance needs to be kept in check to ensure the continued operation of its validator(s). This page explains how to calculate cluster balance at a specific blockchain block.
 
 It is important to be aware that the cluster balance must **always be higher than the required** collateral for the cluster, so only the portion of the cluster balance exceeding the Liquidation Collateral can be used to calculate the Operational Runway.
@@ -40,10 +34,10 @@ $$
 Legend:
 
 * $$balance_n$$ - cluster balance at block number `n` in ETH
+* $$balance_{snapshot}$$ - value of the cluster balance on its latest snapshot
 * $$\Delta_{network\ fee}$$ - Change in network fees paid since the last snapshot
 * $$\Delta_{operators\ fee}$$ - Change in operator fees paid since the last snapshot
-* $$balance_{snapshot}$$ - value of the cluster balance on its latest snapshot
-* $$eb$$ - total effective balance of validators managed by the cluster
+* $$eb$$ - [total effective balance](effective-balance.md) of validators managed by the cluster
 
 #### Network fees delta
 
@@ -59,8 +53,8 @@ Legend:
 * $$\Delta_{network\ fee}$$ - Change in network fees paid since the last snapshot
 * $$nfi_p$$ - Protocol Network Fee Index, the latest protocol-wide network fee index
 * $$b$$ - Block number of the latest blockchain block
-* $$nf$$ - The current network fee
 * $$nfb_p$$ - The block number at which the Protocol Network Fee Index was taken
+* $$nf$$ - The current network fee
 * $$nfi_c$$ - Cluster Network Fee Index, the latest network fee index for the given cluster
 
 #### Operators fees delta

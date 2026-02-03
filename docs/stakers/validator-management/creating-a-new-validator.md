@@ -5,10 +5,6 @@ sidebar_position: 1
 
 # Creating a new validator
 
-:::tip ETH Clusters
-All new clusters on SSV use **native ETH** for operator fee payments. This guide prepares you for creating the validator keys that will be distributed to operators.
-:::
-
 :::info
 Note: Instead of creating a validator key pair and then distribute that into Key Shares, you can run a Distributed Key Generation ceremony, thanks to the [SSV DKG Client](/developers/tools/ssv-dkg-client/).
 :::

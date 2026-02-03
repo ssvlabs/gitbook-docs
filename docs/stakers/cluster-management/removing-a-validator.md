@@ -5,14 +5,6 @@ sidebar_position: 7
 
 # Removing a validator
 
-:::warning Legacy SSV Clusters
-Removing validators from legacy SSV clusters is **no longer supported**. If you need to remove a validator from a legacy cluster:
-1. [Migrate the cluster to ETH](./migrating-to-eth-clusters.md) first
-2. Then remove the validator
-
-Alternatively, you can [exit the validator](./exiting-a-validator.md) and let the cluster liquidate naturally.
-:::
-
 ### Connect your Web3 wallet to the WebApp
 
 Make sure to connect your Web3 wallet with the WebApp, and that the address corresponds with the one you want to manage your Validators with.
