@@ -78,6 +78,20 @@ Have a look at how to collect the necessary data to calculate the balance on the
 
 A programmatic example of calculating the cluster balance has been added to the [SSV SDK](/developers/SSV-SDK/module-reference/api-module#getclusterbalanceclusterid-daoaddress-operatorids).
 
+### Burn Rate
+
+The rate at which a cluster spends ETH per block. It is the sum of all operators' fees with the current network fee, divided by effective balance of a cluster.
+
+$$
+Burn\;Rate_{cluster} = (\sum(ofi_n) + {nf}) * eb / 32
+$$
+
+Legend:
+
+* $$of_n$$ - The current operator fee for the nth operator
+* $$nf$$ - The current network fee
+* $$eb$$ - [total effective balance](effective-balance.md) of validators managed by the cluster
+
 ### Operational Runway
 
 Any additional funds added to the cluster balance on top of the required collateral will prolong the operation of its validators and are usually referred to as Operational Runway. Users can manage their clusters balance by depositing or withdrawing funds at will, knowing that all extra funds added to the cluster balance will increase its operational runway.

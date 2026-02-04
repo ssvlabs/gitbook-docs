@@ -218,7 +218,7 @@ const txn_receipt = await sdk.clusters.registerValidators({
 console.log("txn_receipt: ", txn_receipt)
 ```
 
-For validator [registration transaction](/developers/smart-contracts/ssvnetwork#bulkregistervalidatorpublickey-operatorids-shares-amount-cluster) you need to provide the cluster’s latest snapshot data and the user nonce. Fortunately, SSV SDK retrieves this data automatically, so you don't have to.
+For validator [registration transaction](/developers/smart-contracts/ssvnetwork#bulkregistervalidatorpublickey-operatorids-shares-cluster) you need to provide the cluster’s latest snapshot data and the user nonce. Fortunately, SSV SDK retrieves this data automatically, so you don't have to.
 
 ### Full code example
 

@@ -120,7 +120,7 @@ Run `web3signer` with the arguments in the example. You might need to change HTT
     When TLS is enabled on Web3Signer, make sure to:
     1. Use `https://` in the `WEB3SIGNER_ENDPOINT` value for SSV-Signer
     2. Configure client TLS options for SSV-Signer to connect securely (
-    see [Client TLS Configuration](#client-tls-configuration-ssv-signer-connecting-to-web3signer) section for detailed
+    see [Client TLS Configuration](#5-configure-tls-for-ssv-signer) section for detailed
     examples)
   </TabItem>
 </Tabs>

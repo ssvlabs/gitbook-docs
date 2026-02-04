@@ -8,7 +8,7 @@ sidebar_position: 3
 Across the SSV Network, fees, cluster runway, and liquidation parameters are calculated based on validators’ actual effective balance. [Under Ethereum’s Pectra validator model](https://consensys.io/blog/ethereum-pectra-upgrade), a single validator can secure the network and earn rewards with an effective balance ranging from 32 to 2048 ETH.
 
 ## Effective Balance Monitoring
-This monitoring is performed by the set of [Oracles](/learn/protocol-overview/oracles), periodically fetching validators’ effective balance data from the Beacon Chain and report it on-chain.
+This monitoring is performed by the set of [Oracles](/learn/introduction/oracles), periodically fetching validators’ effective balance data from the Beacon Chain and report it on-chain.
 
 Oracles monitor only validators that have already been registered. During the registration of new validators, stakers may  provide the total Effective Balance (EB) of the validators being registered. This information is used solely to improve the accuracy of initial runway estimations.
 
