@@ -11,5 +11,5 @@ reactivation\;Balance > BurnRate_{cluster} * LTP
 $$
 
 #### Legend
-  * $$Burn Rate$$ - the rate at which a cluster spends ETH per block
+  * [$$Burn Rate$$](cluster-balance.md#burn-rate) - the rate at which a cluster spends ETH per block
   * $$LTP$$ - liquidation threshold period

@@ -18,7 +18,7 @@ Return values:
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| fee | uint256 | The fee charged by the network per 32 ETH (denominated as ETH per block) |
+| fee | uint256 | The fee charged by the network proportional to Effective Balance (denominated as ETH per block) |
 
 ### **`getNetworkEarnings ()`**
 
