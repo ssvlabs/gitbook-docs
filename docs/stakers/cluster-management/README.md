@@ -17,7 +17,7 @@ sidebar_position: 5
 
 :::warning Legacy SSV Clusters
 Existing SSV-based clusters are treated as legacy. **This means the following actions are no longer supported:**
-- Adding new validators to SSV clusterr
+- Adding new validators to SSV cluster
 - Depositing additional SSV to extend runway
 - Removing or exiting validators from SSV clusters
 
