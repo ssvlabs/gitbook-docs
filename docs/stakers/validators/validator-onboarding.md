@@ -45,10 +45,6 @@ With the network embracing a free-market approach, where operators set their own
 
 In addition to fees, there's a minimum balance requirement, known as [liquidation collateral](../clusters/cluster-balance), that has to be deposited for each validator a user runs through the network.
 
-:::tip ETH Clusters
-New clusters on SSV Network use ETH for all fee payments.
-:::
-
 ### Validator Funding <a href="#_kumpogh364aq" id="_kumpogh364aq"></a>
 
 To cover validator operational costs, your cluster must be funded with an appropriate amount of **ETH** (see [Cluster Balance](../clusters/cluster-balance.md)).
@@ -81,8 +77,4 @@ $$
 
 :::info Operational Runway
 Maintaining your cluster's operational runway is essential. You can always deposit more ETH to extend your runway or withdraw excess balance as needed.
-:::
-
-:::note Legacy SSV Clusters
-If you're operating a legacy SSV cluster (funded with SSV tokens), new validators **cannot** be added to it. They can, however, be added to ETH clusters instead.
 :::

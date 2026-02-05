@@ -86,9 +86,7 @@ const sdk = new SSVSDK({
 ```
 
 ### **2. Select operators and collect their data**
-A cluster can have 4, 7, 10, or 13 operators — the bigger your cluster, the higher yearly fee, and the more reliable your validator operations.
-
-If you already know the operator IDs you can proceed to any of the 3 options below to get their data. 
+A cluster can have 4, 7, 10, or 13 operators. If you already know the operator IDs you can proceed to any of the 3 options below to get their data. 
 
 If you need to choose operators, feel free to browse [SSV Explorer](https://explorer.ssv.network/operators) to find the operators you will add to your cluster. Then proceed to the steps below. Please note, some of the operators are Private and only allow specific whitelisted addresses to onboard validators to them.
 
@@ -103,7 +101,7 @@ If you need to choose operators, feel free to browse [SSV Explorer](https://expl
     const operatorIDs = JSON.parse(process.env.OPERATOR_IDS)
     const url = "https://gateway.thegraph.com/api/subgraphs/id/F4AU5vPCuKfHvnLsusibxJEiTN7ELCoYTvnzg3YHGYbh";
     const query = `
-    query ValidatorData($operatorIDs: [Bytes!]) {
+    query OperatorData($operatorIDs: [Bytes!]) {
           operators(where: {id_in: $operatorIDs}) {
             id
             publicKey
@@ -220,7 +218,7 @@ const txn_receipt = await sdk.clusters.registerValidators({
 console.log("txn_receipt: ", txn_receipt)
 ```
 
-For validator [registration transaction](/developers/smart-contracts/ssvnetwork#bulkregistervalidatorpublickey-operatorids-shares-amount-cluster) you need to provide the cluster’s latest snapshot data and the user nonce. Fortunately, SSV SDK retrieves this data automatically, so you don't have to.
+For validator [registration transaction](/developers/smart-contracts/ssvnetwork#bulkregistervalidatorpublickey-operatorids-shares-cluster) you need to provide the cluster’s latest snapshot data and the user nonce. Fortunately, SSV SDK retrieves this data automatically, so you don't have to.
 
 ### Full code example
 
@@ -301,7 +299,7 @@ async function main(): Promise<void> {
     const operatorIDs = JSON.parse(process.env.OPERATOR_IDS)
     const url = "https://gateway.thegraph.com/api/subgraphs/id/F4AU5vPCuKfHvnLsusibxJEiTN7ELCoYTvnzg3YHGYbh";
     const query = `
-    query ValidatorData($operatorIDs: [Bytes!]) {
+    query OperatorData($operatorIDs: [Bytes!]) {
           operators(where: {id_in: $operatorIDs}) {
             id
             publicKey

@@ -115,10 +115,6 @@ To avoid losing your keystores to an attacker, follow these best practices:
 
 You can select the operational runway period of your validator, in accordance with the **Yearly Fee** of previously selected operators. This will dictate the initial amount of **ETH** to be deposited in the cluster, but it can always be managed later.
 
-:::tip ETH Payments
-New clusters use native ETH for all fee payments. This provides simpler accounting and better alignment with Ethereum economics.
-:::
-
 ![Distribute a validator](/img/distributing-a-val-11.avif)
 
 **Please read carefully and understand how fees are managed and the risks of account** [**liquidation**](../../learn/glossary.md#liquidation) **if your account balance falls below the** [**Threshold Balance**](../../learn/glossary.md#liquidation-collateral)**.**

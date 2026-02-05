@@ -1,5 +1,5 @@
 ---
-title: Depositing ETH
+title: Deposit ETH
 sidebar_position: 2
 ---
 
@@ -7,45 +7,42 @@ sidebar_position: 2
 
 All clusters on SSV Network use native ETH for fee payments to operators and the network. The cluster balance is necessary to reward operators and pay network fees.
 
+:::tip Operational Runway
+Remember to maintain sufficient ETH balance to cover your cluster's operational costs. Monitor your runway regularly to avoid liquidation.
+
 For more information on cluster balance mechanics, please refer to [the dedicated learning page](/stakers/clusters/cluster-balance).
-
-:::warning Legacy SSV Clusters
-If you have a legacy SSV cluster, you cannot deposit additional SSV. The only way to maintain your cluster is to [migrate to ETH](./migrating-to-eth-clusters.md), which automatically refunds your SSV balance.
 :::
 
-### Connect your Web3 wallet to the WebApp
+#### 1. Connect Web3 Wallet
 
-Make sure to connect your Web3 wallet with the WebApp, and that the address corresponds with the one you want to manage your Validators with.
+Connect your Web3 wallet with the [WebApp](https://app.ssv.network/), use the same address used for validator registration.
 
-:::info
-**Note:** Your account is associated with your Web3 wallet.
-:::
+#### 2. Choose the Cluster
 
 In the My Account page, select an active cluster and then click on the "Deposit" button.
 
-ETH_FEES_FILLER_TEXT
+![Deposit ETH to cluster balance](/img/deposit-eth-2.png)
+
+#### 3. Enter the Amount
 
 In the next screen, you'll be asked to enter the amount of ETH you want to deposit.
 
-ETH_FEES_FILLER_TEXT
-
 Once you enter the amount, click on the _Deposit_ button.
 
-ETH_FEES_FILLER_TEXT
+![Deposit ETH to cluster balance](/img/deposit-eth-3.png)
 
-The page will submit a transaction to the SSV Network smart contract. The ETH amount will be included as `msg.value` in the transaction. Check your Web3 wallet to confirm.
+#### 4. Sign transaction
 
-ETH_FEES_FILLER_TEXT
+The page will submit a transaction to the SSV Network smart contract. Finalize the deposit to the Cluster by signing the transaction.
 
-Now, finalize the deposit to the Cluster by signing the transaction.
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+  <img 
+    src="/img/deposit-eth-4.png" 
+    alt="Deposit ETH to cluster balance" 
+    style={{ width: '40%', maxWidth: '500px' }}
+  />
+</div>
 
-ETH_FEES_FILLER_TEXT
+#### 5. Deposit Complete
 
 You'll be taken back to the Cluster page, where the balance will be updated with the deposited ETH amount.
-
-ETH_FEES_FILLER_TEXT
-
-:::tip Operational Runway
-Remember to maintain sufficient ETH balance to cover your cluster's operational costs. Monitor your runway regularly to avoid liquidation.
-:::
-

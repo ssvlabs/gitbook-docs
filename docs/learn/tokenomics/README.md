@@ -21,8 +21,8 @@ The network uses ETH-based payments for clusters and operators:
 * **Operators earn in ETH** - Receive ETH payments for managing validators
 * **Network fees in ETH** - A portion of fees flows to the protocol
 
-![Operators receive ETH payments and generate ETH rewards for stakers. Stakers pay ETH and receive generated ETH rewards in return.](/img/tokenomics-readme-1.png)
-*Operators receive ETH payments and generate ETH rewards for stakers. Stakers pay ETH and receive generated ETH rewards in return.*
+![Operators receive ETH payments and generate rewards for stakers. Stakers pay ETH and receive generated rewards in return.](/img/tokenomics-readme-1.png)
+*Operators receive ETH payments and generate rewards for stakers. Stakers pay ETH and receive generated rewards in return.*
 
 ## SSV token utility
 

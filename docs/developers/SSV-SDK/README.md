@@ -4,12 +4,6 @@ sidebar_position: 3
 
 # SSV SDK
 
-:::warning
-Development Notice: This SDK is currently under active development and testing. It is not recommended for production use at this time.
-
-This section and SDK are a work in progress and will be continuously updated as new components of the SDK are released.
-:::
-
 The SSV SDK is a comprehensive, open-source developer toolkit written in TypeScript, designed to empower developers to seamlessly interact with the SSV Network programmatically. 
 
 It consolidates all necessary tooling into a single, cohesive package.

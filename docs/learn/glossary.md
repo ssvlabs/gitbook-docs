@@ -13,17 +13,15 @@ The Beacon Chain is a brand-new, proof-of-stake blockchain that stores and manag
 
 ### Cluster
 
-The group (usually 4, in compliance with [the fault tolerance rule is accepted](../../../stakers/validators/validator-onboarding)) of non-trusting operators that manage a set (one, or multiple) validator(s). Each operator in the cluster holds a share of the complete validator key, for more information, see [Shamir Secret Sharing](glossary.md#shamir-secret-sharing).
-
-Clusters pay fees in ETH, which is the standard payment method. Older clusters may still pay fees in SSV tokens, but can migrate to ETH-based payments via `migrateClusterToETH()`.
+The group (usually 4, in compliance with [the fault tolerance rule is accepted](/stakers/validators/validator-onboarding)) of non-trusting operators that manage a set (one, or multiple) validator(s). Each operator in the cluster holds a share of the complete validator key, for more information, see [Shamir Secret Sharing](glossary.md#shamir-secret-sharing).
 
 ### Consensus Client
 
 Formerly known as an Eth2 client. Runs the Ethereum PoS (Proof-of-Stake) consensus layer, aka the Beacon Chain, checking the validity of transactions and new blocks. Examples of consensus clients include Prysm, Teku, Lighthouse, Nimbus, and Lodestar.
 
-### Cooldown Period
+### cSSV Unstaking Cooldown Period
 
-The mandatory 7-day waiting period between initiating SSV token unstaking and being able to withdraw your staked SSV. During this cooldown:
+The mandatory waiting period (initially 7-days) between cSSV token unstaking and withdrawing your staked SSV. During this cooldown:
 - Rewards stop accruing immediately
 - Oracle voting weight remains active
 - The process cannot be cancelled
@@ -31,16 +29,10 @@ The mandatory 7-day waiting period between initiating SSV token unstaking and be
 
 The cooldown exists to maintain oracle voting stability and prepare for future governance mechanisms.
 
-### cSSV (Compound SSV)
+### cSSV
 
-A non-rebasing ERC-20 token received when you stake SSV tokens. Key properties:
+A non-rebasing transferrable ERC-20 token received when you stake SSV tokens. When unstaking, cSSV is burned and you receive back your original SSV plus any unclaimed rewards. cSSV contributes to the network's oracle infrastructure by providing voting weight for effective balance reporting. 
 
-- **Non-rebasing** - Your cSSV balance stays constant; it doesn't auto-increase
-- **Transferable** - Can be transferred, traded, or used in DeFi protocols
-- **Index-based rewards** - ETH rewards accrue separately via an increasing reward index
-- **Initial 1:1 ratio** - When you stake SSV, you initially receive equal amounts of cSSV
-
-cSSV represents your staked position and determines your share of network fee rewards. When you unstake, cSSV is burned and you receive back your original SSV plus any unclaimed rewards.
 
 ### Custodial Staking
 
@@ -60,9 +52,9 @@ Distributed Validator Technology is another name for SSV (Secret Shared Validato
 
 ### Effective Balance (EB)
 
-The active stake balance of a validator on the Beacon Chain, used to calculate rewards and voting weight. After Ethereum's Pectra upgrade, validators can have variable effective balances from 32 to 2048 ETH (previously fixed at 32 ETH).
+The active stake balance of a validator on the Beacon Chain is used to calculate staking rewards. After Ethereum's Pectra upgrade, validators can have variable effective balances from 32 to 2048 ETH (previously fixed at 32 ETH).
 
-In SSV Network, effective balances are reported by oracles and used to calculate fair fee distribution through vUnits (virtual units). ETH clusters pay fees proportional to their validators' actual effective balances, while legacy SSV clusters use the traditional validator count method.
+In SSV Network, effective balance is used as fee accounting measure. Clusters pay fees proportional to their validators' actual EBs. The EBs is reported by oracles and used to calculate fair fee distribution. 
 
 ### Epochs & Slots
 
@@ -122,11 +114,11 @@ Applying secure Multi-Party Computation (MPC) to secret sharing allows for KeySh
 
 A service that provides streamlined Ethereum validator set-up and management, but does not hold user private validator keys AND withdrawal keys. Allowing users to maximize staking returns, mitigate security risks and retain complete control over their assets.
 
-### Oracle (SSV Network)
+### Effective Balance Oracles
 
-In SSV Network, oracles are permissioned entities that report validator effective balances from the Beacon Chain to the smart contracts. In v1, there are 4 oracles that require 75% weight consensus to commit balance updates.
+In the SSV Network, oracles report validator effective balances from the Beacon Chain to on-chain smart contracts.
 
-Oracles are supported by SSV stakers, whose staked weight is automatically delegated across all oracles. This oracle system enables fair fee calculation for variable-balance validators post-Pectra.
+These oracles are backed by SSV stakers, who delegate their voting power to their chosen Effective Balance (EB) oracle. This system enables fair fee calculation for validators with variable balances following the Pectra upgrade.
 
 ### Operator
 
@@ -166,21 +158,17 @@ The SSV Node software maintain peer-to-peer connections with other Nodes to hand
 ssv.network allows access to a decentralized ETH staking infrastructure with SSV token as the protocol's native token. It has 4 main purposes:
 
 * **Governance** – Submitting votes and voting on DAO proposals
-* **Payments** – The network receives fees paid in ETH by clusters, and the accrued ETH is converted into value for SSV stakers through the staking mechanism
+* **Payments** – The network receives fees paid in ETH by clusters
 * **Grants** – DAO funding for developers and contributors helping to grow the network
-* **Staking** – Stake SSV to support oracle infrastructure
+* **Staking** – The oracle infrastructure is supported through SSV staking, which enables the delegation of voting power to a chosen oracle.
 
 ### SSV Staker
 
-An SSV token holder who stakes their SSV tokens to contribute voting weight to the network's oracle system, which reports validator effective balances to the blockchain. When staking SSV a holder receives cSSV which also allows to participates in SSV governance. While holding cSSV, ETH rewards accrue to the wallet holding cSSV.
+An SSV token holder who stakes their SSV tokens to contribute voting weight to the network's oracle system, which reports validator effective balances to the blockchain. When staking SSV a holder receives cSSV which also allows to participates in SSV governance. 
 
 ### Staker
 
 Services or individual ETH holders that wish to leverage SSV/DVT technology for optimal liveness, security and decentralization of their validator(s). Stakers put 32 ETH "at stake" for each validator they want to run. In the PoS consensus mechanism, validators secure the Ethereum blockchain and earn ETH rewards in return for doing so.
-
-### SSV Staking
-
-The process of staking SSV tokens to earn ETH rewards from network fees. SSV Staking also contributes to the network's oracle infrastructure by providing voting weight for effective balance reporting.
 
 ### Staking
 
@@ -197,18 +185,3 @@ A validator is responsible for confirming transactions and proposing new blocks 
 An SSV validator is one that is run on ssv.network and employs SSV technology to split the validator key into 4 KeyShares for the purposes of distributing the validator over multiple nodes for redundancy and fault-tolerance.
 
 Post-Pectra, validators can have variable effective balances from 32 to 2048 ETH.
-
-### vUnits (Virtual Units)
-
-A measurement unit used in ETH clusters to calculate fees proportional to validator effective balance. Calculated as:
-
-```
-vUnits = (effectiveBalance / 32 ETH) × 100
-```
-
-Examples:
-- 32 ETH validator = 100 vUnits
-- 64 ETH validator = 200 vUnits
-- 2048 ETH validator = 6400 vUnits
-
-This ensures that validators with higher effective balances pay proportionally higher fees, as they generate more rewards. Legacy SSV clusters do not use vUnits and treat all validators equally regardless of effective balance.
