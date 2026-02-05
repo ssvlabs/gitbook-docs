@@ -54,7 +54,6 @@ Return values
 
 Description: Returns the max amount by which operators can increase fees in each fee update cycle. This does refer to the max operator fee limitation, but to the rate (%) by which it can be increased.
 
-
 Return values
 
 | **Parameter** | **Type** | **Description**                                                        |
@@ -64,7 +63,6 @@ Return values
 ### **`getOperatorFeePeriods()`**
 
 Description: returns the time windows (in seconds) of operators declaration and execution fee periods.
-
 
 Return values:
 
@@ -83,7 +81,7 @@ Return values
 | --------- | ------ | -------------------------------- |
 | maxFee    | uint64 | The maximum fee value (ETH/year) |
 
-### `getValidatorsPerOperatorLimit()`
+### **`getValidatorsPerOperatorLimit()`**
 
 Description: Returns the maximum amount of validators an operator may manage.
 
@@ -136,7 +134,13 @@ Description: Returns the declared fee (not actual fee) together with the executi
 | ------------- | -------- | --------------- |
 | operatorId    | uint64   | The operator id |
 
-Return value**getOperatorEarnings (operatorId)**
+Return value
+
+| **Parameter** | **Type** | **Description**                                                        |
+| ------------- | -------- | ---------------------------------------------------------------------- |
+| declaredFee   | uint256  | The fee declared by the operator (denominated as ETH per block) |
+
+### **`getOperatorEarnings (operatorId)`**
 
 Description: Returns the outstanding earnings of an operator.
 
@@ -149,74 +153,6 @@ Return values
 | **Parameter** | **Type** | **Description**                                |
 | ------------- | -------- | ---------------------------------------------- |
 | balance       | uint256  | Operators outstanding earnings in ETH. |
-
-## Cluster Methods <a href="#s1a6da24gvwp" id="s1a6da24gvwp"></a>
-
-### **`getBalance (owner, operatorIds, cluster)`**
-
-Description: Returns the outstanding ETH balance of a cluster.
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| owner | address | The cluster owner address |
-| operatorIds | uint64[] | List of cluster operators Ids |
-| cluster | tuple[] | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](/developers/tools/ssv-scanner) tool |
-
-Return values:
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| balance | uint256 | Clusters outstanding balance denominated in ETH |
-
-### **`getBurnRate (owner, operatorIds, cluster)`**
-
-Description: Returns current ongoing expenses of ETH for a particular SSV cluster balance on per block basis (aggregates all expenses for all the validators in this cluster).\\
-
-| **Parameter** | **Type**  | **Description**                                                                                                          |
-| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
-| owner         | address   | The user address                                                                                                         |
-| operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                           |
-| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
-
-Return values
-
-| **Parameter** | **Type** | **Description**                                     |
-| ------------- | -------- | --------------------------------------------------- |
-| burnRate      | uint256  | The rate per block in which the account spends ETH. |
-
-## Liquidator Methods <a href="#id-39qo7wl8s1he" id="id-39qo7wl8s1he"></a>
-
-### **`isLiquidatable (owner, operatorIds, cluster)`**
-
-Description: Returns true if the specified cluster is under the liquidation threshold and can be liquidated.
-
-| **Parameter** | **Type**  | **Description**                                                                                                          |
-| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
-| owner         | address   | The user address                                                                                                         |
-| operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                           |
-| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
-
-Return values
-
-| **Parameter** | **Type** | **Description**                             |
-| ------------- | -------- | ------------------------------------------- |
-| isLiquidatable | boolean  | Indication if a cluster could be liquidated |
-
-### **`isLiquidated (owner, operatorIds, cluster)`**
-
-Description: Returns true if the provided cluster is liquidated.
-
-| **Parameter** | **Type**  | **Description**                                                                                                          |
-| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
-| owner         | address   | The user address                                                                                                         |
-| operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                           |
-| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
-
-Return values
-
-| **Parameter** | **Type** | **Description**                       |
-| ------------- | -------- | ------------------------------------- |
-| isLiquidated  | boolean  | Indication if a cluster is liquidated |
 
 ### **`getWhitelistedOperators(operatorIds, whitelistedAddress)`**
 
@@ -262,6 +198,270 @@ Return values
 | **Parameter** | **Type** | **Description**                               |
 | ------------- | -------- | --------------------------------------------- |
 | isWhitelisted | bool     | True if address is whitelisted, false if not. |
+
+## Cluster Methods <a href="#s1a6da24gvwp" id="s1a6da24gvwp"></a>
+
+### **`getBalance (owner, operatorIds, cluster)`**
+
+Description: Returns the outstanding ETH balance of a cluster.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| owner | address | The cluster owner address |
+| operatorIds | uint64[] | List of cluster operators Ids |
+| cluster | tuple[] | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](/developers/tools/ssv-scanner) tool |
+
+Return values:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| balance | uint256 | Clusters outstanding balance denominated in ETH |
+
+### **`getBurnRate (owner, operatorIds, cluster)`**
+
+Description: Returns current ongoing expenses of ETH for a particular SSV cluster balance on per block basis (aggregates all expenses for all the validators in this cluster).\\
+
+| **Parameter** | **Type**  | **Description**                                                                                                          |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
+| owner         | address   | The user address                                                                                                         |
+| operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                           |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
+
+Return values
+
+| **Parameter** | **Type** | **Description**                                     |
+| ------------- | -------- | --------------------------------------------------- |
+| burnRate      | uint256  | The rate per block in which the account spends ETH. |
+
+### **`getClusterAssetType(address,uint64[])`**
+
+Description: Payment asset for the cluster identified by provided parameters.
+
+| **Parameter** | **Type**  | **Description**                                                                                                          |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
+| owner         | address   | The user address                                                                                                         |
+| operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                           |
+
+Return values
+
+| **Parameter**   | **Type** | **Description**                              |
+| --------------- | -------- | -------------------------------------------- |
+| Cluster asset type | uint8   | Cluster asset type  |
+
+### **`getEffectiveBalance(address,uint64[],tuple)`**
+
+Description: Total Effective Balance of the cluster identified by the provided parameters.
+
+| **Parameter** | **Type**  | **Description**                                                                                                          |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
+| owner         | address   | The user address                                                                                                         |
+| operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                           |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
+
+Return values
+
+| **Parameter**   | **Type** | **Description**                              |
+| --------------- | -------- | -------------------------------------------- |
+| effectiveBalance | uint32   | Total effective balance of the identified cluster |
+
+## Oracle Methods
+
+### **`getActiveOracleIds()`**
+
+Description: IDs of the currently active Oracles.
+
+Return values
+
+| **Parameter**   | **Type** | **Description**                              |
+| --------------- | -------- | -------------------------------------------- |
+| oracleIds | uint32[4]   | The active oracles' IDs. |
+
+### **`getOracle(uint32)`**
+
+Description: Wallet address of the Oracle identified by the provided ID.
+
+| **Parameter** | **Type**  | **Description**                                                                                                          |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
+| oracleId   | uint32 | ID of the oracle to fetch.                                                                                           |
+
+Return values
+
+| **Parameter**   | **Type** | **Description**                              |
+| --------------- | -------- | -------------------------------------------- |
+| Wallet address | address   | Wallet address of the Oracle identified by the provided ID. |
+
+### **`getOracleWeight(uint32)`**
+
+Description: Delegation weight associated with the Oracle identified by the provided ID.
+
+| **Parameter** | **Type**  | **Description**                                                                                                          |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
+| oracleId   | uint32 | ID of the oracle to fetch.                                                                                           |
+
+Return values
+
+| **Parameter**   | **Type** | **Description**                              |
+| --------------- | -------- | -------------------------------------------- |
+| Delegation weight | unit256   | Delegation weight associated with the Oracle identified by the provided ID. |
+
+### **`getUserDelegation(address)`**
+
+Description: Returns the delegations made by the provided wallet address to the active Oracles.
+
+| **Parameter** | **Type**  | **Description**                                                                                                          |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
+| address   | address | Wallet address to fetch delegations.                                                                                           |
+
+Return values
+
+| **Parameter**   | **Type** | **Description**                              |
+| --------------- | -------- | -------------------------------------------- |
+| oracleIds | uint32[4]   | The oracles' IDs. |
+| amounts | uint256[4]   | The delegations made by each Oracle. |
+
+### **`getQuorumBps()`**
+
+Description: Quorum the Oracles need to reach in order to commit a Hash root, measured in Base Points.
+
+Return values
+
+| **Parameter**   | **Type** | **Description**                              |
+| --------------- | -------- | -------------------------------------------- |
+| Quorum Base Points | uint16   | Quorum the Oracles need to reach in order to commit a Hash root. |
+
+### **`getCommittedRoot(uint64)`**
+
+Description: Hash root of the total effective balance committed by the Oracles on the given block.
+
+| **Parameter** | **Type**  | **Description**                                                                                                          |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
+| blockNum   | uint64\[] | Block number.                                                                                           |
+
+Return values
+
+| **Parameter**   | **Type** | **Description**                              |
+| --------------- | -------- | -------------------------------------------- |
+| Hash root | bytes32   | of the total effective balance committed by the Oracles on the given block. |
+
+## Staking Methods
+
+### **`accEthPerShare()`**
+
+Description: Global cumulative ETH reward index per 1 cSSV share (fixed-point, scaled by PRECISION). Used to compute each account’s pending ETH via shares * index - rewardDebt.
+
+Return values
+
+| **Parameter**   | **Type** | **Description**                              |
+| --------------- | -------- | -------------------------------------------- |
+| ETH reward index | uint256   | Global cumulative ETH reward index |
+
+### **`cooldownDuration()`**
+
+Description: Delay between request for withdrawal of staked SSV and the availability for tokens to be withdrawn.
+
+Return values
+
+| **Parameter**   | **Type** | **Description**                              |
+| --------------- | -------- | -------------------------------------------- |
+| Cooldown duration | uint256   | The delay duration |
+
+### **`pendingUnstake(address)`**
+
+Description: List of pending unstaked token amounts and their respective remaining cooldown.
+
+| **Parameter** | **Type**  | **Description**                                                                                                          |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Wallet address | address   | User wallet address. |
+
+Return values
+
+| **Parameter**   | **Type** | **Description**                              |
+| --------------- | -------- | -------------------------------------------- |
+| amounts[] | uint256   | Amounts of pending unstaked token requests. |
+| unlockTimes[] | uint256   | The unlock time for each of the unstaking requests. |
+
+### **`previewClaimableEth(address)`**
+
+Description: Amount of accrued ETH the provided address can claim.
+
+| **Parameter** | **Type**  | **Description**                                                                                                          |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Wallet address | address   | User wallet address. |
+
+Return values
+
+| **Parameter**   | **Type** | **Description**                              |
+| --------------- | -------- | -------------------------------------------- |
+| Accrued amount | uint256   | Previewed amount of claimable ETH for the provided address. |
+
+### **`stakedBalanceOf(address)`**
+
+Description: Total amount of SSV tokens staked by the provided address.
+
+| **Parameter** | **Type**  | **Description**                                                                                                          |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Wallet address | address   | User wallet address. |
+
+Return values
+
+| **Parameter**   | **Type** | **Description**                              |
+| --------------- | -------- | -------------------------------------------- |
+| Staked amount | uint256   | Total amount of SSV token staked by the provided address. |
+
+### **`stakingEthPoolBalance()`**
+
+Description: Total amount of ETH accrued in fees by the protocol.
+
+Return values
+
+| **Parameter**   | **Type** | **Description**                              |
+| --------------- | -------- | -------------------------------------------- |
+| ETH Accrued | uint64   | Total amount of ETH accrued in fees by the protocol |
+
+### **`totalStaked()`**
+
+Description: Total amount of SSV tokens staked in the protocol.
+
+Return values
+
+| **Parameter**   | **Type** | **Description**                              |
+| --------------- | -------- | -------------------------------------------- |
+| Total staked | uint256   | Amount of SSV tokens staked in the protocol. |
+
+
+## Liquidator Methods <a href="#id-39qo7wl8s1he" id="id-39qo7wl8s1he"></a>
+
+### **`isLiquidatable (owner, operatorIds, cluster)`**
+
+Description: Returns true if the specified cluster is under the liquidation threshold and can be liquidated.
+
+| **Parameter** | **Type**  | **Description**                                                                                                          |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
+| owner         | address   | The user address                                                                                                         |
+| operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                           |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
+
+Return values
+
+| **Parameter** | **Type** | **Description**                             |
+| ------------- | -------- | ------------------------------------------- |
+| isLiquidatable | boolean  | Indication if a cluster could be liquidated |
+
+### **`isLiquidated (owner, operatorIds, cluster)`**
+
+Description: Returns true if the provided cluster is liquidated.
+
+| **Parameter** | **Type**  | **Description**                                                                                                          |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
+| owner         | address   | The user address                                                                                                         |
+| operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                           |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
+
+Return values
+
+| **Parameter** | **Type** | **Description**                       |
+| ------------- | -------- | ------------------------------------- |
+| isLiquidated  | boolean  | Indication if a cluster is liquidated |
 
 ## Legacy Methods
 

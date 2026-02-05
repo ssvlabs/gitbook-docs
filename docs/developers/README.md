@@ -101,7 +101,7 @@ If you need to choose operators, feel free to browse [SSV Explorer](https://expl
     const operatorIDs = JSON.parse(process.env.OPERATOR_IDS)
     const url = "https://gateway.thegraph.com/api/subgraphs/id/F4AU5vPCuKfHvnLsusibxJEiTN7ELCoYTvnzg3YHGYbh";
     const query = `
-    query ValidatorData($operatorIDs: [Bytes!]) {
+    query OperatorData($operatorIDs: [Bytes!]) {
           operators(where: {id_in: $operatorIDs}) {
             id
             publicKey
@@ -299,7 +299,7 @@ async function main(): Promise<void> {
     const operatorIDs = JSON.parse(process.env.OPERATOR_IDS)
     const url = "https://gateway.thegraph.com/api/subgraphs/id/F4AU5vPCuKfHvnLsusibxJEiTN7ELCoYTvnzg3YHGYbh";
     const query = `
-    query ValidatorData($operatorIDs: [Bytes!]) {
+    query OperatorData($operatorIDs: [Bytes!]) {
           operators(where: {id_in: $operatorIDs}) {
             id
             publicKey
