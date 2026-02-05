@@ -7,10 +7,18 @@ Details on the formulas used can be found in the documentation page related to [
 The core calculation function that computes and prints the cluster balance:
 
 ```typescript
-  const balance = sdk.utils.getClusterBalance(
-    {args: {
-      operatorIds: [1,2,3,4]
-    }}
-  )
-      console.log(balance)
+try {
+    const { balance, operationalRunway } = await sdk.utils.getClusterBalance({
+        args: {
+            operatorIds: [1, 2, 3, 4],
+        },
+    });
+
+    console.log('Cluster balance result:', {
+        balance: balance.toString(),
+        operationalRunway: operationalRunway.toString(),
+    });
+} catch (error) {
+    console.error('Failed to get cluster balance:', error);
+}
 ```

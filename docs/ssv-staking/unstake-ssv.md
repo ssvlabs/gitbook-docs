@@ -13,8 +13,7 @@ Unstaking SSV withdraws your staked tokens from the staking contract. The proces
 - **Full withdrawal** - Receive SSV + any unclaimed rewards after cooldown
 
 :::warning Please note
-This process is irreversible. Once initiated, you cannot cancel and rewards stop immediately. 
-<!-- ADD ONCE FINALIZED: There is a limit on the number of 1000 initiated requests at the same time. -->
+This process is irreversible. Once initiated, you cannot cancel and rewards stop immediately. You can only have up to 2000 initiated withdrawal requests at the same time.
 :::
 
 ## Unstaking Process

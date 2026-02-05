@@ -16,10 +16,10 @@ sidebar_position: 5
 - [**Migrate to ETH**](./migrating-to-eth-clusters.md) (for legacy SSV cluster owners)
 
 :::warning Legacy SSV Clusters
-Existing SSV-based clusters are treated as legacy. **This means:**
-- ❌ Adding new validators to SSV clusters is no longer supported
-- ❌ Depositing additional SSV to extend runway is no longer supported
-- ❌ Removing or exiting validators from SSV clusters is no longer supported
+Existing SSV-based clusters are treated as legacy. **This means the following actions are no longer supported:**
+- Adding new validators to SSV clusterr
+- Depositing additional SSV to extend runway
+- Removing or exiting validators from SSV clusters
 
 **The only forward path is [migration to ETH](./migrating-to-eth-clusters.md).** Migration automatically refunds your SSV balance.
 :::

@@ -21,7 +21,7 @@ Formerly known as an Eth2 client. Runs the Ethereum PoS (Proof-of-Stake) consens
 
 ### cSSV Unstaking Cooldown Period
 
-The mandatory 7-day waiting period between cSSV token unstaking and withdrawing your staked SSV. During this cooldown:
+The mandatory waiting period (initially 7-days) between cSSV token unstaking and withdrawing your staked SSV. During this cooldown:
 - Rewards stop accruing immediately
 - Oracle voting weight remains active
 - The process cannot be cancelled

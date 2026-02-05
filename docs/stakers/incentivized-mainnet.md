@@ -5,13 +5,9 @@ sidebar_position: 2
 
 #  Incentivized Mainnet
 
-Our tiered incentive program fosters accelerated usage of SSV network via rewards. Each validator staked on SSV Mainnet network is eligible for claiming Incentives.
-
-## What is Incentivized Mainnet Program
-
 The Incentivized Mainnet Program (IMP) [is an initiative from SSV Network DAO](https://forum.ssv.network/t/dip-34-incentivized-mainnet-program-revision-3/1908), designed to accelerate the adoption of Distributed Validator Technology (DVT) by rewarding participants with SSV Tokens who operate validators on the SSV Network. Launched in October 2023, the program offers tiered rewards to incentivize early and continued participation.
 
-You can find more details on [the IMP FAQ page](https://ssv.network/incentivized-mainnet-faq).
+Our tiered incentive program fosters accelerated usage of SSV network via rewards. Each validator staked on SSV Mainnet network is eligible for claiming Incentives. You can find more details on [the IMP FAQ page](https://ssv.network/incentivized-mainnet-faq).
 
 ### Reward Tiers
 The program tiers are structured according to the effective balance. An Online IM reward calculator can be [found on this page](https://ssv.network/incentivized-mainnet).
@@ -31,7 +27,7 @@ A snapshot is taken of all active validators on the SSV Network, then calculatio
 
 Usually, the rewards are distributed around the middle of the following month. Updates are posted every month in this SSV Governance Forum thread: Incentivized Mainnet Distribution Details](https://forum.ssv.network/t/incentivized-mainnet-program-distributions/).
 
-## How to claim rewards
+### How to claim rewards
 You can claim the rewards on any of the following pages:
 - https://www.ssvrewards.com/
 - https://ssvscan.io/claim/

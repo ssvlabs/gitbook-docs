@@ -42,12 +42,6 @@ $$
 
 As mentioned above, the fees will scale proportionally to the Total Effective Balance of a cluster. 
 
-:::tip Validator Count
-Please note the Validator Count is completely irrelevant in calculations:
-
-A cluster of 1 validator with 64 ETH balance (1 \* 64) and 2 validators each with 32 ETH effective balance (2 \* 32) **would have the same** annual fee.
-:::
-
 #### Example Cluster #1
 - Total Effective Balance: 32
 - Operators fees: 0.01 ETH

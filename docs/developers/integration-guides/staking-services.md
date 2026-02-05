@@ -44,13 +44,13 @@ The second stage outlines how to onboard new or existing validators that your op
 
 In order to assign validator operations to your operators, you must distribute their validator key to KeyShares and register them to the ssv.network.
 
-Follow the Run a Distributor Validator guide for each new validator you want to manage.
+Follow the [Run a Distributor Validator guide](/docs/stakers/validator-management/distributing-a-validator.md) for each new validator you want to manage.
 
 Please note that since validators are assigned to the staking service’s Operators (created during the previous stage), the “Operators Selection” step can be skipped.
 
 #### Validator Funding
 
-Your staking service account must be funded with the appropriate amount of SSV to carry your validator's operational costs. These costs come in the form of operator and network fees (learn more on account balance and validator funding).
+Your staking service account must be funded with the appropriate amount of ETH to carry your validator's operational costs. These costs come in the form of operator and network fees (learn more on account balance and validator funding).
 
 Keep in mind that all the validators that you manage will pay operator fees back to your own operators (basically paying yourself). Therefore, you don’t need to account for operator fees when calculating the required funding for running each of the validators you manage.
 
@@ -62,8 +62,8 @@ Required\,Funding =( O1fee+O2_{fee}+ O3_{fee} + O4_{fee}+N_{fee})*LTP  + (N_{fee
 
 Legend:
 ```
-* $$O1...4_{fee}$$ - operator fee (SSV per block)
-* $$N_{fee}$$ - [network fee] (SSV per block)​
+* $$O1...4_{fee}$$ - operator fee (ETH per block)
+* $$N_{fee}$$ - [network fee] (ETH per block)​
 * $$Period$$ - operation period (blocks)
 * $$LTP$$ - [liquidation threshold period]
 ```
