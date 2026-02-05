@@ -30,10 +30,9 @@ $$
 #### Legend:
   * $$f_o$$ - operator fees *(per 32 ETH)*, representing the combined fees of all operators in the cluster, denominated in _ETH per block_
   * $$f_n$$ - network fees *(per 32 ETH)*, representing fees owed to the SSV network, denominated in _ETH per block_
-  * $$Total Effective Balance$$ - the he sum of effective balances across all validators in the cluster
+  * $$Total Effective Balance$$ - the sum of effective balances of all validators in the cluster
 
-#### Under this model:
-- Fees are denominated in ETH
+#### Key takeaways:
 - Fees scale proportionally with the cluster’s actual effective balance
 - The validator count does *not* affect the fee calculation
 - Effective balance may be split across validator keys in any manner (see [Examples](#examples))
@@ -44,7 +43,7 @@ As mentioned above, the fees will scale proportionally to the Total Effective Ba
 
 #### Example Cluster #1
 - Total Effective Balance: 32
-- Operators fees: 0.01 ETH
+- Sum of Operators fees: 0.01 ETH
 - Network fee: 0.00928 ETH
 
 Annual fee for the cluster: 
@@ -52,16 +51,16 @@ $$(0.01+0.00928)*32/32=0.01928 ETH$$
 
 
 #### Example Cluster #2
-- Total Effective Balance: 64
-- Operators fees: 0.01 ETH
+- Total Effective Balance: 95
+- Sum of Operators fees: 0.01 ETH
 - Network fee: 0.00928 ETH
 
 Annual fee for the cluster: 
-$$(0.01+0.00928)*64/32=0.03856 ETH$$
+$$(0.01+0.00928)*95/32=0.0572375 ETH$$
 
 #### Example Cluster #3
 - Total Effective Balance: 2048
-- Operators fees: 0.01 ETH
+- Sum Operators fees: 0.01 ETH
 - Network fee: 0.00928 ETH
 
 Annual fee for the cluster: 
