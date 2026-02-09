@@ -190,6 +190,12 @@ query daoValues {
     accEthPerShare
     latestMerkleRoot
     totalEffectiveBalance
+    networkFeeSSV
+    networkFeeIndexSSV
+    operatorMaximumFeeSSV
+    liquidationThresholdSSV
+    networkFeeIndexBlockNumberSSV
+    minimumLiquidationCollateralSSV
   }
 }
 ```
@@ -215,6 +221,12 @@ query daoValues {
     accEthPerShare
     latestMerkleRoot
     totalEffectiveBalance
+    networkFeeSSV
+    networkFeeIndexSSV
+    operatorMaximumFeeSSV
+    liquidationThresholdSSV
+    networkFeeIndexBlockNumberSSV
+    minimumLiquidationCollateralSSV
   }
 }`;
 
@@ -237,7 +249,7 @@ console.log(responseData);
 curl -X POST "https://api.studio.thegraph.com/query/71118/ssv-network-hoodi/version/latest" \
   -H "Content-Type: application/json" \
   -d '{
-    "query": "query daoValues { daovalues(id: \"0x58410Bef803ECd7E63B23664C586A6DB72DAf59c\") { declareOperatorFeePeriod executeOperatorFeePeriod liquidationThreshold minimumLiquidationCollateral networkFee networkFeeIndex networkFeeIndexBlockNumber operatorFeeIncreaseLimit operatorMaximumFee quorum accEthPerShare latestMerkleRoot totalEffectiveBalance }}"
+    "query": "query daoValues { daovalues(id: \"0x58410Bef803ECd7E63B23664C586A6DB72DAf59c\") { declareOperatorFeePeriod executeOperatorFeePeriod liquidationThreshold minimumLiquidationCollateral networkFee networkFeeIndex networkFeeIndexBlockNumber operatorFeeIncreaseLimit operatorMaximumFee quorum accEthPerShare latestMerkleRoot totalEffectiveBalance networkFeeSSV networkFeeIndexSSV operatorMaximumFeeSSV liquidationThresholdSSV networkFeeIndexBlockNumberSSV minimumLiquidationCollateralSSV }}"
 }'
 ```
 
@@ -249,19 +261,25 @@ Output
 {
   "data": {
     "daovalues": {
-      "declareOperatorFeePeriod": "604800",
-      "executeOperatorFeePeriod": "60480",
-      "liquidationThreshold": "214800",
-      "minimumLiquidationCollateral": "1000000000000000000",
-      "networkFee": "382640000000",
-      "networkFeeIndex": "215784140000000",
-      "networkFeeIndexBlockNumber": "131572",
+      "declareOperatorFeePeriod": "180",
+      "executeOperatorFeePeriod": "180",
+      "liquidationThreshold": "50190",
+      "minimumLiquidationCollateral": "940000000000000",
+      "networkFee": "3550000000",
+      "networkFeeIndex": "704794182000000000",
+      "networkFeeIndexBlockNumber": "2122845",
       "operatorFeeIncreaseLimit": "1000",
-      "operatorMaximumFee": "76528650000000",
-      "quorum": "7500",
-      "accEthPerShare": "74267140000000",
-      "latestMerkleRoot": "0xad75cf901",
-      "totalEffectiveBalance": "75631987215784140000000",
+      "operatorMaximumFee": "13900000000",
+      "quorum": 7500,
+      "accEthPerShare": "8640821385400000",
+      "latestMerkleRoot": "0x00000000",
+      "totalEffectiveBalance": "1685694",
+      "networkFeeSSV": "0",
+      "networkFeeIndexSSV": "0",
+      "operatorMaximumFeeSSV": "0",
+      "liquidationThresholdSSV": "214800",
+      "networkFeeIndexBlockNumberSSV": "0",
+      "minimumLiquidationCollateralSSV": "1000000000000000000"
     }
   }
 }
