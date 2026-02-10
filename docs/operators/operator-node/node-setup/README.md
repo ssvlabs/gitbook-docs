@@ -23,7 +23,7 @@ At a high level, here is what involved in installing an SSV Node:
 3. Adjust your configuration
 4. Run it!
 
-Please note the process implies you will setup Execution and Beacon clients on your own, _before_ installing the SSV Node.&#x20;
+Please note the process implies you will setup Execution and Beacon clients on your own, _before_ installing the SSV Node. 
 
 Once you have your node running you'll be able to participate in multiple validator clusters and earn rewards 🥳
 
@@ -100,7 +100,7 @@ In order to run the SSV Node, in a server, only Docker engine is necessary, you 
 
 <summary>Git</summary>
 
-To install the latest stable version for your release of Debian/Ubuntu run `apt-get install git` in your command line.&#x20;
+To install the latest stable version for your release of Debian/Ubuntu run `apt-get install git` in your command line. 
 
 If your machine is using another Linux distribution, please use the [official Git documentation](https://git-scm.com/downloads/linux), and find the option that better fits your server configuration.
 
@@ -153,7 +153,7 @@ Example: `BEACON_NODE_ADDR=http://1.2.3.4:5052;http://1.2.3.4:5053`
 :::
 
 ### Password and private key
-On the first start the Node will generate a random `password` and encrypted `private_key` files. You can find the files under `~/ssv-stack/ssv-node-data` directory.&#x20;
+On the first start the Node will generate a random `password` and encrypted `private_key` files. You can find the files under `~/ssv-stack/ssv-node-data` directory. 
 
 **If you already have encrypted key and password files**: 
 * Copy/move them to `/ssv-stack/ssv-node-data` 
@@ -172,7 +172,7 @@ Both password and private key are needed to run SSV and DKG Nodes.
 
 ### Custom ports
 
-We recommend using the default ports for ease of the setup.&#x20;
+We recommend using the default ports for ease of the setup. 
 
 If you wish to change any of the ports — change them in both `ssv.env` and `docker-compose.yaml`, then get [back to exposing those ports in your firewall](#4-adjust-firewall).
 
@@ -210,7 +210,7 @@ Be sure to implement a robust backup and recovery strategy for your database(s),
 
 ## What's next?
 
-* You might want to [configure MEV](/operators/operator-node/setup-sidecars/configuring-mev) to increase your rewards for block proposals.&#x20;
+* You might want to [configure MEV](/operators/operator-node/setup-sidecars/configuring-mev) to increase your rewards for block proposals. 
 
 * You can [enable DKG node](/operators/operator-node/setup-sidecars/enabling-dkg/) to increase your chances of being included in a cluster.
 

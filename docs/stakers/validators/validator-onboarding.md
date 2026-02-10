@@ -39,38 +39,42 @@ Factors to consider in cluster formation:
 
 ### Operational Costs <a href="#_jm9n7m464k0" id="_jm9n7m464k0"></a>
 
-The associated costs for running validators on the ssv network are determined by **operator fees** and **network fees**.
+The associated costs for running validators on the SSV network are determined by **operator fees** and **network fees**, paid in **native ETH**.
 
 With the network embracing a free-market approach, where operators set their own fees, the cost for each validator will vary based on its operator setup.
 
-In addition to fees, there’s a minimum balance requirement, known as [liquidation collateral](../clusters/cluster-balance), that has to be deposited for each validator a user runs through the network.
+In addition to fees, there's a minimum balance requirement, known as [liquidation collateral](../clusters/cluster-balance), that has to be deposited for each validator a user runs through the network.
 
 ### Validator Funding <a href="#_kumpogh364aq" id="_kumpogh364aq"></a>
 
-To carry validators operational costs, the validator's cluster must be funded with an appropriate amount of SSV (see [Cluster Balance](../clusters/cluster-balance.md)).
+To cover validator operational costs, your cluster must be funded with an appropriate amount of **ETH** (see [Cluster Balance](../clusters/cluster-balance.md)).
 
-Funding can be made at any time to the cluster’s balance (see [Deposits](../clusters/cluster-balance), but in case the first validator is onboarded to a cluster, the initial funding must be carried with its registration.
+Funding can be made at any time to the cluster's balance, but when onboarding the first validator to a new cluster, the initial funding must be provided with the registration transaction.
 
-To calculate how much funding is needed to run a validator within its cluster according to a certain **operation period** and the required **liquidation collateral**:
+To calculate how much ETH funding is needed to run a validator within its cluster according to a certain **operation period** and the required **liquidation collateral**:
 
 $$
-Required\;Funding = (O1_{fee} + O2_{fee} + O3_{fee} + O4_{fee} + N_{fee}) * (Period + LTP)
+Required\;Funding_{ETH} = (O1_{fee} + O2_{fee} + O3_{fee} + O4_{fee} + N_{fee}) * (Period + LTP)
 $$
 
 Legend:
-* $$O1_{fee}$$ to $$O4_{fee}$$ - operator fee (SSV per block)
-* $$N_{fee}$$ - network fee (SSV per block)
+* $$O1_{fee}$$ to $$O4_{fee}$$ - operator fee (ETH per block)
+* $$N_{fee}$$ - network fee (ETH per block)
 * $$Period$$ - desired operation period (blocks)
 * $$LTP$$ - liquidation threshold period (blocks)
 
-### Single Validator Funding Example
+### Single Validator Funding Example (ETH Cluster)
 
-Assuming there are 100 blocks per day, **operators and network fee** of 0.001 SSV (per block) and a **liquidation period** of 1 month, the **required funding** for 1 year of **operation period** would be:
+Assuming there are 7,200 blocks per day, **operator fees** of 0.0000001 ETH per block each, and a **network fee** of 0.00000005 ETH per block, with a **liquidation period** of 30 days, the **required funding** for 365 days of **operation period** would be:
 
 $$
-197.5 SSV = ((0.001 + 0.001 + 0.001 + 0.001 + 0.001) * 100 * (365+30))
+ETH_{required} = ((4 \times 0.0000001) + 0.00000005) \times 7,200 \times (365 + 30)
 $$
 
-:::info
-Please note that maintaining your cluster's operational runway is essential and a user could always deposit more balance to their account, or withdraw as they see fit.
+$$
+ETH_{required} \approx 1.278 ETH
+$$
+
+:::info Operational Runway
+Maintaining your cluster's operational runway is essential. You can always deposit more ETH to extend your runway or withdraw excess balance as needed.
 :::

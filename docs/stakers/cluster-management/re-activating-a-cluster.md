@@ -3,6 +3,8 @@ title: Re-activating a cluster
 sidebar_position: 4
 ---
 
+# Re-activating a cluster
+
 ### Connect your Web3 wallet to the WebApp
 
 Make sure to connect your Web3 wallet with the WebApp, and that the address corresponds with the one you want to manage your Validators with.
@@ -19,7 +21,7 @@ In the Cluster page, click on the **Reactivate Cluster** button
 
 ![reactivate-cluster](/img/reactivate-a-cluster-2.avif)
 
-In the next screen, you'll be asked to choose the cluster runway, which will impact the amount of SSV you will have to deposit to reactivate the cluster.
+In the next screen, you'll be asked to choose the cluster runway, which will impact the amount of ETH you will have to deposit to reactivate the cluster.
 
 ![reactivate-cluster](/img/reactivate-a-cluster-3.avif)
 
@@ -37,6 +39,6 @@ Now, finalize the validator reactivation by signing the transaction.
   />
 </div>
 
-You'll be taken back to the Cluster page, where the balance will be updated with the amount of SSV tokens deposited.
+You'll be taken back to the Cluster page, where the balance will be updated with the amount of ETH deposited.
 
 ![reactivate-cluster](/img/reactivate-a-cluster-6.avif)

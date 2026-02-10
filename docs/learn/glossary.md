@@ -13,11 +13,26 @@ The Beacon Chain is a brand-new, proof-of-stake blockchain that stores and manag
 
 ### Cluster
 
-The group (usually 4, in compliance with [the fault tolerance rule is accepted](../../../stakers/validators/validator-onboarding)) of non-trusting operators that manage a set (one, or multiple) validator(s). Each operator in the cluster holds a share of the complete validator key, for more information, see [Shamir Secret Sharing](glossary.md#shamir-secret-sharing).&#x20;
+The group (usually 4, in compliance with [the fault tolerance rule is accepted](/stakers/validators/validator-onboarding)) of non-trusting operators that manage a set (one, or multiple) validator(s). Each operator in the cluster holds a share of the complete validator key, for more information, see [Shamir Secret Sharing](glossary.md#shamir-secret-sharing).
 
 ### Consensus Client
 
 Formerly known as an Eth2 client. Runs the Ethereum PoS (Proof-of-Stake) consensus layer, aka the Beacon Chain, checking the validity of transactions and new blocks. Examples of consensus clients include Prysm, Teku, Lighthouse, Nimbus, and Lodestar.
+
+### cSSV Unstaking Cooldown Period
+
+The mandatory waiting period (initially 7-days) between cSSV token unstaking and withdrawing your staked SSV. During this cooldown:
+- Rewards stop accruing immediately
+- Oracle voting weight remains active
+- The process cannot be cancelled
+- Unclaimed rewards can still be claimed
+
+The cooldown exists to maintain oracle voting stability and prepare for future governance mechanisms.
+
+### cSSV
+
+A non-rebasing transferrable ERC-20 token received when you stake SSV tokens. When unstaking, cSSV is burned and you receive back your original SSV plus any unclaimed rewards. cSSV contributes to the network's oracle infrastructure by providing voting weight for effective balance reporting. 
+
 
 ### Custodial Staking
 
@@ -34,6 +49,12 @@ A cryptographic process to generate a shared public and private key set, calcula
 ### DVT
 
 Distributed Validator Technology is another name for SSV (Secret Shared Validator). SSV can also be referred to as DVT because the validator is distributed over multiple non-trusting nodes.
+
+### Effective Balance (EB)
+
+The active stake balance of a validator on the Beacon Chain is used to calculate staking rewards. After Ethereum's Pectra upgrade, validators can have variable effective balances from 32 to 2048 ETH (previously fixed at 32 ETH).
+
+In SSV Network, effective balance is used as fee accounting measure. Clusters pay fees proportional to their validators' actual EBs. The EBs is reported by oracles and used to calculate fair fee distribution. 
 
 ### Epochs & Slots
 
@@ -93,6 +114,12 @@ Applying secure Multi-Party Computation (MPC) to secret sharing allows for KeySh
 
 A service that provides streamlined Ethereum validator set-up and management, but does not hold user private validator keys AND withdrawal keys. Allowing users to maximize staking returns, mitigate security risks and retain complete control over their assets.
 
+### Effective Balance Oracles
+
+In the SSV Network, oracles report validator effective balances from the Beacon Chain to on-chain smart contracts.
+
+These oracles are backed by SSV stakers, who delegate their voting power to their chosen Effective Balance (EB) oracle. This system enables fair fee calculation for validators with variable balances following the Pectra upgrade.
+
 ### Operator
 
 Individuals or institutions that provide the hardware infrastructure, run the SSV protocol, and manage validator KeyShares on behalf of users (stakers). Operators collect fees from stakers in SSV tokens in return for operating their validator(s) on ssv.network. Each operator is ranked on a scale of 0-100% by the DAO based on the overall quality of service they provide.
@@ -128,19 +155,24 @@ The SSV Node software maintain peer-to-peer connections with other Nodes to hand
 
 ### SSV Token
 
-ssv.network allows access to a decentralized ETH staking infrastructure with SSV token as the protocol’s native token. It has 3 main purposes:
+ssv.network allows access to a decentralized ETH staking infrastructure with SSV token as the protocol's native token. It has 4 main purposes:
 
 * **Governance** – Submitting votes and voting on DAO proposals
-* **Fees** – Operators receive SSV tokens from Stakers for managing and operating validators on their behalf
+* **Payments** – The network receives fees paid in ETH by clusters
 * **Grants** – DAO funding for developers and contributors helping to grow the network
+* **Staking** – The oracle infrastructure is supported through SSV staking, which enables the delegation of voting power to a chosen oracle.
+
+### SSV Staker
+
+An SSV token holder who stakes their SSV tokens to contribute voting weight to the network's oracle system, which reports validator effective balances to the blockchain. When staking SSV a holder receives cSSV which also allows to participates in SSV governance. 
 
 ### Staker
 
-Services or individual ETH holders that wish to leverage SSV/DVT technology for optimal liveness, security and decentralization of their validator(s). Stakers put 32 ETH “at stake” for each validator they want to run. In the PoS consensus mechanism, validators secure the Ethereum blockchain and earn ETH rewards in return for doing so.
+Services or individual ETH holders that wish to leverage SSV/DVT technology for optimal liveness, security and decentralization of their validator(s). Stakers put 32 ETH "at stake" for each validator they want to run. In the PoS consensus mechanism, validators secure the Ethereum blockchain and earn ETH rewards in return for doing so.
 
 ### Staking
 
-Staking is the contributory action of running a node in a PoS consensus mechanism blockchain. One must ‘put at stake’ a certain amount of network tokens in order to participate in securing the blockchain by verifying and adding blocks. On Ethereum, the minimum threshold to participate as a validator is 32 ETH. Validators will earn ETH rewards for honestly attesting to and adding blocks. A validator risks decreasing their stake by participating in malicious behaviors or for time spent offline, disconnected from the network.
+Staking is the contributory action of running a node in a PoS consensus mechanism blockchain. One must 'put at stake' a certain amount of network tokens in order to participate in securing the blockchain by verifying and adding blocks. On Ethereum, the minimum threshold to participate as a validator is 32 ETH. Validators will earn ETH rewards for honestly attesting to and adding blocks. A validator risks decreasing their stake by participating in malicious behaviors or for time spent offline, disconnected from the network.
 
 ### Total Value Locked (TVL)
 
@@ -148,6 +180,8 @@ The total amount of ETH in USD (or other currency) that is “locked-up” by st
 
 ### Validator
 
-A validator is responsible for confirming transactions and proposing new blocks on the Ethereum blockchain. In order to run a validator, one must put 32 ETH ‘at stake’, which is subject to increase (or decrease) as the validator performs its assigned duties. A validator is different from the comparable concept of a miner on the legacy Ethereum chain, as validators are called upon by the PoS protocol to propose and validate emerging blocks rather than compete for their generation.
+A validator is responsible for confirming transactions and proposing new blocks on the Ethereum blockchain. In order to run a validator, one must put 32 ETH 'at stake', which is subject to increase (or decrease) as the validator performs its assigned duties. A validator is different from the comparable concept of a miner on the legacy Ethereum chain, as validators are called upon by the PoS protocol to propose and validate emerging blocks rather than compete for their generation.
 
 An SSV validator is one that is run on ssv.network and employs SSV technology to split the validator key into 4 KeyShares for the purposes of distributing the validator over multiple nodes for redundancy and fault-tolerance.
+
+Post-Pectra, validators can have variable effective balances from 32 to 2048 ETH.

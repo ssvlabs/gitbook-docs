@@ -7,7 +7,7 @@ sidebar_position: 1
 
 ## Minimum requirements
 
-The minimum requirement is an AWS `t3.small` or equivalent machine dedicated to run DKG.&#x20;
+The minimum requirement is an AWS `t3.small` or equivalent machine dedicated to run DKG. 
 The recommend requirement is an AWS `t3.medium` or higher tier machine  ([https://aws.amazon.com/ec2/instance-types/](https://aws.amazon.com/ec2/instance-types/)).
 
 Minimum docker resource allocations:
@@ -31,7 +31,7 @@ In order to successfully participate in DKG ceremonies initiated by stakers, you
 
 * **Operator ID** - the ID of your operator within the SSV network.
 * **Operator Key Pair**
-  * **Public Key** - the public key of the operator&#x20;
+  * **Public Key** - the public key of the operator 
   * **Private Key** - the private key of the operator as an password-encrypted file (if you are in possession of raw text private key, follow [this migration guide to encrypt your existing operator keys](/operators/operator-node/maintenance/troubleshooting/#faq))
 * **Machine Endpoint** - the endpoint (`protocol:ip:port`,  e.g. `https://my-dkg.com:3030`) of the machine intended to run the `ssv-dkg` client (if you have a domain name, instead of an `ip` that works as well)
 

@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Cluster Module
 
-This is a library which contains all the cluster functions you need for working with SSV, such as registering a validator
+This is a library which contains all the functions you need for working with Clusters of SSV network, such as registering a validator.
 
 After instantiating the SDK, you can call any of the functions in the utils library like so:
 
@@ -14,142 +14,176 @@ sdk.clusters.registerValidators()
 
 ## Function List
 
-### `registerValidators()`
-
-Accepts all parameters necessary to compute the keyshares, does this in the background using ssv-keys library, returns the keyshares as an object or saves it to file.
-
-Input:
+### `migrateClusterToETH()`
+Converts an SSV-based cluster (legacy) to ETH-based cluster. Accepts cluster ID to migrate to ETH-denominated fees, and the amount of ETH to deposit upon migrating.
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| keyshares | KeySharesItem[] \| KeySharesPayload[] | Keyshare or transaction payload | See output of [generateKeyShares()](../../tools/ssv-dkg-client/generate-key-shares.md) |
-| depositAmount | bigint | Amount of SSV to deposit to cluster | 4 |
+| `cluster_Id` | string | A `cluster_id` in its computed ID form. | 0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8 |
+| amount | bigint | Amount of ETH to deposit to fund the cluster | 0.1234 |
 
-Example:
+#### Example:
+
+```typescript
+txn_receipt = await sdk.clusters.migrateClusterToETH({ 
+    args: { 
+        cluster_Id: "0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8", 
+        amount: parseEther('0.1234') 
+    },
+}).then(tx => tx.wait())
+```
+
+### `registerValidators()`
+
+Accepts a number of keyshares to be validated and registered to the network. 
+
+| Input parameter | Input type | Description | Example input |
+|----------------|------------|-------------|---------------|
+| keyshares | KeySharesItem[] | Keyshares | See [keyshares example with its structure](/developers/keyshares-structure) |
+| depositAmount | bigint | Amount of ETH to deposit to cluster | 0.1234 |
+
+#### Example:
 
 ```typescript
 txn_receipt = await sdk.clusters.registerValidators({ 
     args: { 
         keyshares: keysharesPayload, 
-        depositAmount: parseEther('30') 
+        depositAmount: parseEther('0.1234') 
     },
 }).then(tx => tx.wait())
 ```
 
 ### `deposit()`
 
-Executes the contract call to the SSV smart contract to deposit SSV to the cluster.&#x20;
-
-Input:
+Executes the contract call to to deposit ETH to the cluster balance.
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| id | string | Cluster ID | ee8881d3c979203025996773ef8a13cb4aac57076e22638dd6ed9b17adcdabfc |
-| amount | bigint | Amount of SSV to deposit to cluster | 4 |
-| approve | bool | Whether to execute out the SSV ERC20 approve transaction or not | true |
+| id | string | Cluster ID | 0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8 |
+| amount | bigint | Amount of ETH to deposit to cluster | 0.1234 |
 
-Example:
+#### Example:
 
 ```typescript
 import { parseEther } from 'viem'
 
 txn_receipt = await sdk.clusters.deposit({ 
     args: { 
-        id: "ee8881d3c979203025996773ef8a13cb4aac57076e22638dd6ed9b17adcdabfc", 
-        amount: parseEther('30')
+        id: "0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8", 
+        amount: parseEther('0.1234')
     },
-  {
-    approve: true, // Automatically triggers token approval  transaction if the allowance is lower than the deposit amount
-  },
 }).then(tx => tx.wait())
 ```
 
 ### `liquidateCluster()`
 
-Liquidates a cluster sends their balances to the msg.sender (the Liquidator), **will fail** if the cluster is not liquidatable.
-
-Input:
+Liquidates a cluster sends their balance to the msg.sender (the Liquidator). **Will fail** if the cluster is not liquidatable.
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| id | string | Cluster ID | ee8881d3c979203025996773ef8a13cb4aac57076e22638dd6ed9b17adcdabfc |
+| id | string | Cluster ID | 0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8 |
 
-Example:
+#### Example:
 
 ```typescript
 txn_receipt = await sdk.clusters.liquidateCluster({ 
     args: { 
-        id: "ee8881d3c979203025996773ef8a13cb4aac57076e22638dd6ed9b17adcdabfc",
+        id: "0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8",
     },
 }).then(tx => tx.wait())
 ```
 
-### `withdraw()`
+### `liquidateSSV()`
 
-Withdraw a specified amount of SSV from a cluster.
-
-Input:
+Liquidates a legacy (SSV-based) cluster sends their balance to the msg.sender (the Liquidator). **Will fail** if the cluster is not liquidatable.
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| id | string | Cluster ID | ee8881d3c979203025996773ef8a13cb4aac57076e22638dd6ed9b17adcdabfc |
-| amount | bigint | Amount of SSV to withdraw to cluster | 4 |
+| id | string | Cluster ID | 0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8 |
 
-Example:
+#### Example:
+
+```typescript
+txn_receipt = await sdk.clusters.liquidateSSV({ 
+    args: { 
+        id: "0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8",
+    },
+}).then(tx => tx.wait())
+```
+
+
+### `withdraw()`
+
+Withdraw a specified amount of ETH from a cluster.
+
+**Will fail** if:
+- the amount to withdraw exceeds the current balance of a cluster;
+- msg.sender is not the cluster owner.
+
+| Input parameter | Input type | Description | Example input |
+|----------------|------------|-------------|---------------|
+| id | string | Cluster ID | 0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8 |
+| amount | bigint | Amount of ETH to withdraw from the cluster | 0.1234 |
+
+#### Example:
 
 ```typescript
 import { parseEther } from 'viem'
 
 txn_receipt = await sdk.clusters.withdraw({ 
     args: { 
-        id: "ee8881d3c979203025996773ef8a13cb4aac57076e22638dd6ed9b17adcdabfc", 
-        amount: parseEther('30') 
+        id: "0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8", 
+        amount: parseEther('0.1234') 
     },
 }).then(tx => tx.wait())
 ```
 
 ### `reactivateCluster()`
 
-Reactivates a liquidated cluster, **will fail** if insufficient SSV tokens to cover the cluster's liquidation collateral have been deposited.
+Reactivates a liquidated cluster.
 
-Input:
+**Will fail** if:
+- the ETH amount to deposit is insufficient to cover the cluster's liquidation collateral;
+- msg.sender is not the cluster owner.
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| id | string | Cluster ID | ee8881d3c979203025996773ef8a13cb4aac57076e22638dd6ed9b17adcdabfc |
-| amount | bigint | Amount of SSV to withdraw to cluster | 4 |
+| id | string | Cluster ID | 0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8 |
+| amount | bigint | Amount of ETH to deposit to cluster | 0.1234 |
 
-Example input:
+#### Example:
 
 ```typescript
 import { parseEther } from 'viem'
 
 txn_receipt = await sdk.clusters.reactivateCluster({ 
     args: { 
-        id: "ee8881d3c979203025996773ef8a13cb4aac57076e22638dd6ed9b17adcdabfc", 
-        amount: parseEther('30') 
+        id: "0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8", 
+        amount: parseEther('0.1234') 
     },
 }).then(tx => tx.wait())
 ```
 
 ### `removeValidators()`
 
-Accepts all parameters necessary to compute the keyshares, does this in the background using ssv-keys library, returns the keyshares as an object or saves it to file.
+Accepts all parameters necessary to remove the validators. Removes all the validators provided as argument from the SSV network.
 
-Input:
+**Will fail** if:
+- the provided validator keys are not registered to ssv network;
+- msg.sender is not the cluster owner.
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| id | string | Cluster ID | ee8881d3c979203025996773ef8a13cb4aac57076e22638dd6ed9b17adcdabfc |
+| id | string | Cluster ID | 0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8 |
 | publicKeys | Hex[] | Array of validator public keys to remove | ["0x820fd0519c75f74c8be9f21f185406919721dad0c624464538e2eaa323d77d3eb3ef27a039e8779de6cfa649a5484e86", "0x820fd0519c75f74c8be9f21f185406919721dad0c624464538e2eaa323d77d3eb3ef27a039e8779de6cfa649a5484e87"] |
 
-Example:
+#### Example:
 
 ```typescript
 txn_receipt = await sdk.clusters.removeValidators({ 
     args: { 
-        id: "ee8881d3c979203025996773ef8a13cb4aac57076e22638dd6ed9b17adcdabfc", 
-        depositAmount: ["0x820fd0519c75f74c8be9f21f185406919721dad0c624464538e2eaa323d77d3eb3ef27a039e8779de6cfa649a5484e86", "0x820fd0519c75f74c8be9f21f185406919721dad0c624464538e2eaa323d77d3eb3ef27a039e8779de6cfa649a5484e87"],
+        id: "0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8", 
+        publicKeys: ["0x820fd0519c75f74c8be9f21f185406919721dad0c624464538e2eaa323d77d3eb3ef27a039e8779de6cfa649a5484e86", "0x820fd0519c75f74c8be9f21f185406919721dad0c624464538e2eaa323d77d3eb3ef27a039e8779de6cfa649a5484e87"],
     },
 }).then(tx => tx.wait())
 ```
@@ -158,13 +192,11 @@ txn_receipt = await sdk.clusters.removeValidators({
 
 Sets a fee recipient address to receive tips from user transactions (part block proposal rewards). This address will be set for all the account's validators (all clusters).
 
-Input:
-
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
 | recipient | Address | Valid Ethereum address | 0xA4831B989972605A62141a667578d742927Cbef9 |
 
-Example:
+#### Example:
 
 ```typescript
 txn_receipt = await sdk.clusters.setFeeRecipient({ 
@@ -178,14 +210,16 @@ txn_receipt = await sdk.clusters.setFeeRecipient({
 
 Prompts SSV nodes to sign a voluntary exit of the validator.
 
-Input:
+**Will fail** if:
+- the provided validator keys are not registered to ssv network;
+- msg.sender is not the cluster owner.
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| publicKeys | Hex[] | Public keys of the validators to be exited | ["0xA4831B989972605A62141a667578d742927Cbef9","0xA4831B989972605A62141a667578d742927Cbef8"] |
+| publicKeys | Hex[] | Array of public keys of the validators to be exited | ["0xA4831B989972605A62141a667578d742927Cbef9","0xA4831B989972605A62141a667578d742927Cbef8"] |
 | operatorIds | bigint[] | IDs of the operators | [1,2,3,4] |
 
-Example input:
+#### Example:
 
 ```typescript
 txn_receipt = await sdk.clusters.exitValidators({ 
@@ -198,21 +232,19 @@ txn_receipt = await sdk.clusters.exitValidators({
 
 ### `validateSharesPostRegistration()`
 
-Accepts a transaction hash of the validator registration contract call.&#x20;
-
-Input:
+Accepts a transaction hash of the validator registration contract call. 
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
 | txHash | Hex | Hash of the register validator transaction | "0xd9095893dba18b101c01973069922db2d81c45e814003851ccc586d60ae28e5b" |
 
-Example input:
+#### Example:
 
 ```typescript
-const result = await validateSharesPostRegistration( { txHash: '0x123' as Hex })
+const result = await sdk.clusters.validateSharesPostRegistration( { txHash: '0x123' as Hex })
 ```
 
-Example output:
+Output:
 
 ```typescript
 {

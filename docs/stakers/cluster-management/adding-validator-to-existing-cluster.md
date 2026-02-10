@@ -71,17 +71,13 @@ The next screen presents a summary of your validator setup.
 
 ![add-validator-to-cluster](/img/add-validator-to-cluster-10.avif)
 
-By clicking on Register validator, you'll be proposed to sign transactions to confirm your choice and transfer the SSV balance necessary to cover for the operational costs.
-
-:::info
-**Note:** If this is the first time you are registering a validator to ssv.network, you will be required to make two transactions - one to approve the SSV smart contract and another one to register the validator.
-:::
+By clicking on Register validator, you'll be proposed to sign a transaction to confirm your choice and deposit the ETH necessary to cover operational costs (if additional funding is needed).
 
 ![add-validator-to-cluster](/img/add-validator-to-cluster-11.webp)
 
-### SSV Balance deposit
+### ETH Balance deposit
 
-Now, finalize the validator registration by signing the transaction and adding SSV tokens to your account balance.
+Now, finalize the validator registration by signing the transaction and depositing ETH to your cluster balance.
 
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>

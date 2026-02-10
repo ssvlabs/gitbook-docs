@@ -17,12 +17,12 @@ Clusters are unique to each account and are defined by the combination of the va
 
 Cluster snapshots are required for SSV contract transactions with cluster related functions which require the **cluster object** as input:
 
-* [registerValidator()](/developers/smart-contracts/ssvnetwork.md#registervalidatorpublickey-operatorids-shares-amount-cluster)
+* [registerValidator()](/developers/smart-contracts/ssvnetwork.md#registervalidatorpublickey-operatorids-shares-cluster)
 * [removeValidator()](/developers/smart-contracts/ssvnetwork#removevalidatorpublickey-operatorids-cluster)
-* [deposit()](/developers/smart-contracts/ssvnetwork.md#depositowner-operatorids-amount-cluster)
+* [deposit()](/developers/smart-contracts/ssvnetwork.md#depositowner-operatorids-cluster)
 * [withdraw()](/developers/smart-contracts/ssvnetwork.md#withdrawoperatorids-amount-cluster)
 * [getBalance()](/developers/smart-contracts/ssvnetworkviews.md#getbalance-owner-operatorids-cluster)
-* [reactivate()](/developers/smart-contracts/ssvnetwork.md#reactivateoperatorids-amount-cluster)
+* [reactivate()](/developers/smart-contracts/ssvnetwork.md#reactivateoperatorids-cluster)
 * [isLiquidated()](/developers/smart-contracts/ssvnetworkviews.md#isliquidated-owner-operatorids-cluster)
 * [isLiquidatable()](/developers/smart-contracts/ssvnetworkviews.md#isliquidatable-owner-operatorids-cluster)
 * [liquidate()](/developers/smart-contracts/ssvnetwork.md#liquidateowner-operatorids-cluster)

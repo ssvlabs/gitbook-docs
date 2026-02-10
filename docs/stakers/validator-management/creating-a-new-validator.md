@@ -30,6 +30,7 @@ For this reason, an alternative and shorter route to the Launchpad is to use the
 
 * Confidence using the command line, and command line interfaces
 * ETH (or Hoodi ETH): 32 + ~0.1 for gas fees to activate the validator keys
+* Additional ETH to fund your cluster's operational runway for operator fees
 
 ### Generate validator keys
 

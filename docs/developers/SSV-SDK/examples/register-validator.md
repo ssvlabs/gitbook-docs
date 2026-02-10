@@ -4,7 +4,7 @@ sidebar_position: 5
 
 # Register Validator
 
-This page shows how to progmatically register a validator to the SSV network. Assuming you already have generated a valid keyshare.&#x20;
+This page shows how to progmatically register a validator to the SSV network. Assuming you already have generated a valid keyshare. 
 
 ### Register Validator
 
