@@ -79,7 +79,7 @@ Return values
 
 | Parameter | Type   | Description                      |
 | --------- | ------ | -------------------------------- |
-| maxFee    | uint64 | The maximum fee value (ETH/year) |
+| maxFee    | uint256 | The maximum fee value (ETH/year) |
 
 ### **`getValidatorsPerOperatorLimit()`**
 

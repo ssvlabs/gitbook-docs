@@ -36,12 +36,13 @@ sidebar_position: 5
 | SSV Token         | [0x9F5d4Ec84fC4785788aB44F9de973cF34F7A038e](https://hoodi.etherscan.io/address/0x9F5d4Ec84fC4785788aB44F9de973cF34F7A038e) |
 | SSV Network       | [0x58410Bef803ECd7E63B23664C586A6DB72DAf59c](https://hoodi.etherscan.io/address/0x58410Bef803ECd7E63B23664C586A6DB72DAf59c) |
 | SSV Network Views | [0x5AdDb3f1529C5ec70D77400499eE4bbF328368fe](https://hoodi.etherscan.io/address/0x5AdDb3f1529C5ec70D77400499eE4bbF328368fe) |
+| cSSV Token         | [0x6e1a5d27361c666f681af06535c8Ac773E571d4d](https://hoodi.etherscan.io/address/0x6e1a5d27361c666f681af06535c8Ac773E571d4d) |
 
 
 #### ABI
 
 * [Mainnet](https://github.com/ssvlabs/ssv-network/tree/contract-abi/docs/mainnet/v1.2.0/abi)
-* [Testnet](https://github.com/ssvlabs/ssv-network/tree/contract-abi/docs/testnet/v1.2.0/abi)
+* [Testnet](https://github.com/ssvlabs/ssv-network/tree/contract-abi/docs/testnet/v2.0.0/abi)
 
 ### Ethereum Deposit Contract Addresses
 
