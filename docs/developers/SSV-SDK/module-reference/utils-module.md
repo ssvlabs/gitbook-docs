@@ -177,12 +177,12 @@ Accepts a cluster ID to identify the cluster, for which the balance needs to be 
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| cluster_Id | string | A cluster_id in its computed ID form. | “0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8” |
+| cluster_Id | string | A cluster_id in its computed ID form. Has to have the **owner address in lower case letters**. It is advised to use the [`createClusterID`](/developers/SSV-SDK/module-reference/api-module#getclusteridowner_address-operator_ids)  function to get the cluster ID in the correct format | “0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8” |
 
 #### Example:
 
 ```typescript
-const result = await sdk.utils.getClusterBalance(“0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8”)
+const result = await sdk.utils.getClusterBalance(“0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8”)
 ```
 
 Example output:
@@ -202,7 +202,7 @@ The function fetches the cluster snapshot using the provided ID, calculate the B
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| cluster_Id | string | A cluster_id in its computed ID form. | “0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8” |
+| cluster_Id | string | A cluster_id in its computed ID form. Has to have the **owner address in lower case letters**. It is advised to use the [`createClusterID`](/developers/SSV-SDK/module-reference/api-module#getclusteridowner_address-operator_ids)  function to get the cluster ID in the correct format | “0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8” |
 | runway | number | Desired Runway length, measured in number of days.  | 45 |
 
 
@@ -210,7 +210,7 @@ The function fetches the cluster snapshot using the provided ID, calculate the B
 
 ```typescript
 const result = await sdk.utils.calcDepositFromRunway({
-        cluster_Id: “0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8”,
+        cluster_Id: “0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8”,
         runway: 45,
       });
 ```

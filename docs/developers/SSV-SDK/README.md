@@ -25,6 +25,13 @@ To install the SDK, run:
 npm i @ssv-labs/ssv-sdk
 ```
 
+:::info ⚠️ Testnet Version ⚠️
+The latest Hoodi-compatible version was not released to npmjs. To install it, download it from [the github release](https://github.com/ssvlabs/ssv-sdk/releases/tag/v.1.0.0) or via the command below:
+```bash
+npm i --force --ignore-scripts github:ssvlabs/ssv-sdk#v.1.0.0
+```
+:::
+
 ## Initialization
 
 The SDK requires specific parameters for initialization. Two that are not optional are the chain and the account. The `viem` library can be used to create an account object based off of a wallet's private key, and pass it into the SDK to instantiate it.
@@ -52,25 +59,27 @@ const walletClient = createWalletClient({
 
 // Initialize SDK with viem clients
 const sdk = new SSVSDK({
-  publicClient,
-  walletClient,
-  extendedConfig: {
-    subgraph: {
-      apiKey: "<YOUR_SUBGRAPH_API_KEY>"
+    publicClient: publicClient as any,
+    walletClient: walletClient as any,
+    extendedConfig: {
+      subgraph: {
+        apiKey: process.env.SUBGRAPH_API,
+        endpoint: process.env.SUBGRAPH_ENDPOINT,
+      }
     }
-  }
-})
+  });
 ```
 
-The `extendedConfig` parameter is optional, if not provided, the SDK will use the development endpoint. Bear in mind that this is rate limited, though, so it is strongly advised to use an API key with the free plan.
-For more information regarding your subgraph API key, please refer to the [dedicated Subgraph page](../tools/ssv-subgraph/README.md).
+The `extendedConfig` parameter is optional, if not provided, the SDK will use the development endpoint. Bear in mind that this is rate limited, though, so it is strongly advised to use an API key with the free plan. For more information regarding your subgraph API key, please refer to the [dedicated Subgraph page](/developers/tools/ssv-subgraph/README.md).
 
 ### Initialization Parameters
 
 | Input name | Input type | Optional |
 |------------|------------|----------|
-| public_client | [Viem public client](https://viem.sh/docs/clients/public.html) | No |
+| public_client | [Viem public client](https://viem.sh/docs/clients/public) | No |
 | wallet_client | [Viem wallet client](https://viem.sh/docs/clients/wallet) | No |
+| SUBGRAPH_API | API Key retrived from [The Graph account](https://thegraph.com/studio/apikeys/) | Yes, strongly recommended |
+| SUBGRAPH_ENDPOINT | Subgraph Endpoint retrieved from [Mainnet or Testnet subgraph page](/developers/tools/ssv-subgraph/#querying-ssv-protocol-smart-contract-data) | Yes, strongly recommended  |
 
 ## Usage
 
