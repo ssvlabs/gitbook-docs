@@ -6,8 +6,6 @@ sidebar_position: 1
 
 The SSVNetwork contract is the main contract for operations and management.
 
-[SSV Network Contracts Repository](https://github.com/ssvlabs/ssv-network/tree/main/contracts)
-
 ## Operator Methods <a href="#cxoku5ytbvgq" id="cxoku5ytbvgq"></a>
 
 ### **`registerOperator(publicKey, operatorFee, setPrivate)`**
@@ -50,9 +48,9 @@ Events:
 
 * `OperatorWithdrawn(address indexed owner, uint64 indexed operatorId, uint256 value)`
 
-### `withdrawAllOperatorEarnings`**`(operatorId)`**
+### **`withdrawAllOperatorEarnings(operatorId)`**
 
-Description: Withdraws all ETH earnings from provided operator balance to msg.sender, **will fail if** msg.sender is not the operator owner.
+Description: Withdraws all ETH and SSV earnings from provided operator balance to msg.sender, **will fail if** msg.sender is not the operator owner.
 
 | **Parameter** | **Type** | **Description** |
 | ------------- | -------- | --------------- |
@@ -61,15 +59,17 @@ Description: Withdraws all ETH earnings from provided operator balance to msg.se
 Events:
 
 * `OperatorWithdrawn(address indexed owner, uint64 indexed operatorId, uint256 value)`
+* *`OperatorWithdrawnSSV(address indexed owner, uint64 indexed operatorId, uint256 value)`* is **emitted only if** the operator had any SSV tokens to withdraw.
+
 
 ### **`setOperatorsWhitelists (operatorIds, whitelisted)`**
 
-Description: For a list of operators provided, set a list of whitelisted addresses which can register validators to these operators.
+Description: For a list of operators provided, set a list of whitelisted addresses which can register validators to these operators. Subsequent calls of this function **extend the list** of whitelisted addresses, and **do not overwrite it**.
 
 | **Parameter** | **Type**   | **Description**                                           |
 | ------------- | ---------- | --------------------------------------------------------- |
 | operatorId    | uint64\[]  | Operator ID list                                          |
-| whitelisted   | address\[] | <p>A list of ETH1 addresses to be whitelisted.</p><p></p> |
+| whitelisted   | address\[] | A list of ETH1 addresses to be whitelisted. |
 
 Events:
 
@@ -82,7 +82,7 @@ Description: For a list of operators provided, remove a list of whitelisted addr
 | **Parameter** | **Type**   | **Description**                                                          |
 | ------------- | ---------- | ------------------------------------------------------------------------ |
 | operatorId    | uint64\[]  | Operator ID list                                                         |
-| whitelisted   | address\[] | <p>A list of ETH1 addresses to be removed from the whitelist.</p><p></p> |
+| whitelisted   | address\[] | A list of ETH1 addresses to be removed from the whitelist. |
 
 Events:
 
@@ -119,13 +119,13 @@ Description: For a list of operators provided, set an external whitelisting cont
 | **Parameter**        | **Type**                 | **Description**                                      |
 | -------------------- | ------------------------ | ---------------------------------------------------- |
 | operatorId           | uint64\[]                | Operator ID list                                     |
-| whitelistingContract | ISSVWhitelistingContract | <p>A valid whitelisting contract address.</p><p></p> |
+| whitelistingContract | ISSVWhitelistingContract | A valid whitelisting contract address. |
 
 Events:
 
 * `OperatorWhitelistingContractUpdated(uint64[] operatorIds, address whitelistingContract)`
 
-### `removeOperatorsWhitelistingContract(operatorIds)`
+### **`removeOperatorsWhitelistingContract(operatorIds)`**
 
 Description: For a list of operators provided, remove the whitelisting contract stored.
 
@@ -174,7 +174,7 @@ Events:
 
 * `OperatorFeeDeclarationCancelled(address indexed owner, uint64 indexed operatorId)`
 
-### `reduceOperatorFee(operatorId, fee)`
+### **`reduceOperatorFee(operatorId, fee)`**
 
 Description: Reduce the operator fee, does not abide by the restrictions of fee increase
 
@@ -203,7 +203,7 @@ Events:
 
 ## Cluster Methods <a href="#hqxi798q7b6v" id="hqxi798q7b6v"></a>
 
-### `migrateClusterToETH(operatorIds, amount, cluster)`
+### **`migrateClusterToETH(operatorIds, amount, cluster)`**
 
 | **Parameter**       | **Type** | **Description**                                      |
 | ------------------- | -------- | ---------------------------------------------------- |
@@ -214,7 +214,7 @@ Events:
 Events:
 
 * `ClusterMigratedToETH(address owner, uint64[] operatorIds, uint256 ethDeposited, uint256 ssvRefunded, uint32 effectiveBalance, Cluster cluster)`
-
+* *`ClusterReactivated(address indexed owner, uint64[] operatorIds, Cluster cluster)`* is **emitted only if** the cluster was liquidated prior to the migration.
 
 ### **`registerValidator(publicKey, operatorIds, shares, cluster)`**
 
@@ -421,7 +421,7 @@ Events:
 
 * `LiquidationThresholdPeriodUpdated(uint64 value)`
 
-### `updateMaxiumumOperatorFee`**`(maxFee)`**
+### **`updateMaxiumumOperatorFee(maxFee)`**
 
 Description: Updates the maximum yearly fee per 32 ETH an operator can set
 
@@ -433,7 +433,7 @@ Events:
 
 * `OperatorMaximumFeeUpdated(uint64 maxFee)`
 
-### `updateMinimumLiquidationCollateral(amount)`
+### **`updateMinimumLiquidationCollateral(amount)`**
 
 Description: Sets the minimum collateral (in ETH) each cluster must keep in his balance.
 
@@ -496,9 +496,9 @@ Description: Withdraws a specified amount of SSV tokens from provided operator b
 
 Events:
 
-* `OperatorWithdrawn(address indexed owner, uint64 indexed operatorId, uint256 value)`
+* `OperatorWithdrawnSSV(address indexed owner, uint64 indexed operatorId, uint256 value)`
 
-### `withdrawAllOperatorEarningsSSV`**`(operatorId)`**
+### **`withdrawAllOperatorEarningsSSV(operatorId)`**
 
 Description: Withdraws all SSV tokens earnings from provided operator balance to msg.sender, **will fail if** msg.sender is not the operator owner.
 
@@ -508,7 +508,7 @@ Description: Withdraws all SSV tokens earnings from provided operator balance to
 
 Events:
 
-* `OperatorWithdrawn(address indexed owner, uint64 indexed operatorId, uint256 value)`
+* `OperatorWithdrawnSSV(address indexed owner, uint64 indexed operatorId, uint256 value)`
 
 ### **`liquidateSSV(owner, operatorIds, cluster)`**
 
@@ -560,7 +560,7 @@ Events:
 
 * `LiquidationThresholdPeriodSSVUpdated(uint64 value)`
 
-### `updateMinimumLiquidationCollateralSSV(amount)`
+### **`updateMinimumLiquidationCollateralSSV(amount)`**
 
 Description: Sets the minimum collateral each SSV-based cluster must keep in his balance.
 

@@ -6,11 +6,9 @@ sidebar_position: 2
 
 The SSVNetworkViews contract is for reading information about the network and its participants.
 
-[SSV Views Contracts Repository](https://github.com/ssvlabs/ssv-network/tree/main/contracts)
-
 ## General Methods
 
-### **`getNetworkFee ()`**
+### **`getNetworkFee()`**
 
 Description: Returns current network fee.
 
@@ -20,7 +18,7 @@ Return values:
 |-----------|------|-------------|
 | fee | uint256 | The fee charged by the network proportional to Effective Balance (denominated as ETH per block) |
 
-### **`getNetworkEarnings ()`**
+### **`getNetworkEarnings()`**
 
 Description: Returns accumulated network fees not yet withdrawn.
 
@@ -30,7 +28,7 @@ Return values:
 |-----------|------|-------------|
 | amount | uint256 | Amount of fees accumulated in the network treasury |
 
-### **`getLiquidationThresholdPeriod ()`**
+### **`getLiquidationThresholdPeriod()`**
 
 Description: Returns the minimum duration (in blocks) which a cluster has to have sufficient balance (liquidation collateral) to not be liquidated.
 
@@ -93,7 +91,7 @@ Return values
 
 ## Operator Methods <a href="#ha5jkuo5opxs" id="ha5jkuo5opxs"></a>
 
-### **`getOperatorById (operatorId)`**
+### **`getOperatorById(operatorId)`**
 
 Description: Returns operator's data.
 
@@ -112,7 +110,7 @@ Return values:
 | isPrivate | boolean | Indication if operator is permissioned |
 | active | boolean | Operator network status |
 
-### **`getOperatorFee (operatorId)`**
+### **`getOperatorFee(operatorId)`**
 
 Description: returns current operator's fee (not declared).
 
@@ -126,7 +124,7 @@ Return values
 | ------------- | -------- | ---------------------------------------------------------------------- |
 | declaredFee   | uint256  | The fee charged by the operator (denominated as ETH per block) |
 
-### **`getOperatorDeclaredFee (operatorId)`**
+### **`getOperatorDeclaredFee(operatorId)`**
 
 Description: Returns the declared fee (not actual fee) together with the execution time window.
 
@@ -140,7 +138,7 @@ Return value
 | ------------- | -------- | ---------------------------------------------------------------------- |
 | declaredFee   | uint256  | The fee declared by the operator (denominated as ETH per block) |
 
-### **`getOperatorEarnings (operatorId)`**
+### **`getOperatorEarnings(operatorId)`**
 
 Description: Returns the outstanding earnings of an operator.
 
@@ -201,7 +199,7 @@ Return values
 
 ## Cluster Methods <a href="#s1a6da24gvwp" id="s1a6da24gvwp"></a>
 
-### **`getBalance (owner, operatorIds, cluster)`**
+### **`getBalance(owner, operatorIds, cluster)`**
 
 Description: Returns the outstanding ETH balance of a cluster.
 
@@ -217,7 +215,7 @@ Return values:
 |-----------|------|-------------|
 | balance | uint256 | Clusters outstanding balance denominated in ETH |
 
-### **`getBurnRate (owner, operatorIds, cluster)`**
+### **`getBurnRate(owner, operatorIds, cluster)`**
 
 Description: Returns current ongoing expenses of ETH for a particular SSV cluster balance on per block basis (aggregates all expenses for all the validators in this cluster).\\
 
@@ -431,7 +429,7 @@ Return values
 
 ## Liquidator Methods <a href="#id-39qo7wl8s1he" id="id-39qo7wl8s1he"></a>
 
-### **`isLiquidatable (owner, operatorIds, cluster)`**
+### **`isLiquidatable(owner, operatorIds, cluster)`**
 
 Description: Returns true if the specified cluster is under the liquidation threshold and can be liquidated.
 
@@ -447,7 +445,7 @@ Return values
 | ------------- | -------- | ------------------------------------------- |
 | isLiquidatable | boolean  | Indication if a cluster could be liquidated |
 
-### **`isLiquidated (owner, operatorIds, cluster)`**
+### **`isLiquidated(owner, operatorIds, cluster)`**
 
 Description: Returns true if the provided cluster is liquidated.
 
@@ -465,7 +463,7 @@ Return values
 
 ## Legacy Methods
 
-### **`getBalanceSSV (owner, operatorIds, cluster)`**
+### **`getBalanceSSV(owner, operatorIds, cluster)`**
 
 Description: Returns the outstanding SSV balance of a legacy (SSV-based) cluster.
 
@@ -481,7 +479,7 @@ Return values:
 |-----------|------|-------------|
 | balance | uint256 | Clusters outstanding balance denominated in SSV |
 
-### **`getBurnRateSSV (owner, operatorIds, cluster)`**
+### **`getBurnRateSSV(owner, operatorIds, cluster)`**
 
 Description: Returns current ongoing expenses of SSV for a particular SSV cluster balance on per block basis (aggregates all expenses for all the validators in this cluster).\\
 
@@ -497,7 +495,7 @@ Return values
 | ------------- | -------- | --------------------------------------------------- |
 | burnRate      | uint256  | The rate per block in which the account spends ETH. |
 
-### **`getNetworkFeeSSV ()`**
+### **`getNetworkFeeSSV()`**
 
 Description: Returns current network fee for legacy (SSV-based) clusters.
 
@@ -507,7 +505,7 @@ Return values:
 |-----------|------|-------------|
 | fee | uint256 | The fee charged by the network (denominated as SSV per block) |
 
-### **`getNetworkEarningsSSV ()`**
+### **`getNetworkEarningsSSV()`**
 
 Description: Returns accumulated network fees not yet withdrawn from the legacy (SSV-based) clusters.
 
@@ -517,7 +515,7 @@ Return values:
 |-----------|------|-------------|
 | amount | uint256 | Amount of fees accumulated in the network treasury |
 
-### **`getLiquidationThresholdPeriodSSV ()`**
+### **`getLiquidationThresholdPeriodSSV()`**
 
 Description: Returns the minimum duration (in blocks) which legacy cluster has to have sufficient balance (liquidation collateral) to not be liquidated.
 
@@ -547,7 +545,7 @@ Return values
 | --------- | ------ | -------------------------------- |
 | maxFee    | uint64 | The maximum fee value (SSV/year) |
 
-### **`getOperatorByIdSSV (operatorId)`**
+### **`getOperatorByIdSSV(operatorId)`**
 
 Description: Returns operator's data for operators participating in legacy clusters.
 
@@ -566,7 +564,7 @@ Return values:
 | isPrivate | boolean | Indication if operator is permissioned |
 | active | boolean | Operator network status |
 
-### **`getOperatorFeeSSV (operatorId)`**
+### **`getOperatorFeeSSV(operatorId)`**
 
 Description: returns current operator's fee (not declared).
 
@@ -580,7 +578,7 @@ Return values
 | ------------- | -------- | ---------------------------------------------------------------------- |
 | declaredFee   | uint256  | The fee charged by the operator (denominated as SSV per block) |
 
-### **getOperatorEarningsSSV (operatorId)**
+### **`getOperatorEarningsSSV(operatorId)`**
 
 Description: Returns the outstanding earnings of an operator participating legacy cluster(s).
 
@@ -594,7 +592,7 @@ Return values
 | ------------- | -------- | ---------------------------------------------- |
 | balance       | uint256  | Operators outstanding earnings in SSV. |
 
-### **`isLiquidatableSSV (owner, operatorIds, cluster)`**
+### **`isLiquidatableSSV(owner, operatorIds, cluster)`**
 
 Description: Returns true if the specified legacy cluster is under the liquidation threshold and can be liquidated.
 
