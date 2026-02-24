@@ -19,7 +19,7 @@ Converts an SSV-based cluster (legacy) to ETH-based cluster. Accepts cluster ID 
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| `cluster_Id` | string | A `cluster_id` in its computed ID form. | 0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8 |
+| cluster_Id | string | A cluster_id in its computed ID form. Has to have the **owner address in lowercase letters**. It is advised to use the [`createClusterID`](/developers/SSV-SDK/module-reference/api-module#getclusteridowner_address-operator_ids)  function to get the cluster ID in the correct format | “0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8” |
 | amount | bigint | Amount of ETH to deposit to fund the cluster | 0.1234 |
 
 #### Example:
@@ -27,7 +27,7 @@ Converts an SSV-based cluster (legacy) to ETH-based cluster. Accepts cluster ID 
 ```typescript
 txn_receipt = await sdk.clusters.migrateClusterToETH({ 
     args: { 
-        cluster_Id: "0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8", 
+        cluster_Id: "0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8", 
         amount: parseEther('0.1234') 
     },
 }).then(tx => tx.wait())
@@ -59,7 +59,7 @@ Executes the contract call to to deposit ETH to the cluster balance.
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| id | string | Cluster ID | 0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8 |
+| id | string | A cluster id in its computed ID form. Has to have the **owner address in lowercase letters**. It is advised to use the [`createClusterID`](/developers/SSV-SDK/module-reference/api-module#getclusteridowner_address-operator_ids)  function to get the cluster ID in the correct format | “0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8” |
 | amount | bigint | Amount of ETH to deposit to cluster | 0.1234 |
 
 #### Example:
@@ -69,7 +69,7 @@ import { parseEther } from 'viem'
 
 txn_receipt = await sdk.clusters.deposit({ 
     args: { 
-        id: "0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8", 
+        id: "0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8", 
         amount: parseEther('0.1234')
     },
 }).then(tx => tx.wait())
@@ -81,14 +81,14 @@ Liquidates a cluster sends their balance to the msg.sender (the Liquidator). **W
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| id | string | Cluster ID | 0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8 |
+| id | string | A cluster id in its computed ID form. Has to have the **owner address in lowercase letters**. It is advised to use the [`createClusterID`](/developers/SSV-SDK/module-reference/api-module#getclusteridowner_address-operator_ids)  function to get the cluster ID in the correct format | “0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8” |
 
 #### Example:
 
 ```typescript
 txn_receipt = await sdk.clusters.liquidateCluster({ 
     args: { 
-        id: "0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8",
+        id: "0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8",
     },
 }).then(tx => tx.wait())
 ```
@@ -99,14 +99,14 @@ Liquidates a legacy (SSV-based) cluster sends their balance to the msg.sender (t
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| id | string | Cluster ID | 0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8 |
+| id | string | A cluster id in its computed ID form. Has to have the **owner address in lowercase letters**. It is advised to use the [`createClusterID`](/developers/SSV-SDK/module-reference/api-module#getclusteridowner_address-operator_ids)  function to get the cluster ID in the correct format | “0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8” |
 
 #### Example:
 
 ```typescript
 txn_receipt = await sdk.clusters.liquidateSSV({ 
     args: { 
-        id: "0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8",
+        id: "0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8",
     },
 }).then(tx => tx.wait())
 ```
@@ -122,7 +122,7 @@ Withdraw a specified amount of ETH from a cluster.
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| id | string | Cluster ID | 0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8 |
+| id | string | A cluster id in its computed ID form. Has to have the **owner address in lowercase letters**. It is advised to use the [`createClusterID`](/developers/SSV-SDK/module-reference/api-module#getclusteridowner_address-operator_ids)  function to get the cluster ID in the correct format | “0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8” |
 | amount | bigint | Amount of ETH to withdraw from the cluster | 0.1234 |
 
 #### Example:
@@ -132,7 +132,7 @@ import { parseEther } from 'viem'
 
 txn_receipt = await sdk.clusters.withdraw({ 
     args: { 
-        id: "0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8", 
+        id: "0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8", 
         amount: parseEther('0.1234') 
     },
 }).then(tx => tx.wait())
@@ -148,7 +148,7 @@ Reactivates a liquidated cluster.
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| id | string | Cluster ID | 0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8 |
+| id | string | A cluster id in its computed ID form. Has to have the **owner address in lowercase letters**. It is advised to use the [`createClusterID`](/developers/SSV-SDK/module-reference/api-module#getclusteridowner_address-operator_ids)  function to get the cluster ID in the correct format | “0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8” |
 | amount | bigint | Amount of ETH to deposit to cluster | 0.1234 |
 
 #### Example:
@@ -158,7 +158,7 @@ import { parseEther } from 'viem'
 
 txn_receipt = await sdk.clusters.reactivateCluster({ 
     args: { 
-        id: "0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8", 
+        id: "0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8", 
         amount: parseEther('0.1234') 
     },
 }).then(tx => tx.wait())
@@ -174,7 +174,7 @@ Accepts all parameters necessary to remove the validators. Removes all the valid
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| id | string | Cluster ID | 0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8 |
+| id | string | A cluster id in its computed ID form. Has to have the **owner address in lowercase letters**. It is advised to use the [`createClusterID`](/developers/SSV-SDK/module-reference/api-module#getclusteridowner_address-operator_ids)  function to get the cluster ID in the correct format | “0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8” |
 | publicKeys | Hex[] | Array of validator public keys to remove | ["0x820fd0519c75f74c8be9f21f185406919721dad0c624464538e2eaa323d77d3eb3ef27a039e8779de6cfa649a5484e86", "0x820fd0519c75f74c8be9f21f185406919721dad0c624464538e2eaa323d77d3eb3ef27a039e8779de6cfa649a5484e87"] |
 
 #### Example:
@@ -182,7 +182,7 @@ Accepts all parameters necessary to remove the validators. Removes all the valid
 ```typescript
 txn_receipt = await sdk.clusters.removeValidators({ 
     args: { 
-        id: "0xf69A08B652f0CEBb685c2fFE043cfB767b66544A-5-6-7-8", 
+        id: "0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8", 
         publicKeys: ["0x820fd0519c75f74c8be9f21f185406919721dad0c624464538e2eaa323d77d3eb3ef27a039e8779de6cfa649a5484e86", "0x820fd0519c75f74c8be9f21f185406919721dad0c624464538e2eaa323d77d3eb3ef27a039e8779de6cfa649a5484e87"],
     },
 }).then(tx => tx.wait())

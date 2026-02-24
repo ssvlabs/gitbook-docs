@@ -63,16 +63,17 @@ const walletClient = createWalletClient({
   transport,
 })
 
-const sdk = new BasedAppsSDK({
-   beaconchainUrl: 'https://example.com/beacon',
-   publicClient,
-   walletClient,
-   extendedConfig: {
-    subgraph: {
-      apiKey: "<YOUR_SUBGRAPH_API_KEY>"
+const sdk = new SSVSDK({
+    publicClient: publicClient as any,
+    walletClient: walletClient as any,
+    beaconchainUrl: 'https://example.com/beacon',
+    extendedConfig: {
+      subgraph: {
+        apiKey: process.env.SUBGRAPH_API,
+        endpoint: process.env.SUBGRAPH_ENDPOINT,
+      }
     }
-  }
- })
+  })
 
 async function main(): Promise<void> {
 

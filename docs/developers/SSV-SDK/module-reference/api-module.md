@@ -75,7 +75,7 @@ const clusterID = createClusterId(ownerAddress, operatorIds)
 Example output: 
 
 ```bash
-1179fed483c8c1b0327c8667521162015fa8cbe1a1b047a26baf0f0971a81929
+0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8
 ```
 
 ### `getClusterBalance(clusterId, daoAddress, operatorIds)`

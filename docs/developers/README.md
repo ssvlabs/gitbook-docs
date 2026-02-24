@@ -80,9 +80,15 @@ const walletClient = createWalletClient({
 
 // Initialize SDK with viem clients
 const sdk = new SSVSDK({
-  publicClient,
-  walletClient,
-})
+    publicClient: publicClient as any,
+    walletClient: walletClient as any,
+    extendedConfig: {
+      subgraph: {
+        apiKey: process.env.SUBGRAPH_API,
+        endpoint: process.env.SUBGRAPH_ENDPOINT,
+      }
+    }
+  });
 ```
 
 ### **2. Select operators and collect their data**
@@ -278,9 +284,16 @@ async function main(): Promise<void> {
 
     // Initialize SDK with viem clients
     const sdk = new SSVSDK({
-        publicClient,
-        walletClient,
+        publicClient: publicClient as any,
+        walletClient: walletClient as any,
+        extendedConfig: {
+        subgraph: {
+            apiKey: process.env.SUBGRAPH_API,
+            endpoint: process.env.SUBGRAPH_ENDPOINT,
+        }
+        }
     })
+
 
     const directoryPath = process.env.KEYSTORE_FILE_DIRECTORY;
     let keystoresArray: { name: string; keystore: any }[];
