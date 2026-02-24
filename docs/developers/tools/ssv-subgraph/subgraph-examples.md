@@ -299,7 +299,7 @@ query clusterBalanceValues {
       number
     }
   }
-  daovalues(id: "	0x58410Bef803ECd7E63B23664C586A6DB72DAf59c") {
+  daovalues(id: "0x58410Bef803ECd7E63B23664C586A6DB72DAf59c") {
     networkFee
     networkFeeIndex
     networkFeeIndexBlockNumber
@@ -330,7 +330,7 @@ query clusterBalanceValues {
       number
     }
   }
-  daovalues(id: "	0x58410Bef803ECd7E63B23664C586A6DB72DAf59c") {
+  daovalues(id: "0x58410Bef803ECd7E63B23664C586A6DB72DAf59c") {
     networkFee
     networkFeeIndex
     networkFeeIndexBlockNumber
