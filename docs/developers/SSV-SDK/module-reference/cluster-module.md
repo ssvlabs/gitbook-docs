@@ -39,7 +39,7 @@ Accepts a number of keyshares to be validated and registered to the network.
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| keyshares | KeySharesItem[] | Keyshares | See [keyshares example with its structure](/developers/keyshares-structure) |
+| keyshares | KeySharesItem[] | Keyshares | See [keyshares example with its structure](/learn/security/keyshares-structure) |
 | depositAmount | bigint | Amount of ETH to deposit to cluster | 0.1234 |
 
 #### Example:

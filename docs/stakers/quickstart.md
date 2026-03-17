@@ -1,7 +1,8 @@
 ---
 description: Quickstart
 sidebar_label: 'Quickstart'
-sidebar_position: 2
+sidebar_position: 7
+unlisted: true
 ---
 
 import Tabs from '@theme/Tabs';

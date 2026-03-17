@@ -26,7 +26,7 @@ sidebar_position: 5
 | SSV DAO Vesting           | [0xB8471180C79A0a69C7790A1CCf62e91b3c3559Bf](https://etherscan.io/address/0xB8471180C79A0a69C7790A1CCf62e91b3c3559Bf) |
 | Mainnet Rewards Distributor | [0xe16d6138b1d2ad4fd6603acdb329ad1a6cd26d9f](https://etherscan.io/address/0xe16d6138b1d2ad4fd6603acdb329ad1a6cd26d9f) |
 | Testnet Rewards Distributor **Deprecated** | [0xE16e6Bddf4a1683c029DdC7AEcb567A6095e95A6](https://etherscan.io/address/0xE16e6Bddf4a1683c029DdC7AEcb567A6095e95A6) |
-| CDT to SSV Upgrader **([Deprecated](https://snapshot.box/#/s:mainnet.ssvnetwork.eth/proposal/0xff1b868f97de48db3ba26c5254e9902645ed55b5107a84ee0cbcb98b31973f27))**     | [0x2bf73A478cc6a7bA4E6758A3A52AbDc8CDBa735E](https://etherscan.io/address/0x2bf73A478cc6a7bA4E6758A3A52AbDc8CDBa735E) |
+| CDT to SSV Upgrader **[Deprecated](https://snapshot.box/#/s:mainnet.ssvnetwork.eth/proposal/0xff1b868f97de48db3ba26c5254e9902645ed55b5107a84ee0cbcb98b31973f27)**     | [0x2bf73A478cc6a7bA4E6758A3A52AbDc8CDBa735E](https://etherscan.io/address/0x2bf73A478cc6a7bA4E6758A3A52AbDc8CDBa735E) |
 
 
 #### Hoodi Testnet

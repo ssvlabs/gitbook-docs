@@ -1,19 +1,22 @@
 ---
-description: Cluster Management
+description: Management
 sidebar_position: 5
 ---
 
-# Cluster Management
+# Management
 
-**Follow the guides in this section:**
-- [**Add validator**](./adding-validator-to-existing-cluster.md) to existing cluster
-- [**Deposit ETH**](./depositing-eth.md) to cluster balance
-- [**Withdraw ETH**](./withdrawing-eth.md) from cluster balance
-- [**Re-activate a cluster**](./re-activating-a-cluster.md) if your balance went to 0
-- [**Update operators**](./update-operators.md) when you need to change one of the operators
-- [**Exit a validator**](./exiting-a-validator.md)
-- [**Remove a validator**](./removing-a-validator.md)
-- [**Migrate to ETH**](./migrating-to-eth-clusters.md) (for legacy SSV cluster owners)
+:::note Automations
+Most of these steps can be automated programmatically. If you wish to do so, please check out [Developers Tutorials page](/developers/examples/).
+:::
+
+This section explains the actions that can be performed with an existing cluster:
+- [Add More Validators](adding-validator-to-existing-cluster.md)
+- [Consolidate Validators](consolidate-validators.md)
+- [Deposit ETH](depositing-eth.md)
+- [Set Fee Recepient](setting-fee-recipient-address.md) for execution layer (block proposals) rewards
+- [Reactivate a Cluster](re-activating-a-cluster.md) if your balance went to 0
+- [Update Operator Set](update-operators.md) when you need to change the operator set
+- [Migrate to ETH](migrating-to-eth-clusters.md), only for legacy SSV clusters
 
 :::warning Legacy SSV Clusters
 Existing SSV-based clusters are treated as legacy. **This means the following actions are no longer supported:**
@@ -21,5 +24,5 @@ Existing SSV-based clusters are treated as legacy. **This means the following ac
 - Depositing additional SSV to extend runway
 - Removing or exiting validators from SSV clusters
 
-**The only forward path is [migration to ETH](./migrating-to-eth-clusters.md).** Migration automatically refunds your SSV balance.
+**The only forward path is [migration to ETH](migrating-to-eth-clusters.md).** Migration automatically refunds your SSV balance.
 :::

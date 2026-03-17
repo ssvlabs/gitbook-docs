@@ -173,7 +173,7 @@ Example output:
 
 ### `getClusterBalance()`
 
-Accepts a cluster ID to identify the cluster, for which the balance needs to be fetched. Returns the[ balance of a cluster](/stakers/clusters/cluster-balance). 
+Accepts a cluster ID to identify the cluster, for which the balance needs to be fetched. Returns the [balance of a cluster](/learn/network-overview/clusters/cluster-balance).
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|

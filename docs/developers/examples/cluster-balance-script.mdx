@@ -1,0 +1,42 @@
+---
+sidebar_position: 8
+---
+
+import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBlock';
+import InlineEditableCommand from '@site/src/components/InlineEditableCommand';
+
+# Cluster Balance Calculation
+
+The script below calculates the balance of a cluster on the SSV network. This calculation can be made useful by adding it to cluster balance monitoring tool/automation of your own.
+
+Details on the formulas used can be found in the documentation page related to [Cluster Balance](/learn/network-overview/clusters/cluster-balance).
+
+The core calculation function that computes and prints the cluster balance:
+
+<InlineEditableCodeBlock
+  language="typescript"
+  template={
+  `
+try {
+    const { balance, operationalRunway } = await sdk.utils.getClusterBalance({
+        args: {
+            operatorIds: [{{OPERATOR_ID1}}, {{OPERATOR_ID2}}, {{OPERATOR_ID3}}, {{OPERATOR_ID4}}]',
+        },
+    });
+
+    console.log('Cluster balance result:', {
+        balance: balance.toString(),
+        operationalRunway: operationalRunway.toString(),
+    });
+} catch (error) {
+    console.error('Failed to get cluster balance:', error);
+}
+  `
+  }
+  variables={{
+    OPERATOR_ID1: '1',
+    OPERATOR_ID2: '2',
+    OPERATOR_ID3: '3',
+    OPERATOR_ID4: '4',
+  }}
+/>

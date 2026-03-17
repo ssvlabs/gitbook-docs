@@ -13,7 +13,7 @@ The Beacon Chain is a brand-new, proof-of-stake blockchain that stores and manag
 
 ### Cluster
 
-The group (usually 4, in compliance with [the fault tolerance rule is accepted](/stakers/validators/validator-onboarding)) of non-trusting operators that manage a set (one, or multiple) validator(s). Each operator in the cluster holds a share of the complete validator key, for more information, see [Shamir Secret Sharing](glossary.md#shamir-secret-sharing).
+The group (usually 4, in compliance with [the fault tolerance rule is accepted](/learn/network-overview/validators/validator-onboarding)) of non-trusting operators that manage a set (one, or multiple) validator(s). Each operator in the cluster holds a share of the complete validator key, for more information, see [Shamir Secret Sharing](glossary.md#shamir-secret-sharing).
 
 ### Consensus Client
 
@@ -92,7 +92,7 @@ Tying it all together, the consensus layer of SSV is based on the Istanbul Byzan
 
 ### KeyShare
 
-Using [Distributed Key Generation](/developers/tools/ssv-dkg-client/), the SSV protocol encrypts and splits a validator key into multiple “KeyShares”. The KeyShares are then distributed to multiple non-trusting nodes, run by operators. This allows the key to be generated and then stored securely offline while the KeyShares that represent it actually run the validator.
+Using [Distributed Key Generation](/stakers/tools/ssv-dkg-client/), the SSV protocol encrypts and splits a validator key into multiple “KeyShares”. The KeyShares are then distributed to multiple non-trusting nodes, run by operators. This allows the key to be generated and then stored securely offline while the KeyShares that represent it actually run the validator.
 
 ### Liquidation
 

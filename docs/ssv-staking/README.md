@@ -17,7 +17,7 @@ By staking SSV, your staked weight contributes to oracle consensus for effective
 Stake SSV and Delegate → Receive cSSV → Claim Rewards → Unstake → Withdraw
 ```
 
-1. **Stake SSV and Delegate** - Deposit SSV tokens into the staking contract, delegating voting power to [oracles](/learn/introduction/oracles.md)
+1. **Stake SSV and Delegate** - Deposit SSV tokens into the staking contract, delegating voting power to [oracles](/learn/network-overview/oracles.md)
 2. **Receive cSSV** - Receive cSSV tokens that represent staked position
 3. **Claim rewards** - Claim your accumulated rewards at any time
 4. **Unstake** - Start the unstaking process, which triggers a 7-day cooldown
@@ -52,7 +52,7 @@ Distributed to cSSV holders
 
 When you stake SSV, your stake weight is automatically delegated to the network's oracle system. Your stake weight remains active during the unstaking cooldown period.
 
-Oracles report validator effective balances to the blockchain. Check out [the Effective Balance Oracles page](/learn/introduction/oracles.md) to learn more about their role in the network.
+Oracles report validator effective balances to the blockchain. Check out [the Effective Balance Oracles page](/learn/network-overview/oracles.md) to learn more about their role in the network.
 
 ## Getting Started
 

@@ -1,9 +1,8 @@
 ---
-title: Re-activating a cluster
-sidebar_position: 4
+sidebar_position: 5
 ---
 
-# Re-activating a cluster
+# Reactivate a Cluster
 
 ### Connect your Web3 wallet to the WebApp
 

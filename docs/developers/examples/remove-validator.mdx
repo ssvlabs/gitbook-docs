@@ -1,0 +1,48 @@
+---
+sidebar_position: 6
+---
+
+import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBlock';
+import InlineEditableCommand from '@site/src/components/InlineEditableCommand';
+
+# Remove Validator
+
+This page shows how to programmatically remove validators from a cluster on the SSV network.
+
+### Remove Validator
+
+<InlineEditableCodeBlock
+  language="typescript"
+  template={
+  `
+try {
+    const ownerAddress = "{{OWNER_ADDRESS}}"
+    const operatorIds: [{{OPERATOR_ID1}}, {{OPERATOR_ID2}}, {{OPERATOR_ID3}}, {{OPERATOR_ID4}}]'
+    const clusterID = createClusterId(ownerAddress, operatorIds)
+
+    const txnReceipt = await sdk.clusters.removeValidators({
+        args: {
+            id: clusterID,
+            publicKeys: [
+                         "{{VALIDATOR_KEY1}}", 
+                         "{{VALIDATOR_KEY2}}"
+            ],
+        },
+    }).then(tx => tx.wait());
+
+    console.log('Transaction receipt:', txnReceipt);
+} catch (error) {
+    console.error('Failed to remove validators:', error);
+}
+  `
+  }
+  variables={{
+    VALIDATOR_KEY1: '0x9168d201b4c51f5a978298fd940a73319d00f7cacc11995960021d52d0bc0f141aa5872fb2aa23a124b8051d54c5c455',
+    VALIDATOR_KEY2: '0xaeee799166f6019a1a97acad6bfd59b6aa20ebadb3b77ca819cb3f81f562c9a876eb5d542e51e43ba3a52d021f339023',
+    OWNER_ADDRESS: '0xA4831B989972605A62141a667578d742927Cbef9',
+    OPERATOR_ID1: '1',
+    OPERATOR_ID2: '2',
+    OPERATOR_ID3: '3',
+    OPERATOR_ID4: '4',
+  }}
+/>

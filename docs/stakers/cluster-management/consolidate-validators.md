@@ -1,9 +1,9 @@
 ---
-title: Consolidate validators
-sidebar_position: 8
+title: Consolidate Validators
+sidebar_position: 2
 ---
 
-# Consolidate validators
+# Consolidate Validators
 
 Since Pectra hardfork all validators are allowed to upgrade their withdrawal address to 0x02 and have up to 2048 ETH on validator balance. [Read more about 0x02 and Max Effective balance here](https://www.kiln.fi/post/next-ethereum-upgrade-how-pectra-will-enhance-the-staking-experience).
 

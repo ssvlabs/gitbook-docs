@@ -1,99 +1,87 @@
 ---
-title: Adding validator to existing cluster
+title: Add More Validators
 sidebar_position: 1
 ---
 
-# Adding validator to existing cluster
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-### Connect your Web3 wallet to the WebApp
+# Add More Validators 
 
-Make sure to connect your Web3 wallet with the WebApp, and that the address corresponds with the one you want to manage your Validators with.
+Make sure to connect your Web3 address/wallet with [the WebApp](https://app.ssv.network/). Use the address you registered your validators with.
 
-:::info
-**Note:** Your account is associated with your Web3 wallet.
-:::
+1. [**In the Clusters page**](https://app.ssv.network/clusters), **select an active cluster** and then click on the "**Add Validator +**" button.
 
-In the My Account page, select an active cluster and then click on the "+ Add Validator" button.
+![add-validator-to-cluster](/img/add-validator-to-cluster-1.png)
 
-![add-validator-to-cluster](/img/add-validator-to-cluster-1.avif)   
+2. **Generate KeyShares** via SSV Keys CLI command or other means. If unsure, refer to [this step-by-step guide](/stakers/validator-onboarding/split-keys.md).
 
-You'll be asked how do you want to handle operational costs, in regards to your existing cluster balance.
+![add-validator-to-cluster](/img/add-validator-to-cluster-6.avif)
 
-![add-validator-to-cluster](/img/add-validator-to-cluster-2.webp)
+<details>
 
-### Key splitting
+<summary>**Key Splitting on Testnet**</summary>
 
-The next screen will allow you to generate KeyShares for your validator key. On testnet, this can be done Online, directly on the WebApp, or Offline, on your computer.
-
-On mainnet, only the Offline option is available.
+On Testnet, this can be done Online, directly on the WebApp, or Offline on your computer.
 
 ![add-validator-to-cluster](/img/add-validator-to-cluster-3.avif)
-#### Online Key Splitting
 
-Online key splitting presents a convenient option, especially for those not familiar with the console, or command line clients.
+:::warning Online Splitting
+**Online splitting is not considered safe** and is only available on testnet for testing purposes.
 
-This is not considered safe and is only available on testnet for testing purposes.
-
-:::warning
 Please never perform a Online key splitting on testnet, with a private key that you intend to use on mainnet.
 :::
-
-![add-validator-to-cluster](/img/add-validator-to-cluster-4.avif)
 
 If the Online option is chosen, the next screen allows you to upload the Validator key (file named keystore) and enter the password to decrypt it.
 
 ![add-validator-to-cluster](/img/add-validator-to-cluster-5.avif)
-#### Offline Key Splitting
 
-Offline key splitting is the most secure option, although less convenient, as it requires running a command line tool. For more information, refer to the specific [User Guide on how to use the ssv-keys CLI tool](../tools/ssv-keys-cli.md).
+</details>
 
-![add-validator-to-cluster](/img/add-validator-to-cluster-6.avif)
 
-If the Offline option was selected, please follow the indications and upload the generated `keyshares-[DATE]-[TIME].json` file in the following screen.
+3. **Upload the generated `keyshares-[DATE]-[TIME].json` file**.
 
 ![add-validator-to-cluster](/img/add-validator-to-cluster-7.avif)
 
-Once uploaded, if successfully validated, advance to the next screen clicking Next.
+4. **If the upload is successful click on "Next".**
 
-![add-validator-to-cluster](/img/add-validator-to-cluster-8.avif)
+   If you see an error such as "Keyshares are invalid", most often it is caused by incorrect nonce. Try to generate KeyShares once again, refer to [this step-by-step guide](/stakers/validator-onboarding/split-keys.md).
 
-### Slashing warning
+![Distribute a validator](/img/distributing-a-val-10.png)
 
-The following screen alerts you of the potential dangers of registering a validator on the SSV network, if the same set of validator keys is also being used by other consensus and validator clients.
+5. **Effective Balance Warnings.**
 
-Please make sure to stop any other running validator setup, if you have any.
+Read the warning on the page, input your Effective Balance and proceed to the next step.
+    ![Distribute a validator](/img/distributing-a-val-EB.png)
 
-![add-validator-to-cluster](/img/add-validator-to-cluster-9.avif)
+6. **Validator Operational Runway**
 
-### Validator summary
+You can select the operational runway period of your validator, in accordance with the **Yearly Fee** of previously selected operators. This will dictate the initial amount of ETH to be deposited in the cluster, but it can always be managed later.
 
-The next screen presents a summary of your validator setup.
+![Distribute a validator](/img/distributing-a-val-11.png)
+![Distribute a validator](/img/distributing-a-val-12.png)
 
-![add-validator-to-cluster](/img/add-validator-to-cluster-10.avif)
+7. **Summary of your validator setup.**
+ 
+Confirm everything is correct and click on "Register Validator". 
 
-By clicking on Register validator, you'll be proposed to sign a transaction to confirm your choice and deposit the ETH necessary to cover operational costs (if additional funding is needed).
+![Distribute a validator](/img/distributing-a-val-14.png)
 
-![add-validator-to-cluster](/img/add-validator-to-cluster-11.webp)
+8. **Adding ETH to cluster balance.**
 
-### ETH Balance deposit
-
-Now, finalize the validator registration by signing the transaction and depositing ETH to your cluster balance.
-
+Now, finalize the validator registration by signing the transaction and adding ETH to your cluster balance. You will need to confirm the transaction in your web3 wallet.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
-    src="/img/add-validator-to-cluster-12.png" 
+    src="/img/distributing-a-val-16.png" 
     alt="Distribute a validator" 
     style={{ width: '50%', maxWidth: '500px' }}
   />
 </div>
 
-You will need to confirm the transaction in your web3 wallet.
 
-![add-validator-to-cluster](/img/add-validator-to-cluster-13.avif)
+9. **Congratulations! You're all set!🥳**
 
 Once the transaction has been signed and confirmed by the network, you'll be presented with the summary screen.
 
-![add-validator-to-cluster](/img/add-validator-to-cluster-14.avif)
-
-**Congratulations! You're all set!🥳**
+![Distribute a validator](/img/distributing-a-val-17.avif)

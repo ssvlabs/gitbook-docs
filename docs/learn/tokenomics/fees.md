@@ -22,4 +22,4 @@ You can find more details on the dedicated [Operator Onboarding page](/operators
 
 In addition to operator fees, stakers are also required to pay a ‘network fee’ for each validator they run through the network.
 
-The network fee is a fixed cost determined by the DAO that governs the network. It's accessible through the [SSV Network Views smart contract](/developers/smart-contracts/ssvnetworkviews#getnetworkfee-) or via the [Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#dao-constants-and-protocol-network-fee-index). 
+The network fee is a fixed cost determined by the DAO that governs the network. It's accessible through the [SSV Network Views smart contract](/developers/smart-contracts/ssvnetworkviews#getnetworkfee-) or via the [Subgraph](/developers/api/ssv-subgraph/subgraph-examples#dao-constants-and-protocol-network-fee-index). 

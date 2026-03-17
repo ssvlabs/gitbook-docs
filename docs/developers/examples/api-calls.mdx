@@ -1,0 +1,63 @@
+---
+sidebar_position: 9
+---
+
+import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBlock';
+import InlineEditableCommand from '@site/src/components/InlineEditableCommand';
+
+# API calls
+
+This page will show how to use the API module to do various calls. The API module is used to get data such as the Account Nonce, or Cluster Snapshot, both are covered on this page. 
+
+For the full list of functions you can check the [API Module Reference](/developers/SSV-SDK/module-reference/api-module.md).
+
+### Get Nonce 
+
+<InlineEditableCodeBlock
+  language="typescript"
+  template={
+  `
+ const ownerNonce = await sdk.api.getOwnerNonce({ 
+        owner: "{{OWNER_ADDRESS}}" 
+    })
+    
+    console.log(ownerNonce)
+}
+  `
+  }
+  variables={{
+    OWNER_ADDRESS: '0xA4831B989972605A62141a667578d742927Cbef9',
+  }}
+/>
+
+
+### Get Cluster Snapshot
+
+<InlineEditableCodeBlock
+  language="typescript"
+  template={
+  `
+import { createClusterId } from '@ssv-labs/ssv-sdk/utils'
+
+async function main() {
+
+  const ownerAddress = "{{OWNER_ADDRESS}}"
+  const operatorIds: [{{OPERATOR_ID1}}, {{OPERATOR_ID2}}, {{OPERATOR_ID3}}, {{OPERATOR_ID4}}]'
+
+  const clusterID = createClusterId(ownerAddress, operatorIds)
+
+    const clusterSnapshot = await sdk.api.getClusterSnapshot({ 
+        id: clusterID
+    })
+    console.log(clusterSnapshot)
+}
+  `
+  }
+  variables={{
+    OWNER_ADDRESS: '0xA4831B989972605A62141a667578d742927Cbef9',
+    OPERATOR_ID1: '1',
+    OPERATOR_ID2: '2',
+    OPERATOR_ID3: '3',
+    OPERATOR_ID4: '4',
+  }}
+/>

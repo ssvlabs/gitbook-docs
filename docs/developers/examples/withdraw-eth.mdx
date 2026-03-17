@@ -1,0 +1,40 @@
+---
+sidebar_position: 7
+---
+
+import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBlock';
+import InlineEditableCommand from '@site/src/components/InlineEditableCommand';
+
+# Withdraw ETH
+
+This page shows how to programmatically withdraw ETH from a cluster on the SSV network.
+
+It is advised to use the [`createClusterID`](/developers/SSV-SDK/module-reference/api-module#getclusteridowner_address-operator_ids) function to get the cluster ID in the correct format.
+
+### Withdraw ETH
+
+<InlineEditableCodeBlock
+  language="typescript"
+  template={
+  `
+import { parseEther } from 'viem';
+
+try {
+    const txnReceipt = await sdk.clusters.withdraw({
+        args: {
+            id: "{{CLUSTER_ID}}",
+            amount: parseEther('{{ETH_AMOUNT}}'),
+        },
+    }).then(tx => tx.wait());
+
+    console.log('Transaction receipt:', txnReceipt);
+} catch (error) {
+    console.error('Failed to withdraw ETH:', error);
+}
+  `
+  }
+  variables={{
+    ETH_AMOUNT: '0.1234',
+    CLUSTER_ID: '0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8',
+  }}
+/>

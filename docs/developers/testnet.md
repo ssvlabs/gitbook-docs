@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Testnet'
-sidebar_position: 10
+sidebar_position: 7
 ---
 
 # Testnet

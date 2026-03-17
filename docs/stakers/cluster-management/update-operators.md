@@ -1,6 +1,6 @@
 ---
 title: Update Operators
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 # Update Operators
@@ -10,18 +10,18 @@ Please do not change more than 2 operators in a cluster. Each set of **generated
 :::
 
 First of all, it's important to verify how the validator was generated. Depending on that fact, your steps will differ:
-1. [**Validators with Keystore**](#1-validators-with-keystore) — follow if you have the `keystore.....json` file of your validator.
-2. [**DKG-generated Validators**](#2-dkg-generated-validators) — follow if you have the `ceremony-YYYY-MM-DD...` folder with `keyshares` and `proofs` for your validators.
-3. [**I don't have neither**](#3-i-dont-have-neither)
+- [**Validators with Keystore**](#1-validators-with-keystore) — follow if you have the `keystore.....json` file of your validator.
+- [**DKG-generated Validators**](#2-dkg-generated-validators) — follow if you have the `ceremony-YYYY-MM-DD...` folder with `keyshares` and `proofs` for your validators.
+- [**I don't have neither**](#3-i-dont-have-neither)
 
-## 1. **Validators with Keystore**
+## **Validators with Keystore**
 If you have multiple keystore files, you can verify them by checking its contents. Near the ending of file you will see `"pubkey"` with public key of the validator. It can be tricky to read JSON file, you can use tools like online JSON formatter or offline Code editors (e.g. VS Code).
 
 Once you've identified the correct `keystore` file, you can follow two guides below:
 1. [Remove the validator(s)](./removing-a-validator.md)
 2. [Distribute your validator(s)](../validator-management/distributing-a-validator.md)
 
-## 2. **DKG-generated Validators**
+## **DKG-generated Validators**
 If you have multiple ceremony folders, you should verify the one you need. Open `proofs.json` file and at the very beginning there will be `"validator":"..."` with the public key of validator. That way you can ensure you're using the correct ceremony.
 
 Once you verified that the correct data in `ceremony-YYYY-MM-DD...`, you can follow the steps below:
@@ -89,7 +89,7 @@ You will be shown your newly created cluster with updated set of operators. You 
 
 Please note if you click on `Back` your page *might not* load properly. In that case, you can continue by following the [validator onboarding guide](../validator-management/dkg-ceremony.md#existing-accounts).
 
-## 3. **I don't have neither**
+## **I don't have neither**
 If you can't find neither of the mentioned files — the only option is to [exit the validator](./exiting-a-validator.md) (assuming you have access to the Withdrawal address). 
 
 Once the validator is exited and you received your ETH, you can generate your validator keys again, store them securely, and choose new operators for your cluster.

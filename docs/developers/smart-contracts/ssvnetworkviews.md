@@ -124,7 +124,7 @@ Description: Returns the outstanding ETH balance of a cluster.
 |-----------|------|-------------|
 | owner | address | The cluster owner address |
 | operatorIds | uint64[] | List of cluster operators Ids |
-| cluster | tuple[] | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](/developers/tools/ssv-scanner) tool |
+| cluster | tuple[] | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/api/subgraph-examples#cluster-snapshot) |
 
 Return values:
 
@@ -142,7 +142,7 @@ Description: Returns current ongoing expenses of ETH for a particular SSV cluste
 | ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
 | owner         | address   | The user address                                                                                                         |
 | operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                           |
-| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/api/ssv-subgraph/subgraph-examples#cluster-snapshot). If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
 
 Return values:
 
@@ -177,7 +177,7 @@ Description: Total Effective Balance of the cluster identified by the provided p
 | ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
 | owner         | address   | The user address                                                                                                         |
 | operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                           |
-| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/api/ssv-subgraph/subgraph-examples#cluster-snapshot). If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
 
 Return values:
 
@@ -500,7 +500,7 @@ Description: Returns true if the specified cluster is under the liquidation thre
 | ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
 | owner         | address   | The user address                                                                                                         |
 | operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                           |
-| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/api/ssv-subgraph/subgraph-examples#cluster-snapshot). If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
 
 Return values:
 
@@ -518,7 +518,7 @@ Description: Returns true if the provided cluster is liquidated.
 | ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
 | owner         | address   | The user address                                                                                                         |
 | operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                           |
-| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/api/ssv-subgraph/subgraph-examples#cluster-snapshot). If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
 
 Return values:
 
@@ -536,7 +536,7 @@ Description: Returns the outstanding SSV balance of a legacy (SSV-based) cluster
 |-----------|------|-------------|
 | owner | address | The cluster owner address |
 | operatorIds | uint64[] | List of cluster operators Ids |
-| cluster | tuple[] | Object containing the latest cluster snapshot data - obtained using the [SSV Scanner](/developers/tools/ssv-scanner) tool |
+| cluster | tuple[] | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/api/ssv-subgraph/subgraph-examples#cluster-snapshot). |
 
 Return values:
 
@@ -554,7 +554,7 @@ Description: Returns current ongoing expenses of SSV for a particular SSV cluste
 | ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
 | owner         | address   | The user address                                                                                                         |
 | operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                           |
-| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/api/ssv-subgraph/subgraph-examples#cluster-snapshot). If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
 
 Return values:
 
@@ -685,7 +685,7 @@ Description: Returns true if the specified legacy cluster is under the liquidati
 | ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
 | owner         | address   | The user address                                                                                                         |
 | operatorIds   | uint64\[] | List of cluster operators Ids.                                                                                           |
-| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/api/ssv-subgraph/subgraph-examples#cluster-snapshot). If this is the 1st validator within a specific cluster (unique set of operators), use - \{0,0,0,true,0\} |
 
 Return values:
 

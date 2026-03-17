@@ -1,0 +1,38 @@
+---
+sidebar_position: 4
+---
+
+import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBlock';
+import InlineEditableCommand from '@site/src/components/InlineEditableCommand';
+
+# Register Validator
+
+This page shows how to progmatically register a validator to the SSV network. Assuming you already have generated a valid keyshare. 
+
+### Register Validator
+
+<InlineEditableCodeBlock
+  language="typescript"
+  template={
+  `
+import { parseEther } from 'viem';
+
+try {
+    const txnReceipt = await sdk.clusters.registerValidators({
+        args: {
+            keyshares: keysharesPayload,
+            depositAmount: parseEther('{{ETH_AMOUNT}}'),
+        },
+    }).then(tx => tx.wait());
+
+    console.log('Transaction receipt:', txnReceipt);
+} catch (error) {
+    logErrorToFile(error);
+    console.error('Failed to register validators:', error);
+}
+  `
+  }
+  variables={{
+    ETH_AMOUNT: '0.1234',
+  }}
+/>
