@@ -28,7 +28,7 @@ Please note the process implies you will setup Execution and Beacon clients on y
 Once you have your node running you'll be able to participate in multiple validator clusters and earn rewards 🥳
 
 :::warning Hardware
-Make sure to check out [Node hardware specs and requirements](./hardware-requirements.md) before proceeding with the setup.
+Make sure to check out [Node hardware specs and requirements](./hardware-requirements) before proceeding with the setup.
 :::
 
 ## Pre-requisites
@@ -145,7 +145,7 @@ Edit the `ssv.env` file and adjust the settings to your needs. The minimum you n
 * `ETH_1_ADDR` - WebSocket address of the Execution node (e.g. `ws://1.2.3.4:8546`)
 * `NETWORK` - The network you are running on (`mainnet`, `hoodi`)
 
-All existing settings are listed on the [Configuration Reference page](./node-configuration-reference.md).
+All existing settings are listed on the [Configuration Reference page](./node-configuration-reference).
 :::info Multiple Endpoints
 Both `BEACON_NODE_ADDR` and `ETH_1_ADDR` support multiple endpoints. Separate them with `;`.
 
@@ -199,7 +199,7 @@ The instructions are on the ["Enablind DKG" section](/operators/operator-node/se
 
 ## Other setup options
 
-1. The same setup can be recreated manually. The steps are described on the [Manual Node setup page](./manual-setup.md).
+1. The same setup can be recreated manually. The steps are described on the [Manual Node setup page](./manual-setup).
 2. There is an alternative SSV client called Anchor, developed by Sigma Prime. [Official documentation for Anchor](https://anchor-book.sigmaprime.io/running_node.html) (recommended for Testnet only).
 3. Alternatively, SSV Node setup is also available using [eth-docker](https://eth-docker.net/Support/SSV/) and [Stereum Launcher](https://stereum.net/).
 

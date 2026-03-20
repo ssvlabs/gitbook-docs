@@ -23,9 +23,9 @@ To gain more understanding of how onboarding to SSV works conceptually and techn
 ***Optionally***, you can run your own SSV operator(s) to manage your and other validator(s). In this case, follow the [Setup Operators](#setup-operators) part and come back here once done.
 
 The next step depends on whether you have validator keys or not. Choose the right option for your case:
-- [I don't have validator key(s)](./creating-a-new-validator.md)
+- [I don't have validator key(s)](./creating-a-new-validator)
 - [I have generated key(s), but yet to deposit them with ETH](/stakers/solo-stakers/creating-a-new-validator.md#deposit-validator-keys)
-- [I have generated and deposited validator key(s)](/stakers/solo-stakers/distributing-a-validator.md)
+- [I have generated and deposited validator key(s)](/stakers/solo-stakers/distributing-a-validator)
 
 ### *Setup Operators*
 
@@ -47,7 +47,7 @@ You can deploy one or many operators to manage your validators. If you wish to m
 
 2. **Configure Monitoring**
 
-*Recommended:* SSV-Stack provisions monitoring (Prometheus + Grafana) by default. Access it by http://localhost:3000. You can [find more details here](https://github.com/ssvlabs/ssv-stack/blob/main/README.md).   
+*Recommended:* SSV-Stack provisions monitoring (Prometheus + Grafana) by default. Access it by http://localhost:3000. You can [find more details here](https://github.com/ssvlabs/ssv-stack/blob/main/README).   
 *Alternative:* For manual setup, we assume you know how to deploy Grafana and Prometheus. Our official Grafana dashboard JSON can be [downloaded here](/operators/operator-node/monitoring/dashboard-runbook).
 
 3. **Configure MEV**

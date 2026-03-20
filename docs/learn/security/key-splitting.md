@@ -201,7 +201,7 @@ private async processFile(
 ```
 
 ## Keyshares Structure
-The detailed explanation of the payload or `keyshares.json` is pressented on [this separate page](/learn/security/keyshares-structure.md).
+The detailed explanation of the payload or `keyshares.json` is pressented on [this separate page](/learn/security/keyshares-structure).
 
 ## Key Splitting Instructions
 You can follow the step-by-step instructions in the [**Validator Onboarding section**](/stakers/validator-onboarding/).

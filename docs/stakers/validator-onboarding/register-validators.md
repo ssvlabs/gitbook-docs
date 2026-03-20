@@ -7,7 +7,7 @@ sidebar_position: 4
 
 ## Prerequisites
 Before registering validators, make sure you are fully prepared:
-- [**Ensure sufficient funds**](./calculate-costs.md) in your wallet to cover validator fees + collateral.
+- [**Ensure sufficient funds**](calculate-costs) in your wallet to cover validator fees + collateral.
 - Gather your **operator IDs** obtained during operator registration.
 - Verify your keyshare file.
 - **Turn off** previous validator setup.
@@ -46,7 +46,7 @@ After registering the first 80 validators, pause and confirm that:
 ## Set the Fee Recipient Address
 By default, your own address will be set as Fee Recipient for block proposals. 
 
-Depending on your operations and off-chain arrangements, you might need to change that address. Use the [SSV Docs guide to change the Fee Recipient](/stakers/cluster-management/setting-fee-recipient-address.md).
+Depending on your operations and off-chain arrangements, you might need to change that address. Use the [SSV Docs guide to change the Fee Recipient](/stakers/cluster-management/setting-fee-recipient-address).
 
 ## Monitor Validators
 Once onboarding is complete, monitor validator performance and cluster health:
@@ -59,4 +59,4 @@ Attestations may take up to 3 epochs to appear after registration.
 ## Next Steps
 Congratulations! Your validators were migrated successfully 🥳.
 
-You can check out [**Post-Onboarding steps**](/stakers/validator-onboarding/post-onboarding-checks.md) to ensure smooth long-term operations.
+You can check out [**Post-Onboarding steps**](/stakers/validator-onboarding/post-onboarding) to ensure smooth long-term operations.

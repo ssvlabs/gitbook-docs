@@ -39,11 +39,11 @@ The associated costs for running validators on the SSV network are determined by
 
 With the network embracing a free-market approach, where operators set their own fees, the cost for each validator will vary based on its operator setup.
 
-In addition to fees, there's a minimum balance requirement, known as [liquidation collateral](../clusters/cluster-balance), that has to be deposited for each validator a user runs through the network.
+In addition to fees, there's a minimum balance requirement, known as [liquidation collateral](/learn/network-overview/clusters/cluster-balance), that has to be deposited for each validator a user runs through the network.
 
 ### Validator Funding
 
-To cover validator operational costs, your cluster must be funded with an appropriate amount of **ETH** (see [Cluster Balance](../clusters/cluster-balance.md)).
+To cover validator operational costs, your cluster must be funded with an appropriate amount of **ETH** (see [Cluster Balance](/learn/network-overview/clusters/cluster-balance)).
 
 Funding can be made at any time to the cluster's balance, but when onboarding the first validator to a new cluster, the initial funding must be provided with the registration transaction.
 

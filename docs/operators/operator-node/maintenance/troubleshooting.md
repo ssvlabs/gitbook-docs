@@ -62,7 +62,7 @@ Then pull the latest image from SSV:
 docker pull ssvlabs/ssv-node:latest
 ```
 
-And finally... [run the creation command again](../node-setup/manual-setup#start-the-node) to create a new Docker container with the latest SSV image.
+And finally... [run the creation command again](/operators/operator-node/node-setup/manual-setup#start-the-node) to create a new Docker container with the latest SSV image.
 
 </details>
 
@@ -350,7 +350,7 @@ The healthy % of CPU usage is generally below 30%, with RAM it heavily depends o
 #### Solution
 **CPU**
 
-Generally, there are two solutions to CPU-related issues - either upscale or optimize. You can check our [Hardware Requirements page](../node-setup/hardware-requirements.md) for your reference. 
+Generally, there are two solutions to CPU-related issues - either upscale or optimize. You can check our [Hardware Requirements page](/operators/operator-node/node-setup/hardware-requirements) for your reference. 
 So let’s explore optimization options:
 - Set CPU Governor to Performance, you can [follow this StackExchange thread](https://askubuntu.com/questions/1021748/set-cpu-governor-to-performance-in-18-04).
 - Set Low Latency CPU profile. Most modern BIOS versions have that in place. 
@@ -360,7 +360,7 @@ You should also limit the CPU usage for each of your applications/clients. The o
 
 **RAM**
 
-To put in simple terms, with RAM issues it's either not enough memory or it is overused by some applications. Once again, you can follow [our hardware recommendations](../node-setup/hardware-requirements.md) to see if your setup has enough memory. 
+To put in simple terms, with RAM issues it's either not enough memory or it is overused by some applications. Once again, you can follow [our hardware recommendations](/operators/operator-node/node-setup/hardware-requirements) to see if your setup has enough memory. 
 To prevent overusage of RAM by your applications you have multiple options, depending on what you use to run your nodes. Choose the relevant option for your setup:
 - [Set limits on the Docker containers](https://docs.docker.com/engine/containers/resource_constraints/)
 - [Similar limits for Kubernetes setup](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-units-in-kubernetes)

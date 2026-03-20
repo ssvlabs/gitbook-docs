@@ -22,8 +22,8 @@ For detailed explanations, see:
 
 
 :::info Incentivized Mainnet
-DAO incentives may partially be applied to cover network fees. Check the [Incentivized Mainnet Rewards section](/stakers/incentivized-mainnet.md) and the [Incentive Calculator](https://docs.google.com/spreadsheets/d/1EmsAuwfXtnu_2_y6vjMKrXWpLISzbWL8kZOdJznKEUU/edit?gid=0#gid=0) for additional details
+DAO incentives may partially be applied to cover network fees. Check the [Incentivized Mainnet Rewards section](/stakers/incentivized-mainnet) and the [Incentive Calculator](https://docs.google.com/spreadsheets/d/1EmsAuwfXtnu_2_y6vjMKrXWpLISzbWL8kZOdJznKEUU/edit?gid=0#gid=0) for additional details
 :::
 
 ## Next Steps
-Now that the keyshares and funds are prepared, it's time to [**Register your Validators**](./register-validators.md).
+Now that the keyshares and funds are prepared, it's time to [**Register your Validators**](./register-validators).

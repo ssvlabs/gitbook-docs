@@ -12,8 +12,8 @@ Operators provide hardware infrastructure, run the SSV protocol (SSV Node), and 
 ## How to participate in SSV
 
 On a high level, starting as an Operator means:
-1. [Setting up an SSV Node](/operators/operator-node/node-setup/README.md)
-2. [Registering a new Operator on the network](/operators/operator-management/registration.md)
+1. [Setting up an SSV Node](/operators/operator-node/node-setup)
+2. [Registering a new Operator on the network](/operators/operator-management/registration)
 
 However, it's beneficial to learn [how Operator Fees work](/learn/network-overview/operators/update-fee), to understand how you will be rewarded for your work.
 

@@ -364,7 +364,7 @@ Events:
 
 #### **`setOperatorsWhitelistingContract(operatorIds, whitelistingContract)`**
 
-Description: For a list of operators provided, set an external whitelisting contract to manage the whitelist for these operators. [Must be a valid whitelisting contract.](external-whitelist-contract-example.md)
+Description: For a list of operators provided, set an external whitelisting contract to manage the whitelist for these operators. [Must be a valid whitelisting contract.](external-whitelist-contract-example)
 
 | **Parameter**        | **Type**                 | **Description**                                      |
 | -------------------- | ------------------------ | ---------------------------------------------------- |

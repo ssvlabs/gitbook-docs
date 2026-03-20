@@ -20,7 +20,7 @@ All of these factors can change at any point in time. To maintain an up-to-date 
 These are tracked using an essential component called an Index.
 
 :::info
-Cluster balance and payments are in a tight relation with two other essential concepts: liquidation collateral threshold, and operational runway, both explained [here](/stakers/clusters/cluster-balance.md).
+Cluster balance and payments are in a tight relation with two other essential concepts: liquidation collateral threshold, and operational runway, both explained [here](/learn/network-overview/clusters/cluster-balance).
 :::
 
 ### Indexes
@@ -35,7 +35,7 @@ It is important to note that indexes are calculated for both the [Network Fee](f
 
 This means, whenever the Network Fee is changed by the SSV DAO, a new _**"protocol-wide" Network Fee Index**_ is calculated and stored in the smart contract. The same applies to the _**"protocol-wide" Operator Fee Index**_, when an operator changes their fee.
 
-Similarly, whenever an event changes fee calculations for a cluster (e.g. adding or removing validators), the Network Fee Index and the sum of all Operator Fee Indexes, referred to as Cluster Index are calculated. These indexes are stored in a [Cluster Snapshot](/developers/api/ssv-subgraph/subgraph-examples#cluster-snapshot), which includes the [Cluster Balance](/stakers/clusters/cluster-balance.md), updated to the block where the cluster-changing event happened.
+Similarly, whenever an event changes fee calculations for a cluster (e.g. adding or removing validators), the Network Fee Index and the sum of all Operator Fee Indexes, referred to as Cluster Index are calculated. These indexes are stored in a [Cluster Snapshot](/developers/api/subgraph-examples#cluster-snapshot), which includes the [Cluster Balance](/learn/network-overview/clusters/cluster-balance), updated to the block where the cluster-changing event happened.
 
 **Indexes are calculated using this generalized formula:**
 

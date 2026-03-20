@@ -5,7 +5,7 @@ sidebar_position: 3
 
 # Opt-in to bApp
 
-After you've [created your Strategy](../create-strategy.md), you can Opt-in to more bApps to start securing them and earn more rewards.
+After you've [created your Strategy](../create-strategy), you can Opt-in to more bApps to start securing them and earn more rewards.
 
 ## 1. Open Strategy page
 

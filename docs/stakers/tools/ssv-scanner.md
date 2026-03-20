@@ -22,10 +22,10 @@ Cluster snapshots are required for SSV contract transactions with cluster relate
 * [removeValidator()](/developers/smart-contracts/ssvnetwork#removevalidatorpublickey-operatorids-cluster)
 * [deposit()](/developers/smart-contracts/ssvnetwork.md#depositowner-operatorids-cluster)
 * [withdraw()](/developers/smart-contracts/ssvnetwork.md#withdrawoperatorids-amount-cluster)
-* [getBalance()](/developers/smart-contracts/ssvnetworkviews.md#getbalance-owner-operatorids-cluster)
+* [getBalance()](/developers/smart-contracts/ssvnetworkviews#getbalanceowner-operatorids-cluster)
 * [reactivate()](/developers/smart-contracts/ssvnetwork.md#reactivateoperatorids-cluster)
-* [isLiquidated()](/developers/smart-contracts/ssvnetworkviews.md#isliquidated-owner-operatorids-cluster)
-* [isLiquidatable()](/developers/smart-contracts/ssvnetworkviews.md#isliquidatable-owner-operatorids-cluster)
+* [isLiquidated()](/developers/smart-contracts/ssvnetworkviews#isliquidatedowner-operatorids-cluster)
+* [isLiquidatable()](/developers/smart-contracts/ssvnetworkviews#isliquidatableowner-operatorids-cluster)
 * [liquidate()](/developers/smart-contracts/ssvnetwork.md#liquidateowner-operatorids-cluster)
 
 Cluster snapshots are updated after each transaction with a cluster related function, and will emit a new **cluster object** (the latest snapshot) which will be required for making the succeeding transaction.
@@ -42,7 +42,7 @@ The registration nonce is a sequence number that represents the number of valida
 
 The registration nonce increments after each validator registration and does not decrease when a validator is removed.
 
-The registration nonce is required as input for the [SSV Keys](/developers/tools/ssv-keys) tool, which outputs the **sharesData** payload required for the [validator registration](https://docs.ssv.network/developers/smart-contracts/ssvnetwork#registervalidatorpublickey-operatorids-shares-amount-cluster) transaction in the SSV contract.
+The registration nonce is required as input for the [SSV Keys](/stakers/tools/ssv-keys-cli) tool, which outputs the **sharesData** payload required for the [validator registration](https://docs.ssv.network/developers/smart-contracts/ssvnetwork#registervalidatorpublickey-operatorids-shares-amount-cluster) transaction in the SSV contract.
 
 :::info
 Please note that alternatively, instead of using this tool to retrieve the **registration nonce**, you could just keep track of the number of validator registrations you have made and use it as the input for the succeeding validator registrations.

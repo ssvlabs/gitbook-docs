@@ -8,10 +8,10 @@ sidebar_position: 1
 
 The SDK consists of four main modules:
 
-* [**Clusters Module**](cluster-module.md): Manage validator clusters, handle deposits, and register validators
-* [**Operator Module**](operator-module.md): Interact with network operators and manage operator relationships
-* [**API Module**](api-module.md): Access network data, query states, and retrieve operational information
-* [**Utils Module**](utils-module.md): Helper functions for keyshare validation, share generation, and other utilities
+* [**Clusters Module**](cluster-module): Manage validator clusters, handle deposits, and register validators
+* [**Operator Module**](operator-module): Interact with network operators and manage operator relationships
+* [**API Module**](api-module): Access network data, query states, and retrieve operational information
+* [**Utils Module**](utils-module): Helper functions for keyshare validation, share generation, and other utilities
 
 ### Contract Calls
 

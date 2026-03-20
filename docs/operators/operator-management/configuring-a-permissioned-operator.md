@@ -73,7 +73,7 @@ Here we're adding two authorized addresses to this operator, simply add valid Et
 
 ### Adding an External Contract
 
-SSV also gives you the option to add your own whitelisting contract for managing authorized addresses. This contract must follow certain specifcations [which can be found here](../../developers/smart-contracts/external-whitelist-contract-example.md).
+SSV also gives you the option to add your own whitelisting contract for managing authorized addresses. This contract must follow certain specifcations [which can be found here](/developers/smart-contracts/external-whitelist-contract-example).
 
 To ensure this contract is compliant, when it is deployed you can verify it is valid with the SSV Network read contract by calling `isWhitelisingContract()` with the contract address as the parameter.
 

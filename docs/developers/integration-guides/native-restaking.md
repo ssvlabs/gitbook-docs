@@ -14,7 +14,7 @@ This page provides guidance on how to setup EigenLayer's Native Restaking throug
 If you have an existing validator, you need to verify the Withdrawal Prefix. EigenLayer has a [good guide to do this on this dedicated page](https://docs.eigenlayer.xyz/eigenlayer/restaking-guides/restaking-user-guide/native-restaking/validator-eligibility-withdrawal-prefix).
 :::
 
-An [EigenPod](https://github.com/Layr-Labs/eigenlayer-contracts/blob/master/docs/core/EigenPodManager.md) is a smart contract that facilitates the EigenLayer protocol in monitoring and managing balance and withdrawal statuses.
+An [EigenPod](https://github.com/Layr-Labs/eigenlayer-contracts/blob/master/docs/core/EigenPodManager) is a smart contract that facilitates the EigenLayer protocol in monitoring and managing balance and withdrawal statuses.
 
 Head over to [the dedicated guide on EigenLayer docs](https://docs.eigenlayer.xyz/eigenlayer/restaking-guides/restaking-user-guide/native-restaking/create-eigenpod/) for indications on how to create an EigenPod.
 

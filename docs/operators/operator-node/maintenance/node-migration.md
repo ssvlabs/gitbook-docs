@@ -24,18 +24,18 @@ So, for this reason, the migration process could be easily summarised in the fol
 5. Start SSV Node service on the new machine
 
 :::warning
-Please note: if you are also running a DKG operator node, you may have to [follow the DKG operator migration guide](./dkg-operator-migration), if it is running on the same machine as the SSV node, or if it is running on a different machine, but you need to decommission that machine as well.
+Please note: if you are also running a DKG operator node, you may have to [follow the DKG operator migration guide](dkg-operator-migration), if it is running on the same machine as the SSV node, or if it is running on a different machine, but you need to decommission that machine as well.
 :::
 
 ## Node backup
 
 ### SSV Stack setup
 
-If you have followed the [automatic node setup with SSV Stack](../node-setup), your files should be in `/ssv-stack/ssv-node-data` directory.
+If you have followed the [automatic node setup with SSV Stack](/operators/operator-node/node-setup/), your files should be in `/ssv-stack/ssv-node-data` directory.
 
 ### Manual Node setup
 
-If you have followed [the Manual Node setup guide](../node-setup/manual-setup), you most likely have (at least) these files in the folder with your node configuration:
+If you have followed [the Manual Node setup guide](/operators/operator-node/node-setup/manual-setup), you most likely have (at least) these files in the folder with your node configuration:
 
 ```
 ⇒   tree
@@ -70,7 +70,7 @@ The configuration file (`config.yaml` in the code snippet above), is necessary f
 
 Operator keys are, essentially, the authentication method to identify an SSV node, and link it to an operator ID. As a consequence, whenever a node is moved to a different machine, they **absolutely must** be preserved and copied from the existing setup to the new one.
 
-The files in question are `encrypted_private_key.json` and `password` in the snippet above and if you have followed [the Manual Node setup guide](../node-setup/manual-setup), the filenames should be the same for you.
+The files in question are `encrypted_private_key.json` and `password` in the snippet above and if you have followed [the Manual Node setup guide](/operators/operator-node/node-setup/manual-setup), the filenames should be the same for you.
 
 #### Node database (optional)
 

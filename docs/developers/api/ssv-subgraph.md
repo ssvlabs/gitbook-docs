@@ -17,7 +17,7 @@ A Subgraph that implements the necessary logic to index all the events emitted b
 
 ## Examples
 
-We prepared examples of queries, **it's likely** the **query you need already exists**. A series of examples of the most useful queries and the data accessible via the Subgraph is available at the [Subgraph Examples subpage](subgraph-examples.md).
+We prepared examples of queries, **it's likely** the **query you need already exists**. A series of examples of the most useful queries and the data accessible via the Subgraph is available at the [Subgraph Examples subpage](subgraph-examples).
 
 ## Querying SSV Protocol smart contract data
 

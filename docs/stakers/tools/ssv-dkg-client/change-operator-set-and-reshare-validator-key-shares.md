@@ -100,4 +100,4 @@ signatures: 111886aa25a07bbd9cb64e50e3237f98a6ecabad6f448bc9c4736ccebcacb45c56ec
 * Alternatively, the tool can be launched as a binary executable. For more information, please [refer to the appropriate section of this page](/stakers/tools/ssv-dkg-client/commands-and-config)
 * For the reference of command line flags, [please refer to this section (Additional flag for reshare command)](/stakers/tools/ssv-dkg-client/commands-and-config), instead.
 
-For more information about the output of a DKG ceremony, and what each file does, what you should use it for, please refer to the [Ceremony Output Summary page](ceremony-output-summary.md).
+For more information about the output of a DKG ceremony, and what each file does, what you should use it for, please refer to the [Ceremony Output Summary page](ceremony-output-summary).

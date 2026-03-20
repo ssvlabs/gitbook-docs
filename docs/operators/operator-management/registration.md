@@ -9,7 +9,7 @@ For information on how to set up and run an SSV Node, please [visit the dedicate
 
 After successfully running an SSV node, an operator must register it to the SSV Network in order to be discoverable by validators.
 
-You can register your operator through the SSV network [web app](https://app.ssv.network) or via a transaction directly to the [smart contract](/developers/smart-contracts/ssvnetwork.md#registeroperatorpublickey-operatorfee-setprivate)
+You can register your operator through the SSV network [web app](https://app.ssv.network) or via a transaction directly to the [smart contract](/developers/smart-contracts/ssvnetwork#registeroperatorpublickey-fee-setprivate)
 
 While registering your operator you will need to provide the following parameters:
 
@@ -40,7 +40,7 @@ In the following screen, select _Register Operator_ (just make sure [that you fo
 
 The next screen will ask you to input the Operator's public key (refer to [the Node setup guide](/operators/operator-node/node-setup) for key generation) and provide a confirmation of the Operator owner address.
 
-Here you will also have to choose whether your Operator status is either [public or private](/operators/operator-onboarding/permissioned-operators).
+Here you will also have to choose whether your Operator status is either [public or private](/learn/network-overview/operators/permissioned-operators).
 
 :::warning
 Please verify once more that the owner address correspond to the wallet address you want to manage your operators with.
@@ -52,7 +52,7 @@ Click _Next_ when ready.
 
 In the following screen, shown below, you are being asked to set the Operator Fee.
 
-For more information about fees, please [head over to the related page](/learn/tokenomics/fees). Just know that it will be possible to update the Operator fees later, [with limitations imposed by the protocol, to protect stakers](/operators/operator-onboarding/update-fee), for a guide on how to do that, head over to [the dedicated page](/operators/operator-management/updating-operator-fees).
+For more information about fees, please [head over to the related page](/learn/tokenomics/fees). Just know that it will be possible to update the Operator fees later, [with limitations imposed by the protocol, to protect stakers](/learn/network-overview/operators/update-fee), for a guide on how to do that, head over to [the dedicated page](/operators/operator-management/updating-operator-fees).
 
 Enter a number and click _Next_ when ready.
 

@@ -20,7 +20,7 @@ Follow the setup guidelines for configuring MEV on your preferred client:
 * [Lodestar](https://chainsafe.github.io/lodestar/run/beacon-management/mev-and-builder-integration)
 
 :::info
-For reference, the [ETHStaker](https://github.com/eth-educators/ethstaker-guides/blob/main/MEV-relay-list.md) community provides a list of MEV relays and their corresponding endpoints.
+For reference, the [ETHStaker](https://github.com/eth-educators/ethstaker-guides/blob/main/MEV-relay-list) community provides a list of MEV relays and their corresponding endpoints.
 :::
 
 ## Enable MEV in SSV node
