@@ -22,7 +22,7 @@ you can start the DKG node in three steps:
 
 
       - Make sure you're running from `ssv-stack` directory
-3. Go to the [**Final Steps**](../final-steps.md)
+3. Go to the [**Final Steps**](/operators/operator-node/setup-sidecars/enabling-dkg/final-steps)
 
 ## Manual Configuration
 
@@ -200,4 +200,4 @@ If the `--configPath` parameter is not provided, `ssv-dkg` will be looking for a
 </Tabs>
 
 ## What's next?
-Once you're done with all the steps here, go to the [**the Final Steps**](../final-steps.md).
+Once you're done with all the steps here, go to the [**the Final Steps**](/operators/operator-node/setup-sidecars/enabling-dkg/final-steps).

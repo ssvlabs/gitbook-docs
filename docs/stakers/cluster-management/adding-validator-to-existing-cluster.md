@@ -14,7 +14,7 @@ Make sure to connect your Web3 address/wallet with [the WebApp](https://app.ssv.
 
 ![add-validator-to-cluster](/img/add-validator-to-cluster-1.png)
 
-2. **Generate KeyShares** via SSV Keys CLI command or other means. If unsure, refer to [this step-by-step guide](/stakers/validator-onboarding/split-keys.md).
+2. **Generate KeyShares** via SSV Keys CLI command or other means. If unsure, refer to [this step-by-step guide](/stakers/validator-onboarding/split-keys).
 
 ![add-validator-to-cluster](/img/add-validator-to-cluster-6.avif)
 
@@ -45,7 +45,7 @@ If the Online option is chosen, the next screen allows you to upload the Validat
 
 4. **If the upload is successful click on "Next".**
 
-   If you see an error such as "Keyshares are invalid", most often it is caused by incorrect nonce. Try to generate KeyShares once again, refer to [this step-by-step guide](/stakers/validator-onboarding/split-keys.md).
+   If you see an error such as "Keyshares are invalid", most often it is caused by incorrect nonce. Try to generate KeyShares once again, refer to [this step-by-step guide](/stakers/validator-onboarding/split-keys).
 
 ![Distribute a validator](/img/distributing-a-val-10.png)
 
@@ -84,4 +84,4 @@ Now, finalize the validator registration by signing the transaction and adding E
 
 Once the transaction has been signed and confirmed by the network, you'll be presented with the summary screen.
 
-![Distribute a validator](/img/distributing-a-val-17.avif)
+![Distribute a validator](/img/distributing-a-val-17.png)

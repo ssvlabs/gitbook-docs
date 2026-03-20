@@ -123,7 +123,7 @@ DKG Ceremony can only be done via a command on a terminal.
 Paste the copied command in your command line and generate the keys. Several files should be generated and placed in the directory where the command was launched from:
 
 * `deposit-[validator_pubkey].json` -  this file contains the deposit data necessary activate the validator
-* `keyshares-[validator_pubkey].json` - this file contains the keyshares necessary to [register the validator on the ssv.network](distributing-a-validator.md)
+* `keyshares-[validator_pubkey].json` - this file contains the keyshares necessary to [register the validator on the ssv.network](distributing-a-validator)
 
 6. Following screen will show a checklist of next steps. You can safely close that page, if you can't keep it open.
 
@@ -153,4 +153,4 @@ You can track your validator's activation on the [BeaconCha.in website](https://
 
 ## Next Steps
 
-At this point, you should have your validators generated and deposited. To register your validators to SSV Network, follow the [**Onboarding a Validator**](./distributing-a-validator.md) page.
+At this point, you should have your validators generated and deposited. To register your validators to SSV Network, follow the [**Onboarding a Validator**](./distributing-a-validator) page.

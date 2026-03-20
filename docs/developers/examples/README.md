@@ -8,14 +8,14 @@ sidebar_label: 'Tutorials'
 In this examples section we will provide quick snippets of code to do certain actions. We will not show the imports/setup for each as [this is covered previously](/developers/SSV-SDK/#initialization).
 
 Most of the examples follow full validator flow:
-1. [Create Validator Keys](./create-validator-keys.md)
-2. [Generate and Validate Keyshares](./generate-and-validate-keyshares.md)
-3. [Deposit ETH](./deposit-eth.md)
-4. [Register Validators](./register-validator.md)
-5. [Exit Validators](./exit-validator.md)
-6. [Remove Validators](./remove-validator.md)
-7. [Withdraw ETH](./withdraw-eth.md)
+1. [Create Validator Keys](./create-validator-keys)
+2. [Generate and Validate Keyshares](./generate-and-validate-keyshares)
+3. [Deposit ETH](./deposit-eth)
+4. [Register Validators](./register-validator)
+5. [Exit Validators](./exit-validator)
+6. [Remove Validators](./remove-validator)
+7. [Withdraw ETH](./withdraw-eth)
 
 Other guides in this section:
-- [Cluster Balance Monitoring](./cluster-balance-script.md)
-- [API Calls](./api-calls.md)
+- [Cluster Balance Monitoring](./cluster-balance-script)
+- [API Calls](./api-calls)

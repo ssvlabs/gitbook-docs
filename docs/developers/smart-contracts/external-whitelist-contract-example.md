@@ -4,15 +4,15 @@ sidebar_position: 4
 
 # External Whitelist Contract example
 
-When [configuring a permissioned Operator](../../operators/operator-management/configuring-a-permissioned-operator), we have the option to set an external whitelising contract to manage this whitelist. To work correctly with the SSV network contract, it must meet certain specifications. 
+When [configuring a permissioned Operator](/learn/network-overview/operators/permissioned-operators), we have the option to set an external whitelising contract to manage this whitelist. To work correctly with the SSV network contract, it must meet certain specifications. 
 
 ### What is a valid Whitelisting Contract? 
 
 The operators can choose to whitelist an external contract with custom logic to manage authorized addresses externally. To be used in SSV contracts, it needs to implement the [ISSVWhitelistingContract](https://github.com/ssvlabs/ssv-network/blob/v1.2.0/contracts/interfaces/external/ISSVWhitelistingContract.sol) interface, that requires to implement the `isWhitelisted(address account, uint256 operatorId)` function. This function is called in the register validator process, that must return `true/false` to indicate if the caller (`msg.sender`) is whitelisted for the operator.
 
-To check if a contract is a valid whitelisting contract, use the function in the [SSVNetworkViews](ssvnetworkviews.md) contract: [`isWhitelistingContract()`](ssvnetworkviews.md#iswhitelistingcontractcontractaddress)
+To check if a contract is a valid whitelisting contract, use the function in the [SSVNetworkViews](ssvnetworkviews) contract: [`isWhitelistingContract()`](ssvnetworkviews.md#iswhitelistingcontractcontractaddress)
 
-To check if an account is whitelisted in a whitelisting contract, use the function in the [SSVNetworkViews](ssvnetworkviews.md) contract: [`isAddressWhitelistedInWhitelistingContract()`](ssvnetworkviews.md#isaddresswhitelistedinwhitelistingcontractaddresstocheck-operatorid-whitelistingcontract)
+To check if an account is whitelisted in a whitelisting contract, use the function in the [SSVNetworkViews](ssvnetworkviews) contract: [`isAddressWhitelistedInWhitelistingContract()`](ssvnetworkviews.md#isaddresswhitelistedinwhitelistingcontractaddresstocheck-operatorid-whitelistingcontract)
 
 ### Example contract
 

@@ -6,7 +6,7 @@ sidebar_position: 8
 :::danger Caution
 The following **configuration options are intended for advanced users** with a deep understanding of their impact.
 
-The parameters used in the [Automatic Installation guide](./README.md) and [Manual Installation guide](./manual-setup.md) should serve the vast majority of users.
+The parameters used in the [Automatic Installation guide](/operators/operator-node/node-setup/) and [Manual Installation guide](/operators/operator-node/node-setup/manual-setup) should serve the vast majority of users.
 
 Please exercise extreme care and discretion when modifying these settings, as any incorrect changes may result in unintended consequences or system instability.
 :::
@@ -39,7 +39,7 @@ The table below represents the reference for every Node configuration option ava
 | ssv.ValidatorOptions.Exporter                   | EXPORTER                       | FALSE            |                                                                                                                                                      |
 | ssv.ValidatorOptions.MsgWorkersCount            | MSG\_WORKERS\_COUNT            | 256              | Number of goroutines to use for message workers                                                                                                      |
 | ssv.ValidatorOptions.MsgWorkerBufferSize        | MSG\_WORKER\_BUFFER\_SIZE      | 1024             | Buffer size for message workers                                                                                                                      |
-| ssv.ValidatorOptions.ExperimentalGasLimit        | EXPERIMENTAL\_GAS\_LIMIT      | 30000000             | Changes the default value for Gas Limit for block proposals. [Carefully read this doc](/operators/operator-node/node-setup/gas-limit.md) before adjusting!                                                                                                                       |
+| ssv.ValidatorOptions.ExperimentalGasLimit        | EXPERIMENTAL\_GAS\_LIMIT      | 30000000             | Changes the default value for Gas Limit for block proposals. [Carefully read this doc](/operators/operator-node/node-setup/gas-limit) before adjusting!                                                                                                                       |
 | eth1                                            |                                |                  |                                                                                                                                                      |
 | eth1.ETH1Addr                                   | ETH\_1\_ADDR                   |                  | Execution client WebSocket address. Supports multiple endpoints separated by a `;`                                                                                                                   |
 | eth1.ETH1ConnectionTimeout                      | ETH\_1\_CONNECTION\_TIMEOUT    | 10s              | Execution client connection timeout                                                                                                                  |

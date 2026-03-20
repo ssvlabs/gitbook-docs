@@ -7,6 +7,6 @@ sidebar_position: 1
 
 The section contains guides for managing and editing your own Strategy.
 
-- [Change Strategy Fee](./change-strategy-fee.md)
-- [Opt-in to bApp](./opt-in-to-bapp.md)
-- [Edit Metadata](./edit-metadata.md)
+- [Change Strategy Fee](./change-strategy-fee)
+- [Opt-in to bApp](./opt-in-to-bapp)
+- [Edit Metadata](./edit-metadata)

@@ -24,4 +24,4 @@ Consolidation is the process of migrating validator funds from one to another, t
 - Wait until the consolidated validator is fully exited, you can monitor on [beaconcha.in](https://beaconcha.in/)
 
 ## Remove exited validators from SSV
-Once you're confirmed that consolidated validator is exited, you can proceed with removing it from SSV Network. Follow the [Removing a Validator guide](./removing-a-validator.md) to do that.
+Once you're confirmed that consolidated validator is exited, you can proceed with removing it from SSV Network. Follow the [Removing a Validator guide](/stakers/validator-offboarding/removing-a-validator) to do that.

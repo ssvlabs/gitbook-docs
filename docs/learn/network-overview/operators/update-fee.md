@@ -35,7 +35,7 @@ Where:
 - $Blocks_{year}$  - avg. number of blocks per year ([reference](https://ycharts.com/indicators/ethereum_blocks_per_day))
 
 :::tip ETH vs SSV fees
-**Previously registered operators will have a default ETH fee** which [they can change as usual](/operators/operator-management/updating-operator-fees.md). They will also have 2 separate balances — in ETH and SSV token. Once all clusters they participate in migrate to ETH, the operator will only have ETH balance.
+**Previously registered operators will have a default ETH fee** which [they can change as usual](/operators/operator-management/updating-operator-fees). They will also have 2 separate balances — in ETH and SSV token. Once all clusters they participate in migrate to ETH, the operator will only have ETH balance.
 
 Fees in SSV (legacy) can not be changed and are charged per each validator, regardless of their effective balance.
 

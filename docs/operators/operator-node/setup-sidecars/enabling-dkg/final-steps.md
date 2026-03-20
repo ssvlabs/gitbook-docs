@@ -18,7 +18,7 @@ To participate in DKG ceremonies without coordination and to enable others to in
 
 Once the DKG tool is up and running, please make sure to update your operator metadata, and provide your DKG Operator endpoint, in the form of `protocol:ip:port` (if you have a domain name, instead of an `ip` that works as well).
 
-Please head over to [the Operator User guide on how to update metadata](../../../operator-management/setting-operator-metadata.md) and follow the instructions
+Please head over to [the Operator User guide on how to update metadata](/operators/operator-management/setting-operator-metadata) and follow the instructions
 
 ## Test the setup
 

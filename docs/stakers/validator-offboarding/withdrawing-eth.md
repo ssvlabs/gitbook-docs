@@ -5,7 +5,7 @@ sidebar_position: 3
 
 # Withdrawing ETH from Cluster
 
-You can withdraw excess ETH from your cluster balance at any time, as long as you maintain the minimum [liquidation collateral](/stakers/clusters/cluster-balance.md) required for your cluster.
+You can withdraw excess ETH from your cluster balance at any time, as long as you maintain the minimum [liquidation collateral](/learn/network-overview/clusters/effective-balance) required for your cluster.
 
 :::warning Liquidation Risk
 Only withdraw excess balance beyond the liquidation collateral. Withdrawing too much may put your cluster at risk of liquidation if fees accumulate faster than expected.

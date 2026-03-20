@@ -13,7 +13,7 @@ This section is a collection of common warnings, error messages, statuses and ot
 FATAL	failed to create beacon go-client	{"error": "failed to create http client: failed to confirm node connection: failed to fetch genesis: failed to request genesis: failed to call GET endpoint: Get \"http://5.104.175.133:5057/eth/v1/beacon/genesis\": context deadline exceeded", "errorVerbose":…………….\nfailed to create http client", "address": "http://5.104.175.133:5057"}
 ```
 
-This is likely due to issues with the Beacon layer Node. Verify that `BeaconNodeAddr` has the correct address and port in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file).
+This is likely due to issues with the Beacon layer Node. Verify that `BeaconNodeAddr` has the correct address and port in [`config.yaml` configuration file](/operators/operator-node/node-setup/manual-setup#create-configuration-file).
 
 ***
 
@@ -23,7 +23,7 @@ This is likely due to issues with the Beacon layer Node. Verify that `BeaconNode
 FATAL	could not connect to execution client	{"error": "failed to connect to execution client: dial tcp 5.104.175.133:8541: i/o timeout"}
 ```
 
-This is likely due to issues with the Execution layer Node. Verify that `ETH1Addr` has the correct address and port in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file).
+This is likely due to issues with the Execution layer Node. Verify that `ETH1Addr` has the correct address and port in [`config.yaml` configuration file](/operators/operator-node/node-setup/manual-setup#create-configuration-file).
 
 Finally, make sure that your ETH1 endpoint is running using Websocket. This is required in order to stream events from the network contracts.
 
@@ -35,7 +35,7 @@ Finally, make sure that your ETH1 endpoint is running using Websocket. This is r
 FATAL	could not setup operator private key	{"error": "Operator private key is not matching the one encrypted the storage", "errorVerbose": ...{
 ```
 
-Verify that the Operator Private Key is correctly set in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file). In particular, if using unencrypted (raw) keys, that the **private (secret) key** was copied in the configuration file and that it contains all characters (sometimes it contains a  `=`  character that can easily be left out).
+Verify that the Operator Private Key is correctly set in [`config.yaml` configuration file](/operators/operator-node/node-setup/manual-setup#create-configuration-file). In particular, if using unencrypted (raw) keys, that the **private (secret) key** was copied in the configuration file and that it contains all characters (sometimes it contains a  `=`  character that can easily be left out).
 
 If the node has been stopped and restart, verify that the same configuration has been applied, that the private key has not been changed, and that the `db.Path` configuration points to the same directory as before.
 
@@ -47,7 +47,7 @@ If the node has been stopped and restart, verify that the same configuration has
 FATAL	could not setup network	{"error": "network not supported: jatov2"}
 ```
 
-In the example above, the `Network` in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file) was wrongly set to `jatov2` instead of `jato-v2`, so be sure to look for thinks like spelling mistakes.
+In the example above, the `Network` in [`config.yaml` configuration file](/operators/operator-node/node-setup/manual-setup#create-configuration-file) was wrongly set to `jatov2` instead of `jato-v2`, so be sure to look for thinks like spelling mistakes.
 
 ***
 
@@ -58,7 +58,7 @@ could not create loggerlogging.SetGlobalLogger: unrecognized level: "infor"
 make: *** [Makefile:97: start-node] Error 1
 ```
 
-In the example above, the `LogLevel` variable in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file) was wrongly set to `infor` instead of `info`, so be sure to look for thinks like spelling mistakes.
+In the example above, the `LogLevel` variable in [`config.yaml` configuration file](/operators/operator-node/node-setup/manual-setup#create-configuration-file) was wrongly set to `infor` instead of `info`, so be sure to look for thinks like spelling mistakes.
 
 ***
 
@@ -78,7 +78,7 @@ This error could be caused by using multiple SSV nodes within one Nimbus setup. 
 ERROR P2PNetwork unable to create external multiaddress {"error": "invalid ip address provided: ...
 ```
 
-This error signalizes the node could not figure the public IP address of your node on a startup. You need to provide your SSV Node's address in `p2p: HostAddress:` variable in [your `config.yaml` file.](../node-setup/manual-setup#peer-to-peer-ports-configuration-and-firewall)
+This error signalizes the node could not figure the public IP address of your node on a startup. You need to provide your SSV Node's address in `p2p: HostAddress:` variable in [your `config.yaml` file.](/operators/operator-node/node-setup/manual-setup#peer-to-peer-ports-configuration-and-firewall)
 
 The error can also mention `communications error to 208.67.220.222#53: timed out`. The IP address is attributed to service SSV Node uses to check your IP address. You can cross-check if the service is available with this command:
 ```bash
@@ -90,21 +90,21 @@ If you see the same timeout error as above, that means your machine can not reac
 
 ### Node Metrics not showing up in Prometheus/Grafana
 
-Please verify that the `MetricsAPIPort` variable is correctly set in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file).
+Please verify that the `MetricsAPIPort` variable is correctly set in [`config.yaml` configuration file](/operators/operator-node/node-setup/manual-setup#create-configuration-file).
 
-For a more in-depth guide on how to set up Node monitoring, refer to [the dedicated page in this section](../monitoring).
+For a more in-depth guide on how to set up Node monitoring, refer to [the dedicated page in this section](/operators/operator-node/monitoring/).
 
 ***
 
 ### Node does not generate a log file
 
-Please verify that the `LogFilePath` variable is correctly set in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file). Be sure to look for thinks like spelling mistakes.
+Please verify that the `LogFilePath` variable is correctly set in [`config.yaml` configuration file](/operators/operator-node/node-setup/manual-setup#create-configuration-file). Be sure to look for thinks like spelling mistakes.
 
 ***
 
 ### Node takes a long time to become active
 
-Please verify that the `Path` under the `db` section is correctly set in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file). Be sure to look for thinks like spelling mistakes.
+Please verify that the `Path` under the `db` section is correctly set in [`config.yaml` configuration file](/operators/operator-node/node-setup/manual-setup#create-configuration-file). Be sure to look for thinks like spelling mistakes.
 
 If the Node was working correctly and becomes inactive after a configuration change, make sure that `Path` wasn't accidentally changed. This will cause the database to be recostructed and will lead to a slower startup.
 

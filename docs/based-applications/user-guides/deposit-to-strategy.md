@@ -5,11 +5,11 @@ sidebar_position: 3
 
 # How to Deposit Tokens to a Strategy 
 
-Strategies are used to secure Based Applications, the most common use cases of bApps [are described on this page](../learn/based-applications/use-cases.md). Strategies are often created by node operators (not necessarily SSV node operators) that want to engage with bApps and earn rewards for securing them. 
+Strategies are used to secure Based Applications, the most common use cases of bApps [are described on this page](../learn/based-applications/use-cases). Strategies are often created by node operators (not necessarily SSV node operators) that want to engage with bApps and earn rewards for securing them. 
 
-As a token holder, you can participate in the protocol by depositing your assets to strategies. Doing that will contribute to the security of bApps and allows you to earn a share of the strategy's rewards. You can read more [about the Rewards for securing bApps](../learn/ssv2.0-a-based-applications-protocol/ultra-sound-ssv/rewards.md).
+As a token holder, you can participate in the protocol by depositing your assets to strategies. Doing that will contribute to the security of bApps and allows you to earn a share of the strategy's rewards. You can read more [about the Rewards for securing bApps](../learn/ssv2.0-a-based-applications-protocol/ultra-sound-ssv/rewards).
 
-The deposited tokens are considered a slashable asset and are exposed to inherent risk. As such you can expect the share of rewards to be bigger than what applies to non-slashable assets. For more information refer [to this dedicated page](../learn/based-applications/slashable-vs-non-slashable-assets-and-how-bapps-use-them.md).
+The deposited tokens are considered a slashable asset and are exposed to inherent risk. As such you can expect the share of rewards to be bigger than what applies to non-slashable assets. For more information refer [to this dedicated page](../learn/based-applications/slashable-vs-non-slashable-assets-and-how-bapps-use-them).
 
 ## 1. Go to My Account page
 

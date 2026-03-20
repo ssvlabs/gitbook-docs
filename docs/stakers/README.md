@@ -7,7 +7,7 @@ sidebar_position: 1
 :::info please note
 This page streamlines the onboarding process for staking providers, staking pools, and other services.
 
- **Solo-Stakers** [**should follow this page**](/stakers/solo-stakers/README.md) which explains the flow that is more tailored to Individual ETH holders.
+ **Solo-Stakers** [**should follow this page**](/stakers/solo-stakers) which explains the flow that is more tailored to Individual ETH holders.
 :::
 ![Stakers Diagram](/img/stakers-readme-1.png)
 
@@ -46,7 +46,7 @@ You have to deploy multiple SSV nodes to form a cluster — repeat the full setu
 
 2. **Configure Monitoring**
 
-*Recommended:* SSV-Stack provisions monitoring (Prometheus + Grafana) by default. Access it by http://localhost:3000. You can [find more details here](https://github.com/ssvlabs/ssv-stack/blob/main/README.md).   
+*Recommended:* SSV-Stack provisions monitoring (Prometheus + Grafana) by default. Access it by http://localhost:3000. You can [find more details here](https://github.com/ssvlabs/ssv-stack/blob/main/README).   
 *Alternative:* For manual setup, we assume you know how to deploy Grafana and Prometheus. Our official Grafana dashboard JSON can be [downloaded here](/operators/operator-node/monitoring/dashboard-runbook).
 
 3. **Configure MEV**

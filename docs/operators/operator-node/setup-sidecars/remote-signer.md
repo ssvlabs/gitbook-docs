@@ -22,7 +22,7 @@ The service consists of two main components:
 2. [**SSV-Signer**](https://github.com/ssvlabs/ssv/tree/main/ssvsigner) - A lightweight service that connects SSV nodes to Web3Signer; it can also be used as a library for
    local signing.
 
-For more detailed technical overview, check [design documentation on our GitHub](https://github.com/ssvlabs/ssv/blob/main/ssvsigner/DESIGN.md).
+For more detailed technical overview, check [design documentation on our GitHub](https://github.com/ssvlabs/ssv/blob/main/ssvsigner/DESIGN).
 
 ## Setup Guide
 
@@ -482,4 +482,4 @@ When migrating from local signing to remote signing:
 ## Additional Resources
 
 - [Web3Signer Documentation](https://docs.web3signer.consensys.io/)
-- [SSV Remote Signer Design Documentation](https://github.com/ssvlabs/ssv/blob/main/ssvsigner/DESIGN.md)
+- [SSV Remote Signer Design Documentation](https://github.com/ssvlabs/ssv/blob/main/ssvsigner/DESIGN)

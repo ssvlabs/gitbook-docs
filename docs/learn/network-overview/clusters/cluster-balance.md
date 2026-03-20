@@ -11,11 +11,11 @@ It is important to be aware that the cluster balance must **always be higher tha
 
 ![Operational Runway](/img/cluster-balance-1.avif)
 
-Since operator and network fees are dynamic, the required [**Liquidation Collateral**](/learn/tokenomics/liquidations.md#liquidation-collateral) could vary between different clusters. To calculate how much funding is needed as collateral for a cluster, please refer to the [Liquidations page](/learn/tokenomics/liquidations.md).
+Since operator and network fees are dynamic, the required [**Liquidation Collateral**](/learn/tokenomics/liquidations.md#liquidation-collateral) could vary between different clusters. To calculate how much funding is needed as collateral for a cluster, please refer to the [Liquidations page](/learn/tokenomics/liquidations).
 
 ### Cluster Balance Formula
 
-As explained in the documentation page related to [Payments](/learn/tokenomics/payments.md), cluster balance is affected by three main factors:
+As explained in the documentation page related to [Payments](/learn/tokenomics/payments), cluster balance is affected by three main factors:
 
 * Network fee
 * Operator fees
@@ -37,7 +37,7 @@ Legend:
 * $$balance_{snapshot}$$ - value of the cluster balance on its latest snapshot
 * $$\Delta_{network\ fee}$$ - Change in network fees paid since the last snapshot
 * $$\Delta_{operators\ fee}$$ - Change in operator fees paid since the last snapshot
-* $$eb$$ - [total effective balance](effective-balance.md) of validators managed by the cluster
+* $$eb$$ - [total effective balance](effective-balance) of validators managed by the cluster
 
 #### Network fees delta
 
@@ -90,7 +90,7 @@ Legend:
 
 * $$of_n$$ - The current operator fee for the nth operator
 * $$nf$$ - The current network fee
-* $$eb$$ - [total effective balance](effective-balance.md) of validators managed by the cluster
+* $$eb$$ - [total effective balance](effective-balance) of validators managed by the cluster
 
 ### Operational Runway
 

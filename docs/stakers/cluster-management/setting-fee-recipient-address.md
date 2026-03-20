@@ -12,7 +12,7 @@ The default setting for all validators in a given account is to send execution l
 This procedure will set the fee recipient address for block proposal rewards **for all your validators**.
 :::
 
-For more information on this topic, please refer to [the dedicated learning page](../../stakers/validators/validator-rewards.md).
+For more information on this topic, please refer to [the dedicated learning page](/learn/network-overview/validators/validator-rewards).
 
 Make sure to connect your Web3 wallet with the WebApp, and that the address corresponds with the one you want to manage your Validators with.
 

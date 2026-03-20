@@ -66,7 +66,7 @@ EnableDoppelgangerProtection: true # Enables Doppelganger Protection
 - SSV with DG enabled will be offline for the first 3 epochs after the node start.
 - If enough nodes in the cluster have DG enabled and are online - a restarted node will not wait for 3 epochs. Node can identify that there's a DG quorum going on and will join it. This process is almost as quick as restart of a node without DG.
 - If you manage all nodes in the cluster — it is recommended to restart one by one. Otherwise, it will take 3 epochs to do the DG checks.
-- To learn more technical details please refer to [our documentation page on GitHub](https://github.com/ssvlabs/ssv/blob/v2.3.0/doppelganger/README.md).
+- To learn more technical details please refer to [our documentation page on GitHub](https://github.com/ssvlabs/ssv/blob/v2.3.0/doppelganger).
 
 #### Database backups
 SSV's database is critical to prevent slashing (PostgreSQL for Web3Signer, or the node's local database `db` for local signing setups). Its loss or corruption can lead to double-signing and severe penalties if operation continues.
@@ -78,7 +78,7 @@ Be sure to implement a robust backup and recovery strategy for your database(s),
 High‑priority practices that ensure reliable, on‑time duty submissions. Might sound obvious, but are often overlooked.
 
 :::info Hardware and performance
-Most of hardware-related suggestions below are for Execution (EL) and Consensus (CL) clients. SSV client is light and [hardware requirements are moderate](./hardware-requirements.md). EL and CL require much more resources to run effectively.
+Most of hardware-related suggestions below are for Execution (EL) and Consensus (CL) clients. SSV client is light and [hardware requirements are moderate](./hardware-requirements). EL and CL require much more resources to run effectively.
 :::
 
 ### **For Home Setups**
@@ -97,7 +97,7 @@ Most of hardware-related suggestions below are for Execution (EL) and Consensus 
 
 ### Sufficient Hardware
 **Recommendation:**  
-Ensure your hardware meets or exceeds [SSV recommended specifications](./hardware-requirements.md). These requirements are in additional to what you need for Execution + Consensus. On the same page you will find a table comparing # of validators to resources used.
+Ensure your hardware meets or exceeds [SSV recommended specifications](./hardware-requirements). These requirements are in additional to what you need for Execution + Consensus. On the same page you will find a table comparing # of validators to resources used.
 
 **Dos and Don'ts:**
   - **Do:** DYOR on the hardware provider or hardware parts for home setup. Verify your specs, as well as quality of hardware provider.
@@ -151,7 +151,7 @@ Location of your clients plays a direct role in performance. Co-hosting Executio
 
 ### Monitoring
 
-Continuous monitoring is essential to maintain good performance and quickly detect any issues. You can check out our [Monitoring section](../monitoring/README.md), if you haven't set monitoring up already. 
+Continuous monitoring is essential to maintain good performance and quickly detect any issues. You can check out our [Monitoring section](/operators/operator-node/monitoring), if you haven't set monitoring up already. 
 
 ***
 

@@ -52,6 +52,6 @@ If you prefer a programmatic path, follow the official [SSV-SDK Quickstart](/dev
 Same safety precautions apply here: Ensure password policy and offline handling of the keys.
 
 ## Next Steps
-Once your keyshare files are prepared — you can [**Calculate and understand the Costs**](./calculate-costs.md) for your cluster. 
+Once your keyshare files are prepared — you can [**Calculate and understand the Costs**](./calculate-costs) for your cluster. 
 
-If you are aware of the expected fees, you can skip right to [Registering your Validators](./register-validators.md).
+If you are aware of the expected fees, you can skip right to [Registering your Validators](./register-validators).

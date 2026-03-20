@@ -9,7 +9,7 @@ import InlineEditableCommand from '@site/src/components/InlineEditableCommand';
 
 This part of the SDK enable users to programmatically generate validator keys and split them into threshold of shares via [Shamir-Secret-Sharing (SSS)](https://en.wikipedia.org/wiki/Shamir's\_Secret\_Sharing), encrypted with a set of operator keys.
 
-The shares and the signature are constructed as [**sharesData**](/learn/security/keyshares-structure.md) which is used during validator registration through the [SSV smart contract](/developers/smart-contracts/ssvnetwork) in order to facilitate their distribution from stakers to operators.
+The shares and the signature are constructed as [**sharesData**](/learn/security/keyshares-structure) which is used during validator registration through the [SSV smart contract](/developers/smart-contracts/ssvnetwork) in order to facilitate their distribution from stakers to operators.
 
 In addition to the generation of shares, the SDK also takes the keyshares file and the operator IDs, and validates that the following registration will succeed. 
 

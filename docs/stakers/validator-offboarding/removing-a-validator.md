@@ -23,12 +23,6 @@ In the Cluster page, **tap the gear icon** next to the validator you want to rem
 
 ### Bulk remove
 
-:::success
-The latest SSV Smart Contract updates added support for [_bulk operations_](../../developers/smart-contracts/ssvnetwork.md#bulkremovevalidatorpublickey-operatorids-cluster), and the SSV WebApp has been upgraded to include the ability to perform bulk operations on multiple validators at a time.
-
-This makes it possible to remove multiple validators in a single transaction.
-:::
-
 Alternatively, if a cluster is managing more than one validator, it is possible to select multiple validators at once, using the _Actions_ dropdown on top of the validators table, and selecting _Remove validators_.
 
 ![remove-validator](/img/remove-a-validator-3.webp)
@@ -42,7 +36,7 @@ In the following screen, select the validators you want to remove from ssv.netwo
 The following screen alerts you of the implications of removing the validator from the cluster.
 
 :::warning
-This will cause the validator to go offline. It is advised to have an alternative validator setup ready to continue operating outside ssv.network, [as explained here](/stakers/validators/validator-offboarding).
+This will cause the validator to go offline. It is advised to have an alternative validator setup ready to continue operating outside ssv.network, as explained [in the Learn section](/learn/network-overview/validators/validator-offboarding).
 
 Removing the validator is **NOT** reversible, the validator will have to be registered anew on the ssv.network, should you intend to join again.
 
