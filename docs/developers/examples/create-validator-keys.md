@@ -4,30 +4,51 @@ sidebar_position: 1
 
 # Create Validator Keys
 
-The SSV SDK does not natively support programmatically generating keystores out of the box, but a number of external libraries can be used to achieve this. 
+The [SSV SDK](/developers/SSV-SDK/) does not natively support generating validator keystores programmatically. This guide shows how to generate validator keys, keystores, and deposit data using external libraries.
 
-If you do not need to do this programmatically, it may be easier to use the [Ethereum Staking Deposit CLI](https://github.com/ethereum/staking-deposit-cli) to generate validator keys. To generate Hoodi validator keys you can use [eth-educators' Staking Deposit CLI fork](https://github.com/eth-educators/ethstaker-deposit-cli).
+Alternatively, you can use the [Ethereum Staking Deposit CLI](https://github.com/ethstaker/ethstaker-deposit-cli) to generate validator keys. The CLI supports multiple networks, including Ethereum mainnet and testnets such as Hoodi.
 
-:::info
-As this is not part of the SSV SDK, SSV is not liable for any misuse of the packages used to generate validator keys in the method show below.
+:::warning
+This process is not part of the SSV SDK. SSV is not responsible for any misuse of the external tools used to generate validator keys in the method shown below.
 :::
+
+## Prerequisites
+
+Before using this example, make sure you have:
+
+- [Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) installed
+- A TypeScript project where you can run the script
+- A withdrawal address to use for the validator
+- A password to encrypt the generated keystore files
+
+## Install Dependencies
 
 Start by installing the packages that are needed to run the script below.
 
 ```bash
-npm i viem @chainsafe/bls-keygen @chainsafe/bls-keystore @chainsafe/bls @chainsafe/ssz @lodestar/config @lodestar/params @lodestar/state-transition @lodestar/types abitype dotenv
+pnpm add viem @chainsafe/bls-keygen @chainsafe/bls-keystore @chainsafe/bls @chainsafe/ssz @lodestar/config @lodestar/params @lodestar/state-transition @lodestar/types abitype dotenv
 ```
 
-Then the `createValidatorKeys` function will return the keystores, deposit data, and secret key.
+## Configure the Project
 
-```typescript
-import type { SupportedChains, chains } from '@/config/chains'
+Ensure your project is configured to use ES modules. Add the following to your `package.json`:
+
+```json
+"type": "module"
+```
+
+## Generate Validator Keys
+
+The following example defines a `createValidatorKeys` helper function that generates validator keys, encrypted keystores, and deposit data for one or more validators.
+
+```ts title="create-validator-keys.ts"
+import 'dotenv/config'
 import { deriveEth2ValidatorKeys, generateRandomSecretKey } from '@chainsafe/bls-keygen'
 import { create } from '@chainsafe/bls-keystore'
 import bls from '@chainsafe/bls/herumi'
 import { fromHexString, toHexString } from '@chainsafe/ssz'
 import type { ChainConfig } from '@lodestar/config'
-import { holeskyChainConfig, mainnetChainConfig } from '@lodestar/config/networks'
+import { hoodiChainConfig, mainnetChainConfig } from '@lodestar/config/networks'
 import { DOMAIN_DEPOSIT } from '@lodestar/params'
 import { ZERO_HASH, computeDomain, computeSigningRoot } from '@lodestar/state-transition'
 import { ssz } from '@lodestar/types/phase0'
@@ -35,9 +56,11 @@ import type { Address } from 'abitype'
 import type { Hex } from 'viem'
 import { sha256, toBytes, toHex } from 'viem'
 
-const chainConfigs: Record<keyof typeof chains, ChainConfig> = {
+type SupportedChains = 'mainnet' | 'hoodi'
+
+const chainConfigs: Record<SupportedChains, ChainConfig> = {
   mainnet: mainnetChainConfig,
-  holesky: holeskyChainConfig,
+  hoodi: hoodiChainConfig,
 }
 
 type ValidatorKeysArgs = {
@@ -57,7 +80,7 @@ export type DepositData = {
   deposit_message_root: string
   deposit_data_root: string
   fork_version: string
-  network_name: 'mainnet' | 'holesky'
+  network_name: SupportedChains
 }
 
 // Add this verification function
@@ -178,4 +201,37 @@ export async function createValidatorKeys({
     masterSK,
   }
 }
+
+// Example usage: generate validator keys using environment variables
+const result = await createValidatorKeys({
+  count: Number(process.env.COUNT),
+  chain: process.env.CHAIN as SupportedChains,
+  withdrawal: process.env.WITHDRAWAL_ADDRESS as Address,
+  password: process.env.KEYSTORE_PASSWORD as string,
+})
+
+// Output generated keystores, deposit data, and master secret key
+console.log(result)
 ```
+
+## Configure Environment Variables
+
+This example assumes you are loading the required inputs from environment variables.
+
+If you use a `.env` file for development, ensure it is added to `.gitignore` so it is not committed to version control. Sensitive data such as passwords or private keys should never be stored in your repository.
+
+```bash
+WITHDRAWAL_ADDRESS=INSERT_WITHDRAWAL_ADDRESS
+KEYSTORE_PASSWORD=INSERT_PASSWORD
+COUNT=INSERT_NUMBER_OF_VALIDATORS
+CHAIN=INSERT_NETWORK
+```
+
+## Run the Script
+
+Run the script using your preferred TypeScript runtime.
+
+```bash
+npx tsx create-validator-keys.ts
+```
+
