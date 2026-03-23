@@ -21,7 +21,7 @@ The ssv network rewards liquidators for the costs and risks associated with liqu
 
 ### Liquidation Collateral
 
-The required collateral amount is the highest value between a fixed amount called [_Minimum Liquidation Collateral_](liquidations.md#minimum-liquidation-collateral), and a dynamic amount (derived from the fees paid by each cluster) which must be sufficient for a predefined period of time called the [_Liquidation Threshold Period_](liquidations.md#liquidation-threshold-period). Because fees can very between different cluster formations this amount is dynamically calculated for each cluster.
+The required collateral amount is the highest value between a fixed amount called [_Minimum Liquidation Collateral_](#minimum-liquidation-collateral), and a dynamic amount (derived from the fees paid by each cluster) which must be sufficient for a predefined period of time called the [_Liquidation Threshold Period_](#liquidation-threshold-period). Because fees can very between different cluster formations this amount is dynamically calculated for each cluster.
 
 Another way to explain it is to reverse the logic: _Clusters that drop below the liquidation collateral threshold are deemed **Liquidatable** and are at risk of being liquidated._
 
@@ -30,20 +30,20 @@ liquidatable = balance<max(MLC, burn\;rate * LTP)
 $$
 
 #### Legend:
-* $balance$ - cluster balance, [please refer to this page for exact calculation](/stakers/clusters/cluster-balance.md)) (denominated in ETH)
+* $balance$ - cluster balance, [please refer to this page for exact calculation](/learn/network-overview/clusters/cluster-balance)) (denominated in ETH)
 * $burn\;rate$ - projected cluster expenses (denominated in ETH per block)
-* [$MLC$](liquidations.md#minimum-liquidation-collateral) - minimum liquidation collateral (denominated in ETH)
-* [$LTP$](liquidations.md#liquidation-threshold-period) - liquidation threshold period (denominated in blocks)
+* [$MLC$](#minimum-liquidation-collateral) - minimum liquidation collateral (denominated in ETH)
+* [$LTP$](#liquidation-threshold-period) - liquidation threshold period (denominated in blocks)
 
 Liquidated clusters will no longer be managed by operators and will become inactive to perform their duties; this could lead to severe penalties on the Beacon Chain.
 
 ### Minimum Liquidation Collateral
 
-This is a fixed constant, set by the SSV DAO and accessible through the [SSV Network Views smart contract](/developers/smart-contracts/ssvnetworkviews#getminimumliquidationcollateral) or via the [Subgraph](/developers/api/ssv-subgraph/subgraph-examples#dao-constants-and-protocol-network-fee-index).
+A fixed constant, set by the SSV DAO and accessible through the [SSVNetworkViews smart contract](/developers/smart-contracts/ssvnetworkviews#getminimumliquidationcollateral) or via the [Subgraph](/developers/api/subgraph-examples#dao-constants-and-protocol-network-fee-index).
 
 ### **Liquidation Threshold Period**
 
-This is another fixed constant, set by the SSV DAO and accessible through the [SSV Network Views smart contract](/developers/smart-contracts/ssvnetworkviews#getliquidationthresholdperiod-) or via the [Subgraph](/developers/api/ssv-subgraph/subgraph-examples#dao-constants-and-protocol-network-fee-index). This can be defined as:
+This is another fixed constant, set by the SSV DAO and accessible through the [SSVNetworkViews smart contract](/developers/smart-contracts/ssvnetworkviews#getliquidationthresholdperiod) or via the [Subgraph](/developers/api/subgraph-examples#dao-constants-and-protocol-network-fee-index). This can be defined as:
 
 > The minimum period (in blocks) for a cluster to maintain sufficient balance before they can be liquidated
 
@@ -62,15 +62,15 @@ burn\;rate = (\sum f_{o}  + f_{n}) * e_{b} / 32
 $$
 
 #### Legend:
-  * $$f_o$$ - [operator fees](fees.md) - the fees of all operators in the cluster (denominated in _ETH per block_)
-  * $$f_n$$ - [network fees](fees.md) - the fees owed to the ssv network (denominated in _ETH per block_)
+  * $$f_o$$ - [operator fees](fees) - the fees of all operators in the cluster (denominated in _ETH per block_)
+  * $$f_n$$ - [network fees](fees) - the fees owed to the ssv network (denominated in _ETH per block_)
   * $$e_b$$ - total effective balance of validators managed by the cluster
 
 ### Liquidation
 
 Upon successful liquidation, the cluster will be flagged as "inactive". This will signal the operators managing the cluster's validators to cease their operation.
 
-Clusters that have been liquidated can no longer use the network to run their validators until [reactivation](/stakers/clusters/reactivation.md).
+Clusters that have been liquidated can no longer use the network to run their validators until [reactivation](/learn/network-overview/clusters/reactivation).
 
 ### Liquidation Scenario Example
 

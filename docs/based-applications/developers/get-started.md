@@ -27,7 +27,7 @@ This will walk through the process of what is needed to register and run a Based
 
 ## 1. Developing a Based Application Middleware smart contract
 
-The `BAppManager` smart contract developed by SSV Labs accepts registrations of BApps that implement a specific interface. This is outlined [in this dedicated page](./smart-contracts/based-app-interface.md), that also provides a simple example.
+The `BAppManager` smart contract developed by SSV Labs accepts registrations of BApps that implement a specific interface. This is outlined [in this dedicated page](./smart-contracts/based-app-interface), that also provides a simple example.
 
 ## 2. Configuring and Registering the bApp
 
@@ -96,7 +96,7 @@ Operators will run a client which is specific to the bApp they have opted into. 
 
 One thing the BApp clients should have in common is that they should calculate the **strategy weights** derived from the balance (tokens and validator balances) allocated to the strategy, as well as the associated **risk** for these balances and use these as voting power. The innovation represented by SSV's Based Applications, is that when a client has completed its execution, it will use the strategy weight to "vote" for its own result, and this will represent the risk-adjusted value of the sum of slashable and non-slashable capital attached to the strategy itself.
 
-The BApp SDK provides high level functions to do this, facilitating the process. For an in-depth look at how all of this works, [please have a look at the dedicated example page](./bapp-example.md). This shows two separate strategies completing a simple task (provide the next Ethereum block number) independently, then voting on the result, and ensuring a consensus (majority vote) is reached.
+The BApp SDK provides high level functions to do this, facilitating the process. For an in-depth look at how all of this works, [please have a look at the dedicated example page](./bapp-example). This shows two separate strategies completing a simple task (provide the next Ethereum block number) independently, then voting on the result, and ensuring a consensus (majority vote) is reached.
 
 ### Example
 

@@ -5,7 +5,7 @@ sidebar_position: 4
 
 # Withdraw from a Strategy
 
-If you ever [Deposited to a Strategy](./deposit-to-strategy.md), you can withdraw that balance.
+If you ever [Deposited to a Strategy](./deposit-to-strategy), you can withdraw that balance.
 
 ## 1. Go to My Account page
 

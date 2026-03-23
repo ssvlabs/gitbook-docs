@@ -5,13 +5,13 @@ sidebar_position: 2
 
 # How to Delegate Validator Balance
 
-Strategies are used to secure Based Applications, the most common use cases of bApps [are described on this page](../learn/based-applications/use-cases.md). Strategies are often created by node operators (not necessarily SSV node operators) that want to engage with bApps and earn rewards for securing them. 
+Strategies are used to secure Based Applications, the most common use cases of bApps [are described on this page](../learn/based-applications/use-cases). Strategies are often created by node operators (not necessarily SSV node operators) that want to engage with bApps and earn rewards for securing them. 
 
-Anyone who registered their validator in the SSV Network can participate in the protocol by delegating your validator balance to strategies. Doing that will contribute to the security of bApps and allows you to earn a share of the strategy's rewards. You can read more [about the Rewards for securing bApps](../learn/ssv2.0-a-based-applications-protocol/ultra-sound-ssv/rewards.md).
+Anyone who registered their validator in the SSV Network can participate in the protocol by delegating your validator balance to strategies. Doing that will contribute to the security of bApps and allows you to earn a share of the strategy's rewards. You can read more [about the Rewards for securing bApps](../learn/ssv2.0-a-based-applications-protocol/ultra-sound-ssv/rewards).
 
-Your validator's balance is not at risk as it is considered a non-slashable asset, for more information refer [to this dedicated page](../learn/based-applications/slashable-vs-non-slashable-assets-and-how-bapps-use-them.md). As such you can expect the share of rewards to be smaller than what applies to slashable assets.
+Your validator's balance is not at risk as it is considered a non-slashable asset, for more information refer [to this dedicated page](../learn/based-applications/slashable-vs-non-slashable-assets-and-how-bapps-use-them). As such you can expect the share of rewards to be smaller than what applies to slashable assets.
 
-You can learn more about how bApps [re-utilize the validators' balance in this article](../learn/based-applications/re-utilization-of-l1-validators-a-new-asset-class.md).
+You can learn more about how bApps [re-utilize the validators' balance in this article](../learn/based-applications/re-utilization-of-l1-validators-a-new-asset-class).
 
 ## 1. Go to bApps page
 

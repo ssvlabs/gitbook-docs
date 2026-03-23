@@ -48,7 +48,7 @@ There are multiple ways to setup your SSV monitoring, we'll go over the most com
 
 ### Running the sample repository
 
-The easiest way to set up observability is to run the sample repository. It is based on Docker Compose and it will do everything for you, including setting up the SSV node, Prometheus, and Grafana. To follow the instructions in the [Node Installation Guide](../node-setup) and additional details you can find in the [README of the repository](https://github.com/ssvlabs/ssv-stack/blob/main/README.md).
+The easiest way to set up observability is to run the sample repository. It is based on Docker Compose and it will do everything for you, including setting up the SSV node, Prometheus, and Grafana. To follow the instructions in the [Node Installation Guide](/operators/operator-node/node-setup/) and additional details you can find in the [README of the repository](https://github.com/ssvlabs/ssv-stack/blob/main).
 
 Once you used our repository, open your browser and go to [http://localhost:3000](http://localhost:3000/). If you're not running on local machine you need to expose port **3030 TCP** on your server and then can access the Grafana via [http://1.2.3.4:3000](http://1.2.3.4:3000), make sure to change it to your public IP address.
 
@@ -66,7 +66,7 @@ If you are running your SSV node on Kubernetes, you will need to ensure that you
 
 Due to the dynamic nature of Kubernetes, a common pattern is to use a `ServiceMonitor` or `PodMonitor` to scrape metrics from your SSV node. `kube-prometheus-stack` by default adds the `pod` label to the metrics, so dashboards should work out of the box.
 
-You can read more on ServiceMonitors and PodMonitors in the [Prometheus Operator documentation](https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md).
+You can read more on ServiceMonitors and PodMonitors in the [Prometheus Operator documentation](https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api).
 
 ## Using Dashboard
 
@@ -76,11 +76,11 @@ Alternatively, you can use [Grafana Cloud](https://grafana.com/products/cloud/) 
 
 ### Download Dashboard
 
-Download the `.json` file of the dashboard on top of the [Dashboard Runbook section](dashboard-runbook.md).
+Download the `.json` file of the dashboard on top of the [Dashboard Runbook section](dashboard-runbook).
 
 ### Metrics Index
 
-All of the metrics from the dashboard are described on the [Metrics Index page](metrics-index.md).
+All of the metrics from the dashboard are described on the [Metrics Index page](metrics-index).
 
 ## Quick note on Prometheus and Grafana
 
@@ -106,5 +106,5 @@ The default scrape interval for Prometheus is 1 minute, whereas the default inte
 
 ## Traces
 
-SSV Node supports distributed tracing via OpenTelemetry. Traces provide deep visibility into node operations and can help diagnose performance issues. See the [Traces guide](./traces/README.md) for setup and configuration details.
+SSV Node supports distributed tracing via OpenTelemetry. Traces provide deep visibility into node operations and can help diagnose performance issues. See the [Traces guide](./traces) for setup and configuration details.
 

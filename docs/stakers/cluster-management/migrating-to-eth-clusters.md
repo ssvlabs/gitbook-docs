@@ -57,7 +57,7 @@ Choose an operational runway based on the new yearly operator fees.
 ![Migrate cluster to ETH](/img/migrate-eth-6.png)
 
 #### 6. Acknowledge Balance Warnings
-Review the balance and fee calculation notice. You can read more about [Effective Balance accounting here](/stakers/clusters/effective-balance.md).
+Review the balance and fee calculation notice. You can read more about [Effective Balance accounting here](/learn/network-overview/clusters/effective-balance).
 
 ![Migrate cluster to ETH](/img/migrate-eth-7.png)
 

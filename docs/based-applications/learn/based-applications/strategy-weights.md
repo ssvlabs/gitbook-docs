@@ -85,4 +85,4 @@ $$
 c_{\text{final}} = \left( \sum_{\text{strategy}} \dfrac{1}{\dfrac{2/3}{W_{\text{strategy, A}}} + \dfrac{1/3}{W_{\text{strategy, B}}}} \right)^{-1}
 $$
 
-<!-- [At the following page](./participant-weight-example.md), you can find a coded example of how to combine Subgraph data with the logic described above. -->
+<!-- [At the following page](./participant-weight-example), you can find a coded example of how to combine Subgraph data with the logic described above. -->

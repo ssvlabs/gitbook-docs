@@ -26,13 +26,8 @@ If the validator is removed first, the following operations won't be possible, a
 :::
 
 ![exit-validator](/img/exit-a-validator-2.avif)
+
 ### Bulk exit
-
-:::success
-The latest SSV Smart Contract updates added support for [_bulk operations_](../../developers/smart-contracts/ssvnetwork.md#bulkexitvalidatorpublickey-operatorids), and the SSV WebApp has been upgraded to include the ability to perform bulk operations on multiple validators at a time.
-
-This makes it possible to exit multiple validators in a single transaction.
-:::
 
 Alternatively, if a cluster is managing more than one validator, it is possible to select multiple validators at once, using the _Actions_ dropdown on top of the validators table, and selecting _Exit validators_.
 
@@ -50,7 +45,7 @@ Exiting your validator signals to the network that you wish to permanently cease
 Initiating an exit places your validator in the exit queue. The duration in the queue depends on the number of validators already waiting. During this period, your validator must remain active, so it is crucial to maintain your validator's performance and keep it registered with the SSV network until it has fully exited.
 :::
 
-This operation will generate a transaction to the [SSV Network smart contract](../../developers/smart-contracts/ssvnetwork.md#exitvalidatorpublickey-operatorids), and will make sure that the operators in the cluster will sign and execute a voluntary exit of the specified validator(s), on behalf of the validator owner.
+This operation will generate a transaction to the [SSV Network smart contract](/developers/smart-contracts/ssvnetwork.md#exitvalidatorpublickey-operatorids), and will make sure that the operators in the cluster will sign and execute a voluntary exit of the specified validator(s), on behalf of the validator owner.
 
 ![exit-validator](/img/exit-a-validator-5.avif)
 

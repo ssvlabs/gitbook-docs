@@ -37,7 +37,7 @@ Similarly, the [SSV Explorer](https://explorer.ssv.network/operators/1) also sho
 
 SSV also provide a subgraph to easily look up information on permissioned Operators, this tracks all the events surrounding whitelisting and means we can check which operators are private, and which addresses are whitelisted per operator. You can find out more details on how to use the subgraph [**here**](/developers/api/ssv-subgraph/)**.**
 
-One last way to verify this is to use the [SSV Network Views smart contract](/developers/smart-contracts/ssvnetworkviews.md#getoperatorbyid-operatorid).
+One last way to verify this is to use the [SSV Network Views smart contract](/developers/smart-contracts/ssvnetworkviews#getoperatorbyidoperatorid).
 
 ### Use Cases
 

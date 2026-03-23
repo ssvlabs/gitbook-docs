@@ -119,4 +119,4 @@ Below is a list of useful attributes to help troubleshoot issues related to duty
 
 - [OpenTelemetry Traces Documentation](https://opentelemetry.io/docs/concepts/signals/traces/)
 - [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/)
-- [SSV Node Configuration Reference](../../node-setup/README.md)
+- [SSV Node Configuration Reference](/operators/operator-node/node-setup)

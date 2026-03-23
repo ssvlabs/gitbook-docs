@@ -98,4 +98,4 @@ signatures: 0eb5bce8a1bf52f106233954b096504c934d08962003c41eff1a29e05ddeeebe3413
 * Alternatively, the tool can be launched as a binary executable. For more information, please [refer to the appropriate section of this page](/stakers/tools/ssv-dkg-client/commands-and-config)
 * For the reference of command line flags, [please refer to this section (Additional flag for resign command)](/stakers/tools/ssv-dkg-client/commands-and-config), instead. Remember to add the `proofsFilePath` and `signatures` arguments.
 
-For more information about the output of a DKG ceremony, and what each file does, what you should use it for, please refer to the [Ceremony Output Summary page](ceremony-output-summary.md).
+For more information about the output of a DKG ceremony, and what each file does, what you should use it for, please refer to the [Ceremony Output Summary page](ceremony-output-summary).

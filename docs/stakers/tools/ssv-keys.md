@@ -7,7 +7,7 @@ unlisted: true
 :::danger
 Please note: SSV Keys SDK has been deprecated as it has become part of the SSV SDK.
 
-The same functionality should be done programatically with [this guide.](/developers/examples/generate-and-validate-keyshares.md)
+The same functionality should be done programatically with [this guide.](/developers/examples/generate-and-validate-keyshares)
 :::
 
 # SSV Keys SDK

@@ -6,7 +6,7 @@ sidebar_position: 3
 This guide outlines the necessary steps required to configure MEV-commit within your SSV node to enable operators to participate in MEV and preconfirmations. You can learn more about the concept and technical details on [Primev documentation](https://docs.Primev.xyz/v1.0.0/get-started/welcome-to-Primev). 
 
 :::warning
-You should only participate if you're managing all operators in the cluster. If you will participate without one or many operators in the cluster — your MEV-commit collateral will be slashed. As an individual operator, you can always choose to [use regular MEV Boost](./configuring-mev.md).
+You should only participate if you're managing all operators in the cluster. If you will participate without one or many operators in the cluster — your MEV-commit collateral will be slashed. As an individual operator, you can always choose to [use regular MEV Boost](./configuring-mev).
 :::
 
 ## Overview

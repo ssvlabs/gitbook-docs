@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Fees
 
-### Operator Fees <a href="#ht1v5x3rp8hp" id="ht1v5x3rp8hp"></a>
+### Operator Fees
 
 The ssv.network utilizes a free-market approach such that operators can set their desired fees. This approach drives competition between operators and helps ensure that operator services are provided to stakers at lower costs.
 
@@ -16,10 +16,10 @@ For example, assuming there are 100 blocks per day and an operator has a set fee
 
 0.365 ETH / 100 blocks per day / 365 days in a year = 0.00001 ETH per block
 
-You can find more details on the dedicated [Operator Onboarding page](/operators/operator-onboarding/README.md).
+You can find more details on the dedicated [Operator Onboarding page](/learn/network-overview/operators).
 
-### Network Fees <a href="#k4tw9to38r3v" id="k4tw9to38r3v"></a>
+### Network Fees
 
 In addition to operator fees, stakers are also required to pay a ‘network fee’ for each validator they run through the network.
 
-The network fee is a fixed cost determined by the DAO that governs the network. It's accessible through the [SSV Network Views smart contract](/developers/smart-contracts/ssvnetworkviews#getnetworkfee-) or via the [Subgraph](/developers/api/ssv-subgraph/subgraph-examples#dao-constants-and-protocol-network-fee-index). 
+The network fee is a fixed cost determined by the DAO that governs the network. It's accessible through the [SSV Network Views smart contract](/developers/smart-contracts/ssvnetworkviews#getnetworkfee) or via the [Subgraph](/developers/api/subgraph-examples#dao-constants-and-protocol-network-fee-index). 

@@ -161,7 +161,7 @@ Sign this transaction with the required tokens, shared risk level for each token
 
 After on-chain deployment and network registration, strategies can be created and opt into the bApp. Once opted in, participants can deposit any supported tokens. 
 
-For detailed guidance on this process, [follow this guide.](../user-guides/create-strategy.md)
+For detailed guidance on this process, [follow this guide.](../user-guides/create-strategy)
 
 ## 4. Client implementation for the bApp 
 

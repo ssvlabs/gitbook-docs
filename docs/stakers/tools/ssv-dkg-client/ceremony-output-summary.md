@@ -25,7 +25,7 @@ ceremony-[timestamp]
 ### Files:
 * `deposit_data.json` - this file contains the deposit data necessary to perform the transaction on the Deposit contract and activate the validator on the Beacon layer
 * [`keyshares.json`](#keyshares) - this file contains the keyshares necessary to register the validator on the ssv.network
-* [`proof.json`](#proofs) - contains the signed proofs that a DKG client participated in a DKG ceremony, generating key shares for a certain owner. This file is crucial for [resharing your validator to a different set of operators](change-operator-set-and-reshare-validator-key-shares.md), or to [regenerate the signature portion of key shares](update-owner-nonce-in-key-shares.md) in the future.
+* [`proof.json`](#proofs) - contains the signed proofs that a DKG client participated in a DKG ceremony, generating key shares for a certain owner. This file is crucial for [resharing your validator to a different set of operators](change-operator-set-and-reshare-validator-key-shares), or to [regenerate the signature portion of key shares](update-owner-nonce-in-key-shares) in the future.
 
 ### Proofs
 #### An example of `proofs.json` structure:
@@ -63,4 +63,4 @@ ceremony-[timestamp]
 - Operator signs the proof with their private key and the proof itself has their public key which can be used to verify the signature.
 
 ### Keyshares
-Keyshares file structure can be found [on this separate page](/developers/keyshares-structure.md).
+Keyshares file structure can be found [on this separate page](/learn/security/keyshares-structure).

@@ -10,7 +10,7 @@ All clusters on SSV Network use native ETH for fee payments to operators and the
 :::tip Operational Runway
 Remember to maintain sufficient ETH balance to cover your cluster's operational costs. Monitor your runway regularly to avoid liquidation.
 
-For more information on cluster balance mechanics, please refer to [the dedicated learning page](/stakers/clusters/cluster-balance).
+For more information on cluster balance mechanics, please refer to [the dedicated learning page](/learn/network-overview/clusters/cluster-balance).
 :::
 
 #### 1. Connect Web3 Wallet

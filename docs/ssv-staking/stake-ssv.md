@@ -51,7 +51,7 @@ Once confirmed, you'll receive cSSV tokens in your wallet and start earning rewa
 
 ## Learn More
 
-- [SSV Staking Overview](README.md) - Full staking mechanism
-- [Claim Rewards](claim-rewards.md) - How to claim rewards
-- [Unstake SSV](unstake-ssv.md) - Unstaking process
-- [Glossary](/learn/glossary.md) - Key terms and definitions
+- [SSV Staking Overview](/ssv-staking) - Full staking mechanism
+- [Claim Rewards](claim-rewards) - How to claim rewards
+- [Unstake SSV](unstake-ssv) - Unstaking process
+- [Glossary](/learn/glossary) - Key terms and definitions

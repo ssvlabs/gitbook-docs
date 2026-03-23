@@ -40,4 +40,4 @@ Tests were done on *Testnet*, so Mainnet will require slighthly more resources.
 
 ## Best Practices
 
-Sufficient hardware is not the only important part. Check out [**Best Practices**](./best-practices.md) page to ensure best performance.
+Sufficient hardware is not the only important part. Check out [**Best Practices**](./best-practices) page to ensure best performance.
