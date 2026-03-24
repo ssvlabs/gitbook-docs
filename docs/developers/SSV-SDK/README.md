@@ -25,13 +25,6 @@ To install the SDK, run:
 npm i @ssv-labs/ssv-sdk
 ```
 
-:::info ⚠️ Testnet Version ⚠️
-The latest Hoodi-compatible version was not released to npmjs. To install it, download it from [the github release](https://github.com/ssvlabs/ssv-sdk/releases/tag/v.1.0.0) or via the command below:
-```bash
-npm i --force --ignore-scripts github:ssvlabs/ssv-sdk#v.1.0.0
-```
-:::
-
 ## Initialization
 
 The SDK requires specific parameters for initialization. Two that are not optional are the chain and the account. The `viem` library can be used to create an account object based off of a wallet's private key, and pass it into the SDK to instantiate it.

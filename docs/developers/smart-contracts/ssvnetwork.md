@@ -554,7 +554,7 @@ Events:
 
 ---
 
-#### **`setQuorumBps(quorum)`**
+#### **`updateQuorumBps(quorum)`**
 
 Description: DAO function to set the percentage of Oracles voting on the same Merkle root, in order for this to be accepted.
 
@@ -567,7 +567,20 @@ Events:
 
 ---
 
-#### **`setUnstakeCooldownDuration(duration)`**
+#### **`updateMinBlocksBetweenUpdates(blocks)`**
+
+Description: DAO function to set the minimum number of blocks between the updates of merkle root submitted by Oracles.
+
+| **Parameter** | **Type**  | **Description**               |
+| ------------- | --------- | ----------------------------- |
+| blocks         | uint32   | ???  |
+
+Events:
+* `MinBlocksBetweenUpdatesUpdated(uint32)`
+
+---
+
+#### **`updateUnstakeCooldownDuration(duration)`**
 
 Description: DAO function to set the time delay between the request of unstaking tokens and when such tokens can actually be withdrawn.
 

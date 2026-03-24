@@ -13,15 +13,16 @@ sidebar_position: 5
   />
 </a>
 
-### SSV Contract Addresses <a href="#bhl3qnbkn7py" id="bhl3qnbkn7py"></a>
+### SSV Contract Addresses
 
 #### Ethereum Mainnet
 
-| Contract                  | Address                                                                                              |
-|---------------------------|------------------------------------------------------------------------------------------------------|
+| Contract                  | Address                                   |
+|---------------------------|-------------------------------------------|
 | SSV Token                 | [0x9D65fF81a3c488d585bBfb0Bfe3c7707c7917f54](https://etherscan.io/address/0x9D65fF81a3c488d585bBfb0Bfe3c7707c7917f54) |
 | SSVNetwork                | [0xDD9BC35aE942eF0cFa76930954a156B3fF30a4E1](https://etherscan.io/address/0xDD9BC35aE942eF0cFa76930954a156B3fF30a4E1) |
 | SSVNetworkViews           | [0xafE830B6Ee262ba11cce5F32fDCd760FFE6a66e4](https://etherscan.io/address/0xafE830B6Ee262ba11cce5F32fDCd760FFE6a66e4) |
+| cSSV Token                 | [0xe018D31F120A637828F46aFD6c64EC099d960546](https://etherscan.io/address/0xe018D31F120A637828F46aFD6c64EC099d960546) |
 | SSV DAO Treasury          | [0xb35096b074fdb9bBac63E3AdaE0Bbde512B2E6b6](https://etherscan.io/address/0xb35096b074fdb9bBac63E3AdaE0Bbde512B2E6b6) |
 | SSV DAO Vesting           | [0xB8471180C79A0a69C7790A1CCf62e91b3c3559Bf](https://etherscan.io/address/0xB8471180C79A0a69C7790A1CCf62e91b3c3559Bf) |
 | Mainnet Rewards Distributor | [0xe16d6138b1d2ad4fd6603acdb329ad1a6cd26d9f](https://etherscan.io/address/0xe16d6138b1d2ad4fd6603acdb329ad1a6cd26d9f) |
@@ -31,25 +32,25 @@ sidebar_position: 5
 
 #### Hoodi Testnet
 
-| Contract        | Address                                                                                                      |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| SSV Token         | [0x9F5d4Ec84fC4785788aB44F9de973cF34F7A038e](https://hoodi.etherscan.io/address/0x9F5d4Ec84fC4785788aB44F9de973cF34F7A038e) |
-| SSV Network       | [0x58410Bef803ECd7E63B23664C586A6DB72DAf59c](https://hoodi.etherscan.io/address/0x58410Bef803ECd7E63B23664C586A6DB72DAf59c) |
+| Contract        | Address         |
+| --------------- | ------------------------------------------ |
+| SSV Token       | [0x9F5d4Ec84fC4785788aB44F9de973cF34F7A038e](https://hoodi.etherscan.io/address/0x9F5d4Ec84fC4785788aB44F9de973cF34F7A038e) |
+| SSV Network     | [0x58410Bef803ECd7E63B23664C586A6DB72DAf59c](https://hoodi.etherscan.io/address/0x58410Bef803ECd7E63B23664C586A6DB72DAf59c) |
 | SSV Network Views | [0x5AdDb3f1529C5ec70D77400499eE4bbF328368fe](https://hoodi.etherscan.io/address/0x5AdDb3f1529C5ec70D77400499eE4bbF328368fe) |
 | cSSV Token         | [0x6e1a5d27361c666f681af06535c8Ac773E571d4d](https://hoodi.etherscan.io/address/0x6e1a5d27361c666f681af06535c8Ac773E571d4d) |
 
 
 #### ABI
 
-* [Mainnet](https://github.com/ssvlabs/ssv-network/tree/contract-abi/docs/mainnet/v1.2.0/abi)
+* [Mainnet](https://github.com/ssvlabs/ssv-network/tree/contract-abi/docs/mainnet/v2.0.0/abi)
 * [Testnet](https://github.com/ssvlabs/ssv-network/tree/contract-abi/docs/testnet/v2.0.0/abi)
 
 ### Ethereum Deposit Contract Addresses
 
 You will need to send 32 ETH to the Deposit Contract in order to activate a validator.
 
-| Ethereum network | Address                                                                                                         |
-|------------------|-----------------------------------------------------------------------------------------------------------------|
+| Ethereum network | Address             |
+|------------------|---------------------|
 | Mainnet          | [0x00000000219ab540356cBB839Cbe05303d7705Fa](https://etherscan.io/address/0x00000000219ab540356cBB839Cbe05303d7705Fa) |
 | Hoodi Testnet    | [0x00000000219ab540356cBB839Cbe05303d7705Fa](https://hoodi.etherscan.io/address/0x00000000219ab540356cBB839Cbe05303d7705Fa) |
 
