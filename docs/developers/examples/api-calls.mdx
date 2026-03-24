@@ -5,24 +5,29 @@ sidebar_position: 9
 import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBlock';
 import InlineEditableCommand from '@site/src/components/InlineEditableCommand';
 
-# API calls
+# API Calls
 
-This page will show how to use the API module to do various calls. The API module is used to get data such as the Account Nonce, or Cluster Snapshot, both are covered on this page. 
+This page shows how to use the API module to perform various calls. The API module is used to retrieve data such as the account nonce and cluster snapshot, both of which are covered on this page.
 
-For the full list of functions you can check the [API Module Reference](/developers/SSV-SDK/module-reference/api-module).
+For the full list of available functions, see the [API Module Reference](/developers/SSV-SDK/module-reference/api-module).
 
-### Get Nonce 
+## Prerequisites
+
+Before using these examples, make sure you have the [SDK initialized](/developers/SSV-SDK/#initialization).
+
+## Get Owner Nonce
+
+Use `sdk.api.getOwnerNonce` to retrieve the current nonce for an account.
 
 <InlineEditableCodeBlock
   language="typescript"
   template={
   `
- const ownerNonce = await sdk.api.getOwnerNonce({ 
-        owner: "{{OWNER_ADDRESS}}" 
-    })
+  const ownerNonce = await sdk.api.getOwnerNonce({ 
+    owner: "{{OWNER_ADDRESS}}" 
+  })
     
-    console.log(ownerNonce)
-}
+  console.log(ownerNonce)
   `
   }
   variables={{
@@ -30,27 +35,24 @@ For the full list of functions you can check the [API Module Reference](/develop
   }}
 />
 
+## Get Cluster Snapshot
 
-### Get Cluster Snapshot
+Use `sdk.api.toSolidityCluster` to retrieve the cluster snapshot in a format compatible with on-chain interactions.
 
 <InlineEditableCodeBlock
   language="typescript"
   template={
   `
-import { createClusterId } from '@ssv-labs/ssv-sdk/utils'
-
-async function main() {
+  import { createClusterId } from '@ssv-labs/ssv-sdk/utils'
 
   const ownerAddress = "{{OWNER_ADDRESS}}"
-  const operatorIds: [{{OPERATOR_ID1}}, {{OPERATOR_ID2}}, {{OPERATOR_ID3}}, {{OPERATOR_ID4}}]'
+  const operatorIds = [{{OPERATOR_ID1}}, {{OPERATOR_ID2}}, {{OPERATOR_ID3}}, {{OPERATOR_ID4}}]
+  const clusterId = createClusterId(ownerAddress, operatorIds)
 
-  const clusterID = createClusterId(ownerAddress, operatorIds)
-
-    const clusterSnapshot = await sdk.api.getClusterSnapshot({ 
-        id: clusterID
-    })
-    console.log(clusterSnapshot)
-}
+  const clusterSnapshot = await sdk.api.toSolidityCluster({ 
+    id: clusterId
+  })
+  console.log(clusterSnapshot)
   `
   }
   variables={{
