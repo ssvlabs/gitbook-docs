@@ -7,33 +7,49 @@ import InlineEditableCommand from '@site/src/components/InlineEditableCommand';
 
 # Remove Validator
 
-This page shows how to programmatically remove validators from a cluster on the SSV network.
+This page shows how to remove validators from a cluster on the SSV Network using the [SSV SDK](/developers/SSV-SDK/).
 
-### Remove Validator
+Removing a validator updates the cluster configuration and stops the validator from participating in the cluster.
+
+## Prerequisites
+
+Before using this example, make sure you have:
+
+- The cluster owner address
+- The cluster operator IDs
+- The validator public keys to remove
+- The [SDK initialized](/developers/SSV-SDK/#initialization) with a `walletClient`
+
+## Remove Validator
+
+Use `sdk.clusters.removeValidators` to remove one or more validators from a cluster identified by its cluster ID.
 
 <InlineEditableCodeBlock
   language="typescript"
   template={
   `
-try {
-    const ownerAddress = "{{OWNER_ADDRESS}}"
-    const operatorIds: [{{OPERATOR_ID1}}, {{OPERATOR_ID2}}, {{OPERATOR_ID3}}, {{OPERATOR_ID4}}]'
-    const clusterID = createClusterId(ownerAddress, operatorIds)
+  import { createClusterId } from '@ssv-labs/ssv-sdk/utils'
 
-    const txnReceipt = await sdk.clusters.removeValidators({
+  try {
+      const ownerAddress = "{{OWNER_ADDRESS}}"
+      const operatorIds = [{{OPERATOR_ID1}}, {{OPERATOR_ID2}}, {{OPERATOR_ID3}}, {{OPERATOR_ID4}}]
+      const clusterId = createClusterId(ownerAddress, operatorIds)
+
+      const tx = await sdk.clusters.removeValidators({
         args: {
-            id: clusterID,
-            publicKeys: [
-                         "{{VALIDATOR_KEY1}}", 
-                         "{{VALIDATOR_KEY2}}"
-            ],
+          id: clusterId,
+          publicKeys: [
+            "{{VALIDATOR_KEY1}}", 
+            "{{VALIDATOR_KEY2}}"
+          ],
         },
-    }).then(tx => tx.wait());
+      })
 
-    console.log('Transaction receipt:', txnReceipt);
-} catch (error) {
-    console.error('Failed to remove validators:', error);
-}
+      const txnReceipt = await tx.wait()
+      console.log('Transaction receipt:', txnReceipt);
+  } catch (error) {
+      console.error('Failed to remove validators:', error);
+  }
   `
   }
   variables={{
@@ -46,3 +62,5 @@ try {
     OPERATOR_ID4: '4',
   }}
 />
+
+After the transaction is confirmed, you can verify the updated cluster state in the [SSV Explorer](https://explorer.ssv.network/mainnet/overview).
