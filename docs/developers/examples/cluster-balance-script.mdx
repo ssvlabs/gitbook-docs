@@ -7,11 +7,25 @@ import InlineEditableCommand from '@site/src/components/InlineEditableCommand';
 
 # Cluster Balance Calculation
 
-The script below calculates the balance of a cluster on the SSV network. This calculation can be made useful by adding it to cluster balance monitoring tool/automation of your own.
+The script below calculates the balance of a cluster on the SSV Network. This calculation can be made useful by integrating it into your own cluster balance monitoring or automation tools.
 
 Details on the formulas used can be found in the documentation page related to [Cluster Balance](/learn/network-overview/clusters/cluster-balance).
 
-The core calculation function that computes and prints the cluster balance:
+## Prerequisites
+
+Before using this example, make sure you have:
+
+- The cluster owner address
+- The cluster operator IDs
+- The [SDK initialized](/developers/SSV-SDK/#initialization)
+
+:::note
+The `ownerAddress` parameter is optional if the SDK is initialized with a `walletClient` that includes an account address.
+:::
+
+## Calculate Cluster Balance
+
+Use `sdk.utils.getClusterBalance` to retrieve the cluster balance and estimated operational runway.
 
 <InlineEditableCodeBlock
   language="typescript"
@@ -19,10 +33,9 @@ The core calculation function that computes and prints the cluster balance:
   `
 try {
     const { balance, operationalRunway } = await sdk.utils.getClusterBalance({
-        args: {
-            operatorIds: [{{OPERATOR_ID1}}, {{OPERATOR_ID2}}, {{OPERATOR_ID3}}, {{OPERATOR_ID4}}]',
-        },
-    });
+        operatorIds: [{{OPERATOR_ID1}}, {{OPERATOR_ID2}}, {{OPERATOR_ID3}}, {{OPERATOR_ID4}}],
+        ownerAddress: '{{OWNER_ADDRESS}}',
+    })
 
     console.log('Cluster balance result:', {
         balance: balance.toString(),
@@ -34,6 +47,7 @@ try {
   `
   }
   variables={{
+    OWNER_ADDRESS: '0xA4831B989972605A62141a667578d742927Cbef9',
     OPERATOR_ID1: '1',
     OPERATOR_ID2: '2',
     OPERATOR_ID3: '3',
