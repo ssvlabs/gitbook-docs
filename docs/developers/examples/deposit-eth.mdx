@@ -7,25 +7,40 @@ import InlineEditableCommand from '@site/src/components/InlineEditableCommand';
 
 # Deposit ETH
 
-This page shows how to programmatically deposit ETH to a cluster on the SSV network. This executes the contract call to the smart contract to deposit ETH to the cluster.
+This page shows how to deposit ETH into an existing cluster on the SSV Network using the [SSV SDK](/developers/SSV-SDK/).
+
+Depositing ETH increases the cluster balance used to pay ongoing validator operating costs.
+
+## Prerequisites
+
+Before integrating this example, make sure you have:
+
+- An existing cluster
+- The cluster owner address
+- The cluster operator IDs
+- The amount of ETH to deposit
+- The [SDK initialized](/developers/SSV-SDK/#installation) with a `walletClient`
 
 ### Deposit ETH
+
+Use `sdk.clusters.deposit` to deposit ETH into a cluster identified by its cluster ID.
 
 <InlineEditableCodeBlock
   language="typescript"
   template={
   `
-import { parseEther } from 'viem';
+import { createClusterId } from '@ssv-labs/ssv-sdk/utils'
+import { parseEther } from 'viem'
 
 try {
     const ownerAddress = "{{OWNER_ADDRESS}}"
-    const operatorIds: [{{OPERATOR_ID1}}, {{OPERATOR_ID2}}, {{OPERATOR_ID3}}, {{OPERATOR_ID4}}]'
-    const clusterID = createClusterId(ownerAddress, operatorIds)
+    const operatorIds = [{{OPERATOR_ID1}}, {{OPERATOR_ID2}}, {{OPERATOR_ID3}}, {{OPERATOR_ID4}}]
+    const clusterId = createClusterId(ownerAddress, operatorIds)
 
     const txnReceipt = await sdk.clusters.deposit({
-        value: parseEther('{{ETH_AMOUNT}}')
         args: {
-            id: clusterID,
+            id: clusterId,
+            amount: parseEther('{{ETH_AMOUNT}}'),
         },
     },
     ).then(tx => tx.wait());
