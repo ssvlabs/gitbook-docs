@@ -15,6 +15,29 @@ For the full list of available functions, see the [API Module Reference](/develo
 
 Before using these examples, make sure you have the [SDK initialized](/developers/SSV-SDK/#initialization).
 
+## Get Operators by IDs
+
+Use `sdk.api.getOperators` to retrieve operator metadata (including decoded public keys) for a set of operator IDs.
+
+<InlineEditableCodeBlock
+  language="typescript"
+  template={
+  `
+  const operators = await sdk.api.getOperators({
+    operatorIds: ["{{OPERATOR_ID1}}", "{{OPERATOR_ID2}}", "{{OPERATOR_ID3}}", "{{OPERATOR_ID4}}"]
+  })
+
+  console.log(operators)
+  `
+  }
+  variables={{
+    OPERATOR_ID1: '1',
+    OPERATOR_ID2: '2',
+    OPERATOR_ID3: '3',
+    OPERATOR_ID4: '4',
+  }}
+/>
+
 ## Get Owner Nonce
 
 Use `sdk.api.getOwnerNonce` to retrieve the current nonce for an account.
