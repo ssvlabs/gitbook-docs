@@ -21,20 +21,35 @@ Before using this example, make sure you have:
 - A withdrawal address to use for the validator
 - A password to encrypt the generated keystore files
 
-## Install Dependencies
+## Set Up the Project
 
-Start by installing the packages that are needed to run the script below.
+Initialize a new Node.js project if needed:
 
 ```bash
-pnpm add viem @chainsafe/bls-keygen @chainsafe/bls-keystore @chainsafe/bls @chainsafe/ssz @lodestar/config @lodestar/params @lodestar/state-transition @lodestar/types abitype dotenv
+npm init -y
 ```
 
-## Configure the Project
+Add the following to your `package.json`:
 
-Ensure your project is configured to use ES modules. Add the following to your `package.json`:
+```json title="package.json"
+{
+  "type": "module",
+  "overrides": {
+    "@lodestar/spec-test-util": {
+      "vitest": "^3.2.4"
+    }
+  }
+}
+```
 
-```json
-"type": "module"
+This override ensures compatibility with [`Lodestar`](https://www.npmjs.com/package/@lodestar/config) dependencies when installing with `npm`.
+
+## Install Dependencies
+
+Install the packages that are needed to run the script below.
+
+```bash
+npm install viem @chainsafe/bls-keygen @chainsafe/bls-keystore @chainsafe/bls @chainsafe/ssz @lodestar/config @lodestar/params @lodestar/state-transition @lodestar/types abitype dotenv
 ```
 
 ## Generate Validator Keys
