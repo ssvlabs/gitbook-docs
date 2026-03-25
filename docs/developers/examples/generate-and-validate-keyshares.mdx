@@ -18,7 +18,7 @@ In addition to generating keyshares, the SDK can validate them before registrati
 Before using this example, make sure you have:
 
 - Validator [keystores](/examples/create-validator-keys) and the keystore password
-- [Operator](https://explorer.ssv.network/mainnet/operators) public keys and IDs
+- [Operator](https://explorer.ssv.network/mainnet/operators) IDs
 - [Validator](https://explorer.ssv.network/mainnet/validators) owner address
 
 ## Install dependencies
@@ -31,7 +31,7 @@ npm install @ssv-labs/ssv-sdk viem
 
 ## Initialize the SDK
 
-Create an SDK instance to interact with the SSV network:
+Create an SDK instance to interact with the SSV Network:
 
 <InlineEditableCodeBlock
   language="typescript"
@@ -60,6 +60,7 @@ Create an SDK instance to interact with the SSV network:
 
 Use `generateKeyShares` to create keyshares from a validator keystore and encrypt them with the selected operator public keys.
 
+Operator public keys are required to encrypt keyshares. These can be retrieved using the SDK based on operator IDs.
 
 <InlineEditableCodeBlock
   language="typescript"
@@ -67,17 +68,27 @@ Use `generateKeyShares` to create keyshares from a validator keystore and encryp
   `
   const ownerAddress = '{{OWNER_ADDRESS}}'
   const nonce = Number(await sdk.api.getOwnerNonce({ owner: ownerAddress }))
+  const operatorIds = ['{{OPERATOR_ID1}}', '{{OPERATOR_ID2}}', '{{OPERATOR_ID3}}', '{{OPERATOR_ID4}}']
 
+  // Fetch operator metadata from the SDK API
+  const operators = await sdk.api.getOperators({ operatorIds })
+  if (operators.length !== operatorIds.length) {
+    throw new Error('One or more operator IDs were not found')
+  }
+
+  // Build operator public keys in the same order as operatorIds.
+  const operatorKeys = operatorIds.map((id) => {
+    const op = operators.find((o) => o.id === id)
+    if (!op) throw new Error(\`Operator \${id} not found\`)
+    return op.publicKey
+  })
+
+  // Generate encrypted keyshares from keystore(s).
   const keysharesPayload = await sdk.utils.generateKeyShares({
     keystore: JSON.stringify(keystoresObject), // or string[]
     keystorePassword: 'INSERT_PASSWORD',
-    operatorKeys: [
-      '{{OPERATOR_KEY1}}',
-      '{{OPERATOR_KEY1}}',
-      '{{OPERATOR_KEY1}}',
-      '{{OPERATOR_KEY1}}',
-    ],
-    operatorIds: [{{OPERATOR_ID1}}, {{OPERATOR_ID2}}, {{OPERATOR_ID3}}, {{OPERATOR_ID4}}], // Replace with your operator IDs
+    operatorKeys,
+    operatorIds: operatorIds.map(Number),
     ownerAddress,
     nonce,
   })
@@ -89,7 +100,6 @@ Use `generateKeyShares` to create keyshares from a validator keystore and encryp
       OPERATOR_ID2: '2',
       OPERATOR_ID3: '3',
       OPERATOR_ID4: '4',
-      OPERATOR_KEY1: 'LS0...',
     }}
 />
 
@@ -102,10 +112,12 @@ Use `validateSharesPreRegistration` to verify that the generated keyshares and o
   template={
   `
   const ownerAddress = '{{OWNER_ADDRESS}}'
+  const operatorIds = ['{{OPERATOR_ID1}}', '{{OPERATOR_ID2}}', '{{OPERATOR_ID3}}', '{{OPERATOR_ID4}}']
 
+  // Validate keyshares and operator set before registration.
   const validatedShares = await sdk.utils.validateSharesPreRegistration({
     keyshares: keysharesPayload,
-    operatorIds: ['{{OPERATOR_ID1}}', '{{OPERATOR_ID2}}', '{{OPERATOR_ID3}}', '{{OPERATOR_ID4}}'],
+    operatorIds,
     ownerAddress, // required if no walletClient in sdk init
   })
 
