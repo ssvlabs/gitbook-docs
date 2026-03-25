@@ -7,24 +7,38 @@ import InlineEditableCommand from '@site/src/components/InlineEditableCommand';
 
 # Exit Validator
 
-This page shows how to programmatically exit a validator from the SSV network. This prompts SSV nodes to sign a voluntary exit of the validator.
+This page shows how to exit a validator from the SSV Network using the [SSV SDK](/developers/SSV-SDK/).
 
-### Exit Validator
+Exiting a validator triggers the voluntary exit flow by requesting the selected SSV operators to sign the validator exit message.
+
+## Prerequisites
+
+Before using this example, make sure you have:
+
+- The validator public key
+- The validator operator IDs
+- The [SDK initialized](/developers/SSV-SDK/#initialization) with a `walletClient`
+
+## Exit Validator
+
+Use `sdk.clusters.exitValidators` to initiate the voluntary exit process for one or more validators.
 
 <InlineEditableCodeBlock
   language="typescript"
   template={
   `
 try {
-    const txnReceipt = await sdk.clusters.exitValidators({
-        args: {
-            publicKeys: [
-                         "{{VALIDATOR_KEY1}}", 
-                         "{{VALIDATOR_KEY2}}"
-            ],
-            operatorIds: [{{OPERATOR_ID1}}, {{OPERATOR_ID2}}, {{OPERATOR_ID3}}, {{OPERATOR_ID4}}]',
-        },
-    }).then(tx => tx.wait());
+    const operatorIds = [{{OPERATOR_ID1}}, {{OPERATOR_ID2}}, {{OPERATOR_ID3}}, {{OPERATOR_ID4}}]
+    const operatorIdsBigInt = operatorIds.map(BigInt)
+
+    const tx = await sdk.clusters.exitValidators({
+      args: {
+        publicKeys: ['{{VALIDATOR_KEY1}}', '{{VALIDATOR_KEY2}}'],
+        operatorIds: operatorIdsBigInt,
+      },
+    })
+
+    const txnReceipt = await tx.wait()
 
     console.log('Transaction receipt:', txnReceipt);
 } catch (error) {

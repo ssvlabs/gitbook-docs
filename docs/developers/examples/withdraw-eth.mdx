@@ -7,34 +7,56 @@ import InlineEditableCommand from '@site/src/components/InlineEditableCommand';
 
 # Withdraw ETH
 
-This page shows how to programmatically withdraw ETH from a cluster on the SSV network.
+This page shows how to withdraw ETH from a cluster on the SSV Network using the [SSV SDK](/developers/SSV-SDK/).
 
-It is advised to use the [`createClusterID`](/developers/SSV-SDK/module-reference/api-module#createclusteridowner_address-operator_ids) function to get the cluster ID in the correct format.
+Withdrawing ETH reduces the cluster balance and transfers funds back to the cluster owner.
 
-### Withdraw ETH
+## Prerequisites
+
+Before using this example, make sure you have:
+
+- The cluster ID
+- The amount of ETH to withdraw
+- The [SDK initialized](/developers/SSV-SDK/#initialization) with a `walletClient`
+
+## Withdraw ETH
+
+Use `sdk.clusters.withdraw` to withdraw ETH from a cluster using its cluster ID.
 
 <InlineEditableCodeBlock
   language="typescript"
   template={
   `
-import { parseEther } from 'viem';
+  import { createClusterId } from '@ssv-labs/ssv-sdk/utils'
+  import { parseEther } from 'viem'
 
-try {
-    const txnReceipt = await sdk.clusters.withdraw({
-        args: {
-            id: "{{CLUSTER_ID}}",
-            amount: parseEther('{{ETH_AMOUNT}}'),
-        },
-    }).then(tx => tx.wait());
+  try {
+      const ownerAddress = '{{OWNER_ADDRESS}}'
+      const operatorIds = [{{OPERATOR_ID1}}, {{OPERATOR_ID2}}, {{OPERATOR_ID3}}, {{OPERATOR_ID4}}]
+      const clusterId = createClusterId(ownerAddress, operatorIds)
 
-    console.log('Transaction receipt:', txnReceipt);
-} catch (error) {
-    console.error('Failed to withdraw ETH:', error);
-}
+      const tx = await sdk.clusters.withdraw({
+          args: {
+              id: clusterId,
+              amount: parseEther('{{ETH_AMOUNT}}'),
+          },
+      })
+
+      const txnReceipt = await tx.wait()
+      console.log('Transaction receipt:', txnReceipt);
+  } catch (error) {
+      console.error('Failed to withdraw ETH:', error);
+  }
   `
   }
   variables={{
     ETH_AMOUNT: '0.1234',
-    CLUSTER_ID: '0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8',
+    OWNER_ADDRESS: '0xF3e3E63b80e65665a1DF537A882de80d1961614E',
+    OPERATOR_ID1: '5',
+    OPERATOR_ID2: '6',
+    OPERATOR_ID3: '7',
+    OPERATOR_ID4: '8',
   }}
 />
+
+After the transaction is confirmed, you can verify the updated cluster balance in the [SSV Explorer](https://explorer.ssv.network/mainnet/overview).
