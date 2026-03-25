@@ -17,7 +17,6 @@ This process is not part of the SSV SDK. SSV is not responsible for any misuse o
 Before using this example, make sure you have:
 
 - [Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) installed
-- A TypeScript project where you can run the script
 - A withdrawal address to use for the validator
 - A password to encrypt the generated keystore files
 
