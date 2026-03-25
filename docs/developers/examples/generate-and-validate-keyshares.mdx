@@ -2,6 +2,9 @@
 sidebar_position: 2
 ---
 
+import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBlock';
+import InlineEditableCommand from '@site/src/components/InlineEditableCommand';
+
 # Generate and Validate Keyshares
 
 This section of the [SSV SDK](/developers/SSV-SDK/) enables users to generate validator keyshares by splitting validator keys into threshold shares using [Shamir Secret Sharing (SSS)](https://en.wikipedia.org/wiki/Shamir's_Secret_Sharing), and encrypting them with operator public keys.
@@ -30,58 +33,92 @@ npm install @ssv-labs/ssv-sdk viem
 
 Create an SDK instance to interact with the SSV network:
 
-```ts
-import { SSVSDK, chains } from '@ssv-labs/ssv-sdk'
-import { createPublicClient, http } from 'viem'
+<InlineEditableCodeBlock
+  language="typescript"
+  template={
+  `
+  import { SSVSDK, chains } from '@ssv-labs/ssv-sdk'
+  import { createPublicClient, http } from 'viem'
 
-// Use chains.mainnet for mainnet
-const publicClient = createPublicClient({
-  chain: chains.hoodi,
-  transport: http('INSERT_RPC_URL'),
-})
+  // Use chains.mainnet for mainnet
+  const publicClient = createPublicClient({
+    chain: chains.hoodi,
+    transport: http('{{RPC_URL}}'),
+  })
 
-const sdk = new SSVSDK({
-  publicClient,
-})
-```
+  const sdk = new SSVSDK({
+    publicClient,
+  })
+  `
+  }
+    variables={{
+      RPC_URL: 'https://ethereum-hoodi-rpc.publicnode.com',
+    }}
+/>
 
 ## Generate Keyshares
 
 Use `generateKeyShares` to create keyshares from a validator keystore and encrypt them with the selected operator public keys.
 
-```ts
-const ownerAddress = 'INSERT_OWNER_ADDRESS'
-const nonce = Number(await sdk.api.getOwnerNonce({ owner: ownerAddress }))
 
-const keysharesPayload = await sdk.utils.generateKeyShares({
-  keystore: JSON.stringify(keystoresObject), // or string[]
-  keystorePassword: 'INSERT_PASSWORD',
-  operatorKeys: [
-    'INSERT_OPERATOR_PUBKEY_1',
-    'INSERT_OPERATOR_PUBKEY_2',
-    'INSERT_OPERATOR_PUBKEY_3',
-    'INSERT_OPERATOR_PUBKEY_4',
-  ],
-  operatorIds: [1, 2, 3, 4], // Replace with your operator IDs
-  ownerAddress,
-  nonce,
-})
-```
+<InlineEditableCodeBlock
+  language="typescript"
+  template={
+  `
+  const ownerAddress = '{{OWNER_ADDRESS}}'
+  const nonce = Number(await sdk.api.getOwnerNonce({ owner: ownerAddress }))
+
+  const keysharesPayload = await sdk.utils.generateKeyShares({
+    keystore: JSON.stringify(keystoresObject), // or string[]
+    keystorePassword: 'INSERT_PASSWORD',
+    operatorKeys: [
+      '{{OPERATOR_KEY1}}',
+      '{{OPERATOR_KEY1}}',
+      '{{OPERATOR_KEY1}}',
+      '{{OPERATOR_KEY1}}',
+    ],
+    operatorIds: [{{OPERATOR_ID1}}, {{OPERATOR_ID2}}, {{OPERATOR_ID3}}, {{OPERATOR_ID4}}], // Replace with your operator IDs
+    ownerAddress,
+    nonce,
+  })
+  `
+  }
+    variables={{
+      OWNER_ADDRESS: '0xA4831B989972605A62141a667578d742927Cbef9',
+      OPERATOR_ID1: '1',
+      OPERATOR_ID2: '2',
+      OPERATOR_ID3: '3',
+      OPERATOR_ID4: '4',
+      OPERATOR_KEY1: 'LS0...',
+    }}
+/>
 
 ## Validate Keyshares
 
 Use `validateSharesPreRegistration` to verify that the generated keyshares and operator IDs are valid before registering the validator.
 
-```ts
-const ownerAddress = 'INSERT_OWNER_ADDRESS'
+<InlineEditableCodeBlock
+  language="typescript"
+  template={
+  `
+  const ownerAddress = '{{OWNER_ADDRESS}}'
 
-const validatedShares = await sdk.utils.validateSharesPreRegistration({
-  keyshares: keysharesPayload,
-  operatorIds: ['1', '2', '3', '4'],
-  ownerAddress, // required if no walletClient in sdk init
-})
+  const validatedShares = await sdk.utils.validateSharesPreRegistration({
+    keyshares: keysharesPayload,
+    operatorIds: ['{{OPERATOR_ID1}}', '{{OPERATOR_ID2}}', '{{OPERATOR_ID3}}', '{{OPERATOR_ID4}}'],
+    ownerAddress, // required if no walletClient in sdk init
+  })
 
-console.log(validatedShares)
-```
+  console.log(validatedShares)
+  `
+  }
+    variables={{
+      OWNER_ADDRESS: '0xA4831B989972605A62141a667578d742927Cbef9',
+      OPERATOR_ID1: '1',
+      OPERATOR_ID2: '2',
+      OPERATOR_ID3: '3',
+      OPERATOR_ID4: '4',
+    }}
+/>
 
 A valid keyshare can then be used to [register a validator.](register-validator.mdx)
