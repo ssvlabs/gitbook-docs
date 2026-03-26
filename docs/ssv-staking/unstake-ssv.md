@@ -12,7 +12,7 @@ Unstaking SSV withdraws your staked tokens from the staking contract. The proces
 - **Oracle weight retention** - Voting weight remains active during cooldown
 - **Full withdrawal** - Receive SSV + any unclaimed rewards after cooldown
 
-:::warning Please note
+:::note Please note
 This process is irreversible. Once initiated, you cannot cancel and rewards stop immediately. You can only have up to 2000 initiated withdrawal requests at the same time.
 :::
 

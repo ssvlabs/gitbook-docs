@@ -13,17 +13,17 @@ Remember to maintain sufficient ETH balance to cover your cluster's operational 
 For more information on cluster balance mechanics, please refer to [the dedicated learning page](/learn/network-overview/clusters/cluster-balance).
 :::
 
-#### 1. Connect Web3 Wallet
+1. **Connect Web3 Wallet**
 
-Connect your Web3 wallet with the [WebApp](https://app.ssv.network/), use the same address used for validator registration.
+Connect your Web3 wallet with the [WebApp](https://app.ssv.network/). Use the address you registered your validators with.
 
-#### 2. Choose the Cluster
+2. **Choose the Cluster**
 
 In the My Account page, select an active cluster and then click on the "Deposit" button.
 
 ![Deposit ETH to cluster balance](/img/deposit-eth-2.png)
 
-#### 3. Enter the Amount
+3. **Enter the Amount**
 
 In the next screen, you'll be asked to enter the amount of ETH you want to deposit.
 
@@ -31,7 +31,7 @@ Once you enter the amount, click on the _Deposit_ button.
 
 ![Deposit ETH to cluster balance](/img/deposit-eth-3.png)
 
-#### 4. Sign transaction
+4. **Sign transaction**
 
 The page will submit a transaction to the SSV Network smart contract. Finalize the deposit to the Cluster by signing the transaction.
 
@@ -43,6 +43,6 @@ The page will submit a transaction to the SSV Network smart contract. Finalize t
   />
 </div>
 
-#### 5. Deposit Complete
+5. **Deposit Complete**
 
 You'll be taken back to the Cluster page, where the balance will be updated with the deposited ETH amount.

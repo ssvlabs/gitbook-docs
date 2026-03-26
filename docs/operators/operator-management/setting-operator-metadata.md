@@ -27,7 +27,7 @@ Currently, the `Description` and `Name` parts do not allow to use symbols `, . ;
 
 The WebApp will ask you to provide a signature of a message. Make sure to open your Web3 wallet, if it does not automatically and confirm the transaction.
 
-:::info Signature costs no gas
+:::note Signature costs no gas
 This is not a transaction and will not cost any gas, it's only needed to verify that you are the Operator owner.
 :::
 

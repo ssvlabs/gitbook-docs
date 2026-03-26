@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 
 # Add More Validators 
 
-Make sure to connect your Web3 address/wallet with [the WebApp](https://app.ssv.network/). Use the address you registered your validators with.
+Connect your Web3 wallet with the [WebApp](https://app.ssv.network/). Use the address you registered your validators with.
 
 1. [**In the Clusters page**](https://app.ssv.network/clusters), **select an active cluster** and then click on the "**Add Validator +**" button.
 

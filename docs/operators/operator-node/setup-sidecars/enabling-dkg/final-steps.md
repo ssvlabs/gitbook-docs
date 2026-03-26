@@ -14,8 +14,8 @@ import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBloc
 
 ## Update Operator Metadata
 
-:::warning
-To participate in DKG ceremonies without coordination and to enable others to initiate ceremonies with you via your provided endpoint, it's crucial to update your operator metadata with the correct information.
+:::warning Update Metadata
+If you will not set an externally availably DKG endpoint in the metadata - **you will not participate in DKG ceremonies**.
 :::
 
 Once the DKG tool is up and running, please make sure to update your operator metadata, and provide your DKG Operator endpoint, in the form of `protocol:ip:port` (if you have a domain name, instead of an `ip` that works as well).

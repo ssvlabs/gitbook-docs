@@ -32,7 +32,7 @@ You will be prompted to set the Obligations and add Data for your strategy.
 - `Obligations` is % of the strategy to be obligated to chosen bApp. In the example on screenshot below, 30% of the strategy's MNT balance will be obligated to the bApp.
 You can later update your obligations by modifying existing ones or adding a new token obligation.
 
-- `Add Data` is an optional field for off-chain information required by some bApps for participation. Please check this bApp’s documentation [before opting-in](../developers/get-started/#4-opting-in). 
+- `Add Data` is an optional field for off-chain information required by some bApps for participation. Please check this bApp’s documentation [before opting-in](/based-applications/developers/get-started.md#4-opting-in). 
 
 <div style={{ textAlign: 'center', width: '100%', margin: '0 auto' }}>
   <img src="/img/opt-in-to-bapp-3.png" alt="" />

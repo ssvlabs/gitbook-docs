@@ -6,7 +6,7 @@ sidebar_position: 7
 # Running a Node
 
 The only essential guide is the [**Automatic SSV Node Setup**](/operators/operator-node/node-setup). There are other setup options avaialble:
-- The same setup can be recreated manually with the [Manual Node setup page](./manual-setup).
+- The same setup can be recreated manually with the [Manual Node setup page](/operators/operator-node/node-setup/manual-setup).
 - There is an alternative SSV client called Anchor, developed by Sigma Prime. [Official documentation for Anchor](https://anchor-book.sigmaprime.io/running_node.html).
 - SSV Node setup is also available using [eth-docker](https://eth-docker.net/Support/SSV/), [Stereum Launcher](https://stereum.net/), and [Dappnode](https://docs.dappnode.io/docs/user/staking/ethereum/dvt-technologies/ssv-network/).
 

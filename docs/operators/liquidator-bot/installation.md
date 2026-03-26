@@ -4,12 +4,9 @@ title: Installation
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBlock';
 
 # Installation
-
-:::warning Hoodi is not supported
-Please note that SSV Mainnet has enough liquidators at the moment, so the tool is not actively updated. There is no official Hoodi support for `ssv-liquidator` tool.
-:::
 
 ### Prerequisites
 
@@ -45,44 +42,58 @@ yarn cli --help
 
 ### Running Options
 
+:::warning
+Make sure that `--ssv-sync` and `--node-url` parameters (or `SSV_SYNC` and `NODE_URL` environment variables) are all relative to the same blockchain (Hoodi or Mainnet)
+:::
+
 <Tabs>
   <TabItem value="cli" label="Option 1: Using CLI Arguments">
 
-```sh
-yarn cli --liquidator-type=eth --ssv-sync-env=<prod | stage> --ssv-sync=<v4.hoodi | v4.mainnet > --node-url=<NODE_URL>  --private-key=<PRIVATE_KEY>  --gas-price=low --max-visible-blocks=<MAX_BLOCKS>
-```
+<InlineEditableCodeBlock
+  language="sh"
+  template={
+  `
+  yarn cli \ 
+    --ssv-sync-env=prod \ 
+    --ssv-sync={{SSV_SYNC}} \ 
+    --node-url={{NODE_URL}}  \ 
+    --private-key=<PRIVATE_KEY>  \ 
+    --gas-price=medium    \ 
+    --max-visible-blocks=50000
+  `
+  }
+  variables={{
+    SSV_SYNC: 'v4.hoodi or v4.mainnet',
+    NODE_URL: 'https://red-silent-dawn.ethereum-hoodi.quiknode.pro/<ACCOUNT_ID>/'
+  }}
+/>
+
 
   </TabItem>
   <TabItem value="env" label="Option 2: Using .ENV Variables">
 
 The liquidation bot can also be simply launched with the command `yarn cli` if the following environment variables have their values correctly set:
 
-```bash
-LIQUIDATOR_TYPE=eth # ssv
-NODE_URL=eth.infra.com 
-ACCOUNT_PRIVATE_KEY=<PRIVATE_KEY>
-GAS_PRICE=medium  # low | medium | high
-HIDE_TABLE=false
-MAX_VISIBLE_BLOCKS=50000
-SSV_SYNC_ENV=prod # prod or stage, prod - is default value
-SSV_SYNC=v4.mainnet # v4.hoodi - is the default
-```
+<InlineEditableCodeBlock
+  language="sh"
+  template={
+  `
+  ACCOUNT_PRIVATE_KEY=<PRIVATE_KEY>
+  NODE_URL={{NODE_URL}}
+  GAS_PRICE={{GAS_PRICE}}  # low | medium | high
+  SSV_SYNC={{SSV_SYNC}} # v4.hoodi - is the default
+  SSV_SYNC_ENV=prod # prod or stage, prod - is default value
+  HIDE_TABLE=false
+  MAX_VISIBLE_BLOCKS=50000
+  LIQUIDATOR_TYPE=eth # ssv
+  `
+  }
+  variables={{
+    SSV_SYNC: 'v4.mainnet',
+    NODE_URL: 'https://red-silent-dawn.ethereum-hoodi.quiknode.pro/<ACCOUNT_ID>/',
+    GAS_PRICE: 'medium'
+  }}
+/>
 
   </TabItem>
 </Tabs>
-
-:::warning
-Make sure that `--ssv-sync` and `--node-url` parameters (or `SSV_SYNC` and `NODE_URL` environment variables) are all relative to the same blockchain.
-
-For example, for Hoodi (using a sample QuickNode RPC endpoint), the command should look like this:
-
-```sh
-yarn cli \
---ssv-sync-env=prod \
---ssv-sync=v4.hoodi \
---node-url=https://red-silent-dawn.ethereum-hoodi.quiknode.pro/<ACCOUNT_ID>/  \
---private-key=<PRIVATE_KEY>  \
---gas-price=slow    \
---max-visible-blocks=5000
-```
-:::

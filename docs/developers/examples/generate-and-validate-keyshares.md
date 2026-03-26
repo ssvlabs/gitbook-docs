@@ -16,7 +16,7 @@ In addition to generating keyshares, the SDK can validate them before registrati
 
 Before using this example, make sure you have:
 
-- Validator [keystores](/examples/create-validator-keys) and the keystore password
+- Validator [keystores](/developers/examples/create-validator-keys) and the keystore password
 - [Operator](https://explorer.ssv.network/mainnet/operators) IDs
 - [Validator](https://explorer.ssv.network/mainnet/validators) owner address
 

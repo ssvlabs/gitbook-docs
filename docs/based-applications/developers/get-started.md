@@ -36,7 +36,7 @@ The `BAppManager` smart contract developed by SSV Labs accepts registrations of 
 - `tokens`:  A list of ERC-20 tokens to be used in the bApp's security mechanism. For the native ETH token, use the special address [`0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE`](https://github.com/ssvlabs/based-applications/blob/main/src/SSVBasedApps.sol#L74).
 - `sharedRiskLevels`: a list with $\beta$ values, one for each token, representing the bApp's tolerance for risk (token over-usage).
 2. **Optional Non-Slashable Validator Balance**: If the bApp uses non-slashable validator balance, it should be configured off-chain, in the bApp's network.
-3. **Register the bApp**: Use the [`registerBApp`](./smart-contracts/SSVBasedApps#registerbappbapp-tokens-sharedrisklevels-metadatauri) function of the smart contract:
+3. **Register the bApp**: Use the [`registerBApp`](/based-applications/developers/smart-contracts/SSVBasedApps#registerbapp-tokens-sharedrisklevels-metadatauri) function of the smart contract:
 ```javascript
 function registerBApp(
    address bApp,

@@ -5,7 +5,7 @@ sidebar_position: 3
 
 # Validator Onboarding
 
-![Key Splitting Flow](/img/flow_chart_keysplit.png)
+  <!--- ![Key Splitting Flow](/img/flow_chart_keysplit.png) --->
 
 Tutorials here will help to migrate your validators to SSV network from a vanilla setup.
 

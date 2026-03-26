@@ -40,7 +40,7 @@ npm i @ssv-labs/bapps-sdk
 ## Example Usage
 
 The `extendedConfig` parameter in th `BasedAppsSDK` constructor is optional, if not provided, the SDK will use the development endpoint. Bear in mind that this is rate limited, though, so it is strongly advised to use an API key with the free plan.
-For more information regarding your subgraph API key, please refer to the [dedicated Subgraph page](../subgraph.md#based-application-subgraph).
+For more information regarding your subgraph API key, please refer to the [dedicated Subgraph page](/based-applications/developers/subgraph.md).
 
 ```typescript
 import { BasedAppsSDK } from "@ssv-labs/bapps-sdk";

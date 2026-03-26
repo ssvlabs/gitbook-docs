@@ -11,7 +11,7 @@ They should be saved at a URL that can be accessed freely, such as [this.](https
 
 ## Bapp 
 
-Stored in the Based App Manager smart contract, as `metadataURI` for a bapp. It is a link (e.g., `http://example.com`) to a JSON file containing metadata such as the name, description, logo, etc. You can set the URI when [registering a bApp](./SSVBasedApps#registerbappbapp-tokens-sharedrisklevels-metadatauri) or [update the URI at any point in the future](./SSVBasedApps#updatebappmetadatauribapp-metadatauri).
+Stored in the Based App Manager smart contract, as `metadataURI` for a bapp. It is a link (e.g., `http://example.com`) to a JSON file containing metadata such as the name, description, logo, etc. You can set the URI when [registering a bApp](./SSVBasedApps#registerbappb-tokens-sharedrisklevels-metadatauri) or [update the URI at any point in the future](./SSVBasedApps#updatebappmetadatauribapp-metadatauri).
 
 :::info
 It is important to set this correctly, as it is used to identify the bApp on interfaces such as the SSV Based App website.
