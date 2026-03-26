@@ -158,7 +158,7 @@ Please note: the number of validators that can be requested to exit from the bea
 
 #### **`deposit(owner, operatorIds, cluster)`**
 
-Description: Deposits ETH into a cluster balance, will fail if not enough tokens are approved.
+Description: Deposits ETH into a cluster balance, will fail if not enough tokens are approved. Allowed on liquidated clusters.
 
 The ETH amount to deposit must be [supplied via `msg.value`](https://docs.ethers.org/v4/api-contract.html#overrides).
 
@@ -182,8 +182,8 @@ Events:
 
 Description: Withdraws a specified amount of ETH from cluster of msg.sender, **will fail if** msg.sender tries to withdraw more than the cluster’s liquidation collateral. To withdraw the entire cluster balance and stop its operation use liquidate().
 
-| **Parameter** | **Type**                   | **Description**                                                                                                                                                                                           |
-| ------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Parameter** | **Type**                   | **Description**            |
+| ------------- | -------------------------- | -------------------------- |
 | operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                            |
 | amount        | uint256 | Amount to be withdrawn. Amount must be divisible by 100000                                                                                        |
 | cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/api/subgraph-examples.md#cluster-snapshot)  |
@@ -196,14 +196,14 @@ Events:
 
 #### **`reactivate(operatorIds, cluster)`**
 
-Description: Reactivates a liquidated cluster, **will fail** if insufficient ETH to cover the cluster’s liquidation collateral have been deposited. The ETH amount to deposit must be [supplied via `msg.value`](https://docs.ethers.org/v4/api-contract.html#overrides).
+Description: Reactivates a liquidated cluster, **will fail** if insufficient ETH to cover the cluster’s liquidation collateral have been deposited. The ETH amount to deposit must be [supplied via `msg.value`](https://docs.ethers.org/v4/api-contract.html#overrides). Effective Balance of the cluster is not updated while its inactive, it is recommended to call [`updateClusterBalance`](/developers/smart-contracts/ssvnetwork#updateclusterbalancecluster-effectivebalance-merkleproof) before reactivating. 
 
 :::info Breaking Changes
 With the [introduction of ETH payments](https://ssv.network/blog/introduction-to-ssv-staking), the smart contract function signature has changed. The `amount` parameter has been removed, and the function is now `payable`. The ETH amount to deposit must be supplied via `msg.value`. Update your integrations accordingly, in line with [the ethers documentation](https://docs.ethers.org/v4/api-contract.html#overrides).
 :::
 
-| **Parameter** | **Type**                   | **Description**                                                                                                                                                                                           |
-| ------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Parameter** | **Type**        | **Description**           |
+| ------------- | --------------- | ------------------------- |
 | operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                            |                                              |
 | cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/api/subgraph-examples.md#cluster-snapshot)  |
 
@@ -236,7 +236,7 @@ Description: Registers a new operator (key) with a set fee, **fails if** fee is 
 | ------------- | ------------------------------------ | --------------------------- |
 | publicKey     | bytes                                | The operator public key (generated as part of the node setup).   |
 | fee   | uint256 | The fee charged by the operator (denominated as ETH per block)        |
-| setPrivate    | boo  | A flag to set the operator to private or public during registration. Calls the [**`setOperatorsPrivateUnchecked`**](ssvnetwork.md#setoperatorsprivateuncheckedoperatorids)function if set to true. |
+| setPrivate    | bool  | A flag to set the operator to private or public during registration. Calls the [**`setOperatorsPrivateUnchecked`**](ssvnetwork.md#setoperatorsprivateuncheckedoperatorids)function if set to true. |
 
 Events:
 
@@ -393,7 +393,10 @@ Events:
 
 #### **`declareOperatorFee(operatorId, operatorFee)`**
 
-Description: Initiates the first step of the operator fee update cycle - declaration of a new fee. [After specified](ssvnetworkviews.md#getoperatorfeeperiods) time window operator will be able to change to the new fee with executeOperatorFee().
+Description: Initiates the first step of the operator fee update cycle - declaration of a new fee. [After specified](ssvnetworkviews.md#getoperatorfeeperiods) time window operator will be able to change to the new fee with executeOperatorFee(). **Will fail** if:
+- the declared fee is the same as the current one
+- the current fee is 0
+- the declared fee increase is higher [than what is allowed](/developers/smart-contracts/ssvnetworkviews#getoperatorfeeincreaselimit)
 
 | **Parameter** | **Type**                   | **Description**                                 |
 | ------------- | -------------------------- | ----------------------------------------------- |
@@ -733,7 +736,7 @@ Events:
 
 #### **`liquidateSSV(owner, operatorIds, cluster)`**
 
-Description: Liquidates an SSV-based cluster sends their balances to the msg.sender (the Liquidator), **will fail** if the cluster is not liquidatable (see isLiquidatable()).
+Description: Liquidates an SSV-based cluster sends their balances to the msg.sender (the Liquidator), **will fail** if the cluster is not liquidatable (see isLiquidatable()). Self-liquidation (caller == owner) is always allowed regardless of liquidation threshold.
 
 | **Parameter** | **Type**  | **Description**                                                                                                                                                                                           |
 | ------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

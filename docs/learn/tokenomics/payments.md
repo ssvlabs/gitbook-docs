@@ -5,7 +5,7 @@ sidebar_position: 2
 
 # Payments
 
-Payments are facilitated by maintaining a cluster balance in the SSV network smart contract, which keeps a balance sheet for all clusters. 
+Payments are facilitated by maintaining a cluster balance in the SSV network smart contract, which keeps a balance sheet for all clusters. All payments are facilitated in native ETH.
 
 Clusters are created when registering validators to the network and are accessible and owned by the wallet address that transmitted the transaction. This means that the address is the cluster's owner, enabling it to manage its balance and its chosen validators/operators.
 

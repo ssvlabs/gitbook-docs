@@ -3,83 +3,69 @@ description: In case you don't want to use the SSV Stack automated setup.
 sidebar_position: 7
 ---
 
+import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBlock';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 # Manual Node setup
 
 :::info
-This is guide is for advanced users, if you are unsure why you'd want to setup manually — we recommend choosing [automated setup with SSV Node stack](.).
+This is guide is for advanced users, if you are unsure why you'd want to setup manually — we recommend choosing [automated setup with SSV Node stack](/operators/operator-node/node-setup).
 :::
 
 ### Pre-requisites
 
-#### Enable SSH
+#### 1. Enable SSH
 
 You will need to be able to connect to your server:
 
-### SSH Access Options
-
 <details>
 
-<summary>SSH into a local machine</summary>
+<summary>How to SSH into a machine</summary>
 
-[https://docs.ethstaker.cc/ethstaker-knowledge-base/tutorials/connect-via-ssh](https://docs.ethstaker.cc/ethstaker-knowledge-base/tutorials/connect-via-ssh)
+Please refer to this guide from EthStaker community: https://docs.ethstaker.cc/ethstaker-knowledge-base/tutorials/connect-via-ssh
+
+If you're using a Cloud Server, you should use their documentation. E.g. guide for AWS: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connect-linux-inst-ssh.html
 
 </details>
 
-<details>
-
-<summary>SSH into a Cloud server (e.g. AWS)</summary>
-
-If you have generated an SSH key for your server or downloaded one from your Cloud hosting provider (e.g. AWS)
-
-**MacOS**
-
-```
-cd ./{path to the folder to which the key pair file was downloaded}
-
-chmod 400 {key pair file name}
-
-ssh -i {key pair file name} ubuntu@{instance public IP you took from AWS}
-
-```
-
-**Windows**
-
-```
-cd /{path to the folder to which the key pair file was downloaded}
-
-ssh -i {key pair file name} ubuntu@{instance public IP you took from AWS}
-```
-
-</details>
+#### 2. Install Docker
 
 <details>
 
-<summary>Docker (Optional)</summary>
+<summary>Docker</summary>
 
-**If you choose to use Docker** to launch the SSV Node, another fundamental pre-requisite is to have Docker installed on the machine hosting the SSV Node. In order to do so, please refer to [the official Docker documentation](https://docs.docker.com/engine/install/), and find the option that better fits your server configuration.
+In order to do so, please refer to [the official Docker documentation](https://docs.docker.com/engine/install/), and find the option that better fits your server configuration.
 
 ***
 
-**NOTE:**
-
-In order to run the SSV Node, in a server, only Docker engine is necessary, you can still go ahead and install Docker Desktop, but it will not be necessary unless you plan to use the Graphical Interface.
+Docker needs `sudo`, which can be annoying to type every time. You can give Docker the needed permissions once and for all, if you wish [https://stackoverflow.com/questions/48957195/how-to-fix-docker-got-permission-denied-issue](https://stackoverflow.com/questions/48957195/how-to-fix-docker-got-permission-denied-issue)
 
 </details>
 
+#### 3. Install Git
+
 <details>
 
-<summary>Golang (optional)</summary>
+<summary>Git</summary>
+
+On Debian/Ubuntu simply run `apt-get install git` in your command line. 
+
+If your machine is using another Linux distribution, please use the [official Git documentation](https://git-scm.com/downloads/linux), and find the option that better fits your server configuration.
+
+</details>
+
+#### 4. *Install Golang (optional)*
+
+<details>
+
+<summary>Golang</summary>
 
 If you choose to build the project from source, you will need to have Go programming language binaries installed.
 
 For more information, you can refer to the [official Go installation instruction](https://go.dev/doc/install).
 
 </details>
-
-Once you're connected and have the command line opened, the next steps describe how to configure and run the SSV Node to create keys and start your SSV Node. If you run into some issues while running the node, try and [take a look at the troubleshooting page](/operators/operator-node/maintenance/troubleshooting).
 
 ### Generate Operator Keys (Encrypted)
 
@@ -89,19 +75,35 @@ The most secure way to run your Operator node, is to generate an Encrypted key p
 
 You will need to create a file (named `password` in this example) containing the password you chose for your Secret Key:
 
-```bash
-echo "<MY_OPERATOR_PASSWORD>" >> password
-```
+<InlineEditableCodeBlock
+  language="sh"
+  template={
+  `
+  echo {{MY_OPERATOR_PASSWORD}} >> password
+  `
+  }
+  variables={{
+    MY_OPERATOR_PASSWORD: 'YOUR_PASSWORD'
+  }}
+/>
 
 #### Key pair generation and encryption
 
 <Tabs>
   <TabItem value="docker-run" label="docker run">
-  The node Docker image will generate keys for you, then encrypt them with a password you provide, using the following command:
-  ```bash
-  docker run --name ssv-node-key-generation -v <PATH_TO_PASSWORD>:/password -it "ssvlabs/ssv-node:latest" /go/bin/ssvnode generate-operator-keys --password-file=password && docker cp ssv-node-key-generation:/encrypted_private_key.json ./encrypted_private_key.json && docker rm ssv-node-key-generation
-  ```
-  `<PATH_TO_PASSWORD>` should be changed to a path to file, e.g. `/path/to/password`
+  The node Docker image will generate keys for you, then encrypt them with a password you provide, using the following command. Make sure to edit `./path_to_password` with the actual path you have:
+  <InlineEditableCodeBlock
+    language="sh"
+    template={
+    `
+    docker run --name ssv-node-key-generation -v {{PATH_TO_PASSWORD}}:/password -it "ssvlabs/ssv-node:latest" /go/bin/ssvnode generate-operator-keys --password-file=password && docker cp ssv-node-key-generation:/encrypted_private_key.json ./encrypted_private_key.json && docker rm ssv-node-key-generation
+    `
+    }
+    variables={{
+      PATH_TO_PASSWORD: './path_to_password'
+    }}
+  />
+
   </TabItem>
   <TabItem value="build-source" label="Build from Source">
   A prerequisite for this is to have `go` version 1.22 installed on the system, and an optional requirement is to have the `make` tool installed as well (alternatively you could run the corresponding command defined in the `Makefile`).
@@ -116,27 +118,37 @@ echo "<MY_OPERATOR_PASSWORD>" >> password
   make build
   ```
   ##### Generate keys
-  The node binary will generate keys for you, then encrypt them with a password you provide, using the following command:
-  ```bash
-  ./bin/ssvnode generate-operator-keys --password-file=<PATH_TO_PASSWORD_FILE>
-  ```
+  The node binary will generate keys for you, then encrypt them with a password you provide, using the following command. Make sure to edit `./path_to_password` with the actual path to your password file:
+    <InlineEditableCodeBlock
+    language="sh"
+    template={
+    `
+    ./bin/ssvnode generate-operator-keys --password-file={{PATH_TO_PASSWORD}}
+    `
+    }
+    variables={{
+      PATH_TO_PASSWORD: './path_to_password'
+    }}
+  />
   </TabItem>
 </Tabs>  
 
+  :::danger Create Backups!
+  Create backups of your `encrypted_private_key.json` and `password` files on a separate device. If any of these files are lost, you will not be able to access your operator ever again.
+  :::
 
 ### Create Configuration File
 
-Copy the following `config.yaml` file, just be sure to replace all the placeholders (`ETH2_NODE`, `ETH1_WEBSOCKET_ADDRESS`, `OPERATOR_SECRET_KEY`, etc.) with actual values.
+Copy the following `config.yaml` file, just be sure to replace all the placeholders with the actual values. The essential values are highlighted and are editable.
 
-In particular, substitute `ENCRYPTED_PRIVATE_KEY_JSON` with the operator encrypted private key file generated above(e.g. `encrypted_private_key.json`) and `PASSWORD_FILE` with the file containing the password used to generate the encrypted key itself.
-
-:::info
-Both `BeaconNodeAddr` and `ETH1Addr` support multiple endpoints. Separate them with `;`.
-
-Example: `BeaconNodeAddr: http://1.2.3.4:5052;http://1.2.3.4:5053`
+:::warning
+Make sure your `ETH1Addr` endpoint is communicating **over WebSocket** and **not over HTTP**.
 :::
 
-```yaml
+<InlineEditableCodeBlock
+  language="yaml"
+  template={
+  `
 global:
   # Console output log level 
   LogLevel: info
@@ -155,10 +167,8 @@ db:
 
 ssv:
   # The SSV network to join to
-  # Mainnet = Network: mainnet (default)
-  # Hoodi = Network: hoodi
-  # Sepolia = Network: sepolia
-  Network: mainnet
+  # Available options are mainnet and hoodi
+  Network: {{NETWORK}}
   
   ValidatorOptions:
     # Block proposals are by default controlled by Beacon Node.
@@ -167,20 +177,18 @@ ssv:
 
 eth2:
   # HTTP URL of the Beacon node to connect to.
-  BeaconNodeAddr: <ETH2_NODE> # e.g. http://example.url:5052
+  BeaconNodeAddr: {{ETH2_NODE}} 
   # If you want to use multiple endpoints you can divide them with ;
   # e.g. http://example.url:5052;http://example.url:5053
   
-  # Enables improved attestation accuracy by scoring responses from multiple Beacon nodes.
+  # Both enable improved attestation accuracy from multiple Beacon nodes.
   # Will have no effect with only 1 endpoint.
   WithWeightedAttestationData: false
-
-  #Enables parallel Attestation and Sync Committee submissions to multiple Beacon nodes.
   WithParallelSubmissions: false
 
 eth1:
   # WebSocket URL of the Eth1 node to connect to.
-  ETH1Addr: <ETH1_WEBSOCKET_ADDRESS> # e.g. ws://example.url:8546/ws
+  ETH1Addr: {{ETH1_WEBSOCKET_ADDRESS}}
   # If you want to use multiple endpoints you can divide them with ;
   # e.g. ws://example.url:8546/ws;ws://example.url:8547/ws
 
@@ -193,8 +201,8 @@ p2p:
   # UdpPort: 12001
 
 KeyStore:
-  PrivateKeyFile: <ENCRYPTED_PRIVATE_KEY_JSON> # e.g. ./encrypted_private_key.json
-  PasswordFile: <PASSWORD_FILE> # e.g. ./password
+  PrivateKeyFile: {{ENCRYPTED_PRIVATE_KEY_JSON}}
+  PasswordFile: {{PASSWORD_FILE}}
 
 # Enables Doppelganger Protection for validators, see https://github.com/ssvlabs/ssv/blob/v2.3.0/doppelganger/README.md
 EnableDoppelgangerProtection: false
@@ -203,11 +211,16 @@ EnableDoppelgangerProtection: false
 MetricsAPIPort: 15000
 # This enables node health endpoint for troubleshooting, see https://docs.ssv.network/operators/operator-node/maintenance/troubleshooting
 SSVAPIPort: 16000
-```
-
-:::warning
-Make sure your `ETH1Addr` endpoint is communicating **over WebSocket** and **not over HTTP** in order to support subscriptions and notifications.
-:::
+  `
+  }
+  variables={{
+    NETWORK: 'mainnet',
+    ETH2_NODE: 'http://example.url:5052',
+    ETH1_WEBSOCKET_ADDRESS: 'ws://example.url:8546/ws',
+    ENCRYPTED_PRIVATE_KEY_JSON: './encrypted_private_key.json',
+    PASSWORD_FILE: './password',
+  }}
+/>
 
 ### Start the Node
 
@@ -218,9 +231,57 @@ This does not increase validator resiliency and **could lead to validator slashi
 :::
 
 <Tabs>
-  <TabItem value="docker-run" label="docker run">
+  <TabItem value="docker-compose" label="docker compose">
+  
+  Here is an example of a `docker-compose.yml` file. Edit the highlighted values according to your setup:
+    <InlineEditableCodeBlock
+    language="yaml"
+    template={
+    `
+    services:
+      ssv:
+        image: ssvlabs/ssv-node:latest
+        ports:
+          - 13001:13001
+          - 12001:12001/udp
+          - 15000:15000
+          - 16000:16000
+        command:
+            make BUILD_PATH="/go/bin/ssvnode" start-node
+        volumes:
+          - {{PATH_TO_CONFIG_YAML_FILE}}:/config/config.yaml
+          - {{PATH_TO_OUTPUT_FOLDER}}:/data
+          - {{PATH_TO_PASSWORD_FILE}}:/password
+          - {{PATH_TO_ENCRYPTED_KEY_FILE}}:/encrypted_private_key.json
+        environment:
+          - CONFIG_PATH=/config/config.yaml
+        container_name: ssv_node
+        restart: unless-stopped
+        networks:
+          - ssv
 
-  To start your node, run the following Docker command in the same folder you created the `config.yaml` file in the previous step:
+    networks:
+      ssv:
+        name: ssv
+        driver: bridge
+    `
+    }
+    variables={{
+      PATH_TO_CONFIG_YAML_FILE: './config.yaml',
+      PATH_TO_OUTPUT_FOLDER: './data',
+      PATH_TO_PASSWORD_FILE: './password',
+      PATH_TO_ENCRYPTED_KEY_FILE: './encrypted_private_key.json',
+    }}
+  />
+
+  - Then run `docker compose up` command from the same directory as your `docker-compose.yml`.
+  - This command will keep the terminal busy, showing the container's logs. It is useful to make sure that the tool start up sequence runs correctly.
+  - If you are sure that the tool works and don't care about the logs, you can use `docker compose up -d`.
+
+  </TabItem>
+    <TabItem value="docker-run" label="docker run">
+
+  To start your node, run the following Docker command in the same folder you created the `config.yaml` file in the previous step. The command assumes you have all of the other files in the same folder:
   ```bash
   docker run --restart unless-stopped --name ssv_node -e \
   CONFIG_PATH=/config.yaml \
@@ -232,45 +293,7 @@ This does not increase validator resiliency and **could lead to validator slashi
   -it "ssvlabs/ssv-node:latest" make BUILD_PATH="/go/bin/ssvnode" start-node
   ```
   * This command will keep the terminal busy, showing the container's logs. It is useful to make sure that the node start up sequence runs correctly.
-  * You can detach the terminal at any time by hitting Ctrl-c key combination, or closing the terminal itself. The node will be stopped, but it will restart automatically, thanks to the `--restart unless-stopped` startup parameter.
   * If you are sure that the node works, and don't care about the logs, you can add the `-d` parameter right after `docker run`.
-
-  </TabItem>
-  <TabItem value="docker-compose" label="docker compose">
-  
-  Here is an example of a docker-compose.yml file, where `<PATH_TO_CONFIG_YAML_FILE>`, `<PATH_TO_PASSWORD_FILE>`, `<PATH_TO_ENCRYPTED_KEY_FILE>` are the paths to the `config.yaml`, `password`, and `encrypted_private_key.json` files you have created in the previous steps:
-  ```yaml
-  services:
-    ssv:
-      image: ssvlabs/ssv-node:latest
-      ports:
-        - 13001:13001
-        - 12001:12001/udp
-        - 15000:15000
-        - 16000:16000
-      command:
-          make BUILD_PATH="/go/bin/ssvnode" start-node
-      volumes:
-        - <PATH_TO_CONFIG_YAML_FILE>:/config/config.yaml
-        - <PATH_TO_OUTPUT_FOLDER>:/data
-        - <PATH_TO_PASSWORD_FILE>:/password
-        - <PATH_TO_ENCRYPTED_KEY_FILE>:/encrypted_private_key.json
-      environment:
-        - CONFIG_PATH=/config/config.yaml
-      container_name: ssv_node
-      restart: unless-stopped
-      networks:
-        - ssv
-
-  networks:
-    ssv:
-      name: ssv
-      driver: bridge
-  ```
-  - Then run `docker compose up` command from the same directory as your `docker-compose.yml`.
-  - This command will keep the terminal busy, showing the container's logs. It is useful to make sure that the tool start up sequence runs correctly.
-  - You can detach the terminal at any time by hitting Ctrl-c key combination, or closing the terminal itself. The tool will be stopped and will restart automatically, thanks to the `restart: "unless-stopped"` startup parameter.
-  - If you are sure that the tool works, and don't care about the logs, you can add the `-d` parameter right after `docker compose up`.
 
   </TabItem>
   <TabItem value="build-source" label="Build from Source">
@@ -292,10 +315,20 @@ This does not increase validator resiliency and **could lead to validator slashi
   git tag
   ```
 
-  And then choose the latest stable version (**change the** `v1.2.3` **to the version you want to use**):
-  ```bash
-  git checkout tags/v1.2.3
-  ```
+  **Change the** `v1.2.3` **to the version you want to use**, you can [browse ssv node releases here](https://github.com/ssvlabs/ssv/releases):
+
+  <InlineEditableCodeBlock
+  language="sh"
+  template={
+  `
+  git checkout tags/{{TAG_VERSION}}
+  `
+  }
+  variables={{
+    TAG_VERSION: 'v1.2.3'
+  }}
+  />
+
 
   #### Build
   To build the SSV with the chosen version run the command:
@@ -314,10 +347,6 @@ This does not increase validator resiliency and **could lead to validator slashi
   :::info pubKey
   Pay close attention to the `pubKey` field, as the name says, it contains the public key, which is needed to [register the Operator on the ssv.network](/operators/operator-management/registration).
   :::
-
-  :::danger Create Backups!
-  Create backups of your `encrypted_private_key.json` and `password` files on a separate device. If any of these files are lost, you will not be able to access your operator ever again.
-  :::
   </TabItem>
 </Tabs>
 
@@ -329,19 +358,31 @@ If you don't want to use the default ports, they can be changed in your `config.
 
 You can also add your `HostAddress` to the config, which is the public static IP address of the machine.
 
-```yaml
-p2p:
-  HostAddress: 206.22.63.189
-  UdpPort: 12001
-  TcpPort: 13001
-```
+<InlineEditableCodeBlock
+  language="yaml"
+  template={
+  `
+  p2p:
+    HostAddress: {{HostAddress}}
+    UdpPort: 12001
+    TcpPort: 13001  `
+  }
+  variables={{
+    HostAddress: '1.2.3.4'
+  }}
+/>
 
 ### Database backups
 SSV's database (folder named `db`) is critical to prevent slashing. Its loss or corruption can lead to double-signing and severe penalties if operation continues.
 
 Be sure to implement a robust backup and recovery strategy for your database(s), it is **crucial** for operators. Failure to maintain database backups can lead to significant financial loss. Operators are responsible for their own database management and protection.
 
-### Other setup options
-1. The same setup can be recreated automatically. The steps are described on the [Node setup page](.).
-2. There is an alternative SSV client called Anchor, developed by Sigma Prime. [Official documentation for Anchor](https://anchor-book.sigmaprime.io/running_node.html) (recommended for Testnet only).
-3. Alternatively, SSV Node setup is also available using [eth-docker](https://eth-docker.net/Support/SSV/) and [Stereum Launcher](https://stereum.net/).
+## What's next?
+
+* You might want to [configure MEV](/operators/operator-node/setup-sidecars/configuring-mev) to increase your rewards for block proposals. 
+
+* You can [enable DKG node](/operators/operator-node/setup-sidecars/enabling-dkg/) to increase your chances of being included in a cluster.
+
+* You might want to learn [how to use your Monitoring stack](/operators/operator-node/monitoring/), to stay on top of your performance.
+
+* If you run into some issues while running the node, try and [take a look at the troubleshooting page](/operators/operator-node/maintenance/troubleshooting).

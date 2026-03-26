@@ -16,9 +16,9 @@ ETH is used to facilitate payments between stakers and SSV node operators to mai
 
 The network uses ETH-based payments for clusters and operators:
 
-* **Clusters pay in ETH** - Deposit ETH to cover operator and network fees
-* **Operators earn in ETH** - Receive ETH payments for managing validators
-* **Network fees in ETH** - A portion of fees flows to the protocol
+* **Clusters** - Deposit ETH to cover operator and network fees
+* **Operators** - Receive ETH payments for managing validators
+* **Network fees** - A portion of ETH fees flows to the [SSV Staking rewards](/ssv-staking)
 
 ![Operators receive ETH payments and generate rewards for stakers. Stakers pay ETH and receive generated rewards in return.](/img/tokenomics-readme-1.png)
 

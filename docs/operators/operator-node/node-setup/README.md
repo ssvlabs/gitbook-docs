@@ -39,38 +39,11 @@ You will need to be able to connect to your server:
 
 <details>
 
-<summary>SSH into a local machine</summary>
+<summary>How to SSH into a machine</summary>
 
-Please refer to this guide from EthStaker community:
+Please refer to this guide from EthStaker community: https://docs.ethstaker.cc/ethstaker-knowledge-base/tutorials/connect-via-ssh
 
-[https://docs.ethstaker.cc/ethstaker-knowledge-base/tutorials/connect-via-ssh](https://docs.ethstaker.cc/ethstaker-knowledge-base/tutorials/connect-via-ssh)
-
-</details>
-
-<details>
-
-<summary>SSH into a Cloud server (e.g. AWS)</summary>
-
-If you have generated an SSH key for your server or downloaded one from your Cloud hosting provider (e.g. AWS)
-
-**Linux / Unix / MacOS**
-
-```
-cd ./{path to the folder to which the key pair file was downloaded}
-
-chmod 400 {key pair file name}
-
-ssh -i {key pair file name} ubuntu@{instance public IP you took from AWS}
-
-```
-
-**Windows**
-
-```
-cd /{path to the folder to which the key pair file was downloaded}
-
-ssh -i {key pair file name} ubuntu@{instance public IP you took from AWS}
-```
+If you're using a Cloud Server, you should use their documentation. E.g. guide for AWS: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connect-linux-inst-ssh.html
 
 </details>
 
@@ -86,12 +59,6 @@ In order to do so, please refer to [the official Docker documentation](https://d
 
 Docker needs `sudo`, which can be annoying to type every time. You can give Docker the needed permissions once and for all, if you wish [https://stackoverflow.com/questions/48957195/how-to-fix-docker-got-permission-denied-issue](https://stackoverflow.com/questions/48957195/how-to-fix-docker-got-permission-denied-issue)
 
-***
-
-**NOTE:**
-
-In order to run the SSV Node, in a server, only Docker engine is necessary, you can still go ahead and install Docker Desktop, but it will not be necessary unless you plan to use the Graphical Interface.
-
 </details>
 
 #### 3. Install Git
@@ -100,15 +67,9 @@ In order to run the SSV Node, in a server, only Docker engine is necessary, you 
 
 <summary>Git</summary>
 
-To install the latest stable version for your release of Debian/Ubuntu run `apt-get install git` in your command line. 
+On Debian/Ubuntu simply run `apt-get install git` in your command line. 
 
 If your machine is using another Linux distribution, please use the [official Git documentation](https://git-scm.com/downloads/linux), and find the option that better fits your server configuration.
-
-***
-
-**NOTE:**
-
-Git is needed to download the SSV Node stack on your machine.
 
 </details>
 
@@ -163,8 +124,7 @@ On the first start the Node will generate a random `password` and encrypted `pri
 
 **If this is done incorrectly**, new keys will be automatically generated, and you will see a message in the console indicating this.
 
-
-:::info Backup your files
+:::warning Backup your files
 Both password and private key are needed to run SSV and DKG Nodes. 
 
 **Backup those files** on a separate device, if any of the two are lost — you will lose access to your operator without a chance to recover.
@@ -175,7 +135,6 @@ Both password and private key are needed to run SSV and DKG Nodes.
 We recommend using the default ports for ease of the setup. 
 
 If you wish to change any of the ports — change them in both `ssv.env` and `docker-compose.yaml`, then get [back to exposing those ports in your firewall](#4-adjust-firewall).
-
 
 Changes to those files will be applied after a restart of the node (_if you already started your node_).
 
@@ -195,13 +154,6 @@ docker compose up -d
 You can also run the stack with DKG, simplifying the setup process. 
 
 The instructions are on the ["Enablind DKG" section](/operators/operator-node/setup-sidecars/enabling-dkg/).
-
-
-## Other setup options
-
-1. The same setup can be recreated manually. The steps are described on the [Manual Node setup page](./manual-setup).
-2. There is an alternative SSV client called Anchor, developed by Sigma Prime. [Official documentation for Anchor](https://anchor-book.sigmaprime.io/running_node.html) (recommended for Testnet only).
-3. Alternatively, SSV Node setup is also available using [eth-docker](https://eth-docker.net/Support/SSV/) and [Stereum Launcher](https://stereum.net/).
 
 ## Database backups
 SSV's database (folder named `db`) is critical to prevent slashing. Its loss or corruption can lead to double-signing and severe penalties if operation continues.

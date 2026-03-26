@@ -10,9 +10,9 @@ sidebar_position: 4
 Validators must choose to opt into these services; running Commit-Boost does not automatically require them to offer all or any of the available services through the Signer. The choice is always up to the validator.
 
 It's important to note that you can run Commit-Boost in a few different ways:
-- For MEV only: This setup is similar to how validators currently run MEV-Boost. With Commit-Boost and the PBS (Proposer-Builder Separation) service, validators get more tools and improved performance.
-- For MEV + Another Service: In this case, validators participate in MEV but also opt into another service, such as preconfirmations through ETHGas.
-- For MEV + Multiple Services: When validators run Commit-Boost, they choose which services to offer. For example, if two services are available, they could choose to use Commit-Boost for MEV + Service 1 + Service 2, or they might only choose to run it for MEV + Service 1.
+- **For MEV only:** This setup is similar to how validators currently run MEV-Boost. With Commit-Boost and the PBS (Proposer-Builder Separation) service, validators get more tools and improved performance.
+- **For MEV + Another Service:** In this case, validators participate in MEV but also opt into another service, such as preconfirmations through ETHGas.
+- **For MEV + Multiple Services:** When validators run Commit-Boost, they choose which services to offer. For example, if two services are available, they could choose to use Commit-Boost for MEV + Service 1 + Service 2, or they might only choose to run it for MEV + Service 1.
 
 Commit-Boost was built by a community of validators, developers, researchers, and other contributors across Ethereum, it's built for Ethereum, by Ethereum. It is supported by a non-profit and is fully open-source and free to use.
 
@@ -48,28 +48,28 @@ The process is best described by the commit-boost team on [their documentation](
 
 To use Commit-Boost for MEV, the client acts very similarly to how validators currently use MEV-Boost. You can choose any MEV-Boost-compatible relays, and the workflow is identical. We also note that Commit-Boost comes with performance  [enhancements](https://github.com/Commit-Boost/commit-boost-client/tree/main/benches/pbs), additional [reporting](https://github.com/Commit-Boost/commit-boost-client/tree/main/crates/metrics) and tools such as the [multiplexer](https://youtu.be/PPWwpPx4it0?si=mcJfGDlozd1AITBj&t=1380) to help validators gain insight and reduce risk. 
 
-### Enable MEV in Beacon Client
+## Enable MEV in Beacon Client
 
-Your Commit-Boost endpoint should be used by Beacon Client in the Builder endpoint variable. Make sure the endpoint and its port are accessible by your Beacon Client.
+Enable MEV by connecting to the [Builders API](https://github.com/ethereum/builder-specs) from your Beacon client.
 
-Follow the setup guidelines for configuring Builder endpoint on your preferred client:
+Follow the setup guidelines for configuring MEV on your preferred client:
 
-* [Prysm](https://docs.prylabs.network/docs/advanced/builder)
+* [Prysm](https://www.offchainlabs.com/prysm/docs/configure-prysm/builder/)
 * [Teku](https://docs.teku.consensys.net/how-to/configure/use-proposer-config-file)
-* [Lighthouse](https://lighthouse-book.sigmaprime.io/builders.html?highlight=mev#maximal-extractable-value-mev)
+* [Lighthouse](https://lighthouse-book.sigmaprime.io/advanced_builders.html?highlight=mev#maximal-extractable-value-mev)
 * [Nimbus](https://nimbus.guide/external-block-builder.html)
-* [Lodestar](https://chainsafe.github.io/lodestar/usage/mev-integration/)
+* [Lodestar](https://chainsafe.github.io/lodestar/run/beacon-management/mev-and-builder-integration)
 
-### Enable MEV in SSV node
+## Enable MEV in SSV Node
 
-Builder proposals are managed by Beacon Client. So once you've done the previous step, your SSV node will collaborate with Commit-Boost relays.
+Builder proposals are managed by Beacon Client. So once you've done the previous step, your SSV node will collaborate with MEV searchers.
 
 ### Using Commit-Boost for Other Services (e.g. Preconfirmations)
 
-:::warning Potential Slashing
+:::warning Potential Slashing Warning
 **If you have a commitment with a collateral**  - only use commit-boost when managing all nodes in the cluster. 
 
-If any of the nodes in a cluster will not follow your commitment, your collateral will be slashed.
+If any of the nodes in a cluster will not follow your commitment, your collateral will be slashed. As an individual operator, you can always choose to [use regular MEV Boost](./configuring-mev).
 :::
 
 Without completing this step, you will be using Commit-Boost similarly to how MEV-Boost is used, only benefiting from the additional tooling and performance of Commit-Boost.
@@ -84,30 +84,6 @@ Once again, **only commit when you are managing all operators in a cluster**, ot
 
 ## Showcase Supported Relays
 
-It's crucial for the network to display the relays supported by operators. The availability of this information aids the network's stability by enabling stakers to use it when considering how to form their clusters, thereby preventing the problems highlighted earlier. Additionally, this practice enhances the operator's likelihood of being selected by stakers.
+It's crucial for the network to display the relays supported by operators. The availability of this information aids the network's stability by enabling stakers to use it when considering how to form their clusters, thereby preventing the problems highlighted earlier. **Additionally, this practice enhances the operator's likelihood of being selected by stakers**.
 
-### How to show supported relays in operator metadata
-
-1. Head over to the [Operators Dashboard](https://app.ssv.network/operators) in the SSV webapp:
-
-![Operators Dashboard](/img/configure-mev-1.avif)
-
-2. Navigate to the operator page and click the Edit Details:
-
-![Operator Page](/img/configure-mev-2.avif)
-
-3. Choose from the "MEV relays" list and click Update when done.
-
-![Edit Metadata Interface](/img/configure-mev-3.avif)
-
-4. Sign the signature request from the Web3 wallet used to sign-in (Metamask, in this case). This is needed to confirm ownership, it is not an actual on-chain transaction (no gas fees required).
-
-<div style={{ display: 'flex', justifyContent: 'center' }}>
-  <img 
-    src="/img/configure-mev-4.png" 
-    alt="Signature Request" 
-    style={{ width: '50%', maxWidth: '500px' }}
-  />
-</div>
-
-5. Success! The new operator metadata should be set and will be visible to everyone in the network.
+Follow ["How to update Operator Metadata" Guide](/operators/operator-management/setting-operator-metadata) to showcase supported relays.

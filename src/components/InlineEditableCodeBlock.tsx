@@ -3,25 +3,9 @@ import { Highlight, type Language } from 'prism-react-renderer';
 import { usePrismTheme } from '@docusaurus/theme-common';
 
 interface InlineEditableCodeBlockProps {
-  /**
-   * Code template, e.g.
-   * 'address: {{host}}:{{port}}\ncluster: {{cluster}}'
-   */
   template: string;
-
-  /**
-   * Default values for variables, e.g.
-   * { host: 'example.teleport.sh', port: '443', cluster: 'my-cluster' }
-   */
   variables: Record<string, string>;
-
-  /**
-   * Prism language id, e.g. "yaml", "bash", "json".
-   * Controls syntax highlighting.
-   */
   language?: string;
-
-  /** Whether to show the "Copy" button (default: true) */
   showCopyButton?: boolean;
 }
 
@@ -34,10 +18,12 @@ export default function InlineEditableCodeBlock({
   language = 'bash',
   showCopyButton = true,
 }: InlineEditableCodeBlockProps) {
-    const prismTheme = usePrismTheme();
-    const varRefs = useRef<Record<string, HTMLSpanElement | null>>({});
-    const normalizedTemplate = template.trim();     // Normalize template: trim leading/trailing whitespace safely
-    const getVarValue = (name: string) => {
+  const prismTheme = usePrismTheme();
+  const varRefs = useRef<Record<string, HTMLSpanElement | null>>({});
+
+  const normalizedTemplate = template.trim();
+
+  const getVarValue = (name: string) => {
     const el = varRefs.current[name];
     const raw = el?.innerText ?? '';
     const trimmed = raw.trim();
@@ -46,7 +32,7 @@ export default function InlineEditableCodeBlock({
   };
 
   const buildCodeForCopy = () =>
-    normalizedTemplate.replace(/{{\s*([a-zA-Z0-9_]+)\s*}}/g, (match, varName) =>
+    normalizedTemplate.replace(/{{\s*([a-zA-Z0-9_]+)\s*}}/g, (_match, varName) =>
       getVarValue(varName),
     );
 
@@ -59,17 +45,38 @@ export default function InlineEditableCodeBlock({
     }
   };
 
-  // For syntax highlighting, replace placeholders with sentinel tokens
   const codeForHighlight = normalizedTemplate.replace(
     /{{\s*([a-zA-Z0-9_]+)\s*}}/g,
-    (match, varName) => `${VAR_PREFIX}${varName}${VAR_SUFFIX}`,
+    (_match, varName) => `${VAR_PREFIX}${varName}${VAR_SUFFIX}`,
   );
+
+  const focusVariableToEnd = (name: string) => {
+    const el = varRefs.current[name];
+    if (!el) return;
+
+    el.focus();
+
+    const selection = window.getSelection();
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    range.collapse(false);
+    selection?.removeAllRanges();
+    selection?.addRange(range);
+  };
 
   const renderTokenWithVariables = (tokenProps: {
     children: React.ReactNode;
+    style?: React.CSSProperties;
+    className?: string;
     [key: string]: any;
   }) => {
-    const { children, ...rest } = tokenProps;
+    const {
+      children,
+      style: tokenStyle,
+      className: tokenClassName,
+      ...rest
+    } = tokenProps;
+
     const text = String(children);
     const parts: React.ReactNode[] = [];
 
@@ -85,11 +92,15 @@ export default function InlineEditableCodeBlock({
       const [fullMatch, varName] = match;
       const matchIndex = match.index;
 
-      // Normal text before the placeholder
       if (matchIndex > lastIndex) {
         const before = text.slice(lastIndex, matchIndex);
         parts.push(
-          <span key={`${lastIndex}-${matchIndex}`} {...rest}>
+          <span
+            key={`${lastIndex}-${matchIndex}`}
+            {...rest}
+            className={tokenClassName}
+            style={tokenStyle}
+          >
             {before}
           </span>,
         );
@@ -97,48 +108,62 @@ export default function InlineEditableCodeBlock({
 
       const placeholder = variables[varName] ?? varName;
 
-      // Editable variable span
       parts.push(
         <span
           key={`var-${varName}-${matchIndex}`}
-          contentEditable
-          suppressContentEditableWarning
-          ref={(el) => {
-            varRefs.current[varName] = el;
-          }}
-          style={{
-            ...(rest.style || {}),
-            color: '#60A6C4',
-            background: 'var(--ifm-color-emphasis-0)',
-            textDecorationThickness: '1px',
-            outline: 'none',
-            padding: '0 0.15rem',
-            whiteSpace: 'nowrap',
-            cursor: 'text',
-            borderRadius: '3px',
+          className="editable-code-var-wrapper"
+          data-variable-name={varName}
+          onClick={(e) => {
+            const target = e.target as HTMLElement;
+            if (target.closest('.editable-code-var')) {
+              return;
+            }
+            focusVariableToEnd(varName);
           }}
         >
-          {placeholder}
+          <span
+            contentEditable
+            suppressContentEditableWarning
+            spellCheck={false}
+            ref={(el) => {
+              varRefs.current[varName] = el;
+            }}
+            className="editable-code-var"
+            data-variable-name={varName}
+          >
+            {placeholder}
+          </span>
+
+          <span
+            contentEditable={false}
+            className="editable-code-var-icon"
+            aria-hidden="true"
+          >
+            ✎
+          </span>
         </span>,
       );
 
       lastIndex = matchIndex + fullMatch.length;
     }
 
-    // Tail after the last placeholder
     if (lastIndex < text.length) {
       const after = text.slice(lastIndex);
       parts.push(
-        <span key={`tail-${lastIndex}`} {...rest}>
+        <span
+          key={`tail-${lastIndex}`}
+          {...rest}
+          className={tokenClassName}
+          style={tokenStyle}
+        >
           {after}
         </span>,
       );
     }
 
-    // If no placeholders, render original token
     if (parts.length === 0) {
       return (
-        <span {...rest}>
+        <span {...rest} className={tokenClassName} style={tokenStyle}>
           {text}
         </span>
       );

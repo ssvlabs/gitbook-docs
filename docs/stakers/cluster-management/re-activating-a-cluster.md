@@ -4,31 +4,31 @@ sidebar_position: 5
 
 # Reactivate a Cluster
 
-### Connect your Web3 wallet to the WebApp
-
 Make sure to connect your Web3 wallet with the WebApp, and that the address corresponds with the one you want to manage your Validators with.
 
-:::info
-**Note:** Your account is associated with your Web3 wallet.
-:::
+1. In the [My Account page](https://app.ssv.network/clusters), **select a _Liquidated cluster_ that needs to be reactivated**.
 
-In the My Account page, select a _Liquidated cluster_ that needs to be reactivated.
+![reactivate-cluster](/img/reactivate-a-cluster-1.png)
 
-![reactivate-cluster](/img/reactivate-a-cluster-1.avif)
+2. In the Cluster page, click on the **Reactivate Cluster** button
 
-In the Cluster page, click on the **Reactivate Cluster** button
+![reactivate-cluster](/img/reactivate-a-cluster-2.png)
 
-![reactivate-cluster](/img/reactivate-a-cluster-2.avif)
+3. **Input Effective Balance** and click "Next". Please note if the actual Effective Balance reported by Oracles is higher than the amount set here, your operational burn rate will increase. 
 
-In the next screen, you'll be asked to choose the cluster runway, which will impact the amount of ETH you will have to deposit to reactivate the cluster.
+![reactivate-cluster](/img/reactivate-a-cluster-3.png)
 
-![reactivate-cluster](/img/reactivate-a-cluster-3.avif)
+4. In the next screen, you'll be asked to **choose the cluster runway**. Selected runway will impact the amount of ETH you will have to deposit to reactivate the cluster. **Click "Reactivate" once the runway is chosen**.
 
-Once you select the runway, click on the _Next_ button. The page will attempt to submit a transaction to the SSV Network smart contract, check your Web3 wallet.
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+  <img 
+    src="/img/reactivate-a-cluster-4.png" 
+    alt="Reactivate a cluster" 
+    style={{ width: '50%', maxWidth: '500px' }}
+  />
+</div>
 
-![reactivate-cluster](/img/reactivate-a-cluster-4.avif)
-
-Now, finalize the validator reactivation by signing the transaction.
+5. Now, finalize the validator reactivation by signing the transaction.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
@@ -38,6 +38,6 @@ Now, finalize the validator reactivation by signing the transaction.
   />
 </div>
 
-You'll be taken back to the Cluster page, where the balance will be updated with the amount of ETH deposited.
+6. You'll be taken back to the Cluster page, where the balance will be updated with the amount of ETH deposited.
 
-![reactivate-cluster](/img/reactivate-a-cluster-6.avif)
+![reactivate-cluster](/img/reactivate-a-cluster-6.png)

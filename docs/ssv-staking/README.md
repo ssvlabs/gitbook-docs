@@ -30,7 +30,9 @@ When clusters pay operator fees and network fees in ETH, a portion of these fees
 <!-- TODO: Add screenshot - cSSV Mechanics -->
 
 ### Key Properties
-cSSV is non-rebasing, meaning your cSSV balance stays constant and does not automatically increase. It is transferable as a standard ERC-20 token and can be moved or used in DeFi. Rewards accrue based on the cSSV balance, so when cSSV is transferred, rewards stop accumulating for the sender. Rewards are calculated based on a reward index that reflects network fee inflows.
+cSSV is non-rebasing, meaning your cSSV balance stays constant and does not automatically increase. Rewards are calculated based on a reward index that reflects network fee inflows.
+
+It is transferable as a standard ERC-20 token and can be moved or used in DeFi. Rewards accrue based on the cSSV balance, so when cSSV is transferred, rewards stop accumulating for the sender. At the moment of cSSV transfer the rewards are settled automatically for both sender and receiver.
 
 ### Rewards flow
 

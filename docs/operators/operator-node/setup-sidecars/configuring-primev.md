@@ -5,8 +5,10 @@ sidebar_position: 3
 
 This guide outlines the necessary steps required to configure MEV-commit within your SSV node to enable operators to participate in MEV and preconfirmations. You can learn more about the concept and technical details on [Primev documentation](https://docs.Primev.xyz/v1.0.0/get-started/welcome-to-Primev). 
 
-:::warning
-You should only participate if you're managing all operators in the cluster. If you will participate without one or many operators in the cluster — your MEV-commit collateral will be slashed. As an individual operator, you can always choose to [use regular MEV Boost](./configuring-mev).
+:::warning Potential Slashing Warning
+**If you have a commitment with a collateral**  - only use Primev when managing all nodes in the cluster. 
+
+If any of the nodes in a cluster will not follow your commitment, your collateral will be slashed. As an individual operator, you can always choose to [use regular MEV Boost](./configuring-mev).
 :::
 
 ## Overview
@@ -15,6 +17,7 @@ To give you a short summary of the steps you'll need to take:
 2. [Choose preconf-compatible relays](#choose-compatible-relays)
 3. [Enable MEV in Beacon Client](#enable-mev-in-beacon-client)
 4. [Register your validator(s) with Primev](#register-your-validator-with-primev)
+5. [Showcase Supported Relays](#showcase-supported-relays)
 
 ## Install MEV Boost client
 
@@ -42,7 +45,7 @@ Builder proposals are managed by Beacon Client. So once you've done the previous
 
 ## Register your validator with Primev
 
-:::info
+:::note
 Without completion of this step you will be practically using MEV Boost without any additional rewards.
 :::
 
@@ -56,30 +59,6 @@ You will need to submit your validators' pubkeys in a `.txt` file, each key on n
 
 ## Showcase Supported Relays
 
-It's crucial for the network to display the relays supported by operators. The availability of this information aids the network's stability by enabling stakers to use it when considering how to form their clusters, thereby preventing the problems highlighted earlier. Additionally, this practice enhances the operator's likelihood of being selected by stakers.
+It's crucial for the network to display the relays supported by operators. The availability of this information aids the network's stability by enabling stakers to use it when considering how to form their clusters, thereby preventing the problems highlighted earlier. **Additionally, this practice enhances the operator's likelihood of being selected by stakers**.
 
-### How to show supported relays in operator metadata
-
-1. Head over to the [Operators Dashboard](https://app.ssv.network/operators) in the SSV webapp:
-
-![Operators Dashboard](/img/configure-mev-1.avif)
-
-2. Navigate to the operator page and click the Edit Details:
-
-![Operator Page](/img/configure-mev-2.avif)
-
-3. Choose from the "MEV relays" list and click Update when done.
-
-![Edit Metadata Interface](/img/configure-mev-3.avif)
-
-4. Sign the signature request from the Web3 wallet used to sign-in (Metamask, in this case). This is needed to confirm ownership, it is not an actual on-chain transaction (no gas fees required).
-
-<div style={{ display: 'flex', justifyContent: 'center' }}>
-  <img 
-    src="/img/configure-mev-4.png" 
-    alt="Signature Request" 
-    style={{ width: '50%', maxWidth: '500px' }}
-  />
-</div>
-
-5. Success! The new operator metadata should be set and will be visible to everyone in the network.
+Follow ["How to update Operator Metadata" Guide](/operators/operator-management/setting-operator-metadata) to showcase supported relays.

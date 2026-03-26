@@ -10,6 +10,7 @@ As an SSV staker, you earn network fees proportional to your share of total stak
 - Can be claimed anytime without affecting your staking position
 - Do not auto-compound, so your cSSV balance stays constant
 - If you transfer cSSV tokens to another wallet recipient earns new rewards from the transfer moment onward
+- Rewards are precised by 100,000 wei. Dust remainder < 100,000 wei stays in the unclaimed rewards.
 
 ## Claiming Process
 

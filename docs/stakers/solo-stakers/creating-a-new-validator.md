@@ -61,8 +61,8 @@ Connect your Web3 wallet with [the SSV WebApp](https://app.ssv.network/). The ad
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
     src="/img/dkg-ceremony-1.png" 
-    alt="Deposit SSV" 
-    style={{ width: '70%'}}
+    alt="Create a new validator" 
+    style={{ width: '60%'}}
   />
 </div>
 
@@ -71,8 +71,8 @@ Connect your Web3 wallet with [the SSV WebApp](https://app.ssv.network/). The ad
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
     src="/img/dkg-ceremony-2.png" 
-    alt="Deposit SSV" 
-    style={{ width: '70%'}}
+    alt="Create a new validator" 
+    style={{ width: '60%'}}
   />
 </div>
 
@@ -85,13 +85,13 @@ Please make sure to use the _Filter_ button to **select DKG-enabled Operators**,
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
     src="/img/dkg-ceremony-3.png" 
-    alt="Deposit SSV" 
+    alt="Create a new validator" 
     style={{ width: '100%'}}
   />
 </div>
 
 :::info Verified Operators
-**Important:** Verified Operators (VOs) are operators that have been granted the **Verified** status by the DAO for completing KYC and providing consistent high-quality service. You can sort the operator list by their daily performance, yearly fee, and # of validators they manage. You can also filter to view only Verified Operators.
+**Important:** [Verified Operators (VOs)](/learn/network-overview/operators/verified-operators) are operators that have been granted the **Verified** status by the DAO for completing KYC and providing consistent high-quality service. You can sort the operator list by their daily performance, yearly fee, and # of validators they manage. You can also filter to view only Verified Operators.
 :::
 
 4. Choose **Offline** option
@@ -100,7 +100,7 @@ DKG Ceremony can only be done via a command on a terminal.
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
     src="/img/dkg-ceremony-4.png" 
-    alt="Deposit SSV" 
+    alt="Create a new validator" 
     style={{ width: '60%'}}
   />
 </div>
@@ -114,8 +114,8 @@ DKG Ceremony can only be done via a command on a terminal.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
-    src="/img/dkg-ceremony-6.png" 
-    alt="Deposit SSV" 
+    src="/img/dkg-ceremony-5.png" 
+    alt="Create a new validator" 
     style={{ width: '80%'}}
   />
 </div>

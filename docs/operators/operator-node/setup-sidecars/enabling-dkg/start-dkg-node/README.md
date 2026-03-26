@@ -3,6 +3,7 @@ title: Start DKG Node
 sidebar_position: 2
 ---
 
+import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBlock';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -42,29 +43,34 @@ ssv-dkg-data
 1 directories, 3 files
 ```
 
-A typical `operator.yaml` configuration file would look like this:
+A typical `operator.yaml` configuration file would look like the example below. You can edit highlighted vaues and copy it locally:
 
-```yaml
-privKey: ./data/encrypted_private_key.json
-privKeyPassword: ./data/password
-operatorID: <YOUR_OPERATOR_ID>
-port: 3030
-logLevel: info
-logFormat: json
-logLevelFormat: capitalColor
-logFilePath: ./data/debug.log
-outputPath: ./data/output
-ethEndpointURL: http://ethnode:8545 #HTTP Address of Execution Node
-# serverTLSCertPath: ./data/ssl/tls.crt #Only enable if manually generated TLS certificate
-# serverTLSKeyPath: ./data/ssl/tls.key #Only enable if manually generated TLS key
-```
-
-:::warning
-DKG v3.0.0 supports Multisig addresses. Confirmation of Multisig addresses is done on Execution layer, so you need to add `ethEndpointURL` to your `operator.yaml` config. Otherwise, you won't be able to participate in DKG ceremonies involving Multisig addresses.
-:::
+<InlineEditableCodeBlock
+  language="yaml"
+  template={
+  `
+  privKey: ./data/encrypted_private_key.json
+  privKeyPassword: ./data/password
+  operatorID: {{YOUR_OPERATOR_ID}}
+  port: 3030
+  logLevel: info
+  logFormat: json
+  logLevelFormat: capitalColor
+  logFilePath: ./data/debug.log
+  outputPath: ./data/output
+  ethEndpointURL: {{ethEndpointURL}} #HTTP Address of Execution Node, needed for Multisig validator owner addresses
+  # serverTLSCertPath: ./data/ssl/tls.crt #Only enable if manually generated TLS certificate
+  # serverTLSKeyPath: ./data/ssl/tls.key #Only enable if manually generated TLS key
+  `
+  }
+  variables={{
+    YOUR_OPERATOR_ID: 'YOUR_OPERATOR_ID',
+    ethEndpointURL: 'http://ethnodeURL:8545'
+  }}
+/>
 
 :::info
-In the config file above, `./data/` represents the container's shared volume created by the `docker` itself with the `-v` or `volumes` option. You don't need to create `data` directory.
+In the config file above, `./data/` represents the container's shared volume created by the `docker` itself with the `-v` or `volumes` option. **You don't need to create `data` directory.**
 :::
 
 ## Start SSV-DKG Node
@@ -73,26 +79,32 @@ In the config file above, `./data/` represents the container's shared volume cre
 <TabItem value="docker-compose">
 To start and manage the DKG tool in the most convenient way, it is advised to use `docker-compose`.
 
-This section assumes that all the necessary files (`encrypted_private_key.json`, `operator.yaml`, `password`) are under the same folder.  Just **make sure to substitute** `<PATH_TO_FOLDER_WITH_CONFIG_FILES>` with the actual folder containing all the files (e.g. `~/ssv-stack/ssv-dkg-data/`).
+This section assumes that all the necessary files (`encrypted_private_key.json`, `operator.yaml`, `password`) are under the same folder. Edit the highlighted value with the actual path:
 
-Below is an example of a docker-compose file:
-
-```yaml
-services:
-  ssv-dkg:
-    image: ssvlabs/ssv-dkg:latest
-    pull_policy: always
-    restart: "unless-stopped"
-    container_name: ssv-dkg
-    volumes:
-      - <PATH_TO_FOLDER_WITH_CONFIG_FILE>:/ssv-dkg/data
-    ports:
-      - 3030:3030/tcp
-    command:
-      ["start-operator", "--configPath", "./data/operator.yaml"]
-    networks:
-      - [local-docker]
-```
+<InlineEditableCodeBlock
+  language="yaml"
+  template={
+  `
+  services:
+    ssv-dkg:
+      image: ssvlabs/ssv-dkg:latest
+      pull_policy: always
+      restart: "unless-stopped"
+      container_name: ssv-dkg
+      volumes:
+        - {{PATH_TO_FOLDER_WITH_CONFIG_FILE}}:/ssv-dkg/data
+      ports:
+        - 3030:3030/tcp
+      command:
+        ["start-operator", "--configPath", "./data/operator.yaml"]
+      networks:
+        - [local-docker]
+  `
+  }
+  variables={{
+    PATH_TO_FOLDER_WITH_CONFIG_FILE: './folder_with_config_file'
+  }}
+/>
 
 You can, of course, change the configuration above to one that suits you better, just be mindful about changing the path references in the docker command **and** in the `operator.yaml` file as well. The two need to be consistent with each other.
 
@@ -101,34 +113,30 @@ In order to launch the container, you would need to run this command:
 ```bash
 docker compose up
 ```
-
-:::info
-This command will keep the terminal busy, showing the container's logs. It is useful to make sure that the tool start up sequence runs correctly.
-
-You can detach the terminal at any time by hitting `Ctrl-c` key combination, or closing the terminal itself. The tool will be stopped, but it will restart automatically, thanks to the `restart: "unless-stopped"` startup parameter.
-
-If you are sure that the tool works and don't care about the logs — you can use `-d` parameter `sudo docker compose up -d`.
-:::
+- This command will keep the terminal busy, showing the container's logs. It is useful to make sure that the tool start up sequence runs correctly.
+- If you are sure that the tool works and don't care about the logs — you can use `docker compose up -d`.
 </TabItem>
 
 <TabItem value="Docker run">
-Under the assumption that all the necessary files (`encrypted_private_key.json`, `operator.yaml`, `password`) are under the same folder (represented below with `<PATH_TO_FOLDER_WITH_CONFIG_FILES>`) you can run the tool using the command below:
+Under the assumption that all the necessary files (`encrypted_private_key.json`, `operator.yaml`, `password`) are under the same folder. Use path to your actual folder in the editable command below:
 
-```bash
-sudo docker run --restart unless-stopped --name ssv-dkg -p 3030:3030 -v <PATH_TO_FOLDER_WITH_CONFIG_FILE>:/ssv-dkg/data -it "ssvlabs/ssv-dkg:latest" start-operator --configPath ./data/operator.yaml
-```
-
-Just **make sure to substitute** `<PATH_TO_FOLDER_WITH_CONFIG_FILES>` with the actual folder containing all the files (e.g. `/home/user/ssv-dkg-data` or `$(pwd)`if you run the command from that directory).
+<InlineEditableCodeBlock
+  language="sh"
+  template={
+  `
+  docker run --restart unless-stopped --name ssv-dkg -p 3030:3030 -v {{PATH_TO_FOLDER_WITH_CONFIG_FILE}}:/ssv-dkg/data -it "ssvlabs/ssv-dkg:latest" start-operator --configPath ./data/operator.yaml
+  `
+  }
+  variables={{
+    PATH_TO_FOLDER_WITH_CONFIG_FILE: './path_to_config_file'
+  }}
+/>
 
 You can, of course, change the configuration above to one that suits you better, just be mindful about changing the path references in the docker command **and** in the `operator.yaml` file as well. The two need to be consistent with each other.
 
-:::info
-This command will keep the terminal busy, showing the container's logs. It is useful to make sure that the tool start up sequence runs correctly.
-
-You can detach the terminal at any time by hitting `Ctrl-c` key combination, or closing the terminal itself. The tool will be stopped, but it will restart automatically, thanks to the `--restart unless-stopped` startup parameter.
+This command will keep the terminal busy, showing the container's logs. It is useful to make sure that the tool start up sequence runs correctly. 
 
 If you are sure that the tool works, and don't care about the logs, you can add the `-d` parameter right after `docker run`.
-:::
 </TabItem>
 
 <TabItem value="Build from Source">
@@ -165,21 +173,30 @@ openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes -keyout "tls.key" -
 
 To run the DKG tool as an operator, you can launch the following command with the appropriate values to each parameter:
 
-```sh
-ssv-dkg start-operator \
-            --privKey ./operator-config/encrypted_private_key.json  \
-            --privKeyPassword ./operator-config/password \
-            --operatorID <YOUR_OPERATOR_ID> \
-            --port 3030 \
-            --logLevel info \
-            --logFormat json \
-            --logLevelFormat capitalColor \
-            --logFilePath ./operator-config/debug.log \
-            --outputPath ./operator-config/output \
-            --serverTLSCertPath ./operator-config/ssl/tls.crt \
-            --serverTLSKeyPath ./operator-config/ssl/tls.key \
-            --ethEndpointURL http://ethnode:8545
-```
+<InlineEditableCodeBlock
+  language="sh"
+  template={
+  `
+  ssv-dkg start-operator \ 
+          --privKey ./operator-config/encrypted_private_key.json  \ 
+          --privKeyPassword ./operator-config/password \ 
+          --operatorID {{YOUR_OPERATOR_ID}} \ 
+          --port 3030 \  
+          --logLevel info \ 
+          --logFormat json \ 
+          --logLevelFormat capitalColor \ 
+          --logFilePath ./operator-config/debug.log \ 
+          --outputPath ./operator-config/output \ 
+          --serverTLSCertPath ./operator-config/ssl/tls.crt \ 
+          --serverTLSKeyPath ./operator-config/ssl/tls.key \ 
+          --ethEndpointURL {{ethEndpointURL}}
+  `
+  }
+  variables={{
+    YOUR_OPERATOR_ID: 'YOUR_OPERATOR_ID',
+    ethEndpointURL: 'http://ethnodeURL:8545'
+  }}
+/>
 
 Here's an explanation of each parameter:
 

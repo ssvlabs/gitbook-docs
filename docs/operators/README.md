@@ -5,7 +5,7 @@ sidebar_position: 1
 
 # Quickstart
 
-Operators provide hardware infrastructure, run the SSV protocol (SSV Node), and are responsible for maintaining the overall health of ssv.network. Operators determine their own fees and are compensated for their integral services to the network by operating and maintaining validators on-behalf of stakers.
+Operators provide hardware infrastructure, run the SSV protocol (SSV Node), and are responsible for maintaining the overall health of ssv.network. Operators determine their own fees and are compensated for their integral services to the network by operating and maintaining validators on-behalf of stakers. [Learn more about how SSV Network works](/learn/network-overview/).
 
 ![Operators receive ETH payments and generate rewards for stakers. Stakers pay ETH and receive generated rewards in return.](/img/tokenomics-readme-1.png)
 

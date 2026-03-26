@@ -96,11 +96,11 @@ Using [Distributed Key Generation](/stakers/tools/ssv-dkg-client/), the SSV prot
 
 ### Liquidation
 
-Liquidation can occur when a staker’s SSV balance drops below the “threshold balance”. (see Liquidation Collateral) This will trigger the validator’s SSV node to terminate services and stop managing the validator.
+Liquidation can occur when a cluster's ETH balance drops below the “threshold balance”. ([see Liquidations](/learn/tokenomics/liquidations)) This will trigger the validator’s SSV node to terminate services and stop managing the validator.
 
 ### Liquidation Collateral
 
-Liquidation collateral is a deposit stakers are required to make in SSV tokens to ensure operators are always compensated for their efforts and to keep the network solvent.
+[Liquidation collateral](/learn/tokenomics/liquidations#liquidation-collateral) is a deposit stakers are required to make in ETH to ensure operators are always compensated for their efforts and to keep the network solvent.
 
 The collateral amount covers the operator costs for a set number of blocks, known as the “threshold balance”.
 
@@ -122,7 +122,7 @@ These oracles are backed by SSV stakers, who delegate their voting power to thei
 
 ### Operator
 
-Individuals or institutions that provide the hardware infrastructure, run the SSV protocol, and manage validator KeyShares on behalf of users (stakers). Operators collect fees from stakers in SSV tokens in return for operating their validator(s) on ssv.network. Each operator is ranked on a scale of 0-100% by the DAO based on the overall quality of service they provide.
+Individuals or institutions that provide the hardware infrastructure, run the SSV protocol, and manage validator KeyShares on behalf of users (stakers). Operators collect fees from stakers in ETH in return for operating their validator(s) on ssv.network. Each operator is ranked on a scale of 0-100% by the DAO based on the overall quality of service they provide.
 
 ### Proof of Staking
 
@@ -158,7 +158,6 @@ The SSV Node software maintain peer-to-peer connections with other Nodes to hand
 ssv.network allows access to a decentralized ETH staking infrastructure with SSV token as the protocol's native token. It has 4 main purposes:
 
 * **Governance** – Submitting votes and voting on DAO proposals
-* **Payments** – The network receives fees paid in ETH by clusters
 * **Grants** – DAO funding for developers and contributors helping to grow the network
 * **Staking** – The oracle infrastructure is supported through SSV staking, which enables the delegation of voting power to a chosen oracle.
 
