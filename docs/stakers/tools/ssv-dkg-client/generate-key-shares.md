@@ -3,33 +3,37 @@ sidebar_label: 'Generate Key Shares'
 sidebar_position: 4
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
-# How to Start Decentralized Key Generation Ceremony
+# Generate Key Shares
 
 :::warning
-A new major version of the `ssv-dkg` tool has been released. The version tagged `v3.0.0` represents a major milestone that introduces new features, fixes, and legacy-breaking changes.
-
-For this reason, it is strongly advised to upgrade, making sure to use the latest image or source code available.
+Use the latest `ssv-dkg` release. Version `v3.0.0` introduced major changes, fixes, and breaking updates.
 :::
 
-The previous two sections have clarified where to source the necessary operator information, and the available options to configure and run the DKG tool.
+Use this page when you want to start a new DKG ceremony and generate validator key shares.
 
-This page covers the feature of the  `ssv-dkg` tool that allows users to generate new Key Shares through a DKG ceremony.
+## Before you begin
 
-To initiate a DKG ceremony, you need to use the `init` option. Below, an example of a command using Docker, using a YAML file (simplest, most convenient option):
+Make sure you already have:
+- the selected operator IDs and operator information file
+- the required command or YAML configuration details from [Commands and Config](/stakers/tools/ssv-dkg-client/commands-and-config)
+- a machine with Docker installed, if you plan to use the Docker flow
+
+If you have not prepared the operator information yet, go back to [Operators Data](operators-data).
+
+## Run the `init` command
+
+To start a DKG ceremony, use the `init` command. Example with Docker:
 
 ```bash
 docker run --rm -v <PATH_TO_FOLDER_WITH_CONFIG_FILES>:/ssv-dkg/data/ \
-    -it "ssvlabs/ssv-dkg:latest" init  --configPath ./data/config/config.yaml
+    -it "ssvlabs/ssv-dkg:latest" init --configPath ./data/config/config.yaml
 ```
 
 :::info
-It is advised launching the tool as a Docker image as it is the most convenient way and only requires to have Docker installed. The team builds a Docker image with every release of the tool.
+Running the tool as a Docker image is usually the simplest option and only requires Docker.
 :::
 
-Here's an example of a YAML config file to launch a DKG ceremony:
+## Example YAML configuration
 
 ```yaml
 validators: 10
@@ -42,8 +46,13 @@ network: "hoodi"
 operatorsInfoPath: /data/initiator/operators_info.json
 ```
 
-* For more information on the YAML file configuration, and how to provide it to the tool, [please refer to this section](/stakers/tools/ssv-dkg-client/commands-and-config). Just remember that the path to the config file needs to be provided via the `--configPath` flag
-* Alternatively, the tool can be launched as a binary executable. For more information, please [refer to the appropriate section of this page](/stakers/tools/ssv-dkg-client/commands-and-config)
-* For the reference of command line flags, [please refer to this section](/stakers/tools/ssv-dkg-client/commands-and-config), instead
+For more detail:
+- see [Commands and Config](/stakers/tools/ssv-dkg-client/commands-and-config) for YAML configuration and the `--configPath` flag
+- see the same page for the binary flow if you do not want to use Docker
+- see the same page for the full list of command-line flags
 
-For more information about the output of a DKG ceremony, and what each file does, what you should use it for, please refer to the [Ceremony Output Summary page](ceremony-output-summary).
+## Output and next step
+
+After a successful ceremony, the tool writes a `ceremony-...` output folder with deposit data, key shares, and proof files.
+
+Review [Ceremony Output Summary](ceremony-output-summary) to understand those artifacts before you continue.

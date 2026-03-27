@@ -5,43 +5,42 @@ sidebar_position: 5
 
 # Update Owner Nonce in Key Shares
 
-The shares data payload of a `keyshares.json` file contains the shares for each operator, the validator public key, and a signed message, which contains the owner address, and its nonce, to prevent re-entry exploits.
+Use this flow when the key shares themselves are still correct, but the signed owner-and-nonce payload inside `keyshares.json` needs to be regenerated.
 
-Sometimes this message part is source of confusion and mistakes by the users, as they might rely on the wrong data source for the `nonce`, or they may simply initiated the DKG ceremony using the wrong `owner`.
+This is **not** an operator-change flow. It keeps the same operator set and refreshes only the signed metadata portion of the key shares.
 
-In order to fix these kind of issues, the `ssv-dkg` tool offers a `resign` feature, that allows users to regenerate Key Shares with the same operator set, essentially leaving the shares untouched, just refreshing the signed message portion of the shares data.
+## Before you begin
 
-## 1. Select Operators
+Make sure you have:
+- the original `proofs.json` file from the DKG ceremony
+- the operator information used for the validator
+- access to the owner wallet that must sign the update
 
-To select operators and obtain the information necessary for a DKG ceremony, please refer to [this section in the Generate Key Shares guide](./generate-key-shares).
+## 1. Prepare the inputs
 
-## 2. Generate message to be signed
+If you need help preparing operator information, see [Generate Key Shares](./generate-key-shares).
 
-Regenerating Key Shares has important security implications, so to make this procedure safe, it is necessary for the entity initiating it to provide proof that they are the same entity that participated in the initial DKG ceremony.
+## 2. Generate the message to sign
 
-Luckily, such proof takes the form of a `proofs.json` file which is part of the output of all DKG ceremonies.
+Use `generate-resign-msg` to create the message that the owner wallet must sign.
 
-As an additional form of security, it is required that the initiating entity signs a message containing this proof, with the wallet indicated as the `owner` in the initial ceremony. The `ssv-dkg` tool has a handy command that takes the `proofs.json` file as input, and generates the message to be signed as output.
+### Required inputs
+- `proofs.json`
+- the current or updated `owner` value, if you are changing the owner
 
-To generate the message to be signed, you need to use the `generate-resign-msg` option.  If using docker, you can use this command:
-
-:::warning
-Make sure to add the `proofsFilePath` configuration parameter either via command line flags, or the YAML file config parameter.
-
-Also, if you are changing the owner, remember to provide the new value of the `owner` command line flag, or the YAML file config parameter.
-:::
-
+### Command
 
 ```bash
 docker run --rm -v <PATH_TO_FOLDER_WITH_CONFIG_FILES>:/ssv-dkg/data -it "ssvlabs/ssv-dkg:latest" generate-resign-msg --configPath ./data/config/config.yaml
 ```
 
+:::warning
+Provide `proofsFilePath` in the YAML file or as a command-line flag.
 
-:::info
-It is advised launching the tool as a Docker image as it is the most convenient way and only requires to have Docker installed. The team builds a Docker image with every release of the tool.
+If you are changing the owner address, also provide the new `owner` value.
 :::
 
-Here's an example of a YAML config file to launch a DKG ceremony:
+Example YAML:
 
 ```yaml
 validators: 10
@@ -55,31 +54,40 @@ operatorsInfoPath: /data/initiator/operators_info.json
 proofsFilePath: ./output/ceremony-2024-11-18--16-04-55.529/proofs.json
 ```
 
-* For more information on the YAML file configuration, and how to provide it to the tool, [please refer to this section (Additional flag for generate-resign-msg)](/stakers/tools/ssv-dkg-client/commands-and-config). Make sure to add the `proofsFilePath` argument. Just remember that the path to the config file needs to be provided via the `--configPath` flag.
-* Alternatively, the tool can be launched as a binary executable. For more information, please [refer to the appropriate section of this page](/stakers/tools/ssv-dkg-client/commands-and-config)
-* For the reference of command line flags, [please refer to this section (Additional flag for generate-resign-msg)](/stakers/tools/ssv-dkg-client/commands-and-config), instead. Remember to add the `proofsFilePath` argument.
+See [Commands and Config](/stakers/tools/ssv-dkg-client/commands-and-config) for YAML, binary, and flag details.
 
-This generated message then needs to be signed by the wallet belonging to the `owner` address specified in the initial ceremony (which has to be the same as the one used during the reshare). This can be done [via etherscan](https://etherscan.io/verifiedSignatures), for example, in case of an EOA wallet. Since it is also possible for multi-sig wallets to be the `owner` address for validators, these will have to [provide a signature based on ERC-1271](https://eips.ethereum.org/EIPS/eip-1271).
+### Sign the generated message
 
-Once the message is signed, the actual ceremony itself will take this as the input, instead.
+Sign the generated message with the owner wallet.
 
-## 3. Start DKG resign ceremony
+- For an EOA, you can use [Etherscan Verified Signatures](https://etherscan.io/verifiedSignatures).
+- For a multisig or smart-contract wallet, provide an [ERC-1271](https://eips.ethereum.org/EIPS/eip-1271) compatible signature.
 
-To initiate the DKG ceremony and regenerate the signed message in the Key Shares, you need to use the `resign` option.  If using docker, you can use this command:
+Keep the resulting signature for the next step.
 
-:::warning
-Make sure to add the `proofsFilePath` and `signatures` configuration parameters either via command line flags, or the YAML file
-:::
+## 3. Run the `resign` command
+
+Use the owner signature to regenerate the signed payload in the key shares.
+
+### Required inputs
+- `proofs.json`
+- `signatures`
+- the rest of the DKG config values for the same validator set
+
+### Expected output
+- updated ceremony output with regenerated key shares metadata
+
+### Command
 
 ```bash
 docker run --rm -v <PATH_TO_FOLDER_WITH_CONFIG_FILES>:/ssv-dkg/data -it "ssvlabs/ssv-dkg:latest" resign --configPath ./data/config/config.yaml
 ```
 
-:::info
-It is advised launching the tool as a Docker image as it is the most convenient way and only requires to have Docker installed. The team builds a Docker image with every release of the tool.
+:::warning
+Provide both `proofsFilePath` and `signatures` in the YAML file or as command-line flags.
 :::
 
-Here's an example of a YAML config file to launch a DKG ceremony:
+Example YAML:
 
 ```yaml
 validators: 10
@@ -94,8 +102,8 @@ proofsFilePath: ./output/ceremony-2024-11-18--16-04-55.529/proofs.json
 signatures: 0eb5bce8a1bf52f106233954b096504c934d08962003c41eff1a29e05ddeeebe34133dd66c7fa9512ae74d3124a9f60ee270f312c08c60512a5009ac9bca78911b
 ```
 
-* For more information on the YAML file configuration, and how to provide it to the tool, [please refer to this section (Additional flag for resign command)](/stakers/tools/ssv-dkg-client/commands-and-config). Make sure to add the `proofsFilePath` and `signatures` arguments. Just remember that the path to the config file needs to be provided via the `--configPath` flag.
-* Alternatively, the tool can be launched as a binary executable. For more information, please [refer to the appropriate section of this page](/stakers/tools/ssv-dkg-client/commands-and-config)
-* For the reference of command line flags, [please refer to this section (Additional flag for resign command)](/stakers/tools/ssv-dkg-client/commands-and-config), instead. Remember to add the `proofsFilePath` and `signatures` arguments.
+## 4. Review the output and continue
 
-For more information about the output of a DKG ceremony, and what each file does, what you should use it for, please refer to the [Ceremony Output Summary page](ceremony-output-summary).
+After the command succeeds, review the generated files and use the updated `keyshares.json` in the next step that required the corrected owner-and-nonce payload.
+
+For output details, see [Ceremony Output Summary](ceremony-output-summary).

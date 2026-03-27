@@ -6,57 +6,73 @@ sidebar_position: 4
 # Register Validators
 
 ## Prerequisites
-Before registering validators, make sure you are fully prepared:
-- [**Ensure sufficient funds**](calculate-costs) in your wallet to cover validator fees + collateral.
-- Gather your **operator IDs** obtained during operator registration.
-- Verify your keyshare file.
-- **Turn off** previous validator setup.
-:::danger Slashing Warning
-Before registering validators, make sure the previous validator setup is down . Wait for 2–3 epochs to confirm there are **no successful attestations** before proceeding.
+
+Before you register validators, make sure you have:
+- enough ETH in the owner wallet to cover fees, collateral, and gas; see [Calculate Costs](calculate-costs)
+- the operator IDs for the selected operator set
+- the correct `keyshares.json` file
+- your previous validator setup turned off
+
+:::danger Slashing warning
+Before you register validators, stop the previous validator setup and wait 2-3 epochs to confirm there are no successful attestations. Registering while another setup is still active can cause slashing.
 :::
 
-## Register Validators
-#### Add a Cluster
-- Navigate to the [SSV Webapp](http://app.ssv.network).
-- **Connect your wallet** → **My Account** → **Validators** → **Add Cluster**.
-- On subsequent registration → **Open your existing cluster** → **Add Validator**.
+## Register validators
 
-#### Upload Keyshares & Bulk Register
-- Select **“I already have key shares”**.
-- Upload your keyshares file.
-  - The Web App supports **≤ 80 validators per registration**. You will **re-upload the same keyshares file** until all validators are registered:
-  - 500 validators → **7 registration batches** (6 × 80 + 1 × 20).
-  - 1,000 validators → **13 registration batches** (12 × 80 + 1 × 40).
-- Confirm **operator IDs match** your recorded values.
-- Check the **validator counts** during each registration.
-- Approve funding and register validators batch.
+#### 1. Open the Web App
 
+1. Go to the [SSV Web App](https://app.ssv.network).
+2. Connect your wallet.
+3. For a new cluster, go to **My Account** → **Validators** → **Add Cluster**.
+4. For an existing cluster, open the cluster and click **Add Validator**.
 
-#### Verify First Batch
-After registering the first 80 validators, pause and confirm that:
-- Validators have resumed attesting.
-- Only continue with the remaining uploads once the first batch is healthy.
-- No issues are shown in monitoring tools.
+#### 2. Upload key shares
 
+1. Select **I already have key shares**.
+2. Upload your key shares file.
+3. Confirm that the operator IDs match your recorded values.
+4. Check the validator count before you continue.
 
-#### Repeat Until Complete
-- Continue until all validators are registered.
-- After completion, click “Manage Validators” to review your setup
+The Web App supports up to **80 validators per registration transaction**. If your file includes more than 80 validators, upload the same file again in multiple batches until all validators are registered.
 
-## Set the Fee Recipient Address
-By default, your own address will be set as Fee Recipient for block proposals. 
+- **500 validators** = 7 batches total (6 × 80 and 1 × 20)
+- **1,000 validators** = 13 batches total (12 × 80 and 1 × 40)
 
-Depending on your operations and off-chain arrangements, you might need to change that address. Use the [SSV Docs guide to change the Fee Recipient](/stakers/cluster-management/setting-fee-recipient-address).
+#### 3. Fund and register the first batch
 
-## Monitor Validators
-Once onboarding is complete, monitor validator performance and cluster health:
+Approve the ETH funding amount and sign the registration transaction for the first batch.
+
+#### 4. Verify the first batch before continuing
+
+After the first 80 validators are registered, pause and confirm that:
+- the validators started attesting again
+- no unexpected errors appear in your monitoring tools
+- the operator set, validator count, and cluster funding look correct
+
+This check helps you catch a bad file, wrong operator IDs, or an operational issue before you submit the remaining batches.
+
+#### 5. Repeat until all validators are registered
+
+Continue uploading and registering batches until the full set is complete. When you are done, click **Manage Validators** to review the final state.
+
+## Set the fee recipient address
+
+By default, the owner address receives execution-layer rewards from block proposals.
+
+If you need a different destination address, follow [Set Fee Recipient](/stakers/cluster-management/setting-fee-recipient-address).
+
+## Monitor validators
+
+After onboarding, monitor validator performance and cluster health:
 - [SSV Explorer](https://explorer.ssv.network/mainnet/overview)
 - [MonitorSSV](https://monitorssv.xyz/)
+
 :::info Note
 Attestations may take up to 3 epochs to appear after registration.
 :::
 
 ## Next Steps
-Congratulations! Your validators were migrated successfully 🥳.
 
-You can check out [**Post-Onboarding steps**](/stakers/validator-onboarding/post-onboarding) to ensure smooth long-term operations.
+Your validators are now registered on SSV Network.
+
+Continue with [Post-Onboarding Checks](/stakers/validator-onboarding/post-onboarding).

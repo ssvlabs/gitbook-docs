@@ -3,60 +3,59 @@ description: Creating a New Validator
 sidebar_position: 1
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 # Creating a New Validator
 
-## Introduction 
+There are two ways to create a validator for SSV Network:
+- [Vanilla key generation](#vanilla-key-generation)
+- [Distributed key generation](#distributed-key-generation)
 
-There are two ways to generate a new Validator:
-
-- [**Vanilla Key Generation**](#vanilla-key-generation)
-
-This way of key generation will result in `keystore` or validator key generation. The upside is increased control, since you will posses the key to your validator(s). This factor also increases chances of key theft, since security management can be tricky and if done incorrectly - can result in lost validator(s).
-
-- [**Distributed Key Generation**](#distributed-key-generation)
-
-This way of key generation will result in a new validator generated and distributed to SSV network operators. Since no validator key is generated in the process, this increases security of the operations. Your owner/withdrawal address will still be the owner of the generated validator(s).
+Use the vanilla flow if you want to generate and hold the validator keystore yourself. Use the DKG flow if you want the validator key to be generated as distributed shares without ever creating the full validator private key in one place.
 
 ## Vanilla Key Generation
 
+This flow generates standard validator files such as `keystore-m...json` and `deposit_data...json`.
+
 ### Prerequisites
 
-* Confidence using the command line, and command line interfaces;
-* ETH (or Hoodi ETH): 32 + ~0.1 for gas fees to activate the validator keys;
-* Web3 wallet address that is secure enough to set as the withdrawal address for your validators.
+- Be comfortable using the command line.
+- Have 32 ETH per validator, plus extra ETH for gas.
+- Prepare a secure Web3 wallet address to use as the withdrawal address.
 
-### Generation Process
+### Generate the validator keys
 
-The best way to generate new validator key is by using Staking Deposit CLI tool. **Follow** [**EthStaker's official documentation**](https://deposit-cli.ethstaker.cc/landing.html) to finish this procedure in a secure way.
+The recommended tool is the Staking Deposit CLI. Follow the [EthStaker Deposit CLI guide](https://deposit-cli.ethstaker.cc/landing.html) and complete the full process in a secure environment.
 
-This process should result in generation of `keystore-m` and `deposit_data` files. Take note of their location, `deposit_data` will be needed during the next step.
+At the end of the flow, you should have:
+- one or more `keystore-m...json` files
+- a `deposit_data...json` file
 
-:::danger Secure Storage
-**Mnemonic phrase and password can be used to generate your validator(s), putting your funds at risk**. 
+Record where these files are stored. You will need the `deposit_data` file in the next step.
 
-Make sure to store the mnemonic phrase and its password in a secure environment. This data cannot be recovered.
+:::danger Secure storage
+Your mnemonic and password can be used to recover the validator keys. If they are exposed, your funds may be at risk.
+
+Store the mnemonic and password securely. They cannot be recovered if lost.
 :::
 
-Now that validator(s) were generated, you can **[Deposit Validator Keys](#deposit-validator-keys) to activate them**.
+When the validator files are ready, continue to [Deposit Validator Keys](#deposit-validator-keys).
 
 ## Distributed Key Generation
 
-Distributed Key Generation (DKG) ceremony described below allows to generate a set of KeyShares by directly communicating with the SSV Operators they have chosen. With this operation, the actual validator key is never created and no one will be able to have the full validator key in its entirety, just its parts, assigned to each chosen Operator.
+The DKG flow creates validator key shares directly with the selected SSV Network operators. The full validator private key is never assembled in one place.
+
+This improves key security, while your owner or withdrawal address still remains the owner of the validator.
 
 ### Prerequisites
 
-* Confidence using the command line, and command line interfaces.
-* ETH (or Hoodi ETH): 32 + ~0.1 for gas fees to activate the validator keys.
-* [Docker installed](https://docs.docker.com/engine/install/) on the computer running the DKG Ceremony.
+- Be comfortable using the command line.
+- Have 32 ETH per validator, plus extra ETH for gas.
+- Install [Docker](https://docs.docker.com/engine/install/) on the machine that will run the DKG ceremony.
 
-### Connect to the [Web App](https://app.ssv.network/)
+### Connect to the Web App
 
-Connect your Web3 wallet with [the SSV WebApp](https://app.ssv.network/). The address should be the one you want to manage your Validators with.
+Connect the Web3 wallet you want to use as the validator owner in the [SSV Web App](https://app.ssv.network).
 
-1. Select **Distribute a Validator** in the main menu.
+1. Select **Distribute a Validator**.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
@@ -66,7 +65,7 @@ Connect your Web3 wallet with [the SSV WebApp](https://app.ssv.network/). The ad
   />
 </div>
 
-2. Select **Generate new key shares**
+2. Select **Generate new key shares**.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
@@ -76,11 +75,9 @@ Connect your Web3 wallet with [the SSV WebApp](https://app.ssv.network/). The ad
   />
 </div>
 
-3. **Select operators**
+3. Select the operators.
 
-Now, select operators to manage your validator. Please note the **Yearly Fee** for the setup you created before hitting the Next button.
-
-Please make sure to use the _Filter_ button to **select DKG-enabled Operators**, like in the screenshot below:
+Review the **Yearly Fee** before you continue. Use the filter to show **DKG-enabled operators**.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
@@ -91,11 +88,12 @@ Please make sure to use the _Filter_ button to **select DKG-enabled Operators**,
 </div>
 
 :::info Verified Operators
-**Important:** [Verified Operators (VOs)](/learn/network-overview/operators/verified-operators) are operators that have been granted the **Verified** status by the DAO for completing KYC and providing consistent high-quality service. You can sort the operator list by their daily performance, yearly fee, and # of validators they manage. You can also filter to view only Verified Operators.
+[Verified Operators (VOs)](/learn/network-overview/operators/verified-operators) are operators that the DAO has marked as **Verified** after KYC and ongoing service review. You can sort and filter the list by performance, yearly fee, validator count, and verified status.
 :::
 
-4. Choose **Offline** option
-DKG Ceremony can only be done via a command on a terminal.
+4. Choose **Offline**.
+
+The DKG ceremony is run from the command line.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
@@ -105,12 +103,12 @@ DKG Ceremony can only be done via a command on a terminal.
   />
 </div>
 
-5. **Key splitting**
+5. Configure the DKG ceremony.
 
-- Select DKG option
-- Choose the # of validators you wish to generate
-- Set and Confirm the Withdrawal Address
-- Copy the command that appeared in the last box
+- Select the **DKG** option.
+- Choose how many validators to generate.
+- Enter and confirm the withdrawal address.
+- Copy the generated command.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
@@ -120,37 +118,43 @@ DKG Ceremony can only be done via a command on a terminal.
   />
 </div>
 
-Paste the copied command in your command line and generate the keys. Several files should be generated and placed in the directory where the command was launched from:
+6. Run the command.
 
-* `deposit-[validator_pubkey].json` -  this file contains the deposit data necessary activate the validator
-* `keyshares-[validator_pubkey].json` - this file contains the keyshares necessary to [register the validator on the ssv.network](distributing-a-validator)
+Paste the command into your terminal. After a successful ceremony, the tool generates output files in the directory where you ran the command.
 
-6. Following screen will show a checklist of next steps. You can safely close that page, if you can't keep it open.
+Important outputs include:
+- `deposit-[validator_pubkey].json`: deposit data used to activate the validator on Ethereum
+- `keyshares-[validator_pubkey].json`: key shares used to register the validator on SSV Network
 
-Now that validator(s) were generated, you can **[Deposit Validator Keys](#deposit-validator-keys) to activate them**.
+7. Review the next-steps checklist in the Web App.
+
+You can close that page after you have copied the command and confirmed the generated files.
+
+When the validator artifacts are ready, continue to [Deposit Validator Keys](#deposit-validator-keys).
 
 ## Deposit Validator Keys
 
-The simplest way to deposit keys is by using Ethereum Launchpad, links to it are below. **We recommend starting with Testnet** to ensure the process is clear, before using your actual funds:
-- [Hoodi (Testnet) Ethereum Launchpad](https://hoodi.launchpad.ethereum.org/en/overview)
+The simplest way to deposit validator keys is through Ethereum Launchpad. Start on testnet first if you want to rehearse the full process.
+
+- [Hoodi Ethereum Launchpad](https://hoodi.launchpad.ethereum.org/en/overview)
 - [Mainnet Ethereum Launchpad](https://launchpad.ethereum.org/en/overview)
 
-Steps to follow when using the Launchpad:
-1. Read thoroughly each of the advisories and confirm;
-2. Skip choice of Execution client;
-3. Skip choice of Consensus client;
-4. Provide your withdrawal address;
-5. Type the amount of HoodiETH (or ETH) you want to stake;
-6. Skip the rest of the page, press "Continue";
-7. Upload your `deposit_data` file;
-8. Connect your Web3 Wallet;
-9. Read and acknowledge all of the associated risks warnings;
-10. Proceed with depositing the validators in the list.
+Follow this flow in Launchpad:
+1. Read and accept the warnings.
+2. Skip the execution-client selection.
+3. Skip the consensus-client selection.
+4. Provide the withdrawal address.
+5. Enter the amount of Hoodi ETH or ETH to stake.
+6. Continue to the upload step.
+7. Upload the `deposit_data` file.
+8. Connect your Web3 wallet.
+9. Review and accept the risk warnings.
+10. Submit the deposit transaction for the validators shown.
 
-The deposit process itself will take from hours to days, depending on the [current entry queue](https://www.validatorqueue.com/).
+Activation can take hours or days depending on the [validator entry queue](https://www.validatorqueue.com/).
 
-You can track your validator's activation on the [BeaconCha.in website](https://beaconcha.in/), using your validator's pubkey.
+You can track validator activation on [Beaconcha.in](https://beaconcha.in/) by validator public key.
 
 ## Next Steps
 
-At this point, you should have your validators generated and deposited. To register your validators to SSV Network, follow the [**Onboarding a Validator**](./distributing-a-validator) page.
+At this point, your validators should be generated and deposited. To register them on SSV Network, continue to [Onboarding a Validator](./distributing-a-validator).

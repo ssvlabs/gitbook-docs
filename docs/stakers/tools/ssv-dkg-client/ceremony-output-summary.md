@@ -5,30 +5,45 @@ sidebar_position: 3
 
 # Ceremony Output Summary
 
-After launching the `ssv-dkg` tool as shown above, it will commence a DKG ceremony with the selected operators.
-Following the successful completion of the DKG ceremony, several files have been generated and placed in the directory where the command was launched from:
-```
-ceremony-[timestamp]
-├── 0..[nonce]-0x...[validator public key]
-    ├── deposit_data.json
-    ├── keyshares.json
-    └── proof.json
-├── 0..[nonce]-0x...[validator public key] ...
-    ├── deposit_data.json
-    ├── keyshares.json
-    └── proof.json
-.....
-├── deposit_data.json # aggregated
-├── keyshares.json # aggregated
-└── proofs.json  # aggregated
-```
-### Files:
-* `deposit_data.json` - this file contains the deposit data necessary to perform the transaction on the Deposit contract and activate the validator on the Beacon layer
-* [`keyshares.json`](#keyshares) - this file contains the keyshares necessary to register the validator on the ssv.network
-* [`proof.json`](#proofs) - contains the signed proofs that a DKG client participated in a DKG ceremony, generating key shares for a certain owner. This file is crucial for [resharing your validator to a different set of operators](change-operator-set-and-reshare-validator-key-shares), or to [regenerate the signature portion of key shares](update-owner-nonce-in-key-shares) in the future.
+After the `ssv-dkg` ceremony finishes successfully, the tool creates a `ceremony-[timestamp]` folder in the directory where you ran the command.
 
-### Proofs
-#### An example of `proofs.json` structure:
+Example output:
+
+```text
+ceremony-[timestamp]/
+├── 0..[nonce]-0x...[validator-public-key]/
+│   ├── deposit_data.json
+│   ├── keyshares.json
+│   └── proof.json
+├── 0..[nonce]-0x...[validator-public-key]/
+│   ├── deposit_data.json
+│   ├── keyshares.json
+│   └── proof.json
+├── deposit_data.json
+├── keyshares.json
+└── proofs.json
+```
+
+## What each file is for
+
+- `deposit_data.json`: deposit data used to activate validators on Ethereum
+- `keyshares.json`: key shares used to register validators on SSV Network
+- `proof.json`: the per-validator proof file stored inside each validator subfolder
+- `proofs.json`: the aggregated proof file for the whole ceremony, stored at the top level
+
+## `proof.json` vs `proofs.json`
+
+Both files are valid artifacts, but they are used differently:
+
+- `proof.json` is the proof file for **one validator** inside that validator's own subfolder.
+- `proofs.json` is the **aggregated ceremony-level file** that contains proofs for all validators generated in that ceremony.
+
+When docs or tools refer to retaining `proofs.json`, they usually mean the top-level aggregated file. Keep it safe. You need it later if you want to [reshare to a new operator set](change-operator-set-and-reshare-validator-key-shares) or [update the owner nonce in key shares](update-owner-nonce-in-key-shares).
+
+## Proof structure
+
+Example `proofs.json` structure:
+
 ```json
 [
   {
@@ -47,20 +62,24 @@ ceremony-[timestamp]
 ...
 ]
 ```
-#### Details about the structure:
-- Each validator will have X proofs, where X is the number of operators in the cluster
-- X proofs of a validator are in an array `[]`
-- One file can contain proofs for multiple validators, by having nested arrays `[[],[],[]]`
-- Each proof has 4 parameters:
-  - `validator` - validator's public key, not encrypted
-  - `encrypted_share`- validator share for i-th operator, encrypted by operator's private key
-  - `share_pub` - Public key of i-th operator, not encrypted
-  - `owner` - Address of validator owner, not encrypted
-- Last parameter `signature` is the content of `proof` signed by private key of i-th operator.
 
-#### How `proofs` secure the ceremony for both parties:
-- Owner/initiator can't change their owner address, because the address is part of proof's content and this is signed by operator's private key.
-- Operator signs the proof with their private key and the proof itself has their public key which can be used to verify the signature.
+### Notes about the structure
 
-### Keyshares
-Keyshares file structure can be found [on this separate page](/learn/security/keyshares-structure).
+- Each validator has one proof from each operator in the ceremony.
+- A single aggregated file can include proofs for multiple validators.
+- Each proof includes:
+  - `validator`: the validator public key
+  - `encrypted_share`: the encrypted share for one operator
+  - `share_pub`: the operator public key for that share
+  - `owner`: the validator owner address
+- `signature` is the operator signature over the proof content.
+
+## Why the proofs matter
+
+The proofs protect both sides of the ceremony:
+- the owner cannot change the owner address later without breaking the signed proof
+- the operator signatures can be verified against the included operator public keys
+
+## Key shares
+
+For the `keyshares.json` format, see [Keyshares Structure](/learn/security/keyshares-structure).

@@ -5,37 +5,47 @@ sidebar_position: 2
 
 # Remove Validators
 
-:::warning Please note
-**If the validator is removed before [exiting](exiting-a-validator)**, it can't be exited via SSV Network. In such case, the validator will have to be exited via [Ethereum Launchpad Actions](https://launchpad.ethereum.org/en/validator-actions) or by running a traditional validator stack and have it sign an exit message.
+:::warning Exit first
+If you remove a validator before it has been [exited](exiting-a-validator), you cannot exit it later through SSV Network. In that case, you must use [Ethereum Launchpad Actions](https://launchpad.ethereum.org/en/validator-actions) or another validator setup that can sign the exit message.
 :::
 
-Make sure to connect your Web3 wallet with the WebApp, and that the address corresponds with the one you want to manage your Validators with.
+#### 1. Connect your wallet
 
-1. In the [My Account page](https://app.ssv.network/clusters), **select an active cluster**.
+Connect the Web3 wallet that owns the cluster in the [Web App](https://app.ssv.network/).
+
+#### 2. Open the cluster
+
+Connect the owner Web3 wallet in the Web App and open the active cluster from the [My Account page](https://app.ssv.network/clusters).
 
 ![remove-validator](/img/remove-a-validator-1.png)
 
-2. In the Cluster page, **tap the Actions button** on top of the validators table **and select "Remove Validator"**.
+#### 3. Start the removal flow
+
+On the cluster page, click **Actions** and select **Remove Validator**.
 
 ![remove-validator](/img/remove-a-validator-2.png)
 
-3. In the following screen, **select the validators you want to remove** from ssv.network, based on their public key. When ready, press the _Next_ button.
+#### 4. Select the validators
+
+Select the validators you want to remove by public key, then click **Next**.
 
 ![remove-validator](/img/remove-a-validator-3.png)
 
-4. **Acknowledge inactivity penalties warning**.
+#### 5. Review the warning
 
-Please read the text carefully and understand the implications of removing your validator from the network.
 :::danger
-Removal will cause the validator to go offline. It is advised to have an alternative validator setup ready to continue operating outside ssv.network, as explained [in the Learn section](/learn/network-overview/validators/validator-offboarding).
+Removing a validator makes it go offline on SSV Network immediately. Removal is not reversible. To use the validator on SSV Network again later, you must register it again.
 
-Removing the validator is **NOT** reversible, the validator will have to be registered anew on the ssv.network, should you intend to join again.
+If the validator has **not** fully exited yet, removing it early can leave it offline while it is still active on Ethereum, which can lead to penalties.
 :::
-When you are ready, check the box and click the "Remove Validator" button.
+
+If you are ready, acknowledge the warning and click **Remove Validator**.
 
 ![remove-validator](/img/remove-a-validator-4.png)
 
-5. Now, **sign the confirmation** to finalize the validator removal.
+#### 6. Sign the transaction
+
+Sign the transaction to confirm removal.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
@@ -45,6 +55,6 @@ When you are ready, check the box and click the "Remove Validator" button.
   />
 </div>
 
-6. **Done!**
+#### 7. Confirm the result
 
-Once the transaction has been signed and confirmed by the network, your validator will have been successfully removed from the cluster and no longer handled by operators on the SSV network.
+After the transaction is confirmed, the validator is removed from the cluster and is no longer handled by operators on SSV Network.

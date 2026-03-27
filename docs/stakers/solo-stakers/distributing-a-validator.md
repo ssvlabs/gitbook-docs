@@ -8,27 +8,31 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 # Onboarding a Validator
-The quickest way to engage with ssv network is to distribute and register your validator. Feel free to start with Testnet and then proceed to Mainnet.
 
-In order to onboard a validator you'll need — its keys, have made the deposit to the Deposit Contract to activate it, and own the necessary amount of SSV tokens to cover operational costs.
+The fastest way to start with SSV Network is to distribute and register an existing validator. If you are new to the flow, try it on testnet first and then continue on mainnet.
+
+Before you begin, make sure you have:
+- your validator keys
+- an active deposit made to the Ethereum Deposit Contract
+- enough ETH in your owner wallet to pay gas and fund the cluster's runway and liquidation collateral
 
 :::note Don't have validator keys yet?
-To learn how to create a new set of validator keys and activate them, [please refer to this guide](creating-a-new-validator).
+To create validator keys and activate them first, follow [Creating a New Validator](creating-a-new-validator).
 :::
 
-### Connect your Web3 wallet to WebApp
+## Connect your Web3 wallet to the Web App
 
-Make sure to connect your Web3 wallet with the WebApp, and that the address corresponds with the one you want to manage your Validators with.
+Connect the Web3 wallet you want to use as the validator owner.
 
-:::info Owner account
-**Your account is associated with your Web3 wallet**. This wallet will be the owner, so having access to it is vital. It can only be changed by removing validator and register using a new wallet.
+:::info Owner wallet
+Your connected wallet becomes the owner account for the validator on SSV Network. Keep access to this wallet. To move ownership to a different wallet later, you must remove the validator and register it again from the new wallet.
 :::
 
-When creating a new account, you can **Create a new cluster** for your validators.
+If this is your first validator in the account, create a new cluster.
 
 ![Distribute a validator](/img/distributing-a-val-1.png)
 
-Accept the disclaimer by clicking _**Next**_ if you have all the pre-requisites.
+Confirm the disclaimer and click **Next**.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
@@ -38,99 +42,98 @@ Accept the disclaimer by clicking _**Next**_ if you have all the pre-requisites.
   />
 </div>
 
+## Select operators
 
-### Select operators
-
-Now, select four operators to manage your validator. Please note the **Yearly Fee** for the setup you created before hitting the Next button.
+Select four operators to run the validator. Before you continue, review the **Yearly Fee** for the selected set.
 
 :::info Verified Operators
-**Important:** [Verified Operators (VOs)](/learn/network-overview/operators/verified-operators) are operators that have been granted the **Verified** status by the DAO for completing KYC and providing consistent high-quality service. You can sort the operator list by their daily performance, yearly fee, and # of validators they manage. You can also filter to view only Verified Operators.
+[Verified Operators (VOs)](/learn/network-overview/operators/verified-operators) are operators that the DAO has marked as **Verified** after KYC and ongoing service review. You can sort and filter the list by performance, yearly fee, validator count, and verified status.
 :::
 
 ![Distribute a validator](/img/distributing-a-val-4.png)
 
-## Key splitting
+## Split the validator key
 
-The next screen will allow you to generate KeyShares for your validator key. 
-- **On Testnet**, this can be done Online, directly on the WebApp, or Offline, on your computer.
-- **On Mainnet, only the Offline** option is available.
+The next screen lets you generate key shares for your validator key.
+- **On testnet**, you can split keys online in the Web App or offline on your own machine.
+- **On mainnet**, only the offline option is available.
 
 ![Distribute a validator](/img/distributing-a-val-5.png)
 
 <Tabs>
   <TabItem value="offline" label="Offline Key Splitting">
 
-    Offline key splitting is the most secure option, although less convenient, as it requires running a command line tool. For more information, refer to the specific [User Guide on how to use the ssv-keys CLI tool](/stakers/tools/ssv-keys-cli).
+Offline key splitting is the safer option. It requires the command-line tool. For details, follow the [SSV-Keys CLI guide](/stakers/tools/ssv-keys-cli).
 
-    ![Distribute a validator](/img/distributing-a-val-8.avif)
+![Distribute a validator](/img/distributing-a-val-8.avif)
 
+If you choose the offline flow, generate the key shares locally and upload the resulting `keyshares-[DATE]-[TIME].json` file on the next screen.
 
-    If the Offline option was selected, please follow the indications and upload the generated `keyshares-[DATE]-[TIME].json` file in the following screen.
+![Distribute a validator](/img/distributing-a-val-9.avif)
 
-    ![Distribute a validator](/img/distributing-a-val-9.avif)
+After the file passes validation, click **Next**.
 
-    Once uploaded, if successfully validated, advance to the next screen clicking Next.
-
-    ![Distribute a validator](/img/distributing-a-val-10.png)
+![Distribute a validator](/img/distributing-a-val-10.png)
 
   </TabItem>
   <TabItem value="online" label="Online Key Splitting">
 
-    Online key splitting presents a convenient option, especially for those not familiar with the console, or command line clients.
+Online key splitting is more convenient, but it is only available on testnet and only for testing.
 
-    This is not considered safe and is only available on testnet for testing purposes.
+:::warning Keep your keys safe
+Never use online key splitting with a private key you plan to use on mainnet.
+:::
 
-    :::warning Keep your keys safe
-    Please never perform a Online key splitting on testnet, with a private key that you intend to use on mainnet.
-    :::
+![Distribute a validator](/img/distributing-a-val-6.avif)
 
-    ![Distribute a validator](/img/distributing-a-val-6.avif)
+If you choose the online flow, upload the validator keystore file and enter its password.
 
-    If the Online option is chosen, the next screen allows you to upload the Validator key (file named keystore) and enter the password to decrypt it.
-
-    ![Distribute a validator](/img/distributing-a-val-7.avif)
+![Distribute a validator](/img/distributing-a-val-7.avif)
 
   </TabItem>
-</Tabs>  
+</Tabs>
 
-## Validator Registration
-### Effective Balance input
+## Register the validator
 
-For accurate runway estimation, you need to manually input the Effective Balance of your validators. If this won't be done, it will be defaulted to each validator having 32 ETH balance. You can read more about [Effective Balance accounting](/learn/network-overview/clusters/effective-balance) for detailed calculations of fees.
+### Enter the effective balance
 
-Read the warning on the page, input your Effective Balance and proceed to the next step.
-    ![Distribute a validator](/img/distributing-a-val-EB.png)
+For an accurate runway estimate, enter the validator's effective balance. If you do not enter a value, the Web App assumes 32 ETH per validator.
 
-### Validator operational runway
+To learn how this affects fees, see [Effective Balance accounting](/learn/network-overview/clusters/effective-balance).
 
-You can select the operational runway period of your validator, in accordance with the **Yearly Fee** of previously selected operators. This will dictate the initial amount of ETH to be deposited in the cluster, but it can always be managed later.
+Read the warning, enter the effective balance, and continue.
+
+![Distribute a validator](/img/distributing-a-val-EB.png)
+
+### Choose the operational runway
+
+Choose how much runway to pre-fund based on the **Yearly Fee** for your selected operators. This determines how much ETH is deposited into the cluster now, but you can manage the balance later.
 
 ![Distribute a validator](/img/distributing-a-val-11.png)
 
-**Please read carefully and understand how fees are managed and the risks of account** [**liquidation**](/learn/tokenomics/liquidations) **if your account balance falls below the** [**Threshold Balance**](/learn/tokenomics/liquidations.md#liquidation-collateral).
+Read the warning carefully. Your cluster must keep enough ETH to cover ongoing fees and the required [liquidation collateral](/learn/tokenomics/liquidations#liquidation-collateral). If the balance falls too low, the cluster can be [liquidated](/learn/tokenomics/liquidations).
 
 ![Distribute a validator](/img/distributing-a-val-12.png)
 
-### Slashing warning
+### Review the slashing warning
 
-The following screen alerts you of the potential dangers of registering a validator on the SSV network, if the same set of validator keys is also being used by other consensus and validator clients.
+This screen warns you about using the same validator keys in more than one validator setup.
 
-Please make sure to stop any other running validator setup, if you have any.
+Before you continue, stop any other validator client that is using the same validator keys.
 
 ![Distribute a validator](/img/distributing-a-val-13.png)
 
-### Validator summary
+### Review the validator summary
 
-The next screen presents a summary of your validator setup.
+Review the validator configuration summary.
 
 ![Distribute a validator](/img/distributing-a-val-14.png)
 
+When you click **Register validator(s)**, you will be asked to sign a transaction that registers the validator and funds the cluster with ETH.
 
-By clicking on Register validator(s), you'll be proposed to sign a transaction to confirm your choice and deposit the ETH balance necessary to cover for the operational costs.
+### Deposit ETH to the cluster balance
 
-### ETH Balance deposit
-
-Now, finalize the validator registration by signing the transaction and adding ETH to your cluster balance.
+Sign the transaction to finish registration and add ETH to the cluster balance.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
@@ -140,18 +143,18 @@ Now, finalize the validator registration by signing the transaction and adding E
   />
 </div>
 
-You will need to confirm the transaction in your web3 wallet.
+Confirm the transaction in your Web3 wallet.
 
-Once the transaction has been signed and confirmed by the network, you'll be presented with the summary screen.
+After the transaction is confirmed, the Web App shows the summary screen.
 
 ![Distribute a validator](/img/distributing-a-val-17.png)
 
-**Congratulations! You're all set! 🥳**
+**You are done.**
 
-## Next Steps
+## Next steps
 
-Allow a couple of epochs to pass for the validator status to change to Active on [**the Explorer page**](https://explorer.ssv.network/).
+Wait a few epochs for the validator status to update to active in the [Explorer](https://explorer.ssv.network/).
 
-You can manage your validators by following guides from the [**Cluster Management section**](/stakers/cluster-management). 
+To manage your validators, use the [Cluster Management](/stakers/cluster-management) guides.
 
-Additionally, you can offboard your validators by following guides from the [**Validator Offobarding section**](/stakers/validator-offboarding)
+To offboard a validator later, use the [Validator Offboarding](/stakers/validator-offboarding) guides.

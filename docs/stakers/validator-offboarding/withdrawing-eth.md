@@ -3,35 +3,35 @@ title: Withdraw ETH
 sidebar_position: 3
 ---
 
-# Withdrawing ETH from Cluster
+# Withdraw ETH from a Cluster
 
-You can withdraw excess ETH from your cluster balance at any time, as long as you maintain the minimum [liquidation collateral](/learn/network-overview/clusters/effective-balance) required for your cluster.
+You can withdraw ETH from a cluster balance at any time, but you must leave enough ETH in the cluster to cover ongoing fees and the required [liquidation collateral](/learn/tokenomics/liquidations#liquidation-collateral).
 
-:::warning Liquidation Risk
-Only withdraw excess balance beyond the liquidation collateral. Withdrawing too much may put your cluster at risk of liquidation if fees accumulate faster than expected.
+:::warning Liquidation risk
+Withdrawing too much ETH can push the cluster below its required balance. If that happens, the cluster may become liquidatable as fees continue to accrue.
 :::
 
-#### 1. Connect Web3 Wallet
+#### 1. Connect your wallet
 
-Connect your Web3 wallet with the [WebApp](https://app.ssv.network/), use the same address used for validator registration.
+Connect the Web3 wallet that owns the cluster in the [Web App](https://app.ssv.network/).
 
-#### 2. Choose the Cluster
+#### 2. Select the cluster
 
-In the My Account page, select an active cluster and then click on the "Withdraw" button.
+On **My Account**, open the active cluster and click **Withdraw**.
 
 ![Withdraw ETH from the cluster balance](/img/withdraw-eth-2.png)
 
-#### 3. Enter the Amount
+#### 3. Enter the withdrawal amount
 
-In the next screen, you'll be asked to enter the amount of ETH you want to withdraw. If you want to withdraw everything from the cluster balance — you will have to accept Liquidation warnings.
+If you try to withdraw the full balance, the Web App will show additional warnings because the cluster may no longer have enough ETH to stay active. 
 
-Once you enter the amount, click on the _Withdraw_ button.
+Click **Withdraw** to continue.
 
 ![Withdraw ETH from the cluster balance](/img/withdraw-eth-3.png)
 
-#### 4. Sign transaction
+#### 4. Sign the transaction
 
-The page will submit a transaction to the SSV Network smart contract. Finalize the withdraw from the Cluster by signing the transaction.
+The Web App prepares a transaction to the SSV Network smart contract. Sign it to confirm the withdrawal.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
@@ -41,6 +41,6 @@ The page will submit a transaction to the SSV Network smart contract. Finalize t
   />
 </div>
 
-#### 5. Withdraw Complete
+#### 5. Confirm the result
 
-You'll be taken back to the Cluster page, where the balance will be updated with the withdrawn amount. And the withdrawn ETH will be sent to your wallet.
+After the transaction is confirmed, the cluster page shows the updated balance and the withdrawn ETH is sent to your wallet.

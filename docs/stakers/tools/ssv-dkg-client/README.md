@@ -5,76 +5,72 @@ sidebar_position: 4
 
 # SSV DKG Client
 
-### What is Distributed Key Generation (DKG)
+The SSV DKG Client lets stakers create validator key shares through a distributed key generation (DKG) ceremony. In this flow, the full validator private key is never assembled in one place.
 
-Distributed Key Generation is a cryptographic process that aims to solve the problem of coordinating `N` parties to cryptographically sign and verify signatures without relying on Trusted Third Parties. The process is demonstrated to be successful in computing a key pair in the presence of a number `T` attackers in a decentralized network. To do so, this algorithm generates a public key, and a secret key of which no single party knows, but has some share of. The involvement of many parties requires Distributed key generation to ensure secrecy in the presence of malicious contributions to the key calculation.
+## What DKG does
 
-For more information about DKG in general, [please visit this page](https://en.wikipedia.org/wiki/Distributed_key_generation).
+Distributed key generation is a cryptographic process that allows multiple parties to create and use a shared key without any one party holding the full secret key.
 
-### SSV-DKG Client
+For general background, see [Distributed key generation on Wikipedia](https://en.wikipedia.org/wiki/Distributed_key_generation).
 
-SSV DKG leverages [drand's DKG protocol](https://drand.love/docs/cryptography/#setup-phase) implementation, which traditionally relies on a peer-to-peer network for operator communication. \
-\
-The `ssv-dkg` introduces a communication layer centered around an Initiator figure to facilitate inter-operator communication, eliminating the reliance on a fully decentralized network. \
-\
-To mitigate potential centralization risks and malicious actors, the system employs a robust mechanism of signatures and signature verifications, as elaborated in the [Security notes](./#security-notes) section.
+## How the SSV DKG Client works
 
-Through the `ssv-dkg` client, stakers can initiate DKG ceremonies to generate new BLS key pairs for Ethereum validators and the key shares required for SSV network registration.
+SSV DKG uses [drand's DKG protocol](https://drand.love/docs/cryptography/#setup-phase) with an initiator-based communication flow. Instead of relying on a fully decentralized peer-to-peer setup, one initiator coordinates the ceremony between the selected operators.
+
+This coordination model is protected by signatures and signature verification throughout the ceremony. See [Security Notes](#security-notes).
+
+## Documentation flow
+
+Use these pages in order:
+
+1. Read this page for the high-level model.
+2. Use [Generate Key Shares](generate-key-shares) to start a new DKG ceremony.
+3. Review [Ceremony Output Summary](ceremony-output-summary) to understand the generated files.
+4. Use [Update Owner Nonce in Key Shares](update-owner-nonce-in-key-shares) or [Change Operator Set and Reshare Validator Key Shares](change-operator-set-and-reshare-validator-key-shares) only when you need those maintenance flows.
+
+If you are an operator enabling DKG support, see [Enabling DKG](/operators/operator-node/setup-sidecars/enabling-dkg).
 
 ## Overview
 
-In order for the DKG protocol to execute successfully:
-
-* all the chosen Operators must be running the `ssv-dkg` tool as _Operators_
-* separately, an _Initiator_ (one of the Operators, or a separate entity), starts the DKG ceremony by running the `ssv-dkg` tool with the `init` parameter
-* the tool automatically exchange data between the interested parties, as outlined in the Architecture section, until the key shares are created
-
-For details on how to run the tool as an Operator, please head over to [this sub-page containing the related instructions](/operators/operator-node/setup-sidecars/enabling-dkg).
-
-Similarly, head over to [this other sub-page ](generate-key-shares)for instructions on how to launch the tool as the Initiator of the DKG ceremony.
+For a DKG ceremony to succeed:
+- the selected operators must be running `ssv-dkg` in operator mode
+- one initiator must start the ceremony with the `init` command
+- the tool exchanges the required messages until it produces validator deposit data and key shares
 
 :::info
-**NOTE:** Threshold is computed automatically using 3f+1 tolerance.
+Threshold is calculated automatically using 3f+1 tolerance.
 :::
 
-## Flow Description
+## Flow description
 
-1. The Initiator creates an initiation (`init`) message, signs it and sends it to all Operators
-2. Upon receiving initiation message, the Operators check Initiator message signature and create their own DKG identity:
+1. The initiator creates and signs an `init` message, then sends it to all operators.
+2. Each operator verifies the initiator signature, creates its DKG identity, and replies with a signed `exchange` message.
+3. The initiator collects and verifies the responses.
+4. The initiator sends a combined message back to the operators.
+5. Operators start the DKG process and send signed deal bundles back to the initiator.
+6. The initiator combines the deal bundles and sends them back to the operators.
+7. Operators complete the DKG process and each operator ends with a share of the shared key.
+8. Each operator signs the deposit root with its share, encrypts the share, and sends the result to the initiator.
+9. The initiator prepares the deposit data and saves it as JSON.
+10. The initiator writes `keyshares.json` and `deposit_data.json` files.
+11. After deposit and SSV registration, operators perform validator duties using their shares.
 
-* new DKG secrets created
-* if a new `init` message with ID \[24]byte is received and at least 5 minutes have passed from the last `init` message with the same ID, the DKG instance is recreated
-* `Exchange` signed message containing the DKG identity is created
-* Operator replies to `init` message with the created `Exchange` message
+## Note on DKG instance management
 
-3. The Initiator collects all responses into one combined message and verifies signatures
-4. The Initiator sends back the combined message to all Operators
-5. Each Operator receives combined `exchange` message and starts the DKG process, responding back to Initiator with a signed `dkg` deal bundle
-6. The Initiator packs the deal bundles together and sends them back to all Operators
-7. Operators process `dkg` bundles and finish the DKG protocol of creating a shared key. After DKG process is finished each Operator has a share of the shared key which can be used for signing
-8. Each Operator signs a deposit root, using its share of the shared key, then encrypts the share with the initial RSA key and sends it to the Initiator
-9. Initiator receives all messages from Operators with signatures/encrypted shares and prepares the deposit data with a signature and save it as JSON file
-10. Initiator prepares a `keyshares.json` and a `deposit_data.json` file to register to SSV contract, and activate the validator(s) on the beacon chain, respectively.
-11. After the deposit is successful and validator has registered to SSV contract, SSV Node Operators will accomplish validator duties using their share of the distributes key(s)
-
-### Note on DKG instance management
-
-A `ssv-dkg` can handle multiple DKG instances, it saves up to `MaxInstances` (1024) up to `MaxInstanceTime` (5 minutes). If a new `Init` arrives the `ssv-dkg` tries to clean instances older than `MaxInstanceTime` from the list. If any of them are found, they are removed and the incoming is added, otherwise it responds with an error, saying that the maximum number of instances is already running.
+`ssv-dkg` can manage multiple DKG instances. It keeps up to `MaxInstances` (1024) for up to `MaxInstanceTime` (5 minutes). When a new `init` arrives, the tool first tries to remove expired instances before accepting the new one.
 
 ***
 
 ## Security Notes
 
 :::info
-The `ssv-dkg` tool has recently been audited, you can find more details about it [on the Security page](/learn/security/audits).
-
-A second audit of the `ssv-dkg` tool covered the necessary changes to introduce keyshares regeneration through DKG. This is also listed [on the Security page](/learn/security/audits).
+The `ssv-dkg` tool has been audited. See [Audits](/learn/security/audits) for details, including the follow-up audit that covered key-share regeneration through DKG.
 :::
 
-It is important to briefly explain how the communication between DKG ceremony Initiator and Operators is secured:
+The ceremony is secured as follows:
 
-1. Initiator is using RSA key (2048 bits) to sign `init` message sent to Operators. Upon receiving the signature, Operators verify it using public key included in the `init` message. If the signature is valid, Operators store this pub key for further verification of messages coming from the Initiator(s).
-2. Operators are using RSA key (SSV Operator key - 2048 bits) to sign every message sent back to Initiator.
-3. Initiator verifies every incoming message from any Operator using ID and Public Key provided by Operators' info file, then Initiator creates a combined message and signs it.
-4. Operators verify each of the messages from other Operators participating in the ceremony and verifies Initiator's signature of the combined message.
-5. During the DKG protocol execution, the BLS auth scheme is used - G2 for its signature space and G1 for its public keys
+1. The initiator signs the `init` message with an RSA key. Operators verify that signature using the included public key.
+2. Operators sign every response with their own RSA keys.
+3. The initiator verifies all operator messages using the operator IDs and public keys from the operators info file.
+4. Operators verify each other's messages and the initiator's signature on the combined message.
+5. During the DKG protocol itself, the tool uses the BLS auth scheme with G2 signatures and G1 public keys.

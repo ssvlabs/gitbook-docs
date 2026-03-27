@@ -1,84 +1,88 @@
 ---
 title: Migrating to ETH
-sidebar_position: 7
+sidebar_position: 6
 ---
 
 # Migrating to ETH
 
-## Overview 
-Legacy SSV-based clusters should be migrated to ETH payments to continue active operations. Migration is the only path forward for maintaining and modifying existing clusters.
+## Overview
 
-### What Happens During Migration
+Legacy SSV-based clusters must be migrated to ETH-based fees to continue operating and to use current cluster-management actions.
 
-1. **ETH Deposit**: You deposit ETH to fund your cluster's operational runway
-2. **SSV Refund**: Your entire SSV balance is automatically refunded to your wallet
-3. **Cluster Conversion**: Your cluster switches to ETH-based fee accounting
-4. **Continued Operation**: Your validators continue running without interruption
+### What happens during migration
 
-:::info Automatic SSV Refund
-You do **not** need to manually withdraw SSV before migrating. The migration process automatically returns your full SSV balance to your wallet address.
+1. You deposit ETH to fund the cluster's runway.
+2. Your remaining SSV balance is refunded automatically.
+3. The cluster switches to ETH-based fee accounting.
+4. Validators continue operating without interruption.
+
+:::info Automatic SSV refund
+You do not need to withdraw SSV manually before migration. The migration flow returns the full SSV balance to your wallet automatically.
 :::
 
-### Prerequisites
+### Before you begin
 
-Before migrating, ensure you have:
+Make sure you have:
+- access to the wallet that owns the cluster
+- enough ETH for the initial runway and gas fees
+- a funding target that gives you comfortable runway; 90 days is a common starting point
 
-- Access to the wallet that owns the cluster
-- Sufficient ETH to cover:
-  - Initial cluster funding (operational runway)
-  - Gas fees for the migration transaction
-  - We recommend depositing enough ETH for at least 90 days of operations to avoid frequent top-ups.
+## Migrate in the Web App
 
-## Migration Process
+#### 1. Connect your wallet
 
-### Via WebApp
+Connect the cluster owner wallet in the [Web App](https://app.ssv.network/).
 
-#### 1. Connect Web3 Wallet
-Connect your Web3 wallet with the [WebApp](https://app.ssv.network/), use the same address used for validator registration.
+#### 2. Select the cluster
 
-#### 2. Choose the Cluster
-Select a non-migrated cluster from the list and click “Switch to ETH”.
+Open the non-migrated cluster and click **Switch to ETH**.
 
 ![Migrate cluster to ETH](/img/migrate-eth-1.png)
 
-#### 3. Acknowledge Fee Warnings
+#### 3. Acknowledge the fee warnings
+
 Review and acknowledge the fee warnings and comparison.
 
 ![Migrate cluster to ETH](/img/migrate-eth-4.png)
 
-#### 4. Enter Effective Balance
-Enter the total Effective Balance for all validators in the cluster. The default is 32 ETH per validator. Acknowledge the warnings and continue.
+#### 4. Enter the effective balance
+
+Enter the total effective balance for all validators in the cluster. If you do not know the exact value, the Web App defaults to 32 ETH per validator.
 
 ![Migrate cluster to ETH](/img/migrate-eth-5.png)
 
-#### 5. Choose Operational Runway
-Choose an operational runway based on the new yearly operator fees.
+#### 5. Choose the operational runway
+
+Choose the runway based on the ETH-based yearly fees for the cluster.
 
 ![Migrate cluster to ETH](/img/migrate-eth-6.png)
 
-#### 6. Acknowledge Balance Warnings
-Review the balance and fee calculation notice. You can read more about [Effective Balance accounting here](/learn/network-overview/clusters/effective-balance).
+#### 6. Review the balance warning
+
+Review the fee and balance notice. For more context, see [Effective Balance accounting](/learn/network-overview/clusters/effective-balance).
 
 ![Migrate cluster to ETH](/img/migrate-eth-7.png)
 
-#### 7. Switch Cluster to ETH
-Review the migration summary and confirm by selecting “Switch Cluster to ETH”. Sign the transaction with your wallet.
+#### 7. Confirm the migration
+
+Review the summary, click **Switch Cluster to ETH**, and sign the transaction.
 
 ![Migrate cluster to ETH](/img/migrate-eth-8.png)
 
-#### 8. Finish Migration
-After on-chain confirmation, review the post-migration summary. The migration is complete.
+#### 8. Confirm completion
+
+After on-chain confirmation, review the post-migration summary. The cluster is now using ETH-based fees.
 
 ![Migrate cluster to ETH](/img/migrate-eth-9.png)
 ![Migrate cluster to ETH](/img/migrate-eth-10.png)
 
-### Via Smart Contract
+## Migrate through the smart contract
 
-If you prefer to migrate directly via the smart contract, use the `migrateClusterToETH()` function in a transaction. Refer to [Developers documentation](/developers/SSV-SDK/module-reference/cluster-module#migrateclustertoeth) for more details.
+If you prefer a contract-level flow, call `migrateClusterToETH()` directly. See the [SDK module reference](/developers/SSV-SDK/module-reference/cluster-module#migrateclustertoeth).
 
-**The transaction will:**
-1. Validate your cluster snapshot
-2. Transfer your SSV balance back to your wallet
-3. Accept your ETH deposit
-4. Convert the cluster to ETH-based accounting
-5. Emit `ClusterMigratedToETH` event
+The transaction:
+1. validates the cluster snapshot
+2. refunds the SSV balance to your wallet
+3. accepts your ETH deposit
+4. converts the cluster to ETH-based accounting
+5. emits the `ClusterMigratedToETH` event

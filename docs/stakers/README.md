@@ -4,79 +4,85 @@ sidebar_position: 1
 ---
 
 # Quickstart
-:::info please note
-This page streamlines the onboarding process for staking providers, staking pools, and other services.
 
- **Solo-Stakers** [**should follow this page**](/stakers/solo-stakers) which explains the flow that is more tailored to Individual ETH holders.
+:::info Please note
+This page is for staking providers, pools, and similar services.
+
+**If you are an individual ETH holder, follow [Solo-Stakers](/stakers/solo-stakers) instead**.
 :::
+
 ![Stakers Diagram](/img/stakers-readme-1.png)
 
-Stakers on SSV network come in various forms. Yet all of the groups supply the required capital to enable validators on the beacon chain. Capital providers must pay fees in ETH to their chosen operators for managing their validator(s).
+SSV Network lets stakers run validators through distributed operators. Stakers fund validators and pay operator and network fees in ETH.
 
-To gain more understanding of how onboarding to SSV works conceptually and technically, check out [SSV Network Overview](/learn/network-overview/) and [Security Overview](/learn/security) pages. 
+For more context, see [SSV Network Overview](/learn/network-overview) and [Security Overview](/learn/security).
 
-## How to integrate with SSV
+## How to integrate with SSV Network
 
 ### Overview
-On a high level, the integration process follows these steps:
-1. Setup SSV Nodes
-2. Register Operators on SSV Network
-3. Split validator keys
-4. Register generated keyshares
+
+At a high level, the process has four steps:
+1. Set up SSV nodes
+2. Register operators on SSV Network.
+3. Split validator keys.
+4. Register the generated key shares.
 
 ### Prerequisites
-- **Infra:** Machines with synced EL + CL clients.
-- **Security:** An offline/air‑gapped environment for all private key operations.
-- **Access:** Administrative access to your current validator setup; you must be able to shut it down during migration.
-- **Wallet:** On‑chain wallet with sufficient ETH to register validators, cover network fees, and liquidation collateral.
 
-:::note Testnet Dry Run
-Before proceeding on Mainnet, we recommend to perform the entire migration flow on the SSV Testnet (Hoodi). This ensures that your infrastructure, processes, and key handling are validated in a safe environment. 
+- **Infrastructure:** Machines with synced execution-layer and consensus-layer clients.
+- **Security:** An offline or air-gapped environment for private key operations.
+- **Access:** Administrative access to your current validator setup, so you can shut it down during migration.
+- **Wallet:** An on-chain wallet with enough ETH for fees, collateral, and gas.
+
+:::note Testnet dry run
+Before you use mainnet, run the full process on SSV testnet (Hoodi). This helps you validate your infrastructure, procedures, and key handling in a safer environment.
 - [Hoodi SSV Faucet](https://faucet.ssv.network/connect)
-- [Hoodi Documentation](/developers/testnet)
+- [Hoodi documentation](/developers/testnet)
 :::
-### Setup Operators
-Setting up your SSV operators correctly ensures they can participate in the distributed key protocol without delays. You will find detailed step-by-step instructions in the linked guides:
-1. **Deploy SSV Nodes**
 
-You have to deploy multiple SSV nodes to form a cluster — repeat the full setup once per every node. Possible number of nodes in a cluster are 4, 7, 10, and 13.
+### Step 1: Set up SSV nodes
 
-*Recommended:* [SSV-Stack for a fast, easy installation](/operators/operator-node/node-setup#process-overview). On first start, it generates a random password and private key files.   
-*Alternative:* manual install [following the official guide](/operators/operator-node/node-setup/manual-setup).
+Deploy the SSV nodes that will operate your validators.
 
-2. **Configure Monitoring**
+1. **Deploy SSV nodes**
 
-*Recommended:* SSV-Stack provisions monitoring (Prometheus + Grafana) by default. Access it by http://localhost:3000. You can [find more details here](https://github.com/ssvlabs/ssv-stack/blob/main/README).   
-*Alternative:* For manual setup, we assume you know how to deploy Grafana and Prometheus. Our official Grafana dashboard JSON can be [downloaded here](/operators/operator-node/monitoring/dashboard-runbook).
+   Deploy one full setup per node. Supported cluster sizes are 4, 7, 10, and 13 operators.
+
+   *Recommended:* [SSV-Stack, quick setup](/operators/operator-node/node-setup#process-overview). It will generate a random password and private key files on first start.  
+   *Alternative:* [Manual setup](/operators/operator-node/node-setup/manual-setup).
+
+2. **Configure monitoring**
+
+   *Recommended:* SSV-Stack includes Prometheus and Grafana. The default local address is `http://localhost:3000`. More details are in the [SSV-Stack README](https://github.com/ssvlabs/ssv-stack/blob/main/README).  
+   *Alternative:* For manual setups, deploy your own Grafana and Prometheus. Downnload our [Grafana dashboard JSON](/operators/operator-node/monitoring/dashboard-runbook).
 
 3. **Configure MEV**
 
-MEV settings are primarily on the consensus client. Follow your CL’s MEV guide [alongside SSV’s MEV guide](/operators/operator-node/setup-sidecars/configuring-mev).
+   MEV settings are mainly handled on the consensus client. Follow [our MEV boost setup guide](/operators/operator-node/setup-sidecars/configuring-mev).
 
-4. **Register Operators**
+### Step 2: Register operators on SSV Network
 
-[Repeat this Operator Registration flow](/operators/operator-management/registration) once per every node you deployed. Use the public keys derived from each node’s generated private key files.
-- Set operator fee.
-- Set operator metadata.
-- Description and logo for your entity.
+1. **Register each operator**
 
-If you want to have a private cluster:
-- Set private permissions.
-- Mark all operators as private.
-- Whitelist the wallet address you’ll use for validator onboarding.
+   Follow [Operator Registration](/operators/operator-management/registration) once for each node you deployed. Use the public key derived from each node's private key files.
 
-5. **Backup Operator Secrets**
+2. **Set operator details**
 
-[Securely back up](/operators/operator-node/maintenance/node-migration#node-backup) operator key and password files.
-:::warning Critical
-Losing either file will permanently disable the related operator. If enough operators in a cluster are lost, validators will be offline which will require to repeat the migration process.
-:::
+   - [Set private permissions and whitelisted addresses](/operators/operator-management/configuring-a-permissioned-operator).
+   - [Add operator metadata](/operators/operator-management/setting-operator-metadata).
 
-6. **Ongoing Maintenance**
+4. **Back up operator secrets**
 
-[Keep nodes current](/operators/operator-node/maintenance/troubleshooting#faq) with new SSV releases.
-If you encounter issues, consult the [Troubleshooting guide](/operators/operator-node/maintenance/troubleshooting) or reach out to our team.
+   [Back up](/operators/operator-node/maintenance/node-migration#node-backup) the operator key files and password files.
+
+   :::warning Critical
+   Losing either file permanently disables that operator. If too many operators are offline, validators in the cluster will go offline, and you will have to repeat the migration process.
+   :::
+
+5. **Maintain the nodes**
+
+   Keep nodes updated with [new SSV releases](https://github.com/ssvlabs/ssv/releases). If you run into issues, use the [Troubleshooting guide](/operators/operator-node/maintenance/troubleshooting).
 
 ### Validator Onboarding
 
-With everything in place, you can start migrating validators to your operators. Follow [Validator Onboarding section](/stakers/validator-onboarding/) to ensure a smooth process.
+**Steps 3 and 4:** follow the [Validator Onboarding](/stakers/validator-onboarding) for key splitting and validator registration.

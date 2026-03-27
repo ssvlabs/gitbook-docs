@@ -5,42 +5,48 @@ sidebar_position: 6
 
 # Change Operator Set and Reshare Validator Key Shares
 
-A Decentralized Key Generation ceremony has a very important property: Key Shares are generated without ever revealing, let alone producing or storing the validator private key.
+Use this flow when a validator was created with DKG and you need to move it to a different operator set without recreating the validator from scratch.
 
-This very good for security, but it comes with a downside: the stake tied to the validator public key is completely dependent on the operators chosen for the key shares generation.
+## Keep these files
 
-In a cluster of four, in the hypothetical case of two of them go permanently offline, the validator will stop attesting, and it won't be possible to exit the validator through SSV protocol either, because there won't be enough operators to successfully sign the exit message. That is, until [EIP-7002 is implemented](https://ethereum-magicians.org/t/eip-7002-execution-layer-triggerable-exits/14195).
+Before you start, make sure you still have the original ceremony artifacts, especially:
+- the top-level `proofs.json`
+- the operator information you need for the new ceremony
+- access to the wallet that signed the original ceremony as the `owner`
 
-To stop this from happening, the `ssv-dkg` latest release has introduced the possibility to generate Key Shares using a new operator set. This ceremony involves both the operator set that participate in the initial DKG ceremony (or the number necessary to reach the threshold to extrapolate the polynomial curve that defines the validator private key), and the new operator set which will generate the new Key Shares.
+Without `proofs.json`, you cannot complete this reshare flow.
 
-There can be partial overlap between the "old" and the "new" operator set, for example, only swap out one operator out of four, because they went offline.
+## Why this flow exists
 
-## 1. Select Operators
+DKG never creates the full validator private key in one place. That is good for security, but it also means you cannot simply re-export the validator key and split it again later.
 
-To select operators and obtain the information necessary for a DKG ceremony, please refer to [this section in the Generate Key Shares guide](./generate-key-shares).
+The reshare flow creates new key shares for a new operator set by using the original ceremony proofs and a new DKG ceremony.
 
-## 2. Generate message to be signed
+## 1. Select the new operators
 
-Regenerate Key Shares has important security implications, so to make this procedure safe, it is necessary for the entity initiating it to provide proof that they are the same entity that participated in the initial DKG ceremony. Such proof takes the form of the `proofs.json` file which is part of the output of all DKG ceremonies.
+Choose the new operator set and prepare the required operator information as described in [Generate Key Shares](./generate-key-shares).
 
-As an additional form of security, it is required that the initiating entity signs a message containing this proof, with the wallet indicated as the `owner` in the initial ceremony. The `ssv-dkg` tool has a handy command that takes the `proofs.json` file as input, and generates the message to be signed as output.
+## 2. Generate the message to sign
 
-To generate the message to be signed, you need to use the `generate-reshare-msg` option.  If using docker, you can use this command:
+To prove that the same owner is authorizing the reshare, use the original `proofs.json` file to generate a message that the owner wallet must sign.
 
-:::warning
-Make sure to provide the `proofsFilePath` and `newOperatorIDs` configuration parameters either via command line flags, or the YAML file
-:::
+### Required inputs
+- `proofs.json`
+- `newOperatorIDs`
+- owner wallet access
+
+### Command
 
 ```bash
 docker run --rm -v <PATH_TO_FOLDER_WITH_CONFIG_FILES>:/ssv-dkg/data/ \
     -it "ssvlabs/ssv-dkg:latest" generate-reshare-msg --configPath ./data/config/config.yaml
 ```
 
-:::info
-It is advised launching the tool as a Docker image as it is the most convenient way and only requires to have Docker installed. The team builds a Docker image with every release of the tool.
+:::warning
+Provide `proofsFilePath` and `newOperatorIDs` either in the YAML file or as command-line flags.
 :::
 
-Here's an example of a YAML config file to launch a DKG ceremony:
+Example YAML:
 
 ```yaml
 validators: 10
@@ -55,32 +61,44 @@ proofsFilePath: ./output/ceremony-2024-11-18--16-04-55.529/proofs.json
 newOperatorIDs: [5, 6, 7, 8]
 ```
 
-* For more information on the YAML configuration file, and how to provide it to the tool, [please refer to this section (Additional flag for generate-reshare-msg)](/stakers/tools/ssv-dkg-client/commands-and-config). Make sure to add the `proofsFilePath` parameter to the YAML configuration file 
-* Alternatively, the tool can be launched as a binary executable. For more information, please [refer to the appropriate section of this page](/stakers/tools/ssv-dkg-client/commands-and-config)
-* For the reference of command line flags, [please refer to this section (Additional flag for generate-reshare-msg)](/stakers/tools/ssv-dkg-client/commands-and-config), instead. Remember to add the `proofsFilePath` flag.
+See [Commands and Config](/stakers/tools/ssv-dkg-client/commands-and-config) for YAML, binary, and flag details.
 
-This generated message then needs to be signed by the wallet belonging to the `owner` address specified in the initial ceremony (which has to be the same as the one used during the reshare). This can be done [via etherscan](https://etherscan.io/verifiedSignatures), for example, in case of an EOA wallet. Since it is also possible for multi-sig wallets to be the `owner` address for validators, these will have to [provide a signature based on ERC-1271](https://eips.ethereum.org/EIPS/eip-1271).
+### Sign the generated message
 
-Once the message is signed, the actual ceremony itself will take this as the input, instead.
+Sign the generated message with the wallet that matches the original ceremony `owner` address.
 
-## 3. Start DKG reshare ceremony
+- For an EOA, you can sign through a tool such as [Etherscan Verified Signatures](https://etherscan.io/verifiedSignatures).
+- For a multisig or smart-contract wallet, provide an [ERC-1271](https://eips.ethereum.org/EIPS/eip-1271) compatible signature.
 
-To initiate the DKG ceremony and regenerate the Key Shares, you need to use the  `reshare` option.  If using docker, you can use this command:
+The resulting signature is required for the next step.
 
-:::warning
-Make sure to add the `proofsFilePath`, `newOperatorIDs` and `signatures` configuration parameter either via command line flags, or the YAML file
-:::
+## 3. Start the reshare ceremony
+
+Run the `reshare` command to generate the new key shares.
+
+### Required inputs
+- `proofs.json`
+- `newOperatorIDs`
+- the owner signature from the previous step
+- the rest of the normal DKG configuration
+
+### Expected output
+- a new `ceremony-...` folder
+- new `keyshares.json`
+- new proof artifacts for the new ceremony
+
+### Command
 
 ```bash
 docker run --rm -v <PATH_TO_FOLDER_WITH_CONFIG_FILES>:/ssv-dkg/data/ \
     -it "ssvlabs/ssv-dkg:latest" reshare --configPath ./data/config/config.yaml
 ```
 
-:::info
-It is advised launching the tool as a Docker image as it is the most convenient way and only requires to have Docker installed. The team builds a Docker image with every release of the tool.
+:::warning
+Provide `proofsFilePath`, `newOperatorIDs`, and `signatures` either in the YAML file or as command-line flags.
 :::
 
-Here's an example of a YAML config file to launch a DKG ceremony:
+Example YAML:
 
 ```yaml
 validators: 10
@@ -96,8 +114,13 @@ newOperatorIDs: [5, 6, 7, 8]
 signatures: 111886aa25a07bbd9cb64e50e3237f98a6ecabad6f448bc9c4736ccebcacb45c56ecac273b076a5d0b1f19619bf808741dff2d8019c728e16a953d3a0b5ff4771b
 ```
 
-* For more information on the YAML file configuration, and how to provide it to the tool, [please refer to this section (Additional flag for reshare command)](/stakers/tools/ssv-dkg-client/commands-and-config). 
-* Alternatively, the tool can be launched as a binary executable. For more information, please [refer to the appropriate section of this page](/stakers/tools/ssv-dkg-client/commands-and-config)
-* For the reference of command line flags, [please refer to this section (Additional flag for reshare command)](/stakers/tools/ssv-dkg-client/commands-and-config), instead.
+See [Commands and Config](/stakers/tools/ssv-dkg-client/commands-and-config) for the full option reference.
 
-For more information about the output of a DKG ceremony, and what each file does, what you should use it for, please refer to the [Ceremony Output Summary page](ceremony-output-summary).
+## 4. Use the new ceremony output
+
+After the reshare succeeds:
+1. Review the generated files in the new `ceremony-...` folder.
+2. Keep the new proof artifacts for future maintenance.
+3. Use the new `keyshares.json` to register the validator with the new operator set.
+
+To understand the generated artifacts, see [Ceremony Output Summary](ceremony-output-summary).

@@ -1,43 +1,47 @@
 ---
-sidebar_position: 4
+sidebar_position: 3
 ---
 
 # Set Fee Recipient
 
-The default setting for all validators in a given account is to send execution layer rewards to the owner address. This page explains how to change this.
-
-For more information on this topic, please refer to [the dedicated learning page](/learn/network-overview/validators/validator-rewards).
-
-:::warning Please Note
-This procedure will set the fee recipient address for **block proposal rewards for validators in all your clusters**.
+:::warning Applies to all validators in the account
+This updates the fee recipient address for execution-layer block rewards across all validators owned by this account.
 :::
 
-1. **Connect Web3 Wallet**
+By default, execution-layer rewards are sent to the owner address. For more context, see [Validator Rewards](/learn/network-overview/validators/validator-rewards).
 
-Connect your Web3 wallet with the [WebApp](https://app.ssv.network/). Use the address you registered your validators with.
+#### 1. Connect your wallet
 
-2. In the Validator Clusters dashboard under My Account page, **click on the Fee Address button**:
+Connect the Web3 wallet that owns the validators in the [Web App](https://app.ssv.network/).
 
-![Distribute a validator](/img/fee-recipient-1.avif)
+#### 2. Open the fee address settings
 
-3. **Click on the pencil icon** next to the address:
+On the [Clusters page](https://app.ssv.network/clusters), click **Fee Address**.
 
-![Distribute a validator](/img/fee-recipient-2.avif)
+![Distribute a validator](/img/fee-recipient-1.png)
 
-4. **Enter the address of the wallet**, then click _Update_
+#### 3. Enter the address
 
-This address will receive rewards for all your validators.
-
-![Distribute a validator](/img/fee-recipient-3.avif)
-
-5. **Sign the transaction**
+Enter the new destination wallet address and click **Update**.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
-    src="/img/fee-recipient-4.png" 
-    alt="Distribute a validator" 
-    style={{ width: '40%', maxWidth: '500px' }}
+    src="/img/fee-recipient-2.png" 
+    alt="Set fee recipient" 
+    style={{ width: '70%', maxWidth: '700px' }}
   />
 </div>
 
-Once the transaction has been signed and confirmed by the network, the fee recipient address for block proposal rewards will be correctly set for all your validators.
+#### 4. Sign the transaction
+
+Sign the transaction to apply the change.
+
+After the transaction is confirmed, the new fee recipient address is used for block proposal rewards for all validators in the account.
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+  <img 
+    src="/img/fee-recipient-3.png" 
+    alt="Set fee recipient" 
+    style={{ width: '40%', maxWidth: '500px' }}
+  />
+</div>

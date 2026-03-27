@@ -5,21 +5,29 @@ sidebar_position: 1
 
 # Exit Validators
 
-:::warning Please note
-If the validator is removed first, the following operations won't be possible. In such case, the validator will have to be exited via [Ethereum Launchpad Actions](https://launchpad.ethereum.org/en/validator-actions) or by running a traditional validator stack and have it sign an exit message.
+:::warning Exit before removal
+If you remove a validator first, you can no longer trigger the exit through SSV Network. In that case, you must exit it through [Ethereum Launchpad Actions](https://launchpad.ethereum.org/en/validator-actions) or by running another validator setup that can sign the exit message.
 :::
 
-Make sure to connect your Web3 wallet with the WebApp, and that the address corresponds with the one you want to manage your Validators with.
+#### 1. Connect your wallet
 
-1. In the [My Account page](https://app.ssv.network/clusters), **select an active cluster**.
+Connect the Web3 wallet that owns the cluster in the [Web App](https://app.ssv.network/).
+
+#### 2. Open the cluster
+
+On the [My Account page](https://app.ssv.network/clusters), select the active cluster.
 
 ![exit-validator](/img/exit-a-validator-1.png)
 
-2. In the Cluster page, **tap the Actions button** on top of the validators table **and select Exit validators**.
+#### 3. Start the exit flow
+
+On the cluster page, click **Actions** and select **Exit validators**.
 
 ![exit-validator](/img/exit-a-validator-2.png)
 
-3. In the following screen, s**elect the validators you want to exit**, based on their public key. When ready, press the _Next_ button.
+#### 4. Select the validators
+
+Select the validators you want to exit by public key, then click **Next**.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
@@ -29,19 +37,21 @@ Make sure to connect your Web3 wallet with the WebApp, and that the address corr
   />
 </div>
 
-4. **Summary and confirmation**.
+#### 5. Review the warning and summary
 
 :::warning
-Exiting your validator signals to the network that you wish to **permanently cease your validator's participation** in the Beacon Chain and retrieve your 32 ETH stake principal.
+Exiting a validator tells Ethereum that you want to stop validating permanently and withdraw the staked principal once withdrawals are available.
 
-Initiating an exit places your validator in the exit queue. The duration in the queue depends on the number of validators already waiting. During this period, your validator must remain active, so it is crucial to maintain your validator's performance and keep it registered with the SSV network until it has fully exited.
+After you submit the exit, the validator enters the Ethereum exit queue. Queue time depends on network conditions and may range from hours to days. Until the exit is fully processed, keep the validator active and keep the cluster funded so the validator can continue performing normally.
 :::
 
-This operation will generate a transaction to the [SSV Network smart contract](/developers/smart-contracts/ssvnetwork.md#exitvalidatorpublickey-operatorids), and will make sure that the operators in the cluster will sign and execute a voluntary exit of the specified validator(s), on behalf of the validator owner.
+This action sends a transaction to the [SSV Network smart contract](/developers/smart-contracts/ssvnetwork#exitvalidatorpublickey-operatorids). The selected operators then coordinate to sign and submit the voluntary exit on behalf of the validator owner.
 
 ![exit-validator](/img/exit-a-validator-4.png)
 
-5. Now, **sign the transaction** to finalize the validator exit.
+#### 6. Sign the transaction
+
+Sign the transaction to confirm the exit request.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
@@ -51,10 +61,10 @@ This operation will generate a transaction to the [SSV Network smart contract](/
   />
 </div>
 
-6. Await the validator exit queue.
+#### 7. Wait for the exit to complete
 
-Once the transaction has been signed and confirmed by the network, **your validator will be successfully scheduled to be exited from the beacon chain**.
+After the transaction is confirmed, the validator is scheduled for exit on Ethereum.
 
-In a short time, dictated by the lenght of the exit queue on the beacon chain (this can vary from a few hours to a few days) it will no longer be considered for validator duties, and can be safely [removed from SSV network](removing-a-validator), without incurring in penalties.
+Once the validator has fully exited, it will stop receiving duties. At that point, you can safely continue to [Remove Validators](removing-a-validator) without causing avoidable penalties.
 
-The 32 ETH stake will be available for withdrawal after a short period of time after this.
+The 32 ETH stake becomes withdrawable after the validator completes the exit and withdrawal process on Ethereum.

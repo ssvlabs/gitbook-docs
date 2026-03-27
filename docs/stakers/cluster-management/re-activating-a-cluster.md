@@ -1,24 +1,30 @@
 ---
-sidebar_position: 5
+sidebar_position: 4
 ---
 
 # Reactivate a Cluster
 
-Make sure to connect your Web3 wallet with the WebApp, and that the address corresponds with the one you want to manage your Validators with.
+#### 1. Connect your wallet
 
-1. In the [My Account page](https://app.ssv.network/clusters), **select a _Liquidated cluster_ that needs to be reactivated**.
+Connect the Web3 wallet that owns the cluster in the [Web App](https://app.ssv.network/).
+
+#### 2. Open the liquidated cluster
+
+On the [My Account page](https://app.ssv.network/clusters), select the liquidated cluster you want to reactivate.
 
 ![reactivate-cluster](/img/reactivate-a-cluster-1.png)
 
-2. In the Cluster page, click on the **Reactivate Cluster** button
+#### 3. Click Reactivate Cluster
 
 ![reactivate-cluster](/img/reactivate-a-cluster-2.png)
 
-3. **Input Effective Balance** and click "Next". Please note if the actual Effective Balance reported by Oracles is higher than the amount set here, your operational burn rate will increase. 
+#### 4. Enter the effective balance
+
+If the actual effective balance is lower than the value you enter here, the fee burn rate will be higher and may result in a liquidation of a cluster.
 
 ![reactivate-cluster](/img/reactivate-a-cluster-3.png)
 
-4. In the next screen, you'll be asked to **choose the cluster runway**. Selected runway will impact the amount of ETH you will have to deposit to reactivate the cluster. **Click "Reactivate" once the runway is chosen**.
+#### 5. Choose the runway and Reactivate
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
@@ -28,7 +34,7 @@ Make sure to connect your Web3 wallet with the WebApp, and that the address corr
   />
 </div>
 
-5. Now, finalize the validator reactivation by signing the transaction.
+#### 6. Sign the transaction
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
@@ -38,6 +44,8 @@ Make sure to connect your Web3 wallet with the WebApp, and that the address corr
   />
 </div>
 
-6. You'll be taken back to the Cluster page, where the balance will be updated with the amount of ETH deposited.
+#### 7. Confirm the result
+
+After the transaction is confirmed, the cluster page will show the updated ETH balance.
 
 ![reactivate-cluster](/img/reactivate-a-cluster-6.png)
