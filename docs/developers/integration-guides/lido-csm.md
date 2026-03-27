@@ -6,9 +6,9 @@ import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBloc
 
 # Lido CSM
 
-Lido's Community Staking Module lets community stakers utilize the Lido protocol to run validators in a permissionless manner. We can combine this with the SSV network to incorporate DVT into CSM.
+Lido's Community Staking Module (CSM) lets community stakers run validators through Lido in a permissionless way. You can combine it with SSV Network to add DVT to CSM.
 
-In this guide we'll run through how to create validator keys, register them on the SSV network with SSV network operators, and post the bond through CSM to activate the validator.
+This guide walks through how to create validator keys, register them on SSV Network with SSV operators, and post the bond through CSM to activate the validator.
 
 :::info
 This page has been written for mainnet CSM. **If you want to try it on testnet first** you can use these parameters for the withdrawal and execution layer addresses:
@@ -20,54 +20,54 @@ This page has been written for mainnet CSM. **If you want to try it on testnet f
 
 ### Key conditions for validators registered to CSM
 
-Lido requires a bond, but will deposit and activate the validator, so for this reason:
+Lido requires a bond, but Lido handles the validator deposit and activation. Because of this:
 
-* **you must** **set the withdrawal address to** [**the Lido Withdrawal vault**](https://etherscan.io/address/0xb9d7934878b5fb9610b3fe8a5e441e8fad7e293f).
-* **you must** **set the fee recipient address to** [**Lido Execution Layer Rewards Vault**](https://etherscan.io/address/0x388C818CA8B9251b393131C08a736A67ccB19297).
+* **You must set the withdrawal address to** [**the Lido Withdrawal Vault**](https://etherscan.io/address/0xb9d7934878b5fb9610b3fe8a5e441e8fad7e293f).
+* **You must [set the fee recipient address](/stakers/cluster-management/setting-fee-recipient-address) to** [**the Lido Execution Layer Rewards Vault**](https://etherscan.io/address/0x388C818CA8B9251b393131C08a736A67ccB19297).
 
 These two conditions are necessary and cannot be omitted.
 
 
-Changing the fee recipient on SSV applies to **all validators owned by an account**. So if you have registered CSM validators in the past, or intend to register validators that will not be part of CSM in the future, please utilize a different account, or you will be effectively **donating the execution rewards to Lido** instead of keeping them for yourself.
+Changing the fee recipient in SSV applies to **all validators owned by that account**. If you already have CSM validators, or plan to register validators outside CSM later, use a separate account. Otherwise, you will effectively **send execution rewards to Lido** instead of keeping them yourself.
 
 
 ### Prerequisites 
 
-* Over 2 ETH for CSM bonding and gas for transactions.
-* SSV tokens when registering your validator to the network
-* A new account/wallet which does not have any validators registered with SSV already, as we need to set the fee recipient to Lido's address.
+* More than 2 ETH for the CSM bond and transaction gas.
+* SSV tokens to register your validator on SSV Network.
+* A new account or wallet that does not already have validators registered with SSV, because you need to set the fee recipient to Lido's address.
 
 ### 1. Creating validator keys
 
-Validator keys for the CSM module can be created the same way as any other validator key, with one difference mentioned above: **you must** **set the withdrawal address to** [**the Lido Withdrawal vault**](https://etherscan.io/address/0xb9d7934878b5fb9610b3fe8a5e441e8fad7e293f).
+Validator keys for the CSM module are created the same way as any other validator keys, with one important difference: **you must set the withdrawal address to** [**the Lido Withdrawal Vault**](https://etherscan.io/address/0xb9d7934878b5fb9610b3fe8a5e441e8fad7e293f).
 
-So for this step, you can simply follow the [guide on generating validator keys found here](/stakers/solo-stakers/creating-a-new-validator), just know that when generating the keys, the withdrawal address needs to be set to this value:
+For this step, follow the [validator key generation guide](/stakers/solo-stakers/creating-a-new-validator), and make sure the withdrawal address is set to:
 
 ```
 0xB9D7934878B5FB9610B3fE8A5e441e8fad7E293f
 ```
 
-Please note that it is only necessary to generate the keys and not activate them, so just follow the procedure until both the `deposit` and `keystore` JSON files have been generated and saved on your machine:
+You only need to generate the keys at this stage, not activate them. Follow the process until both the `deposit` and `keystore` JSON files have been generated and saved locally.
 
 
 
-Make sure to take note of the keystore password you used to generate these keys.
+Make sure you keep the keystore password you used to generate these keys.
 
 
 ### 2. Register the validator with SSV
 
-To register your validator with SSV you can follow [the related guide in this documentation](/stakers/solo-stakers/distributing-a-validator). All of the steps you need to follow are exactly the same as the ones for a CSM validator. Make sure to have your keystore file and password ready.
+To register your validator with SSV Network, follow [the related guide in this documentation](/stakers/solo-stakers/distributing-a-validator). The process is the same for a CSM validator. Have your keystore file and password ready.
 
-You can move onto the next step once your validator is registered to a cluster as shown below.
+Move to the next step once your validator is registered to a cluster.
 
 
 ### 3. Set the Fee Recipient 
 
-As mentioned at the top of this guide, a requirement from Lido for all the validators registered to the CSM is that the fee recipient is set to the Lido Execution Layer Rewards Vault.
+As noted above, Lido requires every validator registered to CSM to use the Lido Execution Layer Rewards Vault as the fee recipient.
 
-As mentioned at the top of the page, this operation is account-wide, so if you don't want other "non-CSM" validators to be impacted, stop this procedure and use a different account.
+This setting applies at the account level. If you do not want other non-CSM validators to be affected, stop here and use a different account.
 
-Once the cluster is in place it's the perfect time to set the fee recipient. On the webapp, browse to the clusters management tab, and in the top right you will see the option to set Fee Address.
+Once the cluster is in place, set the fee recipient in the web app. Open the cluster management tab, then use the "Fee Address" button in the top-right corner to set the fee address.
 
 
 In the following screen, set the address to this value:
@@ -76,31 +76,31 @@ In the following screen, set the address to this value:
 0x388C818CA8B9251b393131C08a736A67ccB19297
 ```
 
-Enter the address, click update, and sign the transaction with your wallet.
+Enter the address, click **Update**, and sign the transaction with your wallet.
 
 
 ### 4. Deposit bond on Lido CSM 
 
-The following, and final step is to deposit the 2 ETH bond to Lido along with the validator deposit data to add the validator to the activation queue. Lido will deposit the 32 ETH needed for the activation to happen.
+The final step is to deposit the 2 ETH bond to Lido together with the validator deposit data so the validator enters the activation queue. Lido supplies the 32 ETH required for activation.
 
 Browse to [https://csm.lido.fi/](https://csm.lido.fi/) and connect your wallet.
 
-At this point, you'll need the `deposit.json` file [generated during the first step of this guide](#1-creating-validator-keys).
+At this point, you will need the `deposit.json` file [generated in step 1](#1-creating-validator-keys).
 
-Open the file, copy its content to your clipboard, and paste it into the "Upload deposit data" textbox as shown below.
-
-
-Then click submit and sign the transaction to deposit 2 ETH.
+Open the file, copy its contents, and paste them into the **Upload deposit data** field.
 
 
-Once the transaction has gone through, you can go to the "View Keys" section of the CSM website to confirm your transaction has succeeded.
+Then click **Submit** and sign the transaction to deposit 2 ETH.
 
 
-This concludes the procedure, now you just need to wait for your validator to be activated, this may take a while depending on how big the queue is.
+Once the transaction is complete, go to the **View Keys** section of the CSM website to confirm it succeeded.
+
+
+This completes the process. You now need to wait for your validator to be activated, which may take time depending on the queue size.
 
 #### Validator activation queue
 
-To check your validator you can use the following link. Make sure to paste the actual public key of the validator you want to monitor:
+To check your validator status, use the following link and replace the placeholder with the validator public key you want to monitor:
 
 <InlineEditableCodeBlock
   template='
@@ -111,4 +111,4 @@ To check your validator you can use the following link. Make sure to paste the a
   }}
 />
 
-Once the validator has been activated, the SSV operators you have chosen in step two will handle the validator duties for you. 
+Once the validator is activated, the SSV operators you selected in step 2 will perform validator duties for you.

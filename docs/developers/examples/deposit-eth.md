@@ -6,9 +6,9 @@ import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBloc
 
 # Deposit ETH
 
-This page shows how to deposit ETH into an existing cluster on the SSV Network using the [SSV SDK](/developers/SSV-SDK/).
+This page shows how to deposit ETH into an existing cluster on SSV Network with the [SSV SDK](/developers/SSV-SDK/).
 
-Depositing ETH increases the cluster balance used to pay ongoing validator operating costs.
+Depositing ETH increases the cluster balance used to cover ongoing validator operating costs.
 
 ## Prerequisites
 
@@ -56,4 +56,3 @@ try {
     OPERATOR_IDS: '1, 2, 3, 4'
     }}
 />
-

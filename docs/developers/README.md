@@ -7,33 +7,33 @@ import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBloc
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Quickstart 
+# Quickstart
 
-SSV is a permissionless network that enables the distribution of validator operations between non-trusting operators. If you're new to SSV network, go through [the Learn section](/learn/introduction/) to understand its core concepts first.
+SSV Network is a permissionless network that distributes validator operations across non-trusting operators. If you're new to SSV Network, start with [the Learn section](/learn/introduction/) to understand the core concepts.
 
-This guide explains how to generate validator keys, split them into key shares, and register them on the Hoodi testnet via the SSV-SDK. 
+This guide shows how to generate validator keys, split them into keyshares, and register them on the Hoodi testnet with the SSV SDK.
 
 ### Introduction
 
-Before getting started, review the following list of essential items for integrating with SSV:
-- [Quickstart guide below](#overview) shows how to automate bulk validator registration.
-- You can also find several [other Guides](/developers/examples/) in the respective section.
-- On-chain data is made available via [Subgraph](/developers/api/ssv-subgraph/) and the [SSV API](/developers/api/ssv-api) (e.g. operator metadata).
-- We recommend integrating with SSV by using [the SDK](/developers/SSV-SDK/). You can better understand how it is structured with [SSV SDK Module Reference](/developers/SSV-SDK/module-reference/).
-- Lastly, you can start experimenting by interacting with [our Hoodi Testnet](/developers/testnet) smart contracts, before interacting [with the Mainnet ones](/developers/smart-contracts).
+Before you start, review these resources for integrating with SSV Network:
+- The [quickstart below](#overview) shows how to automate bulk validator registration.
+- The [Tutorials section](/developers/examples/) includes additional task-focused examples.
+- On-chain data is available through the [SSV Subgraph](/developers/api/ssv-subgraph/) and the [SSV API](/developers/api/ssv-api) for items such as operator metadata.
+- For programmatic integrations, use [the SSV SDK](/developers/SSV-SDK/). For module-level details, see the [SSV SDK Module Reference](/developers/SSV-SDK/module-reference/).
+- You can experiment first with [the Hoodi testnet](/developers/testnet) before working with [mainnet smart contracts](/developers/smart-contracts).
 
 ### Overview
 
-The steps you will need to take:
+This quickstart covers these steps:
 1. [Installation](#1-installation)
 2. [Select operators and collect their data](#2-select-operators-and-collect-their-data)
 3. [Split your validator keys to shares](#3-split-validator-keys)
 4. [Register your validators to the SSV network](#4-register-validators)
 
-There is also [Full code example](#full-code-example) by the end of this page.
+The page also includes a [full code example](#full-code-example).
 
 :::note Prerequisite
-This tutorial assumes you already have keystores generated, or will use the [*code illustrated here*](/developers/examples/create-validator-keys) to generate them pragmatically.
+This tutorial assumes you already have keystores, or that you will use the [Create Validator Keys example](/developers/examples/create-validator-keys) to generate them programmatically.
 :::
 
 ### **1. Installation**
@@ -53,14 +53,14 @@ import { privateKeyToAccount } from 'viem/accounts'
 
 #### Instantiation
 
-To instantiate the SDK, provide a number of parameters:
+To initialize the SDK, provide these parameters:
 
 | Parameter       | Description                             |
 | --------------- | --------------------------------------- |
-| `public_client` | Public client object created using viem |
-| `wallet_client` | Wallet object created using viem        |
+| `publicClient` | Public client object created with viem |
+| `walletClient` | Wallet client created with viem        |
 
-You can use these like so to instantiate the SDK and store it an object:
+You can use them like this to initialize the SDK:
 
 ```typescript
 // Setup viem clients
@@ -85,7 +85,7 @@ const sdk = new SSVSDK({
     walletClient: walletClient as any,
     extendedConfig: {
       subgraph: {
-        apiKey: process.env.SUBGRAPH_API,
+        apiKey: process.env.SUBGRAPH_API_KEY,
         endpoint: process.env.SUBGRAPH_ENDPOINT,
       }
     }
@@ -93,17 +93,17 @@ const sdk = new SSVSDK({
 ```
 
 ### **2. Select operators and collect their data**
-A cluster can have 4, 7, 10, or 13 operators. If you already know the operator IDs you can proceed to any of the 3 options below to get their data. 
+A cluster can have 4, 7, 10, or 13 operators. If you already know the operator IDs, you can use any of the three options below to retrieve their data.
 
-If you need to choose operators, feel free to browse [SSV Explorer](https://explorer.ssv.network/operators) to find the operators you will add to your cluster. Then proceed to the steps below. Please note, some of the operators are Private and only allow specific whitelisted addresses to onboard validators to them.
+If you still need to choose operators, use [SSV Explorer](https://explorer.ssv.network/operators) to find operators for your cluster. Some operators are private and allow only specific whitelisted addresses to onboard validators.
 
 <Tabs>
   <TabItem value="subgraph" label="Subgraph">
-    To generate keyshares, operator IDs and their public keys are needed. You can collect keys of each operator using [SSV Subgraph](/developers/api/ssv-subgraph). You will need to create own Graph API key and use endpoint with it. 
+    To generate keyshares, you need operator IDs and public keys. You can retrieve them from the [SSV Subgraph](/developers/api/ssv-subgraph). To do this programmatically, create your own The Graph API key and use it with the subgraph endpoint.
 
-    Alternatively, you can do it using [The Graph UI](https://thegraph.com/explorer/subgraphs/F4AU5vPCuKfHvnLsusibxJEiTN7ELCoYTvnzg3YHGYbh?view=Query&chain=arbitrum-one). 
+    You can also explore the same data in [The Graph UI](https://thegraph.com/explorer/subgraphs/F4AU5vPCuKfHvnLsusibxJEiTN7ELCoYTvnzg3YHGYbh?view=Query&chain=arbitrum-one).
 
-    An example of how Hoodi Subgraph can fetch the operator data is below. The code snippet considers you have environment variables (`SUBGRAPH_API_KEY` and `OPERATOR_IDS`) in an `.env` file:
+    The example below fetches operator data from the Hoodi subgraph. It assumes you have `SUBGRAPH_API_KEY` and `OPERATOR_IDS` in your `.env` file:
     ```typescript
     const operatorIDs = JSON.parse(process.env.OPERATOR_IDS)
     const url = "https://gateway.thegraph.com/api/subgraphs/id/F4AU5vPCuKfHvnLsusibxJEiTN7ELCoYTvnzg3YHGYbh";
@@ -134,12 +134,12 @@ If you need to choose operators, feel free to browse [SSV Explorer](https://expl
     ```
   </TabItem>
   <TabItem value="explorer" label="Explorer">
-    To generate keyshares, operator IDs and their public keys are needed. This can also be done with [SSV Explorer](https://explorer.ssv.network/operators).
+    To generate keyshares, you need operator IDs and public keys. You can also collect them from [SSV Explorer](https://explorer.ssv.network/operators).
 
-    On each operator's page, there is a 🗝️ sign next to operator's name. Click on the key sign and their public key will be copied. Repeat the process for each operator you chose.
+    On each operator page, there is a 🗝️ icon next to the operator name. Click it to copy the public key, then repeat the process for each selected operator.
   </TabItem>
   <TabItem value="api" label="API">
-    Operator public key can be collected using our API once you know the ID. Use [this request type](https://api.ssv.network/documentation/#/Operators/OperatorsV4Controller_getOperator) to get the data. You only need to set the network and operator ID.
+    Once you know the operator ID, you can retrieve the public key from the SSV API. Use [this request](https://api.ssv.network/documentation/#/Operators/OperatorsV4Controller_getOperator) and set the network and operator ID.
 
 ```bash
 curl -X 'GET' \
@@ -147,7 +147,7 @@ curl -X 'GET' \
   -H 'accept: */*'
 ```
 
-From the response you will need `id` and `public_key` contents:
+From the response, you need the `id` and `public_key` fields:
 ```json
 {
   "id": 1,
@@ -192,28 +192,28 @@ From the response you will need `id` and `public_key` contents:
   </TabItem>
 </Tabs>
 
-Pass the collected operator info into ```generateKeyShares``` function in the code below.
+Pass the collected operator data into the `generateKeyShares` function shown below.
 
 ### **3. Split validator keys**
-Use the collected data and your keystore to generate the keyshare transaction payload. 
+Use the collected operator data and your keystore to generate the keyshare transaction payload.
 
-The code snippet below considers you have environment variables (`KEYSTORE_PASSWORD` and `OWNER_ADDRESS`)  in an `.env` file. Also, `nonce` is being handled automatically in the [full code example](#full-code-example):
+The snippet below assumes `KEYSTORE_PASSWORD` and `OWNER_ADDRESS` are set in your `.env` file. In the [full code example](#full-code-example), `nonce` is handled automatically:
 
 ```typescript
 const keysharesPayload = await sdk.utils.generateKeyShares({
     keystore: keystoreValues,
-    keystore_password: process.env.KEYSTORE_PASSWORD,
-    operator_keys: operators.map((operator: { id: string; publicKey: string }) => operator.publicKey),
-    operator_ids: operators.map((operator: { id: string; publicKey: string }) => Number(operator.id)),
-    owner_address: process.env.OWNER_ADDRESS,
+    keystorePassword: process.env.KEYSTORE_PASSWORD,
+    operatorKeys: operators.map((operator: { id: string; publicKey: string }) => operator.publicKey),
+    operatorIds: operators.map((operator: { id: string; publicKey: string }) => Number(operator.id)),
+    ownerAddress: process.env.OWNER_ADDRESS,
     nonce: nonce,
 })
 ```
 
 ### **4. Register validators**
-Then finally the `registerValidators` function can be called and return the transaction receipt:
+Finally, call `registerValidators` to submit the registration transaction and get the receipt:
 
-Register your validators to the SSV network is performed on completion of this function, when the transaction is processed successfully. 
+Your validators are registered with SSV Network when the transaction completes successfully.
 
 ```typescript
 const txn_receipt = await sdk.clusters.registerValidators({ 
@@ -225,13 +225,13 @@ const txn_receipt = await sdk.clusters.registerValidators({
 console.log("txn_receipt: ", txn_receipt)
 ```
 
-For validator [registration transaction](/developers/smart-contracts/ssvnetwork#bulkregistervalidatorpublickey-operatorids-shares-cluster) you need to provide the cluster’s latest snapshot data and the user nonce. Fortunately, SSV SDK retrieves this data automatically, so you don't have to.
+For the validator [registration transaction](/developers/smart-contracts/ssvnetwork#bulkregistervalidatorpublickey-operatorids-shares-cluster), you need the cluster's latest snapshot data and the owner nonce. The SSV SDK retrieves this data automatically.
 
 ### Full code example
 
-This example assumes you already have a number of keystore files and they are stored, under whatever is set for `KEYSTORE_FILE_DIRECTORY` in the `.env` file.
+This example assumes you already have multiple keystore files stored in the directory set by `KEYSTORE_FILE_DIRECTORY` in your `.env` file.
 
-**`.env` example file for the below script:**
+**Example `.env` file for the script below:**
 
 <InlineEditableCodeBlock
   language="sh"
@@ -244,6 +244,7 @@ KEYSTORE_FILE_DIRECTORY={{KEYSTORE_FILE_DIRECTORY}}
 DEPOSIT_AMOUNT={{DEPOSIT_AMOUNT}}
 OPERATOR_IDS='[{{OPERATOR_ID}}]'
 SUBGRAPH_API_KEY={{SUBGRAPH_API_KEY}}
+SUBGRAPH_ENDPOINT={{SUBGRAPH_ENDPOINT}}
   `
   }
   variables={{
@@ -251,7 +252,8 @@ SUBGRAPH_API_KEY={{SUBGRAPH_API_KEY}}
     KEYSTORE_FILE_DIRECTORY: './validator_keys',
     DEPOSIT_AMOUNT: '0.1234',
     OPERATOR_ID: '"1", "2", "3", "4"',
-    SUBGRAPH_API_KEY: 'GRAPH_API_KEY'
+    SUBGRAPH_API_KEY: 'GRAPH_API_KEY',
+    SUBGRAPH_ENDPOINT: 'https://gateway.thegraph.com/api/subgraphs/id/F4AU5vPCuKfHvnLsusibxJEiTN7ELCoYTvnzg3YHGYbh'
   }}
 />
 
@@ -302,7 +304,7 @@ async function main(): Promise<void> {
         walletClient: walletClient as any,
         extendedConfig: {
         subgraph: {
-            apiKey: process.env.SUBGRAPH_API,
+            apiKey: process.env.SUBGRAPH_API_KEY,
             endpoint: process.env.SUBGRAPH_ENDPOINT,
         }
         }
@@ -361,10 +363,10 @@ async function main(): Promise<void> {
 
         const keysharesPayload = await sdk.utils.generateKeyShares({
             keystore: keystoreValues,
-            keystore_password: process.env.KEYSTORE_PASSWORD,
-            operator_keys: operators.map((operator: { id: string; publicKey: string }) => operator.publicKey),
-            operator_ids: operators.map((operator: { id: string; publicKey: string }) => Number(operator.id)),
-            owner_address: process.env.OWNER_ADDRESS,
+            keystorePassword: process.env.KEYSTORE_PASSWORD,
+            operatorKeys: operators.map((operator: { id: string; publicKey: string }) => operator.publicKey),
+            operatorIds: operators.map((operator: { id: string; publicKey: string }) => Number(operator.id)),
+            ownerAddress: process.env.OWNER_ADDRESS,
             nonce: nonce,
         })
 

@@ -6,7 +6,7 @@ import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBloc
 
 # Register Validator
 
-This page shows how to progmatically register a validator on the SSV Network using the [SSV SDK](/developers/SSV-SDK/).
+This page shows how to programmatically register a validator on SSV Network with the [SSV SDK](/developers/SSV-SDK/).
 
 ## Prerequisites
 
@@ -18,7 +18,7 @@ Before using this example, make sure you have:
 
 ## Register Validator
 
-Use `sdk.clusters.registerValidators` to register a validator and deposit ETH into the cluster during registration.
+Use `sdk.clusters.registerValidators` to register a validator and deposit ETH into the cluster as part of the registration transaction.
 
 <InlineEditableCodeBlock
   language="typescript"

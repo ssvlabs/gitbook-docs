@@ -6,7 +6,7 @@ import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBloc
 
 # Withdraw ETH
 
-This page shows how to withdraw ETH from a cluster on the SSV Network using the [SSV SDK](/developers/SSV-SDK/).
+This page shows how to withdraw ETH from a cluster on SSV Network with the [SSV SDK](/developers/SSV-SDK/).
 
 Withdrawing ETH reduces the cluster balance and transfers funds back to the cluster owner.
 

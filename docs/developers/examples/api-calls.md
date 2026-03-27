@@ -6,7 +6,7 @@ import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBloc
 
 # API Calls
 
-This page shows how to use the API module to perform various calls. The API module is used to retrieve data such as the account nonce and cluster snapshot, both of which are covered on this page.
+This page shows how to use the SDK API module for common read operations. The examples on this page cover operator lookup, owner nonce retrieval, and cluster snapshot retrieval.
 
 For the full list of available functions, see the [API Module Reference](/developers/SSV-SDK/module-reference/api-module).
 

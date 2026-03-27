@@ -6,7 +6,7 @@ import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBloc
 
 # Exit Validator
 
-This page shows how to exit a validator from the SSV Network using the [SSV SDK](/developers/SSV-SDK/).
+This page shows how to exit a validator from SSV Network with the [SSV SDK](/developers/SSV-SDK/).
 
 Exiting a validator triggers the voluntary exit flow by requesting the selected SSV operators to sign the validator exit message.
 

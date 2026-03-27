@@ -11,9 +11,9 @@ sidebar_position: 5
 
 The correct procedure depends on what validator files you still have:
 
-- [You have the validator keystore](#1-you-have-the-validator-keystore)
-- [You have DKG-generated files](#2-you-have-dkg-artifacts)
-- [You have neither](#3-you-have-neither)
+- [You have the validator keystore](#you-have-the-validator-keystore)
+- [You have DKG-generated files](#you-have-dkg-artifacts)
+- [You have neither](#you-have-neither)
 
 If you are unsure about any step, ask in the [SSV Network Discord](https://discord.gg/5vT22pRBrf).
 

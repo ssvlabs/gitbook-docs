@@ -4,12 +4,12 @@ sidebar_position: 1
 
 # Create Validator Keys
 
-The [SSV SDK](/developers/SSV-SDK/) does not natively support generating validator keystores programmatically. This guide shows how to generate validator keys, keystores, and deposit data using external libraries.
+The [SSV SDK](/developers/SSV-SDK/) does not natively generate validator keystores programmatically. This guide shows how to generate validator keys, keystores, and deposit data with external libraries.
 
 Alternatively, you can use the [Ethereum Staking Deposit CLI](https://github.com/ethstaker/ethstaker-deposit-cli) to generate validator keys. The CLI supports multiple networks, including Ethereum mainnet and testnets such as Hoodi.
 
 :::warning
-This process is not part of the SSV SDK. SSV is not responsible for any misuse of the external tools used to generate validator keys in the method shown below.
+This process is not part of the SSV SDK. Use the external tools in this example at your own discretion.
 :::
 
 ## Prerequisites
@@ -45,7 +45,7 @@ This override ensures compatibility with [`Lodestar`](https://www.npmjs.com/pack
 
 ## Install Dependencies
 
-Install the packages that are needed to run the script below.
+Install the packages required to run the script below.
 
 ```bash
 npm install viem @chainsafe/bls-keygen @chainsafe/bls-keystore @chainsafe/bls @chainsafe/ssz @lodestar/config @lodestar/params @lodestar/state-transition @lodestar/types abitype dotenv
@@ -53,7 +53,7 @@ npm install viem @chainsafe/bls-keygen @chainsafe/bls-keystore @chainsafe/bls @c
 
 ## Generate Validator Keys
 
-The following example defines a `createValidatorKeys` helper function that generates validator keys, encrypted keystores, and deposit data for one or more validators.
+The example below defines a `createValidatorKeys` helper that generates validator keys, encrypted keystores, and deposit data for one or more validators.
 
 ```ts title="create-validator-keys.ts"
 import 'dotenv/config'
@@ -230,7 +230,7 @@ console.log(result)
 
 ## Configure Environment Variables
 
-This example assumes you are loading the required inputs from environment variables.
+This example assumes you load the required inputs from environment variables.
 
 If you use a `.env` file for development, ensure it is added to `.gitignore` so it is not committed to version control. Sensitive data such as passwords or private keys should never be stored in your repository.
 
@@ -248,4 +248,3 @@ Run the script using your preferred TypeScript runtime.
 ```bash
 npx tsx create-validator-keys.ts
 ```
-

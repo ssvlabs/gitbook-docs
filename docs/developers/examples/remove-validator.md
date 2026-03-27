@@ -6,7 +6,7 @@ import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBloc
 
 # Remove Validator
 
-This page shows how to remove validators from a cluster on the SSV Network using the [SSV SDK](/developers/SSV-SDK/).
+This page shows how to remove validators from a cluster on SSV Network with the [SSV SDK](/developers/SSV-SDK/).
 
 Removing a validator updates the cluster configuration and stops the validator from participating in the cluster.
 

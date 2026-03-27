@@ -5,6 +5,6 @@ sidebar_position: 3
 
 # SSV API
 
-The SSV API is a RESTful API that provides access to the SSV Network's data and functionality. It is used by the SSV WebApp to fetch operator metadata and other data.
+The SSV API is a REST API that provides access to SSV Network data and selected platform functionality. The SSV Web App uses it for operator metadata and related data.
 
-The API and it's documentation is available at https://api.ssv.network/documentation/#/v4
+API documentation is available at https://api.ssv.network/documentation/#/v4.

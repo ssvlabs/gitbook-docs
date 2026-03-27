@@ -6,7 +6,7 @@ import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBloc
 
 # Cluster Balance Calculation
 
-The script below calculates the balance of a cluster on the SSV Network. This calculation can be made useful by integrating it into your own cluster balance monitoring or automation tools.
+The script below calculates the balance of a cluster on SSV Network. You can integrate it into your own monitoring or automation tools.
 
 Details on the formulas used can be found in the documentation page related to [Cluster Balance](/learn/network-overview/clusters/cluster-balance).
 

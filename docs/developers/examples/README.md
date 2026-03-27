@@ -5,9 +5,9 @@ sidebar_label: 'Tutorials'
 
 # Tutorials
 
-In this examples section we will provide quick snippets of code to do certain actions. We will not show the imports/setup for each as [this is covered previously](/developers/SSV-SDK/#initialization).
+This section contains short code examples for common tasks utilizing SSV SDK. Imports and SDK setup are not repeated on every page because they are covered in [SSV SDK initialization](/developers/SSV-SDK/#initialization).
 
-Most of the examples follow full validator flow:
+Most examples follow the validator lifecycle:
 1. [Create Validator Keys](./create-validator-keys)
 2. [Generate and Validate Keyshares](./generate-and-validate-keyshares)
 3. [Deposit ETH](./deposit-eth)
