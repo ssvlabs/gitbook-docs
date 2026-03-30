@@ -5,7 +5,7 @@ sidebar_position: 2
 
 # Setting Operator Metadata
 
-Make sure to connect your Web3 wallet with the WebApp. The address should be the same you used to register your operator with.
+Connect the same wallet you used to register the Operator in the [Web App](https://app.ssv.network/).
 
 1. Browse to the [My Account page](https://app.ssv.network/operators) and **select the Operator you want to update**.
 
@@ -13,22 +13,22 @@ Make sure to connect your Web3 wallet with the WebApp. The address should be the
 
 ![setting-operator-metadata](/img/set-operator-metadata-1.png)
 
-3. **Fill-in the form with the information you want to edit**.
+3. **Fill in the details you want to update**.
 
-**Remember:** the more details you can provide the better, as it will help stakers making informed decision when selecting operators to manage their validator clusters.
+More complete metadata helps Stakers make informed decisions when choosing Operators for their validator clusters.
 
 :::warning Please note
-Currently, the `Description` and `Name` parts do not allow to use symbols `, . ; :`. Please don't use them, otherwise you'll see errors when submitting the metadata.
+The `Description` and `Name` fields currently do not allow the symbols `, . ; :`. Do not use them, or the metadata submission will fail.
 :::
 
 ![setting-operator-metadata](/img/set-operator-metadata-2.png)
 
 4. Once done, **click the _Sign Metadata_ button** and confirm signature.
 
-The WebApp will ask you to provide a signature of a message. Make sure to open your Web3 wallet, if it does not automatically and confirm the transaction.
+The Web App asks you to sign a message. Open your wallet if it does not open automatically and confirm the signature.
 
 :::note Signature costs no gas
-This is not a transaction and will not cost any gas, it's only needed to verify that you are the Operator owner.
+This is not a transaction and does not cost gas. It only proves that you are the Operator owner.
 :::
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -41,6 +41,6 @@ This is not a transaction and will not cost any gas, it's only needed to verify 
 
 5. **Done!**
 
-When the message is successfully signed, the Operator metadata will have been correctly updated.
+Once the message is signed, the Operator metadata is updated.
 
 ![setting-operator-metadata](/img/set-operator-metadata-4.png)

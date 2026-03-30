@@ -20,14 +20,14 @@ import Link from '@docusaurus/Link';
 <br />
 
 :::info
-The dashboards cover many of the subsystems that make up the SSV node, which may seem a bit overwhelming at first; however, we will try to simplify the processes that we use to diagnose issues as well as things to look out for.
+The dashboards cover many SSV Node subsystems. That can feel overwhelming at first, so this page focuses on what to watch and how to use the panels for diagnosis.
 :::
 
-In this section, we go over what things to look out for and how to monitor them. Not all of the metrics/panels may be useful for the end user to monitor in production, but they may aid in diagnosing issues either at an infrastructure level or client level.
+This page explains what to look for and how to interpret it. Not every panel is equally useful in production, but many of them help when diagnosing infrastructure or client issues.
 
-### P2P Discovery <a href="#p2p-discovery" id="p2p-discovery"></a>
+### P2P Discovery 
 
-**Description:** Handles the discovery of new peers on the network, scoring them, and connecting to them where relevant. Generally, you don't need to worry about high rejection rates, as this is a normal part of the discovery process.
+**Description:** Handles discovery of new peers, peer scoring, and connection attempts. High rejection rates are often normal during discovery.
 
 **Key Metrics to Monitor:**
 
@@ -37,17 +37,17 @@ In this section, we go over what things to look out for and how to monitor them.
 
 **Things to Watch For:**
 
-* **Overall Low Rates:** If you see low rates, it means that your node is not discovering any peers.
+* **Overall low rates:** If rates stay low, the node may not be discovering peers.
 
 **Recommendations:**
 
-* Verify firewall and network configurations/security groups.
+* Verify firewall rules, network configuration, and security groups.
 
 ***
 
-### P2P Peers <a href="#p2p-peers" id="p2p-peers"></a>
+### P2P Peers
 
-**Description:** Tracks and manages active connections, including their direction (inbound/outbound), versions, and subnet distributions.
+**Description:** Tracks active connections, including direction (inbound or outbound), versions, and subnet distribution.
 
 **Key Metrics to Monitor:**
 
@@ -58,8 +58,8 @@ In this section, we go over what things to look out for and how to monitor them.
 **Things to Watch For:**
 
 * **Frequent Disconnects:** This may indicate network instability or misconfiguration.
-* **Low Overall Connections:** If your node is connected to very few peers, it will struggle to propagate messages through peer-to-peer communication, which may impact the performance of the validators that your node manages.
-* **Low Inbound/Outbound Connections:** If your node has low inbound connections, it means other peers in the network may not be able to discover and communicate with your node. The same goes for outbound connections; it may signal outbound connection issues.
+* **Low overall connections:** If your node has very few peers, it may struggle to propagate messages, which can hurt validator performance.
+* **Low inbound or outbound connections:** Low inbound connections may mean peers cannot discover your node. Low outbound connections may indicate connection issues on your side.
 
 **Recommendations:**
 
@@ -67,7 +67,7 @@ In this section, we go over what things to look out for and how to monitor them.
 
 ***
 
-### P2P Traffic <a href="#p2p-traffic" id="p2p-traffic"></a>
+### P2P Traffic
 
 **Description:** Manages inbound and outbound messages, stream requests, and responses. When running an exporter node, you will only see inbound messages, as outbound messages are only considered those that the node itself broadcasts.
 
@@ -86,7 +86,7 @@ In this section, we go over what things to look out for and how to monitor them.
 
 ***
 
-### P2P Message Validation <a href="#p2p-message-validation" id="p2p-message-validation"></a>
+### P2P Message Validation
 
 **Description:** This component is responsible for validating that messages are correct and meet a set of rules. This is an important component, as your node will only relay messages to other peers when the message is valid.
 
@@ -102,7 +102,7 @@ In this section, we go over what things to look out for and how to monitor them.
 
 ***
 
-### Duty Scheduler <a href="#duty-scheduler" id="duty-scheduler"></a>
+### Duty Scheduler
 
 **Description:** This component is responsible for scheduling and coordinating the Ethereum duties that your node will perform.
 
@@ -122,7 +122,7 @@ In this section, we go over what things to look out for and how to monitor them.
 
 ***
 
-### Event Syncer <a href="#event-syncer" id="event-syncer"></a>
+### Event Syncer
 
 **Description:** This component is responsible for processing events from the SSV network Ethereum smart contract. Among other things, it signals the SSV node w,hich validators it should manage on behalf of other users.
 
@@ -140,7 +140,7 @@ In this section, we go over what things to look out for and how to monitor them.
 
 ***
 
-### Runners <a href="#runners" id="runners"></a>
+### Runners
 
 **Description:** Handles various stages of validator operations, including pre-consensus, consensus, and post-consensus. This section should help you visualize how much time is taken on each stage of a validator's duty lifecycle.
 
@@ -161,7 +161,7 @@ In this section, we go over what things to look out for and how to monitor them.
 
 ***
 
-### Validator <a href="#validator" id="validator"></a>
+### Validator
 
 **Description:** Tracks validator logic, including statuses, errors, and duty submissions.
 
@@ -182,7 +182,7 @@ In this section, we go over what things to look out for and how to monitor them.
 
 ***
 
-### QBFT Consensus Instance <a href="#qbft-consensus-instance" id="qbft-consensus-instance"></a>
+### QBFT Consensus Instance
 
 **Description:** Handles QBFT consensus instances. This allows more granular information over a full consensus instance and allows one to see the duration of each stage (commit, prepare, proposal) and consensus round.
 
@@ -192,7 +192,7 @@ In this section, we go over what things to look out for and how to monitor them.
 
 ***
 
-### Ethereum Clients <a href="#ethereum-clients" id="ethereum-clients"></a>
+### Ethereum Clients
 
 **Description:** Monitors interactions and synchronization with Consensus and Execution Layer clients.
 

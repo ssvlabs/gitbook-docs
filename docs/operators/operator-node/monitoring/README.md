@@ -5,19 +5,19 @@ sidebar_position: 3
 
 ## Introduction
 
-This page will go over all the necessary steps to enhance observability of an SSV node.
+This section explains how to monitor an SSV Node.
 
-The SSV node is instrumented with [OpenTelemetry](https://opentelemetry.io/) metrics, where the default exporter is [Prometheus](https://prometheus.io/). You can use [Grafana](https://grafana.com/docs/) to explore the monitoring dashboard. We recommend to have a separate monitoring for your Execution and Beacon nodes to have maximum visibility of your operations.
+SSV Node exposes [OpenTelemetry](https://opentelemetry.io/) metrics, with [Prometheus](https://prometheus.io/) as the default exporter. You can use [Grafana](https://grafana.com/docs/) to explore dashboards. We recommend separate monitoring for your Execution and Beacon nodes so you have full visibility across the stack.
 
-We aim for this section to be an all-stop shop so that you can self-service and diagnose any issues you may have.
+This section is intended as a practical starting point for self-service diagnosis.
 
 ## Requirements
 
-The provided dashboards use `pod` as a label to template across the Grafana panels. This is useful if you are running more than one SSV node as it allows you to see performance metrics for each SSV node.
+The provided dashboards use the `pod` label to template panels. This is useful when you run more than one SSV Node because it lets you view metrics for each node separately.
 
-The following is an example of a Prometheus configuration that will scrape metrics from your SSV node. It is important to note that the `pod` label is not added to the metrics by default, so you will need to add it manually. Prometheus by default adds an `instance` label to the metrics.
+The example below shows a Prometheus configuration that scrapes metrics from your SSV Node. Prometheus does not add a `pod` label by default, so you need to add it yourself. Prometheus does add an `instance` label by default.
 
-In the example below you can find 2 options (as comments) for how you can add the `pod` label:
+The example includes two commented options for setting `pod`:
 
 ```yaml
 global:
@@ -32,7 +32,7 @@ scrape_configs:
           - "localhost:15000"
     relabel_configs:
       ## Two options to choose from:
-      ## 1. If you want a static name, perhaps because you are running 
+      ## 1. If you want a static name, perhaps because you are running
       ## multiple instances of ssv-node, or want to set a specific name, uncomment these:
       # - target_label: pod
       #   replacement: ssv-node-1
@@ -44,67 +44,74 @@ scrape_configs:
 
 ## Monitoring Setup
 
-There are multiple ways to setup your SSV monitoring, we'll go over the most common ones.
+There are several ways to set up monitoring for SSV Node. The most common options are below.
 
 ### Running the sample repository
 
-The easiest way to set up observability is to run the sample repository. It is based on Docker Compose and it will do everything for you, including setting up the SSV node, Prometheus, and Grafana. To follow the instructions in the [Node Installation Guide](/operators/operator-node/node-setup/) and additional details you can find in the [README of the repository](https://github.com/ssvlabs/ssv-stack/blob/main).
+The easiest option is to use the sample repository. It is based on Docker Compose and sets up SSV Node, Prometheus, and Grafana for you. Follow the [Node Installation Guide](/operators/operator-node/node-setup/) and see the [repository README](https://github.com/ssvlabs/ssv-stack/blob/main) for additional details.
 
-Once you used our repository, open your browser and go to [http://localhost:3000](http://localhost:3000/). If you're not running on local machine you need to expose port **3030 TCP** on your server and then can access the Grafana via [http://1.2.3.4:3000](http://1.2.3.4:3000), make sure to change it to your public IP address.
+After the stack is running, open Grafana at [http://localhost:3000](http://localhost:3000/).
 
-Login with `admin`/`admin` you can change the password later. In the `Dashboards` section you should be able to find the `SSV Operational` dashboard. Unless the node is registered with the SSV network and has validators, some of the dashboard's columns might be empty.
+If Grafana is running on a remote server, expose **3000 TCP** and open `http://<your-public-ip>:3000` in your browser.
+
+Sign in with `admin` / `admin`. You can change the password later. In **Dashboards**, look for the `SSV Operational` dashboard. If the node is not yet registered on SSV Network or is not managing validators, some panels may be empty.
 
 ### Using an existing monitoring stack
 
-If you are already running a monitoring stack, scraping metrics from your SSV node has not changed. You will need to ensure that your Prometheus instance is scraping metrics from your SSV node via `MetricsAPIPort` (set in your SSV node's configuration file, 15000 by default).
+If you already run Prometheus and Grafana, the setup is straightforward. Make sure Prometheus scrapes metrics from your SSV Node on `MetricsAPIPort` (`15000` by default in the node configuration).
 
-Once again, `pod` label is used, which is common for Kubernetes, but if you are running your SSV node on a different platform, you will need to change this to the correct label.
+The dashboards expect a `pod` label. If you are not running on Kubernetes, adjust the queries or relabeling to match the labels in your environment.
 
 ### Kubernetes
 
-If you are running your SSV node on Kubernetes, you will need to ensure that your Prometheus instance is scraping metrics from your SSV node. For this, we often recommend a project called [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack).
+If you run SSV Node on Kubernetes, make sure Prometheus scrapes metrics from it. A common option is [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack).
 
-Due to the dynamic nature of Kubernetes, a common pattern is to use a `ServiceMonitor` or `PodMonitor` to scrape metrics from your SSV node. `kube-prometheus-stack` by default adds the `pod` label to the metrics, so dashboards should work out of the box.
+Because Kubernetes is dynamic, a `ServiceMonitor` or `PodMonitor` is usually the best way to scrape metrics. `kube-prometheus-stack` adds the `pod` label by default, so the dashboards should work without extra changes.
 
-You can read more on ServiceMonitors and PodMonitors in the [Prometheus Operator documentation](https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api).
+See the [Prometheus Operator documentation](https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api) for details.
 
 ## Using Dashboard
 
-If you are using Grafana instance, you should be able to access your instance on the 3000 port by default. So Grafana's address would look like `http://1.2.3.4:3000` with the public IP address of your server. In this case, you need to expose port **3000 TCP** (default Grafana port), so that you can access the dashboard.
+If you run your own Grafana instance, Grafana is usually available on port `3000`, for example `http://1.2.3.4:3000`. In that case, expose **3000 TCP** so you can reach the dashboard.
 
-Alternatively, you can use [Grafana Cloud](https://grafana.com/products/cloud/) and connect it to your Prometheus instance. In that case, you will have to expose port **9090 TCP** (default Prometheus port), so that Grafana can access your metrics.
+Alternatively, you can use [Grafana Cloud](https://grafana.com/products/cloud/) and connect it to your Prometheus instance. In that case, expose **9090 TCP** so Grafana Cloud can reach Prometheus.
 
 ### Download Dashboard
 
-Download the `.json` file of the dashboard on top of the [Dashboard Runbook section](dashboard-runbook).
+Download the `.json` dashboard file from the top of the [Dashboard Runbook](dashboard-runbook).
 
 ### Metrics Index
 
-All of the metrics from the dashboard are described on the [Metrics Index page](metrics-index).
+All dashboard metrics are documented on the [Metrics Index page](metrics-index).
 
 ## Quick note on Prometheus and Grafana
 
 ### Interpreting Rates
 
-Some panels in our default dashboard may look confusing at first glance; for example, how is it possible that my SSV node has connected to 34.7 peers over the last minute? Why does it have decimal points?
+Some panels in the default dashboard can look confusing at first. For example, why does a peer count show `34.7` instead of a whole number?
 
-This is where the Prometheus `rate()` function comes in. `rate()` is a function that calculates the rate of change of a metric over a given time interval, and it is displayed on a per-second basis.
+This usually comes from the Prometheus `rate()` function. `rate()` calculates how quickly a metric changes over a time interval and reports that value per second.
 
-For example, if we have a calculation of `rate(ssv_network_peers_connected[1m])`, this means that the rate of peers connected is calculated as the number of peers connected over the last minute, and it is displayed on a per-second basis. We sometimes multiply this by 60 to get a rate over a minute. This should clarify why many panels have decimal points over metrics that, in theory, should be whole numbers.
+For example, `rate(ssv_network_peers_connected[1m])` calculates the peer connection rate over the last minute and displays it as a per-second value. We sometimes multiply that by 60 to show a per-minute rate. That is why some panels display decimals for values that are otherwise whole numbers.
 
 ### Calculating Rates
 
-Rates are a powerful way to see how a metric changes over time, but they force us to specify a time interval to calculate the rate. Rather than hardcoding intervals in our dashboards, we leverage `__rate_interval` all across our dashboards to calculate rates over a given time interval. You can read more about `__rate_interval` it in [Grafana's post](https://grafana.com/blog/2020/09/28/new-in-grafana-7.2-__rate_interval-for-prometheus-rate-queries-that-just-work/). This, however, means that you need to configure your Prometheus data source to match Prometheus's scrape interval. You can do this in the Grafana UI by clicking on the Prometheus datasource and then changing it under `Interval behaviour`. Having a mismatch between those two will result in incorrect rate calculations and dashboards not being displayed correctly.
+Rates are useful, but they require a time interval. Rather than hardcoding intervals in dashboards, we use `__rate_interval` across the dashboards. See [Grafana's post](https://grafana.com/blog/2020/09/28/new-in-grafana-7.2-__rate_interval-for-prometheus-rate-queries-that-just-work/) for background.
 
-The default scrape interval for Prometheus is 1 minute, whereas the default interval for a Prometheus data source in Grafana is 15 seconds.
+This means your Grafana Prometheus data source should match Prometheus's scrape interval. You can change this in the Grafana UI under the Prometheus data source settings and `Interval behaviour`. If those values do not match, rate calculations may be wrong and dashboards may display incorrectly.
+
+The default Prometheus scrape interval is 1 minute, while the default Prometheus data source interval in Grafana is 15 seconds.
 
 ## Alerts
-[Here you can find some example alerts](https://github.com/ssvlabs/ssv-stack/blob/main/prometheus/alert-rules.yml), as pure guidance. Actual alerts will depend on your infrastructure stack. Generally, it's best to approach this from top to bottom. Make sure you have alerts that capture degraded performance at the:
-- Infrastructure level (CPU, RAM, I/O, uptime)
+
+[Here are some example alerts](https://github.com/ssvlabs/ssv-stack/blob/main/prometheus/alert-rules.yml). Use them as a starting point only. Actual alerts should reflect your own infrastructure.
+
+In general, define alerts from top to bottom:
+
+- Infrastructure level: CPU, RAM, I/O, uptime
 - Ethereum clients
 - SSV client
 
 ## Traces
 
-SSV Node supports distributed tracing via OpenTelemetry. Traces provide deep visibility into node operations and can help diagnose performance issues. See the [Traces guide](./traces) for setup and configuration details.
-
+SSV Node supports distributed tracing through OpenTelemetry. Traces provide deeper visibility into node operations and can help diagnose performance issues. See the [Traces guide](./traces) for setup and configuration details.

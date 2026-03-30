@@ -3,19 +3,19 @@ title: Registering an Operator
 sidebar_position: 1
 ---
 
-[After successfully running an SSV node](/operators/operator-node/node-setup), an operator must register it to the SSV Network in order to be discoverable by validators. You can register your operator through the SSV network [web app](https://app.ssv.network) or via a transaction directly to the [smart contract](/developers/smart-contracts/ssvnetwork#registeroperatorpublickey-fee-setprivate)
+[After successfully running an SSV Node](/operators/operator-node/node-setup), you must register your Operator on SSV Network before validators can discover it. You can register through the [Web App](https://app.ssv.network) or by sending a transaction directly to the [smart contract](/developers/smart-contracts/ssvnetwork#registeroperatorpublickey-fee-setprivate).
 
 ### Prerequisites
 
-While registering your operator you will need to provide the following parameters:
+To register your Operator, prepare the following:
 
-* [Operator public key](/operators/operator-node/node-setup) - Part of the private key, generated in the node installation process
-* [Operator fee](/learn/tokenomics/fees) - The fee charged by the operator per each managed validator
+* [Operator public key](/operators/operator-node/node-setup) - generated during node installation
+* [Operator fee](/learn/tokenomics/fees) - the fee charged per every 32 ETH managed
 
-## Registering an Operator on the WebApp
+## Registering an Operator on the Web App
 
-:::info Owner Wallet
-The wallet address used to register the operator is the only address that will hold management permissions for it.
+:::warning Double check key and address
+**The Operator key and owner address cannot be changed**. Verify that the owner address matches the wallet you want to use to manage this Operator.
 :::
 
 1. In the [My Account page](https://app.ssv.network/clusters), **choose "Register Operator"**
@@ -30,12 +30,8 @@ The wallet address used to register the operator is the only address that will h
 
 2. Select **Join as Operator**.
 
-3. **Provide Public key**
-Input the Operator's public key (can be found at the end of private key file) and provide a confirmation of the Operator owner address.
-
-:::warning Double check key and address
-**Operator key and owner address can not be changed**. Please verify once more that the owner address correspond to the wallet address you want to manage your operators with.
-:::
+3. **Provide the public key**
+Enter the Operator public key, which you can find in the private key file, and confirm the Operator owner address.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
@@ -45,11 +41,11 @@ Input the Operator's public key (can be found at the end of private key file) an
   />
 </div>
 
-Additionally, you should **choose between Public and Private** operator modes. [Refer to this page to learn](/learn/network-overview/operators/permissioned-operators#what-are-permissioned-operators) more about these statuses.
+Also choose whether the Operator should be **Public** or **Private**. To learn more, see [permissioned operators](/learn/network-overview/operators/permissioned-operators#what-are-permissioned-operators).
 
 4. **Set the Operator Fee**
 
-Know that it will be possible to update the Operator fees later, [with limitations imposed by the protocol, to protect stakers](/learn/network-overview/operators/update-fee). For more information about fees in general, please [head over to the related page](/learn/tokenomics/fees).
+You can update the Operator fee later, subject to [protocol limits that protect Stakers](/learn/network-overview/operators/update-fee).
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
@@ -61,7 +57,7 @@ Know that it will be possible to update the Operator fees later, [with limitatio
 
 5. **Confirm operator details**
 
-This confirmation screen presents a recap of the information input so far. Double check everything and click _Register Operator_ when ready.
+This screen shows a summary of the details you entered. **Review everything**, then click _Register Operator_.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
@@ -73,7 +69,7 @@ This confirmation screen presents a recap of the information input so far. Doubl
 
 6. **Sign the transaction** to finalize registration
 
-The WebApp will update, waiting for the transaction to be confirmed by the network.
+The Web App updates while the network confirms the transaction.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
@@ -85,7 +81,7 @@ The WebApp will update, waiting for the transaction to be confirmed by the netwo
 
 7. **Done!**
 
-Congratulations, your Operator is successfully registered, and stakers could now choose it to operate their validators.
+Your Operator is now registered and can be selected by Stakers.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 

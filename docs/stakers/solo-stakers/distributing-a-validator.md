@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 The fastest way to start with SSV Network is to distribute and register an existing validator. If you are new to the flow, try it on testnet first and then continue on mainnet.
 
-Before you begin, make sure you have:
+**Before you begin, make sure you have:**
 - your validator keys
 - an active deposit made to the Ethereum Deposit Contract
 - enough ETH in your owner wallet to pay gas and fund the cluster's runway and liquidation collateral

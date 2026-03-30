@@ -3,13 +3,17 @@ description: Creating a New Validator
 sidebar_position: 1
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Creating a New Validator
 
 There are two ways to create a validator for SSV Network:
-- [Vanilla key generation](#vanilla-key-generation)
-- [Distributed key generation](#distributed-key-generation)
+- **Vanilla key generation** - if you want to generate and hold the validator keystore yourself.
+- **Distributed key generation** - if you want the validator key to be generated as distributed shares without ever creating the full validator private key in one place.
 
-Use the vanilla flow if you want to generate and hold the validator keystore yourself. Use the DKG flow if you want the validator key to be generated as distributed shares without ever creating the full validator private key in one place.
+<Tabs>
+  <TabItem value="vanilla" label="Vanilla Key Generation">
 
 ## Vanilla Key Generation
 
@@ -38,6 +42,9 @@ Store the mnemonic and password securely. They cannot be recovered if lost.
 :::
 
 When the validator files are ready, continue to [Deposit Validator Keys](#deposit-validator-keys).
+
+  </TabItem>
+  <TabItem value="DKG" label="Distributed Key Generation">
 
 ## Distributed Key Generation
 
@@ -154,6 +161,9 @@ Follow this flow in Launchpad:
 Activation can take hours or days depending on the [validator entry queue](https://www.validatorqueue.com/).
 
 You can track validator activation on [Beaconcha.in](https://beaconcha.in/) by validator public key.
+
+  </TabItem>
+</Tabs>
 
 ## Next Steps
 

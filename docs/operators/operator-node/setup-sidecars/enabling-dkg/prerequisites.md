@@ -7,8 +7,8 @@ sidebar_position: 1
 
 ## Minimum requirements
 
-The minimum requirement is an AWS `t3.small` or equivalent machine dedicated to run DKG. 
-The recommend requirement is an AWS `t3.medium` or higher tier machine  ([https://aws.amazon.com/ec2/instance-types/](https://aws.amazon.com/ec2/instance-types/)).
+The minimum requirement is an AWS `t3.small` or an equivalent machine dedicated to DKG.
+The recommended requirement is an AWS `t3.medium` or higher ([AWS instance types](https://aws.amazon.com/ec2/instance-types/)).
 
 Minimum docker resource allocations:
 
@@ -21,20 +21,20 @@ deploy:
 ```
 
 :::info Please Note
-Computational demands are raising depending on amount validators being created at once.
-An idle DKG node needs almost none resources.
+Compute requirements increase with the number of validators being created at the same time.
+An idle DKG node uses very few resources.
 :::
 
 ## Prerequisites
 
-In order to successfully participate in DKG ceremonies initiated by stakers, you will need to possess and/or provide this information:
+To participate successfully in DKG ceremonies initiated by Stakers, prepare the following:
 
 * **Operator ID** - the ID of your operator within the SSV network.
-* **Operator Key Pair**
+* **Operator key pair**
   * **Public Key** - the public key of the operator 
-  * **Private Key** - the private key of the operator as an password-encrypted file (if you are in possession of raw text private key, follow [this migration guide to encrypt your existing operator keys](/operators/operator-node/maintenance/troubleshooting/#faq))
-* **Machine Endpoint** - the endpoint (`protocol:ip:port`,  e.g. `https://my-dkg.com:3030`) of the machine intended to run the `ssv-dkg` client (if you have a domain name, instead of an `ip` that works as well)
+  * **Private Key** - the Operator private key as a password-encrypted file (if you only have a raw private key, follow [this migration guide](/operators/operator-node/maintenance/troubleshooting/#faq) to encrypt it)
+* **Machine endpoint** - the endpoint (`protocol:ip:port`, for example `https://my-dkg.com:3030`) of the machine that will run `ssv-dkg` (you can use a domain name instead of an IP)
 
 :::warning
-You **must** **use the same Private and Public Keys** of your SSV operator when running `ssv-dkg` node. Using a different key will result in the inability to successfully complete the DKG ceremony.
+You **must use the same private and public keys** as your SSV Operator when running `ssv-dkg`. Using a different key will prevent the DKG ceremony from completing successfully.
 :::

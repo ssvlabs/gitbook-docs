@@ -10,10 +10,10 @@ import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBloc
 
 ### Prerequisites
 
-* [x] Wallet funded with sufficient ETH for transaction gas fees on the chosen network (Mainnet or Holesky)
-* [x] Execution layer node end-point
+* [x] Wallet funded with enough ETH for transaction gas fees on the chosen network (Mainnet or Hoodi)
+* [x] Execution layer node endpoint
 * [x] Reliable internet connection
-* [x] NodeJS installed on your machine
+* [x] Node.js installed on your machine
 
 The minimum hardware requirements are very low. A single board computer could run multiple instances of the bot, along with other tasks and services, without perceiving an impact on performance.
 
@@ -30,7 +30,7 @@ yarn cli --help
 
 | CLI Parameter       | .ENV Variable     |  Description                             |
 | ---------------| ---------- | --------------------------------------- |
-| `--node-url`    |  `NODE_URL`   |The Ethereum execution node end-point   |
+| `--node-url`    |  `NODE_URL`   |The Ethereum execution node endpoint   |
 | `--private-key` |  `ACCOUNT_PRIVATE_KEY`   |Private key of the liquidator's wallet  |
 | `--liquidator-type` |  `LIQUIDATOR_TYPE`   |The liquidator type. `eth` `ssv`  |
 | `--ssv-sync-env` |   `SSV_SYNC_ENV`  |The SSV sync environment. `prod` (default) or `stage`  |
@@ -43,7 +43,7 @@ yarn cli --help
 ### Running Options
 
 :::warning
-Make sure that `--ssv-sync` and `--node-url` parameters (or `SSV_SYNC` and `NODE_URL` environment variables) are all relative to the same blockchain (Hoodi or Mainnet)
+Make sure `--ssv-sync` and `--node-url` (or `SSV_SYNC` and `NODE_URL`) point to the same blockchain network: Hoodi or Mainnet.
 :::
 
 <Tabs>

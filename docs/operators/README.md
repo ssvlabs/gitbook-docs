@@ -5,22 +5,25 @@ sidebar_position: 1
 
 # Quickstart
 
-Operators provide hardware infrastructure, run the SSV protocol (SSV Node), and are responsible for maintaining the overall health of ssv.network. Operators determine their own fees and are compensated for their integral services to the network by operating and maintaining validators on-behalf of stakers. [Learn more about how SSV Network works](/learn/network-overview/).
+Operators run SSV Node infrastructure and help keep SSV Network healthy. In return, they earn fees from the validators they operate for Stakers. To understand the protocol first, see [How SSV Network works](/learn/network-overview/).
 
 ![Operators receive ETH payments and generate rewards for stakers. Stakers pay ETH and receive generated rewards in return.](/img/tokenomics-readme-1.png)
 
 ## How to participate in SSV
 
-On a high level, starting as an Operator means:
-1. [Setting up an SSV Node](/operators/operator-node/node-setup)
-2. [Registering a new Operator on the network](/operators/operator-management/registration)
+To get started as an Operator:
 
-However, it's beneficial to learn [how Operator Fees work](/learn/network-overview/operators/update-fee), to understand how you will be rewarded for your work.
+1. [Set up an SSV Node](/operators/operator-node/node-setup)
+2. [Register your Operator on the network](/operators/operator-management/registration)
 
-Also, to improve your performance as an operator you should follow [Hardware Requirements](/operators/operator-node/node-setup/hardware-requirements) and [Best Practices](/operators/operator-node/node-setup/best-practices) pages.
+Review the guides that help you run reliably and attract more Stakers:
 
-Apart from essentials, you may benefit from [setting up a DKG node](/operators/operator-node/setup-sidecars/enabling-dkg/) and [enabling MEV](/operators/operator-node/setup-sidecars/configuring-mev). That will attract more Stakers to onboard validators to your Operator. Don't forget to reflect both changes [on your Operator metadata](/operators/operator-management/setting-operator-metadata).
+- [How Operator fees work](/learn/network-overview/operators/update-fee)
+- [Hardware Requirements](/operators/operator-node/node-setup/hardware-requirements)
+- [Best Practices](/operators/operator-node/node-setup/best-practices)
+- [Enable DKG](/operators/operator-node/setup-sidecars/enabling-dkg/)
+- [Enable MEV](/operators/operator-node/setup-sidecars/configuring-mev)
+- [Set Operator metadata](/operators/operator-management/setting-operator-metadata)
+- [Troubleshooting](/operators/operator-node/maintenance/troubleshooting)
 
-Last but not least, check out the [Troubleshooting section](/operators/operator-node/maintenance/troubleshooting) to get to the root of any issue you might have with your node.
-
-We suggest to skim through all of the guides on our documentation, to get familiar with all of the concepts and possible actions. If you still have questions, feel free to ask them on the [official Discord channel](https://discord.gg/5vT22pRBrf).
+If you want a broader overview, browse the rest of the Operator guides. If you still need help, ask in the [official Discord channel](https://discord.gg/5vT22pRBrf).

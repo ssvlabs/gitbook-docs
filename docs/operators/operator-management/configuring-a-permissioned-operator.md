@@ -6,23 +6,23 @@ sidebar_position: 5
 # Configuring a Permissioned Operator
 
 ### Introduction
-**There are 3 independent settings** of a permissioned operator: 
+**There are 3 independent permissioned settings**:
 
 * [Set operator status, Public or Private](#updating-your-operator-status)
 * [Assign whitelisted addresses](#addingremoving-authorized-addresses)
 * [External smart contract to control whitelisted addresses](#adding-an-external-contract)
 
-For example, one can set whitelisted addresses _before_ changing the operator status to be private. You can read more about [Use Cases in our Learn section](/learn/network-overview/operators/permissioned-operators#use-cases).
+For example, you can set whitelisted addresses _before_ changing the Operator status to Private. For more background, [see use cases](/learn/network-overview/operators/permissioned-operators#use-cases).
 
 ---
 
-Make sure to connect your Web3 wallet with [the WebApp](https://app.ssv.network/). The address should be the same you used to register your operator with.
+Connect the Web3 wallet you used to register the Operator in the [Web App](https://app.ssv.network/).
 
 1. Browse to the [My Account page](https://app.ssv.network/operators) and **select the Operator you want to update**.
 
 ![config-operator](/img/configure-a-permissioned-operator-1.png)
 
-2. Click on the three vertical dots on the top-right corner, from the dropdown, **choose the _Permission Settings_**.
+2. Click the three vertical dots in the top-right corner, then choose **_Permission Settings_**.
 
 ![config-operator](/img/configure-a-permissioned-operator-2.png)
 
@@ -39,7 +39,7 @@ Make sure to connect your Web3 wallet with [the WebApp](https://app.ssv.network/
 </div>
 4. **Switch your Operator Status**
 
-In our example, we will be switching the operator to Private.
+In this example, the Operator is being changed to Private.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
@@ -61,9 +61,9 @@ In our example, we will be switching the operator to Private.
 
 6. **Done!**
 
-Once the transaction is signed, you will only need to wait for the blockchain to validate it, and the settings will be live.
+After the transaction is confirmed, the new setting is live.
 
-To change your operator status back to public, follow the same steps and turn the flag off again.
+To change the Operator back to Public, follow the same steps and turn the toggle off.
 
 ### Adding/Removing Authorized addresses
 
@@ -77,9 +77,9 @@ To change your operator status back to public, follow the same steps and turn th
   />
 </div>
 
-4. **Input an Address to whitelist**
+4. **Enter an address to whitelist**
 
-Here we're adding one authorized addresses to this operator. **Once done, click "Add Address"** to sign the transaction with your web3 wallet.
+The example shows how to add one authorized address to the Operator. When ready, click **"Add Address"** and confirm the transaction in your wallet.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
@@ -101,7 +101,7 @@ Here we're adding one authorized addresses to this operator. **Once done, click 
 
 ### Adding an External Contract
 
-SSV also gives you the option to add your own whitelisting contract for managing authorized addresses. **This contract must follow [certain specifcations which can be found here]**(/developers/smart-contracts/external-whitelist-contract-example).
+You can also add your own whitelisting contract to manage authorized addresses. **The contract must [follow these specifications]**(/developers/smart-contracts/external-whitelist-contract-example).
 
 3. **Click on the _External Contract_ option** from the Permission Settings list
 
@@ -113,9 +113,9 @@ SSV also gives you the option to add your own whitelisting contract for managing
   />
 </div>
 
-4. **Input your whitelisting contract**
+4. **Enter your whitelisting contract**
 
-Enter a valid whitelisting contract address, click save, and 
+Enter a valid whitelisting contract address and click save.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
@@ -127,7 +127,7 @@ Enter a valid whitelisting contract address, click save, and
 
 5. **Sign the transaction**
 
-You will be prompted to sign the transaction with your Web3 wallet. This will be saved to the SSV Network contract.
+You will be prompted to sign the transaction in your wallet. The change is saved to the SSV Network contract.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 

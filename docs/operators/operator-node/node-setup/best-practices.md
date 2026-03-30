@@ -5,10 +5,10 @@ sidebar_position: 3
 
 # Best Practices for Running SSV Node
 
-This guide outlines key recommendations to ensure the best Performance and Correctness of your node. The guide will be updated as we get new information.
+This guide outlines recommendations that improve the performance and correctness of your node.
 
 The page is divided into four parts:
-- [**Introduction**](#introduction) - Understanding the Performance, Correctness, and their key factors.
+- [**Introduction**](#introduction) - what performance and correctness mean, and what affects them.
 - [**SSV-specific**](#ssv-specific) - Features of SSV that will improve Performance or Correctness.
 - [**Major impact**](#major-impact) - Vital tips, more obvious.
 - [**Minor impact**](#minor-impact) - Fine-tuning tips, nice-to-have, less obvious.
@@ -16,12 +16,12 @@ The page is divided into four parts:
 
 ## **Introduction**
 
-Performance you see on [SSV Explorer](https://explorer.ssv.network/) is essentially participation rate - how many duties your node participated in. Correctness refers to how timely and accurate duties are, and it affects validators' rewards.
+Performance on [SSV Explorer](https://explorer.ssv.network/) is effectively your participation rate: how many duties your node joins. Correctness refers to how timely and accurate those duties are, and it directly affects validator rewards.
 
 Several key factors influence this:
-- **Setup Configuration:** Software used to manage nodes, configured ports and the firewall help eliminate delays.
+- **Setup configuration:** The software you use, along with correct ports and firewall settings, helps reduce delays.
 - **Network Throughput & Latency:** Minimal network delay is critical, especially for production setups.
-- **Hardware Resources:** Adequate CPU, sufficient RAM, and fast, reliable storage are necessary.
+- **Hardware resources:** Adequate CPU, enough RAM, and fast, reliable storage are necessary.
 
 ## **SSV-specific**
 
@@ -35,9 +35,9 @@ eth1:
   # WebSocket URL of the Execution node to connect to.
   ETH1Addr: ws://example.url:8546/ws;ws://example.url:8547/ws
 ```
-- When the first node goes offline or out of sync, SSV will switch to the next endpoint.
+- When the first node goes offline or falls out of sync, SSV switches to the next endpoint.
 - Endpoints should be set in the order you want them to be used. The first node will be the primary one.
-- Failover works in round-robin way, so once SSV circled through all of the endpoints it will start from the first one again.
+- Failover works in a round-robin pattern, so once SSV cycles through all endpoints it starts again from the first one.
 - When SSV node restarts it will always start with the first endpoint from the list.
 
 
@@ -62,7 +62,7 @@ eth2:
 ```yaml
 EnableDoppelgangerProtection: true # Enables Doppelganger Protection
 ```
-- Doppelganger Protection (DG) checks if the managed validators are attesting elsewhere at the moment of SSV node start. That prevents double signature which is a slashable event.
+- Doppelganger Protection (DG) checks whether managed validators are already attesting elsewhere when SSV Node starts. This helps prevent double-signing, which is slashable.
 - SSV with DG enabled will be offline for the first 3 epochs after the node start.
 - If enough nodes in the cluster have DG enabled and are online - a restarted node will not wait for 3 epochs. Node can identify that there's a DG quorum going on and will join it. This process is almost as quick as restart of a node without DG.
 - If you manage all nodes in the cluster — it is recommended to restart one by one. Otherwise, it will take 3 epochs to do the DG checks.
@@ -71,21 +71,21 @@ EnableDoppelgangerProtection: true # Enables Doppelganger Protection
 #### Database backups
 SSV's database is critical to prevent slashing (PostgreSQL for Web3Signer, or the node's local database `db` for local signing setups). Its loss or corruption can lead to double-signing and severe penalties if operation continues.
 
-Be sure to implement a robust backup and recovery strategy for your database(s), it is **crucial** for operators. Failure to maintain database backups can lead to significant financial loss. Operators are responsible for their own database management and protection.
+Implement a reliable backup and recovery strategy for your databases. Operators are responsible for managing and protecting them.
 
 
 ## **Major impact**
 High‑priority practices that ensure reliable, on‑time duty submissions. Might sound obvious, but are often overlooked.
 
 :::info Hardware and performance
-Most of hardware-related suggestions below are for Execution (EL) and Consensus (CL) clients. SSV client is light and [hardware requirements are moderate](./hardware-requirements). EL and CL require much more resources to run effectively.
+Most hardware-related guidance below applies to Execution (EL) and Consensus (CL) clients. SSV Node itself is relatively light and [has moderate hardware requirements](./hardware-requirements). EL and CL require much more capacity.
 :::
 
 ### **For Home Setups**
 - **Hardware:** Usual setup has 4- to 8-core CPU (focus on single-thread performance) and 32GB RAM.
-- **Disk:** NVMe SSDs are strongly recommended. If you're unsure with filesystem to use, stick to `ext4`, as it is performant and the easiest to maintain. 
+- **Disk:** NVMe SSDs are strongly recommended. If you are unsure which filesystem to use, choose `ext4`. It performs well and is easy to maintain.
 - **Reliability:** Use a UPS and ensure the machine is well-ventilated. Sudden power loss or thermal throttling can cause downtime or result in missed duties.
-- **Internet Connectivity:** Ensure your ISP doesn't impose strict data caps. Choose a plan with at least 10 Mbps upload speed, but latency and reliability make the difference.
+- **Internet connectivity:** Make sure your ISP does not impose strict data caps. A plan with at least 10 Mbps upload is a reasonable baseline, but latency and reliability matter more.
 - **[Follow EthStaker hardware section](https://ethstaker.org/staking-hardware)** as their guides are focused on running Execution and Consensus nodes.
 
 ### **For Enterprise Grade**
@@ -97,7 +97,7 @@ Most of hardware-related suggestions below are for Execution (EL) and Consensus 
 
 ### Sufficient Hardware
 **Recommendation:**  
-Ensure your hardware meets or exceeds [SSV recommended specifications](./hardware-requirements). These requirements are in additional to what you need for Execution + Consensus. On the same page you will find a table comparing # of validators to resources used.
+Ensure your hardware meets or exceeds the [SSV recommended specifications](./hardware-requirements). These are in addition to what you need for Execution and Consensus. The same page also includes a validator-to-resource usage table.
 
 **Dos and Don'ts:**
   - **Do:** DYOR on the hardware provider or hardware parts for home setup. Verify your specs, as well as quality of hardware provider.
@@ -127,7 +127,7 @@ Ensure all required ports are open and correctly configured on your setup.
   
 ### Consolidated Infrastructure
 **Recommendation:**  
-Location of your clients plays a direct role in performance. Co-hosting Execution and Consensus clients minimizes network latency, improves block import timings, and provides more time for SSV rounds.
+Client placement directly affects performance. Co-hosting Execution and Consensus minimizes network latency, improves block import timing, and leaves more time for SSV rounds.
 
 **Dos and Don'ts:**
   - **Do:** Co-host your Execution (EL) and Consensus (CL) clients on a single machine in production environments.
@@ -151,7 +151,7 @@ Location of your clients plays a direct role in performance. Co-hosting Executio
 
 ### Monitoring
 
-Continuous monitoring is essential to maintain good performance and quickly detect any issues. You can check out our [Monitoring section](/operators/operator-node/monitoring), if you haven't set monitoring up already. 
+Continuous monitoring is essential for maintaining good performance and catching issues early. If you have not set it up yet, see the [Monitoring section](/operators/operator-node/monitoring).
 
 ***
 

@@ -9,31 +9,31 @@ import TabItem from '@theme/TabItem';
 # SSV Remote Signer
 
 :::info Optional tool
-The tool is not required to run an SSV Node. The following guide is highly technical, only proceed when sure of what you are doing and why you need the Remote Signer.
+This tool is not required to run an SSV Node. The guide below is highly technical. Proceed only if you understand why you need Remote Signer.
 :::
 
 ## Overview
 
-SSV Remote Signer is a service that separates the key management functions from the SSV node. It is based on [BLS Remote Signer HTTP API presented in EIP-3030](https://eips.ethereum.org/EIPS/eip-3030).
+SSV Remote Signer separates key management from the SSV Node. It is based on the [BLS Remote Signer HTTP API described in EIP-3030](https://eips.ethereum.org/EIPS/eip-3030).
 
 The service consists of two main components:
 
-1. [**Web3Signer**](https://docs.web3signer.consensys.io/) - A service by Consensys, provides secure key management and slashing protection.
+1. [**Web3Signer**](https://docs.web3signer.consensys.io/) - a Consensys service that provides secure key management and slashing protection.
 2. [**SSV-Signer**](https://github.com/ssvlabs/ssv/tree/main/ssvsigner) - A lightweight service that connects SSV nodes to Web3Signer; it can also be used as a library for
    local signing.
 
-For more detailed technical overview, check [design documentation on our GitHub](https://github.com/ssvlabs/ssv/blob/main/ssvsigner/DESIGN).
+For a more detailed technical overview, see the [design documentation on GitHub](https://github.com/ssvlabs/ssv/blob/main/ssvsigner/DESIGN).
 
 ## Setup Guide
 
 :::note Setup consideration
-The perfect setup would have SSV Node and Remote Signer on separate machines with different access credentials. That way even if SSV Node's machine is exposed/attacked by malicious actor, the keys will remain safe. The two machines should be hosted as closely to each other as possible to decrease latency.
+The ideal setup places SSV Node and Remote Signer on separate machines with different access credentials. That way, if the SSV Node machine is compromised, the keys remain protected. Keep the two machines as close together as possible to reduce latency.
 :::
 
 ### Prerequisites
 
 - PostgreSQL database for Web3Signer's slashing protection
-- The operator's private key (raw format or keystore file)
+- The Operator private key (raw format or keystore file)
 - Network access between SSV node, SSV-Signer, and Web3Signer services
 
 ### 1. Set Up the Slashing Protection Database
@@ -73,8 +73,7 @@ docker run -e POSTGRES_PASSWORD=password -e POSTGRES_USER=postgres -e POSTGRES_D
 
 #### Short summary
 
-Run `web3signer` with the arguments in the example. You might need to change HTTP port, Ethereum network, PostgreSQL
-  address
+Run `web3signer` with the arguments in the example below. You may need to change the HTTP port, Ethereum network, or PostgreSQL address.
   - Either download and unpack `web3signer` from https://github.com/Consensys/web3signer/releases
   - Or use `web3signer` Docker image
 
@@ -115,7 +114,7 @@ Run `web3signer` with the arguments in the example. You might need to change HTT
     --slashing-protection-db-password=password \
     --key-manager-api-enabled=true
     ```
-    This configures Web3Signer to accept secure connections from SSV-Signer. 
+This configures Web3Signer to accept secure connections from SSV-Signer.
     
     When TLS is enabled on Web3Signer, make sure to:
     1. Use `https://` in the `WEB3SIGNER_ENDPOINT` value for SSV-Signer
@@ -188,13 +187,12 @@ SSVSigner:
 
 ### 5. Configure TLS for SSV-Signer
 
-SSV-Signer requires TLS (unless `--allow-insecure-http` is provided) to secure connections in two ways:
+SSV-Signer requires TLS, unless `--allow-insecure-http` is provided, to secure connections in two ways:
 
 1. **Server TLS** - Secures incoming connections from SSV nodes to SSV-Signer
 2. **Client TLS** - Secures outgoing connections from SSV-Signer to Web3Signer
 
-The TLS implementation is designed to match Web3Signer's TLS approach exactly, ensuring compatibility and simplifying
-configuration for users who are already familiar with Web3Signer.
+The TLS implementation is designed to match Web3Signer's TLS approach exactly, ensuring compatibility and simplifying configuration for users who already know Web3Signer.
 
 <details>
 
@@ -370,8 +368,7 @@ WEB3SIGNER_SERVER_CERT_FILE=/path/to/server.pem \
 
 <summary>TLS Configuration Options and Validation Rules</summary>
 
-SSV-Signer supports various TLS configuration combinations for both server and client connections. Understanding these
-options helps ensure secure and proper setup.
+SSV-Signer supports several TLS configuration combinations for both server and client connections. Understanding them helps ensure a secure setup.
 
 **TLS Enforcement Notes**
 - TLS 1.3 is enforced for all TLS connections (`MinTLSVersion = tls.VersionTLS13`).
@@ -438,14 +435,13 @@ SSV-Signer exposes the following API endpoints:
 
 ### Key Management Issues
 
-**Problem**: Already existing keys after restart.  
-**Solution**: The SSV node syncs validator shares to the signer during the first start. If restarting from a new clean
-database, cleaning keys in Web3Signer is required to ensure all shares are properly registered.
+**Problem**: Keys already exist after restart.  
+**Solution**: SSV Node syncs validator shares to the signer during first startup. If you restart with a fresh database, clear keys in Web3Signer so all shares can be registered again.
 
 ## Security Considerations
 
 :::warning Slashing database backups
-SSV's database is critical to prevent slashing. Its loss or corruption can lead to double-signing and severe penalties if operation continues. It is **crucial** for operators to implement a robust backup and recovery strategy for their databases (PostgreSQL for Web3Signer, or the node's local database for local signing setups). Failure to maintain database backups can lead to significant financial loss. Operators are responsible for their own database management and protection.
+SSV's database is critical for slashing protection. If it is lost or corrupted and operation continues, it can lead to double-signing and severe penalties. Operators should implement a reliable backup and recovery strategy for their databases, whether that is PostgreSQL for Web3Signer or the node's local database for local signing setups.
 :::
 
 1. **Network Security**: Ensure communication between all components occurs over secure networks.

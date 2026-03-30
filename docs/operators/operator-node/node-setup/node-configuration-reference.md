@@ -4,16 +4,16 @@ sidebar_position: 8
 ---
 
 :::danger Caution
-The following **configuration options are intended for advanced users** with a deep understanding of their impact.
+The configuration options below are intended for advanced users who understand their impact.
 
-The parameters used in the [Automatic Installation guide](/operators/operator-node/node-setup/) and [Manual Installation guide](/operators/operator-node/node-setup/manual-setup) should serve the vast majority of users.
+The parameters used in the [automatic installation guide](/operators/operator-node/node-setup/) and [manual installation guide](/operators/operator-node/node-setup/manual-setup) are sufficient for most users.
 
 Please exercise extreme care and discretion when modifying these settings, as any incorrect changes may result in unintended consequences or system instability.
 :::
 
 ## Configuration Reference
 
-The table below represents the reference for every Node configuration option available.
+The table below lists all available node configuration options.
 
 
 | YAML                                            | ENV                            | Default          | Description                                                                                                                                          |
@@ -87,9 +87,9 @@ The table below represents the reference for every Node configuration option ava
 
 ## API Methods Reference
 
-When SSV Node is configured with `SSVAPIPort` - you can call several methods with it. An example call would look like `curl http://localhost:16000/v1/node/health`.
+When SSV Node is configured with `SSVAPIPort`, you can call several API methods. For example: `curl http://localhost:16000/v1/node/health`.
 
-All methods are described below:
+Available methods are listed below:
 
 | Method    | Output description          |
 | ------------------------------------------  | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
