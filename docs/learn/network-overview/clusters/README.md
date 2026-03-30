@@ -6,14 +6,14 @@ sidebar_position: 2
 
 # Cluster Concepts
 
-Cluster is a unique set of operators managing Distributed Validators, specific to an owner account/address. For example, an owner address X can't create 2 clusters with the same set of operators.
+A cluster is a unique set of operators managing distributed validators for a specific owner address. For example, a single owner address cannot create two clusters with the same set of operators.
 
 ### Read more about Clusters
-- [Cluster Creation](cluster-creation)
-- [Cluster Balance](cluster-balance)
-  - [Effective Balance Accounting](effective-balance)
-  - [Cluster Reactivation](reactivation)
-- [Update Operators](update-operators)
+- [Cluster Creation](/learn/network-overview/clusters/cluster-creation)
+- [Cluster Balance](/learn/network-overview/clusters/cluster-balance)
+  - [Effective Balance Accounting](/learn/network-overview/clusters/effective-balance)
+  - [Cluster Reactivation](/learn/network-overview/clusters/reactivation)
+- [Update Operators](/learn/network-overview/clusters/update-operators)
 - [Operators Performance](/learn/network-overview/performance)
 
 ### Example of an account with 2 Clusters

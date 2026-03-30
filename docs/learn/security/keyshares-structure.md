@@ -5,11 +5,11 @@ sidebar_position: 4
 
 # Keyshares file structure
 
-Using [Distributed Key Generation](/learn/tech-overview#distributed-key-generation), the SSV protocol encrypts and splits a validator key into multiple “KeyShares”. The KeyShares are then distributed to multiple non-trusting nodes, run by operators.
+Using [Distributed Key Generation](/learn/tech-overview#distributed-key-generation), the SSV protocol encrypts and splits a validator key into multiple key shares. The key shares are then distributed to multiple non-trusting nodes run by operators.
 
-Since each element is encrypted, no one can temper with the file. For example, if anyone would change `ownerAddress` or `ownerNonce` and try to submit such file to the ssv network - the KeyShares would be deemed as invalid and ignored by network participants. That is because the signature and the contents of the file are not matching.
+The file also includes signed data that helps detect tampering. For example, if someone changed `ownerAddress` or `ownerNonce` and tried to submit the modified file to SSV Network, the key shares would be considered invalid and ignored by network participants because the signature would no longer match the contents.
 
-Find more details about each element of keyshares structure below.
+More details about each element of the keyshares structure are below.
 
 ### An example of `keyshares.json` structure:
 ```json
@@ -42,19 +42,19 @@ Find more details about each element of keyshares structure below.
 }
 ```
 
-### Details about `sharesData` field
+### Details about the `sharesData` field
 Below is an example of `sharesData` from a Hoodi validator with 4 operators. Each segment is highlighted with color:
 
 <div style={{ textAlign: 'center', width: '100%', margin: '0 auto' }}>
   <img src="/img/sharesData.png" alt="" />
 </div>
 
-### Explanation of each segment:
-- <span style={{ color: 'black', backgroundColor: '#d4d4d4', fontWeight: 'bold' }}>Signature</span>  - First 192 characters (excluding `0x`) is a serialized BLS signed message ([read more about SSZ here](https://ethereum.org/en/developers/docs/data-structures-and-encoding/ssz/)). The message itself is `ownerAddress:ownerNonce`, it's signed by the validator private key and consequently can be verified using validator's `publicKey`.
-- <span style={{ color: 'black', backgroundColor: '#bad6a7', fontWeight: 'bold' }}>Share</span><span style={{ color: 'black', backgroundColor: '#fbe6a2', fontWeight: 'bold' }}>s' pu</span><span style={{ color: 'black', backgroundColor: '#de9d9b', fontWeight: 'bold' }}>blic </span><span style={{ color: 'black', backgroundColor: '#aac1f0', fontWeight: 'bold' }}>keys</span> - An array of concatenated BLS public keys. Each element is a public share of a validator's key and is 96 characters long. The number of shares depends on the number of chosen operators.
-- <span style={{ color: 'black', backgroundColor: '#dce9d5', fontWeight: 'bold' }}>Encr</span><span style={{ color: 'black', backgroundColor: '#fcf5d9', fontWeight: 'bold' }}>ypte</span><span style={{ color: 'black', backgroundColor: '#edcece', fontWeight: 'bold' }}>d sh</span><span style={{ color: 'black', backgroundColor: '#d5e0f5', fontWeight: 'bold' }}>ares</span> - An array of concatenated BLS encrypted keys. Each element is a private share of a validator's key and is 512 characters long. The number of shares depends on the number of chosen operators. Shares are encrypted with each operator's public key and can only be decrypted with the respective private key.
+### Explanation of each segment
+- <span style={{ color: 'black', backgroundColor: '#d4d4d4', fontWeight: 'bold' }}>Signature</span> - The first 192 characters, excluding `0x`, are a serialized BLS-signed message ([read more about SSZ](https://ethereum.org/en/developers/docs/data-structures-and-encoding/ssz/)). The message is `ownerAddress:ownerNonce`, signed by the validator private key, and can therefore be verified using the validator `publicKey`.
+- <span style={{ color: 'black', backgroundColor: '#bad6a7', fontWeight: 'bold' }}>Share</span><span style={{ color: 'black', backgroundColor: '#fbe6a2', fontWeight: 'bold' }}>s' pu</span><span style={{ color: 'black', backgroundColor: '#de9d9b', fontWeight: 'bold' }}>blic </span><span style={{ color: 'black', backgroundColor: '#aac1f0', fontWeight: 'bold' }}>keys</span> - An array of concatenated BLS public keys. Each element is a public share of the validator key and is 96 characters long. The number of shares depends on the number of selected operators.
+- <span style={{ color: 'black', backgroundColor: '#dce9d5', fontWeight: 'bold' }}>Encr</span><span style={{ color: 'black', backgroundColor: '#fcf5d9', fontWeight: 'bold' }}>ypte</span><span style={{ color: 'black', backgroundColor: '#edcece', fontWeight: 'bold' }}>d sh</span><span style={{ color: 'black', backgroundColor: '#d5e0f5', fontWeight: 'bold' }}>ares</span> - An array of concatenated encrypted shares. Each element is a private share of the validator key and is 512 characters long. The number of shares depends on the number of selected operators. Shares are encrypted with each operator’s public key and can only be decrypted with the corresponding private key.
 
-**If you want to learn more about keyshare verification**, you can dissect [verify-keyshare repository  on GitHub](https://github.com/RaekwonIII/verify-keyshares):
-- `validateSingleShares` function in `ssv-keys.ts`  does the signature verification.
-- `buildSharesFromBytes` function breaks down each operators' keyshare.
-- `areKeysharesValid` function then checks the signature and operators' keyshares agains the validator public key.
+**If you want to learn more about keyshare verification**, you can review the [verify-keyshare repository on GitHub](https://github.com/RaekwonIII/verify-keyshares):
+- The `validateSingleShares` function in `ssv-keys.ts` performs signature verification.
+- The `buildSharesFromBytes` function breaks down each operator’s key share.
+- The `areKeysharesValid` function then checks the signature and operators’ key shares against the validator public key.

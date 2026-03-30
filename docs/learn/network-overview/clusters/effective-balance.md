@@ -8,9 +8,9 @@ sidebar_position: 3
 Across the SSV Network, fees, cluster runway, and liquidation parameters are calculated based on validators’ actual effective balance. [Under Ethereum’s Pectra validator model](https://consensys.io/blog/ethereum-pectra-upgrade), a single validator can secure the network and earn rewards with an effective balance ranging from 32 to 2048 ETH.
 
 ## Effective Balance Monitoring
-This monitoring is performed by the set of [Oracles](/learn/network-overview/oracles), periodically fetching validators’ effective balance data from the Beacon Chain and report it on-chain.
+This monitoring is performed by the set of [oracles](/learn/network-overview/oracles), which periodically fetch validator effective-balance data from the Beacon Chain and report it on-chain.
 
-Oracles monitor only validators that have already been registered. During the registration of new validators, stakers may  provide the total Effective Balance (EB) of the validators being registered. This information is used solely to improve the accuracy of initial runway estimations.
+Oracles monitor only validators that have already been registered. During registration of new validators, stakers may provide the total effective balance (EB) of the validators being registered. This information is used only to improve the accuracy of initial runway estimates.
 
 Providing an incorrect EB can lead to misleading runway estimates and unexpected fee changes. For example:
 1. A validator with an effective balance of 2048 ETH is registered
@@ -29,7 +29,7 @@ $$
 
 #### Legend:
   * $$f_o$$ - operator fees *(per 32 ETH)*, representing the combined fees of all operators in the cluster, denominated in _ETH per block_
-  * $$f_n$$ - network fees *(per 32 ETH)*, representing fees owed to the SSV network, denominated in _ETH per block_
+  * $$f_n$$ - network fees *(per 32 ETH)*, representing fees owed to SSV Network, denominated in _ETH per block_
   * $$Total Effective Balance$$ - the sum of effective balances of all validators in the cluster
 
 #### Key takeaways:
@@ -39,7 +39,7 @@ $$
 
 ## Examples
 
-As mentioned above, the fees will scale proportionally to the Total Effective Balance of a cluster. 
+As mentioned above, fees scale proportionally with the total effective balance of a cluster.
 
 #### Example Cluster #1
 - Total Effective Balance: 32
@@ -60,7 +60,7 @@ $$(0.01+0.00928)*95/32=0.0572375 ETH$$
 
 #### Example Cluster #3
 - Total Effective Balance: 2048
-- Sum Operators fees: 0.01 ETH
+- Sum of operator fees: 0.01 ETH
 - Network fee: 0.00928 ETH
 
 Annual fee for the cluster: 

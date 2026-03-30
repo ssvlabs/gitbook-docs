@@ -9,10 +9,10 @@ sidebar_position: 3
 Please do not change more than 2 operators in a cluster. Each set of **generated shares will always be valid** when their signing threshold is met (e.g. 3/4). To reduce the risks, it is advised to not change more than 2 of the validator's managing operators when changing its cluster.
 :::
 
-Below is the educational context around Updating Operators, you can find actionable [steps in our separate guide](/stakers/cluster-management/update-operators).
+This page explains the concepts behind updating operators. For actionable steps, see the [separate guide](/stakers/cluster-management/update-operators).
 
 ### Update Operators
 
-A staker can customize and update the operators managing their validator (cluster) at their discretion, allowing them to run it according to their own preferences.
+A staker can update the operators managing their validator cluster based on their own preferences.
 
-This might be needed in cases when operators start performing poorly or are removed from the network entirely. Note that the keyshares can not be changed or revoked, so technically the process of updating operators is removing old keyshares and generating new ones.
+This may be needed if operators begin performing poorly or are removed from the network. Note that old key shares cannot be changed or revoked, so updating operators technically means generating a new set of key shares while the previously generated key shares remain valid if their threshold can still be met.

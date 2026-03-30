@@ -1,19 +1,19 @@
 ---
-description: How to operator fees work in the SSV network
+description: How operator fees work in the SSV Network
 sidebar_position: 1
 ---
 
 # Operator Fee
 
-On this page you will find educational concepts, to see the actionable steps to Updating Fee [check out this page](/operators/operator-management/updating-operator-fees).
+This page explains the concepts behind operator fees. For step-by-step instructions to update a fee, see [this guide](/operators/operator-management/updating-operator-fees).
 
-Fees are initially set when registering an operator but can be changed at any point in time.
+Fees are set when an operator registers and can later be changed.
 
 Fee changes are generally initiated to stay competitive with other operators.
 
 ## Operator Fee
 
-Operators set their own fees denominated in ETH. This fee will be charged per each 32 ETH staked with validators that selects them as one of their operators.
+Operators set their own fees in ETH. This fee is charged per 32 ETH of effective balance for validators that select them as one of their operators.
 
 Operator earnings are paid to their account balance(s), and can be withdrawn to their wallet at any time.
 
@@ -21,9 +21,9 @@ Operator earnings are paid to their account balance(s), and can be withdrawn to 
 
 Operators initially set their fee when registering an operator to the network.
 
-Fees are presented as annual payments, but in practice are paid to operators continuously as an ongoing process - per each passed block.
+Fees are presented as annual payments, but in practice they are paid continuously per block.
 
-Please note, if you set your operator fee through the smart contract (whether at registration or fee updates), the value should be according to a fee per block format.
+If you set your operator fee through the smart contract, whether at registration or during a fee update, the value must be provided in fee-per-block format.
 
 * To calculate fee per block according to a desired annual fee in fiat (USD):
 
@@ -35,25 +35,25 @@ Where:
 - $Blocks_{year}$  - avg. number of blocks per year ([reference](https://ycharts.com/indicators/ethereum_blocks_per_day))
 
 :::tip ETH vs SSV fees
-**Previously registered operators will have a default ETH fee** which [they can change as usual](/operators/operator-management/updating-operator-fees). They will also have 2 separate balances — in ETH and SSV token. Once all clusters they participate in migrate to ETH, the operator will only have ETH balance.
+**Previously registered operators have a default ETH fee**, which [they can change as usual](/operators/operator-management/updating-operator-fees). They may also have two separate balances — one in ETH and one in SSV. Once all clusters they participate in migrate to ETH, the operator will only have an ETH balance.
 
-Fees in SSV (legacy) can not be changed and are charged per each validator, regardless of their effective balance.
+Legacy SSV-denominated fees cannot be changed and are charged per validator, regardless of effective balance.
 
-**Newly registered operators** will only have ETH balance, without an option to be paid in SSV token.
+**Newly registered operators** have only an ETH balance and cannot be paid in SSV.
 :::
 
 ### Fee Increase Process
 
-To ensure fee updates are transparent and stakers have enough time to adjust accordingly (by depositing more balance or replacing that operator) the network utilizes a 2 step cycle for increasing operator fees:
+To keep fee updates transparent and give stakers time to respond, such as by depositing more balance or replacing an operator, the network uses a two-step cycle for operator fee increases:
 
 ![update-fee](/img/update-fee-1.avif)
 
 1. **Declaring a new fee** - a broadcast to the network that the operator is increasing their fee.
 2. **Executing the declared fee** - finalizing the fee increase process (only after this does the fee change take effect).
 
-Between each of these 2 steps is a waiting period (declaration period) - a period in days, determined by the DAO, for which the operator must wait before executing the newly declared fee.
+Between these two steps is a waiting period, called the declaration period, set by the DAO.
 
-The fee execution is also followed by an execution period - if an operator fails to execute their declared fee in this period, it will expire and they must restart the process.
+The execution must then happen within the execution period. If an operator does not execute the declared fee during that period, it expires and the process must be restarted.
 
 For example, if an operator declares a new fee, they have to wait X days (declaration period) before being able to execute it. Once the period has passed, they have Y days to execute it (execution period) before it expires.
 
@@ -61,7 +61,7 @@ Operators can always cancel their declared fee (during the declaration period or
 
 ### Fee Increase Limitations
 
-A restriction has been set in place by the network which limits the percentage of change that operators can increase their fee in each cycle (i.e. less than 10%).
+The network also limits the percentage by which operators can increase their fee in each cycle.
 
 This limitation is decided by the DAO and is implemented to protect stakers against sudden liquidations due to fee updates and malicious behaviors.
 
@@ -71,7 +71,7 @@ Please note that due to this restriction, Operators that have **set a fee of 0**
 
 ### Fee Decrease Process
 
-Operator fees can be decreased immediately at any time by operators.
+Operators can decrease fees immediately at any time.
 
 The 2 step cycle (consisting of the declaration and execution periods) utilized in the fee increase process, **does not apply** to decreasing operator fees.
 

@@ -13,7 +13,7 @@ The Beacon Chain is a brand-new, proof-of-stake blockchain that stores and manag
 
 ### Cluster
 
-The group (usually 4, in compliance with [the fault tolerance rule is accepted](/learn/network-overview/validators/validator-onboarding)) of non-trusting operators that manage a set (one, or multiple) validator(s). Each operator in the cluster holds a share of the complete validator key, for more information, see [Shamir Secret Sharing](glossary.md#shamir-secret-sharing).
+A group of non-trusting operators that manages one or more validators. Clusters are formed in sizes that follow the protocol fault-tolerance rule; for more details, see [Cluster Creation](/learn/network-overview/clusters/cluster-creation). Each operator in the cluster holds a share of the validator key; for more information, see [Shamir Secret Sharing](/learn/glossary#shamir-secret-sharing).
 
 ### Consensus Client
 
@@ -31,16 +31,16 @@ The cooldown exists to maintain oracle voting stability and prepare for future g
 
 ### cSSV
 
-A non-rebasing transferrable ERC-20 token received when you stake SSV tokens. When unstaking, cSSV is burned and you receive back your original SSV plus any unclaimed rewards. cSSV contributes to the network's oracle infrastructure by providing voting weight for effective balance reporting. 
+A non-rebasing, transferable ERC-20 token received when you stake SSV tokens. When unstaking, cSSV is burned and you receive back your original SSV plus any unclaimed rewards. cSSV contributes to the network’s oracle infrastructure by providing voting weight for effective balance reporting.
 
 
 ### Custodial Staking
 
-Centralized service that manages the entire ETH staking process on behalf of the user and retains custody over user private validator keys and withdrawal keys. Custodial staking risks include: severe slashing penalties, reduced overall rewards and increased likelihood of attack on user keys as they are held in a centralized fashion by the service.
+A centralized service that manages the entire ETH staking process on behalf of the user and retains custody of the user’s validator keys and withdrawal keys. Custodial staking risks include severe slashing penalties, reduced overall rewards, and increased risk to user keys because they are held centrally by the service.
 
 ### DAO
 
-an Decentralized Autonomous Organization is is an organization constructed by rules encoded as a computer program that is often transparent, controlled by the organization's members and not influenced by a central government, in other words they are member-owned communities without centralized leadership.
+A Decentralized Autonomous Organization is an organization governed by rules encoded in computer programs. It is typically transparent, controlled by its members, and not led by a central authority.
 
 ### Distributed Key Generation
 
@@ -52,13 +52,13 @@ Distributed Validator Technology is another name for SSV (Secret Shared Validato
 
 ### Effective Balance (EB)
 
-The active stake balance of a validator on the Beacon Chain is used to calculate staking rewards. After Ethereum's Pectra upgrade, validators can have variable effective balances from 32 to 2048 ETH (previously fixed at 32 ETH).
+The active stake balance of a validator on the Beacon Chain, used to calculate staking rewards. After Ethereum’s Pectra upgrade, validators can have variable effective balances from 32 to 2048 ETH, rather than a fixed 32 ETH.
 
-In SSV Network, effective balance is used as fee accounting measure. Clusters pay fees proportional to their validators' actual EBs. The EBs is reported by oracles and used to calculate fair fee distribution. 
+In SSV Network, effective balance is also used as a fee-accounting measure. Clusters pay fees proportional to their validators’ actual effective balances. Effective balances are reported by oracles and used to calculate fair fee distribution. See [Effective Balance Accounting](/learn/network-overview/clusters/effective-balance).
 
 ### Epochs & Slots
 
-An epoch lasts approximately 6.4 minutes, and includes 32 slots. A slot lasts 12 seconds, during and is the time period in which a randomly selected validator proposes a block.
+An epoch lasts approximately 6.4 minutes and includes 32 slots. A slot lasts 12 seconds and is the time period during which a randomly selected validator may propose a block.
 
 ### ETH Staking Services
 
@@ -68,9 +68,9 @@ Staking services offer a streamlined way to participate in Ethereum staking. Whe
 
 Running an Ethereum validator requires two (2) separate keypairs (public and private):
 
-**Validator Key** A hotkey (key connected to the internet) that is used to sign the validator’s assigned duties.
+**Validation Key** A hot key connected to the internet that is used to sign the validator’s assigned duties.
 
-**Withdrawal Key** A key that is only used for transferring or withdrawing staked ETH. This key should be safely stored offline.
+**Withdrawal Key** A key used only to transfer or withdraw staked ETH. This key should be stored safely offline.
 
 _\*transfers and withdrawals will not be available until later phases of the network upgrade._
 
@@ -80,23 +80,23 @@ Formerly known as an Eth1 client. Manages the transaction pool for the Ethereum 
 
 ### Fault Tolerance
 
-Enables a system to continue operating properly in the event one or more of its components fails. In SSV, this refers to multiple KeyShares operating the validator on multiple non-trusting nodes, and the ability to recreate a data signature even if one of those nodes is offline.
+Enables a system to continue operating properly when one or more of its components fails. In SSV, this refers to multiple key shares operating the validator across multiple non-trusting nodes, and the ability to produce a valid signature even if one of those nodes is offline.
 
 ### Governance
 
-Anyone owning SSV tokens can participate in the ssv.network DAO from a governance standpoint and vote on proposals and other items requiring a vote. The amount of SSV tokens owned determines voting power on network decisions.
+Anyone holding SSV tokens can participate in the SSV Network DAO and vote on proposals and other items that require a vote. The amount of SSV held determines voting power on network decisions. See [Governance](/learn/network-overview/governance).
 
 ### Istanbul Byzantine Fault Tolerance Consensus
 
-Tying it all together, the consensus layer of SSV is based on the Istanbul Byzantine Fault Tolerance (IBFT) algorithm. The algorithm randomly selects a validator node (KeyShare) responsible for proposing a block and shares the information with the other participants. Once the predefined threshold of KeyShares deems the block to be valid, it is added to the chain. As such, consensus can be reached even if some operators are faulty or not currently online ([Advanced IBFT reading](https://github.com/ssvlabs/ssv/blob/main/ibft/IBFT)).
+Tying it all together, the consensus layer of SSV is based on the Istanbul Byzantine Fault Tolerance (IBFT) algorithm. For each validator duty, the cluster reaches agreement on what should be signed before a threshold of operators produces partial signatures. Consensus can be reached even if some operators are faulty or not currently online ([advanced IBFT reading](https://github.com/ssvlabs/ssv/blob/main/ibft/IBFT)).
 
 ### KeyShare
 
-Using [Distributed Key Generation](/stakers/tools/ssv-dkg-client/), the SSV protocol encrypts and splits a validator key into multiple “KeyShares”. The KeyShares are then distributed to multiple non-trusting nodes, run by operators. This allows the key to be generated and then stored securely offline while the KeyShares that represent it actually run the validator.
+Using [Distributed Key Generation](/learn/tech-overview#distributed-key-generation), the SSV protocol encrypts and splits a validator key into multiple key shares. The key shares are then distributed to multiple non-trusting nodes run by operators. This allows the validator key to be generated and then stored securely offline while the key shares are used to operate the validator.
 
 ### Liquidation
 
-Liquidation can occur when a cluster's ETH balance drops below the “threshold balance”. ([see Liquidations](/learn/tokenomics/liquidations)) This will trigger the validator’s SSV node to terminate services and stop managing the validator.
+Liquidation can occur when a cluster’s ETH balance drops below the threshold balance; see [Liquidations](/learn/tokenomics/liquidations). This causes operators to stop managing the cluster’s validators.
 
 ### Liquidation Collateral
 
@@ -108,21 +108,21 @@ Liquidation collateral serves as the incentive for liquidators to constantly mon
 
 ### Multi-Party Computation
 
-Applying secure Multi-Party Computation (MPC) to secret sharing allows for KeyShares of an SSV to be securely distributed amongst operators securely as well as perform decentralized computation of validator duties without reconstructing the validator key on any single device.
+Applying secure Multi-Party Computation (MPC) to secret sharing allows key shares to be distributed securely among operators and enables decentralized computation of validator duties without reconstructing the validator key on any single device.
 
 ### Non-Custodial Staking
 
-A service that provides streamlined Ethereum validator set-up and management, but does not hold user private validator keys AND withdrawal keys. Allowing users to maximize staking returns, mitigate security risks and retain complete control over their assets.
+A service that streamlines Ethereum validator setup and management without holding users’ validator keys or withdrawal keys. This allows users to maximize staking returns, reduce security risks, and retain control over their assets.
 
 ### Effective Balance Oracles
 
-In the SSV Network, oracles report validator effective balances from the Beacon Chain to on-chain smart contracts.
+In SSV Network, oracles report validator effective balances from the Beacon Chain to on-chain smart contracts.
 
-These oracles are backed by SSV stakers, who delegate their voting power to their chosen Effective Balance (EB) oracle. This system enables fair fee calculation for validators with variable balances following the Pectra upgrade.
+These oracles are backed by SSV stakers, who delegate their voting power to their chosen Effective Balance (EB) oracle. This system enables fair fee calculation for validators with variable balances following the Pectra upgrade. See [Effective Balance Oracles](/learn/network-overview/oracles).
 
 ### Operator
 
-Individuals or institutions that provide the hardware infrastructure, run the SSV protocol, and manage validator KeyShares on behalf of users (stakers). Operators collect fees from stakers in ETH in return for operating their validator(s) on ssv.network. Each operator is ranked on a scale of 0-100% by the DAO based on the overall quality of service they provide.
+Individuals or institutions that provide hardware infrastructure, run the SSV protocol, and manage validator key shares on behalf of stakers. Operators collect fees in ETH in return for operating validators on SSV Network. Each operator is ranked on a scale of 0-100% by the DAO based on the overall quality of service they provide.
 
 ### Proof of Staking
 
@@ -132,11 +132,11 @@ Proof of Stake (PoS) however, is a consensus mechanism designed to improve secur
 
 ### Semi-Custodial Staking
 
-A staking service that often claims to be non-custodial, but holds user validator keys. Although this type of service does not hold withdrawal keys, and thus cannot access user funds, semi-custodial staking risks include severe slashing penalties and reduced overall rewards.
+A staking service that often claims to be non-custodial but holds user validator keys. Although this type of service does not hold withdrawal keys and therefore cannot access user funds, semi-custodial staking still carries risks such as severe slashing penalties and reduced overall rewards.
 
 ### Shamir Secret Sharing
 
-A mechanism used to reconstruct a validator key using a predefined threshold of KeyShares. Eth2 validator keys use BLS signatures and BLS signatures are additive, allowing for multiple signatures to be combined to recreate a validator key signature. Individual KeyShares cannot be used to sign a duty, yet not all are needed if some are faulty, as described by n≥3f+1.
+A mechanism used to reconstruct validator signatures using a predefined threshold of key shares. Ethereum validator keys use BLS signatures, and BLS signatures are additive, allowing multiple signatures to be combined into a valid validator signature. Individual key shares cannot be used to sign a duty on their own, yet not all are needed if some are faulty, as described by n≥3f+1.
 
 ### Slashing
 
@@ -144,18 +144,18 @@ If an Ethereum validator behaves maliciously, they would lose a significant amou
 
 ### SSV Node
 
-This is software containing the SSV protocol implementation and integration to the network’s smart contracts. It is run by Operators and includes a validator client.
+Software that contains the SSV protocol implementation and integration with the network’s smart contracts. It is run by operators and includes a validator client.
 
-The SSV Node software maintain peer-to-peer connections with other Nodes to handle communication with the rest of the ssv.network. An SSV Node is responsible for the following:
+The SSV Node software maintains peer-to-peer connections with other nodes to communicate with the rest of SSV Network. An SSV Node is responsible for the following:
 
-* Management of validator KeyShares
+* Management of validator key shares
 * Shamir Secret Sharing
 * Multi-Party Computation
 * Validator signing duties to the Beacon Chain
 
 ### SSV Token
 
-ssv.network allows access to a decentralized ETH staking infrastructure with SSV token as the protocol's native token. It has 4 main purposes:
+SSV Network provides access to decentralized ETH staking infrastructure, with SSV as the protocol’s native token. It has three main purposes:
 
 * **Governance** – Submitting votes and voting on DAO proposals
 * **Grants** – DAO funding for developers and contributors helping to grow the network
@@ -163,11 +163,11 @@ ssv.network allows access to a decentralized ETH staking infrastructure with SSV
 
 ### SSV Staker
 
-An SSV token holder who stakes their SSV tokens to contribute voting weight to the network's oracle system, which reports validator effective balances to the blockchain. When staking SSV a holder receives cSSV which also allows to participates in SSV governance. 
+An SSV token holder who stakes SSV to contribute voting weight to the network’s oracle system, which reports validator effective balances on-chain. When staking SSV, the holder receives cSSV, which also allows participation in SSV governance.
 
 ### Staker
 
-Services or individual ETH holders that wish to leverage SSV/DVT technology for optimal liveness, security and decentralization of their validator(s). Stakers put 32 ETH "at stake" for each validator they want to run. In the PoS consensus mechanism, validators secure the Ethereum blockchain and earn ETH rewards in return for doing so.
+Services or individual ETH holders that use SSV/DVT technology for improved liveness, security, and decentralization of their validators. Stakers put ETH at stake for each validator they want to run. In Ethereum’s PoS consensus mechanism, validators secure the blockchain and earn ETH rewards in return.
 
 ### Staking
 
@@ -179,8 +179,8 @@ The total amount of ETH in USD (or other currency) that is “locked-up” by st
 
 ### Validator
 
-A validator is responsible for confirming transactions and proposing new blocks on the Ethereum blockchain. In order to run a validator, one must put 32 ETH 'at stake', which is subject to increase (or decrease) as the validator performs its assigned duties. A validator is different from the comparable concept of a miner on the legacy Ethereum chain, as validators are called upon by the PoS protocol to propose and validate emerging blocks rather than compete for their generation.
+A validator is responsible for attesting to and proposing blocks on the Ethereum blockchain. To run a validator, one must put ETH at stake, which can increase or decrease as the validator performs its assigned duties. A validator differs from a miner on legacy Ethereum because validators are selected by the PoS protocol to propose and validate blocks rather than compete to generate them.
 
-An SSV validator is one that is run on ssv.network and employs SSV technology to split the validator key into 4 KeyShares for the purposes of distributing the validator over multiple nodes for redundancy and fault-tolerance.
+An SSV validator is run on SSV Network and uses SSV technology to split the validator key into key shares so the validator can be distributed across multiple nodes for redundancy and fault tolerance.
 
 Post-Pectra, validators can have variable effective balances from 32 to 2048 ETH.

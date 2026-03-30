@@ -4,28 +4,28 @@ sidebar_position: 3
 
 # Tech Overview
 
-SSV is a sophisticated multi-signature wallet with a consensus layer. It is a middle layer that comes between a beacon node and a validator client. From a user’s perspective, it is just a component to plug in and take care of everything on their behalf. The main components of an SSV configuration are as follows:
+SSV can be thought of as a multi-signature system with a consensus layer. It sits between a beacon node and a validator client. From a user’s perspective, it is a component that handles distributed validator operation on their behalf. The main components of an SSV setup are:
 
 ### **Distributed Key Generation**
 
-This process generates a shared public and private key set calculated by the operators running an SSV instance. Each operator owns a single portion of the private key, ensuring that no single operator can affect or have control over the entire private key and make unilateral decisions. 
+This process generates a shared public/private key set across the operators running an SSV instance. Each operator holds only one portion of the private key, ensuring that no single operator can control the full key or make unilateral decisions.
 
 ### **Shamir Secret Sharing**
 
-This mechanism used to reconstruct a validator key using a pre-defined threshold of KeyShares. Individual KeyShares cannot be used to sign a duty, yet not all are needed if some are faulty as described by n≥3f+1.
+This mechanism reconstructs validator signatures using a predefined threshold of key shares. Individual key shares cannot be used to sign a duty on their own, and not all shares are required if some operators are faulty, as described by n≥3f+1.
 
-SSV.network is able to leverage the BLS signatures - allowing for multiple signatures to be combined to recreate a validator key signature. By combining Shamir and BLS - the keys are 'broken down' to share and regrouped whenever a duty is assigned. 
+SSV Network leverages BLS signatures, which allow multiple partial signatures to be combined into a valid validator signature. By combining Shamir Secret Sharing and BLS, the validator key can be split for distribution and used collaboratively whenever a duty is assigned.
 
 ### **Multi-Party Computation**
 
-Applying secure Multi-Party Computation (MPC) to secret sharing allows the KeyShares of an SSV to be distributed amongst operators securely as well as performing decentralized computation of validator duties without reconstructing the validator key on a single device.
+Applying secure Multi-Party Computation (MPC) to secret sharing allows key shares to be distributed securely among operators and enables decentralized computation of validator duties without reconstructing the validator key on a single device.
 
 ### **Istanbul Byzantine Fault Tolerance Consensus**
 
-Tying it all together, the consensus layer of SSV, based on the Istanbul Byzantine Fault Tolerance (IBFT) algorithm. The algorithm randomly selects a validator node (KeyShare) responsible for block proposal and sharing the information with the other participants. Once the predefined threshold of KeyShares deems the block to be valid, it is added to the chain. As such, consensus can be reached even if some operators (up to the threshold) are faulty or not currently online. 
+Tying it all together, SSV uses a consensus layer based on the Istanbul Byzantine Fault Tolerance (IBFT) algorithm. For each validator duty, the cluster agrees on the duty data to be signed. A designated participant proposes the message, the other operators verify it, and once the required threshold is reached, the cluster can proceed to sign. This allows the cluster to keep operating even if some operators are faulty or temporarily offline.
 
 ## Specs
 
-You can find specs of SSV Protocol in the following repositories:
+You can find SSV protocol specs in the following repositories:
 - [SSV Spec](https://github.com/ssvlabs/ssv-spec)
 - [P2P Spec](https://github.com/ssvlabs/ssv-spec/tree/main/p2p)

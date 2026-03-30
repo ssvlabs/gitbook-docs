@@ -5,35 +5,31 @@ sidebar_position: 1
 
 # Introduction
 
-Welcome to the ssv.network Learn section! 
+[SSV Network](https://ssv.network/) is a decentralized, open-source ETH staking network built on Secret Shared Validator (SSV) technology.
 
-### **What is [ssv.network](https://ssv.network/)**
+SSV, also known as Distributed Validator Technology (DVT), lets a validator key be split into multiple key shares and distributed across multiple non-trusting nodes so a validator can run as a cluster instead of on a single machine.
 
-[ssv.network](https://ssv.network/) is a fully decentralized, open-source ETH staking network, based on Secret Shared Validator (SSV) technology.
+Running an Ethereum validator on SSV Network provides active-active redundancy, improves validator-key security, and benefits the Ethereum network, staking pools, staking services, and solo stakers.
 
-SSV is also known as DVT, or Distributed Validator Technology, as it provides an open and simple infrastructure for splitting and distributing a validator key into multiple KeyShares, for the purpose of running an Ethereum validator across multiple non-trusting nodes.
-
-Running an Ethereum validator on ssv.network achieves active-active redundancy, introduces new levels of validator key security, and benefits the Ethereum network, staking pools, staking services and solo stakers.
-
-### Benefits of ssv.network
+### Benefits of SSV Network
 
 **Active-Active Redundancy & Fault Tolerance**
 
-In order for a validator to earn ETH rewards by signing data transactions, it must remain online and available. In the current Ethereum staking ecosystem, due to strict protocol rules, a validator must run on one node only and this presents a single point of failure. By splitting the validator key into multiple KeyShares and distributing those KeyShares to multiple nodes, if one node goes offline for routine maintenance or because of a problem, fault tolerance is achieved and the other nodes holding the rest of the KeyShares will respond to keep the validator operating. This results in a slashing-free, decentralized staking environment.
+To earn ETH rewards, a validator must stay online and perform its duties. In the current Ethereum staking ecosystem, a validator typically runs on a single node, which creates a single point of failure. By splitting the validator key into multiple key shares and distributing them across multiple nodes, the validator can keep operating even if one node goes offline for maintenance or due to an issue. This improves fault tolerance and supports a slashing-free, decentralized staking environment.
 
 **Non-Custodial & Secure ETH Staking**
 
-SSV allows the validator key to be generated, split into multiple KeyShares for distribution to non-trusting nodes, and then securely stored offline. Once the KeyShares are distributed to their respective nodes, they will operate the validator and sign data on behalf of the offline validator key. This offers a highly secure staking solution for users as they never have to hand over their validator key to any operators.
+SSV allows the validator key to be generated, split into multiple key shares for distribution to non-trusting nodes, and then securely stored offline. Once the key shares are distributed to their respective nodes, they operate the validator and perform duties without requiring users to hand over the full validator key to operators.
 
 **Decentralization & Diversity**
 
-Independent operators, located all over the world, provide the infrastructure for ssv.network and are responsible for maintaining its overall health. Each operator is free to choose the validator client(s) software they will run and their hardware infrastructure, while stakers are free to choose the independent operators that will run their validator(s). This increases the overall health of the Ethereum blockchain and further eliminates single points of failure and risk for stakers by allowing validators to run on multiple clients.
+Independent operators around the world provide the infrastructure for SSV Network and help maintain its overall health. Each operator chooses its own validator clients and hardware infrastructure, while stakers choose which independent operators will run their validators. This improves client diversity, reduces single points of failure, and lowers risk for stakers.
 
-### What else? 
+### What else?
 
 Feel free to check out other pages in the Learn section:
-- [**Network Overview**](/learn/network-overview) - Relations between each actor in SSV as a protocol, as well as other related concepts.
-- [**Tech Overview**](/learn/tech-overview) - Technical concepts that are at the core of ssv.network.
+- [**Network Overview**](/learn/network-overview) - Relationships between the main actors in SSV Network and related concepts.
+- [**Tech Overview**](/learn/tech-overview) - Core technical concepts behind SSV Network.
 - [**Security**](/learn/security) - Security properties of SSV Network and Distributed Validator Technology.
 - [**Tokenomics Overview**](/learn/tokenomics) - Purpose of $SSV and its tokenomics.
 - [**Glossary**](/learn/glossary) - Terminology used by our documentation.

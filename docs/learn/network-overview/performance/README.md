@@ -1,17 +1,17 @@
 ---
-description: Understanding performance metrics in the SSV network
+description: Understanding performance metrics in SSV Network
 sidebar_position: 4
 ---
 
 # Performance
 
-The operator performance metric serves as a technical scoring system for operators in the ssv network.
+The operator performance metric is a technical scoring system for operators in SSV Network.
 
-The performance score is derived from the attendance/completion of operator duties in the consensus layer of the network (signing decided messages with the rest of the validator's operators cluster). It's calculated by the percentage of attended duties within a specific time frame.
+The performance score is derived from operator participation in the network’s consensus duties, such as signing decided messages with the rest of a validator’s operator cluster. It is calculated as the percentage of duties attended within a given time frame.
 
 ### Macro and micro scoring
 
-Performance scoring can be segmented by macro (operator) and micro (validator) levels - a user can see the operator's performance score for each validator or across all of their validators.
+Performance can be measured at the macro level (operator) and micro level (validator). Users can view an operator’s score for each validator or across all validators they manage.
 
 e.g. **Alice** the operator missed 24 duties in the last 24 hours for **validator #1**, while missing only 12 duties in the same time-frame for **validator #2**, will show the following 24 hours performance scoring:
 
@@ -21,7 +21,7 @@ e.g. **Alice** the operator missed 24 duties in the last 24 hours for **validato
 
 ### Network Explorer
 
-Operator's scores and performance can be viewed in corresponding operator pages and also per each validator at:
+Operator scores can be viewed on operator pages and per validator through the following tools:
 
 * [SSV Network Explorer](https://explorer.ssv.network)
 * [SSV Scan](https://ssvscan.io/)
