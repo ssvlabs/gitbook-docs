@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Network Overview
 
-SSV Network has three main actor groups: stakers, operators, and DAO participants. Separately, SSV stakers support the oracle system; for more on that role, see the [SSV Staking section](/ssv-staking).
+SSV Network has three main actor groups: stakers, operators, and DAO participants. Separately, SSV stakers support [the oracle system](/learn/network-overview/oracles); for more on that role, see the [SSV Staking section](/ssv-staking).
 
 ### Stakers
 
