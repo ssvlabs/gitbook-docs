@@ -5,7 +5,9 @@ sidebar_position: 3
 
 # Validator Onboarding
 
-Use this section to move validators from a standard setup to SSV Network.
+Use this section to move validators from a standard setup to SSV Network. For context, see [Security of Key Splitting](/learn/security/key-splitting).
+
+![Key Splitting Flow](/img/flow_chart_keysplit.png)
 
 Follow the guides in this order:
 1. [Split Keys](split-keys)
