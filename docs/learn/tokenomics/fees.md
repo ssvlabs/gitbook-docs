@@ -20,6 +20,6 @@ You can find more details on the dedicated [Operator Onboarding page](/learn/net
 
 ### Network Fees
 
-In addition to operator fees, stakers must pay a network fee per 32 ETH of effective balance they run through the network.
+In addition to operator fees, stakers must pay a network fee per 32 ETH of effective balance they run through the network. It is set by DAO to be 1% of Ethereum APR.
 
-The network fee is a fixed cost determined by the DAO that governs the network. It's accessible through the [SSV Network Views smart contract](/developers/smart-contracts/ssvnetworkviews#getnetworkfee) or via the [Subgraph](/developers/api/subgraph-examples#dao-constants-and-protocol-network-fee-index). 
+The network fee is a fixed cost determined by the DAO that governs the network. It's on-chain value can be accessed through the [SSV Network Views smart contract](/developers/smart-contracts/ssvnetworkviews#getnetworkfee) or via the [Subgraph](/developers/api/subgraph-examples#dao-constants-and-protocol-network-fee-index). 
