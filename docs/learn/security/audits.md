@@ -20,3 +20,4 @@ SSV Network has undergone multiple audits. You can find completed audit reports 
 | SSV Node - Peer-to-Peer protocol updates - "Alan" fork | October 2024 | [Link](https://github.com/ssvlabs/ssv/blob/main/audits/Hacken_SSV_Labs_L1_SSV_Labs_SSV_Node_Aug2024_P_2024_1212_2_20241016.pdf) | [Hacken](https://hacken.io/about/) |
 | SSV DKG - Reshare and Resign Features | November 2024 | [Link](https://github.com/ssvlabs/ssv-dkg/blob/main/audits/ChainSecurity%20Audit%20Report.pdf) | [ChainSecurity](https://www.chainsecurity.com/) |
 | SSV Node - SSV Signer | July 2025 | [Link](https://github.com/ssvlabs/ssv/blob/main/audits/SSV_SIGNER_FINAL_REPORT.pdf) | [Quantstamp](https://quantstamp.com/) |
+| Smart Contracts - SSV Staking and ETH Payments | March 2026 | [Link](https://github.com/ssvlabs/ssv-network/blob/mainnet-v2.0.0/contracts/audits/2026-03-24_Quantstamp_v1.2.0.pdf) | [Quantstamp](https://quantstamp.com/) |
