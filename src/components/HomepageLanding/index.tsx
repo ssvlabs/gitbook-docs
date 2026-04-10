@@ -222,7 +222,7 @@ const sections: SectionData[] = [
     items: [
       {
         title: 'Stakers Quickstart',
-        description: 'Get started and onboard validators to SSV',
+        description: 'Get started and integrate with SSV Network',
         to: '/stakers/',
       },
       {
@@ -231,7 +231,7 @@ const sections: SectionData[] = [
         to: '/stakers/validator-onboarding/calculate-costs',
       },
       {
-        title: 'Security',
+        title: 'Security Overview',
         description: 'Learn more about SSV Network security',
         to: '/learn/security',
       },
@@ -252,9 +252,9 @@ const sections: SectionData[] = [
         to: '/developers/',
       },
       {
-        title: 'Integration Tutorials',
+        title: 'Tutorials',
         description: 'Follow tutorials and examples to integrate with SSV Network',
-        to: '/developers/integration-guides/',
+        to: '/developers/examples/',
       },
       {
         title: 'SSV SDK',
@@ -305,15 +305,15 @@ const quickLinks: QuickLinkItem[] = [
 
 const supportItems: SupportItem[] = [
   {
-    title: 'Join Discord to get support',
-    description: 'Chat with the community and get real-time help from the SSV team and fellow builders.',
+    title: 'Join the community on Discord',
+    description: 'Chat with the community and get in contact with the fellow builders and the SSV team.',
     href: 'https://discord.gg/5vT22pRBrf',
     action: 'Join Discord',
     icon: <DiscordIcon className={styles.supportActionIcon} />,
     tone: 'highlight',
   },
   {
-    title: 'Insights and news from the SSV team',
+    title: 'Get insights from the SSV team',
     description: 'Stay current with the latest updates, announcements, and technical deep-dives from the SSV team.',
     href: 'https://ssv.network/blog/',
     action: 'Read Blog',

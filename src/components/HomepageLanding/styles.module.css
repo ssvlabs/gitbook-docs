@@ -1,12 +1,12 @@
 .homepage {
-  --home-bg: #f0f3f8;
-  --home-surface: #ffffff;
-  --home-surface-soft: #f5fbff;
-  --home-border: #dde3ee;
-  --home-primary: #2196f3;
-  --home-primary-dark: #1976d2;
-  --home-primary-light: #e8f4fd;
-  --home-primary-muted: #b3d9f7;
+  --home-bg: var(--ssv-surface);
+  --home-surface: var(--ssv-page-bg);
+  --home-surface-soft: var(--ssv-surface-soft);
+  --home-border: var(--ssv-border);
+  --home-primary: #50a4f0;
+  --home-primary-dark: #3c80c0;
+  --home-primary-light: var(--ssv-surface-soft);
+  --home-primary-muted: #9ccff7;
   --home-yellow: #e6a817;
   --home-yellow-bg: #fff8e1;
   --home-red: #e05252;
@@ -16,8 +16,8 @@
   --home-orange: #c96a00;
   --home-orange-bg: #fff4e5;
   --home-orange-border: #f5c98c;
-  --home-text: #1a2035;
-  --home-muted: #5c6a84;
+  --home-text: var(--ssv-text-strong);
+  --home-muted: var(--ssv-text-muted);
   --home-shadow-sm: 0 1px 3px rgba(26, 32, 53, 0.07), 0 1px 2px rgba(26, 32, 53, 0.04);
   --home-shadow-md: 0 4px 16px rgba(26, 32, 53, 0.09), 0 1px 4px rgba(26, 32, 53, 0.05);
   --home-shadow-hover: 0 8px 28px rgba(26, 32, 53, 0.13), 0 2px 8px rgba(26, 32, 53, 0.07);
@@ -27,14 +27,14 @@
 }
 
 :global([data-theme='dark']) .homepage {
-  --home-bg: #0e1727;
-  --home-surface: #131f31;
-  --home-surface-soft: #16253c;
-  --home-border: #263752;
-  --home-primary: #4bbcff;
-  --home-primary-dark: #6ac9ff;
-  --home-primary-light: rgba(75, 188, 255, 0.14);
-  --home-primary-muted: rgba(75, 188, 255, 0.34);
+  --home-bg: var(--ssv-page-bg);
+  --home-surface: var(--ssv-surface);
+  --home-surface-soft: #1c3750;
+  --home-border: var(--ssv-border);
+  --home-primary: var(--ifm-color-primary);
+  --home-primary-dark: var(--ifm-color-primary-dark);
+  --home-primary-light: rgba(80, 164, 240, 0.14);
+  --home-primary-muted: var(--ifm-color-primary-lightest);
   --home-yellow: #f2c14e;
   --home-yellow-bg: rgba(242, 193, 78, 0.12);
   --home-red: #ff8b8b;
@@ -44,8 +44,8 @@
   --home-orange: #ffb15c;
   --home-orange-bg: rgba(255, 177, 92, 0.13);
   --home-orange-border: rgba(255, 177, 92, 0.32);
-  --home-text: #edf3ff;
-  --home-muted: #b2c1d6;
+  --home-text: var(--ssv-text-strong);
+  --home-muted: var(--ssv-text-muted);
   --home-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.22), 0 1px 2px rgba(0, 0, 0, 0.14);
   --home-shadow-md: 0 6px 20px rgba(0, 0, 0, 0.24);
   --home-shadow-hover: 0 14px 32px rgba(0, 0, 0, 0.28);
@@ -71,7 +71,7 @@
 }
 
 .heroTitle span {
-  background: linear-gradient(135deg, var(--home-primary), #56b3f7);
+  background: linear-gradient(135deg, var(--home-primary), var(--home-primary-dark));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
