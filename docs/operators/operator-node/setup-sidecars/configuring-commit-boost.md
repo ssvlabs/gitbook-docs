@@ -32,13 +32,13 @@ The guide follows those two parts. Summary:
 
 **Part 1:**
 
-  - [Install Commit-Boost client](#install-Commit-Boost-client)
+  - [Install Commit-Boost client](#install-commit-boost-client)
   - [Choose relays](#choose-any-relays)
   - [Enable MEV in Beacon Client](#enable-mev-in-beacon-client)
 
 **Part 2:**
 
-  - [Using Commit-Boost for Other Services](#using-Commit-Boost-for-other-services-eg-preconfirmations)
+  - [Using Commit-Boost for Other Services](#using-commit-boost-for-other-services-eg-preconfirmations)
 
 ## Install Commit-Boost client
 
