@@ -5,9 +5,9 @@ sidebar_position: 2
 
 # Payments
 
-Payments are facilitated by maintaining a cluster balance in the SSV network smart contract, which keeps a balance sheet for all clusters. 
+Payments are handled through a cluster balance in the SSV Network smart contract, which keeps a balance sheet for all clusters. All payments are made in native ETH.
 
-Clusters are created when registering validators to the network and are accessible and owned by the wallet address that transmitted the transaction. This means that the address is the cluster's owner, enabling it to manage its balance and its chosen validators/operators.
+Clusters are created when validators are registered to the network. The wallet address that sends the transaction owns the cluster and can manage its balance, validators, and operators.
 
 The most important concept behind cluster balance calculation is that it depends on essentially three factors:
 
@@ -17,10 +17,10 @@ The most important concept behind cluster balance calculation is that it depends
 
 All of these factors can change at any point in time. To maintain an up-to-date cluster balance, the system tracks these factors and the period for which they applied.
 
-These are tracked using an essential component called an Index.
+These factors are tracked using indexes.
 
 :::info
-Cluster balance and payments are in a tight relation with two other essential concepts: liquidation collateral threshold, and operational runway, both explained [here](/stakers/clusters/cluster-balance.md).
+Cluster balance and payments are in a tight relation with two other essential concepts: liquidation collateral threshold, and operational runway, both explained [here](/learn/network-overview/clusters/cluster-balance).
 :::
 
 ### Indexes
@@ -29,13 +29,13 @@ Indexes can be defined as:
 
 > The aggregated sum of fees, valid until the last change that impacted fees calculation
 
-These indexes are retroactively calculated every time there is an event that influences them. When a on-chain action occurs later on, the previous index and the amount of blocks since the last change can be used to calculate the new index. Indexes are a generic concept used for fee calculation.
+These indexes are updated retroactively whenever an event affects fee calculation. When a later on-chain action occurs, the previous index and the number of blocks since the last change are used to calculate the new index. Indexes are a general mechanism used for fee accounting.
 
-It is important to note that indexes are calculated for both the [Network Fee](fees) and the [Operator Fees](fees), and these two indexes are calculated for each cluster, as well as "protocol-wide".
+Indexes are calculated for both [network fees](/learn/tokenomics/fees) and [operator fees](/learn/tokenomics/fees). They are tracked both per cluster and protocol-wide.
 
 This means, whenever the Network Fee is changed by the SSV DAO, a new _**"protocol-wide" Network Fee Index**_ is calculated and stored in the smart contract. The same applies to the _**"protocol-wide" Operator Fee Index**_, when an operator changes their fee.
 
-Similarly, whenever an event changes fee calculations for a cluster (e.g. adding or removing validators), the Network Fee Index and the sum of all Operator Fee Indexes, referred to as Cluster Index are calculated. These indexes are stored in a [Cluster Snapshot](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), which includes the [Cluster Balance](/stakers/clusters/cluster-balance.md), updated to the block where the cluster-changing event happened.
+Similarly, whenever an event changes fee calculations for a cluster, such as adding or removing validators, the Network Fee Index and the sum of all Operator Fee Indexes, referred to as the Cluster Index, are calculated. These indexes are stored in a [Cluster Snapshot](/developers/api/subgraph-examples#cluster-snapshot), which includes the [cluster balance](/learn/network-overview/clusters/cluster-balance) updated to the block where the cluster-changing event occurred.
 
 **Indexes are calculated using this generalized formula:**
 
@@ -76,4 +76,4 @@ $$
 
 Which gets us our third index, 1100.
 
-This process is repeated for any indexes that need calculated.
+This process is repeated for any indexes that need to be calculated.

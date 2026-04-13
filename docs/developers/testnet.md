@@ -1,11 +1,11 @@
 ---
 sidebar_label: 'Testnet'
-sidebar_position: 10
+sidebar_position: 7
 ---
 
 # Testnet
 
-The ssv.network testnet is live on the Hoodi network with the goal of serving as a testing environment for protocol development and for teams building on top of ssv.network.
+SSV Network testnet is live on Hoodi and is intended for protocol development and for teams building on top of SSV Network.
 
 ### Webapp
 
@@ -22,7 +22,7 @@ https://app.ssv.network
 
 ### tSSV Faucet <a href="#id-652a6sxy0wse" id="id-652a6sxy0wse"></a>
 
-The tSSV Faucet is a web interface that distributes small amounts of SSV tokens on the Hoodi network for validators registration to the ssv.network and testing purposes.
+The tSSV Faucet is a web interface that distributes small amounts of SSV tokens on Hoodi for validator registration on SSV Network and for testing.
 
 https://faucet.ssv.network/
 

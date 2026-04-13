@@ -5,12 +5,12 @@ sidebar_position: 9
 
 # Liquidator Bot
 
-The SSV Liquidator bot executes [liquidations](/learn/tokenomics/liquidations.md) on ssv.network [clusters](/stakers/clusters/) that do not hold enough balance to pay for their [operational fees](/learn/tokenomics/fees.md).
+The SSV Liquidator bot executes [liquidations](/learn/tokenomics/liquidations) on SSV Network [clusters](/learn/network-overview/clusters/) that do not hold enough balance to pay their [operational fees](/learn/tokenomics/fees).
 
-The liquidator bot performs 2 main processes:
+The Liquidator bot performs two main processes:
 
-### 1.Syncing network contract data
-   Every minute the liquidator bot pulls recent balance-determining events for the SSV networks contract and maps all of the network's clusters on the liquidator level to calculate the potential block for liquidation for each cluster in the network.
+### 1. Syncing network contract data
+Every minute, the Liquidator bot pulls recent balance-related events from the SSV Network contract. It maps all clusters and calculates the potential liquidation block for each one.
 
 
 #### Liquidator bot cluster mapping example
@@ -23,6 +23,6 @@ OWNER                                          OPERATORIDS     BALANCE     BURNR
 ```
 
 ### 2. Liquidating accounts
-   Once the potential liquidation block is reached the liquidator bot will call the [liquidate()](/developers/smart-contracts/ssvnetwork#liquidateowner-operatorids-cluster) function in the network contract, if the bot was the first to successfully pass the transaction the cluster will be liquidated and its SSV collateral will be sent to the wallet address which performed the liquidation.
+Once a cluster reaches its potential liquidation block, the Liquidator bot calls [liquidate()](/developers/smart-contracts/ssvnetwork#liquidateowner-operatorids-cluster) on the network contract. If it submits the first successful transaction, the cluster is liquidated and the SSV collateral is sent to the wallet that performed the liquidation.
 
-## [Installation](./installation)
+## [Installation](installation)

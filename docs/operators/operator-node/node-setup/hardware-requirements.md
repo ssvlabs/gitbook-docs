@@ -4,7 +4,7 @@ sidebar_position: 2
 ---
 # Hardware Requirements
 :::info Please note
-The specs are in **addition** to what you already have for Execution and Consensus nodes
+These specs are **in addition** to what you already need for Execution and Consensus nodes.
 :::
 
 💻 Machine running Ubuntu (preferably LTS 22.04) 
@@ -18,7 +18,7 @@ The specs are in **addition** to what you already have for Execution and Consens
 🧮 IOPS > 8K
 
 ## Execution and Consensus Requirements
-Please check your clients' documentation for the hardware requirements. Usually Consensus documentation describes requirements for both Execution and Consensus clients:
+Check your clients' documentation for hardware requirements. In many cases, the Consensus client documentation also covers Execution requirements:
 * [Prysm](https://docs.prylabs.network/docs/install/install-with-script#step-1-review-prerequisites-and-best-practices)
 * [Lighthouse](https://lighthouse-book.sigmaprime.io/installation.html?highlight=hardware#recommended-system-requirements)
 * [Teku](https://docs.teku.consensys.io/get-started/system-requirements)
@@ -26,9 +26,9 @@ Please check your clients' documentation for the hardware requirements. Usually 
 * [Lodestar](https://chainsafe.github.io/lodestar/run/getting-started/quick-start-custom-guide#hardware-requirements)
 
 ## Hardware usage reference
-For your reference, we checked resource usage depending on # of managed validators.
+For reference, we measured resource usage based on the number of managed validators.
 
-Tests were done on *Testnet*, so Mainnet will require slighthly more resources.
+Tests were run on *testnet*, so Mainnet will require slightly more resources.
 
 ### SSV node
 
@@ -40,4 +40,4 @@ Tests were done on *Testnet*, so Mainnet will require slighthly more resources.
 
 ## Best Practices
 
-Sufficient hardware is not the only important part. Check out [**Best Practices**](./best-practices.md) page to ensure best performance.
+Hardware is only part of the picture. See [**Best Practices**](./best-practices) for additional guidance.

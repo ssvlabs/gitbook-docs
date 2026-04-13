@@ -25,7 +25,7 @@ The ETH amount to deposit must be [supplied via `msg.value`](https://docs.ethers
 | **Parameter**       | **Type** | **Description**                                      |
 | ------------------- | -------- | ---------------------------------------------------- |
 | operatorIds | uint64[]  | An array of operator IDs of the cluster. |
-| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/api/subgraph-examples#cluster-snapshot) |
 
 Events:
 
@@ -46,8 +46,8 @@ With the [introduction of ETH payments](https://ssv.network/blog/introduction-to
 | ------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | publicKey     | bytes                      | The validator’s public key.                                                                                                                                                                                                                                                                                                                                          |
 | operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                                                                                                                                                                                       |
-| sharesData    | bytes                      | String of keyshares - obtained by splitting the validator key using the [SSV-Keys](../tools/ssv-keys) tool.                                                                                                                                                                                                                                           |
-| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools |
+| sharesData    | bytes                      | String of keyshares - obtained by splitting the validator key using the [SSV SDK](/developers/examples/generate-and-validate-keyshares) or [SSV Keys CLI](/stakers/tools/ssv-keys-cli) tool.                                                                                                                                                                                                                                           |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/api/subgraph-examples#cluster-snapshot) |
 Events:
 
 * `ValidatorAdded(address indexed owner, uint64[] operatorIds, bytes publicKey, bytes shares, Cluster cluster)`
@@ -62,12 +62,12 @@ Description: Registers all the new validators provided as argument to a cluster 
 With the [introduction of ETH payments](https://ssv.network/blog/introduction-to-ssv-staking), the smart contract function signature has changed. The `amount` parameter has been removed, and the function is now `payable`. The ETH amount to deposit must be supplied via `msg.value`. Update your integrations accordingly, in line with [the ethers documentation](https://docs.ethers.org/v4/api-contract.html#overrides).
 :::
 
-| **Parameter** | **Type**                   | **Description**                                                                                                                                                                                                                                                                                                                                                      |
-| ------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| publicKeys    | bytes\[]                   | An array of validators’ public keys.                                                                                                                                                                                                                                                                                                                                 |
-| operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                                                                                                                                                                                       |
-| sharesData    | bytes\[]                   | An array of strings of keyshares - obtained by splitting the validator key using the [SSV-Keys](../tools/ssv-keys) Each element in this array must relate to a public key in the <code>publicKeys</code> array.                                                                                                        |
-| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/tools/ssv-subgraph/subgraph-examples#cluster-snapshot), or [SSV Scanner](/developers/tools/ssv-scanner) tools |
+| **Parameter** | **Type**          | **Description**                     |
+| ------------- | -------------------------- | --------------------------------------------------------------- |
+| publicKeys    | bytes\[]                   | An array of validators’ public keys.                                                |
+| operatorIds   | unit64\[]                  | List of cluster operators Ids.                           |
+| sharesData    | bytes\[]                   | An array of strings of keyshares - obtained by splitting the validator key using the [SSV SDK](/developers/examples/generate-and-validate-keyshares) or [SSV Keys CLI](/stakers/tools/ssv-keys-cli) tool. Each element in this array must relate to a public key in the `publicKeys` array.                    |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/api/subgraph-examples#cluster-snapshot) |
 Events:
 
 * `ValidatorAdded(address indexed owner, uint64[] operatorIds, bytes publicKey, bytes shares, Cluster cluster)`
@@ -92,7 +92,7 @@ Description: Removes validator from the SSV network.
 | ------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | publicKey     | bytes     | The validator’s public key.                                                                                                                                                                               |
 | operatorIds   | unit64\[] | List of cluster operators Ids.                                                                                                                                                                            |
-| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot), or [SSV Scanner](../tools/ssv-scanner) tools. |
+| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/api/subgraph-examples.md#cluster-snapshot)  |
 
 Events:
 
@@ -108,7 +108,7 @@ Description: Removes all the validators provided as argument from the SSV networ
 | ------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | publicKeys    | bytes\[]  | An array of validators’ public keys.                                                                                                                                                                      |
 | operatorIds   | unit64\[] | List of cluster operators Ids.                                                                                                                                                                            |
-| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot), or [SSV Scanner](../tools/ssv-scanner) tools. |
+| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/api/subgraph-examples.md#cluster-snapshot)  |
 
 Events:
 
@@ -158,7 +158,7 @@ Please note: the number of validators that can be requested to exit from the bea
 
 #### **`deposit(owner, operatorIds, cluster)`**
 
-Description: Deposits ETH into a cluster balance, will fail if not enough tokens are approved.
+Description: Deposits ETH into a cluster balance, will fail if not enough tokens are approved. Allowed on liquidated clusters.
 
 The ETH amount to deposit must be [supplied via `msg.value`](https://docs.ethers.org/v4/api-contract.html#overrides).
 
@@ -170,7 +170,7 @@ With the [introduction of ETH payments](https://ssv.network/blog/introduction-to
 | ------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | owner         | address                    | The cluster owner address                                                                                                                                                                                 |
 | operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                            |
-| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot), or [SSV Scanner](../tools/ssv-scanner) tools. |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/api/subgraph-examples.md#cluster-snapshot)  |
 
 Events:
 
@@ -182,11 +182,11 @@ Events:
 
 Description: Withdraws a specified amount of ETH from cluster of msg.sender, **will fail if** msg.sender tries to withdraw more than the cluster’s liquidation collateral. To withdraw the entire cluster balance and stop its operation use liquidate().
 
-| **Parameter** | **Type**                   | **Description**                                                                                                                                                                                           |
-| ------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Parameter** | **Type**                   | **Description**            |
+| ------------- | -------------------------- | -------------------------- |
 | operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                            |
 | amount        | uint256 | Amount to be withdrawn. Amount must be divisible by 100000                                                                                        |
-| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot), or [SSV Scanner](../tools/ssv-scanner) tools. |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/api/subgraph-examples.md#cluster-snapshot)  |
 
 Events:
 
@@ -196,16 +196,16 @@ Events:
 
 #### **`reactivate(operatorIds, cluster)`**
 
-Description: Reactivates a liquidated cluster, **will fail** if insufficient ETH to cover the cluster’s liquidation collateral have been deposited. The ETH amount to deposit must be [supplied via `msg.value`](https://docs.ethers.org/v4/api-contract.html#overrides).
+Description: Reactivates a liquidated cluster, **will fail** if insufficient ETH to cover the cluster’s liquidation collateral have been deposited. The ETH amount to deposit must be [supplied via `msg.value`](https://docs.ethers.org/v4/api-contract.html#overrides). Effective Balance of the cluster is not updated while its inactive, it is recommended to call [`updateClusterBalance`](/developers/smart-contracts/ssvnetwork#updateclusterbalancecluster-effectivebalance-merkleproof) before reactivating. 
 
 :::info Breaking Changes
 With the [introduction of ETH payments](https://ssv.network/blog/introduction-to-ssv-staking), the smart contract function signature has changed. The `amount` parameter has been removed, and the function is now `payable`. The ETH amount to deposit must be supplied via `msg.value`. Update your integrations accordingly, in line with [the ethers documentation](https://docs.ethers.org/v4/api-contract.html#overrides).
 :::
 
-| **Parameter** | **Type**                   | **Description**                                                                                                                                                                                           |
-| ------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Parameter** | **Type**        | **Description**           |
+| ------------- | --------------- | ------------------------- |
 | operatorIds   | unit64\[]                  | List of cluster operators Ids.                                                                                                                                                                            |                                              |
-| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot), or [SSV Scanner](../tools/ssv-scanner) tools. |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/api/subgraph-examples.md#cluster-snapshot)  |
 
 Events:
 
@@ -221,7 +221,7 @@ Description: Updates the effective balance for the cluster described by provided
 | ------------- | --------- | ----------------------------- |
 | effectiveBalance         | uint32   | Cluster's new total effective balance   |
 | merkleProof[]         | bytes32[]   | Merkle proof of the data to verify data validity   |
-| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot), or [SSV Scanner](../tools/ssv-scanner) tools. |
+| cluster       | tuple\[]                   | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/api/subgraph-examples.md#cluster-snapshot)  |
 
 Events:
 * `ClusterBalanceUpdated(ctx.clusterOwner, operatorIds, ctx.blockNum, ctx.effectiveBalance, cluster)`
@@ -236,7 +236,7 @@ Description: Registers a new operator (key) with a set fee, **fails if** fee is 
 | ------------- | ------------------------------------ | --------------------------- |
 | publicKey     | bytes                                | The operator public key (generated as part of the node setup).   |
 | fee   | uint256 | The fee charged by the operator (denominated as ETH per block)        |
-| setPrivate    | boo  | A flag to set the operator to private or public during registration. Calls the [**`setOperatorsPrivateUnchecked`**](ssvnetwork.md#setoperatorsprivateuncheckedoperatorids)function if set to true. |
+| setPrivate    | bool  | A flag to set the operator to private or public during registration. Calls the [**`setOperatorsPrivateUnchecked`**](ssvnetwork.md#setoperatorsprivateuncheckedoperatorids)function if set to true. |
 
 Events:
 
@@ -364,7 +364,7 @@ Events:
 
 #### **`setOperatorsWhitelistingContract(operatorIds, whitelistingContract)`**
 
-Description: For a list of operators provided, set an external whitelisting contract to manage the whitelist for these operators. [Must be a valid whitelisting contract.](external-whitelist-contract-example.md)
+Description: For a list of operators provided, set an external whitelisting contract to manage the whitelist for these operators. [Must be a valid whitelisting contract.](external-whitelist-contract-example)
 
 | **Parameter**        | **Type**                 | **Description**                                      |
 | -------------------- | ------------------------ | ---------------------------------------------------- |
@@ -393,7 +393,10 @@ Events:
 
 #### **`declareOperatorFee(operatorId, operatorFee)`**
 
-Description: Initiates the first step of the operator fee update cycle - declaration of a new fee. [After specified](ssvnetworkviews.md#getoperatorfeeperiods) time window operator will be able to change to the new fee with executeOperatorFee().
+Description: Initiates the first step of the operator fee update cycle - declaration of a new fee. [After specified](ssvnetworkviews.md#getoperatorfeeperiods) time window operator will be able to change to the new fee with executeOperatorFee(). **Will fail** if:
+- the declared fee is the same as the current one
+- the current fee is 0
+- the declared fee increase is higher [than what is allowed](/developers/smart-contracts/ssvnetworkviews#getoperatorfeeincreaselimit)
 
 | **Parameter** | **Type**                   | **Description**                                 |
 | ------------- | -------------------------- | ----------------------------------------------- |
@@ -733,13 +736,13 @@ Events:
 
 #### **`liquidateSSV(owner, operatorIds, cluster)`**
 
-Description: Liquidates an SSV-based cluster sends their balances to the msg.sender (the Liquidator), **will fail** if the cluster is not liquidatable (see isLiquidatable()).
+Description: Liquidates an SSV-based cluster sends their balances to the msg.sender (the Liquidator), **will fail** if the cluster is not liquidatable (see isLiquidatable()). Self-liquidation (caller == owner) is always allowed regardless of liquidation threshold.
 
 | **Parameter** | **Type**  | **Description**                                                                                                                                                                                           |
 | ------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | owner         | address   | The cluster owner address                                                                                                                                                                                 |
 | operatorIds   | unit64\[] | List of cluster operators Ids.                                                                                                                                                                            |
-| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot), or [SSV Scanner](../tools/ssv-scanner) tools. |
+| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/api/subgraph-examples.md#cluster-snapshot)  |
 
 Events:
 
@@ -825,7 +828,7 @@ Description: Liquidates a cluster sends their balances to the msg.sender (the Li
 | ------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | owner         | address   | The cluster owner address                                                                                                                                                                                 |
 | operatorIds   | unit64\[] | List of cluster operators Ids.                                                                                                                                                                            |
-| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](../tools/ssv-subgraph/subgraph-examples.md#cluster-snapshot), or [SSV Scanner](../tools/ssv-scanner) tools. |
+| cluster       | tuple\[]  | Object containing the latest cluster snapshot data - obtained using the [SSV Subgraph](/developers/api/subgraph-examples.md#cluster-snapshot)  |
 
 Events:
 

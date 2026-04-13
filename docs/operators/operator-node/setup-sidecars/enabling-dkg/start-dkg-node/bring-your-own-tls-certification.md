@@ -1,17 +1,17 @@
 ---
-title: Bring Your Own TLS Certification
+title: Bring Your Own TLS Certificate
 sidebar_position: 2
 ---
 
-# Bring Your Own TLS Certification
+# Bring Your Own TLS Certificate
 
 :::info Note
-By default, the certificates will be generated automatically on the first start of DKG tool. **The following steps are not required for the correct setup**.
+By default, certificates are generated automatically the first time the DKG tool starts. **The steps below are optional.**
 :::
 
-However, if you want to generate the certificates yourself, you can follow the steps below.
+If you want to generate the certificates yourself, follow the steps below.
 
-First of all, if you already started the DKG tool it did generate the certificates for you. If that is the case:
+If you already started the DKG tool, it already generated certificates for you. In that case:
 
 1. Stop the DKG tool with `docker stop ssv-dkg`
 2. Check if there is a `ssl` directory created in the `operator-config`
@@ -26,7 +26,7 @@ cd ssl
 openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes -keyout "tls.key" -out "tls.crt"
 ```
 
-After that your `ssv-dkg-data` should look like that:
+After that, `ssv-dkg-data` should look like this:
 
 ```bash
 ssv@localhost:~/ssv-dkg# tree ssv-dkg-data
@@ -41,4 +41,4 @@ ssv-dkg-data
 2 directories, 5 files
 ```
 
-Lastly, you need to specify the path to these files using the `serverTLSCertPath` and `serverTLSKeyPath` configuration parameters in your `operator.yaml` config file.
+Finally, set the file paths in `operator.yaml` using `serverTLSCertPath` and `serverTLSKeyPath`.
