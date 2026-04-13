@@ -89,6 +89,11 @@ body,
   border-bottom: 1px solid var(--ssv-border);
 }
 
+[data-theme='light'] body:has(main[class*='homepage']) .navbar {
+  background-color: var(--ssv-page-bg);
+  border-bottom-color: var(--ssv-border);
+}
+
 [data-theme='dark'] .navbar {
   background-color: var(--ssv-surface);
   border-bottom-color: var(--ssv-border);
