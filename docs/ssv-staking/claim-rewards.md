@@ -4,31 +4,46 @@ sidebar_position: 3
 
 # Claim Rewards
 
+Claiming rewards transfers your accrued ETH to your wallet without changing your staking position or cSSV balance.
+
+## Prerequisites
+
+- A wallet connected to the [SSV Network Web App](https://app.ssv.network/) that holds cSSV
+- Sufficient ETH for gas fees
+
 ## Overview
 
-As an SSV staker, you earn network fees proportional to your share of total staked SSV. These rewards:
-- Can be claimed anytime without affecting your staking position
-- Do not auto-compound, so your cSSV balance stays constant
-- If you transfer cSSV tokens to another wallet recipient earns new rewards from the transfer moment onward
+As an SSV staker, you earn a share of network fees proportional to your share of the total staked SSV. Rewards behave as follows:
+
+- Claim rewards at any time without changing your staking position.
+- Rewards do not auto-compound. Your cSSV balance stays constant unless you stake more, transfer cSSV, or unstake.
+- cSSV is transferable. When cSSV is transferred, rewards are settled automatically for both sender and receiver, then future rewards accrue to the receiver from the time of transfer.
+- Reward claims are rounded to 100,000 wei precision. Any remainder below 100,000 wei stays in unclaimed rewards until it can be claimed later.
 
 ## Claiming Process
 
 #### 1. Connect Wallet
 
-Navigate to the [SSV Network webapp](https://app.ssv.network/) and connect your wallet holding cSSV tokens.
+Open the [SSV Network Web App](https://app.ssv.network/) and connect the wallet that holds your cSSV.
 
 ![Claim Rewards](/img/stake-ssv-1.png)
 
 #### 2. View Unclaimed Rewards
 
-Click on the "Rewards" to see the unclaimed rewards.
+Open the **Rewards** view to check your current unclaimed rewards.
 
 ![Claim Rewards](/img/staking-rewards-2.png)
 
 #### 3. Initiate Claim
 
-Click "Claim All" and review the claim details. Your wallet will prompt for confirmation. Review and confirm the transaction, then wait for blockchain confirmation.
+Select **Claim All**, review the claim details, and confirm the transaction in your wallet. Then wait for onchain confirmation.
 
 ![Claim Rewards](/img/staking-rewards-3.png)
 
-**Once confirmed**, ETH is sent to your wallet. Your "Unclaimed Rewards" counter resets to 0, cSSV balance remains unchanged, and new rewards continue accruing.
+Once confirmed, the claimable ETH is sent to your wallet. Your cSSV balance stays unchanged, your staking position remains active, and new rewards continue to accrue. If any amount remains below the claim precision threshold, it stays in **Unclaimed Rewards** until a later claim.
+
+## Related Links
+
+- [SSV Staking Overview](/ssv-staking) - Full staking mechanism
+- [Stake SSV](stake-ssv) - How to stake SSV
+- [Unstake SSV](unstake-ssv) - How unstaking works

@@ -13,6 +13,7 @@
   --ifm-color-primary-light: #4bbcff;
   --ifm-color-primary-lighter: #5ac2ff;
   --ifm-color-primary-lightest: #87d2ff;
+  --editable-code-var-bg: #ffffff;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
@@ -27,7 +28,42 @@
   --ifm-color-primary-lighter: #5ac2ff;
   --ifm-color-primary-lightest: #87d2ff;
   --ifm-background-color: #0E0E52;
+  --editable-code-var-bg: #000000;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+.editable-code-var-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  background-color: var(--editable-code-var-bg);
+  border: 1px solid rgba(96, 166, 196, 0.4);
+  border-radius: 3px;
+  padding: 0.08rem 0.18rem;
+  line-height: 1.15;
+  vertical-align: baseline;
+  white-space: nowrap;
+  cursor: text;
+}
+
+.editable-code-var {
+  color: #60a6c4;
+  background: transparent;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  display: inline;
+  min-width: 0;
+}
+
+.editable-code-var-icon {
+  font-size: 1em;
+  opacity: 0.6;
+  user-select: none;
+  pointer-events: none;
+  line-height: 1;
+  margin-left: 5px;
 }
 
 .ssv-dark-blue {

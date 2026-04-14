@@ -3,37 +3,33 @@ title: Deposit ETH
 sidebar_position: 2
 ---
 
-# Depositing ETH to Cluster
+# Deposit ETH to a Cluster
 
-All clusters on SSV Network use native ETH for fee payments to operators and the network. The cluster balance is necessary to reward operators and pay network fees.
+:::tip Operational runway
+Keep enough ETH in the cluster to cover ongoing fees and avoid liquidation.
 
-:::tip Operational Runway
-Remember to maintain sufficient ETH balance to cover your cluster's operational costs. Monitor your runway regularly to avoid liquidation.
-
-For more information on cluster balance mechanics, please refer to [the dedicated learning page](/stakers/clusters/cluster-balance).
+For more context, see [Cluster Balance](/learn/network-overview/clusters/cluster-balance).
 :::
 
-#### 1. Connect Web3 Wallet
+#### 1. Connect your wallet
 
-Connect your Web3 wallet with the [WebApp](https://app.ssv.network/), use the same address used for validator registration.
+Connect the Web3 wallet that owns the cluster in the [Web App](https://app.ssv.network/).
 
-#### 2. Choose the Cluster
+#### 2. Open the cluster
 
-In the My Account page, select an active cluster and then click on the "Deposit" button.
+On the [Clusters page](https://app.ssv.network/clusters), select the active cluster and click **Deposit**.
 
 ![Deposit ETH to cluster balance](/img/deposit-eth-2.png)
 
-#### 3. Enter the Amount
+#### 3. Enter the amount
 
-In the next screen, you'll be asked to enter the amount of ETH you want to deposit.
-
-Once you enter the amount, click on the _Deposit_ button.
+Enter the amount of ETH to deposit, then click **Deposit**.
 
 ![Deposit ETH to cluster balance](/img/deposit-eth-3.png)
 
-#### 4. Sign transaction
+#### 4. Sign the transaction
 
-The page will submit a transaction to the SSV Network smart contract. Finalize the deposit to the Cluster by signing the transaction.
+The Web App prepares a transaction to the SSV Network smart contract. Sign it to complete the deposit.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
@@ -43,6 +39,6 @@ The page will submit a transaction to the SSV Network smart contract. Finalize t
   />
 </div>
 
-#### 5. Deposit Complete
+#### 5. Confirm completion
 
-You'll be taken back to the Cluster page, where the balance will be updated with the deposited ETH amount.
+After the transaction is confirmed, the cluster page shows the updated ETH balance.

@@ -25,7 +25,7 @@ The program tiers are structured according to the effective balance. An Online I
 ### Reward Distribution Flow
 A snapshot is taken of all active validators on the SSV Network, then calculations are made and published on the SSV governance forum. This rewards distribution flow is repeated monthly.
 
-Usually, the rewards are distributed around the middle of the following month. Updates are posted every month in this SSV Governance Forum thread: Incentivized Mainnet Distribution Details](https://forum.ssv.network/t/incentivized-mainnet-program-distributions/).
+Usually, the rewards are distributed around the middle of the following month. Updates are posted every month in this SSV Governance Forum thread: [Incentivized Mainnet Distribution Details](https://forum.ssv.network/t/incentivized-mainnet-program-distributions/).
 
 ### How to claim rewards
 You can claim the rewards on any of the following pages:

@@ -1,7 +1,8 @@
 ---
 description: Quickstart
 sidebar_label: 'Quickstart'
-sidebar_position: 2
+sidebar_position: 7
+unlisted: true
 ---
 
 import Tabs from '@theme/Tabs';
@@ -13,7 +14,7 @@ The quickest way to engage with ssv network is to distribute and register your v
 In order to run a validator, you'll need to be in possession of its keys, have made the deposit to the Deposit Contract to activate it, and own the necessary amount of ETH to cover operational costs.
 
 :::note Don't have validator keys?
-To learn how to create a new set of validator keys and activate them, [please refer to this guide](/docs/stakers/validator-management/creating-a-new-validator.md).
+To learn how to create a new set of validator keys and activate them, [please refer to this guide](/stakers/solo-stakers/creating-a-new-validator).
 :::
 
 ### Overview
@@ -46,7 +47,7 @@ Accept the disclaimer by clicking _**Next**_ if you have all the pre-requisites.
 Now, select four operators to manage your validator. Please note the **Yearly Fee** for the setup you created before hitting the Next button.
 
 :::info Verified Operators
-**Important:** [Verified Operators (VOs)](/docs/operators/operator-onboarding/verified-operators.md) are operators that have been granted the **Verified** status by the DAO for completing KYC and providing consistent high-quality service. You can sort the operator list by their daily performance, yearly fee, and # of validators they manage. You can also filter to view only Verified Operators.
+**Important:** [Verified Operators (VOs)](/learn/network-overview/operators/verified-operators) are operators that have been granted the **Verified** status by the DAO for completing KYC and providing consistent high-quality service. You can sort the operator list by their daily performance, yearly fee, and # of validators they manage. You can also filter to view only Verified Operators.
 :::
 
 ![Distribute a validator](/img/distributing-a-val-4.png)
@@ -62,7 +63,7 @@ The next screen will allow you to generate KeyShares for your validator key.
 <Tabs>
   <TabItem value="offline" label="Offline Key Splitting">
 
-    Offline key splitting is the most secure option, although less convenient, as it requires running a command line tool. For more information, refer to the specific [User Guide on how to use the ssv-keys CLI tool](/docs/stakers/tools/ssv-keys-cli.md).
+    Offline key splitting is the most secure option, although less convenient, as it requires running a command line tool. For more information, refer to the specific [User Guide on how to use the ssv-keys CLI tool](/stakers/tools/ssv-keys-cli).
 
     ![Distribute a validator](/img/distributing-a-val-8.avif)
 
@@ -97,7 +98,7 @@ The next screen will allow you to generate KeyShares for your validator key.
 
 ### Effective Balance input
 
-For accurate runway estimation, you need to manually input the Effective Balance of your validators. If this won't be done, it will be defaulted to each validator having 32 ETH balance. You can read more about [Effective Balance accounting](/stakers/clusters/effective-balance) for detailed calculations of fees.
+For accurate runway estimation, you need to manually input the Effective Balance of your validators. If this won't be done, it will be defaulted to each validator having 32 ETH balance. You can read more about [Effective Balance accounting](/learn/network-overview/clusters/effective-balance) for detailed calculations of fees.
 
 Read the warning on the page, input your Effective Balance and proceed to the next step.
     ![Distribute a validator](/img/distributing-a-val-EB.png)
@@ -108,7 +109,7 @@ You can select the operational runway period of your validator, in accordance wi
 
 ![Distribute a validator](/img/distributing-a-val-11.png)
 
-**Please read carefully and understand how fees are managed and the risks of account** [**liquidation**](/learn/tokenomics/liquidations.md) **if your account balance falls below the** [**Threshold Balance**](/learn/tokenomics/liquidations.md#liquidation-collateral).
+**Please read carefully and understand how fees are managed and the risks of account** [**liquidation**](/learn/tokenomics/liquidations) **if your account balance falls below the** [**Threshold Balance**](/learn/tokenomics/liquidations.md#liquidation-collateral).
 
 ![Distribute a validator](/img/distributing-a-val-12.png)
 
@@ -145,7 +146,7 @@ You will need to confirm the transaction in your web3 wallet.
 
 Once the transaction has been signed and confirmed by the network, you'll be presented with the summary screen.
 
-![Distribute a validator](/img/distributing-a-val-17.avif)
+![Distribute a validator](/img/distributing-a-val-17.png)
 
 **Congratulations! You're all set! 🥳**
 

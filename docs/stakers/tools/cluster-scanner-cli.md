@@ -1,6 +1,7 @@
 ---
 title: Cluster Scanner CLI
 sidebar_position: 2
+unlisted: true
 ---
 
 # SSV Scanner CLI

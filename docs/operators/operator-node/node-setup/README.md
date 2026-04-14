@@ -3,74 +3,47 @@ sidebar_label: 'Setup SSV Node'
 sidebar_position: 1
 ---
 
-# Setup SSV Node 
+# Setup SSV Node
 
-In this section, we will walk through the process of installing the [SSV Node stack](https://github.com/ssvlabs/ssv-stack) using the standard Docker-based setup. This will install and configure the node itself with the monitoring stack:
+This guide walks through the standard Docker-based installation using the [SSV Stack](https://github.com/ssvlabs/ssv-stack). It sets up the node together with the monitoring stack:
 
 * SSV Node
 * Prometheus
 * Grafana
-* Alert manager
+* Alertmanager
 * DKG Node
 * Benchmark tool
 
 ## Process Overview
 
-At a high level, here is what involved in installing an SSV Node:
+At a high level, installing an SSV Node includes these steps:
 
 1. Install Docker and Git
-2. Download the SSV Node stack
-3. Adjust your configuration
-4. Run it!
+2. Download the SSV Stack
+3. Update the configuration
+4. Start the stack
 
-Please note the process implies you will setup Execution and Beacon clients on your own, _before_ installing the SSV Node. 
+Set up your Execution and Beacon clients before you install SSV Node.
 
-Once you have your node running you'll be able to participate in multiple validator clusters and earn rewards 🥳
+Once your node is running, you can register your operator in the SSV Network to participate in validator clusters and earn rewards.
 
 :::warning Hardware
-Make sure to check out [Node hardware specs and requirements](./hardware-requirements.md) before proceeding with the setup.
+Review [Node hardware specs and requirements](./hardware-requirements) before you continue.
 :::
 
 ## Pre-requisites
 
 #### 1. Enable SSH
 
-You will need to be able to connect to your server:
+You need SSH access to your server:
 
 <details>
 
-<summary>SSH into a local machine</summary>
+<summary>How to SSH into a machine</summary>
 
-Please refer to this guide from EthStaker community:
+See the EthStaker guide: https://docs.ethstaker.cc/ethstaker-knowledge-base/tutorials/connect-via-ssh
 
-[https://docs.ethstaker.cc/ethstaker-knowledge-base/tutorials/connect-via-ssh](https://docs.ethstaker.cc/ethstaker-knowledge-base/tutorials/connect-via-ssh)
-
-</details>
-
-<details>
-
-<summary>SSH into a Cloud server (e.g. AWS)</summary>
-
-If you have generated an SSH key for your server or downloaded one from your Cloud hosting provider (e.g. AWS)
-
-**Linux / Unix / MacOS**
-
-```
-cd ./{path to the folder to which the key pair file was downloaded}
-
-chmod 400 {key pair file name}
-
-ssh -i {key pair file name} ubuntu@{instance public IP you took from AWS}
-
-```
-
-**Windows**
-
-```
-cd /{path to the folder to which the key pair file was downloaded}
-
-ssh -i {key pair file name} ubuntu@{instance public IP you took from AWS}
-```
+If you are using a cloud server, follow your provider's documentation. For example, AWS: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connect-linux-inst-ssh.html
 
 </details>
 
@@ -80,17 +53,11 @@ ssh -i {key pair file name} ubuntu@{instance public IP you took from AWS}
 
 <summary>Docker</summary>
 
-In order to do so, please refer to [the official Docker documentation](https://docs.docker.com/engine/install/), and find the option that better fits your server configuration.
+Follow [the official Docker documentation](https://docs.docker.com/engine/install/) for the option that matches your server.
 
 ***
 
-Docker needs `sudo`, which can be annoying to type every time. You can give Docker the needed permissions once and for all, if you wish [https://stackoverflow.com/questions/48957195/how-to-fix-docker-got-permission-denied-issue](https://stackoverflow.com/questions/48957195/how-to-fix-docker-got-permission-denied-issue)
-
-***
-
-**NOTE:**
-
-In order to run the SSV Node, in a server, only Docker engine is necessary, you can still go ahead and install Docker Desktop, but it will not be necessary unless you plan to use the Graphical Interface.
+Docker usually requires `sudo`. If you want to avoid using it every time, you can grant the required permissions once: [https://stackoverflow.com/questions/48957195/how-to-fix-docker-got-permission-denied-issue](https://stackoverflow.com/questions/48957195/how-to-fix-docker-got-permission-denied-issue)
 
 </details>
 
@@ -100,27 +67,22 @@ In order to run the SSV Node, in a server, only Docker engine is necessary, you 
 
 <summary>Git</summary>
 
-To install the latest stable version for your release of Debian/Ubuntu run `apt-get install git` in your command line. 
+On Debian or Ubuntu, run `apt-get install git`.
 
-If your machine is using another Linux distribution, please use the [official Git documentation](https://git-scm.com/downloads/linux), and find the option that better fits your server configuration.
-
-***
-
-**NOTE:**
-
-Git is needed to download the SSV Node stack on your machine.
+For other Linux distributions, see the [official Git documentation](https://git-scm.com/downloads/linux).
 
 </details>
 
 #### 4. Adjust Firewall
 
-Make sure to expose the ports on your SSV node machine's firewall, otherwise your node won't be able to run correctly. The default ports are:
-- P2P - **12001 UDP** and **13001 TCP** 
-- Metrics - **15000 TCP** 
-- Health endpoint - **16000 TCP**
-- DKG port - **3030 TCP**
+Open the required ports on the machine that will run SSV Node. Otherwise, the node will not work correctly. The default ports are:
 
-If you don't want to use the default ports, they can be changed on the next step.
+- P2P - **12001 UDP** and **13001 TCP**
+- Metrics - **15000 TCP**
+- Health endpoint - **16000 TCP**
+- DKG - **3030 TCP**
+
+If you do not want to use the default ports, you can change them in the next step.
 
 ## Install SSV Node stack
 
@@ -131,7 +93,7 @@ git clone https://github.com/ssvlabs/ssv-stack.git
 cd ssv-stack
 ```
 
-### Copy the configuration example file
+### Copy the example configuration file
 
 ```bash
 cp ssv.example.env ssv.env
@@ -139,81 +101,76 @@ cp ssv.example.env ssv.env
 
 ### Configure your node
 
-Edit the `ssv.env` file and adjust the settings to your needs. The minimum you need to change is:
+Edit `ssv.env`. At minimum, update:
 
-* `BEACON_NODE_ADDR` - HTTP address of the Beacon node (e.g. `http://1.2.3.4:5052`)
-* `ETH_1_ADDR` - WebSocket address of the Execution node (e.g. `ws://1.2.3.4:8546`)
-* `NETWORK` - The network you are running on (`mainnet`, `hoodi`)
+* `BEACON_NODE_ADDR` - HTTP address of the Beacon node, for example `http://1.2.3.4:5052`
+* `ETH_1_ADDR` - WebSocket address of the Execution node, for example `ws://1.2.3.4:8546`
+* `NETWORK` - the network you are running on: `mainnet` or `hoodi`
 
-All existing settings are listed on the [Configuration Reference page](./node-configuration-reference.md).
-:::info Multiple Endpoints
+All available settings are listed on the [Configuration Reference page](./node-configuration-reference).
+
+:::info Multiple endpoints
 Both `BEACON_NODE_ADDR` and `ETH_1_ADDR` support multiple endpoints. Separate them with `;`.
 
 Example: `BEACON_NODE_ADDR=http://1.2.3.4:5052;http://1.2.3.4:5053`
 :::
 
 ### Password and private key
-On the first start the Node will generate a random `password` and encrypted `private_key` files. You can find the files under `~/ssv-stack/ssv-node-data` directory. 
 
-**If you already have encrypted key and password files**: 
-* Copy/move them to `/ssv-stack/ssv-node-data` 
-* Edit the environment variables to the correct file names, e.g.:
+On first start, the node generates random `password` and encrypted `private_key` files. You can find them in `~/ssv-stack/ssv-node-data`.
+
+**If you already have encrypted key and password files:**
+
+* Copy or move them to `/ssv-stack/ssv-node-data`
+* Update the environment variables with the correct filenames, for example:
     * `PRIVATE_KEY_FILE=/data/encrypted_private_key.json`
     * `PASSWORD_FILE=/data/password`
 
-**If this is done incorrectly**, new keys will be automatically generated, and you will see a message in the console indicating this.
+If this is configured incorrectly, the node generates new keys automatically and logs a message about it.
 
+:::warning Backup your files
+Both the password and private key files are required to run SSV Node and DKG Node.
 
-:::info Backup your files
-Both password and private key are needed to run SSV and DKG Nodes. 
-
-**Backup those files** on a separate device, if any of the two are lost — you will lose access to your operator without a chance to recover.
+Back up both files on a separate device. If either file is lost, you will lose access to your Operator with no recovery path.
 :::
 
 ### Custom ports
 
-We recommend using the default ports for ease of the setup. 
+We recommend keeping the default ports to simplify setup.
 
-If you wish to change any of the ports — change them in both `ssv.env` and `docker-compose.yaml`, then get [back to exposing those ports in your firewall](#4-adjust-firewall).
+If you change any port, update it in both `ssv.env` and `docker-compose.yaml`, then [open the same ports in your firewall](#4-adjust-firewall).
 
-
-Changes to those files will be applied after a restart of the node (_if you already started your node_).
+If the node is already running, restart it for the changes to take effect.
 
 ## Start the Node
 
-To start your node use the following command
+Run:
+
 ```bash
 docker compose up
 ```
 
-Or you can start it in the background, so there won't be logs in your CLI
+To start it in the background (without logs in your CLI):
+
 ```bash
 docker compose up -d
 ```
 
 ## Start DKG Node
-You can also run the stack with DKG, simplifying the setup process. 
 
-The instructions are on the ["Enablind DKG" section](/operators/operator-node/setup-sidecars/enabling-dkg/).
+You can also run the stack with DKG to simplify the setup.
 
-
-## Other setup options
-
-1. The same setup can be recreated manually. The steps are described on the [Manual Node setup page](./manual-setup.md).
-2. There is an alternative SSV client called Anchor, developed by Sigma Prime. [Official documentation for Anchor](https://anchor-book.sigmaprime.io/running_node.html) (recommended for Testnet only).
-3. Alternatively, SSV Node setup is also available using [eth-docker](https://eth-docker.net/Support/SSV/) and [Stereum Launcher](https://stereum.net/).
+See the [Enabling DKG section](/operators/operator-node/setup-sidecars/enabling-dkg/).
 
 ## Database backups
-SSV's database (folder named `db`) is critical to prevent slashing. Its loss or corruption can lead to double-signing and severe penalties if operation continues.
 
-Be sure to implement a robust backup and recovery strategy for your database(s), it is **crucial** for operators. Failure to maintain database backups can lead to significant financial loss. Operators are responsible for their own database management and protection.
+SSV's database (`db`) is critical for slashing protection. If it is lost or corrupted and operation continues, it can lead to double-signing and severe penalties.
+
+Implement a reliable backup and recovery strategy for your database. Operators are responsible for managing and protecting their own databases.
 
 ## What's next?
 
-* You might want to [configure MEV](/operators/operator-node/setup-sidecars/configuring-mev) to increase your rewards for block proposals. 
-
-* You can [enable DKG node](/operators/operator-node/setup-sidecars/enabling-dkg/) to increase your chances of being included in a cluster.
-
-* You might want to learn [how to use your Monitoring stack](/operators/operator-node/monitoring/), to stay on top of your performance.
-
-* If you run into some issues while running the node, try and [take a look at the troubleshooting page](/operators/operator-node/maintenance/troubleshooting).
+* [Configure MEV](/operators/operator-node/setup-sidecars/configuring-mev) to increase rewards for block proposals.
+* [Enable DKG](/operators/operator-node/setup-sidecars/enabling-dkg/) to improve your chances of joining more clusters.
+* [Use the monitoring stack](/operators/operator-node/monitoring/) to track node health and performance.
+* [Check the troubleshooting page](/operators/operator-node/maintenance/troubleshooting) if you run into issues.

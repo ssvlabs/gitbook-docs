@@ -3,7 +3,7 @@ title: Common errors
 sidebar_position: 2
 ---
 
-This section is a collection of common warnings, error messages, statuses and other unexpected behaviours you might encounter and the possible related known causes.
+This page collects common warnings, errors, statuses, and other unexpected behavior you might encounter, along with likely causes.
 
 ***
 
@@ -13,7 +13,7 @@ This section is a collection of common warnings, error messages, statuses and ot
 FATAL	failed to create beacon go-client	{"error": "failed to create http client: failed to confirm node connection: failed to fetch genesis: failed to request genesis: failed to call GET endpoint: Get \"http://5.104.175.133:5057/eth/v1/beacon/genesis\": context deadline exceeded", "errorVerbose":…………….\nfailed to create http client", "address": "http://5.104.175.133:5057"}
 ```
 
-This is likely due to issues with the Beacon layer Node. Verify that `BeaconNodeAddr` has the correct address and port in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file).
+This usually points to a Beacon node issue. Verify that `BeaconNodeAddr` is correct in [`config.yaml`](/operators/operator-node/node-setup/manual-setup#create-configuration-file).
 
 ***
 
@@ -23,21 +23,21 @@ This is likely due to issues with the Beacon layer Node. Verify that `BeaconNode
 FATAL	could not connect to execution client	{"error": "failed to connect to execution client: dial tcp 5.104.175.133:8541: i/o timeout"}
 ```
 
-This is likely due to issues with the Execution layer Node. Verify that `ETH1Addr` has the correct address and port in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file).
+This usually points to an Execution node issue. Verify that `ETH1Addr` is correct in [`config.yaml`](/operators/operator-node/node-setup/manual-setup#create-configuration-file).
 
-Finally, make sure that your ETH1 endpoint is running using Websocket. This is required in order to stream events from the network contracts.
+Also make sure your ETH1 endpoint uses WebSocket. SSV Node requires this to stream events from the network contracts.
 
 ***
 
-### `could not setup operator private key`
+### `could not set up operator private key`
 
 ```bash
 FATAL	could not setup operator private key	{"error": "Operator private key is not matching the one encrypted the storage", "errorVerbose": ...{
 ```
 
-Verify that the Operator Private Key is correctly set in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file). In particular, if using unencrypted (raw) keys, that the **private (secret) key** was copied in the configuration file and that it contains all characters (sometimes it contains a  `=`  character that can easily be left out).
+Verify that the Operator Private Key is correctly set in [`config.yaml` configuration file](/operators/operator-node/node-setup/manual-setup#create-configuration-file). In particular, if using unencrypted (raw) keys, that the **private (secret) key** was copied in the configuration file and that it contains all characters (sometimes it contains a  `=`  character that can easily be left out).
 
-If the node has been stopped and restart, verify that the same configuration has been applied, that the private key has not been changed, and that the `db.Path` configuration points to the same directory as before.
+If the node was stopped and restarted, verify that the same configuration is still applied, the private key has not changed, and `db.Path` still points to the same directory.
 
 ***
 
@@ -47,7 +47,7 @@ If the node has been stopped and restart, verify that the same configuration has
 FATAL	could not setup network	{"error": "network not supported: jatov2"}
 ```
 
-In the example above, the `Network` in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file) was wrongly set to `jatov2` instead of `jato-v2`, so be sure to look for thinks like spelling mistakes.
+In the example above, `Network` in [`config.yaml`](/operators/operator-node/node-setup/manual-setup#create-configuration-file) was set to `jatov2` instead of `jato-v2`. Check for spelling mistakes like this.
 
 ***
 
@@ -58,7 +58,7 @@ could not create loggerlogging.SetGlobalLogger: unrecognized level: "infor"
 make: *** [Makefile:97: start-node] Error 1
 ```
 
-In the example above, the `LogLevel` variable in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file) was wrongly set to `infor` instead of `info`, so be sure to look for thinks like spelling mistakes.
+In the example above, `LogLevel` in [`config.yaml`](/operators/operator-node/node-setup/manual-setup#create-configuration-file) was set to `infor` instead of `info`. Check for spelling mistakes like this.
 
 ***
 
@@ -68,7 +68,7 @@ In the example above, the `LogLevel` variable in [`config.yaml` configuration fi
 "error":"could not start committee duty: failed to get attestation data: failed to get attestation data: failed to call GET endpoint\nGet 
 ```
 
-This error could be caused by using multiple SSV nodes within one Nimbus setup. It is advised to only run one SSV node per Nimbus instance.
+This error can be caused by running multiple SSV nodes with one Nimbus setup. Run only one SSV Node per Nimbus instance.
 
 ***
 
@@ -78,35 +78,35 @@ This error could be caused by using multiple SSV nodes within one Nimbus setup. 
 ERROR P2PNetwork unable to create external multiaddress {"error": "invalid ip address provided: ...
 ```
 
-This error signalizes the node could not figure the public IP address of your node on a startup. You need to provide your SSV Node's address in `p2p: HostAddress:` variable in [your `config.yaml` file.](../node-setup/manual-setup#peer-to-peer-ports-configuration-and-firewall)
+This error means the node could not determine its public IP address on startup. Set the SSV Node address in `p2p: HostAddress:` in [your `config.yaml` file](/operators/operator-node/node-setup/manual-setup#peer-to-peer-ports-configuration-and-firewall).
 
 The error can also mention `communications error to 208.67.220.222#53: timed out`. The IP address is attributed to service SSV Node uses to check your IP address. You can cross-check if the service is available with this command:
 ```bash
 dig +short myip.opendns.com @resolver4.opendns.com
 ```
-If you see the same timeout error as above, that means your machine can not reach the service and you need to look further into allowing this connection on your server/machine.
+If you see the same timeout error, your machine cannot reach the service. Check whether the connection is blocked on the server or local machine.
 
 ***
 
 ### Node Metrics not showing up in Prometheus/Grafana
 
-Please verify that the `MetricsAPIPort` variable is correctly set in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file).
+Please verify that the `MetricsAPIPort` variable is correctly set in [`config.yaml` configuration file](/operators/operator-node/node-setup/manual-setup#create-configuration-file).
 
-For a more in-depth guide on how to set up Node monitoring, refer to [the dedicated page in this section](../monitoring).
+For a more detailed guide, see [Monitoring](/operators/operator-node/monitoring/).
 
 ***
 
 ### Node does not generate a log file
 
-Please verify that the `LogFilePath` variable is correctly set in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file). Be sure to look for thinks like spelling mistakes.
+Verify that `LogFilePath` is set correctly in [`config.yaml`](/operators/operator-node/node-setup/manual-setup#create-configuration-file). Also check for spelling mistakes.
 
 ***
 
 ### Node takes a long time to become active
 
-Please verify that the `Path` under the `db` section is correctly set in [`config.yaml` configuration file](../node-setup/manual-setup#create-configuration-file). Be sure to look for thinks like spelling mistakes.
+Verify that `Path` under the `db` section is set correctly in [`config.yaml`](/operators/operator-node/node-setup/manual-setup#create-configuration-file). Also check for spelling mistakes.
 
-If the Node was working correctly and becomes inactive after a configuration change, make sure that `Path` wasn't accidentally changed. This will cause the database to be recostructed and will lead to a slower startup.
+If the node was working and becomes inactive after a configuration change, make sure `Path` was not changed accidentally. That causes the database to be rebuilt and leads to slower startup.
 
 ***
 
@@ -115,13 +115,13 @@ If the Node was working correctly and becomes inactive after a configuration cha
 This could be due to one of the following causes:
 
 1. No validator has chosen your operator as one of its operators (for testing purposes you can always open one and select yourself as one of its managing operators).
-2. Your node uses a different operator public key than the one you have registered to the network (using the SSV webapp).
+2. Your node uses a different Operator public key from the one registered on the network in the Web App.
 
 Steps to confirm you use the same key:
 
 1. Find the operator key that you have registered to the network in the [ssv explorer](https://explorer.ssv.network/).
 2. Find the operator public key you have generated in your node during setup.
-3. Compare between the keys -  if they do not match you must update your private key in the node config.yaml file, according to the key generated during your node node-setup/manual-setup#create-configuration-file.
+3. Compare the keys. If they do not match, update the private key in `config.yaml` to use the key generated during setup.
 
 :::info
 Example log output showing the public key:
@@ -139,7 +139,7 @@ Example log output showing the public key:
 :::
 
 :::info
-Didn't find the answer you are looking for? Reach out to other network operators on our [Discord channel](https://discord.gg/5vT22pRBrf)
+Did not find the answer you need? Reach out to other network Operators in our [Discord channel](https://discord.gg/5vT22pRBrf).
 :::
 
 [^1]: 
