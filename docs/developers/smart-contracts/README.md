@@ -20,13 +20,11 @@ sidebar_position: 5
 | Contract                  | Address                                                                                              |  ENS Name   |
 |---------------------------|------------------------------------------------------------------------------------------------------|-----------|
 | SSV Token                 | [0x9D65fF81a3c488d585bBfb0Bfe3c7707c7917f54](https://etherscan.io/address/0x9D65fF81a3c488d585bBfb0Bfe3c7707c7917f54) | ssv.ssvnetwork.eth |
-| SSVNetwork                | [0xDD9BC35aE942eF0cFa76930954a156B3fF30a4E1](https://etherscan.io/address/0xDD9BC35aE942eF0cFa76930954a156B3fF30a4E1) | ssvnetwork.eth |
-| SSVNetworkViews           | [0xafE830B6Ee262ba11cce5F32fDCd760FFE6a66e4](https://etherscan.io/address/0xafE830B6Ee262ba11cce5F32fDCd760FFE6a66e4) | views.ssvnetwork.eth |
-| SSV DAO Treasury          | [0xb35096b074fdb9bBac63E3AdaE0Bbde512B2E6b6](https://etherscan.io/address/0xb35096b074fdb9bBac63E3AdaE0Bbde512B2E6b6) | treasury.ssvnetwork.eth |
+| SSV Network                | [0xDD9BC35aE942eF0cFa76930954a156B3fF30a4E1](https://etherscan.io/address/0xDD9BC35aE942eF0cFa76930954a156B3fF30a4E1) | ssvnetwork.eth |
+| SSV Network Views           | [0xafE830B6Ee262ba11cce5F32fDCd760FFE6a66e4](https://etherscan.io/address/0xafE830B6Ee262ba11cce5F32fDCd760FFE6a66e4) | views.ssvnetwork.eth |
 | Mainnet Rewards Distributor | [0xe16d6138b1d2ad4fd6603acdb329ad1a6cd26d9f](https://etherscan.io/address/0xe16d6138b1d2ad4fd6603acdb329ad1a6cd26d9f) | v1-imp.ssvnetwork.eth |
+| SSV DAO Treasury          | [0xb35096b074fdb9bBac63E3AdaE0Bbde512B2E6b6](https://etherscan.io/address/0xb35096b074fdb9bBac63E3AdaE0Bbde512B2E6b6) | treasury.ssvnetwork.eth |
 | SSV DAO Foundation           | [0xeC29418bc30FED20dE85706F32c7D77Da0be7afB](https://etherscan.io/address/0xeC29418bc30FED20dE85706F32c7D77Da0be7afB) | foundation.ssvnetwork.eth |
-| SSV DAO Vesting           | [0xB8471180C79A0a69C7790A1CCf62e91b3c3559Bf](https://etherscan.io/address/0xB8471180C79A0a69C7790A1CCf62e91b3c3559Bf) | - |
-| Testnet Rewards Distributor **Deprecated** | [0xE16e6Bddf4a1683c029DdC7AEcb567A6095e95A6](https://etherscan.io/address/0xE16e6Bddf4a1683c029DdC7AEcb567A6095e95A6) | - |
 | CDT to SSV Upgrader **[Deprecated](https://snapshot.box/#/s:mainnet.ssvnetwork.eth/proposal/0xff1b868f97de48db3ba26c5254e9902645ed55b5107a84ee0cbcb98b31973f27)**     | [0x2bf73A478cc6a7bA4E6758A3A52AbDc8CDBa735E](https://etherscan.io/address/0x2bf73A478cc6a7bA4E6758A3A52AbDc8CDBa735E) | - |
 
 
