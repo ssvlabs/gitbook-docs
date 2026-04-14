@@ -1,83 +1,141 @@
 ---
-title: Updating Operator fees
-sidebar_position: 3
+title: Updating Operator Fees
+sidebar_position: 4
 ---
 
-### Connect your Web3 wallet to WebApp
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-Make sure to connect your Web3 wallet with the WebApp, and that the address corresponds with the one you want to manage your Operators with.
+# Updating Operator Fees
 
-:::info
-**Note:** Your account is associated with your Web3 wallet.
-:::
+Connect the same wallet you used to register the Operator in the [Web App](https://app.ssv.network/).
 
-Once connected, browse to the _My Account_ page and select the Operator you want to update from the _Operator Dashboard_.
+1. Browse to the [My Account page](https://app.ssv.network/operators) and **select the Operator you want to update**.
 
-![update-fee](/img/update-operator-fees-1.avif)
+![update-fee](/img/update-operator-fees-1.png)
 
-Then, on the _Operator Details_ screen, click on the _Update Fee_ button at the bottom left.
+2. **Click on the _Update Fee_ button** at the bottom left.
 
-![update-fee](/img/update-operator-fees-2.avif)
+![update-fee](/img/update-operator-fees-2.png)
+
+**At this point, you can either** increase the fee or decrease the fee.
+
+<Tabs>
+  <TabItem value="increase" label="Increasing Operator fee">
 
 ### Increasing Operator fee
 
-In the following screen you'll be asked to enter a new fee. Just pay attention: there are limits imposed by the protocol for incrementing the Operator fee, please read more about this in [the dedicated section](/operators/operator-onboarding/update-fee).
+3. **Enter a new fee** and click _Next_.
 
-![update-fee](/img/update-operator-fees-3.avif)
+**Please note:** The protocol [limits fee increases](/learn/network-overview/operators/update-fee). You can click _Max Fee_ to use the current limit.
 
-If the proposed updated fee is within the limits, you can select _Next_, and the following screen is going to explain that the procedure is divided in two steps:
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+  <img 
+    src="/img/update-operator-fees-3.png" 
+    alt="Declare fee update" 
+    style={{ width: '60%', maxWidth: '700px' }}
+  />
+</div>
 
-* fee update declaration
-* fee update execution
+4. **Acknowledge the procedure's steps**
 
-The current operation is about declaring the new fee.
+The procedure is divided in three steps:
+* Fee update declaration
+* Waiting period
+* Fee update execution
 
-![update-fee](/img/update-operator-fees-4.avif)
+5. **Click on _Declare Fee_**.
 
-You'll have to submit and confirm a transaction to interact with the smart contract, in order for the fee updates to be declared.
+This step declares the new fee.
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+  <img 
+    src="/img/update-operator-fees-4.png" 
+    alt="Declare fee update" 
+    style={{ width: '60%', maxWidth: '700px' }}
+  />
+</div>
+
+6. **Sign the transaction** to declare new fee.
+
+You need to submit and confirm a transaction to declare the fee update.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
     src="/img/update-operator-fees-5.png" 
     alt="Declare fee update" 
-    style={{ width: '50%', maxWidth: '500px' }}
+    style={{ width: '40%', maxWidth: '500px' }}
   />
 </div>
 
-![update-fee](/img/update-operator-fees-6.avif)
+7. **Waiting period**.
 
-Then, a waiting period is necessary to let all the validators using this operators know about the fee update.
+Then a waiting period gives all validators using this Operator time to learn about the fee update.
 
-You can cancel the fee update at any time, but you will have to wait until the end of the waiting period to _Execute._
+You can cancel the fee update at any time, but you must wait for the waiting period to end before you can _Execute_.
 
-So, after the period has ended you will have to come back to this page and confirm the _Execution_ of the fee update.
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+  <img 
+    src="/img/update-operator-fees-6.png" 
+    alt="Declare fee update" 
+    style={{ width: '60%', maxWidth: '600px' }}
+  />
+</div>
 
-![update-fee](/img/update-operator-fees-7.avif)
+8. **Execute fee update**.
+
+**After the waiting period ends**, return to this page and confirm the _Execution_ of the fee update.
+
+  </TabItem>
+  <TabItem value="Decrease" label="Decreasing Operator fee">
 
 ### Decreasing Operator fee
 
-On the other hand, there are no limitations for decreasing the Operator fee, as it is advantagious for Stakers.
+There are no protocol limits on decreasing the Operator fee because it benefits Stakers. **Please note** that if the fee is reduced to 0, it can never be increased again.
 
-Once you have decided a new fee which complies with the protocol's limits, click _Next_.
+3. **Enter the new fee** and click _Next_.
 
-![update-fee](/img/update-operator-fees-8.avif)
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+  <img 
+    src="/img/update-operator-fees-7.png" 
+    alt="Declare fee update" 
+    style={{ width: '60%', maxWidth: '600px' }}
+  />
+</div>
 
-The following screen summarizes the changes to be applied, asking for confirmation.
+4. Read the summary and **click on the _Update Fee_ button**.
 
-![update-fee](/img/update-operator-fees-9.avif)
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+  <img 
+    src="/img/update-operator-fees-8.png" 
+    alt="Declare fee update" 
+    style={{ width: '60%', maxWidth: '600px' }}
+  />
+</div>
 
-When clicking on _Update Fee_ button, a smart contract transaction is generated by the WebApp, make sure to open your Web3 wallet, if it does not automatically and confirm the transaction.
+5. **Sign the transaction**.
+
+When you click _Update Fee_, the Web App creates a smart contract transaction. Open your wallet if needed and confirm the transaction.
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+  <img 
+    src="/img/update-operator-fees-9.png" 
+    alt="Declare fee update" 
+    style={{ width: '40%', maxWidth: '500px' }}
+  />
+</div>
+
+6. **Done!**
+
+Once the transaction is confirmed, the change takes effect. 
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <img 
     src="/img/update-operator-fees-10.png" 
     alt="Declare fee update" 
-    style={{ width: '50%', maxWidth: '500px' }}
+    style={{ width: '60%', maxWidth: '600px' }}
   />
 </div>
 
-The WebApp will update, waiting for the transaction to be confirmed by the network.
-
-![update-fee](/img/update-operator-fees-11.avif)
-
-When the transaction is confirmed by the network, the changes will take place. Bear in mind, once again, that in case of Fee increase, there will be a delay, to make sure Validators are aware and can decide accordingly.
+  </TabItem>
+</Tabs>

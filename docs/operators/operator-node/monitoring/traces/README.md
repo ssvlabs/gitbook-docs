@@ -11,7 +11,7 @@ Traces provide insight into the flow of requests and operations within the node,
 
 ## OpenTelemetry Support
 
-SSV Node supports all standard OpenTelemetry (OTel) environment variables for traces, as well as an SSV Node–specific variable to enable or disable tracing.
+SSV Node supports all standard OpenTelemetry (OTel) environment variables for traces, as well as an SSV Node-specific variable to enable or disable tracing.
 
 - **OTEL_EXPORTER_OTLP_TRACES_ENDPOINT** ([docs](https://opentelemetry.io/docs/languages/sdk-configuration/otlp-exporter/#otel_exporter_otlp_traces_endpoint)) — **Required** when traces are enabled. Specifies the endpoint to which traces are exported.
 - **OTEL_EXPORTER_OTLP_TRACES_PROTOCOL** ([docs](https://opentelemetry.io/docs/languages/sdk-configuration/otlp-exporter/#otel_exporter_otlp_traces_protocol)) — Optional. Set if you need to specify the protocol (`http` or `grpc`).
@@ -77,46 +77,46 @@ Below is a list of useful attributes to help troubleshoot issues related to duty
 
 - **Fetch all Attester duties that took longer than 5 seconds:**
   ```
-  { resource.service.name = “SSV-Node” && span:name = “ssv.validator.execute_committee_duty” && trace:duration > 5s }
+  { resource.service.name = "SSV-Node" && span:name = "ssv.validator.execute_committee_duty" && trace:duration > 5s }
   ```
 
 - **Fetch all traces related to a specific Beacon slot:**
   ```
-  { resource.service.name = “SSV-Node” && span.ssv.beacon.slot = 171903 }
+  { resource.service.name = "SSV-Node" && span.ssv.beacon.slot = 171903 }
   ```
 
 - **Fetch traces for a specific slot where the runner performs Attester duties and successfully submitted attestations for a specific validator:**
   ```
-  { resource.service.name = “SSV-Node” && span.ssv.beacon.slot = 669122 && span.ssv.runner.role = “COMMITTEE_RUNNER” }
-  && { event:name = “✅ successfully submitted attestations” }
+  { resource.service.name = "SSV-Node" && span.ssv.beacon.slot = 669122 && span.ssv.runner.role = "COMMITTEE_RUNNER" }
+  && { event:name = "successfully submitted attestations" }
   && { event.ssv.validator.index = 843162 }
   ```
 
 - **Fetch traces for a specific slot for the Proposer role where block proposals were successfully submitted:**
   ```
-  { resource.service.name = “SSV-Node” && span.ssv.beacon.role = “PROPOSER” && span.ssv.beacon.slot=668720 }
-  && { event:name = “✅ successfully submitted block proposal” }
+  { resource.service.name = "SSV-Node" && span.ssv.beacon.role = "PROPOSER" && span.ssv.beacon.slot=668720 }
+  && { event:name = "successfully submitted block proposal" }
   ```
   
 - **Fetch traces for a specific slot indicating that Attester duties were fetched from the Beacon Node for a specific validator index:**
   ```
-  { resource.service.name = “SSV-Node” && span:name = “ssv.duty.attester.fetch_and_store” && span.ssv.beacon.slot = 669328 && event.ssv.validator.index = 843871 }
+  { resource.service.name = "SSV-Node" && span:name = "ssv.duty.attester.fetch_and_store" && span.ssv.beacon.slot = 669328 && event.ssv.validator.index = 843871 }
   ```
 
 - **Fetch traces for a specific epoch indicating that Proposer duties were fetched from the Beacon Node for a specific validator index:**
   ```
-  { resource.service.name = “SSV-Node” && span:name = “ssv.duty.proposer.fetch_and_store” && span.ssv.beacon.epoch = 20929 && event.ssv.validator.index = 843871 }
+  { resource.service.name = "SSV-Node" && span:name = "ssv.duty.proposer.fetch_and_store" && span.ssv.beacon.epoch = 20929 && event.ssv.validator.index = 843871 }
   ```
 
 ## Best Practices
 
-- Ensure that wherever you are sending traces, is reachable from the SSV node.
+- Make sure the trace destination is reachable from the SSV Node.
 - Use a compatible backend, such as [Tempo](https://grafana.com/docs/tempo/latest/) to ingest traces and [Alloy](https://grafana.com/docs/alloy/latest/) to collect them and add any necessary metadata. You can also send traces directly to a compatible backend without the need for an intermediary OTel Collector / Alloy agent.
-- Combine traces with metrics for a complete observability solution.
+- Combine traces with metrics for a more complete observability setup.
 - OpenTelemetry is a standard, so you can use any compatible tool or vendor of your choice.
 
 ## Further Reading
 
 - [OpenTelemetry Traces Documentation](https://opentelemetry.io/docs/concepts/signals/traces/)
 - [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/)
-- [SSV Node Configuration Reference](../../node-setup/README.md)
+- [SSV Node Configuration Reference](/operators/operator-node/node-setup)

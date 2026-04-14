@@ -4,6 +4,142 @@ import type * as Preset from '@docusaurus/preset-classic';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
+const subtreeRedirects: Record<string, string> = {
+  '/operators/operator-node/setup-sidecars/enabling-dkg': '/operators/operator-node/node-setup/enabling-dkg',
+  '/developers/examples': '/developers/SSV-SDK/examples',
+  '/stakers/tools/ssv-dkg-client': '/developers/tools/ssv-dkg-client',
+  '/learn/network-overview/performance': '/learn/performance',
+  '/learn/network-overview/operators': '/operators/operator-onboarding',
+  '/learn/network-overview/clusters': '/stakers/clusters',
+  '/learn/network-overview/validators': '/stakers/validators',
+};
+
+const explicitRedirects = [
+  {
+    to: '/operators/operator-node/setup-sidecars/configuring-mev',
+    from: ['/operators/operator-node/node-setup/configuring-mev'],
+  },
+  {
+    to: '/operators/operator-node/setup-sidecars/configuring-primev',
+    from: ['/operators/operator-node/node-setup/configuring-primev'],
+  },
+  {
+    to: '/developers/integration-guides/',
+    from: [
+      '/developers/integration-guides/staking-pools',
+      '/developers/integration-guides/staking-pools/initialization-stage',
+      '/developers/integration-guides/staking-pools/maintenance-stage',
+      '/developers/integration-guides/staking-pools/operation-stage',
+      '/developers/integration-guides/staking-services',
+    ],
+  },
+  {
+    to: '/developers/examples/',
+    from: ['/developers/code-examples-and-snippets'],
+  },
+  {
+    to: '/learn/security/keyshares-structure',
+    from: ['/developers/keyshares-structure'],
+  },
+  {
+    to: '/learn/security/audits',
+    from: ['/developers/security'],
+  },
+  {
+    to: '/developers/api/ssv-api',
+    from: ['/developers/tools/ssv-api'],
+  },
+  {
+    to: '/stakers/tools/ssv-keys',
+    from: ['/developers/tools/ssv-keys'],
+  },
+  {
+    to: '/stakers/tools/ssv-scanner',
+    from: ['/developers/tools/ssv-scanner'],
+  },
+  {
+    to: '/developers/api/ssv-subgraph',
+    from: ['/developers/tools/ssv-subgraph'],
+  },
+  {
+    to: '/developers/api/subgraph-examples',
+    from: ['/developers/tools/ssv-subgraph/subgraph-examples'],
+  },
+  {
+    to: '/developers/api/',
+    from: ['/developers/tools'],
+  },
+  {
+    to: '/learn/network-overview/',
+    from: [
+      '/learn/protocol-overview',
+      '/learn/introduction/network-overview',
+    ],
+  },
+  {
+    to: '/learn/network-overview/governance',
+    from: ['/learn/introduction/governance'],
+  },
+  {
+    to: '/learn/network-overview/oracles',
+    from: ['/learn/introduction/oracles'],
+  },
+  {
+    to: '/learn/tokenomics/',
+    from: ['/learn/introduction/ssv-token'],
+  },
+  {
+    to: '/learn/tech-overview',
+    from: ['/learn/introduction/tech-overview'],
+  },
+  {
+    to: '/stakers/validator-offboarding/exiting-a-validator',
+    from: ['/stakers/cluster-management/exiting-a-validator'],
+  },
+  {
+    to: '/stakers/validator-offboarding/removing-a-validator',
+    from: ['/stakers/cluster-management/removing-a-validator'],
+  },
+  {
+    to: '/stakers/validator-offboarding/withdrawing-eth',
+    from: [
+      '/stakers/cluster-management/withdrawing-eth',
+      '/stakers/cluster-management/withdrawing-ssv',
+    ],
+  },
+  {
+    to: '/stakers/cluster-management/depositing-eth',
+    from: ['/stakers/cluster-management/depositing-ssv'],
+  },
+  {
+    to: '/stakers/validator-onboarding/',
+    from: ['/stakers/validator-management'],
+  },
+  {
+    to: '/stakers/solo-stakers/creating-a-new-validator',
+    from: [
+      '/stakers/validator-management/creating-a-new-validator',
+      '/stakers/validator-management/dkg-ceremony',
+    ],
+  },
+  {
+    to: '/stakers/solo-stakers/distributing-a-validator',
+    from: ['/stakers/validator-management/distributing-a-validator'],
+  },
+  {
+    to: '/stakers/cluster-management/setting-fee-recipient-address',
+    from: ['/stakers/validator-management/setting-fee-recipient-address'],
+  },
+  {
+    to: '/learn/network-overview/clusters/cluster-creation',
+    from: ['/stakers/validators/validator-onboarding'],
+  },
+  {
+    to: '/learn/network-overview/clusters/update-operators',
+    from: ['/stakers/validators/update-operators'],
+  },
+];
+
 const config: Config = {
   title: 'SSV',
   favicon: 'img/favicon.ico',
@@ -20,8 +156,12 @@ const config: Config = {
   projectName: 'ssv-docs', // Usually your repo name.
 
   onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
-
+  markdown: {
+      hooks: {
+        onBrokenMarkdownLinks: 'warn', // or 'throw' / 'ignore'
+        onBrokenMarkdownImages: 'warn', 
+      },
+    },
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
@@ -143,31 +283,23 @@ const config: Config = {
       '@docusaurus/plugin-client-redirects',
       {
         fromExtensions: ['html'],
+        redirects: explicitRedirects,
         createRedirects(existingPath) {
-          console.log('[Redirect plugin] Existing path:', existingPath);
-          const redirectFolders: Record<string, string> = {
-            '/operators/operator-node/setup-sidecars/enabling-dkg': '/operators/operator-node/node-setup/enabling-dkg',
-          };
-          const redirectFiles: Record<string, string> = {
-            '/operators/operator-node/setup-sidecars/configuring-mev': '/operators/operator-node/node-setup/configuring-mev',
-            '/operators/operator-node/setup-sidecars/configuring-primev': '/operators/operator-node/node-setup/configuring-primev',
-            '/developers/quickstart':'/developers/SSV-SDK/examples/bulk-register-validators',
-            '/stakers/cluster-management/depositing-ssv': '/stakers/cluster-management/depositing-eth',
-            '/stakers/cluster-management/withdrawing-ssv': '/stakers/cluster-management/withdrawing-eth'
-          };
-          for (const [newPath, oldPath] of Object.entries(redirectFolders)) {
-            if (existingPath === newPath || existingPath.startsWith(`${newPath}/`)) {
-              const subPath = existingPath.slice(newPath.length);
-              const fromPath = `${oldPath}${subPath}`;
-              console.log(`[Redirect plugin] Redirecting folder: ${fromPath} → ${existingPath}`);
-              return [fromPath];
+          const normalizedPath =
+            existingPath !== '/' && existingPath.endsWith('/')
+              ? existingPath.slice(0, -1)
+              : existingPath;
+
+          for (const [newPath, oldPath] of Object.entries(subtreeRedirects)) {
+            if (
+              normalizedPath === newPath ||
+              normalizedPath.startsWith(`${newPath}/`)
+            ) {
+              const subPath = normalizedPath.slice(newPath.length);
+              return [`${oldPath}${subPath}`];
             }
           }
-          if (redirectFiles[existingPath]) {
-            const from = redirectFiles[existingPath];
-            console.log(`[Redirect plugin] Redirecting file: ${from} → ${existingPath}`);
-            return [from];
-          }
+
           return undefined;
         },
       },

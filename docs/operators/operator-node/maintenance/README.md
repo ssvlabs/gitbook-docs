@@ -5,9 +5,9 @@ sidebar_position: 4
 
 # Maintenance
 
-* [Troubleshooting section](./troubleshooting.md) - If you are having troubles with your SSV node.
-* [Common errors page](./common-errors.md) - If you are looking for a specific error, you might find it here.
+* [Troubleshooting](./troubleshooting) - diagnose and fix SSV Node issues.
+* [Common errors](./common-errors) - look up specific errors and likely causes.
 ***
-To migrate your SSV node follow the guides
-* [Node Migration](./node-migration.md)
+If you need to migrate your setup, use these guides:
+* [Node Migration](./node-migration)
 * [DKG Migration](./dkg-operator-migration)

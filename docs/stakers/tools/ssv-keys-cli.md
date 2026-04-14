@@ -62,7 +62,7 @@ Note that if there are missing arguments that the CLI needs, it will ask you for
 | `--operator-ids (-oids)` | int | Comma-separated list of operator IDs. The amount must be 3f+1 compatible. |
 | `--operator-keys (-oks)` | string | Comma-separated list of operator keys (same sequence as operator ids). The amount must be 3f+1 compatible. |
 | `--owner-address (-oa)` | string | The cluster owner address (in the SSV contract) |
-| `--owner-nonce (-on)` | int | The validator registration nonce of the account (owner address) within the SSV contract (increments after each validator registration), obtained using the ssv-scanner tool. |
+| `--owner-nonce (-on)` | int | The validator registration nonce of the account (owner address) within the SSV contract (increments after each validator registration), obtained using the [SSV Subgraph](/developers/api/subgraph-examples#cluster-snapshot). |
 | `--output-folder (-of)` | string | Target folder path to output the key shares file |
 
 ## Examples

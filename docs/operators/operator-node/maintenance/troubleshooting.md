@@ -9,16 +9,16 @@ import TabItem from '@theme/TabItem';
 # Troubleshooting
 
 ## Overview
-Troubleshooting is divided in 2 sections: tools to identify and solutions to resolve issues.
+This page is split into two parts: tools to identify issues and checklists to resolve them.
 
 **Solutions**:
-- [FAQ](#faq) - short answers on the most common questions.
-- [Checklists for troubleshooting](#checklists-for-troubleshooting) - long answers for complex issues.
+- [FAQ](#faq) - short answers to common questions.
+- [Checklists for troubleshooting](#checklists-for-troubleshooting) - step-by-step guidance for more complex issues.
 
 **Tools**:
-- [Health endpoint](#ssv-node-health-endpoint) - the starting point to troubleshooting your node.
-- [SSV-Pulse benchmarking](#ssv-pulse-benchmarking-tool) - powerful tool that will give insight into potential issue source.
-- [SSV-Pulse log analysis](#ssv-pulse-log-analysis) - the tool will analyze `debug.log` files of your SSV node(s) and provide stats.
+- [Health endpoint](#ssv-node-health-endpoint) - the best starting point for troubleshooting your node.
+- [SSV-Pulse benchmarking](#ssv-pulse-benchmarking-tool) - helps identify likely infrastructure or client bottlenecks.
+- [SSV-Pulse log analysis](#ssv-pulse-log-analysis) - analyzes `debug.log` files from one or more SSV nodes.
 
 ***
 
@@ -38,31 +38,31 @@ docker pull ssvlabs/ssv-node:latest
 docker compose up -d
 ```
 
-_Alternatively_, you can set the exact version in your `docker-compose.yaml` configuration file with `image: ssvlabs/ssv-node:v1.2.3`. But in that case you will have to change the version in your file with each new update [posted on SSV Docker Hub](https://hub.docker.com/r/ssvlabs/ssv-node/tags).
+Alternatively, you can pin an exact version in `docker-compose.yaml`, for example `image: ssvlabs/ssv-node:v1.2.3`. If you do, update that version manually whenever a new release is published on [SSV Docker Hub](https://hub.docker.com/r/ssvlabs/ssv-node/tags).
 
 **Docker run:**
 
-If you followed our documentation, you named your node with the `--name=ssv_node`  docker flag. This is how you will reference your node with other docker commands.
+If you followed our documentation, your container is named `ssv_node` with the `--name=ssv_node` flag. Use that name in the Docker commands below.
 
-To update your SSV node, you will need to stop your current node:
+To update your SSV Node:
 
 ```bash
 docker stop ssv_node
 ```
 
-Then remove it (this only removes the old Docker image, not all of your data!):
+Then remove the container. This does **not** remove your data:
 
 ```bash
 docker rm -f ssv_node
 ```
 
-Then pull the latest image from SSV:
+Pull the latest image:
 
 ```bash
 docker pull ssvlabs/ssv-node:latest
 ```
 
-And finally... [run the creation command again](../node-setup/manual-setup#start-the-node) to create a new Docker container with the latest SSV image.
+Then [run the creation command again](/operators/operator-node/node-setup/manual-setup#start-the-node) to create a new container from the updated image.
 
 </details>
 
@@ -70,32 +70,32 @@ And finally... [run the creation command again](../node-setup/manual-setup#start
 
 <summary><strong>What happens if my machine restarts?</strong></summary>
 
-If you look at the Docker command you ran to start the node you'll see the part that says:
+In the Docker command you used to start the node, you should see:
 
 ```bash
 --restart unless-stopped
 ```
 
-This means that the Docker container running your node will always try to restart if it crashes, or if the whole machine turns off and then restarts.
+This means Docker will try to restart the container if it crashes or if the machine restarts.
 
 </details>
 
 <details>
 
 <summary><strong>My node is not attesting</strong></summary>
-There are several reasons for your node to not participate in cluster's consensus:
+If your node is not participating in cluster consensus, check the following:
 
-1. Verify that the `network` in config has the correct value for the blockchain you are trying to operate on.
+1. Verify that `network` in the config matches the blockchain you want to operate on.
 
-2. Next, verify in the SSV node logs that the connection to execution and beacon nodes has been established.
+2. Verify in the SSV Node logs that connections to the Execution and Beacon nodes were established.
 
-3. Check correctness of the path to private key/password files. Check the files are correct too, e.g. in your private key there is `pubKey` section - it should be exactly the same as your registered public key of this operator.
+3. Check the private key and password file paths. Also verify the files themselves. In the private key file, the `pubKey` value must exactly match the public key registered for this Operator.
 
-4. If the SSV node logs don't report any errors, please verify the clients logs themselves. If the disk they are running on does not support fast IOPS, they might struggle to stay in sync with the blockchain.
+4. If the SSV Node logs look healthy, check the Execution and Beacon client logs. Slow disks or low IOPS can prevent them from staying in sync.
 
-5. It is finally possible that the clients don't report any errors, but the issue persists. In this cases, try and re-sync ssv (by deleting `db` folder). If that doesn't help, try to re-sync execution and/or beacon client(s), and then re-sync ssv node again. That should fix potential initialization issues.
+5. If the issue continues, try re-syncing SSV by deleting the `db` folder. If that does not help, re-sync the Execution or Beacon client, then re-sync SSV Node again.
 
-6. If you can't find the reason for this issue, feel free to ask our team for help in our [Discord channel](https://discord.gg/5vT22pRBrf).
+6. If you still cannot identify the cause, ask for help in the [Discord channel](https://discord.gg/5vT22pRBrf).
 
 </details>
 
@@ -103,17 +103,17 @@ There are several reasons for your node to not participate in cluster's consensu
 
 <summary>How do I start the node?</summary>
 
-If for some reason your node has stopped (maybe you manually stopped it 🤔) you don't need to run the full creation command again, as that will actually throw an error saying that the Docker container already exists.
+If your node stopped, do not run the full creation command again. Docker will return an error because the container already exists.
 
-In the command above, you named your node:
+Your node container is named:
 
 ```bash
 --name=ssv_node
 ```
 
-This is how you will reference your node with other docker commands.
+Use this name in other Docker commands.
 
-To start a container, run the command:
+To start the container, run:
 
 ```bash
 docker start ssv_node
@@ -125,15 +125,15 @@ docker start ssv_node
 
 <summary>How do I stop the node?</summary>
 
-In the command above, you named your node:
+Your node container is named:
 
 ```bash
 --name=ssv_node
 ```
 
-This is how you will reference your node with other docker commands.
+Use this name in other Docker commands.
 
-To stop the node run:
+To stop the node, run:
 
 ```bash
 docker stop ssv_node
@@ -145,15 +145,15 @@ docker stop ssv_node
 
 <summary>How do I view the logs again?</summary>
 
-In the command above, you named your node:
+Your node container is named:
 
 ```bash
 --name=ssv_node
 ```
 
-This is how you will reference your node with other docker commands.
+Use this name in other Docker commands.
 
-To view the logs when your node is running, use the command:
+To view the logs while the node is running, use:
 
 ```bash
 docker logs ssv_node
@@ -165,11 +165,11 @@ docker logs ssv_node
 
 <summary>How do I migrate raw (deprecated) Operator Keys</summary>
 
-If you are already in possession of raw (unencrypted) Operator Keys, please copy the private key into a text file and make sure the file only contains the key in a single line. For this mini-guide, we are going to call this file: `private-key`.
+If you already have raw (unencrypted) Operator keys, copy the private key into a text file that contains only the key on a single line. In this example, the file is named `private-key`.
 
 **Password file**
 
-You will need to create a file (named `password` in this example) containing the password you chose for your Secret Key:
+Create a file named `password` with the password you want to use for the Secret Key:
 
 ```bash
 echo "<MY_OPERATOR_PASSWORD>" >> password
@@ -177,7 +177,7 @@ echo "<MY_OPERATOR_PASSWORD>" >> password
 
 **Secret Key encryption**
 
-Then, you can generate a KeyStore using this command:
+Then generate a keystore with:
 
 ```bash
 docker run --name ssv-node-key-generation \
@@ -192,7 +192,7 @@ docker rm ssv-node-key-generation
 
 **Configuration update**
 
-At this point the node configuration needs to be changed, please edit the `config.yaml` file for your node, find the line with `OperatorPrivateKey` and delete it entirely. Replace it with this section:
+Next, update `config.yaml`. Remove the `OperatorPrivateKey` line completely and replace it with:
 
 ```yaml
 KeyStore:
@@ -200,11 +200,11 @@ KeyStore:
   PasswordFile: <PASSWORD_FILE> # e.g. ./password
 ```
 
-And make sure to replace `ENCRYPTED_PRIVATE_KEY_JSON` with the operator encrypted private key file just generated (e.g. `encrypted_private_key.json`) and `PASSWORD_FILE` with the file containing the password used to generate the encrypted key itself (e.g. `password`).
+Replace `ENCRYPTED_PRIVATE_KEY_JSON` with the encrypted private key file you just generated, for example `encrypted_private_key.json`. Replace `PASSWORD_FILE` with the file that contains the password used to encrypt it, for example `password`.
 
 **Restart node and apply new configuration**
 
-The node needs to be restarted, in order for the new configuration to be applied. Please connect to the machine running the node via terminal and execute the command:
+Restart the node so the new configuration takes effect:
 
 ```bash
 docker stop ssv_node && docker rm ssv_node && docker run -d --restart unless-stopped --name ssv_node -e \
@@ -221,12 +221,12 @@ docker logs ssv_node --follow
 ## Checklists for Troubleshooting
 
 :::warning Before you begin
-For the most part, we used our benchmarking tool as a starting point. If you don't know how to run it - go to the [SSV-Pulse Benchmarking section](#ssv-pulse-benchmarking-tool) and then come back here for answers.
+Most checklists below assume you already ran the benchmarking tool. If you have not, go to [SSV-Pulse Benchmarking](#ssv-pulse-benchmarking-tool) first, then return here.
 :::
 
 
 
-Below is a table with issues description, their probable causes and solutions. You can click on the relevant issue to see the full description. Each issue has its own checklist to simplify this process.
+The table below lists common symptoms, likely causes, and the section to use next.
 
 
 | Observed issue                                            | Common cause                            | Solution                                                                                                                                          |
@@ -247,43 +247,43 @@ Below is a table with issues description, their probable causes and solutions. Y
 
 ![SSV 0 Peers](/img/SSV0peerss.png)
 
-If you see SSV shows 0 peers and connections that means you have not opened 16000 port on your container, and the tool can’t reach the correct endpoint. If you are running your node as a  systemd service, you’ll likely see the same result. 
+If SSV shows 0 peers and 0 connections, the tool usually cannot reach your health endpoint. The most common cause is that port `16000` is not exposed on the container or host. The same applies if you run SSV Node with `systemd`.
 
 #### Solution
-- Open `SSVAPIPort` on the SSV container. By default the port is 16000, optionally can be changed in `config.yaml`.
-- As an alternative for SSV running as a systemd service, you can expose 16000 port externally and use a public IP address. 
-- Lastly, you can check the same data via curl command `curl http://localhost:16000/v1/node/health`.
+- Open `SSVAPIPort` on the SSV container. The default value is `16000`, but it can be changed in `config.yaml`.
+- If you run SSV Node as a `systemd` service, expose the same port externally and query it through the machine's IP address if needed.
+- Verify locally with `curl http://localhost:16000/v1/node/health`.
 
 
 ### SSV 0 inbound connections
 
 ![SSV 0 Inbound](/img/SSV0inbound.png)
 
-The healthy number of SSV peers is 10-30, depending on the number of clusters you participate in. Make sure you see both *inbound* and *outbound* connections. If inbound are at 0, then your P2P ports are closed.
+The healthy number of SSV peers is usually 10-30, depending on how many clusters you participate in. Make sure you see both *inbound* and *outbound* connections. If inbound stays at 0, your P2P ports are likely closed.
 
-In this example you can see an SSV node has peers and outbound connections, but 0 inbound. That signalizes incorrect P2P ports configuration and should be fixed on your firewall side.
+In this example, the SSV node has peers and outbound connections, but 0 inbound connections. That usually points to incorrect P2P port exposure or firewall rules.
 
 #### Solution
-The most common cause for SSV related issues is closed P2P ports. As mentioned earlier, if you see 0 inbound connections on your SSV node that means your ports are closed. Double-check you are exposing 12001 UDP and 13001 TCP ports (or your values from config):
-- on your vps’s firewall
-- any local firewall tool (e.g. `ufw`)
-- docker container 
-- config file (if ports’ values are not default)
+The most common cause of SSV issues is closed P2P ports. Double-check that `12001 UDP` and `13001 TCP` are open, or the custom values from your config:
+- on your VPS firewall
+- in any local firewall tool, for example `ufw`
+- on the Docker container
+- in the config file, if you changed the defaults
 
-Same applies to the RPC ports on your Execution and Consensus nodes, if they’re not exposed — your SSV node won’t work properly.
+The same applies to RPC ports on your Execution and Consensus nodes. If SSV Node cannot reach them, it will not work correctly.
 
 
-The other common cause for SSV’s poor performance is errors such as `future msg from height`. This error is caused by the fact that the received message has a timestamp from the future, often caused by de-synced times on different machines. The solution is [to install and use chrony](https://ethdocker.com/Usage/LinuxSecurity/#time-synchronization-on-linux) on your machine  to keep the timestamps in sync. The linked guide also includes other tools and performance fine-tuning, we recommend reading it all.
+Another common cause of poor performance is `future msg from height`. This means a received message has a timestamp from the future, usually because clocks differ across machines. Install and use [chrony](https://ethdocker.com/Usage/LinuxSecurity/#time-synchronization-on-linux) to keep timestamps in sync.
 
 ### Execution 0 peers
 
 ![Execution 0 Peers](/img/Execution0peers.png)
 
-In this example you see Execution node has 0 peers while there is data in Latency row. In such a case, your Execution node likely has peers, but its `net` namespace is disabled and the benchmark tool can’t fetch the `net_peerCount` results. 
+If the Execution node shows 0 peers but latency data is present, the node likely has peers and the benchmark tool just cannot query `net_peerCount` because the `net` namespace is disabled.
 
 #### Solution
-- If you have a monitoring setup on your Execution node you can find the peer count on your dashboard. 
-- Otherwise, you should enable `net` namespace
+- If you already monitor the Execution node, check the peer count on that dashboard.
+- Otherwise, enable the `net` namespace:
   - How to do it [on Geth](https://geth.ethereum.org/docs/fundamentals/command-line-options) (`--http.api`) 
   - And [on Nethermind](https://docs.nethermind.io/fundamentals/configuration#jsonrpc-additionalrpcurls) (`JsonRpc.AdditionalRpcUrls`).
 
@@ -291,12 +291,12 @@ In this example you see Execution node has 0 peers while there is data in Latenc
 
 ![Execution Low Peer count](/img/Executionlowpeers.png)
 
-The healthy number of Execution peers is 25-75, depending on your client and its recommended `--maxpeers` value. The tool does not take into account which client you use. 
+The healthy number of Execution peers is usually 25-75, depending on the client and its recommended `--maxpeers` value. The tool does not account for client-specific defaults.
 
-In this example, the client is Besu and 25 `maxpeers` is the default value, so everything is good. If you see 25 on Geth that is too low, as the default `maxpeers` for Geth is 50. Also, if you see an abnormal number of peers you might have issues with your ISP. That is common with home setups where local ISPs can’t provide enough concurrent connections.
+In this example, the client is Besu and `25` is the default `maxpeers` value, so the result is healthy. On Geth, `25` would be low because the default is `50`. If the peer count is unusually low or unstable, your ISP may be limiting concurrent connections. This is common in home setups.
 
 #### Solution
-- Adjust the `--maxpeers` value as per your client’s documented default value and restart Execution node. 
+- Adjust `--maxpeers` to the value recommended in your client's documentation, then restart the Execution node.
 - If you suspect the issue is with concurrent connection limit, refer to [the relevant section here](#network-congestion).
 
 
@@ -304,22 +304,22 @@ In this example, the client is Besu and 25 `maxpeers` is the default value, so e
 
 ![Execution Consensus client latency](/img/ExecutionConsensusLatency.png)
 
-If you are running SSV, Execution, and Consensus on the same server - you should see latency 10ms or lower. Running clients on different servers is suboptimal and you will see latency around 150ms. Any value above can be considered unhealthy, as it affects your performance a lot.
+If SSV, Execution, and Consensus run on the same server, latency should usually be 10 ms or lower. Running them on different servers is less efficient and often results in latency closer to 150 ms. Higher values usually indicate a problem.
 
 #### Solution
-- Relocate your nodes to be closer to each other. For the best performance run SSV, Execution, and Consensus on the same server.
-- If you find your latency is >150ms with closely located nodes — likely your network is congested, it depends on the network limitations your setup has. If you are using bare metal providers or cloud computing services to host your nodes - they should have visibility into your network congestion. For home setups it can be hard to find the limit or track it at all, as local ISPs rarely provide this information (e.g. actual throughput of their hardware in place). You can refer to [the relevant section here](#network-congestion).
-- For nodes hosted on several servers it is strongly recommended to use NTP server to keep timestamps in sync (e.g. [chrony](https://ethdocker.com/Usage/LinuxSecurity/#time-synchronization-on-linux)) and [TCP BBR congestion control](https://www.cyberciti.biz/cloud-computing/increase-your-linux-server-internet-speed-with-tcp-bbr-congestion-control/).
+- Move the nodes closer together. For best performance, run SSV, Execution, and Consensus on the same server.
+- If latency is over 150 ms even for nearby nodes, your network may be congested. See [Network congestion](#network-congestion).
+- If you run nodes across several servers, use an NTP service such as [chrony](https://ethdocker.com/Usage/LinuxSecurity/#time-synchronization-on-linux) and consider [TCP BBR congestion control](https://www.cyberciti.biz/cloud-computing/increase-your-linux-server-internet-speed-with-tcp-bbr-congestion-control/).
 
 ### Consensus peer count
 
 ![Consensus peer count](/img/ConsensusPeers.png)
 
-By default, `maxpeers` value on Consensus nodes is in the range of 50-150, depending on your client. 
-Peer count is a double-edged sword. Having too few peers can cause sync issues, while having too many will “eat” all of your network bandwidth causing performance issues and RPC calls delay.
+By default, Consensus node `maxpeers` is usually in the 50-150 range, depending on the client.
+Peer count is a trade-off: too few peers can cause sync issues, while too many can consume bandwidth and delay RPC calls.
 
 #### Solution
-- Stick to the recommended `maxpeers` value provided by your client’s documentation 
+- Stick to the `maxpeers` value recommended in your client's documentation:
   - `--p2p-max-peers=70` [for Prysm](https://docs.prylabs.network/docs/prysm-usage/parameters#beacon-node-flags)
   - `--target-peers=100` [for Lighthouse](https://lighthouse-book.sigmaprime.io/faq.html?highlight=peer#network-monitoring-and-maintenance-1)
   - `--p2p-peer-upper-bound=100` [for Teku](https://docs.teku.consensys.io/reference/cli#p2p-peer-lower-bound)
@@ -328,30 +328,31 @@ Peer count is a double-edged sword. Having too few peers can cause sync issues, 
 
 ![Consensus missed sync blocks](/img/ConsensusMissedBlocks.png)
 
-In the Consensus - Attestation section you will find missed_blocks value. 
-The healthy number of missed blocks is 0-2. If you are seeing significantly more missed blocks — you need to check sync progress of both your Execution and Consensus nodes. 
+In the Consensus - Attestation section, check `missed_blocks`.
+The healthy range is usually 0-2. If the value is significantly higher, check sync progress on both the Execution and Consensus nodes.
 
-Such an issue can come from multiple directions, from configuration faults to hardware resources deficiency. You can cross-check this with [the log analyzer tool](#ssv-pulse-log-analysis).
+This issue can come from several sources, including configuration errors and hardware bottlenecks. Cross-check it with the [log analyzer tool](#ssv-pulse-log-analysis).
 
 #### Solution
-- Make sure your peer counts are in the healthy range for both Consensus and Execution nodes, you can refer to relevant sections above.
+- Make sure peer counts are healthy for both the Consensus and Execution nodes. See the sections above.
 
-Other than that, this issue might be coming from hardware bottlenecks:
-- For example, your disk doesn’t have enough free space and/or IOPS limit of your disk is too low to keep up with the new blocks production. [Regular pruning of your databases](https://everstake.one/blog/how-to-prune-an-eth-20-node-with-prysm-and-geth-as-an-external-execution-layer) can be helpful, if that’s not helpful change the hardware. 
-- Another example is not enough RAM, you can adjust the available resources for your node (e.g. Execution needs less RAM than most Consensus nodes), regular restarts every week might help slightly. Once again, if that’s not helpful enough you’ll need to upscale.
+It may also come from hardware bottlenecks:
+- Your disk may not have enough free space, or its IOPS may be too low to keep up with new blocks. [Regular pruning](https://everstake.one/blog/how-to-prune-an-eth-20-node-with-prysm-and-geth-as-an-external-execution-layer) may help. If not, upgrade the hardware.
+- You may not have enough RAM and / or CPU. Adjust available resources for the affected node. Weekly restarts may help slightly, but persistent issues usually require more capacity.
 
 
 ### RAM and CPU usage
 
 ![RAM CPU usage](/img/RAMCPU.png)
 
-The healthy % of CPU usage is generally below 30%, with RAM it heavily depends on the clients of your choice and go from 16GB to 32GB (on Mainnet). These values should be cross-checked with the values on monitoring of your server, as the benchmark tool has limited visibility into your resources due to docker constraints.
+Healthy CPU usage is generally below 30%. RAM depends heavily on the clients you use and usually ranges from 16 GB to 32 GB on Mainnet. Cross-check these values with your own server monitoring, because the benchmark tool has limited visibility into host resources when Docker is involved.
 
 #### Solution
 **CPU**
 
-Generally, there are two solutions to CPU-related issues - either upscale or optimize. You can check our [Hardware Requirements page](../node-setup/hardware-requirements.md) for your reference. 
-So let’s explore optimization options:
+CPU issues usually have two fixes: optimize or add more capacity. See the [Hardware Requirements page](/operators/operator-node/node-setup/hardware-requirements) for a baseline.
+
+Optimization options:
 - Set CPU Governor to Performance, you can [follow this StackExchange thread](https://askubuntu.com/questions/1021748/set-cpu-governor-to-performance-in-18-04).
 - Set Low Latency CPU profile. Most modern BIOS versions have that in place. 
 - [RedHat wrote a great runbook](https://access.redhat.com/sites/default/files/attachments/201501-perf-brief-low-latency-tuning-rhel7-v2.1.pdf) on how to optimize your CPU profile. There is a checklist on page 5 that you can follow.
@@ -360,8 +361,7 @@ You should also limit the CPU usage for each of your applications/clients. The o
 
 **RAM**
 
-To put in simple terms, with RAM issues it's either not enough memory or it is overused by some applications. Once again, you can follow [our hardware recommendations](../node-setup/hardware-requirements.md) to see if your setup has enough memory. 
-To prevent overusage of RAM by your applications you have multiple options, depending on what you use to run your nodes. Choose the relevant option for your setup:
+RAM issues usually mean either you do not have enough memory or other applications are overusing it. Check [our hardware recommendations](/operators/operator-node/node-setup/hardware-requirements), then apply limits based on your environment:
 - [Set limits on the Docker containers](https://docs.docker.com/engine/containers/resource_constraints/)
 - [Similar limits for Kubernetes setup](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-units-in-kubernetes)
 - [Set limits with Linux Control group](https://unix.stackexchange.com/a/125024)
@@ -374,45 +374,45 @@ To prevent overusage of RAM by your applications you have multiple options, depe
 
 ![Execution Consensus client versions](/img/ClientVersion.png)
 
-The tool will not tell you when the client is outdated. Also, it only checks the Consensus version, the Execution needs to be checked manually. 
+The tool does not warn when a client is outdated. It also checks only the Consensus client version. You must verify the Execution client separately.
 
-In our example we see Teku 24.8.0 which is a version from August 2024, many months old at the time of writing this. Using outdated versions can cause issues, as newer versions are generally more performant. Also, SSV node relies on some functions that might appear only in newer versions, so it's important to keep your clients updated. 
+In the example, Teku 24.8.0 is already several months old. Outdated versions can cause issues because newer releases are often more stable and performant. SSV Node may also rely on functionality introduced in newer versions.
 
 #### Solution
-To be on the safe side, you can upgrade to the latest version after some days or weeks have passed, or better run it on Testnet first yourself.
+To reduce risk, upgrade after a short delay rather than on release day, or test the new version on testnet first.
 
-You can download lastest upgrades manually, e.g. `docker pull consensys/teku:latest` and restart.
+You can pull the latest image manually, for example `docker pull consensys/teku:latest`, then restart the client.
 
 
 ### Network congestion
 
-Neither of these metrics are observed by the benchmark, and it’s tricky to get visibility into this in general.
+The benchmark does not measure these metrics directly, and they can be difficult to observe.
 Each peer is essentially a concurrent connection and we can estimate the total number:
 - Consensus - 100-150 peers
 - Execution - 30-75 peers
 - SSV - 10-20 peers
 - RPC calls and Websocket connections - depends on the load
 
-So your setup has to handle at least 120+50+15 = 185 concurrent connections. That does not include WebSocket and RPC calls, so let’s round up to 200 *at the very minimum*. The amount of managed validators will directly influence the amount of RPC calls. 
+Your setup therefore needs to handle at least 120 + 50 + 15 = 185 concurrent connections. That does not include WebSocket and RPC calls, so 200 is a practical minimum. The number of managed validators will increase RPC load further.
 
-If your setup has a bottleneck in concurrent connections you will see unstable peer count, sync issues, performance issues, delayed RPC calls. Same with congested network - not enough bandwidth.
+If concurrent connections are limited, you may see unstable peer counts, sync issues, performance degradation, and delayed RPC calls. The same is true for insufficient bandwidth.
 
 #### Solution
-1. First of all, we need to understand the current network usage which can be done with monitoring provided by your server hosting, or with Linux [tools such as iperf](https://www.golinuxcloud.com/linux-monitor-network-traffic/). Monitoring peer count on your Consensus and Execution nodes can give you a hint into this.
+1. Measure current network usage with provider monitoring or Linux [tools such as iperf](https://www.golinuxcloud.com/linux-monitor-network-traffic/). Consensus and Execution peer counts can also help you spot saturation.
 
-2. Secondly, we need to learn if there are network limitations imposed on your setup. As already mentioned, network usage can be limited by your router, ISP, server/bare metal provider, and hardware. With ISPs and server providers that limit can be undisclosed, so you might need to ask them about an existing limitation.
+2. Identify network limits in your setup. Bottlenecks may come from the router, ISP, server provider, or hardware. In some cases you may need to ask the provider directly.
 
-3. Lastly, expand the limits and improve your setup. The industry standard for network congestion control is [TCP BBR](https://www.cyberciti.biz/cloud-computing/increase-your-linux-server-internet-speed-with-tcp-bbr-congestion-control/) and we strongly recommend using it.
+3. Increase the available capacity and optimize the setup. [TCP BBR](https://www.cyberciti.biz/cloud-computing/increase-your-linux-server-internet-speed-with-tcp-bbr-congestion-control/) is a common choice for improving congestion control.
 
 ### Disk performance
 
-This metric is also not observed in the benchmark results. In our tests we have used `iostat` and `ioping` to assess Disk’s performance.
-It is fairly easy to detect insufficient free space - one or many of your nodes will be in a restart loop, as they fail to write new data on the disk. However, detecting not-so-well performing disks is not as easy. That is why the industry standard disk is NVMe or at least fairly powerful SSD. 
+This metric is also not included in the benchmark results. In our tests, we used `iostat` and `ioping` to assess disk performance.
+Low free space is usually easy to spot because one or more nodes enter a restart loop when they cannot write new data. Poor disk performance is harder to identify. In practice, NVMe or at least a strong SSD is the expected standard.
 
 #### Solution
-- There are a couple of tools called `noatime` and `swappiness`, you could use to optimize your disk usage for running Ethereum clients. They are described by [eth-docker team on their docs](https://ethdocker.com/Usage/LinuxSecurity/#additional-and-recommended-linux-performance-tuning), we highly recommend utilizing them.
+- `noatime` and `swappiness` can improve disk behavior for Ethereum clients. See the [eth-docker guide](https://ethdocker.com/Usage/LinuxSecurity/#additional-and-recommended-linux-performance-tuning).
 
-- Disk issues arise generally if you don’t have enough free space or if the disk is not performant enough in terms of IOPS. So in case your nodes are hosted in a cloud/bare metal environment you can always upscale. For home stakers the only option is to upgrade their setup.
+- Disk issues usually come from insufficient free space or insufficient IOPS. In cloud or bare-metal environments, scaling up is often the quickest fix. In home setups, you usually need a hardware upgrade.
 
 
 ## SSV Node health endpoint

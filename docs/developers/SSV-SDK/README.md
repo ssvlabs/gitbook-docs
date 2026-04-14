@@ -1,21 +1,23 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
 ---
+
+import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBlock';
 
 # SSV SDK
 
-The SSV SDK is a comprehensive, open-source developer toolkit written in TypeScript, designed to empower developers to seamlessly interact with the SSV Network programmatically. 
+The SSV SDK is an open-source TypeScript toolkit for interacting with SSV Network programmatically.
 
-It consolidates all necessary tooling into a single, cohesive package.
+It brings the main developer workflows into a single package.
 
 The SDK is structured into four core modules:
 
 * **Cluster**: Manage and interact with distributed validator clusters.
-* **Utils**: Utility functions to simplify development workflows.
-* **API**: Streamlined access to SSV Subgraph APIs.
-* **Operator**: Tools for operator-related interactions.
+* **Operator**: Work with operator-related data and actions.
+* **API**: Access SSV data through SDK-supported APIs.
+* **Utils**: Use helper functions for common development workflows.
 
-Explore the SDK's source code on GitHub: [SSV SDK Repository](https://github.com/ssvlabs/ssv-sdk).
+Explore the source code on GitHub: [SSV SDK Repository](https://github.com/ssvlabs/ssv-sdk).
 
 ## Installation
 
@@ -26,7 +28,7 @@ npm i @ssv-labs/ssv-sdk
 ```
 
 :::info ⚠️ Testnet Version ⚠️
-The latest Hoodi-compatible version was not released to npmjs. To install it, download it from [the github release](https://github.com/ssvlabs/ssv-sdk/releases/tag/v.1.0.0) or via the command below:
+The latest Hoodi-compatible version was not released to npm. To install it, download it from [the GitHub release](https://github.com/ssvlabs/ssv-sdk/releases/tag/v.1.0.0) or use the command below:
 ```bash
 npm i --force --ignore-scripts github:ssvlabs/ssv-sdk#v.1.0.0
 ```
@@ -34,14 +36,16 @@ npm i --force --ignore-scripts github:ssvlabs/ssv-sdk#v.1.0.0
 
 ## Initialization
 
-The SDK requires specific parameters for initialization. Two that are not optional are the chain and the account. The `viem` library can be used to create an account object based off of a wallet's private key, and pass it into the SDK to instantiate it.
+The SDK requires a `publicClient` configured with a supported chain (`mainnet` or `hoodi`). A `walletClient` is optional and is only needed for write operations. You can use [`viem`](https://www.npmjs.com/package/viem) to create both clients, whether you want a read-only setup or a read/write setup.
+
+If needed, you can attach a wallet later with `sdk.connectWallet(walletClient)`.
 
 ```typescript
 import { SSVSDK, chains } from '@ssv-labs/ssv-sdk'
 import { createPublicClient, createWalletClient, http } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
 
-// Setup viem clients
+// Set up viem clients
 const chain = chains.mainnet // or chains.hoodi
 const transport = http()
 
@@ -59,38 +63,46 @@ const walletClient = createWalletClient({
 
 // Initialize SDK with viem clients
 const sdk = new SSVSDK({
-    publicClient: publicClient as any,
-    walletClient: walletClient as any,
+    publicClient,
+    walletClient,
     extendedConfig: {
       subgraph: {
-        apiKey: process.env.SUBGRAPH_API,
+        apiKey: process.env.SUBGRAPH_API_KEY,
         endpoint: process.env.SUBGRAPH_ENDPOINT,
       }
     }
   });
 ```
 
-The `extendedConfig` parameter is optional, if not provided, the SDK will use the development endpoint. Bear in mind that this is rate limited, though, so it is strongly advised to use an API key with the free plan. For more information regarding your subgraph API key, please refer to the [dedicated Subgraph page](/developers/tools/ssv-subgraph/README.md).
+The `extendedConfig` parameter is optional. If you do not provide it, the SDK uses the development endpoint. That endpoint is rate-limited, so using your own API key is strongly recommended. For more information, see the [SSV Subgraph page](/developers/api/ssv-subgraph).
 
 ### Initialization Parameters
 
 | Input name | Input type | Optional |
 |------------|------------|----------|
-| public_client | [Viem public client](https://viem.sh/docs/clients/public) | No |
-| wallet_client | [Viem wallet client](https://viem.sh/docs/clients/wallet) | No |
-| SUBGRAPH_API | API Key retrived from [The Graph account](https://thegraph.com/studio/apikeys/) | Yes, strongly recommended |
-| SUBGRAPH_ENDPOINT | Subgraph Endpoint retrieved from [Mainnet or Testnet subgraph page](/developers/tools/ssv-subgraph/#querying-ssv-protocol-smart-contract-data) | Yes, strongly recommended  |
+| publicClient | [Viem public client](https://viem.sh/docs/clients/public) | No |
+| walletClient | [Viem wallet client](https://viem.sh/docs/clients/wallet) | Yes |
+| SUBGRAPH_API_KEY | API key retrieved from [The Graph account](https://thegraph.com/studio/apikeys/) | Yes, strongly recommended |
+| SUBGRAPH_ENDPOINT | Subgraph Endpoint retrieved from [Mainnet or Testnet subgraph page](/developers/api/ssv-subgraph/#querying-ssv-protocol-smart-contract-data) | Yes, strongly recommended  |
 
 ## Usage
 
-Use the SDK by selecting [one of the four modules ](module-reference/)and calling the desired function.
+Use the SDK by choosing [one of the five modules](module-reference/) and calling the function you need. For working examples, see the [Tutorials section](/developers/examples).
 
-```typescript
+<InlineEditableCodeBlock
+  language="typescript"
+  template={
+  `
 async function main() {
     const ownerNonce = await sdk.api.getOwnerNonce({ 
-        owner: "0xA4831B989972605A62141a667578d742927Cbef9" 
+        owner: "{{OWNER_ADDRESS}}" 
     })
     
     console.log(ownerNonce)
 }
-```
+  `
+  }
+  variables={{
+    OWNER_ADDRESS: '0x...'
+  }}
+/>

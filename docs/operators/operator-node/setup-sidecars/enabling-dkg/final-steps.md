@@ -3,28 +3,53 @@ title: Final Steps
 sidebar_position: 3
 ---
 
+import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBlock';
+
 # Final Steps
 
 ## Open port 3030❗
-**Make sure to expose the port you set on your machine's firewall** (and Docker container creation command, if running on Docker). The default is **3030**.
+**Expose the port you configured on the machine firewall** and in the Docker container command if you use Docker. The default is **3030**.
 
-**Otherwise**, your DKG node will not be available for stakers, as a result you will get less validators. 
+Otherwise, your DKG node will not be available to Stakers and you may receive fewer validators.
 
 ## Update Operator Metadata
 
-:::warning
-To participate in DKG ceremonies without coordination and to enable others to initiate ceremonies with you via your provided endpoint, it's crucial to update your operator metadata with the correct information.
+:::warning Update Metadata
+If you do not set an externally available DKG endpoint in the metadata, **you will not participate in DKG ceremonies**.
 :::
 
-Once the DKG tool is up and running, please make sure to update your operator metadata, and provide your DKG Operator endpoint, in the form of `protocol:ip:port` (if you have a domain name, instead of an `ip` that works as well).
+Once the DKG tool is running, update your Operator metadata and provide the DKG endpoint in the form `protocol:ip:port` (a domain name also works).
 
-Please head over to [the Operator User guide on how to update metadata](../../../operator-management/setting-operator-metadata.md) and follow the instructions
+See [Setting Operator Metadata](/operators/operator-management/setting-operator-metadata) for instructions.
 
 ## Test the setup
 
-You can test out if your DKG node is correctly setup, with these simple steps:
+Use these steps to test that your DKG node is set up correctly:
 
-* fetch operator metadata from [SSV-API](https://api.ssv.network/documentation/#/v4) (e.g. `https://api.ssv.network/api/v4/< hoodi | mainnet >/operators/<OPERATOR_ID>` choosing the right network and substituting your operator ID) and get `dkg_address` from the output
-* run the command:`docker run --rm "ssvlabs/ssv-dkg:latest" ping --ip <DKG_ADDRESS>` where `<DKG_ADDRESS>` is the address used in the previous step
+1. **Fetch Operator metadata** from [SSV API](https://api.ssv.network/documentation/#/v4) and get `dkg_address` from the response. Edit and use the URL below:
 
-It should tell you if the operator is online and is updated to the latest version.
+<InlineEditableCodeBlock
+  language="sh"
+  template={
+  `
+https://api.ssv.network/api/v4/{{NETWORK}}/operators/{{OPERATOR_ID}}
+  `
+  }
+  variables={{
+    NETWORK: 'mainnet or hoodi',
+    OPERATOR_ID: 'Operator ID'
+  }}
+/>
+2. **Check DKG Node status**. Use the `dkg_address` from the previous step. The response should show whether the Operator is online and running the latest version. Edit the command below and run it:
+
+<InlineEditableCodeBlock
+  language="sh"
+  template={
+  `
+docker run --rm "ssvlabs/ssv-dkg:latest" ping --ip {{DKG_ADDRESS}}
+  `
+  }
+  variables={{
+    DKG_ADDRESS: 'dkg_address'
+  }}
+/>

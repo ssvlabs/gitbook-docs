@@ -4,12 +4,12 @@ title: Gas Limit
 
 # Gas Limit Change
 
-The default gas limit is 30M and SSV makes it configurable as long as the operator committees converge on the same value.
+The default gas limit is 36M and SSV makes it configurable as long as the operator committees converge on the same value.
 
-:::danger Attention
-All operators in the committee **MUST** set the same gas limit. Otherwise, MEV registrations would fail. The validators would eventually not propose MEV blocks and instead fall back to vanilla blocks (non-MEV blocks built locally).
-
+:::danger Warning
 **Do this only on private operators, and on clusters where you either can control all the operators, or coordinate with them**.
+
+All operators in the cluster **MUST** set the same gas limit. Otherwise, MEV registrations would fail. The validators would eventually not propose MEV blocks and instead fall back to vanilla blocks (non-MEV blocks built locally).
 :::
 
 ## Configuration
@@ -20,7 +20,7 @@ The SSV node registers its validators to MEV relays with a preferred gas limit. 
 - For `.yaml` configuration file use the following
 ```yaml
 ValidatorOptions:
-    ExperimentalGasLimit: 36000000
+    ExperimentalGasLimit: 45000000
 ```
 
 Gas limit for vanilla blocks (non-MEV blocks built locally) are set by the Execution Node  which you should ideally be set to the same value.
