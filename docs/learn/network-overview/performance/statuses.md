@@ -5,15 +5,47 @@ sidebar_position: 2
 
 # Statuses
 
-Participant status is a monitoring signal for whether network members are currently active in SSV Network.
+### Operator Statuses
+
+The status of an **Operator** can be either **Active**, **Inactive**, or **No Validators**. In short, it indicates recent participation in SSV duties. 
+
+Operator is Inactive if it has not carried out any duties for the previous 10 epochs for the majority of their validators.
+
+### Validator Statuses
+
+The status of a **Validator** is derived from Beacon Chain state of the validator. The possible statuses are:
+- **Not Deposited**
+- **Pending** Deposit
+- **Active**
+- **Inactive**
+- **Exiting**
+- **Exited**
+- **Slashed**
+
+## Macro Score
+
+On operator's page the performance is calculated per all managed validators. The graph shows how the performance fluctuates over time.
 
 <div style={{ textAlign: 'center' }}>
-  <img src="/img/statuses-1.png" alt="Statuses" />
+  <img src="/img/statuses-2.png" alt="Macro Score" />
 </div>
 
-The status can be either **active** or **inactive**. It is derived from duty attendance and refers to status within SSV Network, not on the **Beacon Chain**. In short, it indicates recent participation in SSV duties.
+## Micro Score
 
-All participants are regarded as "active" unless the cases below apply:
+On validator's page the performance is calculated per duties for this specific validator. 
 
-* **Validator** - its operators carried out no duties in the last 10 epochs.
-* **Operator** - has not carried out any duties for the previous 10 epochs for the majority of their validators.
+<div style={{ textAlign: 'center' }}>
+  <img src="/img/statuses-3.png" alt="Micro Score" />
+</div>
+
+## Duty Breakdown
+
+On validator's page, each duty has a breakdown of operators participation in the duty. 
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+  <img 
+    src="/img/statuses-4.png" 
+    alt="Duty Breakdown" 
+    style={{ width: '50%', maxWidth: '500px' }}
+  />
+</div>

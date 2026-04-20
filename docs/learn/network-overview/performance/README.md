@@ -5,23 +5,70 @@ sidebar_position: 4
 
 # Performance
 
-The operator performance metric is a technical scoring system for operators in SSV Network.
+Performance measures how well operators fulfill actual consensus responsibilities for the validators they help run.
 
-The performance score is derived from operator participation in the network’s consensus duties, such as signing decided messages with the rest of a validator’s operator cluster. It is calculated as the percentage of duties attended within a given time frame.
+The score is duty-aware and role-aware. It reflects what happened during consensus for each evaluated slot, including multiple rounds within a slot, rather than treating performance as a simple percentage of duties attended.
 
-### Macro and micro scoring
+In plain language, the consensus flow is:
 
-Performance can be measured at the macro level (operator) and micro level (validator). Users can view an operator’s score for each validator or across all validators they manage.
+`leader* -> prepares -> commits -> pre-consensus** -> post-consensus`
 
-e.g. **Alice** the operator missed 24 duties in the last 24 hours for **validator #1**, while missing only 12 duties in the same time-frame for **validator #2**, will show the following 24 hours performance scoring:
+- For each duty, there is only one randomly chosen `leader`.
+- `pre-consensus` applies only to Aggregator, Sync Committee, and Proposer duties.
 
-* Performance per **validator #1** (micro) - 90% ((240-24)/240)
-* Performance per **validator #2** (micro) - 95% ((240-12)/240)
-* Performance of **Alice** (macro) - 92.5% (((240 * (# of validators) - 36)) / (240 * (# of validators)))
+## Scored duties
+
+Each scored step contributes a fixed weight when it is completed:
+
+| Duty step | Score |
+| --- | --- |
+| leader | 4 if completed, else 0 |
+| prepares | 1 if completed, else 0 |
+| commits | 1 if completed, else 0 |
+| pre-consensus | 1 if completed, else 0 |
+| post-consensus | 1 if achieved, else 0 |
+
+Leadership and proposal-related work carry more weight because they have greater responsibility and impact on consensus outcomes.
+
+## Duty categories
+
+Performance is evaluated across these duty categories:
+
+- **Attestation**
+- **Aggregator**
+- **Sync Committee**
+- **Block Proposal**
+
+Committee, Aggregator, and Sync Committee are **Standard Consensus** duties. Proposer is a **Proposal Consensus** duty.
+
+When both kinds of duties occur in the measured period, the final score combines them as follows:
+
+- **Standard Consensus Duties**: `5/8`
+- **Proposal Consensus Duties**: `3/8`
+
+If no proposal duties occurred during the measured period, the score is based entirely on Standard Consensus duties.
+
+## Micro and macro scoring
+
+See [Performance Scoring Formulae page](formulae) for more details. Also, [Statuses page](statuses) shows how these scores appear in the Explorer. 
+
+Below is an explanation in plain-english.
+
+### Micro score
+
+The micro score is the performance score for a specific validator or committee context, depending on what is being viewed.
+
+It is based on the score earned versus the maximum possible score across the evaluated slots. If proposal duties exist in that period, the result combines Standard Consensus and Proposal Consensus performance using the `5/8` and `3/8` weights.
+
+### Macro score
+
+The macro score is the operator-level score.
+
+It is calculated as the arithmetic mean of validator-specific performance scores. It is not one pooled ratio across all duties for all validators.
 
 ### Network Explorer
 
-Operator scores can be viewed on operator pages and per validator through the following tools:
+Operator scores can be viewed on operator pages and per validator in the following tools:
 
 * [SSV Network Explorer](https://explorer.ssv.network)
 * [SSV Scan](https://ssvscan.io/)
