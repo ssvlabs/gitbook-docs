@@ -15,7 +15,7 @@ This page is for staking providers, pools, and similar services.
 
 SSV Network lets stakers run validators through distributed operators. Stakers fund validators and pay operator and network fees in ETH.
 
-For more context, see [SSV Network Overview](/learn/network-overview) and [Security Overview](/learn/security).
+For more context, see [SSV Network Overview](/learn/network-overview) and [Security Overview](/developers/security).
 
 ## How to integrate with SSV Network
 
