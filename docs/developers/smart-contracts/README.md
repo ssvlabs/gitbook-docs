@@ -20,6 +20,7 @@ sidebar_position: 5
 | Contract                  | Address                                                                                              |  ENS Name   |
 |---------------------------|------------------------------------------------------------------------------------------------------|-----------|
 | SSV Token                 | [0x9D65fF81a3c488d585bBfb0Bfe3c7707c7917f54](https://etherscan.io/address/0x9D65fF81a3c488d585bBfb0Bfe3c7707c7917f54) | ssv.ssvnetwork.eth |
+| cSSV Token                 | [0xe018D31F120A637828F46aFD6c64EC099d960546](https://etherscan.io/address/0xe018D31F120A637828F46aFD6c64EC099d960546) | cssv.ssvnetwork.eth |
 | SSV Network                | [0xDD9BC35aE942eF0cFa76930954a156B3fF30a4E1](https://etherscan.io/address/0xDD9BC35aE942eF0cFa76930954a156B3fF30a4E1) | ssvnetwork.eth |
 | SSV Network Views           | [0xafE830B6Ee262ba11cce5F32fDCd760FFE6a66e4](https://etherscan.io/address/0xafE830B6Ee262ba11cce5F32fDCd760FFE6a66e4) | views.ssvnetwork.eth |
 | Mainnet Rewards Distributor | [0xe16d6138b1d2ad4fd6603acdb329ad1a6cd26d9f](https://etherscan.io/address/0xe16d6138b1d2ad4fd6603acdb329ad1a6cd26d9f) | v1-imp.ssvnetwork.eth |
@@ -40,7 +41,7 @@ sidebar_position: 5
 
 #### ABI
 
-* [Mainnet](https://github.com/ssvlabs/ssv-network/tree/contract-abi/docs/mainnet/v1.2.0/abi)
+* [Mainnet](https://github.com/ssvlabs/ssv-network/tree/contract-abi/docs/mainnet/v2.0.0/abi)
 * [Testnet](https://github.com/ssvlabs/ssv-network/tree/contract-abi/docs/testnet/v2.0.0/abi)
 
 ### Ethereum Deposit Contract Addresses

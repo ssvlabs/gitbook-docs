@@ -20,7 +20,7 @@ https://app.ssv.network
 | SSV Network Views | [0x5AdDb3f1529C5ec70D77400499eE4bbF328368fe](https://hoodi.etherscan.io/address/0x5AdDb3f1529C5ec70D77400499eE4bbF328368fe) |
 
 
-### tSSV Faucet <a href="#id-652a6sxy0wse" id="id-652a6sxy0wse"></a>
+### tSSV Faucet
 
 The tSSV Faucet is a web interface that distributes small amounts of SSV tokens on Hoodi for validator registration on SSV Network and for testing.
 
