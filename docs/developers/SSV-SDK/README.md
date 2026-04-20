@@ -27,13 +27,6 @@ To install the SDK, run:
 npm i @ssv-labs/ssv-sdk
 ```
 
-:::info ⚠️ Testnet Version ⚠️
-The latest Hoodi-compatible version was not released to npm. To install it, download it from [the GitHub release](https://github.com/ssvlabs/ssv-sdk/releases/tag/v.1.0.0) or use the command below:
-```bash
-npm i --force --ignore-scripts github:ssvlabs/ssv-sdk#v.1.0.0
-```
-:::
-
 ## Initialization
 
 The SDK requires a `publicClient` configured with a supported chain (`mainnet` or `hoodi`). A `walletClient` is optional and is only needed for write operations. You can use [`viem`](https://www.npmjs.com/package/viem) to create both clients, whether you want a read-only setup or a read/write setup.
