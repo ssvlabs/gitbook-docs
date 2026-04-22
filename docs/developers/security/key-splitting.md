@@ -8,7 +8,7 @@ sidebar_position: 1
 This page describes the security aspects of the key-splitting procedure. It focuses on the core functions in the `ssv-keys` library of [the SSV-SDK](https://github.com/ssvlabs/ssv-sdk), which is used to split validator keys.
 
 ## Flow Overview
-  <!--- ![Key Splitting Flow](/img/flow_chart_keysplit.png) --->
+![Key Splitting Flow](/img/flow_chart_keysplit.png)
 
 The whole flow can be described in 4 steps:
 1. Prepare `keystore-m` files and their respective password(s).
@@ -22,7 +22,7 @@ A couple of important points to understand about the security of the key splitti
 - Key splitting can (and **should**) be done on an offline machine, ensuring the data is not transmitted elsewhere.
 - Private keys are loaded in RAM and decrypted, they are not logged or stored anywhere.
 - Key shares, the product of key splitting, are then broadcast to the network during the validator registration process, through the event emitted by the smart contract.
-- You can find the [structure of `keyshares.json` explained on this page](/learn/security/keyshares-structure).
+- You can find the [structure of `keyshares.json` explained on this page](/developers/security/keyshares-structure).
 - Operator nodes fetch smart contract events and extract encrypted key shares from them. 
 - Each share can only be decrypted by the operator's private key. So although everything is broadcast publicly, it is impossible to reconstruct the full key from events alone.
 - Old keyshares remain valid. Take this into consideration when splitting a key more than once.   
@@ -130,7 +130,7 @@ class Threshold {
 
 ### `buildPayload`
 Payload construction (buildPayload) - A KeySharesItem object is created containing the cluster metadata (owner address, owner nonce, operators, validator public key) along with the encrypted shares. This step builds the registration payload required by the SSV smart contract and outputs it to a keyshares-*.json file.
-Detailed documentation for the key shares structure is [available on a separate page](/learn/security/keyshares-structure).
+Detailed documentation for the key shares structure is [available on a separate page](/developers/security/keyshares-structure).
 ```typescript
 async buildPayload(
 metaData: IKeySharesPayloadData,
@@ -201,7 +201,7 @@ private async processFile(
 ```
 
 ## Keyshares Structure
-The detailed explanation of the payload, or `keyshares.json`, is presented on [this separate page](/learn/security/keyshares-structure).
+The detailed explanation of the payload, or `keyshares.json`, is presented on [this separate page](/developers/security/keyshares-structure).
 
 ## Key Splitting Instructions
 You can follow the step-by-step instructions in the [**Validator Onboarding section**](/stakers/validator-onboarding/).

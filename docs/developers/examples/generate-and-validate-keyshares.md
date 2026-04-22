@@ -8,7 +8,7 @@ import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBloc
 
 This part of the [SSV SDK](/developers/SSV-SDK/) lets you generate validator keyshares by splitting validator keys into threshold shares with [Shamir Secret Sharing (SSS)](https://en.wikipedia.org/wiki/Shamir's_Secret_Sharing) and encrypting them with operator public keys.
 
-The resulting shares and signatures are packaged as [`sharesData`](/learn/security/keyshares-structure), which is used during validator registration through the [SSV smart contracts](/developers/smart-contracts/) to distribute keyshares from stakers to operators.
+The resulting shares and signatures are packaged as [`sharesData`](/developers/security/keyshares-structure), which is used during validator registration through the [SSV smart contracts](/developers/smart-contracts/) to distribute keyshares from stakers to operators.
 
 The SDK can also validate keyshares before registration to help ensure the validator can be registered successfully.
 

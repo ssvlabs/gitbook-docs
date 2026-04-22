@@ -1,0 +1,442 @@
+.homepage {
+  --home-bg: var(--ssv-surface);
+  --home-surface: var(--ssv-page-bg);
+  --home-surface-soft: var(--ssv-surface-soft);
+  --home-border: var(--ssv-border);
+  --home-primary: #50a4f0;
+  --home-primary-dark: #3c80c0;
+  --home-primary-light: var(--ssv-surface-soft);
+  --home-primary-muted: #9ccff7;
+  --home-yellow: #e6a817;
+  --home-yellow-bg: #fff8e1;
+  --home-red: #e05252;
+  --home-red-bg: #fce8e8;
+  --home-green: #27ae60;
+  --home-green-bg: #eaf7ef;
+  --home-orange: #c96a00;
+  --home-orange-bg: #fff4e5;
+  --home-orange-border: #f5c98c;
+  --home-text: var(--ssv-text-strong);
+  --home-muted: var(--ssv-text-muted);
+  --home-shadow-sm: 0 1px 3px rgba(26, 32, 53, 0.07), 0 1px 2px rgba(26, 32, 53, 0.04);
+  --home-shadow-md: 0 4px 16px rgba(26, 32, 53, 0.09), 0 1px 4px rgba(26, 32, 53, 0.05);
+  --home-shadow-hover: 0 8px 28px rgba(26, 32, 53, 0.13), 0 2px 8px rgba(26, 32, 53, 0.07);
+  background: var(--home-bg);
+  color: var(--home-text);
+  padding: 2rem 0 5rem;
+}
+
+:global([data-theme='dark']) .homepage {
+  --home-bg: var(--ssv-page-bg);
+  --home-surface: var(--ssv-surface);
+  --home-surface-soft: #1c3750;
+  --home-border: var(--ssv-border);
+  --home-primary: var(--ifm-color-primary);
+  --home-primary-dark: var(--ifm-color-primary-dark);
+  --home-primary-light: rgba(80, 164, 240, 0.14);
+  --home-primary-muted: var(--ifm-color-primary-lightest);
+  --home-yellow: #f2c14e;
+  --home-yellow-bg: rgba(242, 193, 78, 0.12);
+  --home-red: #ff8b8b;
+  --home-red-bg: rgba(255, 139, 139, 0.12);
+  --home-green: #57d08a;
+  --home-green-bg: rgba(87, 208, 138, 0.12);
+  --home-orange: #ffb15c;
+  --home-orange-bg: rgba(255, 177, 92, 0.13);
+  --home-orange-border: rgba(255, 177, 92, 0.32);
+  --home-text: var(--ssv-text-strong);
+  --home-muted: var(--ssv-text-muted);
+  --home-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.22), 0 1px 2px rgba(0, 0, 0, 0.14);
+  --home-shadow-md: 0 6px 20px rgba(0, 0, 0, 0.24);
+  --home-shadow-hover: 0 14px 32px rgba(0, 0, 0, 0.28);
+}
+
+.hero {
+  padding: 3rem 0 2.75rem;
+  text-align: center;
+}
+
+.heroCopy {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.heroTitle {
+  color: var(--home-text);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.heroTitle span {
+  background: linear-gradient(135deg, var(--home-primary), var(--home-primary-dark));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.heroDescription {
+  color: var(--home-muted);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.6;
+  max-width: 32.5rem;
+  margin: 0 auto;
+}
+
+.pathways {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.875rem;
+  margin-bottom: 2.75rem;
+}
+
+.pathwayCard,
+.sectionCard,
+.supportCard,
+.quickLink {
+  background: var(--home-surface);
+  border: 1.5px solid var(--home-border);
+  box-shadow: var(--home-shadow-sm);
+}
+
+.pathwayCard,
+.sectionCard,
+.quickLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.pathwayCard,
+.sectionCard,
+.supportCard {
+  border-radius: 12px;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.15s ease;
+}
+
+.pathwayCard:hover,
+.sectionCard:hover,
+.supportCard:hover,
+.quickLink:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--home-shadow-hover);
+}
+
+.pathwayCard:hover,
+.sectionCard:hover,
+.quickLink:hover {
+  border-color: var(--home-primary-muted);
+}
+
+.pathwayCard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 1.125rem 1.125rem 1.25rem;
+}
+
+.pathwayCardFeatured {
+  border-color: var(--home-primary);
+  background: linear-gradient(145deg, var(--home-surface-soft), var(--home-surface));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--home-primary) 8%, transparent), var(--home-shadow-md);
+}
+
+.pathwayIcon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+
+.pathwayIconBlue {
+  background: var(--home-primary-light);
+  color: var(--home-primary);
+}
+
+.pathwayIconYellow {
+  background: var(--home-yellow-bg);
+  color: var(--home-yellow);
+}
+
+.pathwayIconRed {
+  background: var(--home-red-bg);
+  color: var(--home-red);
+}
+
+.pathwayIconGreen {
+  background: var(--home-green-bg);
+  color: var(--home-green);
+}
+
+.pathwaySvg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.cardLabel {
+  font-size: 0.656rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.375rem;
+}
+
+.cardLabelBlue {
+  color: var(--home-primary);
+}
+
+.cardLabelYellow {
+  color: var(--home-yellow);
+}
+
+.cardLabelRed {
+  color: var(--home-red);
+}
+
+.cardLabelGreen {
+  color: var(--home-green);
+}
+
+.pathwayTitle,
+.sectionCardTitle,
+.sectionTitle {
+  color: var(--home-text);
+}
+
+.pathwayTitle {
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 0;
+}
+
+.sectionCardTitle {
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 0;
+}
+
+.cardDescription {
+  color: var(--home-muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.pathwayDescription,
+.sectionCardDescription,
+.supportDescription {
+  margin-top: 0.7rem;
+}
+
+.contentSection {
+  margin-bottom: 2.5rem;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.sectionTitle {
+  font-size: 1.375rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.sectionDivider {
+  flex: 1;
+  height: 1px;
+  background: var(--home-border);
+}
+
+.sectionGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.sectionCard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 1.25rem;
+}
+
+.quickLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+
+.quickLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  color: var(--home-text);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.625rem 1rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease, transform 0.12s ease;
+}
+
+.quickLink:hover {
+  color: var(--home-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--home-primary) 10%, transparent), var(--home-shadow-sm);
+}
+
+.quickLinkIcon {
+  width: 0.95rem;
+  height: 0.95rem;
+  flex-shrink: 0;
+}
+
+.supportGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.supportCard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 1.75rem 1.5rem;
+}
+
+.supportCardHighlight {
+  border-color: var(--home-primary-muted);
+  background: linear-gradient(145deg, var(--home-surface-soft), var(--home-surface));
+}
+
+.supportCardOrange {
+  background: linear-gradient(145deg, color-mix(in srgb, var(--home-orange-bg) 68%, var(--home-surface) 32%), var(--home-surface));
+}
+
+.supportTitle {
+  font-size: 1rem;
+  letter-spacing: -0.015em;
+}
+
+.supportFooter {
+  margin-top: auto;
+  padding-top: 1.25rem;
+}
+
+.supportLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.5rem;
+  border-radius: 8px;
+  padding: 0.5rem 0.875rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.supportActionIcon {
+  width: 0.875rem;
+  height: 0.875rem;
+  flex-shrink: 0;
+}
+
+.supportLinkHighlight {
+  background: var(--home-primary-light);
+  border: 1.5px solid var(--home-primary-muted);
+  color: var(--home-primary);
+}
+
+.supportLinkHighlight:hover {
+  color: var(--home-primary-dark);
+  background: color-mix(in srgb, var(--home-primary-light) 72%, var(--home-surface) 28%);
+}
+
+.supportLinkOutline {
+  background: var(--home-bg);
+  border: 1.5px solid var(--home-border);
+  color: var(--home-muted);
+}
+
+.supportLinkOutline:hover {
+  color: var(--home-primary);
+  border-color: var(--home-primary-muted);
+}
+
+.supportLinkOrange {
+  background: var(--home-orange-bg);
+  border: 1.5px solid var(--home-orange-border);
+  color: var(--home-orange);
+}
+
+.supportLinkOrange:hover {
+  color: var(--home-orange);
+  border-color: color-mix(in srgb, var(--home-orange) 40%, var(--home-orange-border) 60%);
+}
+
+@media (max-width: 996px) {
+  .homepage {
+    padding-top: 1.5rem;
+  }
+
+  .hero {
+    padding-top: 2.25rem;
+  }
+
+  .pathways,
+  .sectionGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .supportGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 2rem 0 2.25rem;
+  }
+
+  .heroTitle {
+    font-size: clamp(2rem, 11vw, 2.5rem);
+  }
+
+  .pathways,
+  .sectionGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .sectionHeader {
+    align-items: flex-start;
+  }
+
+  .quickLinks {
+    flex-direction: column;
+  }
+
+  .quickLink {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .pathwayCard,
+  .sectionCard,
+  .supportCard {
+    padding: 1rem;
+  }
+}
