@@ -8,7 +8,7 @@ sidebar_position: 1
 This page describes the security aspects of the key-splitting procedure. It focuses on the core functions in the `ssv-keys` library of [the SSV-SDK](https://github.com/ssvlabs/ssv-sdk), which is used to split validator keys.
 
 ## Flow Overview
-  <!--- ![Key Splitting Flow](/img/flow_chart_keysplit.png) --->
+![Key Splitting Flow](/img/flow_chart_keysplit.png)
 
 The whole flow can be described in 4 steps:
 1. Prepare `keystore-m` files and their respective password(s).
