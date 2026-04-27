@@ -38,14 +38,6 @@ const explicitRedirects = [
     from: ['/developers/code-examples-and-snippets'],
   },
   {
-    to: '/learn/security/keyshares-structure',
-    from: ['/developers/keyshares-structure'],
-  },
-  {
-    to: '/learn/security/audits',
-    from: ['/developers/security'],
-  },
-  {
     to: '/developers/api/ssv-api',
     from: ['/developers/tools/ssv-api'],
   },

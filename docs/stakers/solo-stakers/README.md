@@ -9,7 +9,7 @@ sidebar_position: 6
 
 This section is for individual ETH holders who want to use SSV Network. Validators on SSV Network pay operator and network fees in ETH.
 
-If you need more context first, see [SSV Network Overview](/learn/network-overview) and [Security Overview](/learn/security).
+If you need more context first, see [SSV Network Overview](/learn/network-overview) and [Security Overview](/developers/security).
 
 ## Before you start
 

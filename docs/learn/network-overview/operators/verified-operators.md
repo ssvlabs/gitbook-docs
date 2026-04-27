@@ -25,14 +25,12 @@ The [Verified Operator Committee](https://snapshot.org/#/mainnet.ssvnetwork.eth/
 
 ### How the list of Verified Operators is maintained?
 
-Verified operators are periodically re-evaluated to ensure they continue to meet DAO-defined requirements and standards. This may include reviewing performance metrics, updating company metadata, and confirming continued operational quality.
+Verified operators are periodically re-evaluated to ensure they continue to meet [DAO-defined requirements and standards](https://snapshot.org/#/s:vo.ssvnetwork.eth/proposal/0x32482336a43b2ecbee3a80ef55160b55765240e2c75cc58eee8a1e40ad4e11a0). This may include reviewing performance metrics, updating company metadata, and confirming continued operational quality.
 
 **Requirements:**
 
-* Set up an operator on Hoodi
-* Have at least 10 _active_ Validators assigned to your operator
+* Have at least 1 _active_ Validator assigned to your operator
 * Keep performance above 98%
-* Run the latest build of the node software
 
 ### How to apply
 

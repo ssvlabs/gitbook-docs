@@ -7,10 +7,10 @@ sidebar_position: 4
 
 This section explains the main security properties of SSV Network and DVT.
 
-- [Key Splitting Security](/learn/security/key-splitting)
-- [Audit Resources](/learn/security/audits)
-- [Bug Bounty Program](/learn/security/bug-bounty)
-- [Keyshares Structure](/learn/security/keyshares-structure)
+- [Key Splitting Security](/developers/security/key-splitting)
+- [Audit Resources](/developers/security/audits)
+- [Bug Bounty Program](/developers/security/bug-bounty)
+- [Keyshares Structure](/developers/security/keyshares-structure)
 
 ## Introduction
 Within Distributed Validator Technology (DVT), validators are operated in clusters of independent operators. Each operator holds a key share rather than the full validator key. For each validator duty, the cluster reaches consensus on what to sign and then a threshold of operators produces partial signatures that are aggregated into a valid BLS signature; the validator’s private key is never reconstructed at any point. 

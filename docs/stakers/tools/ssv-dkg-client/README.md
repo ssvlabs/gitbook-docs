@@ -64,7 +64,7 @@ Threshold is calculated automatically using 3f+1 tolerance.
 ## Security Notes
 
 :::info
-The `ssv-dkg` tool has been audited. See [Audits](/learn/security/audits) for details, including the follow-up audit that covered key-share regeneration through DKG.
+The `ssv-dkg` tool has been audited. See [Audits](/developers/security/audits) for details, including the follow-up audit that covered key-share regeneration through DKG.
 :::
 
 The ceremony is secured as follows:

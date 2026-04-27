@@ -82,4 +82,4 @@ The proofs protect both sides of the ceremony:
 
 ## Key shares
 
-For the `keyshares.json` format, see [Keyshares Structure](/learn/security/keyshares-structure).
+For the `keyshares.json` format, see [Keyshares Structure](/developers/security/keyshares-structure).

@@ -30,6 +30,5 @@ Independent operators around the world provide the infrastructure for SSV Networ
 Feel free to check out other pages in the Learn section:
 - [**Network Overview**](/learn/network-overview) - Relationships between the main actors in SSV Network and related concepts.
 - [**Tech Overview**](/learn/tech-overview) - Core technical concepts behind SSV Network.
-- [**Security**](/learn/security) - Security properties of SSV Network and Distributed Validator Technology.
 - [**Tokenomics Overview**](/learn/tokenomics) - Purpose of $SSV and its tokenomics.
 - [**Glossary**](/learn/glossary) - Terminology used by our documentation.
