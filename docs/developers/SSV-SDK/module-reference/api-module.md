@@ -1,8 +1,8 @@
 # API Module
 
-This is a read only library which contains all the functions you need to obtain any data relating to the SSV network.
+This is a read-only library which contains the functions you need to obtain data relating to the SSV network.
 
-After instantiating the SDK, you can call any of the functions in the utils library like so:
+After instantiating the SDK, you can call any of the functions in the api library like so:
 
 ```typescript
 sdk.api.getOwnerNonce()
@@ -12,18 +12,17 @@ sdk.api.getOwnerNonce()
 
 ### `getOwnerNonce(string account_address)`
 
-Accepts a list of addresses, fetches their nonces using subgraph, returns as a list.
+Accepts an owner address and returns the current owner nonce from the subgraph.
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| account_address | string[] | An array of owner addresses. | [“0xA4831B989972605A62141a667578d742927Cbef9”] |
-
+| owner | string | Owner address | "0xA4831B989972605A62141a667578d742927Cbef9" |
 
 #### Example:
 
 ```typescript
 const ownerAddress = "0xA4831B989972605A62141a667578d742927Cbef9"
-let nonce = Number(await sdk.api.getOwnerNonce({ owner: ownerAddress}))
+let nonce = Number(await sdk.api.getOwnerNonce({ owner: ownerAddress }))
 ```
 
 Example output:
@@ -32,67 +31,92 @@ Example output:
 12
 ```
 
-### `getClusterSnapshot(string cluster_id )`
+### `toSolidityCluster(id)`
 
-Accepts a list of addresses, fetches cluster snapshots using subgraph, returns as a list.
+:::info Please note
+This method was previously named as `getClusterSnapshot` in 0.1.x versions. It is available as a deprecated alias in current `1.x` releases for backwarsd compatibility.
+:::
+
+Accepts a cluster ID and returns the current cluster snapshot from the subgraph.
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| cluster_id | string[] | An array of cluster IDs in their computed ID form. | ["0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8"] |
+| id | string | Cluster ID in its computed ID form | "0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8" |
 
 #### Example:
 
 ```typescript
-const clusterSnapshot = await sdk.api.getClusterSnapshot({id: clusterID})
+const clusterSnapshot = await sdk.api.toSolidityCluster({ id: clusterID })
 ```
 
 Example output:
 
 ```bash
 {
-  "active": true,
-  "balance": "19479447888000000000",
-  "index": "46367642388",
-  "networkFeeIndex": "59597136600",
-  "validatorCount": "1"
- }
+  active: true,
+  balance: '19479447888000000000',
+  index: '46367642388',
+  networkFeeIndex: '59597136600',
+  validatorCount: '1'
+}
 ```
 
 ### `createClusterId(owner_address, operator_ids[])`
 
-Accepts the owner address and a list of operator IDs, computes and returns the cluster ID hash.
+Accepts the owner address and a list of operator IDs, computes and returns the cluster ID.
 
-
-| Input parameter   | Input type | Description                   | Example input                                |
-| ----------------- | ---------- | ----------------------------- | -------------------------------------------- |
-|  owner\_address   | string     | Address of the cluster Owner. | "0x81592c3de184a3e2c0dcb5a261bc107bfa91f494" |
-|  operator\_ids\[] | integer    | List of operator IDs.         | \[12, 34, 56, 78]                            |
+| Input parameter | Input type | Description | Example input |
+|----------------|------------|-------------|---------------|
+| owner_address | string | Address of the cluster owner | "0x81592c3de184a3e2c0dcb5a261bc107bfa91f494" |
+| operator_ids[] | integer[] | List of operator IDs | [12, 34, 56, 78] |
 
 #### Example:
 
 ```typescript
 import { createClusterId } from '@ssv-labs/ssv-sdk/utils'
+
 const ownerAddress = "0xA4831B989972605A62141a667578d742927Cbef9"
 const operatorIds = [242, 686, 707, 736]
 const clusterID = createClusterId(ownerAddress, operatorIds)
 ```
 
-Example output: 
+Example output:
 
 ```bash
-0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8
+0xf69a08b652f0cebb685c2ffe043cfb767b66544a-242-686-707-736
+```
+
+### `isClusterId(cluster_id)`
+
+Checks whether a string is a valid cluster ID.
+
+| Input parameter | Input type | Description | Example input |
+|----------------|------------|-------------|---------------|
+| cluster_id | string | Cluster ID string to validate | "0xf69a08b652f0cebb685c2ffe043cfb767b66544a-242-686-707-736" |
+
+#### Example:
+
+```typescript
+import { isClusterId } from '@ssv-labs/ssv-sdk/utils'
+
+const isValid = isClusterId('0xf69a08b652f0cebb685c2ffe043cfb767b66544a-242-686-707-736')
+```
+
+Example output:
+
+```bash
+true
 ```
 
 ### `getClusterBalance(clusterId, daoAddress, operatorIds)`
 
-Accepts a cluster id in it's hashed form. Returns details about the cluster.
+Accepts a cluster ID together with the DAO address and operator IDs, and returns cluster balance details.
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| cluster_id | string | A cluster ID in its computed ID form. | ["0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8"] |
-|  daoAddress   | string     | Address of the DAO (chain specific) | "0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA" |
-|  operator_ids | integer[]    | List of operator IDs.         | \[12, 34, 56, 78]                            |
-
+| clusterId | string | A cluster ID in its computed ID form | "0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8" |
+| daoAddress | string | Address of the DAO (chain specific) | "0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA" |
+| operatorIds | string[] | List of operator IDs | ["242", "686", "707", "736"] |
 
 #### Example:
 
@@ -101,33 +125,38 @@ const ownerAddress = "0xA4831B989972605A62141a667578d742927Cbef9"
 const operatorIds = [242, 686, 707, 736]
 const operatorIdsString = ['242', '686', '707', '736']
 const clusterID = createClusterId(ownerAddress, operatorIds)
-const clusterBalance = await sdk.api.getClusterBalance({clusterId: clusterID, daoAddress: "0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA", operatorIds: operatorIdsString}) 
+const clusterBalance = await sdk.api.getClusterBalance({
+  clusterId: clusterID,
+  daoAddress: "0x38A4794cCEd47d3baf7370CcC43B560D3a1beEFA",
+  operatorIds: operatorIdsString,
+})
 ```
 
 Example output:
 
 ```bash
- cluster: {
+{
+  cluster: {
     validatorCount: '140',
     networkFeeIndex: '110259590936',
     index: '136319254858',
     balance: '126290824043600000000'
-  },
+  }
+}
 ```
 
 ### `getCluster(id)`
 
-Accepts a cluster id in it's hashed form. Returns details about the cluster.
+Accepts a cluster ID and returns details about that cluster.
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| cluster_id | string[] | An array of cluster IDs in their computed ID form. | ["0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8"] |
-
+| id | string | Cluster ID in its computed ID form | "0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8" |
 
 #### Example:
 
 ```typescript
-const clusterData = await sdk.api.getCluster({id: clusterID})
+const clusterData = await sdk.api.getCluster({ id: clusterID })
 ```
 
 Example output:
@@ -139,23 +168,23 @@ Example output:
   balance: '126290824043600000000',
   index: '136319254858',
   networkFeeIndex: '110259590936',
-  operatorIds: [ '242', '686', '707', '736' ]
+  operatorIds: ['242', '686', '707', '736']
 }
 ```
 
 ### `getClusters(owner)`
 
-Accepts an owner address. Returns details about all of the clusters that they own. 
+Accepts an owner address and returns details about all of the clusters that they own.
 
-| Input parameter   | Input type | Description                   | Example input                                |
-| ----------------- | ---------- | ----------------------------- | -------------------------------------------- |
-|  owner\_address   | string     | Address of the cluster Owner. | "0x81592c3de184a3e2c0dcb5a261bc107bfa91f494" |
+| Input parameter | Input type | Description | Example input |
+|----------------|------------|-------------|---------------|
+| owner | string | Address of the cluster owner | "0x81592c3de184a3e2c0dcb5a261bc107bfa91f494" |
 
 #### Example:
 
 ```typescript
 const ownerAddress = "0xA4831B989972605A62141a667578d742927Cbef9"
-const clusterData = await sdk.api.getClusters({owner: ownerAddress})
+const clusterData = await sdk.api.getClusters({ owner: ownerAddress })
 ```
 
 Example output:
@@ -169,7 +198,7 @@ Example output:
     balance: '0',
     index: '0',
     networkFeeIndex: '0',
-    operatorIds: [ '11', '21', '24', '29' ]
+    operatorIds: ['11', '21', '24', '29']
   },
   {
     id: '0xa4831b989972605a62141a667578d742927cbef9-11-66-306-400',
@@ -178,8 +207,8 @@ Example output:
     balance: '0',
     index: '0',
     networkFeeIndex: '0',
-    operatorIds: [ '11', '66', '306', '400' ]
-  },
+    operatorIds: ['11', '66', '306', '400']
+  }
 ]
 ```
 
@@ -187,14 +216,14 @@ Example output:
 
 Accepts an operator ID and returns details about the operator.
 
-| Input parameter   | Input type | Description                   | Example input                                |
-| ----------------- | ---------- | ----------------------------- | -------------------------------------------- |
-|  id  | number     | A single operator ID | 4 |
+| Input parameter | Input type | Description | Example input |
+|----------------|------------|-------------|---------------|
+| id | string | A single operator ID | "4" |
 
 #### Example:
 
 ```typescript
-const operatorData = await sdk.api.getOperator({id: "4"})
+const operatorData = await sdk.api.getOperator({ id: "4" })
 ```
 
 Example output:
@@ -214,14 +243,14 @@ Example output:
 
 Accepts a list of operator IDs and returns details about them.
 
-| Input parameter   | Input type | Description                   | Example input                                |
-| ----------------- | ---------- | ----------------------------- | -------------------------------------------- |
-|  operatorIds  | string[]     | An array of operator IDs | ["4","5"] |
+| Input parameter | Input type | Description | Example input |
+|----------------|------------|-------------|---------------|
+| operatorIds | string[] | An array of operator IDs | ["4", "5"] |
 
 #### Example:
 
 ```typescript
-const operatorData = await sdk.api.getOperators({operatorIds: ["4","5"]})
+const operatorData = await sdk.api.getOperators({ operatorIds: ["4", "5"] })
 ```
 
 Example output:
@@ -253,12 +282,12 @@ Accepts a validator ID and returns details about the validator.
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| id | string | A single validator ID | ["0x0c74493afd8082f86485e4172be72678b0feb1494087ee6abe7d7ea7437c2a3fc6c06193040c6e24cdf59c9081d1c7a9"] |
+| id | string | A single validator ID | "0x0c74493afd8082f86485e4172be72678b0feb1494087ee6abe7d7ea7437c2a3fc6c06193040c6e24cdf59c9081d1c7a9" |
 
 #### Example:
 
 ```typescript
-const validatorData = await sdk.api.getValidators({id: "0x0c74493afd8082f86485e4172be72678b0feb1494087ee6abe7d7ea7437c2a3fc6c06193040c6e24cdf59c9081d1c7a9"})
+const validatorData = await sdk.api.getValidator({ id: "0x0c74493afd8082f86485e4172be72678b0feb1494087ee6abe7d7ea7437c2a3fc6c06193040c6e24cdf59c9081d1c7a9" })
 ```
 
 Example output:
@@ -271,7 +300,7 @@ Example output:
 
 ### `getValidators(ids[])`
 
-Accepts an validator ID and returns details about the validator.
+Accepts a list of validator IDs and returns details about them.
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
@@ -280,13 +309,74 @@ Accepts an validator ID and returns details about the validator.
 #### Example:
 
 ```typescript
-const validatorData = await sdk.api.getValidators({id: ["0x0c74493afd8082f86485e4172be72678b0feb1494087ee6abe7d7ea7437c2a3fc6c06193040c6e24cdf59c9081d1c7a9", "0x1a85052f3b9d17e73ec76c472220c80ada65a19a0fd177344b1e9f6173d51136c400120989dbd9ff498defc99dfe5181"]})
+const validatorData = await sdk.api.getValidators({
+  ids: [
+    "0x0c74493afd8082f86485e4172be72678b0feb1494087ee6abe7d7ea7437c2a3fc6c06193040c6e24cdf59c9081d1c7a9",
+    "0x1a85052f3b9d17e73ec76c472220c80ada65a19a0fd177344b1e9f6173d51136c400120989dbd9ff498defc99dfe5181"
+  ]
+})
+```
+
+Example output:
+
+```bash
+[
+  {
+    id: '0x0c74493afd8082f86485e4172be72678b0feb1494087ee6abe7d7ea7437c2a3fc6c06193040c6e24cdf59c9081d1c7a9'
+  }
+]
+```
+
+### `getDaoValues()`
+
+Returns DAO values such as network fees and liquidation thresholds.
+
+#### Example:
+
+```typescript
+const daoValues = await sdk.api.getDaoValues()
 ```
 
 Example output:
 
 ```bash
 {
-  id: '0x0c74493afd8082f86485e4172be72678b0feb1494087ee6abe7d7ea7437c2a3fc6c06193040c6e24cdf59c9081d1c7a9'
+  networkFee: '1000000000',
+  networkFeeIndex: '123456789',
+  networkFeeIndexBlockNumber: '19482001',
+  networkFeeSSV: '30000000000000000000',
+  networkFeeIndexSSV: '123456790',
+  networkFeeIndexBlockNumberSSV: '19482001',
+  liquidationThreshold: '86400',
+  liquidationThresholdSSV: '86400',
+  minimumLiquidationCollateral: '0',
+  minimumLiquidationCollateralSSV: '0'
+}
+```
+
+### `getQueries()`
+
+Returns bound query helpers for the current API client.
+
+#### Example:
+
+```typescript
+const queries = sdk.api.getQueries()
+```
+
+Example output:
+
+```bash
+{
+  getOwnerNonce,
+  getClusterSnapshot,
+  getCluster,
+  getClusters,
+  getOperator,
+  getOperators,
+  getValidator,
+  getValidators,
+  getClusterBalance,
+  getDaoValues
 }
 ```
