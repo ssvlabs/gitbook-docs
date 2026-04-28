@@ -11,35 +11,28 @@ The SSV DKG Client lets stakers create validator key shares through a distribute
 
 Distributed key generation is a cryptographic process that allows multiple parties to create and use a shared key without any one party holding the full secret key.
 
-For general background, see [Distributed key generation on Wikipedia](https://en.wikipedia.org/wiki/Distributed_key_generation).
+For general background, see [Distributed key generation on Wikipedia](https://en.wikipedia.org/wiki/Distributed_key_generation) and [SSV Network Tech Overview](https://docs.ssv.network/learn/tech-overview).
 
-## How the SSV DKG Client works
+SSV DKG uses [drand's DKG protocol](https://drand.love/docs/cryptography/#setup-phase) with an initiator-based communication flow. This coordination model is protected by signatures and signature verification throughout the ceremony. See [Security Notes](#security-notes).
 
-SSV DKG uses [drand's DKG protocol](https://drand.love/docs/cryptography/#setup-phase) with an initiator-based communication flow. Instead of relying on a fully decentralized peer-to-peer setup, one initiator coordinates the ceremony between the selected operators.
+## Installation
 
-This coordination model is protected by signatures and signature verification throughout the ceremony. See [Security Notes](#security-notes).
+- **Docker:** Use `ssvlabs/ssv-dkg:latest` from the [Docker Hub](https://hub.docker.com/r/ssvlabs/ssv-dkg/tags)
+- **Build from source:** Build from the [ssv-dkg GitHub repository](https://github.com/ssvlabs/ssv-dkg/)
 
 ## Documentation flow
 
-Use these pages in order:
+Use the pages in this order:
 
 1. Read this page for the high-level model.
-2. Use [Generate Key Shares](generate-key-shares) to start a new DKG ceremony.
-3. Review [Ceremony Output Summary](ceremony-output-summary) to understand the generated files.
-4. Use [Update Owner Nonce in Key Shares](update-owner-nonce-in-key-shares) or [Change Operator Set and Reshare Validator Key Shares](change-operator-set-and-reshare-validator-key-shares) only when you need those maintenance flows.
+2. Prepare the operator metadata in [Operators Data](operators-data).
+3. Review [DKG tool commands and configuration](commands-and-config) for the required inputs and command options.
+4. Use [Generate Key Shares](generate-key-shares) to start a new DKG ceremony.
+5. Review [Ceremony Output Summary](ceremony-output-summary) to understand the generated files.
+6. Use [Update Owner Nonce in Key Shares](update-owner-nonce-in-key-shares) or [Change Operator Set and Reshare Validator Key Shares](change-operator-set-and-reshare-validator-key-shares) only when you need those follow-up maintenance flows.
+7. If you're facing issues, check out the [Troubleshooting section](troubleshooting).
 
-If you are an operator enabling DKG support, see [Enabling DKG](/operators/operator-node/setup-sidecars/enabling-dkg).
-
-## Overview
-
-For a DKG ceremony to succeed:
-- the selected operators must be running `ssv-dkg` in operator mode
-- one initiator must start the ceremony with the `init` command
-- the tool exchanges the required messages until it produces validator deposit data and key shares
-
-:::info
-Threshold is calculated automatically using 3f+1 tolerance.
-:::
+If you are an operator enabling DKG, see [Enabling DKG](/operators/operator-node/setup-sidecars/enabling-dkg).
 
 ## Flow description
 
@@ -55,11 +48,11 @@ Threshold is calculated automatically using 3f+1 tolerance.
 10. The initiator writes `keyshares.json` and `deposit_data.json` files.
 11. After deposit and SSV registration, operators perform validator duties using their shares.
 
-## Note on DKG instance management
+***
+
+## Instance management
 
 `ssv-dkg` can manage multiple DKG instances. It keeps up to `MaxInstances` (1024) for up to `MaxInstanceTime` (5 minutes). When a new `init` arrives, the tool first tries to remove expired instances before accepting the new one.
-
-***
 
 ## Security Notes
 
