@@ -1,126 +1,137 @@
 ---
-sidebar_label: 'Change Operator Set and Reshare Validator Key Shares'
-sidebar_position: 6
+sidebar_label: 'Change Operator Set'
+sidebar_position: 5
 ---
 
-# Change Operator Set and Reshare Validator Key Shares
+import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBlock';
 
-Use this flow when a validator was created with DKG and you need to move it to a different operator set without recreating the validator from scratch.
+# Change Operator Set
 
-## Keep these files
+Use this flow when a validator was created with DKG and you need to move it to a different operator set without recreating the validator from scratch. 
 
-Before you start, make sure you still have the original ceremony artifacts, especially:
-- the top-level `proofs.json`
-- the operator information you need for the new ceremony
-- access to the wallet that signed the original ceremony as the `owner`
+The command for this is called `reshare`. The reshare flow **creates new key shares for a new operator set** by using the original ceremony proofs and a new DKG ceremony.
 
-Without `proofs.json`, you cannot complete this reshare flow.
+To prove that the same owner is authorizing the reshare, use the original `proofs.json` file for that validator or validator set.
 
-## Why this flow exists
+## Prerequisites
 
-DKG never creates the full validator private key in one place. That is good for security, but it also means you cannot simply re-export the validator key and split it again later.
+- [**Proofs**](ceremony-output-summary#proofs): the relevant `proofs.json`
+- [**Operator Data**](operator-data): the operator information you need for the new ceremony
+- [**Command or Config**](commands-and-config): the required command or YAML configuration details
+- **Owner Wallet**: access to the wallet that signed the original ceremony as the `owner`
 
-The reshare flow creates new key shares for a new operator set by using the original ceremony proofs and a new DKG ceremony.
+Depending on the ceremony output, `proofs.json` may be inside the validator subfolder or available as a top-level combined file.
 
-## 1. Select the new operators
+Without the required `proofs.json`, you cannot complete this reshare flow.
 
-Choose the new operator set and prepare the required operator information as described in [Generate Key Shares](./generate-key-shares).
+## Flow of the Ceremony
 
-## 2. Generate the message to sign
+On a high-level the process consists of six steps:
+- [Generate Reshare message](#generate-reshare-message)
+- Sign the message
+- [Generate new Key Shares](#reshare-ceremony)
+- Remove old Key Shares
+- Wait for 2-3 epochs
+- Register new Key Shares
 
-To prove that the same owner is authorizing the reshare, use the original `proofs.json` file to generate a message that the owner wallet must sign.
+## Generate Reshare Message
 
-### Required inputs
-- `proofs.json`
-- `newOperatorIDs`
-- owner wallet access
+### 1. Select the new operators
 
-### Command
+Choose the new operator set and prepare the required operator information as described in [Operators Data](operators-data). For the related command inputs and config fields, see [Commands and Config](commands-and-config).
 
-```bash
-docker run --rm -v <PATH_TO_FOLDER_WITH_CONFIG_FILES>:/ssv-dkg/data/ \
-    -it "ssvlabs/ssv-dkg:latest" generate-reshare-msg --configPath ./data/config/config.yaml
-```
+### 2. Prepare config
 
-:::warning
-Provide `proofsFilePath` and `newOperatorIDs` either in the YAML file or as command-line flags.
-:::
+**Required inputs**
+- `proofs.json` for the validator or validator set you are resharing
+- `newOperatorIDs` with the new set of operators
+- Operator Data for both old and new operators
+- Owner wallet access
+- `nonce` of the owner address. Source the current nonce from the [SSV Subgraph](/developers/api/subgraph-examples.md#account-nonce)
 
-Example YAML:
-
-```yaml
-validators: 10
-operatorIDs: [1, 2, 3, 4]
-withdrawAddress: 0xaA184b86B4cdb747F4A3BF6e6FCd5e27c1d92c5a
-owner: 0xa1a66CC5d309F19Fb2Fda2b7601b223053d0f7F5
-nonce: 0
+<InlineEditableCodeBlock
+  language="yaml"
+  template={`
+validators: {{VALIDATORS}}
+operatorIDs: [{{OPERATOR_IDS}}]
+newOperatorIDs: [{{NEW_OPERATOR_IDS}}]
+withdrawAddress: {{WITHDRAW_ADDRESS}}
+owner: {{OWNER_ADDRESS}}
+nonce: {{OWNER_NONCE}}
+network: "{{NETWORK}}"
+operatorsInfoPath: {{OPERATORS_INFO_PATH}}
+proofsFilePath: {{PROOFS_FILE_PATH}} 
 tlsInsecure: true 
-network: "hoodi"
-operatorsInfoPath: /data/initiator/operators_info.json
-proofsFilePath: ./output/ceremony-2024-11-18--16-04-55.529/proofs.json
-newOperatorIDs: [5, 6, 7, 8]
-```
+`}
+  variables={{
+    VALIDATORS: '10',
+    OPERATOR_IDS: '1, 2, 3, 4',
+    NEW_OPERATOR_IDS: '1, 2, 3, 5',
+    WITHDRAW_ADDRESS: '0xaA184b86B4cdb747F4A3BF6e6FCd5e27c1d92c5a',
+    OWNER_ADDRESS: '0xa1a66CC5d309F19Fb2Fda2b7601b223053d0f7F5',
+    OWNER_NONCE: '10',
+    NETWORK: 'hoodi',
+    OPERATORS_INFO_PATH: './data/operators_info.json',
+    PROOFS_FILE_PATH: './data/output/ceremony-2024-11-18--16-04-55.529/proofs.json',
+  }}
+/>
 
-See [Commands and Config](/stakers/tools/ssv-dkg-client/commands-and-config) for YAML, binary, and flag details.
+### 3. Generate the message to sign
 
-### Sign the generated message
+<InlineEditableCodeBlock
+  language="bash"
+  template={`
+docker run --rm -v {{CONFIG_FOLDER_PATH}}:/ssv-dkg/data/ \ 
+    -it "ssvlabs/ssv-dkg:{{DKG_VERSION}}" generate-reshare-msg \ 
+    --configPath {{CONFIG_PATH}}
+`}
+  variables={{
+    CONFIG_FOLDER_PATH: '${PWD}',
+    CONFIG_PATH: './data/config.yaml',
+    DKG_VERSION: 'latest',
+  }}
+/>
 
-Sign the generated message with the wallet that matches the original ceremony `owner` address.
+### 4. Sign the generated message
 
-- For an EOA, you can sign through a tool such as [Etherscan Verified Signatures](https://etherscan.io/verifiedSignatures).
-- For a multisig or smart-contract wallet, provide an [ERC-1271](https://eips.ethereum.org/EIPS/eip-1271) compatible signature.
+Sign the generated message with the wallet that matches the original ceremony `owner` address:
 
-The resulting signature is required for the next step.
+- **For EOA**: you can sign through a tool such as [Etherscan Verified Signatures](https://etherscan.io/verifiedSignatures).
+- **For multisig or smart-contract**: provide an [ERC-1271](https://eips.ethereum.org/EIPS/eip-1271) compatible signature.
+- **The resulting signature is required for the next step.**
 
-## 3. Start the reshare ceremony
+## Reshare ceremony
 
-Run the `reshare` command to generate the new key shares.
+### 5. Start the reshare ceremony
 
-### Required inputs
-- `proofs.json`
-- `newOperatorIDs`
-- the owner signature from the previous step
-- the rest of the normal DKG configuration
+Run the `reshare` command to generate the new key shares, using the same `config.yaml` from the previous step:
 
-### Expected output
-- a new `ceremony-...` folder
-- new `keyshares.json`
-- new proof artifacts for the new ceremony
+<InlineEditableCodeBlock
+  language="bash"
+  template={`
+docker run --rm -v {{CONFIG_FOLDER_PATH}}:/ssv-dkg/data/ \ 
+    -it "ssvlabs/ssv-dkg:{{DKG_VERSION}}" reshare \ 
+    --configPath {{CONFIG_PATH}} \ 
+    --signatures {{SIGNATURES}}
+`}
+  variables={{
+    CONFIG_FOLDER_PATH: '${PWD}',
+    CONFIG_PATH: './data/config.yaml',
+    DKG_VERSION: 'latest',
+    SIGNATURES: '0x...',
+  }}
+/>
 
-### Command
+### 6. Use the new ceremony output
 
-```bash
-docker run --rm -v <PATH_TO_FOLDER_WITH_CONFIG_FILES>:/ssv-dkg/data/ \
-    -it "ssvlabs/ssv-dkg:latest" reshare --configPath ./data/config/config.yaml
-```
-
-:::warning
-Provide `proofsFilePath`, `newOperatorIDs`, and `signatures` either in the YAML file or as command-line flags.
-:::
-
-Example YAML:
-
-```yaml
-validators: 10
-operatorIDs: [1, 2, 3, 4]
-withdrawAddress: 0xaA184b86B4cdb747F4A3BF6e6FCd5e27c1d92c5a
-owner: 0xa1a66CC5d309F19Fb2Fda2b7601b223053d0f7F5
-nonce: 0
-tlsInsecure: true 
-network: "hoodi"
-operatorsInfoPath: /data/initiator/operators_info.json
-proofsFilePath: ./output/ceremony-2024-11-18--16-04-55.529/proofs.json
-newOperatorIDs: [5, 6, 7, 8]
-signatures: 111886aa25a07bbd9cb64e50e3237f98a6ecabad6f448bc9c4736ccebcacb45c56ecac273b076a5d0b1f19619bf808741dff2d8019c728e16a953d3a0b5ff4771b
-```
-
-See [Commands and Config](/stakers/tools/ssv-dkg-client/commands-and-config) for the full option reference.
-
-## 4. Use the new ceremony output
+To understand the generated artifacts, see [Ceremony Output Summary](ceremony-output-summary).
 
 After the reshare succeeds:
 1. Review the generated files in the new `ceremony-...` folder.
-2. Keep the new proof artifacts for future maintenance.
-3. Use the new `keyshares.json` to register the validator with the new operator set.
+2. Keep the new `proofs.json` output for future maintenance.
+3. [Remove old key shares](/stakers/validator-offboarding/removing-a-validator) from SSV Network
+4. Use the new `keyshares.json` to [register the validator with the new operator set](/stakers/solo-stakers/distributing-a-validator).
 
-To understand the generated artifacts, see [Ceremony Output Summary](ceremony-output-summary).
+:::warning Backup Output Files
+Securely save output files on a separate device. They might be needed later, if you need to [Change Operator Set](change-operator-set-and-reshare-validator-key-shares) or [Update Owner Nonce](update-owner-nonce-in-key-shares).
+:::
