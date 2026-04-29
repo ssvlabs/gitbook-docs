@@ -26,7 +26,7 @@ See [Setting Operator Metadata](/operators/operator-management/setting-operator-
 
 Use these steps to test that your DKG node is set up correctly:
 
-1. **Fetch Operator metadata** from [SSV API](https://api.ssv.network/documentation/#/v4) and get `dkg_address` from the response. Edit and use the URL below:
+1. **Fetch your Operator metadata** from the [SSV API](https://api.ssv.network/documentation/#/v4) and review the published DKG fields in the response. Edit and use the URL below:
 
 <InlineEditableCodeBlock
   language="sh"
@@ -40,16 +40,42 @@ https://api.ssv.network/api/v4/{{NETWORK}}/operators/{{OPERATOR_ID}}
     OPERATOR_ID: 'Operator ID'
   }}
 />
-2. **Check DKG Node status**. Use the `dkg_address` from the previous step. The response should show whether the Operator is online and running the latest version. Edit the command below and run it:
+
+2. **Create an operators info JSON file** with your published DKG metadata.
+
+<InlineEditableCodeBlock
+  language="json"
+  template={
+  `
+  [
+    {
+      "id": {{ID}},
+      "public_key": "{{RSA_PUBLIC_KEY}}",
+      "ip": "{{DKG_ADDRESS}}"
+    }
+  ]
+  `
+  }
+  variables={{
+    ID: '123',
+    RSA_PUBLIC_KEY: 'LS0tL...',
+    DKG_ADDRESS: 'https://1.2.3.4:3030',
+  }}
+/>
+
+3. **Run `ping` with your operators info file**. Mount the folder that contains the file and point `--operatorsInfoPath` to it:
 
 <InlineEditableCodeBlock
   language="sh"
   template={
   `
-docker run --rm "ssvlabs/ssv-dkg:latest" ping --ip {{DKG_ADDRESS}}
+  docker run --rm -v {{FOLDER_PATH}}:/ssv-dkg/data/ \  
+    "ssvlabs/ssv-dkg:latest" ping \  
+    --operatorsInfoPath {{OPERATOR_INFO}}
   `
   }
   variables={{
-    DKG_ADDRESS: 'dkg_address'
+    FOLDER_PATH: '${PWD}',
+    OPERATOR_INFO: './data/operators_info.json',
   }}
 />

@@ -113,7 +113,8 @@ The DKG ceremony is run from the command line.
 5. Configure the DKG ceremony.
 
 - Select the **DKG** option.
-- Choose how many validators to generate.
+- Choose Compounding / Regular validator type.
+- Choose how many validators to generate and their Effective Balance.
 - Enter and confirm the withdrawal address.
 - Copy the generated command.
 
