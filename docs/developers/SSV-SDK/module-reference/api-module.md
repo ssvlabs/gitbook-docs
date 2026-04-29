@@ -31,11 +31,7 @@ Example output:
 12
 ```
 
-### `toSolidityCluster(id)`
-
-:::info Please note
-This method was previously named as `getClusterSnapshot` in 0.1.x versions. It is available as a deprecated alias in current `1.x` releases for backwarsd compatibility.
-:::
+### `getClusterSnapshot(id)`
 
 Accepts a cluster ID and returns the current cluster snapshot from the subgraph.
 
@@ -46,7 +42,7 @@ Accepts a cluster ID and returns the current cluster snapshot from the subgraph.
 #### Example:
 
 ```typescript
-const clusterSnapshot = await sdk.api.toSolidityCluster({ id: clusterID })
+const clusterSnapshot = await sdk.api.getClusterSnapshot({ id: clusterID })
 ```
 
 Example output:
