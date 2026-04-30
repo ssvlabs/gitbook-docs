@@ -7,7 +7,7 @@ sidebar_position: 2
 
 This is a library which contains all the helper functions you need for working with operators on SSV network.
 
-After instantiating the SDK, you can call any of the functions in the utils library like so:
+After instantiating the SDK, you can call any of the functions in the operator library like so:
 
 ```typescript
 sdk.operators.registerOperator()
@@ -17,11 +17,11 @@ sdk.operators.registerOperator()
 
 ### `registerOperator()`
 
-Accepts a list of addresses, fetches their nonces using subgraph, returns as a list.
+Registers a new operator with a privacy setting, yearly fee, and operator public key.
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| isPrivate | bool | true/false flag of whether the operator is private | true |
+| isPrivate | boolean | Whether the operator should be private | true |
 | yearlyFee | bigint | Operator yearly fee specified in ETH | 0.1234 |
 | publicKey | string | The operator public key (generated as part of the node setup) | "LS0tLS1CRUdJTiBSU0EgUFVCTElDIE..." |
 
@@ -33,8 +33,8 @@ import { parseEther } from 'viem'
 const receipt = await sdk.operators
     .registerOperator({
       args: {
-        publicKey: "LS0tLS1CRUdJTiBSU0EgUFVCTElDIE..."
-        yearlyFee: parseEther('0.1234') 
+        publicKey: "LS0tLS1CRUdJTiBSU0EgUFVCTElDIE...",
+        yearlyFee: parseEther('0.1234'),
         isPrivate: true,
       },
     })
@@ -148,20 +148,20 @@ const receipt = await sdk.operators.withdrawAllVersionOperatorEarnings({
 
 ### `setOperatorWhitelists()`
 
-For a list of operators provided, set a list of whitelisted addresses which can register validators to these operators.
+Sets an external whitelisting contract for the provided operators.
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| operatorId | bigint[] | Array of operator ID(s) | [1,2,3,4] |
-| whitelisted | Hex[] | Array of ETH1 addresses to be whitelisted | ["0xA4831B989972605A62141a667578d742927Cbef9", "0xA4831B989972605A62141a667578d742927Cbef8"] |
+| operatorIds | string[] | Array of operator IDs | ["1","2","3","4"] |
+| contractAddress | Address | Address of the contract that manages operator access | "0xA4831B989972605A62141a667578d742927Cbef9" |
 
 #### Example:
 
 ```typescript
 const receipt = await sdk.operators.setOperatorWhitelists({
       args: {
-        operatorId: [1,2,3,4],
-        whitelisted: ["0xA4831B989972605A62141a667578d742927Cbef9", "0xA4831B989972605A62141a667578d742927Cbef8"],
+        operatorIds: ["1","2","3","4"],
+        contractAddress: "0xA4831B989972605A62141a667578d742927Cbef9",
       },
     })
 .then((tx) => tx.wait())
@@ -267,7 +267,7 @@ const receipt = await sdk.operators
 .then((tx) => tx.wait())
 ```
 
-#### `declareOperatorFee()`
+### `declareOperatorFee()`
 
 Initiates the first step of the operator fee update cycle - declaration of a new fee. [After specified](https://docs.ssv.network/developers/smart-contracts/ssvnetworkviews#getoperatorfeeperiods) time window operator will be able to change to the new fee with executeOperatorFee(). **Will fail if** msg.sender is not the operator owner.
 

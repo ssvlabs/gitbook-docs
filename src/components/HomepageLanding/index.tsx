@@ -233,7 +233,7 @@ const sections: SectionData[] = [
       {
         title: 'Security Overview',
         description: 'Learn more about SSV Network security',
-        to: '/learn/security',
+        to: '/developers/security',
       },
       {
         title: 'Incentivized Mainnet Program',

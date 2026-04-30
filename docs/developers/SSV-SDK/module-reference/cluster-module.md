@@ -6,7 +6,7 @@ sidebar_position: 1
 
 This is a library which contains all the functions you need for working with Clusters of SSV network, such as registering a validator.
 
-After instantiating the SDK, you can call any of the functions in the utils library like so:
+After instantiating the SDK, you can call any of the functions in the cluster library like so:
 
 ```typescript
 sdk.clusters.registerValidators()
@@ -19,7 +19,7 @@ Converts an SSV-based cluster (legacy) to ETH-based cluster. Accepts cluster ID 
 
 | Input parameter | Input type | Description | Example input |
 |----------------|------------|-------------|---------------|
-| cluster_Id | string | A cluster_id in its computed ID form. Has to have the **owner address in lowercase letters**. It is advised to use the [`createClusterID`](/developers/SSV-SDK/module-reference/api-module#createclusteridowner_address-operator_ids)  function to get the cluster ID in the correct format | “0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8” |
+| id | string | A cluster ID in its computed ID form. Has to have the **owner address in lowercase letters**. It is advised to use the [`createClusterId`](/developers/SSV-SDK/module-reference/api-module#createclusteridowner_address-operator_ids) function to get the cluster ID in the correct format | "0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8" |
 | amount | bigint | Amount of ETH to deposit to fund the cluster | 0.1234 |
 
 #### Example:
@@ -27,7 +27,7 @@ Converts an SSV-based cluster (legacy) to ETH-based cluster. Accepts cluster ID 
 ```typescript
 txn_receipt = await sdk.clusters.migrateClusterToETH({ 
     args: { 
-        cluster_Id: "0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8", 
+        id: "0xf69a08b652f0cebb685c2ffe043cfb767b66544a-5-6-7-8", 
         amount: parseEther('0.1234') 
     },
 }).then(tx => tx.wait())
