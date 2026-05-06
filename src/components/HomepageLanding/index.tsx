@@ -239,6 +239,38 @@ function OperationArrowDownIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+function OperationBalanceIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path d="M12 4.5v15" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" />
+      <path d="M7 7.5h10" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" />
+      <path d="m7 7.5-3 5.25h6L7 7.5Zm10 0-3 5.25h6L17 7.5Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+      <path d="M8.5 19.5h7" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function OperationExitIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path d="M10 5.5H6.75A1.75 1.75 0 0 0 5 7.25v9.5c0 .97.78 1.75 1.75 1.75H10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M13 8.5 17 12m0 0-4 3.5M17 12H9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M15 5.5h2.25c.97 0 1.75.78 1.75 1.75v9.5A1.75 1.75 0 0 1 17.25 18.5H15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function OperationRemoveIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path d="M5.5 7.5h13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M9 4.75h6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M8 7.5v9.25c0 .97.78 1.75 1.75 1.75h4.5A1.75 1.75 0 0 0 16 16.75V7.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M9.5 12h5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 const pathways: Pathway[] = [
   {
     title: 'Onboarding Guides',
@@ -324,6 +356,21 @@ const commonOperations: OperationItem[] = [
     title: 'Deposit ETH',
     to: '/developers/examples/deposit-eth',
     icon: <OperationArrowDownIcon className={styles.operationIconSvg} />,
+  },
+  {
+    title: 'Cluster Balance',
+    to: '/developers/examples/cluster-balance-script',
+    icon: <OperationBalanceIcon className={styles.operationIconSvg} />,
+  },
+  {
+    title: 'Exit validator',
+    to: '/developers/examples/exit-validator',
+    icon: <OperationExitIcon className={styles.operationIconSvg} />,
+  },
+  {
+    title: 'Remove validator',
+    to: '/developers/examples/remove-validator',
+    icon: <OperationRemoveIcon className={styles.operationIconSvg} />,
   },
 ];
 
@@ -438,11 +485,11 @@ export default function HomepageLanding(): ReactElement {
             <pre className={styles.heroCodeBlock}>
               <span className={styles.heroCodeComment}>// Onboard a validator across 4 SSV operators</span>
               {'\n'}
-              <span className={styles.heroCodeKeyword}>import</span> {'{'} SSV {'}'} <span className={styles.heroCodeKeyword}>from</span>{' '}
+              <span className={styles.heroCodeKeyword}>import</span> {'{'} SSVSDK {'}'} <span className={styles.heroCodeKeyword}>from</span>{' '}
               <span className={styles.heroCodeString}>'@ssv-labs/ssv-sdk'</span>
               {'\n\n'}
-              <span className={styles.heroCodeKeyword}>const</span> <span className={styles.heroCodeVariable}>ssv</span> = <span className={styles.heroCodeKeyword}>new</span> SSV({'{'} network:{' '}
-              <span className={styles.heroCodeString}>'mainnet'</span> {'}'})
+              <span className={styles.heroCodeKeyword}>const</span> <span className={styles.heroCodeVariable}>ssv</span> = <span className={styles.heroCodeKeyword}>new</span> SSVSDK({'{'} publicClient, walletClient{' '}
+              <span className={styles.heroCodeString}></span>{'}'})
               {'\n'}
               <span className={styles.heroCodeKeyword}>await</span> <span className={styles.heroCodeVariable}>ssv</span>.cluster.register({'{'} owner, operators, keyShares {'}'})
             </pre>
