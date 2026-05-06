@@ -11,10 +11,12 @@ The score is duty-aware and role-aware. It reflects what happened during consens
 
 In plain language, the consensus flow is:
 
-`leader* -> prepares -> commits -> pre-consensus** -> post-consensus`
+`Pre-consensus* -> leader** -> prepares -> commits -> post-consensus***`
 
-- For each duty, there is only one randomly chosen `leader`.
 - `pre-consensus` applies only to Aggregator, Sync Committee, and Proposer duties.
+- For each round of a duty, there is only one deterministically chosen `leader`.
+- `pre-` and `post-consensus` happen only once per duty. The other steps will cycle once per duty round.
+- Round change happens if there is a failure at any point.
 
 ## Scored duties
 

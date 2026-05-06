@@ -7,7 +7,7 @@ sidebar_position: 2
 
 ### Operator Statuses
 
-The status of an **Operator** can be either **Active**, **Inactive**, or **No Validators**. In short, it indicates recent participation in SSV duties. 
+The status of an **Operator** can be either **Active**, **Inactive**, **No Validators**, or **Pending Validators** (has validators that are pending deposit). In short, it indicates recent participation in SSV duties. 
 
 Operator is Inactive if it has not carried out any duties for the previous 10 epochs for the majority of their validators.
 
