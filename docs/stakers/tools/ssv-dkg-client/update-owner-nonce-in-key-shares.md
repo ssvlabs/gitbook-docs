@@ -15,7 +15,7 @@ If you need to move a validator to a different operator set, use [Change Operato
 
 ## Prerequisites
 - [**Proofs**](ceremony-output-summary#proofs): the relevant `proofs.json`
-- [**Operator Data**](operator-data): the operator information you need for the new ceremony
+- [**Operator Data**](operators-data): the operator information you need for the new ceremony
 - [**Command or Config**](commands-and-config): the required command or YAML configuration details
 - **Owner Wallet**: access to the wallet that signed the original ceremony as the `owner`
 

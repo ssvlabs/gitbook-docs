@@ -11,9 +11,9 @@ import InlineEditableCodeBlock from '@site/src/components/InlineEditableCodeBloc
 
 ## Prerequisites
 
-- [**Operator Data**](operator-data): the selected operator IDs and a current operators info file with DKG metadata
+- [**Operator Data**](operators-data): the selected operator IDs and a current operators info file with DKG metadata
 - [**Command or Config**](commands-and-config): the required command or YAML configuration details
-- [**Installation secured**](README#installation): a machine with Docker installed OR ssv-dkg built locally from source
+- [**Installation**](/stakers/tools/ssv-dkg-client#installation): a machine with Docker installed OR ssv-dkg built locally from source
 
 Outdated or incomplete operator metadata can block ceremony startup. A stale endpoint, missing RSA public key, or mismatched DKG metadata can cause validation to fail before the ceremony begins.
 
