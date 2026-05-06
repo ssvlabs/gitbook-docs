@@ -4,31 +4,40 @@ import Heading from '@theme/Heading';
 
 import styles from './styles.module.css';
 
-type Pathway = {
+type InternalLink = {
+  to: string;
+  href?: never;
+};
+
+type ExternalLink = {
+  href: string;
+  to?: never;
+};
+
+type LinkTarget = InternalLink | ExternalLink;
+
+type Pathway = InternalLink & {
   title: string;
   description: string;
-  to: string;
   label: string;
   icon: ReactElement;
   iconTone: 'blue' | 'yellow' | 'red' | 'green';
-  featured?: boolean;
+  titleHoverTone?: 'default' | 'green' | 'yellow' | 'red';
 };
 
-type CardItem = {
+type ToolItem = InternalLink & {
   title: string;
   description: string;
-  to: string;
+  icon: ReactElement;
 };
 
-type SectionData = {
-  id: string;
+type OperationItem = InternalLink & {
   title: string;
-  items: CardItem[];
+  icon: ReactElement;
 };
 
-type QuickLinkItem = {
-  label: string;
-  href: string;
+type SecurityLinkItem = LinkTarget & {
+  title: string;
   icon: ReactElement;
 };
 
@@ -40,6 +49,18 @@ type SupportItem = {
   icon: ReactElement;
   tone?: 'default' | 'highlight' | 'orange';
 };
+
+function getLinkProps(target: LinkTarget) {
+  if ('href' in target) {
+    return {
+      href: target.href,
+      target: '_blank',
+      rel: 'noopener noreferrer',
+    };
+  }
+
+  return {to: target.to};
+}
 
 export function SSVIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -114,46 +135,6 @@ function NodeIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-function GithubIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
-      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" />
-    </svg>
-  );
-}
-
-function ExplorerIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-      <path
-        d="m12 3 2.78 5.63L21 9.54l-4.5 4.38 1.06 6.2L12 17.2l-5.56 2.92 1.06-6.2L3 9.54l6.22-.91L12 3Z"
-        stroke="currentColor"
-        strokeWidth="1.7"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function AppIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-      <rect x="3.5" y="4.5" width="17" height="15" rx="3" stroke="currentColor" strokeWidth="1.7" />
-      <path d="M8 9.5h8M8 14.5h5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function GlobeIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-      <circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.7" />
-      <path d="M3.75 12h16.5M12 3.5c2.2 2.4 3.5 5.39 3.5 8.5S14.2 18.1 12 20.5M12 3.5c-2.2 2.4-3.5 5.39-3.5 8.5S9.8 18.1 12 20.5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-    </svg>
-  );
-}
-
 function DiscordIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
@@ -179,31 +160,143 @@ function ForumIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+function ApiIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <rect x="4" y="5" width="16" height="14" rx="3" stroke="currentColor" strokeWidth="1.8" />
+    </svg>
+  );
+}
+
+function DiamondIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path d="M12 4 20 12 12 20 4 12 12 4Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function ContractIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path d="M8 4.75h8.5A1.75 1.75 0 0 1 18.25 6.5v11A1.75 1.75 0 0 1 16.5 19.25H7.5A1.75 1.75 0 0 1 5.75 17.5v-11A1.75 1.75 0 0 1 7.5 4.75H8Zm1 4h6M9 12h6M9 15.5h4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function ShieldCheckIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path d="M12 2 4 5v6c0 5 3.5 9.5 8 11 4.5-1.5 8-6 8-11V5l-8-3Z" stroke="currentColor" strokeWidth="1.9" strokeLinejoin="round" />
+      <path d="m9 12 2 2 4-4" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function FileIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+      <path d="M14 2v6h6" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function OperationKeyIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <circle cx="8.5" cy="11.5" r="3.25" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M11.75 11.5H20m-3 0v2.5m-3-2.5v2.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function OperationKeySharesIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <rect x="5" y="5" width="14" height="14" rx="2.5" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="m9.25 9.25 5.5 5.5m0-5.5-5.5 5.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function OperationPlusIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function OperationArrowDownIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path d="M12 4.5v11m0 0 4-4m-4 4-4-4" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M6 19.5h12" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function OperationBalanceIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path d="M12 4.5v15" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" />
+      <path d="M7 7.5h10" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" />
+      <path d="m7 7.5-3 5.25h6L7 7.5Zm10 0-3 5.25h6L17 7.5Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+      <path d="M8.5 19.5h7" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function OperationExitIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path d="M10 5.5H6.75A1.75 1.75 0 0 0 5 7.25v9.5c0 .97.78 1.75 1.75 1.75H10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M13 8.5 17 12m0 0-4 3.5M17 12H9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M15 5.5h2.25c.97 0 1.75.78 1.75 1.75v9.5A1.75 1.75 0 0 1 17.25 18.5H15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function OperationRemoveIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path d="M5.5 7.5h13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M9 4.75h6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M8 7.5v9.25c0 .97.78 1.75 1.75 1.75h4.5A1.75 1.75 0 0 0 16 16.75V7.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M9.5 12h5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 const pathways: Pathway[] = [
   {
-    title: 'What is SSV Network?',
-    description: 'Learn the core concepts of SSV Network, tokenomics, and related topics.',
-    to: '/learn/introduction',
-    label: 'Getting started',
-    icon: <BookIcon className={styles.pathwaySvg} />,
-    iconTone: 'blue',
-    featured: true,
-  },
-  {
-    title: 'Integrate with SSV Network',
-    description: 'Integrate and onboard validators with our step-by-step guides.',
+    title: 'Onboarding Guides',
+    description: 'Migrate and register validators with our step-by-step guides.',
     to: '/stakers/',
     label: 'Integrate',
-    icon: <GearIcon className={styles.pathwaySvg} />,
-    iconTone: 'yellow',
+    icon: <BookIcon className={styles.pathwaySvg} />,
+    iconTone: 'blue',
   },
   {
-    title: 'Develop with SSV Network',
-    description: 'Automate validator operations with SSV SDK using our guides and examples.',
+    title: 'Calculate Costs',
+    description: 'Estimate the cost of running a distributed validator.',
+    to: '/stakers/validator-onboarding/calculate-costs',
+    label: 'Plan',
+    icon: <GearIcon className={styles.pathwaySvg} />,
+    iconTone: 'yellow',
+    titleHoverTone: 'yellow',
+  },
+  {
+    title: 'Incentivized Mainnet Program',
+    description: 'Increase APR by running validators on SSV Network.',
     to: '/developers/',
-    label: 'Develop',
+    label: 'Earn',
     icon: <CodeIcon className={styles.pathwaySvg} />,
     iconTone: 'red',
+    titleHoverTone: 'red',
   },
   {
     title: 'Operate SSV Node',
@@ -212,94 +305,90 @@ const pathways: Pathway[] = [
     label: 'Operate',
     icon: <NodeIcon className={styles.pathwaySvg} />,
     iconTone: 'green',
+    titleHoverTone: 'green',
   },
 ];
 
-const sections: SectionData[] = [
+const developerTools: ToolItem[] = [
   {
-    id: 'integrate',
-    title: 'Integrate with SSV Network',
-    items: [
-      {
-        title: 'Stakers Quickstart',
-        description: 'Get started and integrate with SSV Network',
-        to: '/stakers/',
-      },
-      {
-        title: 'Calculate Costs',
-        description: 'Estimate the cost of distributing a validator',
-        to: '/stakers/validator-onboarding/calculate-costs',
-      },
-      {
-        title: 'Security Overview',
-        description: 'Learn more about SSV Network security',
-        to: '/developers/security',
-      },
-      {
-        title: 'Incentivized Mainnet Program',
-        description: 'Increase APR by running validators on SSV Network',
-        to: '/stakers/incentivized-mainnet',
-      },
-    ],
+    title: 'SDK',
+    description: 'TypeScript SDK to automate validator and cluster operations.',
+    to: '/developers/SSV-SDK/',
+    icon: <GearIcon className={styles.toolSvg} />,
   },
   {
-    id: 'develop',
-    title: 'Develop with SSV Network',
-    items: [
-      {
-        title: 'Developers Quickstart',
-        description: 'Start automating validator onboarding on SSV Network',
-        to: '/developers/',
-      },
-      {
-        title: 'Tutorials',
-        description: 'Follow tutorials and examples to integrate with SSV Network',
-        to: '/developers/examples/',
-      },
-      {
-        title: 'SSV SDK',
-        description: 'Explore the SSV SDK modules and how to use them',
-        to: '/developers/SSV-SDK/',
-      },
-      {
-        title: 'Smart Contracts',
-        description: 'Explore our smart contracts and their functions in detail',
-        to: '/developers/smart-contracts/',
-      },
-    ],
+    title: 'Subgraph',
+    description: 'GraphQL queries of indexed SSV Network — clusters, operators, validators.',
+    to: '/developers/api/ssv-subgraph',
+    icon: <DiamondIcon className={styles.toolSvg} />,
+  },
+  {
+    title: 'Smart Contracts',
+    description: 'SSV Network contracts — addresses, ABIs, function references, source code.',
+    to: '/developers/smart-contracts/',
+    icon: <ContractIcon className={styles.toolSvg} />,
+  },
+  {
+    title: 'Testnet',
+    description: 'Resources for testing validator flows and integrations safely on Hoodi.',
+    to: '/developers/testnet',
+    icon: <ApiIcon className={styles.toolSvg} />,
   },
 ];
 
-const quickLinks: QuickLinkItem[] = [
+const commonOperations: OperationItem[] = [
   {
-    label: 'ssvlabs/ssv',
+    title: 'Create validator keys',
+    to: '/developers/examples/create-validator-keys',
+    icon: <OperationKeyIcon className={styles.operationIconSvg} />,
+  },
+  {
+    title: 'Generate key shares',
+    to: '/developers/examples/generate-and-validate-keyshares',
+    icon: <OperationKeySharesIcon className={styles.operationIconSvg} />,
+  },
+  {
+    title: 'Register validator',
+    to: '/developers/examples/register-validator',
+    icon: <OperationPlusIcon className={styles.operationIconSvg} />,
+  },
+  {
+    title: 'Deposit ETH',
+    to: '/developers/examples/deposit-eth',
+    icon: <OperationArrowDownIcon className={styles.operationIconSvg} />,
+  },
+  {
+    title: 'Cluster Balance',
+    to: '/developers/examples/cluster-balance-script',
+    icon: <OperationBalanceIcon className={styles.operationIconSvg} />,
+  },
+  {
+    title: 'Exit validator',
+    to: '/developers/examples/exit-validator',
+    icon: <OperationExitIcon className={styles.operationIconSvg} />,
+  },
+  {
+    title: 'Remove validator',
+    to: '/developers/examples/remove-validator',
+    icon: <OperationRemoveIcon className={styles.operationIconSvg} />,
+  },
+];
+
+const securityLinks: SecurityLinkItem[] = [
+  {
+    title: 'All audit reports',
+    to: '/developers/security/audits',
+    icon: <FileIcon className={styles.securityLinkIcon} />,
+  },
+  {
+    title: 'Smart contracts',
+    href: 'https://github.com/ssvlabs/ssv-network',
+    icon: <ContractIcon className={styles.securityLinkIcon} />,
+  },
+  {
+    title: 'SSV node',
     href: 'https://github.com/ssvlabs/ssv',
-    icon: <GithubIcon className={styles.quickLinkIcon} />,
-  },
-  {
-    label: 'ssvlabs/ssv-sdk',
-    href: 'https://github.com/ssvlabs/ssv-sdk',
-    icon: <GithubIcon className={styles.quickLinkIcon} />,
-  },
-  {
-    label: 'ssvlabs/ssv-stack',
-    href: 'https://github.com/ssvlabs/ssv-stack',
-    icon: <GithubIcon className={styles.quickLinkIcon} />,
-  },
-  {
-    label: 'SSV Explorer',
-    href: 'https://explorer.ssv.network/',
-    icon: <SSVIcon className={styles.quickLinkIcon} />,
-  },
-  {
-    label: 'SSV Web App',
-    href: 'https://app.ssv.network/',
-    icon: <SSVIcon className={styles.quickLinkIcon} />,
-  },
-  {
-    label: 'SSV Network',
-    href: 'https://ssv.network/',
-    icon: <SSVIcon className={styles.quickLinkIcon} />,
+    icon: <NodeIcon className={styles.securityLinkIcon} />,
   },
 ];
 
@@ -329,14 +418,16 @@ const supportItems: SupportItem[] = [
   },
 ];
 
-function PathwayCard({title, description, to, label, icon, iconTone, featured}: Pathway) {
+function PathwayCard({title, description, to, label, icon, iconTone, titleHoverTone}: Pathway) {
   return (
-    <Link className={`${styles.pathwayCard} ${featured ? styles.pathwayCardFeatured : ''}`} to={to}>
+    <Link className={styles.pathwayCard} to={to}>
       <div className={`${styles.pathwayIcon} ${styles[`pathwayIcon${iconTone[0].toUpperCase()}${iconTone.slice(1)}`]}`} aria-hidden="true">
         {icon}
       </div>
       <div className={`${styles.cardLabel} ${styles[`cardLabel${iconTone[0].toUpperCase()}${iconTone.slice(1)}`]}`}>{label}</div>
-      <Heading as="h2" className={styles.pathwayTitle}>
+      <Heading
+        as="h2"
+        className={`${styles.pathwayTitle} ${titleHoverTone === 'green' ? styles.pathwayTitleHoverGreen : ''} ${titleHoverTone === 'yellow' ? styles.pathwayTitleHoverYellow : ''} ${titleHoverTone === 'red' ? styles.pathwayTitleHoverRed : ''}`}>
         {title}
       </Heading>
       <p className={`${styles.cardDescription} ${styles.pathwayDescription}`}>{description}</p>
@@ -344,9 +435,12 @@ function PathwayCard({title, description, to, label, icon, iconTone, featured}: 
   );
 }
 
-function SectionCard({title, description, to}: CardItem) {
+function DeveloperToolCard({title, description, to, icon}: ToolItem) {
   return (
     <Link className={styles.sectionCard} to={to}>
+      <div className={styles.toolIcon} aria-hidden="true">
+        {icon}
+      </div>
       <Heading as="h3" className={styles.sectionCardTitle}>
         {title}
       </Heading>
@@ -355,21 +449,14 @@ function SectionCard({title, description, to}: CardItem) {
   );
 }
 
-function ContentSection({id, title, items}: SectionData) {
+function SectionHeader({title, note}: {title: string; note?: string}) {
   return (
-    <section className={styles.contentSection}>
-      <div className={styles.sectionHeader}>
-        <Heading as="h2" id={id} className={styles.sectionTitle}>
-          {title}
-        </Heading>
-        <div className={styles.sectionDivider} aria-hidden="true" />
-      </div>
-      <div className={styles.sectionGrid}>
-        {items.map((item) => (
-          <SectionCard key={item.to} {...item} />
-        ))}
-      </div>
-    </section>
+    <div className={styles.sectionHeader}>
+      <Heading as="h2" className={styles.sectionTitle}>
+        {title}
+      </Heading>
+      {note ? <p className={styles.sectionNote}>{note}</p> : <div className={styles.sectionDivider} aria-hidden="true" />}
+    </div>
   );
 }
 
@@ -378,55 +465,112 @@ export default function HomepageLanding(): ReactElement {
     <main className={styles.homepage}>
       <div className="container">
         <section className={styles.hero}>
-          <div className={styles.heroCopy}>
-            <Heading as="h1" className={styles.heroTitle}>
-              Build with <span>SSV Network</span>
-            </Heading>
-            <p className={styles.heroDescription}>
-              Use Distributed Validator Technology for secure, decentralized, and scalable staking infrastructure.
-            </p>
+          <div className={styles.heroGrid}>
+            <div className={styles.heroCopy}>
+              <Heading as="h1" className={styles.heroTitle}>
+                Build with <span>SSV Network</span>
+              </Heading>
+              <p className={styles.heroDescription}>
+                Onboard validators across distributed operators using the SSV SDK, API, subgraph, and smart contracts.
+              </p>
+              <div className={styles.heroActions}>
+                <Link className={`${styles.heroButton} ${styles.heroButtonPrimary}`} to="/developers/">
+                  Quickstart →
+                </Link>
+                <Link className={`${styles.heroButton} ${styles.heroButtonSecondary}`} to="/learn/introduction">
+                  Introduction →
+                </Link>
+              </div>
+            </div>
+            <pre className={styles.heroCodeBlock}>
+              <span className={styles.heroCodeComment}>// Onboard a validator across 4 SSV operators</span>
+              {'\n'}
+              <span className={styles.heroCodeKeyword}>import</span> {'{'} SSVSDK {'}'} <span className={styles.heroCodeKeyword}>from</span>{' '}
+              <span className={styles.heroCodeString}>'@ssv-labs/ssv-sdk'</span>
+              {'\n\n'}
+              <span className={styles.heroCodeKeyword}>const</span> <span className={styles.heroCodeVariable}>ssv</span> = <span className={styles.heroCodeKeyword}>new</span> SSVSDK({'{'} publicClient, walletClient{' '}
+              <span className={styles.heroCodeString}></span>{'}'})
+              {'\n'}
+              <span className={styles.heroCodeKeyword}>await</span> <span className={styles.heroCodeVariable}>ssv</span>.cluster.register({'{'} owner, operators, keyShares {'}'})
+            </pre>
           </div>
         </section>
-
-        <section className={styles.pathways} aria-label="Primary documentation pathways">
-          {pathways.map((pathway) => (
-            <PathwayCard key={pathway.title} {...pathway} />
-          ))}
-        </section>
-
-        {sections.map((section) => (
-          <ContentSection key={section.id} {...section} />
-        ))}
 
         <section className={styles.contentSection}>
-          <div className={styles.sectionHeader}>
-            <Heading as="h2" className={styles.sectionTitle}>
-              Quick Links
-            </Heading>
-            <div className={styles.sectionDivider} aria-hidden="true" />
-          </div>
-          <div className={styles.quickLinks}>
-            {quickLinks.map((item) => (
-              <Link
-                key={item.href}
-                className={styles.quickLink}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer">
-                {item.icon}
-                <span>{item.label}</span>
-              </Link>
+          <SectionHeader title="Developer tools" />
+          <div className={styles.sectionGrid}>
+            {developerTools.map((item) => (
+              <DeveloperToolCard key={item.to} {...item} />
             ))}
           </div>
         </section>
 
         <section className={styles.contentSection}>
-          <div className={styles.sectionHeader}>
-            <Heading as="h2" className={styles.sectionTitle}>
-              Connect with us
-            </Heading>
-            <div className={styles.sectionDivider} aria-hidden="true" />
+          <SectionHeader title="Common operations" />
+          <div className={styles.operationsList}>
+            {commonOperations.map((item) => (
+              <Link key={item.to} className={styles.operationPill} to={item.to}>
+                <span className={styles.operationIcon} aria-hidden="true">
+                  {item.icon}
+                </span>
+                <span>{item.title}</span>
+              </Link>
+            ))}
           </div>
+        </section>
+
+        <section className={styles.contentSection} aria-label="Primary documentation pathways">
+          <SectionHeader title="Integrate with SSV Network" />
+          <div className={styles.pathways}>
+            {pathways.map((pathway) => (
+              <PathwayCard key={pathway.title} {...pathway} />
+            ))}
+          </div>
+        </section>
+
+        <section className={styles.contentSection}>
+          <SectionHeader title="Security" />
+          <div className={styles.securityGrid}>
+            <Link className={styles.securityPrimaryCard} to="https://immunefi.com/bounty/ssvnetwork/">
+              <span className={styles.securityBadge}>
+                <ShieldCheckIcon className={styles.securityBadgeIcon} />
+                Immunefi · Bug bounty
+              </span>
+              <Heading as="h3" className={styles.securityPrimaryTitle}>
+                Found a vulnerability?
+              </Heading>
+              <p className={styles.securityPrimaryText}>
+                SSV Network runs an active bug bounty program on Immunefi. Critical issues earn substantial rewards — responsible disclosure only.
+              </p>
+              <div className={styles.securityRewardWrap}>
+                <div className={styles.securityReward}>Up to $250K</div>
+                <div className={styles.securityRewardMeta}>per critical finding</div>
+              </div>
+              <div className={styles.securityPrimaryCta}>View program →</div>
+            </Link>
+
+            <article className={styles.securitySideCard}>
+              <Heading as="h3" className={styles.securitySideTitle}>
+                Audits &amp; source
+              </Heading>
+              <p className={styles.securitySideText}>
+                SSV Network has been audited multiple times across the protocol, contracts, DKG, and node implementations.
+              </p>
+              <div className={styles.securityLinks}>
+                {securityLinks.map((item) => (
+                  <Link key={item.title} className={styles.securityLink} {...getLinkProps(item)}>
+                    {item.icon}
+                    <span className={styles.securityLinkTitle}>{item.title}</span>
+                    <span className={styles.securityLinkArrow}>→</span>
+                  </Link>
+                ))}
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section className={styles.contentSection}>
+          <SectionHeader title="Connect" />
           <div className={styles.supportGrid}>
             {supportItems.map((item) => (
               <article
