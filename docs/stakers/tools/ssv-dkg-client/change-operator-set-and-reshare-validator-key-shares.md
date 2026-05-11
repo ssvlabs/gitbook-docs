@@ -16,7 +16,7 @@ To prove that the same owner is authorizing the reshare, use the original `proof
 ## Prerequisites
 
 - [**Proofs**](ceremony-output-summary#proofs): the relevant `proofs.json`
-- [**Operator Data**](operator-data): the operator information you need for the new ceremony
+- [**Operator Data**](operators-data): the operator information you need for the new ceremony
 - [**Command or Config**](commands-and-config): the required command or YAML configuration details
 - **Owner Wallet**: access to the wallet that signed the original ceremony as the `owner`
 
