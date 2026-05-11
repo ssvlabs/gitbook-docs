@@ -44,6 +44,12 @@ The guide follows those two parts. Summary:
 
 The Commit-Boost team documents this process in [their guide](https://commit-boost.github.io/commit-boost-client/get_started/overview).
 
+:::warning Muxing endpoint
+For better Commit-Boost performance it is recommended to set `ssv_node_api_url = "http://localhost:16000/v1/"` [in its config](https://commit-boost.github.io/commit-boost-client/get_started/configuration).
+
+**Make sure to expose `16000` port on your SSV Node's container**.
+:::
+
 ### Choose any relays
 
 To use Commit-Boost for MEV, the client behaves much like MEV-Boost. You can choose any MEV-Boost-compatible relays, and the workflow is the same. Commit-Boost also includes performance [enhancements](https://github.com/commit-boost/bommit-boost-client/tree/main/benches/pbs), additional [reporting](https://github.com/commit-boost/commit-boost-client/tree/main/crates/metrics), and tools such as the [multiplexer](https://youtu.be/PPWwpPx4it0?si=mcJfGDlozd1AITBj&t=1380) to help validators reduce risk.

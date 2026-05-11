@@ -292,7 +292,7 @@ const pathways: Pathway[] = [
   {
     title: 'Incentivized Mainnet Program',
     description: 'Increase APR by running validators on SSV Network.',
-    to: '/developers/',
+    to: '/stakers/incentivized-mainnet',
     label: 'Earn',
     icon: <CodeIcon className={styles.pathwaySvg} />,
     iconTone: 'red',
