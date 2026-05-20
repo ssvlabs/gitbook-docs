@@ -23,14 +23,21 @@ Verified Operators are marked in the operator selection list in the Web App with
 
 The [Verified Operator Committee](https://snapshot.org/#/mainnet.ssvnetwork.eth/proposal/0x5806627f78940463ac049662b5a7bff8a3b72fff75e04279c47ef9ba4a6c8a2b) (VOC) is responsible for screening and nominating new verified operators. The criteria and standards expected from Verified Operators should be accessible and transparent to the community and operators applying to be included in the verified group.
 
+**Requirements:**
+
+- Have at least 1 _active_ Validator assigned to your operator for >90 days
+- Keep performance above 98% for >30 days
+
 ### How the list of Verified Operators is maintained?
 
 Verified operators are periodically re-evaluated to ensure they continue to meet [DAO-defined requirements and standards](https://snapshot.org/#/s:vo.ssvnetwork.eth/proposal/0x32482336a43b2ecbee3a80ef55160b55765240e2c75cc58eee8a1e40ad4e11a0). This may include reviewing performance metrics, updating company metadata, and confirming continued operational quality.
 
 **Requirements:**
 
-* Have at least 1 _active_ Validator assigned to your operator
-* Keep performance above 98%
+- A verified operator shall not have their performance degraded below 98% for more than 14-days. 
+- In case of degraded performance for >14-days, the Operator Committee shall, at its discretion, notify the Operator directly to resolve the performance issue
+- A notified Operator has another 14-days to mediate the issue.
+- If within those two periods (28-days) the performance is still not >98%, the Verified Operator classification will be removed.
 
 ### How to apply
 

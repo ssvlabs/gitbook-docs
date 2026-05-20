@@ -3,7 +3,7 @@ sidebar_label: 'Audit Resources'
 sidebar_position: 2
 ---
 
-## Audit Resources
+# Audit Resources
 
 SSV Network has undergone multiple audits. You can find completed audit reports below.
 
