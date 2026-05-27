@@ -3,7 +3,7 @@ sidebar_label: 'Audit Resources'
 sidebar_position: 2
 ---
 
-## Audit Resources
+# Audit Resources
 
 SSV Network has undergone multiple audits. You can find completed audit reports below.
 
@@ -21,3 +21,4 @@ SSV Network has undergone multiple audits. You can find completed audit reports 
 | SSV DKG - Reshare and Resign Features | November 2024 | [Link](https://github.com/ssvlabs/ssv-dkg/blob/main/audits/ChainSecurity%20Audit%20Report.pdf) | [ChainSecurity](https://www.chainsecurity.com/) |
 | SSV Node - SSV Signer | July 2025 | [Link](https://github.com/ssvlabs/ssv/blob/main/audits/SSV_SIGNER_FINAL_REPORT.pdf) | [Quantstamp](https://quantstamp.com/) |
 | Smart Contracts - SSV Staking and ETH Payments | March 2026 | [Link](https://github.com/ssvlabs/ssv-network/blob/ssv-staking/contracts/audits/2026-04-10_Quantstamp_v2.0.0.pdf) | [Quantstamp](https://quantstamp.com/) |
+| SSV Oracle - Critical Components | May 2026 | [Link](https://github.com/ssvlabs/ssv-oracle/blob/v0.3.0/audits/quantstamp-ssv-oracle-2026-05-18.pdf) | [Quantstamp](https://quantstamp.com/) |
