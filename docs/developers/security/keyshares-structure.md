@@ -1,9 +1,9 @@
 ---
-sidebar_label: 'Keyshares file structure'
+sidebar_label: 'Keyshares File Structure'
 sidebar_position: 4
 ---
 
-# Keyshares file structure
+# Keyshares File Structure
 
 Using [Distributed Key Generation](/learn/tech-overview#distributed-key-generation), the SSV protocol encrypts and splits a validator key into multiple key shares. The key shares are then distributed to multiple non-trusting nodes run by operators.
 
