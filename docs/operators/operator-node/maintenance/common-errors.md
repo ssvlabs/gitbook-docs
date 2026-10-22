@@ -23,7 +23,7 @@ This usually points to a Beacon node issue. Verify that `BeaconNodeAddr` is corr
 FATAL	beacon config: a client schedules a fork the node started without, which the node cannot adopt while running; upgrade every client that lacks it, the node's config source included, then restart the node before that fork; stopping, as the fork is too close to cross on the old schedule
 ```
 
-One of your Beacon nodes schedules a fork (e.g. Gloas) that SSV Node didn't know about when it started. SSV Node reads the fork schedule only once, at startup. It logs this as an error, and stops on purpose when the fork is 2 epochs away or less.
+One of your Beacon nodes schedules a fork (such as Gloas) that SSV Node didn't know about when it started. SSV Node reads the fork schedule only once, at startup. It logs this as an error, and stops on purpose when the fork is 2 epochs away or less.
 
 Upgrade **all** your Beacon nodes to a release that supports the fork, then restart SSV Node. See [Configuring ePBS (Gloas)](/operators/operator-node/setup-sidecars/configuring-epbs#upgrade-your-nodes).
 

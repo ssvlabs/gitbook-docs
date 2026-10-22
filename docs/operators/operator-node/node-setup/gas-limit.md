@@ -40,4 +40,4 @@ https://<relay-url>/relay/v1/data/validator_registration?pubkey=0x<validator-pub
 
 Validators are registered in a round-robin fashion once an hour, so you may have to wait this long or check more validators.
 
-After the Gloas fork, relays no longer receive validator registrations. Check that all operators in the cluster use the same `ExperimentalGasLimit` value instead.
+After the Gloas fork, the SSV node no longer produces validator registrations, so this check no longer applies. Instead, make sure all operators in the cluster use the same `ExperimentalGasLimit` value.

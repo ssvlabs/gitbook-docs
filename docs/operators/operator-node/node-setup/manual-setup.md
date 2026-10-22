@@ -212,13 +212,8 @@ KeyStore:
 # Enables Doppelganger Protection for validators, see https://github.com/ssvlabs/ssv/blob/v2.3.0/doppelganger/README.md
 EnableDoppelgangerProtection: false
 
-# Optional Gloas (ePBS) direct-builder connections. MUST be identical across all operators of every shared cluster.
+# Optional, advanced: Gloas (ePBS) direct-builder connections (Builders block).
 # Please see https://docs.ssv.network/operators/operator-node/setup-sidecars/configuring-epbs
-# Builders:
-#   MinBid: 0
-#   BuilderBoostFactor: 100
-#   Entries:
-#     - URL: "https://builder.example.com"
 
 # This enables monitoring at the specified port, see https://docs.ssv.network/operators/operator-node/monitoring/
 MetricsAPIPort: 15000
