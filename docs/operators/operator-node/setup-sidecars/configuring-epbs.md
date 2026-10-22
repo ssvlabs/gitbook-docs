@@ -12,7 +12,7 @@ This guide explains how block building changes with the Glamsterdam upgrade and 
 See the [Ethereum Foundation announcement](https://blog.ethereum.org/en/2026/10/16/glamsterdam-hoodi-announcement) for details.
 :::
 
-**TL;DR:** Upgrade your clients and SSV Node before the fork. ePBS works out of the box with no configuration. Direct builder connections are optional.
+**TL;DR:** Upgrade your clients and SSV Node before the Gloas fork. ePBS works out of the box with no configuration. Direct builder connections are optional.
 
 On a high level, the process consists of 3 steps:
 1. [Upgrade your nodes](#upgrade-your-nodes)
@@ -21,18 +21,18 @@ On a high level, the process consists of 3 steps:
 
 ## What changes with ePBS
 
-**Before the fork**, block building happens outside the Ethereum protocol, as described in [Configuring MEV](./configuring-mev):
+**Before the Gloas fork**, block building happens outside the Ethereum protocol, as described in [Configuring MEV](./configuring-mev):
 * Builders send their blocks and bids to **relays**. Your Beacon client queries them through an MEV client (e.g. MEV-Boost or Commit-Boost).
 * The proposer signs a **blinded block** (header only), and the relay reveals the full block.
 * SSV Node regularly submits **validator registrations** to the relays, with the fee recipient and gas limit of each validator.
 
-**After the fork**, the builder market is part of the protocol itself:
+**After the Gloas fork**, the builder market is part of the protocol itself:
 * Builders publish **bids** on the network. The proposer's block commits to a bid, and the protocol enforces the payment to the proposer.
 * The builder reveals the execution payload (the block's transactions) separately. A **Payload Timeliness Committee (PTC)** attests that it arrived on time.
 * If no bid is worth more than a locally built block, the cluster **builds the block itself** (self-build). Self-build is always available as a fallback.
 * **Proposer preferences** replace validator registrations. SSV Node broadcasts the fee recipient and gas limit ahead of each upcoming proposal, so builders can bid accordingly.
 
-| | Before the fork | After the fork |
+| | Before the Gloas fork | After the Gloas fork |
 | --- | --- | --- |
 | Where bids come from | Relays, through an MEV client | Builders' bids on the network, plus optional [direct builders](#direct-builder-connections-optional) |
 | Trust between proposer and builder | Relays act as trusted intermediaries | The protocol enforces the payment |
@@ -52,7 +52,7 @@ docker pull ssvlabs/ssv-node:latest
 ```
 
 :::danger Upgrade order matters
-SSV Node reads the fork schedule **only once, at startup**, from the first Beacon node that connects. If a Beacon node later announces a fork that SSV Node doesn't know about, SSV Node logs an error. If the fork is 2 epochs away or less, SSV Node **shuts down on purpose**, because with an outdated fork schedule it would fail every duty after the fork.
+SSV Node reads the fork schedule **only once, at startup**, from the first Beacon node that connects. If a Beacon node later announces a fork (such as Gloas) that SSV Node doesn't know about, SSV Node logs an error. If the fork is 2 epochs away or less, SSV Node **shuts down on purpose**, because with an outdated fork schedule it would fail every duty after the fork.
 
 It shuts down again on every restart while the Beacon node it reads the schedule from still lacks the fork. As that can be any of them, upgrade all Beacon nodes first, then restart SSV Node.
 :::
@@ -62,7 +62,7 @@ It shuts down again on every restart while the Beacon node it reads the schedule
 You don't need to configure anything for ePBS. Without any configuration, SSV Node asks the Beacon node for the most profitable option: the best bid from builders on the network, or a locally built block. If anything fails or no builder is available, the cluster builds the block itself.
 
 Keep the following in mind:
-* **Existing MEV setups stop being used at the fork.** In-protocol ePBS replaces the relay-based flow and validator registrations. [Configuring MEV](./configuring-mev) still applies until a network reaches the fork.
+* **Existing MEV setups stop being used at the Gloas fork.** In-protocol ePBS replaces the relay-based flow and validator registrations. [Configuring MEV](./configuring-mev) still applies until a network reaches the Gloas fork.
 * **Gas limit still has to match across the cluster.** Proposer preferences are signed by the cluster, so all Operators in a cluster **must** use the same gas limit, as before. See [Gas Limit](/operators/operator-node/node-setup/gas-limit).
 
 ## Direct builder connections (optional)
@@ -134,7 +134,7 @@ It is disabled by default (`0`) and capped at `1s`, with no option to exceed it.
 
 ## Proposer round timeout
 
-Starting from `v2.5.0`, the QBFT round budget for block proposals is `1.5s` (previously `2s`), so that a round change still fits before the earlier attestation deadline introduced by Glamsterdam. This change applies on all networks, regardless of the fork.
+Starting from `v2.5.0`, the QBFT round budget for block proposals is `1.5s` (previously `2s`), so that a round change still fits before the earlier attestation deadline introduced by Glamsterdam. This change applies on all networks, regardless of the Gloas fork.
 
 `LegacyProposerRoundTimeout` (`LEGACY_PROPOSER_ROUND_TIMEOUT`) restores `2s`. It is an emergency rollback only: it **must** be set identically across all Operators of every shared cluster, and takes effect only once at most *f* Operators of a cluster still use `1.5s`.
 

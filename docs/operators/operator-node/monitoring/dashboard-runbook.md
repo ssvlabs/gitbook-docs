@@ -152,7 +152,7 @@ This page explains what to look for and how to interpret it. Not every panel is 
 
 **Things to Watch For:**
 
-* **Prolonged Durations:** If you notice that your duties are taking longer than usual, it may indicate degraded performance in the stack. For example, if the full cycle of a `PROPOSAL` duty is taking longer than usual, it may be worth looking into the beacon node (and, before the Gloas fork, MEV-Boost) to investigate further. After the fork, also check your [direct builders](/operators/operator-node/setup-sidecars/configuring-epbs#direct-builder-connections-optional), if configured.
+* **Prolonged Durations:** If you notice that your duties are taking longer than usual, it may indicate degraded performance in the stack. For example, if the full cycle of a `PROPOSAL` duty is taking longer than usual, it may be worth looking into the beacon node (and, before the Gloas fork, MEV-Boost) to investigate further. After the Gloas fork, also check your [direct builders](/operators/operator-node/setup-sidecars/configuring-epbs#direct-builder-connections-optional), if configured.
 
 **Recommendations:**
 

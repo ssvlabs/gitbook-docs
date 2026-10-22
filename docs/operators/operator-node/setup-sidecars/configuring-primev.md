@@ -12,7 +12,7 @@ If any node in the cluster does not follow your commitment, your collateral will
 :::
 
 :::warning ePBS (Gloas)
-The relay-based flow described in this guide applies until the Gloas fork (Hoodi: October 26, 2026; Mainnet: not scheduled yet). From the fork on, in-protocol ePBS replaces it, and SSV Node no longer submits validator registrations to relays.
+The relay-based flow described in this guide applies until the Gloas fork (Hoodi: October 26, 2026; Mainnet: not scheduled yet). From the Gloas fork on, in-protocol ePBS replaces it, and SSV Node no longer submits validator registrations to relays.
 
 Check the [Primev documentation](https://docs.primev.xyz/) for its Glamsterdam support. See [Configuring ePBS (Gloas)](./configuring-epbs) for what changes in SSV Node.
 :::
