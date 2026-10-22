@@ -11,12 +11,12 @@ The default gas limit is 36M and SSV makes it configurable as long as the operat
 
 All operators in the cluster **MUST** set the same gas limit. Otherwise, MEV registrations would fail. The validators would eventually not propose MEV blocks and instead fall back to vanilla blocks (non-MEV blocks built locally).
 
-This still applies after the Gloas fork: proposer preferences, which carry the gas limit from then on, are signed by the cluster too. If not enough operators set the same value, the cluster can't produce a valid signature for them.
+This also applies after the Gloas fork, when the gas limit is sent in proposer preferences, which are signed by the cluster too.
 :::
 
 ## Configuration
 
-The SSV node registers its validators to MEV relays with a preferred gas limit. From the [Gloas fork](/operators/operator-node/setup-sidecars/configuring-epbs) on, validator registrations stop, and the SSV node publishes the same gas limit in **proposer preferences** (through its Beacon node) instead.
+The SSV node registers its validators to MEV relays with a preferred gas limit. From the [Gloas fork](/operators/operator-node/setup-sidecars/configuring-epbs) on, validator registrations stop and the same gas limit is published in **proposer preferences** instead.
 
 Starting from SSV version `v2.1.1` this gas limit becomes configurable:
 
@@ -39,5 +39,3 @@ https://<relay-url>/relay/v1/data/validator_registration?pubkey=0x<validator-pub
 ```
 
 Validators are registered in a round-robin fashion once an hour, so you may have to wait this long or check more validators.
-
-After the Gloas fork, the SSV node no longer produces validator registrations, so this check no longer applies. Instead, make sure all operators in the cluster use the same `ExperimentalGasLimit` value.

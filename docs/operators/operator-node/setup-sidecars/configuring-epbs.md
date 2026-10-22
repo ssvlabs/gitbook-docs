@@ -15,8 +15,6 @@ Upgrade your Execution and Beacon clients and SSV Node before the Gloas fork. eP
 | Hoodi | Epoch `132352`, on October 26, 2026 at 17:42:48 UTC |
 | Mainnet | Not scheduled yet |
 
-See the [Ethereum Foundation announcement](https://blog.ethereum.org/en/2026/10/16/glamsterdam-hoodi-announcement) for details.
-
 ## Upgrade your nodes
 
 1. Upgrade your Execution and Beacon clients to releases that support Glamsterdam, as listed in the [Ethereum Foundation announcement](https://blog.ethereum.org/en/2026/10/16/glamsterdam-hoodi-announcement). If you run multiple Beacon nodes, upgrade **all** of them.
@@ -25,7 +23,7 @@ See the [Ethereum Foundation announcement](https://blog.ethereum.org/en/2026/10/
 :::danger Upgrade order matters
 SSV Node reads the fork schedule only once, at startup, from the first Beacon node that connects. If a Beacon node later schedules a fork (such as Gloas) that SSV Node didn't start with, SSV Node logs an error, and **shuts down on purpose** when the fork is 2 epochs away or less.
 
-It shuts down again on every restart while the Beacon node it reads the schedule from doesn't support the fork. Upgrade all Beacon nodes first, then restart SSV Node.
+It shuts down again on every restart until the Beacon node it reads the schedule from supports the fork.
 :::
 
 ## What changes
@@ -36,11 +34,11 @@ From the Gloas fork on, block building works as follows:
 * If no bid is worth more than a locally built block, or no bid is available, the block is built locally.
 * **Proposer preferences** replace validator registrations. They carry each validator's fee recipient and gas limit, and are signed by the cluster. All Operators in a cluster must therefore still use the same [gas limit](/operators/operator-node/node-setup/gas-limit).
 
-In-protocol ePBS replaces the MEV-Boost / relay flow described in [Configuring MEV](./configuring-mev), which still applies until a network reaches the Gloas fork. SSV Node runs the new duties automatically, with no configuration needed.
+In-protocol ePBS replaces the MEV-Boost / relay flow described in [Configuring MEV](./configuring-mev), which still applies until a network reaches the Gloas fork. SSV Node runs the new duties automatically.
 
 ## Direct builder connections (optional)
 
-In addition to the bids on the network, a cluster can request bids directly from specific builders. These requests are authenticated by the cluster and sent through the Beacon node. If a builder is unavailable or a request fails, the cluster falls back to the bids on the network or a locally built block.
+In addition to the bids on the network, a cluster can request bids directly from specific builders. These requests are authenticated by the cluster and sent through the Beacon node. If a builder is unavailable or a request fails, the default flow described above is used.
 
 :::warning Identical configuration required
 **Every Operator of every cluster that shares a validator MUST configure the identical `Builders` block.**
