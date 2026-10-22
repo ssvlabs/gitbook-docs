@@ -5,17 +5,17 @@ sidebar_position: 3
 
 The Glamsterdam upgrade introduces **ePBS** (enshrined Proposer-Builder Separation, [EIP-7732](https://eips.ethereum.org/EIPS/eip-7732)), activated on the consensus layer by the **Gloas** fork. With ePBS, the exchange between block proposers and builders becomes part of the Ethereum protocol. SSV Node supports it starting from version `v2.5.0`.
 
-:::warning Fork schedule
-* **Sepolia** - activated on **October 6, 2026 at 13:53:36 UTC**.
-* **Hoodi** - epoch `132352`, on **October 26, 2026 at 17:42:48 UTC**.
-* **Mainnet** - not scheduled yet.
+Upgrade your Execution and Beacon clients and SSV Node before the Gloas fork. ePBS works without any configuration. Direct builder connections are optional and intended for advanced setups.
+
+## Fork schedule
+
+| Network | Gloas fork |
+| --- | --- |
+| Sepolia | Activated on October 6, 2026 at 13:53:36 UTC |
+| Hoodi | Epoch `132352`, on October 26, 2026 at 17:42:48 UTC |
+| Mainnet | Not scheduled yet |
 
 See the [Ethereum Foundation announcement](https://blog.ethereum.org/en/2026/10/16/glamsterdam-hoodi-announcement) for details.
-:::
-
-:::info Summary
-Upgrade your Execution and Beacon clients and SSV Node before the Gloas fork. ePBS works without any configuration. Direct builder connections are optional and intended for advanced setups.
-:::
 
 ## Upgrade your nodes
 
@@ -42,7 +42,7 @@ In-protocol ePBS replaces the MEV-Boost / relay flow described in [Configuring M
 
 In addition to the bids on the network, a cluster can request bids directly from specific builders. These requests are authenticated by the cluster and sent through the Beacon node. If a builder is unavailable or a request fails, the cluster falls back to the bids on the network or a locally built block.
 
-:::danger Identical configuration required
+:::warning Identical configuration required
 **Every Operator of every cluster that shares a validator MUST configure the identical `Builders` block.**
 
 The cluster authenticates to each builder with a signature that the Operators produce together. If a builder's `AuthData` differs between Operators, that builder is **silently disabled**: proposals still succeed, but without its bids. The other settings don't disable a builder, but they should match as well, so that bid selection doesn't depend on which Operator leads the proposal.
@@ -83,11 +83,9 @@ It is disabled by default (`0`) and capped at `1s`: a higher value prevents SSV 
 
 ## Remote signer limitations
 
-:::warning SSV Remote Signer
 As of SSV Node `v2.5.0`, Web3Signer doesn't support the new Gloas signing types. From the Gloas fork on, an Operator using [SSV Remote Signer](./remote-signer) fails these duties: Gloas block proposals (including the execution payload), Gloas aggregation, PTC attestations, proposer preferences, and builder authentication.
 
 The cluster still completes them as long as no more than *f* of its Operators use SSV Remote Signer (e.g. 1 out of 4).
-:::
 
 If `Builders` entries are configured together with SSV Remote Signer, SSV Node logs a warning at startup and ignores the entries.
 
