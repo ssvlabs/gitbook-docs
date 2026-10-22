@@ -58,7 +58,7 @@ Deploy the SSV nodes that will operate your validators.
 
 3. **Configure MEV**
 
-   MEV settings are mainly handled on the consensus client. Follow [our MEV boost setup guide](/operators/operator-node/setup-sidecars/configuring-mev).
+   MEV settings are mainly handled on the consensus client. Follow [our MEV boost setup guide](/operators/operator-node/setup-sidecars/configuring-mev). This applies until the Gloas fork: from the fork on, ePBS needs no configuration, see [Configuring ePBS (Gloas)](/operators/operator-node/setup-sidecars/configuring-epbs).
 
 ### Step 2: Register operators on SSV Network
 

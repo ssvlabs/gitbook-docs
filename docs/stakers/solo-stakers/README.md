@@ -52,7 +52,7 @@ Follow these guides:
 
 3. **Configure MEV**
 
-   MEV settings are mainly handled on the consensus client. Follow your CL guide together with [SSV's MEV guide](/operators/operator-node/setup-sidecars/configuring-mev).
+   MEV settings are mainly handled on the consensus client. Follow your CL guide together with [SSV's MEV guide](/operators/operator-node/setup-sidecars/configuring-mev). This applies until the Gloas fork: from the fork on, ePBS needs no configuration, see [Configuring ePBS (Gloas)](/operators/operator-node/setup-sidecars/configuring-epbs).
 
 4. **Register operators**
 

@@ -1,6 +1,6 @@
 ---
 title: Configuring Commit-Boost
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 ## Introduction
@@ -15,6 +15,12 @@ You can run Commit-Boost in several ways:
 - **For MEV + multiple services:** Validators choose which services to offer. For example, they might use Commit-Boost for MEV plus one service, or for MEV plus several services.
 
 Commit-Boost was built by a community of validators, developers, researchers, and other contributors across Ethereum. It is supported by a non-profit, fully open source, and free to use.
+
+:::warning ePBS (Gloas)
+The relay-based MEV flow described in this guide applies until the Gloas fork (Hoodi: October 26, 2026; Mainnet: not scheduled yet). From the fork on, in-protocol ePBS replaces it, and SSV Node no longer submits validator registrations to relays.
+
+If you keep running Commit-Boost, use a release that supports Glamsterdam, as listed in the [Ethereum Foundation announcement](https://blog.ethereum.org/en/2026/10/16/glamsterdam-hoodi-announcement). See [Configuring ePBS (Gloas)](./configuring-epbs) for what changes and how to prepare.
+:::
 
 ## Configuring Commit-Boost
 

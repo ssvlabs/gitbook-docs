@@ -171,6 +171,7 @@ Implement a reliable backup and recovery strategy for your database. Operators a
 ## What's next?
 
 * [Configure MEV](/operators/operator-node/setup-sidecars/configuring-mev) to increase rewards for block proposals.
+* [Configure ePBS (Gloas)](/operators/operator-node/setup-sidecars/configuring-epbs) to prepare for the Glamsterdam upgrade.
 * [Enable DKG](/operators/operator-node/setup-sidecars/enabling-dkg/) to improve your chances of joining more clusters.
 * [Use the monitoring stack](/operators/operator-node/monitoring/) to track node health and performance.
 * [Check the troubleshooting page](/operators/operator-node/maintenance/troubleshooting) if you run into issues.

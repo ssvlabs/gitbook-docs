@@ -1,6 +1,6 @@
 ---
 title: SSV Remote Signer
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 import Tabs from '@theme/Tabs';
@@ -23,6 +23,12 @@ The service consists of two main components:
    local signing.
 
 For a more detailed technical overview, see the [design documentation on GitHub](https://github.com/ssvlabs/ssv/blob/main/ssvsigner/DESIGN).
+
+:::warning ePBS (Gloas) limitations
+Web3Signer doesn't support the new Gloas signing types yet. From the Gloas fork on (Hoodi: October 26, 2026; Mainnet: not scheduled yet), an Operator using SSV Remote Signer fails these duties: Gloas block proposals (including the self-build execution payload), Gloas aggregation, PTC attestations, proposer preferences, and builder authentication. The cluster still completes them as long as no more than *f* of its Operators use SSV Remote Signer (e.g. 1 out of 4).
+
+See [Configuring ePBS (Gloas)](./configuring-epbs#remote-signer-limitations) for details.
+:::
 
 ## Setup Guide
 
