@@ -8,7 +8,7 @@ This guide outlines the necessary steps required to configure MEV within your SS
 Enabling MEV will grant you access to a network of block builders, who collaborate with MEV searchers to produce the most valuable blocks that validators can propose.
 
 :::warning ePBS (Gloas)
-This guide applies until the Gloas fork, when in-protocol ePBS replaces the MEV-Boost / relay flow described below. See [Configuring ePBS (Gloas)](./configuring-epbs) for the fork schedule and what changes.
+This guide applies until the Gloas fork. After the fork, relays connect through `Builders` entries instead, see [Using relays after Gloas](./configuring-epbs#using-relays-after-gloas). For the fork schedule and other changes, see [Configuring ePBS (Gloas)](./configuring-epbs).
 :::
 
 On a high level, the process consists of 4 steps:

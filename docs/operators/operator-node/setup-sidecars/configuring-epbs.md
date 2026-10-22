@@ -5,7 +5,7 @@ sidebar_position: 3
 
 The Glamsterdam upgrade introduces **ePBS** (enshrined Proposer-Builder Separation, [EIP-7732](https://eips.ethereum.org/EIPS/eip-7732)), activated on the consensus layer by the **Gloas** fork. With ePBS, the exchange between block proposers and builders becomes part of the Ethereum protocol. SSV Node supports it starting from version `v2.5.0`.
 
-Upgrade your Execution and Beacon clients and SSV Node before the Gloas fork. ePBS works without any configuration. Direct builder connections are optional and intended for advanced setups.
+Upgrade your Execution and Beacon clients and SSV Node before the Gloas fork. ePBS works without any configuration. Connections to specific builders or relays are optional and intended for advanced setups.
 
 ## Fork schedule
 
@@ -34,11 +34,11 @@ From the Gloas fork on, block building works as follows:
 * If no bid is worth more than a locally built block, or no bid is available, the block is built locally.
 * **Proposer preferences** replace validator registrations. They carry each validator's fee recipient and gas limit, and are signed by the cluster. All Operators in a cluster must therefore still use the same [gas limit](/operators/operator-node/node-setup/gas-limit).
 
-In-protocol ePBS replaces the MEV-Boost / relay flow described in [Configuring MEV](./configuring-mev), which still applies until a network reaches the Gloas fork. SSV Node runs the new duties automatically.
+The relay flow described in [Configuring MEV](./configuring-mev), based on validator registrations and blinded blocks, applies until a network reaches the Gloas fork. Relays can still be used after the fork, see [Using relays after Gloas](#using-relays-after-gloas). SSV Node runs the new duties automatically.
 
 ## Direct builder connections (optional)
 
-In addition to the bids on the network, a cluster can request bids directly from specific builders. These requests are authenticated by the cluster and sent through the Beacon node. If a builder is unavailable or a request fails, the default flow described above is used.
+In addition to the bids on the network, a cluster can request bids directly from specific builders or relays. These requests are authenticated by the cluster and sent through the Beacon node. If a builder is unavailable or a request fails, the default flow described above is used.
 
 :::warning Identical configuration required
 **Every Operator of every cluster that shares a validator MUST configure the identical `Builders` block.**
@@ -48,7 +48,7 @@ The cluster authenticates to each builder with a signature that the Operators pr
 Only set this up on clusters where you control all Operators, or coordinate with them.
 :::
 
-The `Builders` block can be set **only in the YAML configuration file**; there are no environment variables for it. The [SSV Stack setup](/operators/operator-node/node-setup/) configures the node through `ssv.env`, so to use direct builders follow the [Manual Node Setup](/operators/operator-node/node-setup/manual-setup) with a `config.yaml` file.
+The `Builders` block can be set **only in the YAML configuration file**; there are no environment variables for it. The [SSV Stack setup](/operators/operator-node/node-setup/) configures the node through `ssv.env`, so to use `Builders` entries follow the [Manual Node Setup](/operators/operator-node/node-setup/manual-setup) with a `config.yaml` file.
 
 Add the block at the top level of your `config.yaml`:
 
@@ -72,6 +72,33 @@ Keep in mind:
 * To check whether proposals use builder bids, watch the `ssv_runner_proposal_build_source_total` metric. Its `ssv_validator_duty_build_source` label is `builder` or `local`.
 
 For the `AuthData` defaults and other technical details, see the [SSV Node documentation on GitHub](https://github.com/ssvlabs/ssv/blob/v2.5.0/docs/EXTERNAL_BUILDERS.md).
+
+### Using relays after Gloas
+
+After the Gloas fork, relays that support the Gloas builder API connect through `Builders` entries, with the same requirements as any other entry. If you route through MEV-Boost or Commit-Boost, use a version that supports the Gloas builder API. As of October 2026, MEV-Boost support is not released yet ([mev-boost#914](https://github.com/flashbots/mev-boost/pull/914)), and Commit-Boost supports it starting from the `v0.12.0-rc1` pre-release.
+
+To connect to a relay directly, set its URL. `AuthData` then defaults to the relay's hostname:
+
+```yaml
+Builders:
+  Entries:
+    - URL: "https://relay.example.com"
+```
+
+To route through MEV-Boost or Commit-Boost, add one entry per relay. Set `URL` to your MEV-Boost or Commit-Boost instance, and `AuthData` to the hex of the relay's hostname, or of the value configured for that relay there:
+
+```yaml
+Builders:
+  Entries:
+    - URL: "http://mev-boost:18550"
+      AuthData: "0x72656c61792e6578616d706c652e636f6d"   # hex of "relay.example.com"
+```
+
+Without an explicit `AuthData`, it would default to the MEV-Boost or Commit-Boost hostname, which doesn't identify the relay.
+
+* `URL` must be reachable from your Beacon nodes, which send the requests. SSV Node doesn't contact relays directly.
+* `AuthData` must be hex (`0x...`).
+* `MaxExecutionPayment` caps the part of a bid that is paid outside the protocol and relies on trust in the relay. If it is omitted or `0`, only the part paid by the protocol counts when bids are compared.
 
 ## Proposer delay
 

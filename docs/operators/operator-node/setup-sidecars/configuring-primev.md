@@ -12,7 +12,7 @@ If any node in the cluster does not follow your commitment, your collateral will
 :::
 
 :::warning ePBS (Gloas)
-This guide uses MEV-Boost and relays, which apply until the Gloas fork, when in-protocol ePBS replaces the MEV-Boost / relay flow. See [Configuring ePBS (Gloas)](./configuring-epbs) for the fork schedule and what changes in SSV Node.
+This guide uses MEV-Boost and relays as set up before the Gloas fork. After the fork, relays connect through `Builders` entries instead, see [Using relays after Gloas](./configuring-epbs#using-relays-after-gloas). For the fork schedule and other changes in SSV Node, see [Configuring ePBS (Gloas)](./configuring-epbs).
 
 Check the [Primev documentation](https://docs.primev.xyz/) for its Glamsterdam support.
 :::

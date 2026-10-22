@@ -32,7 +32,7 @@ Factors to consider in cluster formation:
   * **Full Relay Correlation**: When all operator nodes support the same relays, every node would broadcast the block, enhancing liveness beyond the industry standard.
   * **Partial Relay Correlation**: In cases where overlap is lacking, only operator nodes supporting the relay chosen by the operator leading the proposal will broadcast the proposal.
   * **No MEV Support**: In instances where a non-MEV operator leads the proposal of the block, the proposal would proceed but without any MEV rewards (vanilla block).
-  * **After the Gloas fork**: In-protocol ePBS replaces the MEV-Boost / relay flow described above. See [Configuring ePBS (Gloas)](/operators/operator-node/setup-sidecars/configuring-epbs).
+  * **After the Gloas fork**: The relay flow described above stops, and ePBS needs no configuration. To keep using relays, see [Using relays after Gloas](/operators/operator-node/setup-sidecars/configuring-epbs#using-relays-after-gloas).
 
 ### Operational Costs
 

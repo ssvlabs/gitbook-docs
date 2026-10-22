@@ -177,7 +177,7 @@ ssv:
     # Block proposals are by default controlled by Beacon Node.
     # Before the Gloas fork, MEV requires the connected Beacon node to be MEV-enabled.
     # Please see https://docs.ssv.network/operators/operator-node/setup-sidecars/configuring-mev
-    # From the Gloas fork on, in-protocol ePBS is used and needs no configuration.
+    # From the Gloas fork on, in-protocol ePBS needs no configuration. To keep using relays, see the Builders block below.
     # Please see https://docs.ssv.network/operators/operator-node/setup-sidecars/configuring-epbs
 
 eth2:
@@ -212,7 +212,7 @@ KeyStore:
 # Enables Doppelganger Protection for validators, see https://github.com/ssvlabs/ssv/blob/v2.3.0/doppelganger/README.md
 EnableDoppelgangerProtection: false
 
-# Optional, advanced: Gloas (ePBS) direct-builder connections (Builders block).
+# Optional, advanced: Gloas (ePBS) connections to specific builders or relays (Builders block).
 # Please see https://docs.ssv.network/operators/operator-node/setup-sidecars/configuring-epbs
 
 # This enables monitoring at the specified port, see https://docs.ssv.network/operators/operator-node/monitoring/
