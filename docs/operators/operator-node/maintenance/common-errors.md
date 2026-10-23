@@ -29,6 +29,18 @@ Upgrade **all** your Beacon nodes to a release that supports the fork, then rest
 
 ***
 
+### `beacon config: no client schedules a fork as the node's config does`
+
+```bash
+FATAL	beacon config: no client schedules a fork as the node's config does; if the clients are right, the fork moved or was dropped after the node started, which the node cannot adopt while running: restart the node before the logged epoch; stopping, as that epoch is too close to cross on a schedule no client shares
+```
+
+A fork that SSV Node knew about when it started was moved or cancelled on your Beacon nodes (as happened with the Hoodi Gloas fork). It logs this as an error, and stops on purpose when the logged epoch is 2 epochs away or less.
+
+Once all your Beacon nodes run the new schedule, restart SSV Node.
+
+***
+
 ### `could not connect to execution client`
 
 ```bash

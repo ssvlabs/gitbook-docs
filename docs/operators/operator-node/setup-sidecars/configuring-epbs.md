@@ -12,18 +12,20 @@ Upgrade your Execution and Beacon clients and SSV Node before the Gloas fork. eP
 | Network | Gloas fork |
 | --- | --- |
 | Sepolia | Activated on October 6, 2026 at 13:53:36 UTC |
-| Hoodi | Epoch `132352`, on October 26, 2026 at 17:42:48 UTC |
+| Hoodi | Postponed, new date not set yet (was epoch `132352`, October 26, 2026). See the [Ethereum Foundation update](https://blog.ethereum.org/en/2026/10/22/glamsterdam-hoodi-delay) |
 | Mainnet | Not scheduled yet |
 
 ## Upgrade your nodes
 
-1. Upgrade your Execution and Beacon clients to releases that support Glamsterdam, as listed in the [Ethereum Foundation announcement](https://blog.ethereum.org/en/2026/10/16/glamsterdam-hoodi-announcement). If you run multiple Beacon nodes, upgrade **all** of them.
+1. Upgrade your Execution and Beacon clients to releases that match the current fork schedule of your network, as described in the [Ethereum Foundation update](https://blog.ethereum.org/en/2026/10/22/glamsterdam-hoodi-delay). If you run multiple Beacon nodes, upgrade **all** of them.
 2. Upgrade SSV Node to `v2.5.0` or later, and restart it **after** all Beacon nodes are upgraded. See [How do I update my node?](/operators/operator-node/maintenance/troubleshooting#faq) for the steps.
 
 :::danger Upgrade order matters
 SSV Node reads the fork schedule only once, at startup, from the first Beacon node that connects. If a Beacon node later schedules a fork (such as Gloas) that SSV Node didn't start with, SSV Node logs an error, and **shuts down on purpose** when the fork is 2 epochs away or less.
 
 It shuts down again on every restart until the Beacon node it reads the schedule from supports the fork.
+
+The same applies if a fork is moved or cancelled after SSV Node started, as happened with Hoodi: once your Beacon nodes run the new schedule, restart SSV Node, or it shuts down shortly before the old fork epoch.
 :::
 
 ## What changes
@@ -48,7 +50,7 @@ The cluster authenticates to each builder with a signature that the Operators pr
 Only set this up on clusters where you control all Operators, or coordinate with them.
 :::
 
-The `Builders` block can be set **only in the YAML configuration file**; there are no environment variables for it. The [SSV Stack setup](/operators/operator-node/node-setup/) configures the node through `ssv.env`, so to use `Builders` entries follow the [Manual Node Setup](/operators/operator-node/node-setup/manual-setup) with a `config.yaml` file.
+The `Builders` block can be set **only in the YAML configuration file**; there are no environment variables for it. With the [SSV Stack setup](/operators/operator-node/node-setup/), load it through `SHARE_CONFIG`, see the [SSV Stack README](https://github.com/ssvlabs/ssv-stack#builders-configuration-optional). With the [Manual Node Setup](/operators/operator-node/node-setup/manual-setup), add it to your `config.yaml`.
 
 Add the block at the top level of your `config.yaml`:
 

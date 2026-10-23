@@ -19,7 +19,7 @@ Commit-Boost was built by a community of validators, developers, researchers, an
 :::warning ePBS (Gloas)
 The MEV setup described in this guide applies until the Gloas fork. After the fork, relays connect through `Builders` entries instead, see [Using relays after Gloas](./configuring-epbs#using-relays-after-gloas). For the fork schedule and other changes, see [Configuring ePBS (Gloas)](./configuring-epbs).
 
-If you keep running Commit-Boost, use a release that supports Glamsterdam, as listed in the [Ethereum Foundation announcement](https://blog.ethereum.org/en/2026/10/16/glamsterdam-hoodi-announcement).
+If you keep running Commit-Boost after the Gloas fork, use a release that supports the Gloas builder API.
 :::
 
 ## Configuring Commit-Boost
