@@ -17,6 +17,30 @@ This usually points to a Beacon node issue. Verify that `BeaconNodeAddr` is corr
 
 ***
 
+### `beacon config: a client schedules a fork the node started without`
+
+```bash
+FATAL	beacon config: a client schedules a fork the node started without, which the node cannot adopt while running; upgrade every client that lacks it, the node's config source included, then restart the node before that fork; stopping, as the fork is too close to cross on the old schedule
+```
+
+One of your Beacon nodes schedules a fork (such as Gloas) that SSV Node didn't know about when it started. SSV Node reads the fork schedule only once, at startup. It logs this as an error, and stops on purpose when the fork is 2 epochs away or less.
+
+Upgrade **all** your Beacon nodes to a release that supports the fork, then restart SSV Node. See [Configuring ePBS (Gloas)](/operators/operator-node/setup-sidecars/configuring-epbs#upgrade-your-nodes).
+
+***
+
+### `beacon config: no client schedules a fork as the node's config does`
+
+```bash
+FATAL	beacon config: no client schedules a fork as the node's config does; if the clients are right, the fork moved or was dropped after the node started, which the node cannot adopt while running: restart the node before the logged epoch; stopping, as that epoch is too close to cross on a schedule no client shares
+```
+
+A fork that SSV Node knew about when it started was moved or cancelled on your Beacon nodes (as happened with the Hoodi Gloas fork). It logs this as an error, and stops on purpose when the logged epoch is 2 epochs away or less.
+
+Once all your Beacon nodes run the new schedule, restart SSV Node.
+
+***
+
 ### `could not connect to execution client`
 
 ```bash
