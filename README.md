@@ -17,7 +17,7 @@ The documentation is built using [Docusaurus](https://docusaurus.io/), a modern 
 Ensure you have the following installed on your system:
 
 - [Node.js](https://nodejs.org/) (v16 or later recommended)
-- [Yarn](https://yarnpkg.com/) or npm
+- npm
 
 ### Installation and Running Locally
 
@@ -29,13 +29,13 @@ git clone https://github.com/ssvlabs/gitbook-docs.git
 cd ssv-docs
 
 # Install dependencies
-yarn install  # or npm install
+npm install
 ```
 
 To start a local development server with hot-reloading:
 
 ```bash
-yarn start  # or npm run start
+npm run start
 ```
 
 This will launch the documentation site in your default browser, typically available at `http://localhost:3000/`.
@@ -43,7 +43,7 @@ This will launch the documentation site in your default browser, typically avail
 To build the static site for deployment:
 
 ```bash
-yarn build  # or npm run build
+npm run build
 ```
 
 ## 🛠 Contributing
