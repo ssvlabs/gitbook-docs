@@ -23,6 +23,7 @@ Review the guides that help you run reliably and attract more Stakers:
 - [Best Practices](/operators/operator-node/node-setup/best-practices)
 - [Enable DKG](/operators/operator-node/setup-sidecars/enabling-dkg/)
 - [Enable MEV](/operators/operator-node/setup-sidecars/configuring-mev)
+- [Configure ePBS (Gloas)](/operators/operator-node/setup-sidecars/configuring-epbs)
 - [Set Operator metadata](/operators/operator-management/setting-operator-metadata)
 - [Troubleshooting](/operators/operator-node/maintenance/troubleshooting)
 

@@ -1,6 +1,6 @@
 ---
 title: Configuring Commit-Boost
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 ## Introduction
@@ -15,6 +15,12 @@ You can run Commit-Boost in several ways:
 - **For MEV + multiple services:** Validators choose which services to offer. For example, they might use Commit-Boost for MEV plus one service, or for MEV plus several services.
 
 Commit-Boost was built by a community of validators, developers, researchers, and other contributors across Ethereum. It is supported by a non-profit, fully open source, and free to use.
+
+:::warning ePBS (Gloas)
+The MEV setup described in this guide applies until the Gloas fork. After the fork, relays connect through `Builders` entries instead, see [Using relays after Gloas](./configuring-epbs#using-relays-after-gloas). For the fork schedule and other changes, see [Configuring ePBS (Gloas)](./configuring-epbs).
+
+If you keep running Commit-Boost after the Gloas fork, use a release that supports the Gloas builder API.
+:::
 
 ## Configuring Commit-Boost
 

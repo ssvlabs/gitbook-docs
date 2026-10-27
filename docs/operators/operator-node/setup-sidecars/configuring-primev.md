@@ -1,6 +1,6 @@
 ---
 title: Configuring Primev
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 This guide outlines the steps required to configure MEV-commit with your SSV Node so Operators can participate in MEV and preconfirmations. For more background, see the [Primev documentation](https://docs.primev.xyz/v1.2.x/get-started/welcome-to-primev).
@@ -9,6 +9,12 @@ This guide outlines the steps required to configure MEV-commit with your SSV Nod
 **If you have a commitment with collateral**, only use Primev when managing all nodes in the cluster.
 
 If any node in the cluster does not follow your commitment, your collateral will be slashed. If you manage only one Operator in the cluster, you can [use regular MEV Boost](./configuring-mev) instead.
+:::
+
+:::warning ePBS (Gloas)
+This guide uses MEV-Boost and relays as set up before the Gloas fork. After the fork, relays connect through `Builders` entries instead, see [Using relays after Gloas](./configuring-epbs#using-relays-after-gloas). For the fork schedule and other changes in SSV Node, see [Configuring ePBS (Gloas)](./configuring-epbs).
+
+Check the [Primev documentation](https://docs.primev.xyz/) for its Glamsterdam support.
 :::
 
 ## Overview

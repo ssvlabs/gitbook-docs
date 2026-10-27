@@ -175,8 +175,10 @@ ssv:
 
   ValidatorOptions:
     # Block proposals are by default controlled by Beacon Node.
-    # Requires the connected Beacon node to be MEV-enabled.
+    # Before the Gloas fork, MEV requires the connected Beacon node to be MEV-enabled.
     # Please see https://docs.ssv.network/operators/operator-node/setup-sidecars/configuring-mev
+    # From the Gloas fork on, in-protocol ePBS needs no configuration. To keep using relays, see the Builders block below.
+    # Please see https://docs.ssv.network/operators/operator-node/setup-sidecars/configuring-epbs
 
 eth2:
   # HTTP URL of the Beacon node to connect to.
@@ -209,6 +211,9 @@ KeyStore:
 
 # Enables Doppelganger Protection for validators, see https://github.com/ssvlabs/ssv/blob/v2.3.0/doppelganger/README.md
 EnableDoppelgangerProtection: false
+
+# Optional, advanced: Gloas (ePBS) connections to specific builders or relays (Builders block).
+# Please see https://docs.ssv.network/operators/operator-node/setup-sidecars/configuring-epbs
 
 # This enables monitoring at the specified port, see https://docs.ssv.network/operators/operator-node/monitoring/
 MetricsAPIPort: 15000
@@ -385,6 +390,7 @@ Implement a reliable backup and recovery strategy for your database. Operators a
 ## What's next?
 
 * [Configure MEV](/operators/operator-node/setup-sidecars/configuring-mev) to increase rewards for block proposals.
+* [Configure ePBS (Gloas)](/operators/operator-node/setup-sidecars/configuring-epbs) to prepare for the Glamsterdam upgrade.
 * [Enable DKG](/operators/operator-node/setup-sidecars/enabling-dkg/) to improve your chances of joining more clusters.
 * [Use the monitoring stack](/operators/operator-node/monitoring/) to stay on top of performance.
 * [Check the troubleshooting page](/operators/operator-node/maintenance/troubleshooting) if you run into issues.
