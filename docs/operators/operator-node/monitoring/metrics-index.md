@@ -69,6 +69,10 @@ This document lists the metrics exposed by SSV Node itself, excluding upstream d
 
 **Description:** Instrumentation Scope metadata
 
+:::note
+SSV Node no longer exports this metric from `v2.5.1` on. To select SSV Node series, filter on the `otel_scope_name` label instead, for example `{otel_scope_name=~"github.com/ssvlabs/.*"}`.
+:::
+
 **Labels:**
 
 * `otel_scope_name`
