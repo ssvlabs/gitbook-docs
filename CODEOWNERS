@@ -1,8 +1,6 @@
 # CODEOWNERS file
+#
+# Owners are teams, not people. GitHub ignores an owner without write access
+# to this repository, so each team here must have write access.
 
-# workflow files are sensitive
-.github/workflows/* @vaclav-ssvlabs
-
-# 
-* @RaekwonIII @Alex-ssvlabs @martinssvlabs
-
+* @ssvlabs/dev-rel @ssvlabs/ssv-team-lead @ssvlabs/ssv-developer
